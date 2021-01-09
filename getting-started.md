@@ -4,7 +4,7 @@
 
 This tutorial introduces you to the essentials of the QuestPDF library by showing you how to implement a basic invoice document. It discusses architectural concepts, then shows how to prepare data layers and finally presents how to use various elements to compose a document's structure. At the end of this tutorial, you will get code capable of generating the full, page-aware invoice similar to the one below. Let's get started!
 
-![example](./images/getting-started/invoice.png)
+![invoice](./images/getting-started/invoice.png)
 
 ::: tip
 You can download, analyse and compile the code yourself by visiting [this GitHub repository](https://github.com/QuestPDF/QuestPDF).
