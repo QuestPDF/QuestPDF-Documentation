@@ -14,7 +14,8 @@ module.exports = {
         nav: [
             { text: 'Homepage', link: 'https://www.questpdf.com' },
             { text: 'Documentation', link: '/' },
-            { text: 'Sample code', link: 'https://github.com/QuestPDF/QuestPDF' },
+            { text: 'Example code', link: 'https://github.com/QuestPDF/example-invoice' },
+            { text: 'Repository', link: 'https://github.com/QuestPDF/library' },
             { text: 'Nuget', link: 'https://www.nuget.org/packages/QuestPDF/' }
         ],
         sidebar: {
