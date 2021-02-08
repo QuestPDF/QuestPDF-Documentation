@@ -473,3 +473,9 @@ static void Main(string[] args)
 ::: tip
 There are multiple overloads of the `Generate` method. In the example above, the document has been saved into a new file. Additionally, there is an overload that returns a byte array. If you are working on the webserver and care about memory consumption, please use the overload that accepts a stream as an argument.
 :::
+
+## Complex example
+
+Looking for more advanced example that uses the vast majority of available features? Please take a look at the [library's repository](https://github.com/QuestPDF/library/tree/main/QuestPDF.ReportSample). It contains a sample report:
+
+![example](./images/getting-started/complex.jpg)

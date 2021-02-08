@@ -90,6 +90,7 @@ Please be careful. This component may try to enforce size constraints that are i
 Such scenarios end up with the layouting exception.
 :::
 
+
 ## Extend
 
 - This container extends its size to take entire space possible.
@@ -100,16 +101,73 @@ Such scenarios end up with the layouting exception.
 .ExtendHorizontal()
 ```
 
-## Image
+## External link
+
+- This container creates a hyperlink around its child area.
+- It redirects the user outside the document, e.g. to the webpage.
+
+```csharp{2-2}
+.Padding(10)
+.ExternalLink("https://www.questpdf.com")
+.Text("QuestPDF Webpage");
+```
+
+## Images
+
+### Static images
 
 - This element can be used for placing images inside the document.
-- It preserves the image's aspect ratio by default.
-- You can use images in any common raster format, e.g. JPG, PNG, BPM, etc.
+- By default, It preserves the image's aspect ratio.
+- You can use images in any common raster format, e.g. JPG, PNG, BMB, etc.
 
 ```csharp
 byte[] imageData = /* load raw binary data for an image */;
 
 .Image(imageData)
+```
+
+### Dynamic images
+
+- QuestPDF offers flexible layouts, therefore it is hard to predict image resolution.
+- To achieve the best image clarity, generate images with specified resolution (or multiple of the resolution for retina displays).
+- Useful when creating maps / charts.  
+- This element behaves similarly to static images.
+- As an argument, it expects a function that takes available space and returns an image in a binary format. 
+
+```csharp{7-7}
+// somewhere in your code
+byte[] GenerateImage(Size size) 
+{
+    // logic that generates and returns an image with a specific resolution
+}
+
+.DynamicImage(GenerateImage);
+```
+
+## Internal link
+
+### Location
+
+- This container creates a new location in the document where user can be redirected.
+- Specify the location name, so you can use it when creating a link.
+
+```csharp{1-1}
+.Location("links-chapter")
+.Section(section => {
+    section.Header().Text("About internal links");
+    section.Content().Text("Some content");
+});
+```
+
+### Link
+
+- This container creates a hyperlink around its child area.
+- It redirects the user to other place in the document.
+- Specify target place by providing proper location name.
+
+```csharp{1-1}
+.InternalLink("links-chapter")
+.Text("About internal links chapter");
 ```
 
 ## Padding
@@ -358,56 +416,75 @@ Please analyse an example showing how to use the Stack component with additional
 .Text("Red big text", TextStyle.Default.Color("#F00").Size(24))
 ```
 
-You can define text style using the object initialization pattern.
+You can define text style using available FluentAPI methods which are described below.
 
-::: tip
+### Basic font style
+
+```csharp
+.Color("#F00")
+.FontType("Times New Roman")
+.Size(24)
+.LineHeight(1.5f)
+.Italic()
+```
+
+### Font alignment
+
+You these fluent API methods to adjust text position:
+
+```csharp
+.AlignLeft()
+.AlignCenter()
+.AlignRight()
+```
+
+### Font weight
+
+You can easily set up font weight by using one of the following fluent API methods:
+
+```csharp
+.Weight(FontWeight.Normal)
+
+.Thin()
+.ExtraLight()
+.Light()
+.NormalWeight()
+.Medium()
+.SemiBold()
+.Bold()
+.ExtraBold()
+.Black()
+.ExtraBlack()
+```
+
+### Typography pattern
+
 Please consider an example Typography class that describes text styling across all documents:
-:::
 
 ```csharp
 // single typography class can help with keeping document look&feel consistent
 public static class Typography
 {
-    public static TextStyle Title => new TextStyle
-    {
-        Color = "#000000",
-        FontType = "Helvetica",
-        Size = 18,
-        LineHeight = 1
-    };
-
-    public static TextStyle Headline => new TextStyle
-    {
-        Color = "#2E74b5",
-        FontType = "Helvetica",
-        Size = 14,
-        LineHeight = 1
-    };
-
-    public static TextStyle Normal => new TextStyle
-    {
-        Color = "#000000",
-        FontType = "Helvetica",
-        Size = 10,
-        LineHeight = 1.25f
-    };
+    public static TextStyle Title => TextStyle
+        .Default
+        .FontType("Helvetica")
+        .Color("#000000")
+        .Size(20)
+        .Bold();
+    
+    public static TextStyle Headline => TextStyle
+        .Default
+        .FontType("Helvetica")
+        .Color("#047AED")
+        .Size(14);
+    
+    public static TextStyle Normal => TextStyle
+        .Default
+        .FontType("Helvetica")
+        .Color("#000000")
+        .Size(10)
+        .LineHeight(1.25f)
+        .AlignLeft();
 }
 
-// with usage:
-.Text("Red big text", Typography.Headline)
-```
-
-Or, when composing the document, you can use fluent methods to create or modify the text style:
-
-```csharp
-.Text("Black headline", Typography.Headline.Color("#000"))
-
-// Each property has its extension method:
-.Color("#F00")
-.FontType("Times New Roman")
-.Size(24)
-.LineHeight(2f)
-.AlignLeft()
-.AlignCenter()
-.AlignRight()
 ```
