@@ -22,12 +22,34 @@ public class DocumentMetadata
     public DateTime CreationDate { get; set; } = DateTime.Now;
     public DateTime ModifiedDate { get; set; } = DateTime.Now;
 
+    public int DocumentLayoutExceptionThreshold { get; set; } = 250;
+
     public static DocumentMetadata Default => new DocumentMetadata();
 }
 ```
 
 ::: tip
+If the number of generated pages exceeds the `DocumentLayoutExceptionThreshold` (likely due to infinite layout), the exception is thrown. Please adjust this parameter, so the library can stop as soon as possible, saving CPU and memory resources.
+:::
+
+::: tip
 The `ImageQuality` property controls the trade-off between quality and size. The default value `101` corresponds to lossless encoding. When you use a value less than 100, all images are opaque and encoded using the JPEG algorithm. The smaller the value is, the higher compression is used.
+:::
+
+## Generating images
+
+The default functionality of the library is generating PDF files based on specified document configuration. In some cases, you may need to generate set of images instead. Such tasks can be done by additional extension methods:
+
+```csharp
+// generate images as dynamic list of images
+IEnumerable<byte[]> images = document.GenerateImages();
+
+// generate images and save them as files with provided naming schema
+document.GenerateImages(i => $"image-{i}.png");  
+```
+
+::: tip
+Generated images are in the PNG format. In order to increase resolution of generated images, please modify the value of the `DocumentMetadata.RasterDpi` property. When RasterDpi is set to 72, one PDF point corresponds to one pixel.
 :::
 
 ## Extending DSL

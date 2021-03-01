@@ -318,6 +318,32 @@ You can change text format by using the `{number}` slot as well as provide custo
 
 ![example](./images/api-reference/section-example.png =300x)
 
+## Show if
+
+This container allows you to show/hide its child based on a condition. It is practically only a syntactic sugar to simplify code and avoid standard if-statements.
+
+```csharp
+var condition = numberOfElements > 5;
+
+// c# if-statement approach
+.Row(row =>
+{
+    row.RelativeColumn().Text("One");
+
+    var secondColumn = row.RelativeColumn();
+    
+    if (condition)
+        secondColumn.Text("Two");
+});
+
+// equivalent fluent approach 
+.Row(row =>
+{
+    row.RelativeColumn().Text("One");
+    row.RelativeColumn().ShowIf(condition).Text("Two");
+});
+```
+
 ## Show once
 
 - This container changes the default rendering behaviour.

@@ -6,8 +6,6 @@ title: "Releases"
 
 The QuestPDF library offers multiple tools needed to design and generate PDF documents. However, there is plenty of ideas under consideration. Most of the features listed below should be added in the nearest months, stay tuned!
 
-### Significant features
-
 - Custom slots in components (named slots, dynamic slots),
 - RichText element (applying multiple styles to text content, text justification, better word-wrapping algorithm, page-break support etc.),
 - SVG support ([integration with SkiaSharp.Svg](https://www.nuget.org/packages/SkiaSharp.Svg/)),
@@ -16,17 +14,20 @@ The QuestPDF library offers multiple tools needed to design and generate PDF doc
 - Generation optimization: measuring text operation takes the vast majority of processing time,
 - Transformations: scale, rotate, offset, matrix,
 - Better debugging experience (e.g. when created layout generates an infinite document).
-
-### Improvements
-
-- Element to conditionally show/hide content,
-- Divider element (replacement for applying border in some scenarios),
-- Rendering document to set of images instead of PDF file,
 - Allow the Placeholder element to show text instead of an icon,
+- Divider element (replacement for applying border in some scenarios),
 - The library should return the generated document even if DocumentLayoutException is thrown (to better understand the issue).
 
 
 ## Release notes
+
+### 2021.03
+
+Added new element: `ShowIf` can be used for conditionally showing/hiding elements without using c# if-statement. This is practically a syntactic sugar to simplify your code.
+
+Usability improvement: fluent API for changing text style does not mutate original style anymore, creates a copy instead with applied change.
+
+Added possibility to render document as a set of images.
 
 ### 2021.02
 

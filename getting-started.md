@@ -464,7 +464,7 @@ static void Main(string[] args)
 
     var model = InvoiceDocumentDataSource.GetInvoiceDetails();
     var document = new InvoiceDocument(model);
-    document.Generate(filePath);
+    document.GeneratePdf(filePath);
 
     Process.Start("explorer.exe", filePath);
 }
