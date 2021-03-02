@@ -35,7 +35,7 @@
 - This container changes background colour on the area provided by its parent.
 
 ```csharp
-.Background("#00FF00")
+.Background("#EEE")
 ```
 
 ## Border
@@ -58,7 +58,7 @@
 .BorderBottom(7)
 
 // change colour of the border
-.BorderColor("#00FF00")
+.BorderColor("#F00")
 ```
 
 ## Constrained
@@ -153,7 +153,8 @@ byte[] GenerateImage(Size size)
 
 ```csharp{1-1}
 .Location("links-chapter")
-.Section(section => {
+.Section(section => 
+{
     section.Header().Text("About internal links");
     section.Content().Text("Some content");
 });
@@ -200,20 +201,20 @@ byte[] GenerateImage(Size size)
 {
     page.Header()
         .Height(60)
-        .Background("#C5CAE9")
+        .Background("#BBB")
         .AlignCenter()
         .AlignMiddle()
         .Text("Header");
 
     page.Content()
-        .Background("#B3E5FC")
+        .Background("#DDD")
         .AlignCenter()
         .AlignMiddle()
         .Text("Content");
 
     page.Footer()
         .Height(30)
-        .Background("#C8E6C9")
+        .Background("#BBB")
         .AlignCenter()
         .AlignMiddle()
         .Text("Footer");
@@ -273,18 +274,18 @@ You can change text format by using the `{number}` slot as well as provide custo
 .Row(row =>
 {
     row.ConstantColumn(100)
-        .Background("#C5CAE9")
+        .Background("#DDD")
         .Padding(10)
         .ExtendVertical()
         .Text("This column is 100 points width");
 
     row.RelativeColumn()
-        .Background("#B3E5FC")
+        .Background("#BBB")
         .Padding(10)
         .Text("This column takes 1/3 of the available space");
 
     row.RelativeColumn(2)
-        .Background("#C8E6C9")
+        .Background("#DDD")
         .Padding(10)
         .Text("This column takes 2/3 of the available space");
 });
@@ -303,13 +304,13 @@ You can change text format by using the `{number}` slot as well as provide custo
 {
     section
         .Header()
-        .Background("#FFCA28")
+        .Background("#888")
         .Padding(10)
-        .Text("Notes");
+        .Text("Notes", TextStyle.Default.Size(16).Color("#FFF"));
 
     section
         .Content()
-        .Background("#FFE082")
+        .Background("#DDD")
         .Padding(10)
         .ExtendVertical()
         .Text(TextPlaceholder.LoremIpsum());
@@ -412,17 +413,17 @@ Please analyse an example showing how to use the Stack component with additional
 
     stack
         .Element()
-        .Background("#C5CAE9")
+        .Background("#999")
         .Height(50);
 
     stack
         .Element()
-        .Background("#B3E5FC")
+        .Background("#BBB")
         .Height(100);
 
     stack
         .Element()
-        .Background("#C8E6C9")
+        .Background("#DDD")
         .Height(150);
 });
 ```
