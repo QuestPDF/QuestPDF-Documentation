@@ -381,6 +381,17 @@ You can change text format by using the `{number}` slot as well as provide custo
 
 ![example](./images/api-reference/row-example.png =740x)
 
+You can specify the spacing between each column by using the Spacing() method:
+
+```csharp
+.Row(row =>
+{
+    row.Spacing(5);
+
+    // define content here
+});
+```
+
 ## Section
 
 - This container consists of two parts: header and content.
