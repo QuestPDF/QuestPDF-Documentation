@@ -20,15 +20,27 @@
 
 ## Aspect Ratio
 
-- This container takes the entire width provided by its parent.
-- Then, it calculates required height to meet the aspect ratio requirement.
-- If there is no space available, it wraps to the next page.
+- Aspect ratio is a ratio between width and height. When component is 200 points in width and 100 points in height, its aspect ratio is equal to 2.
+- This container calculates desired size, and scales itself to take as much space as possible.
 - Supports paging: on each page, the aspect ratio constraint is preserved.
 
 ```csharp
 .AspectRatio(0.5) // use a ratio
 .AspectRatio(1f / 2f) // or division
 ```
+
+By default, the AspectRatio element wants to use entire provided width. You can change that behavior using one of the available options:
+1) `AspectRatioOption.FitWidth` - the element scales to take entire available width. Default.
+2) `AspectRatioOption.FitHeight` - the element scales to take entire available height. Good in conjunction with constraining elements.
+3) `AspectRatioOption.FitArea` - this is the combination of both options above. The element scales to take entire available area with preserving its aspect ratio. That means, sometimes it takes entire width and sometimes entire height. This is the safest option.
+
+```csharp
+.AspectRatio(0.5, AspectRatioOption.FitArea)
+```
+
+::: danger
+Please be careful. This component may try to enforce size constraints that are impossible to meet. Such scenarios end up with the layouting exception.
+:::
 
 ## Background
 
@@ -90,6 +102,69 @@ Please be careful. This component may try to enforce size constraints that are i
 Such scenarios end up with the layouting exception.
 :::
 
+## Debug
+
+- This container can be used to inspect space taken by its children.
+- It does not alter document's layout.
+
+```csharp{4}
+.Width(300)
+.Height(200)
+.Padding(25)
+.Debug()
+.Padding(-5)
+.Row(row =>
+{
+    row.RelativeColumn().Padding(5).Extend().Placeholder();
+    row.RelativeColumn().Padding(5).Extend().Placeholder();
+});
+```
+
+![example](./images/api-reference/debug.png =300x)
+
+## Element
+
+Sometimes it is useful to alter the document's content based on a condition. It is practically only a syntactic sugar to simplify your code. Use this component to achieve such results without breaking the fluent API chain:
+
+```csharp{6-7,18}
+// before
+public static IContainer TableCell(this IContainer container, bool applyBackground = false)
+{
+    var container = container.Border(0.5f).BorderColor("#222");
+    
+    if (applyBackground)
+        container = container.Background("#DEE");
+
+    return container.Padding(5);
+}
+
+// after
+public static IContainer TableCell(this IContainer container, bool applyBackground = false)
+{
+    return container
+        .Border(0.5f)
+        .BorderColor("#222")
+        .Element(x => applyBackground ? x.Background("#DEE") : x)
+        .Padding(5);
+}
+```
+
+It is not required to follow the methods chain. Using this approach, you can also end the chain:
+
+```csharp
+public static IContainer TextOrBackground(this IContainer container, string text)
+{
+    return container
+        .Padding(10)
+        .Element(x =>
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                x.Height(10).Width(50).Background("#DDD");
+            else
+                x.Text(text);
+        });
+}
+```
 
 ## Extend
 
@@ -125,6 +200,20 @@ byte[] imageData = /* load raw binary data for an image */;
 
 .Image(imageData)
 ```
+
+By default, the Image element wants to use entire provided width while preserving its aspect ratio. You can change that behavior using one of the available options:
+1) `ImageScaling.FitWidth` - the element scales to take entire available width. Default.
+2) `ImageScaling.FitHeight` - the element scales to take entire available height. Good in conjunction with constraining elements.
+3) `ImageScaling.FitArea` - this is the combination of both options above. The element scales to take entire available area with preserving its aspect ratio. That means, sometimes it takes entire width and sometimes entire height. This is the safest option.
+4) `ImageScaling.Resize` - element resizes itself to cover entire available space. It does not preserve proportions. The image may look incorrectly scaled, therefore it is not desired in most of the cases.
+
+```csharp
+.Image(imageData, ImageScaling.FitArea)
+```
+
+::: danger
+Please be careful. This component may try to enforce size constraints that are impossible to meet. Such scenarios end up with the layouting exception.
+:::
 
 ### Dynamic images
 
