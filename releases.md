@@ -26,7 +26,8 @@ The QuestPDF library offers multiple tools needed to design and generate PDF doc
 - Added new element: `Element` can be used for injecting dynamic elements (usually conditionally) without breaking the fluent API chain. This is practically a syntactic sugar to simplify your code.
 - The `AspectRatio` element allows now to specify scaling rule: fitting width, height or available space.
 - The `Image` element supports now scaling rules: fitting width, height or available space, as well as scaling unproportionally.
-- Bug fix: the `GeneratePdf(Stream stream)` method does not close the output stream.
+- Added more, commonly used page sizes (thank you for your work [lmingle](https://github.com/lmingle)).
+- Bug fix: the `GeneratePdf(Stream stream)` method does not close the output stream (thank you for your suggestion [tthiery](https://github.com/tthiery)).
 
 ### 2021.03
 
