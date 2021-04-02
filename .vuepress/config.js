@@ -6,7 +6,7 @@ module.exports = {
         ['link', { rel: 'icon', href: '/favicon.png' }],
     ],
     evergreen: true,
-    base: '/documentation',
+    base: '/documentation/',
     dest: '/workspace/dist',
     themeConfig: {
         displayAllHeaders: true,
