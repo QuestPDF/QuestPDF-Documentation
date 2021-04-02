@@ -4,16 +4,15 @@
     "build": "vuepress build"
   },
   "dependencies": {
-    "@vuepress/core": "^1.7.1",
+    "@vuepress/core": "^1.8.2",
     "i": "^0.3.6",
     "markdown-it-imsize": "^2.0.1",
-    "npm": "^6.14.8",
+    "npm": "^6.14.12",
     "to": "^0.2.9",
     "update": "^0.7.4",
-    "vuepress": "^1.7.1"
+    "vuepress": "^1.8.2"
   },
   "devDependencies": {
-    "@vuepress/plugin-google-analytics": "^1.7.1"
+    "@vuepress/plugin-google-analytics": "^1.8.2"
   }
 }
-
