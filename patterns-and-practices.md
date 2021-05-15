@@ -171,33 +171,199 @@ If the component class has parameter-less constructor, you can use the generic `
 :::
 
 
+## Style
+
+### Material Design colors
+
+You can access any color defined in the Material Design colors set. Please find more details [on the official webpage](https://material.io/design/color/the-color-system.html).
+
+```csharp
+// base colors:
+Colors.Black
+Colors.White
+Colors.Transparent
+
+// colors with medium brightness:
+Colors.Green.Medium;
+Colors.Orange.Medium;
+Colors.Blue.Medium;
+
+// darken colors:
+Colors.Blue.Darken4
+Colors.LightBlue.Darken3
+Colors.Indigo.Darken2
+Colors.Brown.Darken1
+
+// lighten colors:
+Colors.Pink.Lighten1
+Colors.Purple.Lighten2
+Colors.Teal.Lighten3
+Colors.Cyan.Lighten4
+Colors.LightGreen.Lighten5
+
+// accent colors:
+Colors.Lime.Accent1
+Colors.Yellow.Accent2
+Colors.Amber.Accent3
+Colors.DeepOrange.Accent4
+```
+
+Example usage:
+
+```csharp
+var colors = new[]
+{
+    Colors.Green.Darken4,
+    Colors.Green.Darken3,
+    Colors.Green.Darken2,
+    Colors.Green.Darken1,
+    
+    Colors.Green.Medium,
+    
+    Colors.Green.Lighten1,
+    Colors.Green.Lighten2,
+    Colors.Green.Lighten3,
+    Colors.Green.Lighten4,
+    Colors.Green.Lighten5,
+    
+    Colors.Green.Accent1,
+    Colors.Green.Accent2,
+    Colors.Green.Accent3,
+    Colors.Green.Accent4,
+};
+
+container
+    .Padding(25)
+    .Height(100)
+    .Row(row =>
+    {
+        foreach (var color in colors)
+            row.RelativeColumn().Background(color);
+    });
+```
+
+![example](./images/patterns-and-practices/material_colors.png =450x)
+
+### Basic fonts
+
+The library offers a list of simple and popular fonts.
+```csharp
+Fonts.Calibri
+Fonts.Candara
+Fonts.Arial
+// and more...
+```
+
+Example:
+
+```csharp
+var fonts = new[]
+{
+    Fonts.Calibri,
+    Fonts.Candara,
+    Fonts.Arial,
+    Fonts.TimesNewRoman,
+    Fonts.Consolas,
+    Fonts.Tahoma,
+    Fonts.Impact,
+    Fonts.Trebuchet,
+    Fonts.ComicSans
+};
+
+container.Padding(25).Grid(grid =>
+{
+    grid.Columns(3);
+
+    foreach (var font in fonts)
+    {
+        grid.Item()
+            .Border(1)
+            .BorderColor(Colors.Grey.Medium)
+            .Padding(10)
+            .Text(font, TextStyle.Default.FontType(font).Size(16));
+    }
+});
+```
+
+![example](./images/patterns-and-practices/defined_fonts.png =500x)
+
 ## Prototyping
+
+### Text
 
 It is a very common scenario when we know how the document layout should look like, however, we do not have appropriate data to fill it. The Quest PDF library provides a set of helpers to generate random text of different kinds:
 
 ```csharp
 using QuestPDF.Helpers;
 
-TextPlaceholder.LoremIpsum();
-TextPlaceholder.Label();
-TextPlaceholder.Sentence();
-TextPlaceholder.Question();
-TextPlaceholder.Paragraph();
-TextPlaceholder.Paragraphs();
+Placeholders.LoremIpsum();
+Placeholders.Label();
+Placeholders.Sentence();
+Placeholders.Question();
+Placeholders.Paragraph();
+Placeholders.Paragraphs();
 
-TextPlaceholder.Email();
-TextPlaceholder.Name();
-TextPlaceholder.PhoneNumber();
+Placeholders.Email();
+Placeholders.Name();
+Placeholders.PhoneNumber();
 
-TextPlaceholder.Time();
-TextPlaceholder.ShortDate();
-TextPlaceholder.LongDate();
-TextPlaceholder.DateTime();
+Placeholders.Time();
+Placeholders.ShortDate();
+Placeholders.LongDate();
+Placeholders.DateTime();
 
-TextPlaceholder.Integer();
-TextPlaceholder.Decimal();
-TextPlaceholder.Percent();
+Placeholders.Integer();
+Placeholders.Decimal();
+Placeholders.Percent();
 ```
+
+### Colors
+
+You can access a random color picked from the Material Design colors set. Colors are returned as text in the HEX format.
+
+```csharp
+// bright color, lighten-2
+Placeholders.BackgroundColor();
+
+// medium
+Placeholders.Color();
+```
+
+Example usage to create a colorful matrix:
+
+```csharp
+.Padding(25)
+.Grid(grid =>
+{
+    grid.Columns(5);
+    
+    Enumerable
+        .Range(0, 25)
+        .Select(x => Placeholders.BackgroundColor())
+        .ToList()
+        .ForEach(x => grid.Item().Height(50).Background(x));
+});
+```
+
+![example](./images/patterns-and-practices/random_colors.png =300x)
+
+### Image
+
+Use this simple function to generate random image with required size:
+
+```csharp
+// both functions return a byte array containing a JPG file
+Placeholders.Image(400, 300);
+Placeholders.Image(new Size(400, 300));
+
+// example usage
+.Padding(25)
+.Width(300)
+.AspectRatio(3 / 2f)
+.Image(Placeholders.Image);
+```
+
+![example](./images/patterns-and-practices/image_placeholder.png =350x)
 
 ## Exceptions
 

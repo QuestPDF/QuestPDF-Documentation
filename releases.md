@@ -5,7 +5,11 @@ title: "Releases"
 
 ## Release notes
 
+### 2021.05
+This release is the biggest one so far, offering a handful of new features and helpers.
+
 ### 2021.04
+
 - Added new element: `Debug` - this element can be used for inspecting its children and space taken by them,
 - Added new element: `Element` can be used for injecting dynamic elements (usually conditionally) without breaking the fluent API chain. This is practically syntactic sugar to simplify your code.
 - The `AspectRatio` element allows now to specify scaling rule: fitting width, height or available space.
@@ -52,10 +56,6 @@ The QuestPDF library offers multiple tools needed to design and generate PDF doc
 
 Most of the features listed below should be added in the nearest months:
 
-- Spacing property for the Row element,
-- Grid element (code simplification by reduce usage of the Row and the Stack elements),
-- Canvas element (exposing entire SkiaSharp API to draw complex content),
-- Layer element (possible to render elements on top of others, e.g. watermark),
 - RichText element (applying multiple styles to text content, text justification, better word-wrapping algorithm, page-break support etc.),
 - Custom slots in components (named slots, dynamic slots),
 - Documentation cleanup.
@@ -64,8 +64,8 @@ Most of the features listed below should be added in the nearest months:
 
 There are also features being actively investigated with lower importance:
 
-- Tutorials: adding maps / charts to the document,
 - Better debugging experience (e.g. when created layout generates an infinite document),
+- Tutorials: adding maps / charts to the document,
 - The library should return the generated document even if DocumentLayoutException is thrown (to better understand the issue),
 - Allow the Placeholder element to show text instead of an icon,
 - SVG support ([integration with SkiaSharp.Svg](https://www.nuget.org/packages/SkiaSharp.Svg/)),
