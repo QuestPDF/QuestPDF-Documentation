@@ -43,16 +43,17 @@ Below you can find the rough estimation of the progress:
 - [X] Border
 - [X] Constrained
 - [X] Dynamic Image
-- [ ] Extend
-- [ ] External Link
+- [X] Extend
+- [ ] External Link (not planned yet)
 - [X] Image
-- [ ] Internal Link / Internal Location
+- [ ] Internal Link / Internal Location (not planned yet)
 - [X] Padding
-- [ ] Page
-- [ ] Page Break
-- [ ] Page Number
-- [ ] Row
-- [ ] Section
-- [ ] Show Once (needs revision)
-- [ ] Stack (needs revision)
+- [X] Page
+- [X] Page Break
+- [ ] Page Number (not planned yet)
+- [X] Row
+- [X] Section
+- [ ] Show Once (tests need revision)
+- [ ] Stack (tested layouting algorithm, missing fluent API)
 - [ ] Text
+- Other elements.

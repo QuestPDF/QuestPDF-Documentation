@@ -6,7 +6,17 @@ title: "Releases"
 ## Release notes
 
 ### 2021.05
-This release is the biggest one so far, offering a handful of new features and helpers.
+This release is the biggest one so far, offering a handful of new features and helpers:
+- Added new element: `Box` - it does not enforce parent size to its child,
+- Added new element: `Grid` - allows putting elements on the grid layout. Each element can take various number of columns. To big items will be moved to the next row,
+- Added new element: `Canvas` - allows drawing custom content using the SkiaSharp canvas element,
+- Added new element: `EnsureSpace` - makes sure that pageable content that according to the layout will take multiple pages, has enough space on each page,
+- Added new element: `Layers` - allows drawing content below and above the main layer, e.g. drawing text on top of the image,
+- Redesigned the `Debug` element - it does not only highlight space but also puts a small label,
+- Added set of predefined colors inspired by the Material Design system,
+- Added set of predefined fonts,
+- Improved the `Row` element - added spacing property similar to the one available in the `Stack` element,
+- Slightly adjusted available API (insignificant breaking changes).
 
 ### 2021.04
 
