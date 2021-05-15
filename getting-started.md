@@ -73,7 +73,7 @@ If you expect to have multiple documents with similar content, for instance, the
 This tutorial focuses mainly on preparing the layout structure. For this reason, all necessary data is randomly generated.
 
 ::: tip
-To improve the workflow, use various helper methods to easily generate fake data. All of them are available in the static `TextPlaceholder` class. This way, it is easy to prototype document structure without implementing a real data source.
+To improve the workflow, use various helper methods to easily generate fake data. All of them are available in the static `Placeholders` class. This way, it is easy to prototype document structure without implementing a real data source.
 :::
 
 ```csharp
@@ -98,7 +98,7 @@ public static class InvoiceDocumentDataSource
             CustomerAddress = GenerateRandomAddress(),
 
             Items = items,
-            Comments = TextPlaceholder.Paragraph()
+            Comments = Placeholders.Paragraph()
         };
     }
 
@@ -106,7 +106,7 @@ public static class InvoiceDocumentDataSource
     {
         return new OrderItem
         {
-            Name = TextPlaceholder.Label(),
+            Name = Placeholders.Label(),
             Price = (decimal) Math.Round(Random.NextDouble() * 100, 2),
             Quantity = Random.Next(1, 10)
         };
@@ -116,12 +116,12 @@ public static class InvoiceDocumentDataSource
     {
         return new Address
         {
-            CompanyName = TextPlaceholder.Name(),
-            Street = TextPlaceholder.Label(),
-            City = TextPlaceholder.Label(),
-            State = TextPlaceholder.Label(),
-            Email = TextPlaceholder.Email(),
-            Phone = TextPlaceholder.PhoneNumber()
+            CompanyName = Placeholders.Name(),
+            Street = Placeholders.Label(),
+            City = Placeholders.Label(),
+            State = Placeholders.Label(),
+            Email = Placeholders.Email(),
+            Phone = Placeholders.PhoneNumber()
         };
     }
 }
@@ -208,8 +208,8 @@ public class InvoiceDocument : IDocument
             .PaddingVertical(50)
             .Page(page =>
             {
-                page.Header(ComposeHeader);
-                page.Content(ComposeContent);
+                page.Header().Element(ComposeHeader);
+                page.Content().Element(ComposeContent);
                 page.Footer().AlignCenter().PageNumber("Page {number}");
             });
     }
@@ -220,12 +220,12 @@ public class InvoiceDocument : IDocument
         {
             row.RelativeColumn().Stack(stack =>
             {
-                stack.Element().Text($"Invoice #{Model.InvoiceNumber}", TextStyle.Default.Size(20));
-                stack.Element().Text($"Issue date: {Model.IssueDate:d}");
-                stack.Element().Text($"Due date: {Model.DueDate:d}");
+                stack.Item().Text($"Invoice #{Model.InvoiceNumber}", TextStyle.Default.Size(20));
+                stack.Item().Text($"Issue date: {Model.IssueDate:d}");
+                stack.Item().Text($"Due date: {Model.DueDate:d}");
             });
 
-            stack.ConstantColumn(100).Height(50).Placeholder();
+            row.ConstantColumn(100).Height(50).Placeholder();
         });
     }
 
@@ -246,29 +246,9 @@ The code above produces the following result:
 
 ![example](./images/getting-started/step-header.png =595x)
 
-#### Row
-
-The `Row` element takes the entire width available and then splits it into multiple columns. Each column can be filled defined dynamically and filled separately with different content. All columns inside a row have the same height equal to the highest child inside. You can define any number of columns you want, even dynamically with a loop.
-
-The `ConstantColumn` has always the same width provided as an argument. The `RelativeColumn` however, allows resizing the child depending on other columns. As an optional argument (default is `1`) you can provide its relative size.
-
-The algorithm is simple. Size of constant columns is maintained and subtracted from the available width. The space left is then divided by relative columns in proportions equal to relative sizes. For example, if a row has two relative columns with sizes `1` and `2`, the first column takes `1/3` of available space, and the second one takes `2/3`.
-
-![example](./images/api-reference/row-example.png =740x)
-
-#### Stack
-
-The `Stack` element is used for displaying elements one underneath another. You can generate elements conditionally and dynamically in a loop. It is also possible to configure space between elements by using the `Spacing` method (default is `0 points`).
-
-The screenshot below shows a stack containing three colored elements:
-
-![example](./images/api-reference/stack-example.png =500x)
-
 ### Content implementation
 
 In the document generation world, it is expected that a single document has multiple pages. The QuestPDF library assumes that certain elements should be repeated across the page, for example, header and footer. Additionally, it offers a great mechanism to support paging content. It is not desired to split the content in any place, usually, we want to define explicitly where it should happen if needed.
-
-A common practice is using the `PageableStack` element inside the `Content` section. If an element would be bigger than available space, it is going to be wrapped to the next page. This way, the `PageableStack` element makes sure that the split happens only between its children and they are not divided.
 
 ```csharp
 public class InvoiceDocument : IDocument
@@ -277,14 +257,14 @@ public class InvoiceDocument : IDocument
 
     void ComposeContent(IContainer container)
     {
-        container.PaddingVertical(40).PageableStack(stack =>
+        container.PaddingVertical(40).Stack(stack =>
         {
             stack.Spacing(5);
 
-            stack.Element(ComposeTable);
+            stack.Item().Element(ComposeTable);
 
             if (!string.IsNullOrWhiteSpace(Model.Comments))
-                stack.Element().PaddingTop(25).Element(ComposeComments);
+                stack.Item().PaddingTop(25).Element(ComposeComments);
         });
     }
 
@@ -303,8 +283,8 @@ public class InvoiceDocument : IDocument
         container.Background("#EEE").Padding(10).Stack(stack =>
         {
             stack.Spacing(5);
-            stack.Element().Text("Comments", TextStyle.Default.Size(14));
-            stack.Element().Text(Model.Comments);
+            stack.Item().Text("Comments", TextStyle.Default.Size(14));
+            stack.Item().Text(Model.Comments);
         });
     }
 }
@@ -328,10 +308,10 @@ public class InvoiceDocument : IDocument
 
     void ComposeTable(IContainer container)
     {
-        container.PaddingTop(10).Section(section =>
+        container.PaddingTop(10).Decoration(decoration =>
         {
             // header
-            section.Header().BorderBottom(1).Padding(5).Row(row =>
+            decoration.Header().BorderBottom(1).Padding(5).Row(row =>
             {
                 row.ConstantColumn(25).Text("#");
                 row.RelativeColumn(3).Text("Product");
@@ -341,13 +321,13 @@ public class InvoiceDocument : IDocument
             });
 
             // content
-            section
+            decoration
                 .Content()
-                .PageableStack(stack =>
+                .Stack(stack =>
                 {
                     foreach (var item in Model.Items)
                     {
-                        stack.Element().BorderBottom(1).BorderColor("CCC").Padding(5).Row(row =>
+                        stack.Item().BorderBottom(1).BorderColor("CCC").Padding(5).Row(row =>
                         {
                             row.ConstantColumn(25).Text(Model.Items.IndexOf(item) + 1);
                             row.RelativeColumn(3).Text(item.Name);
@@ -366,11 +346,11 @@ public class InvoiceDocument : IDocument
 
 ![example](./images/getting-started/step-table.png =595x)
 
-#### Section
+#### Decoration
 
-Please notice that this implementation uses the `PageableStack` element. That means, the page wrap can happen between any of the order items. When you think about it, you can realize that in simplified flow algorithm, there would be no table's header on the next page.
+Please notice that this implementation uses the `Stack` element. That means, the page wrap can happen between any of the order items. When you think about it, you can realize that in simplified flow algorithm, there would be no table's header on the next page.
 
-This exactly why the `Section` element was created! It has two slots: `Header` and `Content`. When this element is wrapped to multiple pages, it makes sure that the header element is always present. Please take a look at screenshots from the very beginning of this tutorial and notice that it is true. Even the table was split into two pages, on each page the header is visible.
+This exactly why the `Decoration` element was created! It has two slots: `Header` and `Content`. When this element is wrapped to multiple pages, it makes sure that the header element is always present. Please take a look at screenshots from the very beginning of this tutorial and notice that it is true. Even the table was split into two pages, on each page the header is visible.
 
 ### Address component
 
@@ -405,13 +385,13 @@ public class AddressComponent : IComponent
         {
             stack.Spacing(5);
 
-            stack.Element().BorderBottom(1).PaddingBottom(5).Text(Title);
+            stack.Item().BorderBottom(1).PaddingBottom(5).Text(Title);
 
-            stack.Element().Text(Address.CompanyName);
-            stack.Element().Text(Address.Street);
-            stack.Element().Text($"{Address.City}, {Address.State}");
-            stack.Element().Text(Address.Email);
-            stack.Element().Text(Address.Phone);
+            stack.Item().Text(Address.CompanyName);
+            stack.Item().Text(Address.Street);
+            stack.Item().Text($"{Address.City}, {Address.State}");
+            stack.Item().Text(Address.Email);
+            stack.Item().Text(Address.Phone);
         });
     }
 }
@@ -426,24 +406,24 @@ public class InvoiceDocument : IDocument
 
     void ComposeContent(IContainer container)
     {
-        container.PaddingVertical(40).PageableStack(stack => 
+        container.PaddingVertical(40).Stack(stack => 
         {
             stack.Spacing(5);
 
-            stack.Element().Row(row =>
+            stack.Item().Row(row =>
             {
                 row.RelativeColumn().Component(new AddressComponent("From", Model.SellerAddress));
                 row.ConstantColumn(50);
                 row.RelativeColumn().Component(new AddressComponent("For", Model.CustomerAddress));
             });
 
-            stack.Element(ComposeTable);
+            stack.Item().Element(ComposeTable);
 
             var totalPrice = Model.Items.Sum(x => x.Price * x.Quantity);
-            stack.Element().AlignRight().Text($"Grand total: {totalPrice}$", TextStyle.Default.Size(14));
+            stack.Item().AlignRight().Text($"Grand total: {totalPrice}$", TextStyle.Default.Size(14));
 
             if (!string.IsNullOrWhiteSpace(Model.Comments))
-                stack.Element().PaddingTop(25).Element(ComposeComments);
+                stack.Item().PaddingTop(25).Element(ComposeComments);
         });
     }
 
@@ -466,6 +446,7 @@ static void Main(string[] args)
     var document = new InvoiceDocument(model);
     document.GeneratePdf(filePath);
 
+    Process.Start("explorer.exe", filePath);
     Process.Start("explorer.exe", filePath);
 }
 ```
