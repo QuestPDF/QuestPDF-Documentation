@@ -76,6 +76,52 @@ Please be careful. This component may try to enforce size constraints that are i
 ```
 
 
+## Box
+
+The box element loosens the size constraints provided by its parent. It makes sure that its child is rendered only with necessary space, no bigger.
+
+```csharp{3-3}
+.Border(4)
+.BorderColor(Colors.Blue.Medium)
+.Box()
+.Background(Colors.Grey.Lighten2)
+.Padding(15)
+.Text("Test of the \n box element", TextStyle.Default.Size(20));
+```
+
+Without using the box element (notice that the text element takes entire space provided by its parent):
+
+![example](./images/api-reference/box-without.png =300x)
+
+With using the box element (notice that the text element takes only necessary space):
+
+![example](./images/api-reference/box-with.png =300x)
+
+
+## Canvas
+
+This element allows drawing any custom content using the SkiaSharp canvas objects.
+
+```csharp
+.Canvas((canvas, size) =>
+{
+    using var paint = new SKPaint
+    {
+        Color = SKColors.Red,
+        StrokeWidth = 10,
+        IsStroke = true
+    };
+        
+    // move origin to the center of the available space
+    canvas.Translate(size.Width / 2, size.Height / 2);
+    
+    // draw a circle
+    canvas.DrawCircle(0, 0, 50, paint);
+});
+```
+
+![example](./images/api-reference/canvas.png =300x)
+
 ## Debug
 
 - This container can be used to inspect space taken by its children.
@@ -184,6 +230,20 @@ public static IContainer TextOrBackground(this IContainer container, string text
 }
 ```
 
+## Ensure space
+
+Sometimes when rendering multi-page content, we want to make sure that the element on each page takes some minimal space. 
+For example, when rendering a table, you may want to show at least 5 rows. 
+The EnsureSpace element makes sure that if its child is going to take more pages, it has enough space on its page.
+
+```csharp
+.EnsureSpace(100)
+.Stack(stack =>
+{
+    // content
+}); 
+```
+
 ## Extend
 
 - This container extends its size to take entire space possible.
@@ -272,6 +332,39 @@ byte[] GenerateImage(Size size)
 .DynamicImage(GenerateImage);
 ```
 
+## Grid
+
+- The Grid elements builds entire layout based on multiple Row elements put inside a Stack. 
+- Space is divided into multiple columns (12 by default).
+- Each item can take multiple columns.
+- If in the row there is not enough space for the item, it is pushed to the next row.
+- If there is more space than necessary, items can be aligned to the left / center or right.  
+- It is possible to put space between elements.
+
+```csharp
+.Grid(grid =>
+{
+    grid.VerticalSpacing(15);
+    grid.HorizontalSpacing(15);
+    grid.AlignCenter();
+    grid.Columns(10); // 12 by default
+
+    grid.Item(6).Background(Colors.Blue.Lighten1).Height(50);
+    grid.Item(4).Background(Colors.Blue.Lighten3).Height(50);
+    
+    grid.Item(2).Background(Colors.Teal.Lighten1).Height(70);
+    grid.Item(3).Background(Colors.Teal.Lighten2).Height(70);
+    grid.Item(5).Background(Colors.Teal.Lighten3).Height(70);
+    
+    grid.Item(2).Background(Colors.Green.Lighten1).Height(50);
+    grid.Item(2).Background(Colors.Green.Lighten2).Height(50);
+    grid.Item(2).Background(Colors.Green.Lighten3).Height(50);
+});
+```
+
+![example](./images/api-reference/grid.png =400x)
+
+
 ## Internal link
 
 ### Location
@@ -297,6 +390,51 @@ byte[] GenerateImage(Size size)
 .InternalLink("links-chapter")
 .Text("About internal links chapter");
 ```
+
+## Layers
+
+- This element allows putting elements below and above the main content.
+- The paging algorithm is driven by the PrimaryLayer.
+- You need to specify exactly one PrimaryLayer.
+
+```csharp
+.Layers(layers =>
+{
+    // layer below main content
+    layers
+        .Layer()
+        .Height(100)
+        .Width(100)
+        .Background(Colors.Grey.Lighten3);
+    
+    layers
+        .PrimaryLayer()
+        .Padding(25)
+        .Stack(stack =>
+        {
+            stack.Spacing(5);
+            
+            foreach (var _ in Enumerable.Range(0, 7))
+                stack.Item().Text(Placeholders.Sentence());
+        });
+    
+    // layer above the main content    
+    layers
+        .Layer()
+        .AlignCenter()
+        .AlignMiddle()
+        .Text("Watermark", TextStyle.Default.Size(48).Bold().Color(Colors.Green.Lighten3));
+    
+    layers
+        .Layer()
+        .AlignBottom()
+        .PageNumber("Page {number}", TextStyle.Default.Size(16).Color(Colors.Green.Medium));
+});
+```
+
+![example](./images/api-reference/layers-1.png =400x)
+![example](./images/api-reference/layers-2.png =400x)
+
 
 ## Padding
 
