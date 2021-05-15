@@ -8,6 +8,7 @@
     "i": "^0.3.6",
     "markdown-it-imsize": "^2.0.1",
     "npm": "^6.14.12",
+    "markdown-it-task-lists": "^2.1.1",
     "to": "^0.2.9",
     "update": "^0.7.4",
     "vuepress": "^1.8.2"

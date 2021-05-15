@@ -47,7 +47,8 @@ Please be careful. This component may try to enforce size constraints that are i
 - This container changes background colour on the area provided by its parent.
 
 ```csharp
-.Background("#EEE")
+.Background("#00FF00")
+.Background(Colors.Green.Lighten2)
 ```
 
 ## Border
@@ -70,37 +71,91 @@ Please be careful. This component may try to enforce size constraints that are i
 .BorderBottom(7)
 
 // change colour of the border
-.BorderColor("#F00")
+.BorderColor("#00FF00")
+.BorderColor(Colors.Green.Darken1)
 ```
 
-## Constrained
 
-- Use this container to enforce additional sizing rules, e.g. minimal height or maximum width.
-- It is possible to control the width and height independently.
+## Box
+
+The box element loosens the size constraints provided by its parent. It makes sure that its child is rendered only with necessary space, no bigger.
+
+```csharp{3-3}
+.Border(4)
+.BorderColor(Colors.Blue.Medium)
+.Box()
+.Background(Colors.Grey.Lighten2)
+.Padding(15)
+.Text("Test of the \n box element", TextStyle.Default.Size(20));
+```
+
+Without using the box element (notice that the text element takes entire space provided by its parent):
+
+![example](./images/api-reference/box-without.png =300x)
+
+With using the box element (notice that the text element takes only necessary space):
+
+![example](./images/api-reference/box-with.png =300x)
+
+
+## Canvas
+
+This element allows drawing any custom content using the SkiaSharp canvas objects.
 
 ```csharp
-// adjust width to specific value
-.Width(50)
+.Canvas((canvas, size) =>
+{
+    using var paint = new SKPaint
+    {
+        Color = SKColors.Red,
+        StrokeWidth = 10,
+        IsStroke = true
+    };
 
-// set a constraint on the minimum and/or maximum width
-.MinWidth(50)
-.MaxWidth(100)
+    // move origin to the center of the available space
+    canvas.Translate(size.Width / 2, size.Height / 2);
 
-// adjust the height to a specific value
-.Height(50)
-
-// set a constraint on the minimum and/or maximum height
-.MinHeight(50)
-.MaxHeight(100)
+    // draw a circle
+    canvas.DrawCircle(0, 0, 50, paint);
+});
 ```
 
-::: danger
-Please be careful. This component may try to enforce size constraints that are impossible to meet when:
-- requires more space than is available,
-- tries to squeeze its child in less space than necessary.
+![example](./images/api-reference/canvas.png =300x)
 
-Such scenarios end up with the layouting exception.
-:::
+## Debug
+
+- This container can be used to inspect space taken by its children.
+- It does not alter document's layout.
+
+```csharp
+// You can specify text and color,
+// to better distinguish between various debug elements:
+.Debug("Grid example", Colors.Blue.Medium)
+
+// You can skip color, by default it is red:
+.Debug("Grid example")
+
+// Or use default style:
+.Debug()
+```
+
+Example:
+
+```csharp{4}
+container
+    .Padding(25)
+    .Debug("Grid example", Colors.Blue.Medium)
+    .Grid(grid =>
+    {
+        grid.Columns(3);
+        grid.Spacing(5);
+
+        foreach (var _ in Enumerable.Range(0, 8))
+            grid.Item().Height(50).Placeholder();
+    });
+```
+
+![example](./images/api-reference/debug.png =210x)
 
 ## Debug
 
@@ -131,7 +186,7 @@ Sometimes it is useful to alter the document's content based on a condition. It 
 public static IContainer TableCell(this IContainer container, bool applyBackground = false)
 {
     var container = container.Border(0.5f).BorderColor("#222");
-    
+
     if (applyBackground)
         container = container.Background("#DEE");
 
@@ -166,6 +221,92 @@ public static IContainer TextOrBackground(this IContainer container, string text
 }
 ```
 
+## Decoration
+
+- This container consists of three slots: header, content and footer.
+- The header element is always visible above the content. When the element is visible on multiple pages, the header element is going to be repeated on each page.
+- The footer element is always visible below the content. When the element is visible on multiple pages, the footer element is going to be repeated on each page.
+- The content element is visible only once. It is often used along with a PageableStack to allow drawing longer content across multiple pages.
+
+```csharp
+.Decoration(decoration =>
+{
+    decoration
+        .Header()
+        .Background(Colors.Grey.Medium)
+        .Padding(10)
+        .Text("Notes", TextStyle.Default.Size(16).Color("#FFF"));
+
+    decoration
+        .Content()
+        .Background(Colors.Grey.Lighten3)
+        .Padding(10)
+        .ExtendVertical()
+        .Text(Helpers.Placeholders.LoremIpsum());
+});
+```
+
+![example](./images/api-reference/decoration.png =300x)
+
+
+## Element
+
+Sometimes it is useful to alter the document's content based on a condition. It is practically only a syntactic sugar to simplify your code. Use this component to achieve such results without breaking the fluent API chain:
+
+```csharp{6-7,18}
+// before
+public static IContainer TableCell(this IContainer container, bool applyBackground = false)
+{
+    var container = container.Border(0.5f).BorderColor("#222");
+
+    if (applyBackground)
+        container = container.Background("#DEE");
+
+    return container.Padding(5);
+}
+
+// after
+public static IContainer TableCell(this IContainer container, bool applyBackground = false)
+{
+    return container
+        .Border(0.5f)
+        .BorderColor("#222")
+        .Element(x => applyBackground ? x.Background("#DEE") : x)
+        .Padding(5);
+}
+```
+
+It is not required to follow the methods chain. Using this approach, you can also end the chain:
+
+```csharp
+public static IContainer TextOrBackground(this IContainer container, string text)
+{
+    return container
+        .Padding(10)
+        .Element(x =>
+        {
+            if (string.IsNullOrWhiteSpace(text))
+                x.Height(10).Width(50).Background("#DDD");
+            else
+                x.Text(text);
+        });
+}
+```
+
+## Ensure space
+
+Sometimes when rendering multi-page content, we want to make sure that the element on each page takes some minimal space.
+For example, when rendering a table, you may want to show at least 5 rows.
+The EnsureSpace element makes sure that if its child is going to take more pages, it has enough space on its page.
+
+```csharp
+.EnsureSpace(100)
+.Stack(stack =>
+{
+    // content
+});
+```
+
 ## Extend
 
 - This container extends its size to take entire space possible.
@@ -186,6 +327,27 @@ public static IContainer TextOrBackground(this IContainer container, string text
 .ExternalLink("https://www.questpdf.com")
 .Text("QuestPDF Webpage");
 ```
+
+## Height
+
+Use this container to enforce additional sizing rules, e.g. minimum/maximum/exact height.
+
+```csharp
+// adjust the height to a specific value
+.Height(50)
+
+// set a constraint on the minimum and/or maximum height
+.MinHeight(50)
+.MaxHeight(100)
+```
+
+::: danger
+Please be careful. This component may try to enforce size constraints that are impossible to meet when:
+- requires more space than is available,
+- tries to squeeze its child in less space than necessary.
+
+Such scenarios end up with the layouting exception.
+:::
 
 ## Images
 
@@ -221,17 +383,50 @@ Please be careful. This component may try to enforce size constraints that are i
 - To achieve the best image clarity, generate images with specified resolution (or multiple of the resolution for retina displays).
 - Useful when creating maps / charts.  
 - This element behaves similarly to static images.
-- As an argument, it expects a function that takes available space and returns an image in a binary format. 
+- As an argument, it expects a function that takes available space and returns an image in a binary format.
 
 ```csharp{7-7}
 // somewhere in your code
-byte[] GenerateImage(Size size) 
+byte[] GenerateImage(Size size)
 {
     // logic that generates and returns an image with a specific resolution
 }
 
 .DynamicImage(GenerateImage);
 ```
+
+## Grid
+
+- The Grid elements builds entire layout based on multiple Row elements put inside a Stack.
+- Space is divided into multiple columns (12 by default).
+- Each item can take multiple columns.
+- If in the row there is not enough space for the item, it is pushed to the next row.
+- If there is more space than necessary, items can be aligned to the left / center or right.  
+- It is possible to put space between elements.
+
+```csharp
+.Grid(grid =>
+{
+    grid.VerticalSpacing(15);
+    grid.HorizontalSpacing(15);
+    grid.AlignCenter();
+    grid.Columns(10); // 12 by default
+
+    grid.Item(6).Background(Colors.Blue.Lighten1).Height(50);
+    grid.Item(4).Background(Colors.Blue.Lighten3).Height(50);
+
+    grid.Item(2).Background(Colors.Teal.Lighten1).Height(70);
+    grid.Item(3).Background(Colors.Teal.Lighten2).Height(70);
+    grid.Item(5).Background(Colors.Teal.Lighten3).Height(70);
+
+    grid.Item(2).Background(Colors.Green.Lighten1).Height(50);
+    grid.Item(2).Background(Colors.Green.Lighten2).Height(50);
+    grid.Item(2).Background(Colors.Green.Lighten3).Height(50);
+});
+```
+
+![example](./images/api-reference/grid.png =400x)
+
 
 ## Internal link
 
@@ -242,7 +437,7 @@ byte[] GenerateImage(Size size)
 
 ```csharp{1-1}
 .Location("links-chapter")
-.Section(section => 
+.Section(section =>
 {
     section.Header().Text("About internal links");
     section.Content().Text("Some content");
@@ -259,6 +454,51 @@ byte[] GenerateImage(Size size)
 .InternalLink("links-chapter")
 .Text("About internal links chapter");
 ```
+
+## Layers
+
+- This element allows putting elements below and above the main content.
+- The paging algorithm is driven by the PrimaryLayer.
+- You need to specify exactly one PrimaryLayer.
+
+```csharp
+.Layers(layers =>
+{
+    // layer below main content
+    layers
+        .Layer()
+        .Height(100)
+        .Width(100)
+        .Background(Colors.Grey.Lighten3);
+
+    layers
+        .PrimaryLayer()
+        .Padding(25)
+        .Stack(stack =>
+        {
+            stack.Spacing(5);
+
+            foreach (var _ in Enumerable.Range(0, 7))
+                stack.Item().Text(Placeholders.Sentence());
+        });
+
+    // layer above the main content    
+    layers
+        .Layer()
+        .AlignCenter()
+        .AlignMiddle()
+        .Text("Watermark", TextStyle.Default.Size(48).Bold().Color(Colors.Green.Lighten3));
+
+    layers
+        .Layer()
+        .AlignBottom()
+        .PageNumber("Page {number}", TextStyle.Default.Size(16).Color(Colors.Green.Medium));
+});
+```
+
+![example](./images/api-reference/layers-1.png =400x)
+![example](./images/api-reference/layers-2.png =400x)
+
 
 ## Padding
 
@@ -290,20 +530,20 @@ byte[] GenerateImage(Size size)
 {
     page.Header()
         .Height(60)
-        .Background("#BBB")
+        .Background(Colors.Grey.Lighten1)
         .AlignCenter()
         .AlignMiddle()
         .Text("Header");
 
     page.Content()
-        .Background("#DDD")
+        .Background(Colors.Grey.Lighten2)
         .AlignCenter()
         .AlignMiddle()
         .Text("Content");
 
     page.Footer()
         .Height(30)
-        .Background("#BBB")
+        .Background(Colors.Grey.Lighten1)
         .AlignCenter()
         .AlignMiddle()
         .Text("Footer");
@@ -382,31 +622,36 @@ You can change text format by using the `{number}` slot as well as provide custo
 
 ![example](./images/api-reference/row-example.png =740x)
 
-## Section
-
-- This container consists of two parts: header and content.
-- The header element is always visible above the content. When the element is visible on multiple pages, the header element is going to be repeated on each page.
-- The content element is visible only once. It is often used along with a PageableStack to allow drawing longer content across multiple pages.
+You can specify the spacing between each column by using the Spacing() method:
 
 ```csharp
-.Section(section =>
+.Row(row =>
 {
-    section
-        .Header()
-        .Background("#888")
-        .Padding(10)
-        .Text("Notes", TextStyle.Default.Size(16).Color("#FFF"));
-
-    section
-        .Content()
-        .Background("#DDD")
-        .Padding(10)
-        .ExtendVertical()
-        .Text(TextPlaceholder.LoremIpsum());
+    row.Spacing(20);
+    row.RelativeColumn(2).Border(1).Background(Colors.Grey.Lighten1);
+    row.RelativeColumn(3).Border(1).Background(Colors.Grey.Lighten2);
+    row.RelativeColumn(4).Border(1).Background(Colors.Grey.Lighten3);
 });
 ```
 
-![example](./images/api-reference/section-example.png =300x)
+![example](./images/api-reference/row-spacing.png =370x)
+
+
+## Show entire
+
+Use this container to prevent the element from being paged. If on the page there is not enough space, the element is wrapped to the next page without splitting its content.
+
+This container is commonly used with the Stack and Row elements to make sure that their content is fully visible on a single page.
+
+```csharp
+.ShowEntire()
+// element that will not be paged
+```
+
+::: danger
+Please be careful when using the ShowEntire container. If its content requires more space than is available on the page, the rendering process will end up with the layouting exception.
+:::
+
 
 ## Show if
 
@@ -421,12 +666,12 @@ var condition = numberOfElements > 5;
     row.RelativeColumn().Text("One");
 
     var secondColumn = row.RelativeColumn();
-    
+
     if (condition)
         secondColumn.Text("Two");
 });
 
-// equivalent fluent approach 
+// equivalent fluent approach
 .Row(row =>
 {
     row.RelativeColumn().Text("One");
@@ -438,8 +683,7 @@ var condition = numberOfElements > 5;
 
 - This container changes the default rendering behaviour.
 - All its children, once fully rendered, are not going to be present on next pages.
-- Useful when creating tables. In such a case, the table structure should be visible on each page
-but the content inside the cell should not be repeated.
+- Useful when creating tables. In such a case, the table structure should be visible on each page but the content inside the cell should not be repeated.
 
 ```csharp
 .ShowOnce()
@@ -455,70 +699,28 @@ By default, all elements should fit on a single page. Otherwise, the entire cont
 ```csharp
 .Stack(stack =>
 {
-    stack.Element().Text("First item", Typography.Normal);
-    stack.Element().Text("Second item", Typography.Normal);
-    stack.Element().Text("Third item", Typography.Normal);
-
-    // and so on...
+    stack.Item().Background(Colors.Grey.Medium).Height(50);
+    stack.Item().Background(Colors.Grey.Lighten1).Height(100);
+    stack.Item().Background(Colors.Grey.Lighten2).Height(150);
 });
 ```
 
-::: danger
-Please be careful when using not-pageable stack. If its content requires more space than is available on the page, the rendering process will end up with the layouting exception. Please use PageableStack by default.
-:::
+![example](./images/api-reference/stack.png =350x)
 
-Much more useful version of the Stack component is to use the pageable stack, like so:
-
-```csharp
-.PageableStack(stack =>
-{
-    stack.Element().Text("First item", Typography.Normal);
-
-    // ...
-    // if the content does not fit on a single page, it is paged properly
-    // ...
-
-    stack.Element().Text("N-th item", Typography.Normal);
-});
-```
-
-You can specify the spacing between each element by using the Spacing() methods:
-
-```csharp
-.PageableStack(stack =>
-{
-    stack.Spacing(5);
-
-    // define content here
-});
-```
-
-Please analyse an example showing how to use the Stack component with additional spacing between its elements:
+Use the Spacing property to add some space between elements:
 
 ```csharp
 .Stack(stack =>
 {
-    stack.Spacing(5);
+    stack.Spacing(15);
 
-    stack
-        .Element()
-        .Background("#999")
-        .Height(50);
-
-    stack
-        .Element()
-        .Background("#BBB")
-        .Height(100);
-
-    stack
-        .Element()
-        .Background("#DDD")
-        .Height(150);
+    stack.Item().Background(Colors.Grey.Medium).Height(50);
+    stack.Item().Background(Colors.Grey.Lighten1).Height(100);
+    stack.Item().Background(Colors.Grey.Lighten2).Height(150);
 });
 ```
 
-![example](./images/api-reference/stack-example.png =350x)
-
+![example](./images/api-reference/stack-spacing.png =350x)
 
 ## Text
 
@@ -587,13 +789,13 @@ public static class Typography
         .Color("#000000")
         .Size(20)
         .Bold();
-    
+
     public static TextStyle Headline => TextStyle
         .Default
         .FontType("Helvetica")
         .Color("#047AED")
         .Size(14);
-    
+
     public static TextStyle Normal => TextStyle
         .Default
         .FontType("Helvetica")
@@ -604,3 +806,24 @@ public static class Typography
 }
 
 ```
+
+## Width
+
+Use this container to enforce additional sizing rules: minimum/maximum/exact width,
+
+```csharp
+// adjust width to specific value
+.Width(50)
+
+// set a constraint on the minimum and/or maximum width
+.MinWidth(50)
+.MaxWidth(100)
+```
+
+::: danger
+Please be careful. This component may try to enforce size constraints that are impossible to meet when:
+- requires more space than is available,
+- tries to squeeze its child in less space than necessary.
+
+Such scenarios end up with the layouting exception.
+:::

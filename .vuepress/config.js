@@ -22,6 +22,7 @@ module.exports = {
             '/': [
                 '/',
                 'releases',
+                'quality-assurance',
                 'getting-started',
                 'api-reference',
                 'patterns-and-practices',
@@ -31,7 +32,8 @@ module.exports = {
     },
     markdown: {
         plugins: {
-            'markdown-it-imsize': {}
+            'markdown-it-imsize': {},
+            'markdown-it-task-lists': {}
         }
     },
     plugins: {
