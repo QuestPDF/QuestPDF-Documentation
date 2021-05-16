@@ -155,27 +155,7 @@ container
     });
 ```
 
-![example](./images/api-reference/debug.png =210x)
-
-## Debug
-
-- This container can be used to inspect space taken by its children.
-- It does not alter document's layout.
-
-```csharp{4}
-.Width(300)
-.Height(200)
-.Padding(25)
-.Debug()
-.Padding(-5)
-.Row(row =>
-{
-    row.RelativeColumn().Padding(5).Extend().Placeholder();
-    row.RelativeColumn().Padding(5).Extend().Placeholder();
-});
-```
-
-![example](./images/api-reference/debug.png =300x)
+![example](./images/api-reference/debug.png =420x)
 
 ## Element
 
