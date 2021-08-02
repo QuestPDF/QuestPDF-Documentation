@@ -5,6 +5,34 @@ title: "Releases"
 
 ## Release notes
 
+### 2021.08
+This release mostly introduces a couple of additions requested by the QuestPDF community:
+- The ability to create documents with pages of various sizes, including continuous pages which are not restricted in height,
+- The `PageNumber` component supports now additional placeholders, such as total number of pages or page number of predefined locations. This addition is great for creating lists of content with interactive links, 
+- Added new element: `Unconstrained` - it removes any size constraints and gives its child full freedom in terms of layout,
+- Added new elements: `Scale`, `ScaleHorizontal` and `ScaleVrtical` - they allow to change the scale of an included child, making content inside bigger or smaller than it will appear otherwise,
+- Added new elements: `FlipOver`, `FlipHorizontal` and `FlipVertical` - they allow to create a mirror image of the content in one or both axes,
+- Added new elements: `RotateLeft` and `RotateRight` - they allow to rotate the content by 90 degrees to the left or to the right, preserving space constraints,
+- Added new element: `Rotate(degrees)` - it allows to rotate its content. Important: this element does not preserve space constraints and elements put inside may be placed over other elements,
+- Added new elements: `TranslateX` and `TranslateY` - they allow to move content in both axes, preserving size constraints.
+
+Additionally, this release includes some improvements to the engine used for generating code examples and their results. In the future, it will simplify creating examples and therefore will allow creating better documentation.
+
+Breaking changes:
+
+1) `PageNumber` - the default placeholder storing current page number has changed. Please replace your code following this patter:
+
+```csharp
+// change from:
+.PageNumber("Page {number}")
+
+// to:
+.PageNumber("Page {pdf:currentPage}")
+```
+
+2) The page settings are defined slightly differently. The page size is no longer defined in the `DocumentMetadata` class. The page margins have now predefined fluent API methods and do not rely on the padding element anymore. Please refer to the Getting Started section to see where this information should be placed.
+
+
 ### 2021.05
 This release is the biggest one so far, offering a handful of new features and helpers:
 - Added new element: `Box` - it does not enforce parent size to its child,
@@ -80,7 +108,6 @@ There are also features being actively investigated with lower importance:
 - Allow the Placeholder element to show text instead of an icon,
 - SVG support ([integration with SkiaSharp.Svg](https://www.nuget.org/packages/SkiaSharp.Svg/)),
 - Generation optimization: measuring text operation takes the vast majority of processing time,
-- Transformations: scale, rotate, offset, matrix,
 - Divider element (replacement for applying border in some scenarios),
 - and more...
 
