@@ -139,7 +139,7 @@ The implementation starts with defining a new class implementing the `IDocument`
 public interface IDocument
 {
     DocumentMetadata GetMetadata();
-    void Compose(IContainer container);
+    void Compose(IDocumentContainer container);
 }
 ```
 
@@ -163,13 +163,13 @@ public class InvoiceDocument : IDocument
 
     public DocumentMetadata GetMetadata() => DocumentMetadata.Default;
 
-    public void Compose(IContainer container)
+    public void Compose(IDocumentContainer container)
     {
         container
-            .PaddingHorizontal(50)
-            .PaddingVertical(50)
             .Page(page =>
             {
+                page.Margin(50);
+            
                 page.Header().Height(100).Background("CCC");
                 page.Content().Background("EEE");
                 page.Footer().Height(50).Background("CCC");
@@ -177,8 +177,6 @@ public class InvoiceDocument : IDocument
     }
 }
 ```
-
-The `PaddingHorizontal` and `PaddingVertical` elements have been used to define margins. QuestPDF uses `point` as a length unit. By definition, `1 inch = 72 points`. For example, A4 page has dimensions `595 x 842 points`.
 
 The `Page` element has three slots available: `Header`, `Content` and `Footer`. Moreover, there are additional rules for them:
 
@@ -201,16 +199,16 @@ public class InvoiceDocument : IDocument
 {
     /* code omitted */
 
-    public void Compose(IContainer container)
+    public void Compose(IDocumentContainer container)
     {
         container
-            .PaddingHorizontal(50)
-            .PaddingVertical(50)
             .Page(page =>
             {
+                page.Margin(50);
+            
                 page.Header().Element(ComposeHeader);
                 page.Content().Element(ComposeContent);
-                page.Footer().AlignCenter().PageNumber("Page {number}");
+                page.Footer().AlignCenter().PageNumber();
             });
     }
 
