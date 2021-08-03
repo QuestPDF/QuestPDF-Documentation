@@ -308,6 +308,53 @@ The EnsureSpace element makes sure that if its child is going to take more pages
 .Text("QuestPDF Webpage");
 ```
 
+## Flip
+- This container makes a mirror image of its child,
+- It follows all layoting rules and size constraints, as well as enforces them over its child.
+
+```csharp
+.FlipOver()
+
+.FlipHorizontal()
+.FlipVertical()
+```
+
+Example:
+
+```csharp{16-20}
+.Padding(20)
+.Grid(grid =>
+{
+    grid.Columns(2);
+    grid.Spacing(10);
+    
+    foreach (var turns in Enumerable.Range(0, 4))
+    {
+        grid.Item()
+            .Width(150)
+            .Height(150)
+            .Background(Colors.Grey.Lighten3)
+            .Padding(10)
+            .Element(element =>
+            {
+                if (turns == 1 || turns == 2)
+                    element = element.FlipHorizontal();
+
+                if (turns == 2 || turns == 3)
+                    element = element.FlipVertical();
+                
+                return element;
+            })
+            .Box()
+            .Background(Colors.White)
+            .Padding(10)
+            .Text($"Flipped {turns}", TextStyle.Default.Size(16));
+    }
+});
+```
+
+![example](./images/api-reference/flip.png =350x)
+
 ## Height
 
 Use this container to enforce additional sizing rules, e.g. minimum/maximum/exact height.
@@ -550,16 +597,29 @@ Please be careful! When the total height of the header and footer element is gre
 - This component displays the current page number.
 
 ```csharp
-.PageNumber(Typography.Normal)
+.PageNumber()
+.PageNumber("{pdf:currentPage}")
+.PageNumber("{pdf:currentPage}", Typography.Normal)
 ```
 
-::: tip
-You can change text format by using the `{number}` slot as well as provide custom font styling:
+### Basic placeholders
+`{pdf:currentPage}` - is replaced by the number of the current page,
+`{pdf:totalPages}` - corresponds to number of all pages withing the PDF document,
 
 ```csharp
-.PageNumber("Page {number}", TextStyle.Default.Size(20))
+.PageNumber("Page {pdf:currentPage} out of {pdf:totalPages}", TextStyle.Default.Size(20))
 ```
-:::
+
+### Location positions
+`{pdf:customLocationName}` - is replaced by the page number of the first occurrence of the specified location. The name corresponds to the location name provided within the `.Location()` invocation.
+
+```csharp
+// define your location somewhere in the document:
+.Location("customLocationName")
+
+// refer to this location position in your list of contents:
+.PageNumber("Page {pdf:customLocationName}")
+```
 
 ## Placeholder
 
@@ -571,6 +631,98 @@ You can change text format by using the `{number}` slot as well as provide custo
 ```
 
 ![example](./images/api-reference/placeholder-example.png =200x)
+
+## Rotate
+
+### Constrained
+- This container changes content rotation in 90 degrees increments,
+- The content is always put within the same space and size constraints.
+
+There are two methods available: `.RotateLeft()` and `.RotateRight()`
+
+Example:
+
+```csharp{17-18}
+.Padding(20)
+.Grid(grid =>
+{
+    grid.Columns(2);
+    grid.Spacing(10);
+    
+    foreach (var turns in Enumerable.Range(0, 4))
+    {
+        grid.Item()
+            .Width(200)
+            .Height(200)
+            .Background(Colors.Grey.Lighten2)
+            .Padding(10)
+            .Element(element =>
+            {
+                foreach (var x in Enumerable.Range(0, turns))
+                    element = element.RotateRight();
+
+                return element;
+            })
+            .Box()
+            .Background(Colors.White)
+            .Padding(10)
+            .Text($"Rotated {turns * 90}°", TextStyle.Default.Size(20));
+    }
+});
+```
+
+![example](./images/api-reference/rotate-constrained.png =350x)
+
+### Free
+- This container allows to rotate its child by any angle provided in degrees,
+- The content is always put within the same space and size constraints,
+- - The rendered child appears like floating below/above of the other content.
+
+Example:
+
+```csharp{9}
+.Padding(25)
+.Background(Colors.Grey.Lighten2)
+
+.AlignCenter()
+.AlignMiddle()
+
+.Background(Colors.White)
+
+.Rotate(30)
+
+.Width(100)
+.Height(100)
+.Background(Colors.Blue.Medium);
+```
+
+![example](./images/api-reference/rotate-free.png =300x)
+
+You can apply additional translation to change the rotation origin point:
+
+```csharp{9-10,14-15}
+.Padding(25)
+.Background(Colors.Grey.Lighten2)
+
+.AlignCenter()
+.AlignMiddle()
+
+.Background(Colors.White)
+
+.TranslateX(50)
+.TranslateY(50)
+
+.Rotate(30)
+
+.TranslateX(-50)
+.TranslateY(-50)
+
+.Width(100)
+.Height(100)
+.Background(Colors.Blue.Medium);
+```
+
+![example](./images/api-reference/rotate-free-origin.png =300x)
 
 ## Row
 
@@ -616,6 +768,38 @@ You can specify the spacing between each column by using the Spacing() method:
 
 ![example](./images/api-reference/row-spacing.png =370x)
 
+
+## Scale
+- This component scales the size of its children,
+- The layouting rules, such as available space is being scaled as well so the container follow all size constraints.
+
+```csharp
+.Scale(2f)
+
+.ScaleHorizontal(2f)
+.ScaleVertical(2f)
+```
+
+Example:
+
+```csharp{10}
+.Stack(stack =>
+{
+    var scales = new[] { 0.75f, 1f, 1.25f, 1.5f };
+
+    foreach (var scale in scales)
+    {
+        stack
+            .Item()
+            .Border(1)
+            .Scale(scale)
+            .Padding(10)
+            .Text($"Content with {scale} scale.", TextStyle.Default.Size(20));
+    }
+});
+```
+
+![example](./images/api-reference/scale.png =400x)
 
 ## Show entire
 
@@ -786,6 +970,55 @@ public static class Typography
 }
 
 ```
+
+## Translate
+- This container allows to move its content up/down/left/right regardless of the layouting constraints,
+- It applies the same size constraints to its child,
+- The rendered child appears like floating below/above of the other content.
+
+```csharp{5-6}
+.Background("#FFF")
+.Box()
+.Padding(25)
+.Background(Colors.Green.Lighten3)
+.TranslateX(15)
+.TranslateY(15)
+.Border(2)
+.BorderColor(Colors.Green.Darken1)
+.Padding(50)
+.Text("Text outside of bounds", TextStyle.Default.Size(25));
+```
+
+![example](./images/api-reference/translate.png =300x)
+
+## Unconstrained
+- This container takes no space,
+- It removes any size constraints from its child,
+- The rendered child appears like floating below/above of the other content.
+
+```csharp{11-13}
+.Width(400)
+.Height(350)
+.Padding(25)
+.PaddingLeft(75)
+.Stack(stack =>
+{
+    stack.Item().Width(300).Height(150).Background(Colors.Blue.Lighten3);
+    
+    stack
+        .Item()
+        .Unconstrained()
+        .TranslateX(-50)
+        .TranslateY(-50)
+        .Width(100)
+        .Height(100)
+        .Background(Colors.Blue.Darken2);
+    
+    stack.Item().Width(300).Height(150).Background(Colors.Blue.Lighten2);
+});
+```
+
+![example](./images/api-reference/unconstrained.png =400x)
 
 ## Width
 

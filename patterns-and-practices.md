@@ -1,5 +1,78 @@
 # Patters and practices
 
+## Page settings
+
+It is possible to put pages of various settings within the single document. Please notice that the example below declares two consecutive page sizes (A4 and A3) with various margin values:
+
+```csharp{10-13,21-24}
+public class StandardReport : IDocument
+{
+    // metadata
+
+    public void Compose(IDocumentContainer container)
+    {
+        container
+            .Page(page =>
+            {
+                page.MarginVertical(80);
+                page.MarginHorizontal(100);
+                
+                page.Size(PageSizes.A3);
+                    
+                page.Header().Element(ComposeHeader);
+                page.Content().Element(ComposeBigContent);
+                page.Footer().AlignCenter().PageNumber();
+            })
+            .Page(page =>
+            {
+                page.MarginVertical(40);
+                page.MarginHorizontal(50);
+                
+                page.Size(PageSizes.A4);
+                    
+                page.Header().Element(ComposeHeader);
+                page.Content().Element(ComposeSmallContent);
+                page.Footer().AlignCenter().PageNumber();
+            });
+    }
+
+    // content implementation
+}
+```
+
+## Continuous page size
+
+It is possible to define a page size with known width but dynamic height. In this example, the resulting page has constant width equal to A4 page's width, but its height depends on the content:
+
+```csharp{13}
+public class StandardReport : IDocument
+{
+    // metadata
+
+    public void Compose(IDocumentContainer container)
+    {
+        container
+            .Page(page =>
+            {
+                page.MarginVertical(40);
+                page.MarginHorizontal(60);
+                
+                page.ContinuousSize(PageSizes.A4.Width);
+                    
+                page.Header().Element(ComposeHeader);
+                page.Content().Element(ComposeContent);
+                page.Footer().AlignCenter().PageNumber();
+            });
+    }
+
+    // content implementation
+}
+```
+
+::: danger
+Because of the practical layouting limitations, the maximum page height is limited to 14400 points (around 5 meters).
+:::
+
 ## Document metadata
 
 You can modify the PDF document metadata by returning the `DocumentMetadata` object from the `IDocument.GetMetadata()` method. There are multiple properties available, some of them have default values:
@@ -7,7 +80,6 @@ You can modify the PDF document metadata by returning the `DocumentMetadata` obj
 ```csharp
 public class DocumentMetadata
 {
-    public Size Size { get; set; } = PageSizes.A4;
     public int ImageQuality { get; set; } = 101;
     public int RasterDpi { get; set; } = 72;
     public bool PdfA { get; set; }
