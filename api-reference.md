@@ -550,11 +550,14 @@ byte[] GenerateImage(Size size)
 - This container consists of three slots: header, content and footer.
 - The header element is always visible at the top on each page.
 - The footer element is always visible at the bottom on each page.
-- The content element is drawn on the rest of the space (between the header and the footer.)
+- The content element is drawn on the rest of the space (between the header and the footer.).
 
 ```csharp
 .Page(page =>
 {
+    page.MarginHorizontal(40);
+    page.MarginVertical(60);
+
     page.Header()
         .Height(60)
         .Background(Colors.Grey.Lighten1)
