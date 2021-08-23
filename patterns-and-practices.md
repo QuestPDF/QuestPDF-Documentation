@@ -137,11 +137,14 @@ static class SimpleExtension
     {
         return container
             .Border(1)
-            .Background(dark ? "#EEE" : "#FFF")
+            .Background(dark ? Colors.Grey.Lighten2 : Colors.White)
             .Padding(10);
     }
-
-    public static IContainer LabelCell(this IContainer container) => container.Cell(true);
+    
+    // displays only text label
+    public static void LabelCell(this IContainer container, string text) => container.Cell(true).Text(text, TextStyle.Default.Medium());
+    
+    // allows to inject any type of content, e.g. image
     public static IContainer ValueCell(this IContainer container) => container.Cell(false);
 }
 ```
@@ -149,26 +152,78 @@ static class SimpleExtension
 Now, you can easily use newly created DSL language to build the table:
 
 ```csharp
-.Stack(stack =>
+.Grid(grid =>
 {
+    grid.Columns(10);
+    
     for(var i=1; i<=4; i++)
     {
-        stack.Element().Row(row =>
-        {
-            row.RelativeColumn(2).LabelCell().Text(TextPlaceholder.Label());
-            row.RelativeColumn(3).ValueCell().Text(TextPlaceholder.Paragraph());
-        });
+        grid.Item(2).LabelCell(Placeholders.Label());
+        grid.Item(3).ValueCell().Image(Placeholders.Image(200, 150));
     }
 });
 ```
 
-This example procudes the following output:
+This example produces the following output:
 
-![example](./images/patterns-and-practices/extension-method.png =540x)
+![example](./images/patterns-and-practices/domain-specific-language.png =600x)
 
 ::: tip
 Please note that this example shows only the concept of using extension methods to build custom API elements. Using this approach you can build and reuse more complex structures. For example, extension methods can expect arguments.
 :::
+
+## Complex layouts and grids
+
+By combining various elements, you can build complex layouts. When designing try to break your layout into separate pieces and then model them by using the `Row` and the `Stack` elements. In many cases, the `Grid` element can simplify and shorten your code.
+
+Please consider the code below. Please note that it uses example DSL elements from the previous section.
+
+```csharp
+.Stack(stack =>
+{
+    stack.Item().Row(row =>
+    {
+        row.RelativeColumn().LabelCell("Label 1");
+        
+        row.RelativeColumn(3).Grid(grid =>
+        {
+            grid.Columns(3);
+            
+            grid.Item(2).LabelCell("Label 2");
+            grid.Item().LabelCell("Label 3");
+            
+            grid.Item(2).ValueCell().Text("Value 2");
+            grid.Item().ValueCell().Text("Value 3");
+        });
+    });
+    
+    stack.Item().Row(row =>
+    {
+        row.RelativeColumn().ValueCell().Text("Value 1");
+        
+        row.RelativeColumn(3).Grid(grid =>
+        {
+            grid.Columns(3);
+            
+            grid.Item().LabelCell("Label 4");
+            grid.Item(2).LabelCell("Label 5");
+            
+            grid.Item().ValueCell().Text("Value 4");
+            grid.Item(2).ValueCell().Text("Value 5");
+        });
+    });
+    
+    stack.Item().Row(row =>
+    {
+        row.RelativeColumn().LabelCell("Label 6");
+        row.RelativeColumn().ValueCell().Text("Value 6");
+    });
+});
+```
+
+And its corresponding output:
+
+![example](./images/patterns-and-practices/complex-layout.png =500x)
 
 ## Components
 
@@ -314,7 +369,7 @@ container
     });
 ```
 
-![example](./images/patterns-and-practices/material_colors.png =450x)
+![example](./images/patterns-and-practices/material-colors.png =450x)
 
 ### Basic fonts
 
@@ -357,7 +412,7 @@ container.Padding(25).Grid(grid =>
 });
 ```
 
-![example](./images/patterns-and-practices/defined_fonts.png =500x)
+![example](./images/patterns-and-practices/defined-fonts.png =500x)
 
 ## Prototyping
 
@@ -417,7 +472,7 @@ Example usage to create a colorful matrix:
 });
 ```
 
-![example](./images/patterns-and-practices/random_colors.png =300x)
+![example](./images/patterns-and-practices/random-colors.png =300x)
 
 ### Image
 
@@ -435,7 +490,7 @@ Placeholders.Image(new Size(400, 300));
 .Image(Placeholders.Image);
 ```
 
-![example](./images/patterns-and-practices/image_placeholder.png =350x)
+![example](./images/patterns-and-practices/image-placeholder.png =350x)
 
 ## Exceptions
 
