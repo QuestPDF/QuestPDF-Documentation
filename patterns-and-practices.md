@@ -1,4 +1,4 @@
-# Patters and practices
+# Patterns and practices
 
 ## Page settings
 
