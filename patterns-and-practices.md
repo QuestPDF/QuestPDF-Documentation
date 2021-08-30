@@ -124,6 +124,37 @@ document.GenerateImages(i => $"image-{i}.png");
 Generated images are in the PNG format. In order to increase resolution of generated images, please modify the value of the `DocumentMetadata.RasterDpi` property. When RasterDpi is set to 72, one PDF point corresponds to one pixel.
 :::
 
+## Support for the Linux environment
+
+The QuestPDF library has a dependency called SkiaSharp which is used to render the final PDF file. This library has additional dependencies when used in the Linux environment. 
+
+When you get the exception `Unable to load shared library 'libSkiaSharp' or one of its dependencies.`, please try to install one more nuget package: `SkiaSharp.NativeAssets.Linux.NoDependencies`. 
+
+This nuget ensures that the `libSkiaSharp.so` file is published and available.
+
+## Accessing custom fonts
+
+The QuestPDF library has access to all fonts installed on the hosting system. Sometimes though, you don't have control over fonts installed on the production environment. Or you may want to use self-hosted fonts that come with your application as files or embedded resources. In such case, you need to register those fonts as follows:
+
+```csharp
+// static method definition
+FontManager.RegisterFontType(string fontName, Stream fontDataStream);
+
+// perform similar invocation only once, when the application starts or during its initialization step
+FontManager.RegisterFontType("LibreBarcode39", File.OpenRead("LibreBarcode39-Regular.ttf"));
+
+// then, you will have access to the font by its name
+container
+    .Background(Colors.White)
+    .AlignCenter()
+    .AlignMiddle()
+    .Text("*QuestPDF*", TextStyle.Default.FontType("LibreBarcode39").Size(64));
+```
+
+This way, it is possible to generate barcodes:
+
+![example](./images/patterns-and-practices/custom-font.png =400x)
+
 ## Extending DSL
 
 The existing Fluent API offers a clear and easy-to-understand way to describe a document's structure. When working on the document, you may find that many places use similar styles, for instances borders or backgrounds. It is especially common when you keep the document consistent. To make future adjustments easier, you can reuse the styling code by extracting it into separate extension methods. This way, you can assign a meaningful name to documents structure without increasing code complexity.

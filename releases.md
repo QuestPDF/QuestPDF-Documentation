@@ -5,6 +5,10 @@ title: "Releases"
 
 ## Release notes
 
+### 2021.09
+
+Added support for registering custom fonts. This way, the application can ship its own set of fonts that are independent of the hosting environment. Please refer to the `Patterns and practices` section for more details.
+
 ### 2021.08
 This release mostly introduces a couple of additions requested by the QuestPDF community:
 - The ability to create documents with pages of various sizes, including continuous pages which are not restricted in height,
