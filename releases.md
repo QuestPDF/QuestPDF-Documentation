@@ -7,7 +7,9 @@ title: "Releases"
 
 ### 2021.09
 
-Added support for registering custom fonts. This way, the application can ship its own set of fonts that are independent of the hosting environment. Please refer to the `Patterns and practices` section for more details.
+- Added support for registering custom fonts. This way, the application can ship its own set of fonts that are independent of the hosting environment. Please refer to the `Patterns and practices` section for more details,
+- Fixed rendering documents with pages of dynamic size, including continuous pages,
+- Improved messages in exceptions regarding composing layouts using the Fluent API.
 
 ### 2021.08
 This release mostly introduces a couple of additions requested by the QuestPDF community:
