@@ -170,9 +170,9 @@ public class InvoiceDocument : IDocument
             {
                 page.Margin(50);
             
-                page.Header().Height(100).Background("CCC");
-                page.Content().Background("EEE");
-                page.Footer().Height(50).Background("CCC");
+                page.Header().Height(100).Background(Colors.Grey.Lighten1);
+                page.Content().Background(Colors.Grey.Lighten3);
+                page.Footer().Height(50).Background(Colors.Grey.Lighten1);
             });
     }
 }
@@ -208,19 +208,38 @@ public class InvoiceDocument : IDocument
             
                 page.Header().Element(ComposeHeader);
                 page.Content().Element(ComposeContent);
-                page.Footer().AlignCenter().PageNumber();
+
+                    
+                page.Footer().AlignCenter().Text(x =>
+                {
+                    x.CurrentPageNumber();
+                    x.Span(" / ");
+                    x.TotalPages();
+                });
             });
     }
 
     void ComposeHeader(IContainer container)
     {
+        var titleStyle = TextStyle.Default.Size(20).SemiBold().Color(Colors.Blue.Medium);
+    
         container.Row(row =>
         {
             row.RelativeColumn().Stack(stack =>
             {
-                stack.Item().Text($"Invoice #{Model.InvoiceNumber}", TextStyle.Default.Size(20));
-                stack.Item().Text($"Issue date: {Model.IssueDate:d}");
-                stack.Item().Text($"Due date: {Model.DueDate:d}");
+                stack.Item().Text($"Invoice #{Model.InvoiceNumber}", titleStyle);
+
+                stack.Item().Text(text =>
+                {
+                    text.Span("Issue date: ", TextStyle.Default.SemiBold());
+                    text.Span($"{Model.IssueDate:d}");
+                });
+                
+                stack.Item().Text(text =>
+                {
+                    text.Span("Due date: ", TextStyle.Default.SemiBold());
+                    text.Span($"{Model.DueDate:d}");
+                });
             });
 
             row.ConstantColumn(100).Height(50).Placeholder();
@@ -232,7 +251,7 @@ public class InvoiceDocument : IDocument
         container
             .PaddingVertical(40)
             .Height(250)
-            .Background("EEE")
+            .Background(Colors.Grey.Lighten3)
             .AlignCenter()
             .AlignMiddle()
             .Text("Content", TextStyle.Default.Size(16));
@@ -270,7 +289,7 @@ public class InvoiceDocument : IDocument
     {
         container
             .Height(250)
-            .Background("EEE")
+            .Background(Colors.Grey.Lighten3)
             .AlignCenter()
             .AlignMiddle()
             .Text("Table", TextStyle.Default.Size(16));
@@ -278,7 +297,7 @@ public class InvoiceDocument : IDocument
 
     void ComposeComments(IContainer container)
     {
-        container.Background("#EEE").Padding(10).Stack(stack =>
+        container.Background(Colors.Grey.Lighten3).Padding(10).Stack(stack =>
         {
             stack.Spacing(5);
             stack.Item().Text("Comments", TextStyle.Default.Size(14));
@@ -325,7 +344,7 @@ public class InvoiceDocument : IDocument
                 {
                     foreach (var item in Model.Items)
                     {
-                        stack.Item().BorderBottom(1).BorderColor("CCC").Padding(5).Row(row =>
+                        stack.Item().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(5).Row(row =>
                         {
                             row.ConstantColumn(25).Text(Model.Items.IndexOf(item) + 1);
                             row.RelativeColumn(3).Text(item.Name);
@@ -381,9 +400,9 @@ public class AddressComponent : IComponent
     {
         container.Stack(stack =>
         {
-            stack.Spacing(5);
+            stack.Spacing(2);
 
-            stack.Item().BorderBottom(1).PaddingBottom(5).Text(Title);
+            stack.Item().BorderBottom(1).PaddingBottom(5).Text(Title, TextStyle.Default.SemiBold());
 
             stack.Item().Text(Address.CompanyName);
             stack.Item().Text(Address.Street);

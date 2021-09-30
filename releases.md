@@ -2,8 +2,34 @@
 title: "Releases"
 ---
 
-
 ## Release notes
+
+### 2021.10
+
+This update is focused on text rendering capabilities:
+- text paging support,
+- text background,
+- text stroke,
+- text underline,
+- changing text style within a run (e.g. size, font type, color),
+- inserting links in text,
+- inserting custom components in text, e.g. an image,
+- inserting page numbers in text (current page, total pages, page of location),
+- layouting engine uses now more font-related metadata when rendering text (e.g. ascent, descent properties),
+- increased rendering performance by introducing short-living cache.
+
+**Breaking change:** The old way of injecting page numbers was working correct, however was far from being ideal. I decided to change the API so to make everything more obvious and safe. The old slots approach has been removed and replaced by proper API invocations. Please find more details in the API Reference section.
+
+```csharp
+.Text(x =>
+{
+    x.CurrentPageNumber();
+    x.Span(" / ");
+    x.TotalPages();
+});
+```
+
+Additionally, the test coverage has been highly increased. No new bugs have been found :)
 
 ### 2021.09
 
@@ -25,7 +51,7 @@ This release mostly introduces a couple of additions requested by the QuestPDF c
 
 Additionally, this release includes some improvements to the engine used for generating code examples and their results. In the future, it will simplify creating examples and therefore will allow creating better documentation.
 
-Breaking changes:
+**Breaking changes:**
 
 1) `PageNumber` - the default placeholder storing current page number has changed. Please replace your code following this patter:
 

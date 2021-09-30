@@ -551,35 +551,6 @@ Please be careful! When the total height of the header and footer element is gre
 .PageBreak();
 ```
 
-## Page number
-
-- This component displays the current page number.
-
-```csharp
-.PageNumber()
-.PageNumber("{pdf:currentPage}")
-.PageNumber("{pdf:currentPage}", Typography.Normal)
-```
-
-### Basic placeholders
-`{pdf:currentPage}` - is replaced by the number of the current page,
-`{pdf:totalPages}` - corresponds to number of all pages withing the PDF document,
-
-```csharp
-.PageNumber("Page {pdf:currentPage} out of {pdf:totalPages}", TextStyle.Default.Size(20))
-```
-
-### Location positions
-`{pdf:customLocationName}` - is replaced by the page number of the first occurrence of the specified location. The name corresponds to the location name provided within the `.Location()` invocation.
-
-```csharp
-// define your location somewhere in the document:
-.Location("customLocationName")
-
-// refer to this location position in your list of contents:
-.PageNumber("Page {pdf:customLocationName}")
-```
-
 ## Placeholder
 
 - Renders a placeholder that is a grey rectangle with an image icon in the middle.
@@ -852,14 +823,28 @@ Use the Spacing property to add some space between elements:
 - If text is longer, the element may take the entire width and break to the next line.
 - This element does not support paging at this moment.
 
+For most cases, that do not require any complex formatting, the simplified version of the text component is enough:
+
 ```csharp
 .Text("Sample text")
 .Text("Red big text", TextStyle.Default.Color("#F00").Size(24))
 ```
 
-You can define text style using available FluentAPI methods which are described below.
+When you want to change style in the middle of the text, inject page numbers or include custom components - use text block approach:
+
+```csharp
+.Text(text =>
+{
+    text.Span("This is a normal text, followed by an ");
+    text.Span("underlined text.", TextStyle.Default.Underline());
+});
+```
+
+![example](./images/api-reference/text-simple-block.png =500x)
 
 ### Basic font style
+
+You can define text style using available FluentAPI methods which are described below.
 
 ```csharp
 .Color("#F00")
@@ -867,16 +852,23 @@ You can define text style using available FluentAPI methods which are described 
 .Size(24)
 .LineHeight(1.5f)
 .Italic()
+.BackgroundColor(Colors.Grey.Lighten5)
+.Strikethrough()
+.Underline()
 ```
 
-### Font alignment
+### Default text style within a block
 
 You these fluent API methods to adjust text position:
 
 ```csharp
-.AlignLeft()
-.AlignCenter()
-.AlignRight()
+.Text(text =>
+{
+    text.DefaultTextStyle(TextStyle.Default.Size(20).BackgroundColor(Colors.Green.Lighten3));
+    
+    text.Line("Text following default style.");
+    text.Line("Text with altered style.", TextStyle.Default.Underline());
+});
 ```
 
 ### Font weight
@@ -928,6 +920,130 @@ public static class Typography
         .AlignLeft();
 }
 
+```
+
+### Font alignment
+
+You these fluent API methods to adjust text position:
+
+```csharp
+.Text(text =>
+{
+    // pick alignment
+    text.AlignLeft();
+    text.AlignCenter();
+    text.AlignRight();
+    
+    text.Span("Sample text");
+});
+```
+
+### Custom paragraph spacing
+
+It is possible to specify additional spacing between paragraphs - blocks of text in different lines.
+
+```csharp
+.Text(text =>
+{
+    text.ParagraphSpacing(10);
+    
+    text.Line("Paragraph 1");
+    text.Line("Paragraph 2");
+    text.Line("Paragraph 3");
+    text.Line(Placeholders.LoremIpsum());
+});
+```
+
+![example](./images/api-reference/text-paragraph-spacing.png =500x)
+
+### Injecting custom content
+
+Sometimes you may need to inject custom components between text spans. Every injected element is aligned to the baseline.
+
+```csharp
+.Text(text =>
+{
+    text.Span("This is a random image aligned to the baseline: ");
+    text.Element().Height(24).Width(48).Image(Placeholders.Image);
+    text.Span(".");
+});
+```
+
+![example](./images/api-reference/text-custom-element.png =450x)
+
+Use negative padding to adjust element position to your needs:
+
+```csharp{7}
+.Text(text =>
+{
+    text.DefaultTextStyle(TextStyle.Default.Size(20));
+    text.Span("This is a random image aligned to the baseline: ");
+    
+    text.Element()
+        .PaddingBottom(-6)
+        .Height(24)
+        .Width(48)
+        .Image(Placeholders.Image);
+    
+    text.Span(".");
+});
+```
+
+![example](./images/api-reference/text-custom-element-aligned.png =450x)
+
+::: danger
+When injecting custom elements inside the text block, please remember to always constrain its size. Otherwise, the element will take entire space possible. 
+:::
+
+### Page numbers
+
+Use new text elements to inject page numbers: current page number where the text is located and number of all pages within the document.
+
+```csharp
+.Text(text =>
+{
+    text.CurrentPageNumber();
+    text.TotalPages();
+    text.PageNumberOfLocation("location-name");
+    
+    // it is also possible to pass a style
+    text.CurrentPageNumber(TextStyle.Default.Underline());
+});
+```
+
+You can also provide page number of internal location:
+
+```csharp
+// define your location somewhere in the document:
+.Location("customLocationName")
+
+// refer to this location position in your list of contents:
+.Text(text =>
+{
+    text.PageNumberOfLocation("customLocationName");
+});
+```
+
+### Internal links
+
+```csharp
+// define your location somewhere in the document:
+.Location("customLocationName")
+
+// create a hyperlink to that location
+.Text(text =>
+{
+    text.InternalLocation("Custom location link", "customLocationName");
+});
+```
+
+### External links
+
+```csharp
+.Text(text =>
+{
+    text.ExternalLocation("Please visit QuestPDF website", "https://www.questpdf.com");
+});
 ```
 
 ## Translate
