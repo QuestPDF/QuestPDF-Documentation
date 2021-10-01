@@ -821,7 +821,7 @@ Use the Spacing property to add some space between elements:
 - Draws text with default or custom styling.
 - Text always takes as little space as possible.
 - If text is longer, the element may take the entire width and break to the next line.
-- This element does not support paging at this moment.
+- This element supports paging.
 
 For most cases, that do not require any complex formatting, the simplified version of the text component is enough:
 
@@ -1044,6 +1044,24 @@ You can also provide page number of internal location:
 {
     text.ExternalLocation("Please visit QuestPDF website", "https://www.questpdf.com");
 });
+```
+
+### Dealing with pageable text
+
+The text element supports paging. That means part of the text may be moved to the next page if there is not enough space on the current one. There are several approaches to simplify the workflow with text:
+
+To make sure that text is never paged and always filly visible on a single page, please use the `ShowEntire` element:
+
+```csharp
+.ShowEntire()
+.Text("A long text here will not be paged.");
+```
+
+Sometimes, there is very little space on the page. It is enough to display a couple of lines but such a short text block may look incorrectly. In such cases, it is better to move the text block to the next page, instead of attempting to perform line breaking. Please adjust the minimum height in the `EnsureSpace` element to match the desired minimum number of lines to display at the end of the page.
+
+```csharp
+.EnsureSpace(50)
+.Text("A long text here.");
 ```
 
 ## Translate

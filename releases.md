@@ -18,7 +18,9 @@ This update is focused on text rendering capabilities:
 - layouting engine uses now more font-related metadata when rendering text (e.g. ascent, descent properties),
 - increased rendering performance by introducing short-living cache.
 
-**Breaking change:** The old way of injecting page numbers was working correct, however was far from being ideal. I decided to change the API so to make everything more obvious and safe. The old slots approach has been removed and replaced by proper API invocations. Please find more details in the API Reference section.
+**Breaking change:** 
+
+1) The old way of injecting page numbers was working correct, however was far from being ideal. I decided to change the API so to make everything more obvious and safe. The old slots approach has been removed and replaced by proper API invocations. Please find more details in the API Reference section.
 
 ```csharp
 .Text(x =>
@@ -27,6 +29,13 @@ This update is focused on text rendering capabilities:
     x.Span(" / ");
     x.TotalPages();
 });
+```
+
+2) Please notice that the text element supports paging now. That means, if there is not enough space, the text may be divided into separate sections on various pages. If this behaviour is not desired, you can use the `ShowEntire` element like so:
+
+```csharp
+.ShowEntire()
+.Text("Long text here.");
 ```
 
 Additionally, the test coverage has been highly increased. No new bugs have been found :)
