@@ -7,9 +7,10 @@ title: "Releases"
 ### 2021.11 (beta)
 
 - Added new `Inlined` element - put block elements along a line with a line-breaking and a page-breaking support. This element also supports various element placement in the horizontal axis as well as the baseline. It will help me in the future development, especially with text rendering optimization,
-- Introduced a new `SkipOnce` element - it can be used to hide content on the first occurrence of the parent. Useful with conjunction with the `ShowOnce` element. This change was proposed by the **jcl86** user, thank you!
-- Improved debugging experience by providing more detailed message when the `DocumentLayoutException` is thrown.
-- Now it is possible to specify global, document-specific text style. This improves text style management and simplifies the typography pattern. This feature was proposed by the **JonnyBooker** user, thank you!
+- Introduced a new `SkipOnce` element - it can be used to hide content on the first occurrence of the parent. Useful with conjunction with the `ShowOnce` element. This change was proposed by **jcl86**, thank you!
+- Improved debugging experience by providing more detailed message when the `DocumentLayoutException` is thrown. This improvement is based on the discussion started by **preiius**, thank you! 
+- Now it is possible to specify global, document-specific text style. This improves text style management and simplifies the typography pattern. This feature was proposed by **JonnyBooker**, thank you!
+- Improved text rendering performance.
 - Improved documentation examples for the `ShowOnce` and the `EnsureSpace` elements.
 
 ### 2021.10
