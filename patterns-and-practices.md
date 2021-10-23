@@ -16,7 +16,7 @@ public class StandardReport : IDocument
             {
                 page.MarginVertical(80);
                 page.MarginHorizontal(100);
-                
+                page.Background(Colors.Grey.Medium); // transparent is default
                 page.Size(PageSizes.A3);
                     
                 page.Header().Element(ComposeHeader);
@@ -25,9 +25,9 @@ public class StandardReport : IDocument
             })
             .Page(page =>
             {
-                page.MarginVertical(40);
-                page.MarginHorizontal(50);
-                
+                // you can specify multiple page types in the document
+                // with independend configurations
+                page.Margin(50)
                 page.Size(PageSizes.A4);
                     
                 page.Header().Element(ComposeHeader);
