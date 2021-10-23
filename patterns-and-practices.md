@@ -40,6 +40,18 @@ public class StandardReport : IDocument
 }
 ```
 
+You easily change page orientation:
+```csharp
+// default is portrait
+page.Size(PageSizes.A3);
+
+// explicit portrait orientation
+page.Size(PageSizes.A3.Portrait());
+
+// change to landscape orientation
+page.Size(PageSizes.A3.Landscape());
+```
+
 ## Continuous page size
 
 It is possible to define a page size with known width but dynamic height. In this example, the resulting page has constant width equal to A4 page's width, but its height depends on the content:
@@ -72,6 +84,60 @@ public class StandardReport : IDocument
 ::: danger
 Because of the practical layouting limitations, the maximum page height is limited to 14400 points (around 5 meters).
 :::
+
+## Global text style (beta)
+
+The QuestPDF library provides a default set of styles that applied to text.
+
+```csharp
+.Text("Text with library default styles")
+```
+
+You can adjust the text style by providing additional argument:
+
+```csharp
+.Text("Red semibold text of size 20", TextStyle.Default.Size(20).SemiBold())
+```
+
+The option above introduces overrides the default style. To get more control you can set a default text style in your document. Please notice that all changes are additive:
+
+```csharp{9-10,22-23,27-28}
+public class SampleReport : IDocument
+{
+    public DocumentMetadata GetMetadata() => new DocumentMetadata();
+
+    public void Compose(IDocumentContainer container)
+    {
+        container.Page(page =>
+        {
+            // all text in this set of pages has size 20
+            page.DefaultTextStyle(TextStyle.Default.Size(20));
+            
+            page.Margin(20);
+            page.Size(PageSizes.A4);
+            page.Background(Colors.White);
+
+            page.Content().Stack(stack =>
+            {
+                stack.Item().Text(Placeholders.Sentence());
+                
+                stack.Item().Text(text =>
+                {
+                    // text in this block is additionally semibold
+                    text.DefaultTextStyle(TextStyle.Default.SemiBold());
+
+                    text.Line(Placeholders.Sentence());
+                    
+                    // this text has size 20 but also semibold and red
+                    text.Span(Placeholders.Sentence(), TextStyle.Default.Color(Colors.Red.Medium));
+                });
+            });
+        });
+    }
+}
+```
+
+![example](./images/patterns-and-practices/global-text-style.png =595x)
 
 ## Document metadata
 
