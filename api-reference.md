@@ -243,6 +243,31 @@ The EnsureSpace element makes sure that if its child is going to take more pages
 });
 ```
 
+Example:
+```csharp{11}
+page.Content().Stack(stack =>
+{
+    stack
+        .Item()
+        .ExtendHorizontal()
+        .Height(75)
+        .Background(Colors.Grey.Lighten2);
+    
+    stack
+        .Item()
+        .EnsureSpace(100)
+        .Text(Placeholders.LoremIpsum());
+});
+```
+
+![example](./images/api-reference/ensure-space-first.png =300x)
+![example](./images/api-reference/ensure-space-second.png =300x)
+
+Please notice that in the example above, the grey block takes a significant part of the page. There is not much space left for the Text element. In fact, there is less than 100 points. Therefore, the EnsureSpace element decides to wrap to the next page and make sure that its child has enough vertical space to render.
+
+![example](./images/api-reference/ensure-space-off-first.png =300x)
+![example](./images/api-reference/ensure-space-off-second.png =300x)
+
 ## Extend
 
 - This container extends its size to take entire space possible.
@@ -410,6 +435,91 @@ byte[] GenerateImage(Size size)
 
 ![example](./images/api-reference/grid.png =400x)
 
+
+## Inlined (beta)
+
+```csharp{16-24}
+// this method just generates blocks with random size and color for examples below
+void RandomBlock(IContainer container)
+{
+    container
+        .Width(Placeholders.Random.Next(1, 5) * 20)
+        .Height(Placeholders.Random.Next(1, 5) * 20)
+        .Border(1)
+        .BorderColor(Colors.Grey.Darken2)
+        .Background(Placeholders.BackgroundColor());
+}
+
+// example usage:
+.Padding(20)
+.Border(1)
+.Background(Colors.Grey.Lighten3)
+.Inlined(inlined =>
+{
+    inlined.Spacing(20);
+    inlined.AlignLeft();
+    inlined.BaselineBottom();
+
+    foreach (var _ in Enumerable.Range(0, 20))
+        inlined.Item().Element(RandomBlock);
+});
+```
+
+![example](./images/api-reference/inlined-left-bottom.png =400x)
+
+Available spacing settings:
+```csharp
+.VerticalSpacing(30)
+.HorizontalSpacing(40)
+
+// sets both vertical and horizontal alignment
+.Spacing(20)
+```
+
+Available horizontal alignments:
+```csharp
+.AlignLeft()
+.AlignRight()
+.AlignCenter()
+.AlignJustify()
+.AlignSpaceAround()
+```
+
+Available baseline alignments:
+```csharp
+.BaselineBottom()
+.BaselineMiddle()
+.BaselineTop()
+```
+
+More examples:
+```csharp{3-5}
+.Inlined(inlined =>
+{
+    inlined.Spacing(20);
+    inlined.AlignJustify();
+    inlined.BaselineMiddle();
+
+    foreach (var _ in Enumerable.Range(0, 20))
+        inlined.Item().Element(RandomBlock);
+});
+```
+![example](./images/api-reference/inlined-justify-middle.png =400x)
+
+```csharp{3-6}
+.Inlined(inlined =>
+{
+    inlined.VerticalSpacing(50);
+    inlined.HorizontalSpacing(20);
+    inlined.AlignSpaceAround();
+    inlined.BaselineTop();
+
+    foreach (var _ in Enumerable.Range(0, 20))
+        inlined.Item().Element(RandomBlock);
+});
+```
+
+![example](./images/api-reference/inlined-space-around-top.png =400x)
 
 ## Internal link
 
@@ -776,12 +886,87 @@ var condition = numberOfElements > 5;
 ## Show once
 
 - This container changes the default rendering behaviour.
-- All its children, once fully rendered, are not going to be present on next pages.
+- Its child, once fully rendered, is not going to be present on next pages.
 - Useful when creating tables. In such a case, the table structure should be visible on each page but the content inside the cell should not be repeated.
 
 ```csharp
 .ShowOnce()
 ```
+
+Example:
+```csharp{7}
+page.Content().PaddingVertical(5).Row(row =>
+{
+    row.RelativeColumn()
+        .Background(Colors.Grey.Lighten2)
+        .Border(1)
+        .Padding(5)
+        .ShowOnce()
+        .Text(Placeholders.Label());
+    
+    row.RelativeColumn(2)
+        .Border(1)
+        .Padding(5)
+        .Text(Placeholders.Paragraph());
+});
+```
+
+![example](./images/api-reference/show-once-first.png =300x)
+![example](./images/api-reference/show-once-second.png =300x)
+
+Please also consider an effect without the ShowOnce element applied. Please notice that the content in the right column was paged and took two pages. Therefore, the Row element (parent) also got paged, and as a result, left column was repeated twice:
+
+![example](./images/api-reference/show-once-off-first.png =300x)
+![example](./images/api-reference/show-once-off-second.png =300x)
+
+## Skip once (beta)
+
+- This container changes the default rendering behaviour.
+- Its child is not visible on the first occurrence page.
+- If the parent is visible on more than one page, the element is visible on the second page of occurrence and all following ones.
+
+```csharp
+.SkipOnce()
+```
+
+Example:
+```csharp{9-12,14-17}
+.RenderDocument(container =>
+{
+    container.Page(page =>
+    {
+        // page configuration details
+
+        page.Header().Stack(stack =>
+        {
+            stack
+                .Item()
+                .ShowOnce()
+                .Text("This header is visible on the first page.");
+                
+            stack
+                .Item()
+                .SkipOnce()
+                .Text("This header is visible on the second page and all following.");
+        });
+        
+        page.Content()
+            .PaddingVertical(10)
+            .Text(Placeholders.Paragraphs(), TextStyle.Default.Color(Colors.Grey.Medium));
+        
+        page.Footer().Text(text =>
+        {
+            text.Span("Page ");
+            text.CurrentPageNumber();
+            text.Span(" out of ");
+            text.TotalPages();
+        });
+    });
+})
+```
+
+![example](./images/api-reference/skip-once-first.png =300x)
+![example](./images/api-reference/skip-once-second.png =300x)
 
 ## Stack
 
