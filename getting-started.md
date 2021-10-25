@@ -77,6 +77,8 @@ To improve the workflow, use various helper methods to easily generate fake data
 :::
 
 ```csharp
+using QuestPDF.Helpers;
+
 public static class InvoiceDocumentDataSource
 {
     private static Random Random = new Random();
@@ -152,6 +154,11 @@ The class below implements the basic document structure. Please note how differe
 Most of the elements are simple containers, that is they have only a single child. In such cases, the method chaining is used for describing documents content. However, there are more advanced elements which offer multiple slots to fill.
 
 ```csharp
+using QuestPDF.Drawing;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+
 public class InvoiceDocument : IDocument
 {
     public InvoiceModel Model { get; }
