@@ -10,6 +10,7 @@ title: "Releases"
 - Introduced a new `SkipOnce` element - it can be used to hide content on the first occurrence of the parent. Useful with conjunction with the `ShowOnce` element. This change was proposed by **jcl86**, thank you!
 - Improved debugging experience by providing more detailed message when the `DocumentLayoutException` is thrown. This improvement is based on the discussion started by **preiius**, thank you! 
 - Now it is possible to specify global, document-specific text style. This improves text style management and simplifies the typography pattern. This feature was proposed by **JonnyBooker**, thank you!
+- Added two overloads to the Image element. Now, you can provide an image as a filePath or a Stream. This improvement was suggested by **pha3z**. Thank you!
 - Improved text rendering performance.
 - Improved documentation examples for the `ShowOnce` and the `EnsureSpace` elements.
 

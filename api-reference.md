@@ -363,12 +363,22 @@ Such scenarios end up with the layouting exception.
 
 - This element can be used for placing images inside the document.
 - By default, It preserves the image's aspect ratio.
-- You can use images in any common raster format, e.g. JPG, PNG, BMB, etc.
+- The image is loaded into SkiaSharp.Image object. Notice that all limitations are derived. For example, available image formats may differ by platform.
+- You can use images in any common raster format, e.g. JPG, PNG, BMB, etc. [More details](https://docs.microsoft.com/en-us/dotnet/api/skiasharp.skencodedimageformat?view=skiasharp-2.80.2)
 
 ```csharp
-byte[] imageData = /* load raw binary data for an image */;
+// it is possible to provide an image as:
+ 
+// 1) a binary array
+byte[] imageData = File.ReadAllBytes("path/to/logo.png")
+container.Image(imageData)
 
-.Image(imageData)
+// 2) a fileName (beta)
+container.Image(imageData)
+
+// 3) a stream (beta)
+using var stream = new FileStream("logo.png", FileMode.Open);
+container.Image(stream);
 ```
 
 By default, the Image element wants to use entire provided width while preserving its aspect ratio. You can change that behavior using one of the available options:
