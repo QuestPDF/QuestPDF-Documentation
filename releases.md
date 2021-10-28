@@ -13,6 +13,7 @@ title: "Releases"
 - Added two overloads to the Image element. Now, you can provide an image as a filePath or a Stream. This improvement was suggested by **pha3z**. Thank you!
 - Improved text rendering performance.
 - Improved documentation examples for the `ShowOnce` and the `EnsureSpace` elements.
+- All new releases of QuestPDF will contain symbol packages. Let's welcome simplified debugging experience 🎉
 
 ### 2021.10
 
