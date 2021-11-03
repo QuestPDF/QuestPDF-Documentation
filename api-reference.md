@@ -374,7 +374,7 @@ byte[] imageData = File.ReadAllBytes("path/to/logo.png")
 container.Image(imageData)
 
 // 2) a fileName (beta)
-container.Image(imageData)
+container.Image("path/myFile.png")
 
 // 3) a stream (beta)
 using var stream = new FileStream("logo.png", FileMode.Open);
