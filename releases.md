@@ -4,7 +4,7 @@ title: "Releases"
 
 ## Release notes
 
-### 2021.11 (beta)
+### 2021.11
 
 - Added new `Inlined` element - put block elements along a line with line-breaking and page-breaking support. This element also supports various element placement in the horizontal axis as well as the baseline. It will help me in the future development, especially with text rendering optimization,
 - Introduced a new `SkipOnce` element - it can be used to hide content on the first occurrence of the parent. Useful in conjunction with the `ShowOnce` element. This change was proposed by **jcl86**, thank you!

@@ -373,10 +373,10 @@ Such scenarios end up with the layouting exception.
 byte[] imageData = File.ReadAllBytes("path/to/logo.png")
 container.Image(imageData)
 
-// 2) a fileName (beta)
+// 2) a fileName
 container.Image("path/myFile.png")
 
-// 3) a stream (beta)
+// 3) a stream
 using var stream = new FileStream("logo.png", FileMode.Open);
 container.Image(stream);
 ```
@@ -446,7 +446,7 @@ byte[] GenerateImage(Size size)
 ![example](./images/api-reference/grid.png =400x)
 
 
-## Inlined (beta)
+## Inlined
 
 ```csharp{16-24}
 // this method just generates blocks with random size and color for examples below
@@ -929,7 +929,7 @@ Please also consider an effect without the ShowOnce element applied. Please noti
 ![example](./images/api-reference/show-once-off-first.png =300x)
 ![example](./images/api-reference/show-once-off-second.png =300x)
 
-## Skip once (beta)
+## Skip once
 
 - This container changes the default rendering behaviour.
 - Its child is not visible on the first occurrence page.

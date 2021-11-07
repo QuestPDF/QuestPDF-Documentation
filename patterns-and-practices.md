@@ -85,7 +85,7 @@ public class StandardReport : IDocument
 Because of the practical layouting limitations, the maximum page height is limited to 14400 points (around 5 meters).
 :::
 
-## Global text style (beta)
+## Global text style
 
 The QuestPDF library provides a default set of styles that applied to text.
 
