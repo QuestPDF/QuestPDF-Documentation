@@ -471,7 +471,6 @@ static void Main(string[] args)
     document.GeneratePdf(filePath);
 
     Process.Start("explorer.exe", filePath);
-    Process.Start("explorer.exe", filePath);
 }
 ```
 
