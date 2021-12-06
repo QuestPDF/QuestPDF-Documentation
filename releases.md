@@ -4,6 +4,13 @@ title: "Releases"
 
 ## Release notes
 
+### 2021.12
+
+- Improved debugging experience for layout-related exceptions. To make the library predictable, it is (by design) very strict about layouting rules and throws an exception when a constraint cannot be met. In this release, each exception contains an element stack that contains all information needed to identify the issue. By default, this feature is enabled only when debugger is attached.
+- Improved layouting algorithm performance by introducing additional caching layer. This cache reduces the layouting time by half. By default, this feature is enabled only when debugger is not attached (mostly release mode).
+- Reduced GA pressure put by the layouting algorithm. Previously, every element measurement operation was represented by an object and the paging support was done via class hierarchy. New solution uses structs (which are value-types) and enums. This also makes the code more readable and easier to follow.
+- Added support for generating XPS files which are easier to print in the Windows environment. This was possible due to existing support in SkiaSharp. This change was proposed by **sbrkich**, thank you!
+
 ### 2021.11
 
 - Added new `Inlined` element - put block elements along a line with line-breaking and page-breaking support. This element also supports various element placement in the horizontal axis as well as the baseline. It will help me in the future development, especially with text rendering optimization,
@@ -147,8 +154,7 @@ The QuestPDF library offers multiple tools needed to design and generate PDF doc
 ### Next releases
 
 Most of the features listed below should be added in the nearest months:
-- Document-wide text styles,
-- Better debugging experience (e.g. when created layout generates an infinite document),
+- Font subsetting to reduce output file size,
 - Dynamic component (allows to generate dynamic content based on the context, e.g. page number, available space, etc.).
 
 ### Under consideration
@@ -157,8 +163,7 @@ There are also features being actively investigated with lower importance:
 
 - Documentation cleanup.
 - Custom slots in components (named slots, dynamic slots),
-- Tutorials: adding maps / charts to the document,
-- The library should return the generated document even if DocumentLayoutException is thrown (to better understand the issue),
+- Tutorials: adding maps to the document,
 - Allow the Placeholder element to show text instead of an icon,
 - SVG support ([integration with SkiaSharp.Svg](https://www.nuget.org/packages/SkiaSharp.Svg/)),
 - and more...

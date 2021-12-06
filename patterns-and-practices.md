@@ -162,6 +162,9 @@ public class DocumentMetadata
 
     public int DocumentLayoutExceptionThreshold { get; set; } = 250;
 
+    public bool ApplyCaching { get; set; } // false when debugger is attached
+    public bool ApplyDebugging { get; set; } // true when debugger is attached
+
     public static DocumentMetadata Default => new DocumentMetadata();
 }
 ```
@@ -173,6 +176,16 @@ If the number of generated pages exceeds the `DocumentLayoutExceptionThreshold` 
 ::: tip
 The `ImageQuality` property controls the trade-off between quality and size. The default value `101` corresponds to lossless encoding. When you use a value less than 100, all images are opaque and encoded using the JPEG algorithm. The smaller the value is, the higher compression is used.
 :::
+
+## Generating PDF and XPS files
+
+The library supports generating both PDF and XPS files:
+
+```csharp
+report.GeneratePdf("result.pdf");
+report.GenerateXps("result.xps");
+```
+
 
 ## Generating images
 
@@ -190,13 +203,13 @@ document.GenerateImages(i => $"image-{i}.png");
 Generated images are in the PNG format. In order to increase resolution of generated images, please modify the value of the `DocumentMetadata.RasterDpi` property. When RasterDpi is set to 72, one PDF point corresponds to one pixel.
 :::
 
-## Support for the Linux environment
+## Support for custom environments (cloud / linux)
 
 The QuestPDF library has a dependency called SkiaSharp which is used to render the final PDF file. This library has additional dependencies when used in the Linux environment. 
 
-When you get the exception `Unable to load shared library 'libSkiaSharp' or one of its dependencies.`, please try to install one more nuget package: `SkiaSharp.NativeAssets.Linux.NoDependencies`. 
+When you get the exception `Unable to load shared library 'libSkiaSharp' or one of its dependencies.`, please try to install additional nuget packages provided by the SkiaSharp team.
 
-This nuget ensures that the `libSkiaSharp.so` file is published and available.
+For example: the SkiaSharp.NativeAssets.Linux.NoDependencies nuget ensures that the libSkiaSharp.so file is published and available.
 
 ## Accessing custom fonts
 
@@ -394,6 +407,81 @@ If the component class has parameter-less constructor, you can use the generic `
 ```
 :::
 
+## Implementing charts
+
+There are many ways on how to implement charts in the QuestPDF documents. By utilizing the `Canvas` element and SkiaSharp-compatible charting libraries, it is possible to achieve vector charts.
+
+Please analyse this simple example which utilizes the `microcharts` library ([nuget site](https://www.nuget.org/packages/Microcharts/)):
+
+```csharp
+// prepare data
+var entries = new[]
+{
+    new ChartEntry(212)
+    {
+        Label = "UWP",
+        ValueLabel = "112",
+        Color = SKColor.Parse("#2c3e50")
+    },
+    new ChartEntry(248)
+    {
+        Label = "Android",
+        ValueLabel = "648",
+        Color = SKColor.Parse("#77d065")
+    },
+    new ChartEntry(128)
+    {
+        Label = "iOS",
+        ValueLabel = "428",
+        Color = SKColor.Parse("#b455b6")
+    },
+    new ChartEntry(514)
+    {
+        Label = "Forms",
+        ValueLabel = "214",
+        Color = SKColor.Parse("#3498db")
+    }
+};
+
+// draw chart using the Canvas element
+.Stack(stack =>
+{
+    var titleStyle = TextStyle
+        .Default
+        .Size(20)
+        .SemiBold()
+        .Color(Colors.Blue.Medium)
+
+    stack
+        .Item()
+        .PaddingBottom(10)
+        .Text("Chart example", titleStyle);
+    
+    stack
+        .Item()
+        .Border(1)
+        .ExtendHorizontal()
+        .Height(300)
+        .Canvas((canvas, size) =>
+        {
+            var chart = new BarChart
+            {
+                Entries = entries,
+
+                LabelOrientation = Orientation.Horizontal,
+                ValueLabelOrientation = Orientation.Horizontal,
+                
+                IsAnimated = false,
+            };
+            
+            chart.DrawContent(canvas, (int)size.Width, (int)size.Height);
+        });
+});
+```
+
+This is a result:
+
+![example](./images/patterns-and-practices/chart.png =400x)
 
 ## Style
 
@@ -606,3 +694,93 @@ This exception occurs during the document generation process - when the generati
 ### DocumentLayoutException
 
 This exception may be extremely hard to fix because it happens for valid document trees which enforce constraints that are impossible to meet. For example, when you try to draw a rectangle bigger than available space on the page, the rendering engine is going to wrap the content in a hope that on the next page there would be enough space. Generally, such wrapping behaviour is happening all the time and is working nicely - however, there are cases when it can lead to infinite wrapping. When a certain document length threshold is passed, the algorithm stops the rendering process and throws this exception. In such case, please revise your code and search for indivisible elements requiring too much space.
+
+This exception provides an additional element stack. It shows which elements have been rendered when the exception was thrown. Please analyse the example below:
+
+```csharp{2,8}
+.Padding(10)
+.Width(100)
+.Background(Colors.Grey.Lighten3)
+.DebugPointer("Example debug pointer")
+.Stack(x =>
+{
+    x.Item().Text("Test");
+    x.Item().Width(150); // requires 150pt width where only 100pt is available
+});
+```
+
+Below is the element trace returned by the exception. Nested elements (children) are indented. Sometimes you may find additional, library-specific elements. 
+
+Additional symbols are used to help you find the problem cause:
+- 🌟 - represents special elements, e.g. page header/content/footer or the debug pointer element,
+- 🔥 - represents an element that causes the layouting exception. Follow the symbol deeper to find the root cause.
+
+```
+🔥 Page content 🌟
+------------------
+Available space: (Width: 500, Height: 360)
+Requested space: PartialRender (Width: 120,00, Height: 20,00)
+
+    🔥 Background
+    -------------
+    Available space: (Width: 500, Height: 360)
+    Requested space: PartialRender (Width: 120,00, Height: 20,00)
+    Color: #ffffff
+
+        🔥 Padding
+        ----------
+        Available space: (Width: 500, Height: 360)
+        Requested space: PartialRender (Width: 120,00, Height: 20,00)
+        Top: 10
+        Right: 10
+        Bottom: 10
+        Left: 10
+
+            🔥 Constrained
+            --------------
+            Available space: (Width: 480, Height: 340)
+            Requested space: PartialRender (Width: 100,00, Height: 0,00)
+            Min Width: 100
+            Max Width: 100
+            Min Height: -
+            Max Height: -
+
+                🔥 Background
+                -------------
+                Available space: (Width: 100, Height: 340)
+                Requested space: PartialRender (Width: 0,00, Height: 0,00)
+                Color: #eeeeee
+
+                    🔥 Example debug pointer 🌟
+                    ---------------------------
+                    Available space: (Width: 100, Height: 340)
+                    Requested space: PartialRender (Width: 0,00, Height: 0,00)
+
+                        🔥 Stack
+                        --------
+                        Available space: (Width: 100, Height: 340)
+                        Requested space: PartialRender (Width: 0,00, Height: 0,00)
+
+                            🔥 Padding
+                            ----------
+                            Available space: (Width: 100, Height: 340)
+                            Requested space: PartialRender (Width: 0,00, Height: 0,00)
+                            Top: 0
+                            Right: 0
+                            Bottom: -0
+                            Left: 0
+
+                                🔥 BinaryStack
+                                --------------
+                                Available space: (Width: 100, Height: 340)
+                                Requested space: PartialRender (Width: 0,00, Height: 0,00)
+
+                                    🔥 Constrained
+                                    --------------
+                                    Available space: (Width: 100, Height: 340)
+                                    Requested space: Wrap
+                                    Min Width: 150
+                                    Max Width: 150
+                                    Min Height: -
+                                    Max Height: -
+```
