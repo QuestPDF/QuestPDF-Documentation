@@ -122,6 +122,48 @@ This element allows drawing any custom content using the SkiaSharp canvas object
 
 ![example](./images/api-reference/canvas.png =300x)
 
+In next example, we will analyze how to create a rounded rectangle using SkiaSharp and the `Canvas` element. It clearly shows how powerful is this approach:
+
+```csharp
+container
+.Background(Colors.Grey.Lighten2)
+.Padding(25)
+.Box()
+.Layers(layers =>
+{
+    layers.Layer().Canvas((canvas, size) =>
+    {
+        DrawRoundedRectangle(Colors.White, false);
+        DrawRoundedRectangle(Colors.Blue.Darken2, true);
+
+        void DrawRoundedRectangle(string color, bool isStroke)
+        {
+            using var paint = new SKPaint
+            {
+                Color = SKColor.Parse(color),
+                IsStroke = isStroke,
+                StrokeWidth = 2,
+                IsAntialias = true
+            };
+        
+            canvas.DrawRoundRect(0, 0, size.Width, size.Height, 20, 20, paint);
+        }
+    });
+    
+    layers
+        .PrimaryLayer()
+        .PaddingVertical(10)
+        .PaddingHorizontal(20)
+        .Text("Sample text", TextStyle.Default.Size(16).Color(Colors.Blue.Darken2).SemiBold());
+});
+```
+
+![example](./images/api-reference/canvas-rounded-rectangle.png =175x)
+
+::: tip
+Did you know that the Canvas element can also be used to combine QuestPDF with other, SkiaSharp-based libraries? A great example of such situation is drawing vector-based charts. Please take a look [at this example](/patterns-and-practices.html#implementing-charts).
+:::
+
 ## Debug area
 
 - This container can be used to inspect space taken by its children.
@@ -223,6 +265,42 @@ Max Height: -
 
 ![example](./images/api-reference/decoration.png =300x)
 
+
+## Default text style
+
+For professional documents, it is important to keep consistent typography. At the same time, documents that contain many text elements (e.g. reports) may become troublesome to configure, even with techniques such as [global text styles](/patterns-and-practices.html#global-text-style) or [DSL extensions](/patterns-and-practices.html#extending-dsl) (creating more complex structures defined as C# extension methods). 
+
+This element allows you to override text styles in all its children at once.
+
+```csharp{1}
+.DefaultTextStyle(TextStyle.Default.Bold().Underline())
+.Stack(stack =>
+{ 
+    stack.Item().Text("Default style applies to all children", TextStyle.Default);
+    stack.Item().Text("You can override certain styles", TextStyle.Default.Underline(false).Color(Colors.Green.Darken2));
+    
+    stack.Item().PaddingTop(10).Border(1).Grid(grid =>
+    {
+        grid.Columns(4);
+
+        foreach (var i in Enumerable.Range(1, 16))
+        {
+            grid.Item()
+                .Border(1)
+                .BorderColor(Colors.Grey.Lighten1)
+                .Background(Colors.Grey.Lighten3)
+                .Width(50)
+                .Height(50)
+                .AlignCenter()
+                .AlignMiddle()
+                .Text(i, TextStyle.Default.Size(16 + i / 4));   
+        }
+    });
+```
+
+Please notice that this element extends existing styles with additional configuration. Those styles can be extended/overridden on later stages of the code.
+
+![example](./images/api-reference/default-text-style.png =220x)
 
 ## Element
 
@@ -1049,6 +1127,364 @@ Use the Spacing property to add some space between elements:
 ```
 
 ![example](./images/api-reference/stack-spacing.png =350x)
+
+
+## Table
+
+The Table element is one of the most complex layout-related algorithms available in the QuestPDF library. It can achieve more sophisticated structures than any combination of the Row and the Stack elements. It also greatly reduce code complexity. However, it is slightly slower to compute.
+
+### Basic usage
+
+Please analyse this simple example showing how to create a simple Table instance:
+1) You start with column definition that describes width of each column.
+2) And then, you can place any number of items inside. Each item has a corresponding position (Row and Column).
+
+```csharp{4-10,13-16}
+.Border(1)
+.Table(table =>
+{
+    table.ColumnsDefinition(columns =>
+    {
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+    });
+
+    // by using custom 'Element' method, we can reuse visual configuration
+    table.Cell().Row(1).Column(4).Element(Block).Text("A");
+    table.Cell().Row(2).Column(2).Element(Block).Text("B");
+    table.Cell().Row(3).Column(3).Element(Block).Text("C");
+    table.Cell().Row(4).Column(1).Element(Block).Text("D");
+    
+    // for simplicity, you can also use extension method described in the "Extending DSL" section
+    static IContainer Block(IContainer container)
+    {
+        return container
+            .Border(1)
+            .Background(Colors.Grey.Lighten3)
+            .MinWidth(50)
+            .MinHeight(50)
+            .AlignCenter()
+            .AlignMiddle();
+    }
+});
+```
+
+![example](./images/api-reference/table-basic-usage.png =220x)
+
+### Automated cell placement
+
+You don't need to specify position of every cell. When the algorithm detects that the cell does not have assigned location, it places it in the nearest possible location.
+
+```csharp{11-14}
+.Table(table =>
+{
+    table.ColumnsDefinition(columns =>
+    {
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+    });
+
+    table.Cell().Row(1).Column(1).Element(Block).Text("A");
+    table.Cell().Row(2).Column(2).Element(Block).Text("B");
+    table.Cell().Row(1).Column(3).Element(Block).Text("C");
+    table.Cell().Row(2).Column(4).Element(Block).Text("D");
+    
+    // the Block() method, that defines default cell style, is ommited
+});
+```
+
+![example](./images/api-reference/table-partial-automated-cell-placement.png =220x)
+
+
+### Column definitions
+
+Similarly to the `Row` element, you can define [columns of constant and relative sizes](/api-reference.html#row).
+
+**Important:** this example uses extensions methods presented in [the Extending DSL section](/patterns-and-practices.html#extending-dsl).
+
+```csharp{5-11}
+container
+    .Padding(10)
+    .Table(table =>
+    {
+        table.ColumnsDefinition(columns =>
+        {
+            columns.ConstantColumn(50);
+            columns.ConstantColumn(100);
+            columns.RelativeColumn(2);
+            columns.RelativeColumn(3);
+        });
+
+        table.Cell().ColumnSpan(4).LabelCell("Total width: 300px");
+        table.Cell().ValueCell("50px");
+        table.Cell().ValueCell("100px");
+        table.Cell().ValueCell("100px");
+        table.Cell().ValueCell("150px");
+    });
+```
+
+![example](./images/api-reference/table-columns-definition.png =320x)
+
+### Row spans and column spans
+
+Cells can span over multiple rows and/or multiple columns:
+
+```csharp{11-19}
+.Table(table =>
+{
+    table.ColumnsDefinition(columns =>
+    {
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+    });
+
+    table.Cell().RowSpan(2).ColumnSpan(2).Element(Block).Text("1");
+    table.Cell().ColumnSpan(2).Element(Block).Text("2");
+    table.Cell().Element(Block).Text("3");
+    table.Cell().Element(Block).Text("4");
+    table.Cell().RowSpan(2).Element(Block).Text("5");
+    table.Cell().ColumnSpan(2).Element(Block).Text("6");
+    table.Cell().RowSpan(2).Element(Block).Text("7");
+    table.Cell().Element(Block).Text("8");
+    table.Cell().Element(Block).Text("9");
+    
+    // the Block() method, that defines default cell style, is ommited
+});
+```
+
+![example](./images/api-reference/table-spans.png =220x)
+
+### Overlapping cells
+
+Cells can overlap each other. This situation is possible when you manually assign cell's location:
+
+```csharp{10-12}
+.Table(table =>
+{
+    table.ColumnsDefinition(columns =>
+    {
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+    });
+
+    table.Cell().Row(1).RowSpan(3).Column(1).ColumnSpan(3).Background(Colors.Grey.Lighten3).MinHeight(150);
+    table.Cell().Row(1).RowSpan(2).Column(1).ColumnSpan(2).Background(Colors.Grey.Lighten1).MinHeight(100);
+    table.Cell().Row(3).Column(3).Background(Colors.Grey.Darken1).MinHeight(50);
+});
+```
+
+![example](./images/api-reference/table-overlapping-cells.png =170x)
+
+### Extend last cells to table bottom
+
+This feature is very useful when creating complex table structures that are likely to page. It applies a special rule to last cells within each column. It extends them in such a way that they end on the table's bottom. This behavior may improve visuals of your table.
+
+```csharp{11}
+.Table(table =>
+{
+    table.ColumnsDefinition(columns =>
+    {
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+    });
+    
+    table.ExtendLastCellsToTableBottom();
+
+    table.Cell().Row(1).Column(1).Element(Block).Text("A");
+    table.Cell().Row(3).Column(1).Element(Block).Text("B");
+    table.Cell().Row(2).Column(2).Element(Block).Text("C");
+    table.Cell().Row(3).Column(3).Element(Block).Text("D");
+    table.Cell().Row(2).RowSpan(2).Column(4).Element(Block).Text("E");
+    
+    // the Block() method, that defines default cell style, is ommited
+});
+```
+
+Please notice that the block "C" ends along with the "B" and "D" blocks:
+
+![example](./images/api-reference/table-extend-last-cells-to-table-bottom.png =220x)
+
+
+### Report example
+
+Please analyse this example to understand how to design report-like document structures.
+
+**Important:** this example uses extensions methods presented in [the Extending DSL section](/patterns-and-practices.html#extending-dsl).
+
+```csharp
+.Box()
+.Border(1)
+.Table(table =>
+{
+    table.ColumnsDefinition(columns =>
+    {
+        columns.ConstantColumn(100);
+        columns.RelativeColumn();
+        columns.ConstantColumn(100);
+        columns.RelativeColumn();
+    });
+    
+    table.ExtendLastCellsToTableBottom();
+
+    table.Cell().RowSpan(3).LabelCell("Project");
+    table.Cell().RowSpan(3).ShowEntire().ValueCell(Placeholders.Sentence());
+
+    table.Cell().LabelCell("Report number");
+    table.Cell().ValueCell(i.ToString());
+    
+    table.Cell().LabelCell("Date");
+    table.Cell().ValueCell(Placeholders.ShortDate());
+
+    table.Cell().LabelCell("Inspector");
+    table.Cell().ValueCell("Marcin Ziąbek");
+
+    table.Cell().ColumnSpan(2).LabelCell("Morning weather");
+    table.Cell().ColumnSpan(2).LabelCell("Evening weather");
+
+    table.Cell().ValueCell("Time");
+    table.Cell().ValueCell("7:13");
+
+    table.Cell().ValueCell("Time");
+    table.Cell().ValueCell("18:25");
+
+    table.Cell().ValueCell("Description");
+    table.Cell().ValueCell("Sunny");
+
+    table.Cell().ValueCell("Description");
+    table.Cell().ValueCell("Windy");
+
+    table.Cell().ValueCell("Wind");
+    table.Cell().ValueCell("Mild");
+
+    table.Cell().ValueCell("Wind");
+    table.Cell().ValueCell("Strong");
+
+    table.Cell().ValueCell("Temperature");
+    table.Cell().ValueCell("17°C");
+
+    table.Cell().ValueCell("Temperature");
+    table.Cell().ValueCell("32°C");
+
+    table.Cell().LabelCell("Remarks");
+    table.Cell().ColumnSpan(3).ValueCell(Placeholders.Paragraph());
+});
+```
+
+![example](./images/api-reference/table-report-example.png =1125x)
+
+
+### Table header
+
+This example shows how to design a special table containing a header that repeats on every page. To achieve such result, we will use the `Decorator` element and two separate tables. 
+
+We want to stay safe and be sure that both tables have similar configuration. To achieve such a requirement, we will define reusable configuration methods (static local functions). This way, column definition configuration and default cell styles can be easily shared.
+
+```csharp{15,30-33,53-55}
+var pageSizes = new List<(string name, float width, float height)>()
+{
+    ("Letter", 8.5f, 11),
+    ("Legal", 8.5f, 14),
+    ("Ledger", 11, 17),
+    ("Tabloid", 17, 11),
+};
+
+const int inchesToPoints = 72;
+
+container
+.Padding(10)
+.Box()
+.Border(1)
+.Decoration(decoration =>
+{
+    // this function allows to share default cell style across both tables
+    IContainer DefaultCellStyle(IContainer container, string backgroundColor)
+    {
+        return container
+            .Border(1)
+            .BorderColor(Colors.Grey.Lighten1)
+            .Background(backgroundColor)
+            .PaddingVertical(5)
+            .PaddingHorizontal(10)
+            .AlignCenter()
+            .AlignMiddle();
+    }
+    
+    decoration
+        .Header()
+        .DefaultTextStyle(TextStyle.Default.SemiBold())
+        .Table(table =>
+        {
+            table.ColumnsDefinition(DefineTableColumns);
+            
+            table.Cell().RowSpan(2).Element(CellStyle).ExtendHorizontal().AlignLeft().Text("Document type");
+            
+            table.Cell().ColumnSpan(2).Element(CellStyle).Text("Inches");
+            table.Cell().ColumnSpan(2).Element(CellStyle).Text("Points");
+            
+            table.Cell().Element(CellStyle).Text("Width");
+            table.Cell().Element(CellStyle).Text("Height");
+            
+            table.Cell().Element(CellStyle).Text("Width");
+            table.Cell().Element(CellStyle).Text("Height");
+
+            // again, to not repeat the same configuration, 
+            // we will define new style function with predefined background color
+            IContainer CellStyle(IContainer container) => DefaultCellStyle(container, Colors.Grey.Lighten3); 
+        });
+    
+    decoration
+        .Content()
+        .Table(table =>
+        {
+            table.ColumnsDefinition(DefineTableColumns);
+            
+            foreach (var page in pageSizes)
+            {
+                table.Cell().Element(CellStyle).ExtendHorizontal().AlignLeft().Text(page.name);
+                
+                // inches
+                table.Cell().Element(CellStyle).Text(page.width);
+                table.Cell().Element(CellStyle).Text(page.height);
+                
+                // points
+                table.Cell().Element(CellStyle).Text(page.width * inchesToPoints);
+                table.Cell().Element(CellStyle).Text(page.height * inchesToPoints);
+                
+                // cells in this table should have white background
+                IContainer CellStyle(IContainer container) => DefaultCellStyle(container, Colors.White); 
+            }
+        });
+
+    void DefineTableColumns(TableColumnsDefinitionDescriptor columns)
+    {
+        columns.RelativeColumn();
+        
+        columns.ConstantColumn(75);
+        columns.ConstantColumn(75);
+        
+        columns.ConstantColumn(75);
+        columns.ConstantColumn(75);
+    }
+});
+```
+
+Page 1:
+
+![example](./images/api-reference/table-header-1.png =500x)
+
+Page 2:
+
+![example](./images/api-reference/table-header-2.png =500x)
+
 
 ## Text
 

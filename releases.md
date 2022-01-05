@@ -4,6 +4,15 @@ title: "Releases"
 
 ## Release notes
 
+### 2022.01
+Introduced new element: `Table` - a great way to construct complex document structures, e.g. reports. This element covers all cases offered by combination of the `Stack` and the `Row` elements. Additionally, it provides support for more complex layouts and corner cases. Updating to the `Table` element can greatly simplify your code 😁
+
+Other changes:
+- Added new element `DefaultTextStyle` - it allows set new text style to all its children,
+- Improved the default paging behavior for the `Row` element. In some minor corner cases it might cause infinite layout exceptions and confuse developers. This improvement was suggested by **SvizelPritula**, thank you!
+- Improved the `Row` element: added new type of column that combines constant and relative widths. This improvement was proposed by **qcz**, thank you!
+- Fixed default page sizes for: Letter and Legal. This improvement was introduced by **markhewett**, thank you!
+
 ### 2021.12
 
 - Improved debugging experience for layout-related exceptions. To make the library predictable, it is (by design) very strict about layouting rules and throws an exception when a constraint cannot be met. In this release, each exception contains an element stack that contains all information needed to identify the issue. By default, this feature is enabled only when debugger is attached.
@@ -155,7 +164,10 @@ The QuestPDF library offers multiple tools needed to design and generate PDF doc
 
 Most of the features listed below should be added in the nearest months:
 - Font subsetting to reduce output file size,
-- Dynamic component (allows to generate dynamic content based on the context, e.g. page number, available space, etc.).
+- Dynamic component (allows generating dynamic content based on the context, e.g. page number, available space, etc.),
+- Font fallback (using alternative fonts when glyphs are not available),
+- Text justification,
+- The `PreventPaging` element that tries to render as much as possible in the available space. When the content requires more space, instead of performing paging operation, it ignores rest of the content. [Discussion](https://github.com/QuestPDF/QuestPDF/issues/51)
 
 ### Under consideration
 
@@ -166,4 +178,5 @@ There are also features being actively investigated with lower importance:
 - Tutorials: adding maps to the document,
 - Allow the Placeholder element to show text instead of an icon,
 - SVG support ([integration with SkiaSharp.Svg](https://www.nuget.org/packages/SkiaSharp.Svg/)),
+- Line element (horizontal and vertical),
 - and more...
