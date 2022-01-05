@@ -76,28 +76,6 @@ Please be careful. This component may try to enforce size constraints that are i
 ```
 
 
-## Box
-
-The box element loosens the size constraints provided by its parent. It makes sure that its child is rendered only with necessary space, no bigger.
-
-```csharp{3-3}
-.Border(4)
-.BorderColor(Colors.Blue.Medium)
-.Box()
-.Background(Colors.Grey.Lighten2)
-.Padding(15)
-.Text("Test of the \n box element", TextStyle.Default.Size(20));
-```
-
-Without using the box element (notice that the text element takes entire space provided by its parent):
-
-![example](./images/api-reference/box-without.png =300x)
-
-With using the box element (notice that the text element takes only necessary space):
-
-![example](./images/api-reference/box-with.png =300x)
-
-
 ## Canvas
 
 This element allows drawing any custom content using the SkiaSharp canvas objects.
@@ -122,13 +100,13 @@ This element allows drawing any custom content using the SkiaSharp canvas object
 
 ![example](./images/api-reference/canvas.png =300x)
 
-In next example, we will analyze how to create a rounded rectangle using SkiaSharp and the `Canvas` element. It clearly shows how powerful is this approach:
+In the next example, we will analyze how to create a rounded rectangle using SkiaSharp and the `Canvas` element. It clearly shows how powerful is this approach:
 
 ```csharp
 container
 .Background(Colors.Grey.Lighten2)
 .Padding(25)
-.Box()
+.MinimalBox()
 .Layers(layers =>
 {
     layers.Layer().Canvas((canvas, size) =>
@@ -443,7 +421,7 @@ Example:
                 
                 return element;
             })
-            .Box()
+            .MinimalBox()
             .Background(Colors.White)
             .Padding(10)
             .Text($"Flipped {turns}", TextStyle.Default.Size(16));
@@ -720,6 +698,28 @@ More examples:
 ![example](./images/api-reference/layers-2.png =400x)
 
 
+## Minimal box
+
+The `MinimalBox` element loosens the size constraints provided by its parent. It makes sure that its child is rendered only with necessary space, no bigger.
+
+```csharp{3-3}
+.Border(4)
+.BorderColor(Colors.Blue.Medium)
+.MinimalBox()
+.Background(Colors.Grey.Lighten2)
+.Padding(15)
+.Text("Test of the \n box element", TextStyle.Default.Size(20));
+```
+
+Without using the `MinimalBox` element (notice that the text element takes entire space provided by its parent):
+
+![example](./images/api-reference/minimal-box-without.png =300x)
+
+With using the `MinimalBox` element (notice that the text element takes only necessary space):
+
+![example](./images/api-reference/minimal-box-with.png =300x)
+
+
 ## Padding
 
 - This container adds space around its child.
@@ -830,7 +830,7 @@ Example:
 
                 return element;
             })
-            .Box()
+            .MinimalBox()
             .Background(Colors.White)
             .Padding(10)
             .Text($"Rotated {turns * 90}°", TextStyle.Default.Size(20));
@@ -1321,7 +1321,7 @@ Please analyse this example to understand how to design report-like document str
 **Important:** this example uses extensions methods presented in [the Extending DSL section](/patterns-and-practices.html#extending-dsl).
 
 ```csharp
-.Box()
+.MinimalBox()
 .Border(1)
 .Table(table =>
 {
@@ -1401,7 +1401,7 @@ const int inchesToPoints = 72;
 
 container
 .Padding(10)
-.Box()
+.MinimalBox()
 .Border(1)
 .Decoration(decoration =>
 {
@@ -1741,7 +1741,7 @@ Sometimes, there is very little space on the page. It is enough to display a cou
 
 ```csharp{5-6}
 .Background("#FFF")
-.Box()
+.MinimalBox()
 .Padding(25)
 .Background(Colors.Green.Lighten3)
 .TranslateX(15)
