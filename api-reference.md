@@ -1388,7 +1388,7 @@ It is also possible to define table headers and footers. If your table contains 
 
 Please note that header and footer sections have their own set of rows - they do not count in the content section.
 
-```csharp{43-61}
+```csharp{43-60}
 var pageSizes = new List<(string name, double width, double height)>()
 {
     ("Letter (ANSI A)", 8.5f, 11),
