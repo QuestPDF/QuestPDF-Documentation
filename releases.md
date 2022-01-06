@@ -12,6 +12,8 @@ Other changes:
 - Improved the default paging behavior for the `Row` element. In some minor corner cases it might cause infinite layout exceptions and confuse developers. This improvement was suggested by **SvizelPritula**, thank you!
 - Improved the `Row` element: added new type of column that combines constant and relative widths. This improvement was proposed by **qcz**, thank you!
 - Fixed default page sizes for: Letter and Legal. This improvement was introduced by **markhewett**, thank you!
+- Documentation: added article on how to run QuestPDF on in Blazor Webassembly. This article was written by **pablopioli**, thank you!
+- Other library / documentation improvements.
 
 ### 2021.12
 
@@ -19,7 +21,7 @@ Other changes:
 - Improved layouting algorithm performance by introducing additional caching layer. This cache reduces the layouting time by half. By default, this feature is enabled only when debugger is not attached (mostly release mode).
 - Reduced GA pressure put by the layouting algorithm. Previously, every element measurement operation was represented by an object and the paging support was done via class hierarchy. New solution uses structs (which are value-types) and enums. This also makes the code more readable and easier to follow.
 - Added support for generating XPS files which are easier to print in the Windows environment. This was possible due to existing support in SkiaSharp. This change was proposed by **sbrkich**, thank you!
-
+- Documentation: added article about adding charts to QuestPDF documents. This article was written by **donmurta**, thank you!
 ### 2021.11
 
 - Added new `Inlined` element - put block elements along a line with line-breaking and page-breaking support. This element also supports various element placement in the horizontal axis as well as the baseline. It will help me in the future development, especially with text rendering optimization,
