@@ -165,20 +165,22 @@ The QuestPDF library offers multiple tools needed to design and generate PDF doc
 ### Next releases
 
 Most of the features listed below should be added in the nearest months:
-- Font subsetting to reduce output file size,
+- Better support for other measurement units (points / mm / cm / inches),
 - Dynamic component (allows generating dynamic content based on the context, e.g. page number, available space, etc.),
-- Font fallback (using alternative fonts when glyphs are not available),
-- Text justification,
-- The `PreventPaging` element that tries to render as much as possible in the available space. When the content requires more space, instead of performing paging operation, it ignores rest of the content. [Discussion](https://github.com/QuestPDF/QuestPDF/issues/51)
+- The `PreventPaging` element that tries to render as much as possible in the available space. When the content requires more space, instead of performing paging operation, it ignores rest of the content. [Discussion](https://github.com/QuestPDF/QuestPDF/issues/51),
+- Line element (horizontal and vertical).
 
 ### Under consideration
 
 There are also features being actively investigated with lower importance:
 
-- Documentation cleanup.
+- Font subsetting to reduce output file size,
+- Font fallback (using alternative fonts when glyphs are not available),
+- Text justification,
+- Documentation cleanup,
 - Custom slots in components (named slots, dynamic slots),
 - Tutorials: adding maps to the document,
 - Allow the Placeholder element to show text instead of an icon,
 - SVG support ([integration with SkiaSharp.Svg](https://www.nuget.org/packages/SkiaSharp.Svg/)),
-- Line element (horizontal and vertical),
+
 - and more...

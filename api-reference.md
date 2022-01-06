@@ -1382,19 +1382,22 @@ Please analyse this example to understand how to design report-like document str
 ![example](./images/api-reference/table-report-example.png =1125x)
 
 
-### Table header
+### Table header / footer
 
-This example shows how to design a special table containing a header that repeats on every page. To achieve such result, we will use the `Decorator` element and two separate tables. 
+It is also possible to define table headers and footers. If your table contains more content and spans multiple pages, header and footer elements are repeated on each page.
 
-We want to stay safe and be sure that both tables have similar configuration. To achieve such a requirement, we will define reusable configuration methods (static local functions). This way, column definition configuration and default cell styles can be easily shared.
+Please note that header and footer sections have their own set of rows - they do not count in the content section.
 
-```csharp{15,30-33,53-55}
-var pageSizes = new List<(string name, float width, float height)>()
+```csharp{43-61}
+var pageSizes = new List<(string name, double width, double height)>()
 {
-    ("Letter", 8.5f, 11),
+    ("Letter (ANSI A)", 8.5f, 11),
     ("Legal", 8.5f, 14),
-    ("Ledger", 11, 17),
-    ("Tabloid", 17, 11),
+    ("Ledger (ANSI B)", 11, 17),
+    ("Tabloid (ANSI B)", 17, 11),
+    ("ANSI C", 22, 17),
+    ("ANSI D", 34, 22),
+    ("ANSI E", 44, 34)
 };
 
 const int inchesToPoints = 72;
@@ -1403,9 +1406,8 @@ container
 .Padding(10)
 .MinimalBox()
 .Border(1)
-.Decoration(decoration =>
+.Table(table =>
 {
-    // this function allows to share default cell style across both tables
     IContainer DefaultCellStyle(IContainer container, string backgroundColor)
     {
         return container
@@ -1418,53 +1420,7 @@ container
             .AlignMiddle();
     }
     
-    decoration
-        .Header()
-        .DefaultTextStyle(TextStyle.Default.SemiBold())
-        .Table(table =>
-        {
-            table.ColumnsDefinition(DefineTableColumns);
-            
-            table.Cell().RowSpan(2).Element(CellStyle).ExtendHorizontal().AlignLeft().Text("Document type");
-            
-            table.Cell().ColumnSpan(2).Element(CellStyle).Text("Inches");
-            table.Cell().ColumnSpan(2).Element(CellStyle).Text("Points");
-            
-            table.Cell().Element(CellStyle).Text("Width");
-            table.Cell().Element(CellStyle).Text("Height");
-            
-            table.Cell().Element(CellStyle).Text("Width");
-            table.Cell().Element(CellStyle).Text("Height");
-
-            // again, to not repeat the same configuration, 
-            // we will define new style function with predefined background color
-            IContainer CellStyle(IContainer container) => DefaultCellStyle(container, Colors.Grey.Lighten3); 
-        });
-    
-    decoration
-        .Content()
-        .Table(table =>
-        {
-            table.ColumnsDefinition(DefineTableColumns);
-            
-            foreach (var page in pageSizes)
-            {
-                table.Cell().Element(CellStyle).ExtendHorizontal().AlignLeft().Text(page.name);
-                
-                // inches
-                table.Cell().Element(CellStyle).Text(page.width);
-                table.Cell().Element(CellStyle).Text(page.height);
-                
-                // points
-                table.Cell().Element(CellStyle).Text(page.width * inchesToPoints);
-                table.Cell().Element(CellStyle).Text(page.height * inchesToPoints);
-                
-                // cells in this table should have white background
-                IContainer CellStyle(IContainer container) => DefaultCellStyle(container, Colors.White); 
-            }
-        });
-
-    void DefineTableColumns(TableColumnsDefinitionDescriptor columns)
+    table.ColumnsDefinition(columns =>
     {
         columns.RelativeColumn();
         
@@ -1473,6 +1429,40 @@ container
         
         columns.ConstantColumn(75);
         columns.ConstantColumn(75);
+    });
+    
+    table.Header(header =>
+    {
+        // please be sure to call the 'header' handler!
+        
+        header.Cell().RowSpan(2).Element(CellStyle).ExtendHorizontal().AlignLeft().Text("Document type");
+            
+        header.Cell().ColumnSpan(2).Element(CellStyle).Text("Inches");
+        header.Cell().ColumnSpan(2).Element(CellStyle).Text("Points");
+            
+        header.Cell().Element(CellStyle).Text("Width");
+        header.Cell().Element(CellStyle).Text("Height");
+            
+        header.Cell().Element(CellStyle).Text("Width");
+        header.Cell().Element(CellStyle).Text("Height");
+
+        // you can extend already existing styles by creating additional methods
+        IContainer CellStyle(IContainer container) => DefaultCellStyle(container, Colors.Grey.Lighten3); 
+    });
+
+    foreach (var page in pageSizes)
+    {
+        table.Cell().Element(CellStyle).ExtendHorizontal().AlignLeft().Text(page.name);
+                
+        // inches
+        table.Cell().Element(CellStyle).Text(page.width);
+        table.Cell().Element(CellStyle).Text(page.height);
+                
+        // points
+        table.Cell().Element(CellStyle).Text(page.width * inchesToPoints);
+        table.Cell().Element(CellStyle).Text(page.height * inchesToPoints);
+                
+        IContainer CellStyle(IContainer container) => DefaultCellStyle(container, Colors.White); 
     }
 });
 ```
