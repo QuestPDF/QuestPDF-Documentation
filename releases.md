@@ -173,7 +173,6 @@ Most of the features listed below should be added in the nearest months:
 ### Under consideration
 
 There are also features being actively investigated with lower importance:
-
 - Font subsetting to reduce output file size,
 - Font fallback (using alternative fonts when glyphs are not available),
 - Text justification,

@@ -1163,6 +1163,7 @@ Please analyse this simple example showing how to create a simple Table instance
         return container
             .Border(1)
             .Background(Colors.Grey.Lighten3)
+            .ShowOnce()
             .MinWidth(50)
             .MinHeight(50)
             .AlignCenter()
@@ -1417,7 +1418,8 @@ container
             .PaddingVertical(5)
             .PaddingHorizontal(10)
             .AlignCenter()
-            .AlignMiddle();
+            .AlignMiddle()
+            .ShowOnce();
     }
     
     table.ColumnsDefinition(columns =>
