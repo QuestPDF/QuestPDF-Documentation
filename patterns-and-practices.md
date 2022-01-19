@@ -511,6 +511,14 @@ This is a result:
 
 ## Style
 
+### Color definitions
+
+In QuestPDF, multiple element expect color as part of the configuration. Similarly to HTML, there are a couple of supported formats:
+1. Standard format: `RRGGBB` OR `#RRGGBB`
+2. Shorthand format: `RGB` or `#RGB`, e.g. `#123` is an equivalent to `#112233`
+3. Alpha support: `AARRGGBB` or `#AARRGGBB`
+4. Shorthand alpha format: `ARGB` or `#ARGB`
+
 ### Material Design colors
 
 You can access any color defined in the Material Design colors set. Please find more details [on the official webpage](https://material.io/design/color/the-color-system.html).
