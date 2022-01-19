@@ -1191,10 +1191,10 @@ You don't need to specify position of every cell. When the algorithm detects tha
 
     table.Cell().Row(1).Column(1).Element(Block).Text("A");
     table.Cell().Row(2).Column(2).Element(Block).Text("B");
-    table.Cell().Row(1).Column(3).Element(Block).Text("C");
-    table.Cell().Row(2).Column(4).Element(Block).Text("D");
+    table.Cell().Element(Block).Text("C");
+    table.Cell().Element(Block).Text("D");
     
-    // the Block() method, that defines default cell style, is ommited
+    // the Block() method, that defines default cell style, is omitted
 });
 ```
 
@@ -1255,7 +1255,7 @@ Cells can span over multiple rows and/or multiple columns:
     table.Cell().Element(Block).Text("8");
     table.Cell().Element(Block).Text("9");
     
-    // the Block() method, that defines default cell style, is ommited
+    // the Block() method, that defines default cell style, is omitted
 });
 ```
 
@@ -1306,7 +1306,7 @@ This feature is very useful when creating complex table structures that are like
     table.Cell().Row(3).Column(3).Element(Block).Text("D");
     table.Cell().Row(2).RowSpan(2).Column(4).Element(Block).Text("E");
     
-    // the Block() method, that defines default cell style, is ommited
+    // the Block() method, that defines default cell style, is omitted
 });
 ```
 
