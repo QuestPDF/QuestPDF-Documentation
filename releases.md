@@ -4,6 +4,17 @@ title: "Releases"
 
 ## Release notes
 
+### 2022.02
+
+- Added a `ScaleToFit` element - scales it child down so it does fit in the provided space,
+- Added a `StopPaging` element - when its child requires more than one page to fully render, only the first page is shown,
+- Added a 'LineVertical' and a 'LineHorizontal' elements - those will simplify your code a lot, no need to use the `Border` element anymore!
+- Renaming: the `Stack` element has been renamed to the `Column` element,
+- Renaming: children of the `Row` elements are not called `items` instead of `columns`, e.g. `ConstantItem`, `RelativeItem`, `AutoItem`,
+- Added support of the `AutoItem` to the `Row` element - those items take as little width as possible,
+- Improved default Fluent configuration behavior for elements: Scale, Padding, Translate,
+- Improved integration support with the HttpContext.Response.Body. This improvement was introduced by schulz3000, thank you!
+
 ### 2022.01
 Introduced new element: `Table` - a great way to construct complex document structures, e.g. reports. This element covers all cases offered by combination of the `Stack` and the `Row` elements. Additionally, it provides support for more complex layouts and corner cases. Updating to the `Table` element can greatly simplify your code 😁
 

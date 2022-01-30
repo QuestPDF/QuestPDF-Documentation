@@ -221,7 +221,7 @@ Max Height: -
 - This container consists of three slots: header, content and footer.
 - The header element is always visible above the content. When the element is visible on multiple pages, the header element is going to be repeated on each page.
 - The footer element is always visible below the content. When the element is visible on multiple pages, the footer element is going to be repeated on each page.
-- The content element is visible only once. It is often used along with a PageableStack to allow drawing longer content across multiple pages.
+- The content element is visible only once. It is often used along with a PageableColumn to allow drawing longer content across multiple pages.
 
 ```csharp
 .Decoration(decoration =>
@@ -252,12 +252,12 @@ This element allows you to override text styles in all its children at once.
 
 ```csharp{1}
 .DefaultTextStyle(TextStyle.Default.Bold().Underline())
-.Stack(stack =>
+.Column(column =>
 { 
-    stack.Item().Text("Default style applies to all children", TextStyle.Default);
-    stack.Item().Text("You can override certain styles", TextStyle.Default.Underline(false).Color(Colors.Green.Darken2));
+    column.Item().Text("Default style applies to all children", TextStyle.Default);
+    column.Item().Text("You can override certain styles", TextStyle.Default.Underline(false).Color(Colors.Green.Darken2));
     
-    stack.Item().PaddingTop(10).Border(1).Grid(grid =>
+    column.Item().PaddingTop(10).Border(1).Grid(grid =>
     {
         grid.Columns(4);
 
@@ -332,7 +332,7 @@ The EnsureSpace element makes sure that if its child is going to take more pages
 
 ```csharp
 .EnsureSpace(100)
-.Stack(stack =>
+.Column(column =>
 {
     // content
 });
@@ -340,15 +340,15 @@ The EnsureSpace element makes sure that if its child is going to take more pages
 
 Example:
 ```csharp{11}
-page.Content().Stack(stack =>
+page.Content().Column(column =>
 {
-    stack
+    column
         .Item()
         .ExtendHorizontal()
         .Height(75)
         .Background(Colors.Grey.Lighten2);
     
-    stack
+    column
         .Item()
         .EnsureSpace(100)
         .Text(Placeholders.LoremIpsum());
@@ -510,7 +510,7 @@ byte[] GenerateImage(Size size)
 
 ## Grid
 
-- The Grid elements builds entire layout based on multiple Row elements put inside a Stack.
+- The Grid elements builds entire layout based on multiple Row elements put inside a Column.
 - Space is divided into multiple columns (12 by default).
 - Each item can take multiple columns.
 - If in the row there is not enough space for the item, it is pushed to the next row.
@@ -672,12 +672,12 @@ More examples:
     layers
         .PrimaryLayer()
         .Padding(25)
-        .Stack(stack =>
+        .Column(column =>
         {
-            stack.Spacing(5);
+            column.Spacing(5);
 
             foreach (var _ in Enumerable.Range(0, 7))
-                stack.Item().Text(Placeholders.Sentence());
+                column.Item().Text(Placeholders.Sentence());
         });
 
     // layer above the main content    
@@ -782,7 +782,7 @@ Please be careful! When the total height of the header and footer element is gre
 ## Page break
 
 - This component changes the layout flow and forces its container to render the following content on the next page.
-- Usually used inside the pageable Stack component.
+- Usually used inside the pageable Column component.
 
 ```csharp
 .PageBreak();
@@ -901,18 +901,18 @@ You can apply additional translation to change the rotation origin point:
 ```csharp
 .Row(row =>
 {
-    row.ConstantColumn(100)
+    row.ConstantItem(100)
         .Background("#DDD")
         .Padding(10)
         .ExtendVertical()
         .Text("This column is 100 points width");
 
-    row.RelativeColumn()
+    row.RelativeItem()
         .Background("#BBB")
         .Padding(10)
         .Text("This column takes 1/3 of the available space");
 
-    row.RelativeColumn(2)
+    row.RelativeItem(2)
         .Background("#DDD")
         .Padding(10)
         .Text("This column takes 2/3 of the available space");
@@ -927,9 +927,9 @@ You can specify the spacing between each column by using the Spacing() method:
 .Row(row =>
 {
     row.Spacing(20);
-    row.RelativeColumn(2).Border(1).Background(Colors.Grey.Lighten1);
-    row.RelativeColumn(3).Border(1).Background(Colors.Grey.Lighten2);
-    row.RelativeColumn(4).Border(1).Background(Colors.Grey.Lighten3);
+    row.RelativeItem(2).Border(1).Background(Colors.Grey.Lighten1);
+    row.RelativeItem(3).Border(1).Background(Colors.Grey.Lighten2);
+    row.RelativeItem(4).Border(1).Background(Colors.Grey.Lighten3);
 });
 ```
 
@@ -950,13 +950,13 @@ You can specify the spacing between each column by using the Spacing() method:
 Example:
 
 ```csharp{10}
-.Stack(stack =>
+.Column(column =>
 {
     var scales = new[] { 0.75f, 1f, 1.25f, 1.5f };
 
     foreach (var scale in scales)
     {
-        stack
+        column
             .Item()
             .Border(1)
             .Scale(scale)
@@ -972,7 +972,7 @@ Example:
 
 Use this container to prevent the element from being paged. If on the page there is not enough space, the element is wrapped to the next page without splitting its content.
 
-This container is commonly used with the Stack and Row elements to make sure that their content is fully visible on a single page.
+This container is commonly used with the Column and Row elements to make sure that their content is fully visible on a single page.
 
 ```csharp
 .ShowEntire()
@@ -994,9 +994,9 @@ var condition = numberOfElements > 5;
 // c# if-statement approach
 .Row(row =>
 {
-    row.RelativeColumn().Text("One");
+    row.RelativeItem().Text("One");
 
-    var secondColumn = row.RelativeColumn();
+    var secondColumn = row.RelativeItem();
 
     if (condition)
         secondColumn.Text("Two");
@@ -1005,8 +1005,8 @@ var condition = numberOfElements > 5;
 // equivalent fluent approach
 .Row(row =>
 {
-    row.RelativeColumn().Text("One");
-    row.RelativeColumn().ShowIf(condition).Text("Two");
+    row.RelativeItem().Text("One");
+    row.RelativeItem().ShowIf(condition).Text("Two");
 });
 ```
 
@@ -1024,14 +1024,14 @@ Example:
 ```csharp{7}
 page.Content().PaddingVertical(5).Row(row =>
 {
-    row.RelativeColumn()
+    row.RelativeItem()
         .Background(Colors.Grey.Lighten2)
         .Border(1)
         .Padding(5)
         .ShowOnce()
         .Text(Placeholders.Label());
     
-    row.RelativeColumn(2)
+    row.RelativeItem(2)
         .Border(1)
         .Padding(5)
         .Text(Placeholders.Paragraph());
@@ -1064,14 +1064,14 @@ Example:
     {
         // page configuration details
 
-        page.Header().Stack(stack =>
+        page.Header().Column(column =>
         {
-            stack
+            column
                 .Item()
                 .ShowOnce()
                 .Text("This header is visible on the first page.");
                 
-            stack
+            column
                 .Item()
                 .SkipOnce()
                 .Text("This header is visible on the second page and all following.");
@@ -1095,43 +1095,43 @@ Example:
 ![example](./images/api-reference/skip-once-first.png =300x)
 ![example](./images/api-reference/skip-once-second.png =300x)
 
-## Stack
+## Column
 
-- The Stack element is a multi-element container. You can put any set of elements you want.
+- The Column element is a multi-element container. You can put any set of elements you want.
 - The algorithm places element one underneath another. Each element may take the entire width.
 
 By default, all elements should fit on a single page. Otherwise, the entire content is be wrapped to the next page.
 
 ```csharp
-.Stack(stack =>
+.Column(column =>
 {
-    stack.Item().Background(Colors.Grey.Medium).Height(50);
-    stack.Item().Background(Colors.Grey.Lighten1).Height(100);
-    stack.Item().Background(Colors.Grey.Lighten2).Height(150);
+    column.Item().Background(Colors.Grey.Medium).Height(50);
+    column.Item().Background(Colors.Grey.Lighten1).Height(100);
+    column.Item().Background(Colors.Grey.Lighten2).Height(150);
 });
 ```
 
-![example](./images/api-reference/stack.png =350x)
+![example](./images/api-reference/column.png =350x)
 
 Use the Spacing property to add some space between elements:
 
 ```csharp
-.Stack(stack =>
+.Column(column =>
 {
-    stack.Spacing(15);
+    column.Spacing(15);
 
-    stack.Item().Background(Colors.Grey.Medium).Height(50);
-    stack.Item().Background(Colors.Grey.Lighten1).Height(100);
-    stack.Item().Background(Colors.Grey.Lighten2).Height(150);
+    column.Item().Background(Colors.Grey.Medium).Height(50);
+    column.Item().Background(Colors.Grey.Lighten1).Height(100);
+    column.Item().Background(Colors.Grey.Lighten2).Height(150);
 });
 ```
 
-![example](./images/api-reference/stack-spacing.png =350x)
+![example](./images/api-reference/column-spacing.png =350x)
 
 
 ## Table
 
-The Table element is one of the most complex layout-related algorithms available in the QuestPDF library. It can achieve more sophisticated structures than any combination of the Row and the Stack elements. It also greatly reduce code complexity. However, it is slightly slower to compute.
+The Table element is one of the most complex layout-related algorithms available in the QuestPDF library. It can achieve more sophisticated structures than any combination of the Row and the Column elements. It also greatly reduce code complexity. However, it is slightly slower to compute.
 
 ### Basic usage
 
@@ -1145,10 +1145,10 @@ Please analyse this simple example showing how to create a simple Table instance
 {
     table.ColumnsDefinition(columns =>
     {
-        columns.RelativeColumn();
-        columns.RelativeColumn();
-        columns.RelativeColumn();
-        columns.RelativeColumn();
+        columns.RelativeItem();
+        columns.RelativeItem();
+        columns.RelativeItem();
+        columns.RelativeItem();
     });
 
     // by using custom 'Element' method, we can reuse visual configuration
@@ -1183,10 +1183,10 @@ You don't need to specify position of every cell. When the algorithm detects tha
 {
     table.ColumnsDefinition(columns =>
     {
-        columns.RelativeColumn();
-        columns.RelativeColumn();
-        columns.RelativeColumn();
-        columns.RelativeColumn();
+        columns.RelativeItem();
+        columns.RelativeItem();
+        columns.RelativeItem();
+        columns.RelativeItem();
     });
 
     table.Cell().Row(1).Column(1).Element(Block).Text("A");
@@ -1214,10 +1214,10 @@ container
     {
         table.ColumnsDefinition(columns =>
         {
-            columns.ConstantColumn(50);
-            columns.ConstantColumn(100);
-            columns.RelativeColumn(2);
-            columns.RelativeColumn(3);
+            columns.ConstantItem(50);
+            columns.ConstantItem(100);
+            columns.RelativeItem(2);
+            columns.RelativeItem(3);
         });
 
         table.Cell().ColumnSpan(4).LabelCell("Total width: 300px");
@@ -1239,10 +1239,10 @@ Cells can span over multiple rows and/or multiple columns:
 {
     table.ColumnsDefinition(columns =>
     {
-        columns.RelativeColumn();
-        columns.RelativeColumn();
-        columns.RelativeColumn();
-        columns.RelativeColumn();
+        columns.RelativeItem();
+        columns.RelativeItem();
+        columns.RelativeItem();
+        columns.RelativeItem();
     });
 
     table.Cell().RowSpan(2).ColumnSpan(2).Element(Block).Text("1");
@@ -1270,9 +1270,9 @@ Cells can overlap each other. This situation is possible when you manually assig
 {
     table.ColumnsDefinition(columns =>
     {
-        columns.RelativeColumn();
-        columns.RelativeColumn();
-        columns.RelativeColumn();
+        columns.RelativeItem();
+        columns.RelativeItem();
+        columns.RelativeItem();
     });
 
     table.Cell().Row(1).RowSpan(3).Column(1).ColumnSpan(3).Background(Colors.Grey.Lighten3).MinHeight(150);
@@ -1292,10 +1292,10 @@ This feature is very useful when creating complex table structures that are like
 {
     table.ColumnsDefinition(columns =>
     {
-        columns.RelativeColumn();
-        columns.RelativeColumn();
-        columns.RelativeColumn();
-        columns.RelativeColumn();
+        columns.RelativeItem();
+        columns.RelativeItem();
+        columns.RelativeItem();
+        columns.RelativeItem();
     });
     
     table.ExtendLastCellsToTableBottom();
@@ -1328,10 +1328,10 @@ Please analyse this example to understand how to design report-like document str
 {
     table.ColumnsDefinition(columns =>
     {
-        columns.ConstantColumn(100);
-        columns.RelativeColumn();
-        columns.ConstantColumn(100);
-        columns.RelativeColumn();
+        columns.ConstantItem(100);
+        columns.RelativeItem();
+        columns.ConstantItem(100);
+        columns.RelativeItem();
     });
     
     table.ExtendLastCellsToTableBottom();
@@ -1424,13 +1424,13 @@ container
     
     table.ColumnsDefinition(columns =>
     {
-        columns.RelativeColumn();
+        columns.RelativeItem();
         
-        columns.ConstantColumn(75);
-        columns.ConstantColumn(75);
+        columns.ConstantItem(75);
+        columns.ConstantItem(75);
         
-        columns.ConstantColumn(75);
-        columns.ConstantColumn(75);
+        columns.ConstantItem(75);
+        columns.ConstantItem(75);
     });
     
     table.Header(header =>
@@ -1756,11 +1756,11 @@ Sometimes, there is very little space on the page. It is enough to display a cou
 .Height(350)
 .Padding(25)
 .PaddingLeft(75)
-.Stack(stack =>
+.Column(column =>
 {
-    stack.Item().Width(300).Height(150).Background(Colors.Blue.Lighten3);
+    column.Item().Width(300).Height(150).Background(Colors.Blue.Lighten3);
     
-    stack
+    column
         .Item()
         .Unconstrained()
         .TranslateX(-50)
@@ -1769,7 +1769,7 @@ Sometimes, there is very little space on the page. It is enough to display a cou
         .Height(100)
         .Background(Colors.Blue.Darken2);
     
-    stack.Item().Width(300).Height(150).Background(Colors.Blue.Lighten2);
+    column.Item().Width(300).Height(150).Background(Colors.Blue.Lighten2);
 });
 ```
 
