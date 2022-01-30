@@ -85,6 +85,84 @@ public class StandardReport : IDocument
 Because of the practical layouting limitations, the maximum page height is limited to 14400 points (around 5 meters).
 :::
 
+## Length unit types
+
+QuestPDF uses points as default measure unit. Where 1 inch equals to 72 points, according to PDF specification. However, the vast majority of the Fluent API supports additional/optional argument to specify unit type. 
+
+| Unit       | Size                 |
+|------------|----------------------|
+| meter      | 100 centimeters      |
+| centimetre | 2.54 inches          |
+| millimetre | 1/10th of centimeter |
+| feet       | 12 inches            |
+| inch       | 72 points            |
+| mill       | 1/1000th of inch     |
+
+Example usage:
+
+```csharp
+// all invocations are equal
+.Padding(72)
+.Padding(1, Unit.Inch)
+.Padding(1/12f, Unit.Feet)
+.Padding(1000, Unit.Mill)
+
+// unit types can be provided in other API methods too, e.g.
+.BorderLeft(100, Unit.Mill)
+row.ConstantItem(8, Unit.Centimetre)
+```
+
+
+## Execution order
+
+QuestPDF uses FluentAPI and method chaining to describe document's content. It is very important to remember that order of methods os strict. That means, in many cases, changing order of invocations will produce different results. To better understand this behavior, let's analyse this simple example:
+
+```csharp{7-8,13-14}
+.Row(row =>
+{
+    row.Spacing(25);
+
+    row.RelativeItem()
+        .Border(1)
+        .Padding(15)
+        .Background(Colors.Grey.Lighten2)
+        .Text("Lorem ipsum");
+    
+    row.RelativeItem()
+        .Border(1)
+        .Background(Colors.Grey.Lighten2)
+        .Padding(15)
+        .Text("dolor sit amet");
+});
+```
+
+![example](./images/patterns-and-practices/execution-order-1.png =400x)
+
+This is another good example showing how applying padding changes available space:
+
+```csharp
+.Padding(25)
+.Border(2)
+.Width(150)
+.Height(150)
+
+.Background(Colors.Blue.Lighten2)
+.PaddingTop(50)
+
+.Background(Colors.Green.Lighten2)
+.PaddingRight(50)
+
+.Background(Colors.Red.Lighten2)
+.PaddingBottom(50)
+
+.Background(Colors.Amber.Lighten2)
+.PaddingLeft(50)
+
+.Background(Colors.Grey.Lighten2);
+```
+
+![example](./images/patterns-and-practices/execution-order-2.png =200x)
+
 ## Global text style
 
 The QuestPDF library provides a default set of styles that applied to text.

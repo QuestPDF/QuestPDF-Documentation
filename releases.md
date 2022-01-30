@@ -12,6 +12,7 @@ title: "Releases"
 - Renaming: the `Stack` element was renamed to the `Column` element,
 - Renaming: children of the `Row` element are now called `items` instead of `columns`, e.g. `RelativeItem` instead of `RelativeColumn`,
 - Added support of the `AutoItem` to the `Row` element - those items take as little width as possible,
+- Extended Fluent API to support unit types, e.g. inches, centimeters, etc.
 - Improved default Fluent configuration behavior for elements: Scale, Padding, Translate,
 - Improved integration support with the HttpContext.Response.Body. This improvement was introduced by schulz3000, thank you!
 
