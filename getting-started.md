@@ -320,10 +320,15 @@ In the code, the content structure is prepared. Please notice that a comments se
 
 ### Table generation
 
-Congratulations, you already know the most important pieces needed to create complex documents. Let's use that knowledge to generate a dynamic table showing all orders. It can be done in two steps:
+In this step, we will introduce the `Table` element. This element allows you to put multiple cells.
 
-1) **Header** - it is created by a `Row` elements with multiple columns inside.
-2) **Content** - implemented by a `PageableColumn` element, inside which a loop is used to generate a separate row for each order's item.
+You can specify the exact position of the cell by using the `Row(X)` and the `Column(X)` methods. However, by default, the position can also be automatically determined by the algorithm. Each cell can also take multiple rows and/or columns. To specify such behavior, use the `RowSpan(X)`and the `ColumnSpan(X)` methods.
+
+Let's implement the table in three simple steps:
+
+1) **Step 1** defines number and sizes of columns. Similarly to the `Row` element, you can create columns of constant and relative widths.
+2) **Step 2** implements table's header. This is a special section: when table takes multiple pages, the header content is present on every page.
+2) **Step 3** uses a foreach-loop to iterates over all products and then generates set of cells for each of them.
 
 ```csharp
 public class InvoiceDocument : IDocument
@@ -332,35 +337,45 @@ public class InvoiceDocument : IDocument
 
     void ComposeTable(IContainer container)
     {
-        container.PaddingTop(10).Decoration(decoration =>
+        var headerStyle = TextStyle.Default.SemiBold();
+        
+        container.Table(table =>
         {
-            // header
-            decorationBefore.BorderBottom(1).Padding(5).Row(row =>
+            // step 1
+            table.ColumnsDefinition(columns =>
             {
-                row.ConstantItem(25).Text("#");
-                row.RelativeItem(3).Text("Product");
-                row.RelativeItem().AlignRight().Text("Unit price");
-                row.RelativeItem().AlignRight().Text("Quantity");
-                row.RelativeItem().AlignRight().Text("Total");
+                columns.ConstantColumn(25);
+                columns.RelativeColumn(3);
+                columns.RelativeColumn();
+                columns.RelativeColumn();
+                columns.RelativeColumn();
             });
-
-            // content
-            decoration
-                .Content()
-                .Column(column =>
-                {
-                    foreach (var item in Model.Items)
-                    {
-                        column.Item().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(5).Row(row =>
-                        {
-                            row.ConstantItem(25).Text(Model.Items.IndexOf(item) + 1);
-                            row.RelativeItem(3).Text(item.Name);
-                            row.RelativeItem().AlignRight().Text($"{item.Price}$");
-                            row.RelativeItem().AlignRight().Text(item.Quantity);
-                            row.RelativeItem().AlignRight().Text($"{item.Price * item.Quantity}$");
-                        });
-                    }
-                });
+            
+            // step 2
+            table.Header(header =>
+            {
+                header.Cell().Text("#", headerStyle);
+                header.Cell().Text("Product", headerStyle);
+                header.Cell().AlignRight().Text("Unit price", headerStyle);
+                header.Cell().AlignRight().Text("Quantity", headerStyle);
+                header.Cell().AlignRight().Text("Total", headerStyle);
+                
+                header.Cell().ColumnSpan(5)
+                    .PaddingVertical(5).BorderBottom(1).BorderColor(Colors.Black);
+            });
+            
+            // step 3
+            foreach (var item in Model.Items)
+            {
+                table.Cell().Text(Model.Items.IndexOf(item) + 1);
+                table.Cell().Text(item.Name);
+                table.Cell().AlignRight().Text($"{item.Price}$");
+                table.Cell().AlignRight().Text(item.Quantity);
+                table.Cell().AlignRight().Text($"{item.Price * item.Quantity}$");
+                
+                table.Cell().ColumnSpan(5)
+                    .PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Lighten2);
+            }
         });
     }
 
@@ -369,12 +384,6 @@ public class InvoiceDocument : IDocument
 ```
 
 ![example](./images/getting-started/step-table.png =595x)
-
-#### Decoration
-
-Please notice that this implementation uses the `Column` element. That means, the page wrap can happen between any of the order items. When you think about it, you can realize that in simplified flow algorithm, there would be no table's header on the next page.
-
-This exactly why the `Decoration` element was created! It has two slots: `Header` and `Content`. When this element is wrapped to multiple pages, it makes sure that the header element is always present. Please take a look at screenshots from the very beginning of this tutorial and notice that it is true. Even the table was split into two pages, on each page the header is visible.
 
 ### Address component
 
