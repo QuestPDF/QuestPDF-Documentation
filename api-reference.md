@@ -142,6 +142,41 @@ container
 Did you know that the Canvas element can also be used to combine QuestPDF with other, SkiaSharp-based libraries? A great example of such situation is drawing vector-based charts. Please take a look [at this example](/patterns-and-practices.html#implementing-charts).
 :::
 
+
+## Column
+
+- The Column element is a multi-element container. You can put any set of elements you want.
+- The algorithm places element one underneath another. Each element may take the entire width.
+
+By default, all elements should fit on a single page. Otherwise, the entire content is be wrapped to the next page.
+
+```csharp
+.Column(column =>
+{
+    column.Item().Background(Colors.Grey.Medium).Height(50);
+    column.Item().Background(Colors.Grey.Lighten1).Height(100);
+    column.Item().Background(Colors.Grey.Lighten2).Height(150);
+});
+```
+
+![example](./images/api-reference/column.png =350x)
+
+Use the Spacing property to add some space between elements:
+
+```csharp
+.Column(column =>
+{
+    column.Spacing(15);
+
+    column.Item().Background(Colors.Grey.Medium).Height(50);
+    column.Item().Background(Colors.Grey.Lighten1).Height(100);
+    column.Item().Background(Colors.Grey.Lighten2).Height(150);
+});
+```
+
+![example](./images/api-reference/column-spacing.png =350x)
+
+
 ## Debug area
 
 - This container can be used to inspect space taken by its children.
@@ -219,15 +254,15 @@ Max Height: -
 ## Decoration
 
 - This container consists of three slots: header, content and footer.
-- The header element is always visible above the content. When the element is visible on multiple pages, the header element is going to be repeated on each page.
-- The footer element is always visible below the content. When the element is visible on multiple pages, the footer element is going to be repeated on each page.
-- The content element is visible only once. It is often used along with a PageableColumn to allow drawing longer content across multiple pages.
+- The `Before` element is always visible above the content. When the element is visible on multiple pages, the `Before` element is going to be repeated on each page.
+- The `Footer` element is always visible below the content. When the element is visible on multiple pages, the `Footer` element is going to be repeated on each page.
+- The `Content` element is visible only once. It is often used along with content that spans multiple pages.
 
 ```csharp
 .Decoration(decoration =>
 {
     decoration
-        .Header()
+        .Before()
         .Background(Colors.Grey.Medium)
         .Padding(10)
         .Text("Notes", TextStyle.Default.Size(16).Color("#FFF"));
@@ -635,10 +670,10 @@ More examples:
 
 ```csharp{1-1}
 .Location("links-chapter")
-.Section(section =>
+.Decoration(decoration =>
 {
-    section.Header().Text("About internal links");
-    section.Content().Text("Some content");
+    decoration.Before().Text("About internal links");
+    decoration.Content().Text("Some content");
 });
 ```
 
@@ -697,6 +732,43 @@ More examples:
 ![example](./images/api-reference/layers-1.png =400x)
 ![example](./images/api-reference/layers-2.png =400x)
 
+
+## Line
+
+### Vertical
+
+LineVertical is virtual - it takes entire available height and no width.
+
+```csharp{6}
+.Padding(15)
+.DefaultTextStyle(TextStyle.Default.Size(16))
+.Row(row =>
+{
+    row.AutoItem().Text("Left text");
+    row.AutoItem().PaddingHorizontal(10).LineVertical(1).LineColor(Colors.Grey.Medium);
+    row.AutoItem().Text("Right text");
+});
+```
+
+![example](./images/api-reference/line-horizontal.png =100x)
+
+### Horizontal
+
+LineHorizontal is virtual - it takes entire available width and no height.
+
+```csharp{7}
+.Padding(15)
+.MinimalBox()
+.DefaultTextStyle(TextStyle.Default.Size(16))
+.Column(column =>
+{
+    column.Item().Text("Above text");
+    column.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
+    column.Item().Text("Below text");
+});
+```
+
+![example](./images/api-reference/line-vertical.png =175x)
 
 ## Minimal box
 
@@ -968,6 +1040,40 @@ Example:
 
 ![example](./images/api-reference/scale.png =400x)
 
+
+## Scale to fit
+
+This container attempts to scale down its child, so it fits in the available space. This approach is useful when your content usually fits in the available space. For special situations, instead of wrapping the content to the next page or causing the infinite layout exception, it may make the content a little smaller to preserve the document look and feel.
+
+```csharp{13-15}
+.Padding(25)
+.Column(column =>
+{
+    var text = Placeholders.Paragraph();
+
+    foreach (var i in Enumerable.Range(2, 5))
+    {
+        column
+            .Item()
+            .MinimalBox()
+            .Border(1)
+            .Padding(5)
+            .Width(i * 40) // sizes from 80x40 to 240x120
+            .Height(i * 20)
+            .ScaleToFit()
+            .Text(text);
+    }
+});
+```
+
+![example](./images/api-reference/scale-to-fit.png =275x)
+
+::: danger
+Please notice that this component scales the available space. That means that you may still encounter situations where the child does not fit, e.g. when a child tries to enforce a specific aspect ratio.
+
+The process performs a binary search algorithm - in some cases may cause performance issues.
+:::
+
 ## Show entire
 
 Use this container to prevent the element from being paged. If on the page there is not enough space, the element is wrapped to the next page without splitting its content.
@@ -1095,38 +1201,46 @@ Example:
 ![example](./images/api-reference/skip-once-first.png =300x)
 ![example](./images/api-reference/skip-once-second.png =300x)
 
-## Column
 
-- The Column element is a multi-element container. You can put any set of elements you want.
-- The algorithm places element one underneath another. Each element may take the entire width.
+## Stop paging
 
-By default, all elements should fit on a single page. Otherwise, the entire content is be wrapped to the next page.
+This container is active when its child requires more than one page to draw. Where the content spans multiple pages, only the first page is visibile. Rest of the content, that normally would be visible on the next pages, is omitted.
 
-```csharp
-.Column(column =>
+```csharp{20}
+.Padding(25)
+.DefaultTextStyle(TextStyle.Default.Size(14))
+.Decoration(decoration =>
 {
-    column.Item().Background(Colors.Grey.Medium).Height(50);
-    column.Item().Background(Colors.Grey.Lighten1).Height(100);
-    column.Item().Background(Colors.Grey.Lighten2).Height(150);
+    decoration
+        .Before()
+        .Text(text =>
+        {
+            text.DefaultTextStyle(TextStyle.Default.SemiBold().Color(Colors.Blue.Medium));
+            
+            text.Span("Page ");
+            text.CurrentPageNumber();
+        });
+    
+    decoration
+        .Content()
+        .Column(column =>
+        {
+            column.Spacing(25);
+            column.Item().StopPaging().Text(Placeholders.LoremIpsum());
+            column.Item().ExtendHorizontal().Height(75).Background(Colors.Grey.Lighten2);
+        });
 });
 ```
 
-![example](./images/api-reference/column.png =350x)
+First, let's analyse the results where the `StopPaging` element is **NOT** applied. Part of the text is moved to the next page:
 
-Use the Spacing property to add some space between elements:
+![example](./images/api-reference/stop-paging-with-1.png =300x)
+![example](./images/api-reference/stop-paging-with-2.png =300x)
 
-```csharp
-.Column(column =>
-{
-    column.Spacing(15);
+However, where the `StopPaging` **IS** applied, the text that does not fit on the first page, is omitted. This behaviour is true for all structures that span multiple pages.
 
-    column.Item().Background(Colors.Grey.Medium).Height(50);
-    column.Item().Background(Colors.Grey.Lighten1).Height(100);
-    column.Item().Background(Colors.Grey.Lighten2).Height(150);
-});
-```
-
-![example](./images/api-reference/column-spacing.png =350x)
+![example](./images/api-reference/stop-paging-without-1.png =300x)
+![example](./images/api-reference/stop-paging-without-2.png =300x)
 
 
 ## Table

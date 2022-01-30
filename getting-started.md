@@ -197,7 +197,7 @@ So far we have scaffolded a very simple page where each section has a different 
 
 ### Header implementation
 
-This chapter introduces a couple of very important layouting elements: `Row` and `Stack`. Before we discuss how they work, let's analyze the new code sample. First of all, when creating a document, we expect that it will contain multiple sections and therefore the amount of code is going to increase significantly. 
+This chapter introduces a couple of very important layouting elements: `Row` and `Column`. Before we discuss how they work, let's analyze the new code sample. First of all, when creating a document, we expect that it will contain multiple sections and therefore the amount of code is going to increase significantly. 
 
 To keep the code clean and easy to maintain, you can create additional methods for each section. The general principle is to use a composition of simple layout structures, a structure per method. Most of the API invocations have special overloads designed for **1)** method chaining and **2)** passing method as an argument.
 
@@ -232,24 +232,24 @@ public class InvoiceDocument : IDocument
     
         container.Row(row =>
         {
-            row.RelativeColumn().Stack(stack =>
+            row.RelativeItem().Column(column =>
             {
-                stack.Item().Text($"Invoice #{Model.InvoiceNumber}", titleStyle);
+                column.Item().Text($"Invoice #{Model.InvoiceNumber}", titleStyle);
 
-                stack.Item().Text(text =>
+                column.Item().Text(text =>
                 {
                     text.Span("Issue date: ", TextStyle.Default.SemiBold());
                     text.Span($"{Model.IssueDate:d}");
                 });
                 
-                stack.Item().Text(text =>
+                column.Item().Text(text =>
                 {
                     text.Span("Due date: ", TextStyle.Default.SemiBold());
                     text.Span($"{Model.DueDate:d}");
                 });
             });
 
-            row.ConstantColumn(100).Height(50).Placeholder();
+            row.ConstantItem(100).Height(50).Placeholder();
         });
     }
 
@@ -281,14 +281,14 @@ public class InvoiceDocument : IDocument
 
     void ComposeContent(IContainer container)
     {
-        container.PaddingVertical(40).Stack(stack =>
+        container.PaddingVertical(40).Column(column =>
         {
-            stack.Spacing(5);
+            column.Spacing(5);
 
-            stack.Item().Element(ComposeTable);
+            column.Item().Element(ComposeTable);
 
             if (!string.IsNullOrWhiteSpace(Model.Comments))
-                stack.Item().PaddingTop(25).Element(ComposeComments);
+                column.Item().PaddingTop(25).Element(ComposeComments);
         });
     }
 
@@ -304,11 +304,11 @@ public class InvoiceDocument : IDocument
 
     void ComposeComments(IContainer container)
     {
-        container.Background(Colors.Grey.Lighten3).Padding(10).Stack(stack =>
+        container.Background(Colors.Grey.Lighten3).Padding(10).Column(column =>
         {
-            stack.Spacing(5);
-            stack.Item().Text("Comments", TextStyle.Default.Size(14));
-            stack.Item().Text(Model.Comments);
+            column.Spacing(5);
+            column.Item().Text("Comments", TextStyle.Default.Size(14));
+            column.Item().Text(Model.Comments);
         });
     }
 }
@@ -323,7 +323,7 @@ In the code, the content structure is prepared. Please notice that a comments se
 Congratulations, you already know the most important pieces needed to create complex documents. Let's use that knowledge to generate a dynamic table showing all orders. It can be done in two steps:
 
 1) **Header** - it is created by a `Row` elements with multiple columns inside.
-2) **Content** - implemented by a `PageableStack` element, inside which a loop is used to generate a separate row for each order's item.
+2) **Content** - implemented by a `PageableColumn` element, inside which a loop is used to generate a separate row for each order's item.
 
 ```csharp
 public class InvoiceDocument : IDocument
@@ -335,29 +335,29 @@ public class InvoiceDocument : IDocument
         container.PaddingTop(10).Decoration(decoration =>
         {
             // header
-            decoration.Header().BorderBottom(1).Padding(5).Row(row =>
+            decorationBefore.BorderBottom(1).Padding(5).Row(row =>
             {
-                row.ConstantColumn(25).Text("#");
-                row.RelativeColumn(3).Text("Product");
-                row.RelativeColumn().AlignRight().Text("Unit price");
-                row.RelativeColumn().AlignRight().Text("Quantity");
-                row.RelativeColumn().AlignRight().Text("Total");
+                row.ConstantItem(25).Text("#");
+                row.RelativeItem(3).Text("Product");
+                row.RelativeItem().AlignRight().Text("Unit price");
+                row.RelativeItem().AlignRight().Text("Quantity");
+                row.RelativeItem().AlignRight().Text("Total");
             });
 
             // content
             decoration
                 .Content()
-                .Stack(stack =>
+                .Column(column =>
                 {
                     foreach (var item in Model.Items)
                     {
-                        stack.Item().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(5).Row(row =>
+                        column.Item().BorderBottom(1).BorderColor(Colors.Grey.Lighten3).Padding(5).Row(row =>
                         {
-                            row.ConstantColumn(25).Text(Model.Items.IndexOf(item) + 1);
-                            row.RelativeColumn(3).Text(item.Name);
-                            row.RelativeColumn().AlignRight().Text($"{item.Price}$");
-                            row.RelativeColumn().AlignRight().Text(item.Quantity);
-                            row.RelativeColumn().AlignRight().Text($"{item.Price * item.Quantity}$");
+                            row.ConstantItem(25).Text(Model.Items.IndexOf(item) + 1);
+                            row.RelativeItem(3).Text(item.Name);
+                            row.RelativeItem().AlignRight().Text($"{item.Price}$");
+                            row.RelativeItem().AlignRight().Text(item.Quantity);
+                            row.RelativeItem().AlignRight().Text($"{item.Price * item.Quantity}$");
                         });
                     }
                 });
@@ -372,7 +372,7 @@ public class InvoiceDocument : IDocument
 
 #### Decoration
 
-Please notice that this implementation uses the `Stack` element. That means, the page wrap can happen between any of the order items. When you think about it, you can realize that in simplified flow algorithm, there would be no table's header on the next page.
+Please notice that this implementation uses the `Column` element. That means, the page wrap can happen between any of the order items. When you think about it, you can realize that in simplified flow algorithm, there would be no table's header on the next page.
 
 This exactly why the `Decoration` element was created! It has two slots: `Header` and `Content`. When this element is wrapped to multiple pages, it makes sure that the header element is always present. Please take a look at screenshots from the very beginning of this tutorial and notice that it is true. Even the table was split into two pages, on each page the header is visible.
 
@@ -405,17 +405,17 @@ public class AddressComponent : IComponent
 
     public void Compose(IContainer container)
     {
-        container.Stack(stack =>
+        container.Column(column =>
         {
-            stack.Spacing(2);
+            column.Spacing(2);
 
-            stack.Item().BorderBottom(1).PaddingBottom(5).Text(Title, TextStyle.Default.SemiBold());
+            column.Item().BorderBottom(1).PaddingBottom(5).Text(Title, TextStyle.Default.SemiBold());
 
-            stack.Item().Text(Address.CompanyName);
-            stack.Item().Text(Address.Street);
-            stack.Item().Text($"{Address.City}, {Address.State}");
-            stack.Item().Text(Address.Email);
-            stack.Item().Text(Address.Phone);
+            column.Item().Text(Address.CompanyName);
+            column.Item().Text(Address.Street);
+            column.Item().Text($"{Address.City}, {Address.State}");
+            column.Item().Text(Address.Email);
+            column.Item().Text(Address.Phone);
         });
     }
 }
@@ -430,24 +430,24 @@ public class InvoiceDocument : IDocument
 
     void ComposeContent(IContainer container)
     {
-        container.PaddingVertical(40).Stack(stack => 
+        container.PaddingVertical(40).Column(column => 
         {
-            stack.Spacing(5);
+            column.Spacing(5);
 
-            stack.Item().Row(row =>
+            column.Item().Row(row =>
             {
-                row.RelativeColumn().Component(new AddressComponent("From", Model.SellerAddress));
-                row.ConstantColumn(50);
-                row.RelativeColumn().Component(new AddressComponent("For", Model.CustomerAddress));
+                row.RelativeItem().Component(new AddressComponent("From", Model.SellerAddress));
+                row.ConstantItem(50);
+                row.RelativeItem().Component(new AddressComponent("For", Model.CustomerAddress));
             });
 
-            stack.Item().Element(ComposeTable);
+            column.Item().Element(ComposeTable);
 
             var totalPrice = Model.Items.Sum(x => x.Price * x.Quantity);
-            stack.Item().AlignRight().Text($"Grand total: {totalPrice}$", TextStyle.Default.Size(14));
+            column.Item().AlignRight().Text($"Grand total: {totalPrice}$", TextStyle.Default.Size(14));
 
             if (!string.IsNullOrWhiteSpace(Model.Comments))
-                stack.Item().PaddingTop(25).Element(ComposeComments);
+                column.Item().PaddingTop(25).Element(ComposeComments);
         });
     }
 

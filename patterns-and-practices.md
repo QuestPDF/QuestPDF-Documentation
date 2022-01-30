@@ -117,11 +117,11 @@ public class SampleReport : IDocument
             page.Size(PageSizes.A4);
             page.Background(Colors.White);
 
-            page.Content().Stack(stack =>
+            page.Content().Column(column =>
             {
-                stack.Item().Text(Placeholders.Sentence());
+                column.Item().Text(Placeholders.Sentence());
                 
-                stack.Item().Text(text =>
+                column.Item().Text(text =>
                 {
                     // text in this block is additionally semibold
                     text.DefaultTextStyle(TextStyle.Default.SemiBold());
@@ -310,18 +310,18 @@ Please note that this example shows only the concept of using extension methods 
 
 ## Complex layouts and grids
 
-By combining various elements, you can build complex layouts. When designing try to break your layout into separate pieces and then model them by using the `Row` and the `Stack` elements. In many cases, the `Grid` element can simplify and shorten your code.
+By combining various elements, you can build complex layouts. When designing try to break your layout into separate pieces and then model them by using the `Row` and the `Column` elements. In many cases, the `Grid` element can simplify and shorten your code.
 
 Please consider the code below. Please note that it uses example DSL elements from the previous section.
 
 ```csharp
-.Stack(stack =>
+.Column(column =>
 {
-    stack.Item().Row(row =>
+    column.Item().Row(row =>
     {
-        row.RelativeColumn().LabelCell("Label 1");
+        row.RelativeItem().LabelCell("Label 1");
         
-        row.RelativeColumn(3).Grid(grid =>
+        row.RelativeItem(3).Grid(grid =>
         {
             grid.Columns(3);
             
@@ -333,11 +333,11 @@ Please consider the code below. Please note that it uses example DSL elements fr
         });
     });
     
-    stack.Item().Row(row =>
+    column.Item().Row(row =>
     {
-        row.RelativeColumn().ValueCell().Text("Value 1");
+        row.RelativeItem().ValueCell().Text("Value 1");
         
-        row.RelativeColumn(3).Grid(grid =>
+        row.RelativeItem(3).Grid(grid =>
         {
             grid.Columns(3);
             
@@ -349,10 +349,10 @@ Please consider the code below. Please note that it uses example DSL elements fr
         });
     });
     
-    stack.Item().Row(row =>
+    column.Item().Row(row =>
     {
-        row.RelativeColumn().LabelCell("Label 6");
-        row.RelativeColumn().ValueCell().Text("Value 6");
+        row.RelativeItem().LabelCell("Label 6");
+        row.RelativeItem().ValueCell().Text("Value 6");
     });
 });
 ```
@@ -407,7 +407,7 @@ public class LoremPicsum : IComponent
 Example usage:
 
 ```csharp{7}
-.Stack(column =>
+.Column(column =>
 {
     column.Spacing(10);
 
@@ -470,7 +470,7 @@ var entries = new[]
 };
 
 // draw chart using the Canvas element
-.Stack(stack =>
+.Column(column =>
 {
     var titleStyle = TextStyle
         .Default
@@ -478,12 +478,12 @@ var entries = new[]
         .SemiBold()
         .Color(Colors.Blue.Medium)
 
-    stack
+    column
         .Item()
         .PaddingBottom(10)
         .Text("Chart example", titleStyle);
     
-    stack
+    column
         .Item()
         .Border(1)
         .ExtendHorizontal()
@@ -584,7 +584,7 @@ container
     .Row(row =>
     {
         foreach (var color in colors)
-            row.RelativeColumn().Background(color);
+            row.RelativeItem().Background(color);
     });
 ```
 
@@ -720,18 +720,18 @@ container.Page(page =>
     page.Size(PageSizes.A6);
     page.Margin(30);
     
-    page.Header().Stack(stack =>
+    page.Header().Column(column =>
     {
-        stack.Item().ShowOnce().Background(Colors.Blue.Lighten2).Height(60);
-        stack.Item().SkipOnce().Background(Colors.Green.Lighten2).Height(40);
+        column.Item().ShowOnce().Background(Colors.Blue.Lighten2).Height(60);
+        column.Item().SkipOnce().Background(Colors.Green.Lighten2).Height(40);
     });
     
-    page.Content().PaddingVertical(10).Stack(stack =>
+    page.Content().PaddingVertical(10).Column(column =>
     {
-        stack.Spacing(10);
+        column.Spacing(10);
 
         foreach (var _ in Enumerable.Range(0, 13))
-            stack.Item().Background(Colors.Grey.Lighten2).Height(40);
+            column.Item().Background(Colors.Grey.Lighten2).Height(40);
     });
     
     page.Footer().AlignCenter().Text(text =>
@@ -776,14 +776,14 @@ This exception occurs during the document generation process - when the generati
 
 This exception may be extremely hard to fix because it happens for valid document trees which enforce constraints that are impossible to meet. For example, when you try to draw a rectangle bigger than available space on the page, the rendering engine is going to wrap the content in a hope that on the next page there would be enough space. Generally, such wrapping behaviour is happening all the time and is working nicely - however, there are cases when it can lead to infinite wrapping. When a certain document length threshold is passed, the algorithm stops the rendering process and throws this exception. In such case, please revise your code and search for indivisible elements requiring too much space.
 
-This exception provides an additional element stack. It shows which elements have been rendered when the exception was thrown. Please analyse the example below:
+This exception provides an additional element column. It shows which elements have been rendered when the exception was thrown. Please analyse the example below:
 
 ```csharp{2,8}
 .Padding(10)
 .Width(100)
 .Background(Colors.Grey.Lighten3)
 .DebugPointer("Example debug pointer")
-.Stack(x =>
+.Column(x =>
 {
     x.Item().Text("Test");
     x.Item().Width(150); // requires 150pt width where only 100pt is available
@@ -837,7 +837,7 @@ Requested space: PartialRender (Width: 120,00, Height: 20,00)
                     Available space: (Width: 100, Height: 340)
                     Requested space: PartialRender (Width: 0,00, Height: 0,00)
 
-                        🔥 Stack
+                        🔥 Column
                         --------
                         Available space: (Width: 100, Height: 340)
                         Requested space: PartialRender (Width: 0,00, Height: 0,00)
@@ -851,7 +851,7 @@ Requested space: PartialRender (Width: 120,00, Height: 20,00)
                             Bottom: -0
                             Left: 0
 
-                                🔥 BinaryStack
+                                🔥 BinaryColumn
                                 --------------
                                 Available space: (Width: 100, Height: 340)
                                 Requested space: PartialRender (Width: 0,00, Height: 0,00)
