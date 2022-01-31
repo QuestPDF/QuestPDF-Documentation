@@ -177,10 +177,8 @@ The QuestPDF library offers multiple tools needed to design and generate PDF doc
 ### Next releases
 
 Most of the features listed below should be added in the nearest months:
-- Better support for other measurement units (points / mm / cm / inches),
-- Dynamic component (allows generating dynamic content based on the context, e.g. page number, available space, etc.),
-- The `PreventPaging` element that tries to render as much as possible in the available space. When the content requires more space, instead of performing paging operation, it ignores rest of the content. [Discussion](https://github.com/QuestPDF/QuestPDF/issues/51),
-- Line element (horizontal and vertical).
+- Investigation on how to simplify unit tests and make them easier to manage,
+- Dynamic component (allows generating dynamic content based on the context, e.g. page number, available space, etc.).
 
 ### Under consideration
 
