@@ -177,6 +177,7 @@ The QuestPDF library offers multiple tools needed to design and generate PDF doc
 ### Next releases
 
 Most of the features listed below should be added in the nearest months:
+- Minimal API,
 - Investigation on how to simplify unit tests and make them easier to manage,
 - Dynamic component (allows generating dynamic content based on the context, e.g. page number, available space, etc.).
 
