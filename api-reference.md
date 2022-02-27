@@ -1,3 +1,5 @@
+<RecentArticles/>
+
 # API reference
 
 ## Alignment

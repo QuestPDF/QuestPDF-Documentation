@@ -494,3 +494,5 @@ There are multiple overloads of the `Generate` method. In the example above, the
 Looking for more advanced example that uses the vast majority of available features? Please take a look at the [library's repository](https://github.com/QuestPDF/library/tree/main/QuestPDF.ReportSample). It contains a sample report:
 
 ![example](./images/getting-started/complex.jpg)
+
+<RecentArticles/>
