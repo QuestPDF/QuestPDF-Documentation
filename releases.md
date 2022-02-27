@@ -4,6 +4,18 @@ title: "Releases"
 
 ## Release notes
 
+### 2022.03
+
+- Added minimal API to help you quickly start with QuestPDF development and speed up prototyping,
+- Improved exception message when desired font type cannot be found (instead of loading default font on Windows and failing with wrong characters on Linux),
+- Improved support for custom font types: loading all type faces from a file, respecting true font family, using CSS-like algorithm to find best style match,
+- Renaming: the `ExternalLink` element was renamed to the `Hyperlink` element,
+- Renaming: the `Location` element was renamed to the `Section` element,
+- Renaming: the `InternalLink` element was renamed to the `SectionLink` element,
+- Added support for custom page number formats in the `Text` element, e.g. you can implement roman literal style if required,
+- Extended support for the `Section` element (previously the `Location` element) by tracking: beginning page number, end page number, page length, page number within location,
+- Updated homepage and GitHub pages content.
+
 ### 2022.02
 
 - Added a `ScaleToFit` element - scales its child down so it fits in the provided space,
@@ -177,9 +189,10 @@ The QuestPDF library offers multiple tools needed to design and generate PDF doc
 ### Next releases
 
 Most of the features listed below should be added in the nearest months:
-- Minimal API,
-- Investigation on how to simplify unit tests and make them easier to manage,
-- Dynamic component (allows generating dynamic content based on the context, e.g. page number, available space, etc.).
+- Dynamic component (allows generating dynamic content based on the context, e.g. page number, available space, etc.),
+- Font shaping (correctly measuring and drawing text) for more complex languages, e.g. Arabic,
+- RTL support for content (placing content in the right-to-left orientation) and text,
+- Investigation on how to simplify unit tests and make them easier to manage.
 
 ### Under consideration
 
@@ -188,9 +201,9 @@ There are also features being actively investigated with lower importance:
 - Font fallback (using alternative fonts when glyphs are not available),
 - Text justification,
 - Documentation cleanup,
+- Documentation improvements,
 - Custom slots in components (named slots, dynamic slots),
 - Tutorials: adding maps to the document,
 - Allow the Placeholder element to show text instead of an icon,
 - SVG support ([integration with SkiaSharp.Svg](https://www.nuget.org/packages/SkiaSharp.Svg/)),
-
 - and more...

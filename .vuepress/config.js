@@ -21,11 +21,11 @@ module.exports = {
         sidebar: {
             '/': [
                 '/',
-                'releases',
-                'quality-assurance',
                 'getting-started',
                 'api-reference',
                 'patterns-and-practices',
+                'releases',
+                'quality-assurance',
                 'acknowledgements'
             ]
         }
