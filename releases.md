@@ -13,6 +13,7 @@ title: "Releases"
 - Renaming: the `Location` element was renamed to the `Section` element,
 - Renaming: the `InternalLink` element was renamed to the `SectionLink` element,
 - Added support for custom page number formats in the `Text` element, e.g. you can implement roman literal style if required,
+- Improved text API to make to concise,
 - Extended support for the `Section` element (previously the `Location` element) by tracking: beginning page number, end page number, page length, page number within location,
 - Updated homepage and GitHub pages content.
 

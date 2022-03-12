@@ -20,36 +20,70 @@ The library is available as a nuget package. You can install it as any other nug
 
 [![quest pdf logo](./images/nuget.svg =200x)](https://www.nuget.org/packages/QuestPDF/)
 
-Or use the following command in Visual Studio:
 
-```
+```xml
+// Package Manager
 Install-Package QuestPDF
+
+// .NET CLI
+dotnet add package QuestPDF
+
+// Package reference in .csproj file
+<PackageReference Include="QuestPDF" Version="2022.2.5" />
 ```
 
 ## Quick start
 
+How easy it is to start and prototype with QuestPDF? Really easy thanks to its minimal API! Please analyse the code below:
+
 ```csharp
-Document
-    .Create(container =>
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+
+// code in your main method
+Document.Create(container =>
+{
+    container.Page(page =>
     {
-        container.Page(page =>
-        {
-            page.Size(PageSizes.A5);
-            page.Margin(1.5f, Unit.Centimetre);
-            
-            page.Header()
-                .Text("Hello PDF!", TextStyle.Default.SemiBold().Size(20));
-            
-            page.Content()
-                .PaddingVertical(1, Unit.Centimetre)
-                .Column(x =>
-                {
-                    x.Spacing(10);
-                    
-                    x.Item().Text(Placeholders.LoremIpsum());
-                    x.Item().Image(Placeholders.Image(200, 100));
-                });
-        });
-    })
-    .GeneratePdf("hello.pdf");
+        page.Size(PageSizes.A4);
+        page.Margin(2, Unit.Centimetre);
+        page.Background(Colors.White);
+        page.DefaultTextStyle(x => x.FontSize(20));
+        
+        page.Header()
+            .Text("Hello PDF!")
+            .SemiBold().FontSize(36).FontColor(Colors.Blue.Medium);
+        
+        page.Content()
+            .PaddingVertical(1, Unit.Centimetre)
+            .Column(x =>
+            {
+                x.Spacing(20);
+                
+                x.Item().Text(Placeholders.LoremIpsum());
+                x.Item().Image(Placeholders.Image(200, 100));
+            });
+        
+        page.Footer()
+            .AlignCenter()
+            .Text(x =>
+            {
+                x.Span("Page ");
+                x.CurrentPageNumber();
+            });
+    });
+})
+.GeneratePdf("hello.pdf");
 ```
+
+And compare it to the produced PDF file:
+
+![example](./images/minimal-api.png =595x)
+
+
+## Are you ready for more?
+
+The Fluent API of QuestPDF scales really well. It is easy to create and maintain even most complex documents. Read [the Getting started tutorial](https://www.questpdf.com/documentation/getting-started.html) to learn QuestPDF basics and implement an invoice under 200 lines of code. You can also investigate and play with the code from [the example repository](https://github.com/QuestPDF/example-invoice).
+
+![invoice](./images/getting-started/invoice.png)

@@ -228,23 +228,23 @@ public class InvoiceDocument : IDocument
 
     void ComposeHeader(IContainer container)
     {
-        var titleStyle = TextStyle.Default.Size(20).SemiBold().Color(Colors.Blue.Medium);
+        var titleStyle = TextStyle.Default.FontSize(20).SemiBold().FontColor(Colors.Blue.Medium);
     
         container.Row(row =>
         {
             row.RelativeItem().Column(column =>
             {
-                column.Item().Text($"Invoice #{Model.InvoiceNumber}", titleStyle);
+                column.Item().Text($"Invoice #{Model.InvoiceNumber}").Style(titleStyle);
 
                 column.Item().Text(text =>
                 {
-                    text.Span("Issue date: ", TextStyle.Default.SemiBold());
+                    text.Span("Issue date: ").SemiBold();
                     text.Span($"{Model.IssueDate:d}");
                 });
                 
                 column.Item().Text(text =>
                 {
-                    text.Span("Due date: ", TextStyle.Default.SemiBold());
+                    text.Span("Due date: ").SemiBold();
                     text.Span($"{Model.DueDate:d}");
                 });
             });
@@ -261,7 +261,7 @@ public class InvoiceDocument : IDocument
             .Background(Colors.Grey.Lighten3)
             .AlignCenter()
             .AlignMiddle()
-            .Text("Content", TextStyle.Default.Size(16));
+            .Text("Content").FontSize(16);
     }
 }
 ```
@@ -299,7 +299,7 @@ public class InvoiceDocument : IDocument
             .Background(Colors.Grey.Lighten3)
             .AlignCenter()
             .AlignMiddle()
-            .Text("Table", TextStyle.Default.Size(16));
+            .Text("Table").FontSize(16);
     }
 
     void ComposeComments(IContainer container)
@@ -307,7 +307,7 @@ public class InvoiceDocument : IDocument
         container.Background(Colors.Grey.Lighten3).Padding(10).Column(column =>
         {
             column.Spacing(5);
-            column.Item().Text("Comments", TextStyle.Default.Size(14));
+            column.Item().Text("Comments").FontSize(14);
             column.Item().Text(Model.Comments);
         });
     }
@@ -337,8 +337,6 @@ public class InvoiceDocument : IDocument
 
     void ComposeTable(IContainer container)
     {
-        var headerStyle = TextStyle.Default.SemiBold();
-        
         container.Table(table =>
         {
             // step 1
@@ -352,13 +350,13 @@ public class InvoiceDocument : IDocument
             });
             
             // step 2
-            table.Header(header =>
+            table.DefaultTextStyle(x => x.SemiBold()).Header(header =>
             {
-                header.Cell().Text("#", headerStyle);
-                header.Cell().Text("Product", headerStyle);
-                header.Cell().AlignRight().Text("Unit price", headerStyle);
-                header.Cell().AlignRight().Text("Quantity", headerStyle);
-                header.Cell().AlignRight().Text("Total", headerStyle);
+                header.Cell().Text("#");
+                header.Cell().Text("Product");
+                header.Cell().AlignRight().Text("Unit price");
+                header.Cell().AlignRight().Text("Quantity");
+                header.Cell().AlignRight().Text("Total");
                 
                 header.Cell().ColumnSpan(5)
                     .PaddingVertical(5).BorderBottom(1).BorderColor(Colors.Black);
@@ -420,7 +418,7 @@ public class AddressComponent : IComponent
         {
             column.Spacing(2);
 
-            column.Item().BorderBottom(1).PaddingBottom(5).Text(Title, TextStyle.Default.SemiBold());
+            column.Item().BorderBottom(1).PaddingBottom(5).Text(Title).SemiBold();
 
             column.Item().Text(Address.CompanyName);
             column.Item().Text(Address.Street);
@@ -455,7 +453,7 @@ public class InvoiceDocument : IDocument
             column.Item().Element(ComposeTable);
 
             var totalPrice = Model.Items.Sum(x => x.Price * x.Quantity);
-            column.Item().AlignRight().Text($"Grand total: {totalPrice}$", TextStyle.Default.Size(14));
+            column.Item().AlignRight().Text($"Grand total: {totalPrice}$").FontSize(14);
 
             if (!string.IsNullOrWhiteSpace(Model.Comments))
                 column.Item().PaddingTop(25).Element(ComposeComments);

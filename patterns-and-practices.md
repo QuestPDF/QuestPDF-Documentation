@@ -174,7 +174,7 @@ The QuestPDF library provides a default set of styles that applied to text.
 You can adjust the text style by providing additional argument:
 
 ```csharp
-.Text("Red semibold text of size 20", TextStyle.Default.Size(20).SemiBold())
+.Text("Red semibold text of size 20").FontSize(20).SemiBold()
 ```
 
 The option above introduces overrides the default style. To get more control you can set a default text style in your document. Please notice that all changes are additive:
@@ -202,12 +202,12 @@ public class SampleReport : IDocument
                 column.Item().Text(text =>
                 {
                     // text in this block is additionally semibold
-                    text.DefaultTextStyle(TextStyle.Default.SemiBold());
+                    text.DefaultTextStyle(x => x.SemiBold());
 
                     text.Line(Placeholders.Sentence());
                     
                     // this text has size 20 but also semibold and red
-                    text.Span(Placeholders.Sentence(), TextStyle.Default.Color(Colors.Red.Medium));
+                    text.Span(Placeholders.Sentence()).FontColor(Colors.Red.Medium);
                 });
             });
         });
@@ -331,7 +331,8 @@ container
     .Background(Colors.White)
     .AlignCenter()
     .AlignMiddle()
-    .Text("*QuestPDF*", TextStyle.Default.FontType("LibreBarcode39").Size(64));
+    .Text("*QuestPDF*")
+    .FontFamily("LibreBarcode39").FontSize(64);
 ```
 
 This way, it is possible to generate barcodes:
@@ -356,7 +357,7 @@ static class SimpleExtension
     }
     
     // displays only text label
-    public static void LabelCell(this IContainer container, string text) => container.Cell(true).Text(text, TextStyle.Default.Medium());
+    public static void LabelCell(this IContainer container, string text) => container.Cell(true).Text(text).Medium();
     
     // allows to inject any type of content, e.g. image
     public static IContainer ValueCell(this IContainer container) => container.Cell(false);
@@ -559,7 +560,8 @@ var entries = new[]
     column
         .Item()
         .PaddingBottom(10)
-        .Text("Chart example", titleStyle);
+        .Text("Chart example")
+        .Style(titleStyle);
     
     column
         .Item()
@@ -704,7 +706,8 @@ container.Padding(25).Grid(grid =>
             .Border(1)
             .BorderColor(Colors.Grey.Medium)
             .Padding(10)
-            .Text(font, TextStyle.Default.FontType(font).Size(16));
+            .Text(font)
+            .FontFamily(font).FontSize(16);
     }
 });
 ```
@@ -814,7 +817,7 @@ container.Page(page =>
     
     page.Footer().AlignCenter().Text(text =>
     {
-        text.DefaultTextStyle(TextStyle.Default.Size(16));
+        text.DefaultTextStyle(x => x.Size(16));
         
         text.CurrentPageNumber();
         text.Span(" / ");

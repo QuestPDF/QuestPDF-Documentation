@@ -132,7 +132,8 @@ container
         .PrimaryLayer()
         .PaddingVertical(10)
         .PaddingHorizontal(20)
-        .Text("Sample text", TextStyle.Default.Size(16).Color(Colors.Blue.Darken2).SemiBold());
+        .Text("Sample text")
+        .FontSize(16).FontColor(Colors.Blue.Darken2).SemiBold();
 });
 ```
 
@@ -265,7 +266,8 @@ Max Height: -
         .Before()
         .Background(Colors.Grey.Medium)
         .Padding(10)
-        .Text("Notes", TextStyle.Default.Size(16).Color("#FFF"));
+        .Text("Notes")
+        .FontSize(16).FontColor("#FFF");
 
     decoration
         .Content()
@@ -286,11 +288,11 @@ For professional documents, it is important to keep consistent typography. At th
 This element allows you to override text styles in all its children at once.
 
 ```csharp{1}
-.DefaultTextStyle(TextStyle.Default.Bold().Underline())
+.DefaultTextStyle(x => x.Bold().Underline())
 .Column(column =>
 { 
-    column.Item().Text("Default style applies to all children", TextStyle.Default);
-    column.Item().Text("You can override certain styles", TextStyle.Default.Underline(false).Color(Colors.Green.Darken2));
+    column.Item().Text("Default style applies to all children");
+    column.Item().Text("You can override certain styles").Underline(false).FontColor(Colors.Green.Darken2);
     
     column.Item().PaddingTop(10).Border(1).Grid(grid =>
     {
@@ -306,7 +308,8 @@ This element allows you to override text styles in all its children at once.
                 .Height(50)
                 .AlignCenter()
                 .AlignMiddle()
-                .Text(i, TextStyle.Default.Size(16 + i / 4));   
+                .Text(i)
+                .FontSize(16 + i / 4);   
         }
     });
 ```
@@ -408,17 +411,6 @@ Please notice that in the example above, the grey block takes a significant part
 .ExtendHorizontal()
 ```
 
-## External link
-
-- This container creates a hyperlink around its child area.
-- It redirects the user outside the document, e.g. to the webpage.
-
-```csharp{2-2}
-.Padding(10)
-.ExternalLink("https://www.questpdf.com")
-.Text("QuestPDF Webpage");
-```
-
 ## Flip
 - This container makes a mirror image of its child,
 - It follows all layoting rules and size constraints, as well as enforces them over its child.
@@ -459,7 +451,7 @@ Example:
             .MinimalBox()
             .Background(Colors.White)
             .Padding(10)
-            .Text($"Flipped {turns}", TextStyle.Default.Size(16));
+            .Text($"Flipped {turns}").FontSize(16);
     }
 });
 ```
@@ -486,6 +478,18 @@ Please be careful. This component may try to enforce size constraints that are i
 
 Such scenarios end up with the layouting exception.
 :::
+
+## Hyperlink
+
+- This container creates a hyperlink around its child area.
+- It redirects the user outside the document, e.g. to the webpage.
+- Hyperlink can be used on any content, e.g. text, image and even complex structures like tables.
+
+```csharp{2-2}
+.Padding(10)
+.Hyperlink("https://www.questpdf.com")
+.Text("QuestPDF Webpage");
+```
 
 ## Images
 
@@ -542,6 +546,20 @@ byte[] GenerateImage(Size size)
 
 .DynamicImage(GenerateImage);
 ```
+
+### Limiting image size
+
+PDF standard uses points to describe size, where 72 points are 1 inch. Image uses pixels to describe content. However, pixel does not have any meaningful size. Only when you specify DPI (dots per inch), it is possible to translate how bix pixels are. Therefore, the library always scales the image, as determining physical image size based on its resolution just does not make sense.
+
+To force the image to take a specified area, you can use any of the constraining elements. The simplest ones are `Width` and `Height`, e.g.:
+
+```csharp
+container
+    .Width(1, Unit.Inch)
+    .Image(ImageElement.Image)
+```
+
+Please notice that because the Image element uses a proper scaling setting by default, you do not need to use both Width and Height, as image aspect ratio is preserved.
 
 ## Grid
 
@@ -661,33 +679,6 @@ More examples:
 
 ![example](./images/api-reference/inlined-space-around-top.png =400x)
 
-## Internal link
-
-### Location
-
-- This container creates a new location in the document where user can be redirected.
-- Specify the location name, so you can use it when creating a link.
-
-```csharp{1-1}
-.Location("links-chapter")
-.Decoration(decoration =>
-{
-    decoration.Before().Text("About internal links");
-    decoration.Content().Text("Some content");
-});
-```
-
-### Link
-
-- This container creates a hyperlink around its child area.
-- It redirects the user to other place in the document.
-- Specify target place by providing proper location name.
-
-```csharp{1-1}
-.InternalLink("links-chapter")
-.Text("About internal links chapter");
-```
-
 ## Layers
 
 - This element allows putting elements below and above the main content.
@@ -720,12 +711,14 @@ More examples:
         .Layer()
         .AlignCenter()
         .AlignMiddle()
-        .Text("Watermark", TextStyle.Default.Size(48).Bold().Color(Colors.Green.Lighten3));
+        .Text("Watermark")
+        .FontSize(48).Bold().FontColor(Colors.Green.Lighten3);
 
     layers
         .Layer()
         .AlignBottom()
-        .PageNumber("Page {number}", TextStyle.Default.Size(16).Color(Colors.Green.Medium));
+        .PageNumber("Page {number}")
+        .FontSize(16).FontColor(Colors.Green.Medium);
 });
 ```
 
@@ -741,7 +734,7 @@ LineVertical is virtual - it takes entire available height and no width.
 
 ```csharp{6}
 .Padding(15)
-.DefaultTextStyle(TextStyle.Default.Size(16))
+.DefaultTextStyle(x => x.FontSize(16))
 .Row(row =>
 {
     row.AutoItem().Text("Left text");
@@ -759,7 +752,7 @@ LineHorizontal is virtual - it takes entire available width and no height.
 ```csharp{7}
 .Padding(15)
 .MinimalBox()
-.DefaultTextStyle(TextStyle.Default.Size(16))
+.DefaultTextStyle(x => x.FontSize(16))
 .Column(column =>
 {
     column.Item().Text("Above text");
@@ -780,7 +773,8 @@ The `MinimalBox` element loosens the size constraints provided by its parent. It
 .MinimalBox()
 .Background(Colors.Grey.Lighten2)
 .Padding(15)
-.Text("Test of the \n box element", TextStyle.Default.Size(20));
+.Text("Test of the \n box element")
+.FontSize(20);
 ```
 
 Without using the `MinimalBox` element (notice that the text element takes entire space provided by its parent):
@@ -905,7 +899,8 @@ Example:
             .MinimalBox()
             .Background(Colors.White)
             .Padding(10)
-            .Text($"Rotated {turns * 90}°", TextStyle.Default.Size(20));
+            .Text($"Rotated {turns * 90}°")
+            .FontSize(20);
     }
 });
 ```
@@ -1033,7 +1028,8 @@ Example:
             .Border(1)
             .Scale(scale)
             .Padding(10)
-            .Text($"Content with {scale} scale.", TextStyle.Default.Size(20));
+            .Text($"Content with {scale} scale.")
+            .FontSize(20);
     }
 });
 ```
@@ -1073,6 +1069,34 @@ Please notice that this component scales the available space. That means that yo
 
 The process performs a binary search algorithm - in some cases may cause performance issues.
 :::
+
+## Section
+
+- This container marks its entire content as a named section.
+- Section can span multiple pages depending on how much content is inside.
+- You can create links in the document which redirect the user to the section.
+- Sections also stores additional data, e.g. the start/end page, page length, etc. that can be accessed within the Text element API.
+
+```csharp{1-1}
+.Section("links-chapter")
+.Decoration(decoration =>
+{
+    decoration.Before().Text("About internal links");
+    decoration.Content().Text("Some content");
+});
+```
+
+## SectionLink
+
+- This container creates a link around its child area.
+- It redirects the user to other place in the document.
+- Specify target place by providing proper section name.
+- The link always redirects the user to the very beginning of the section.
+
+```csharp{1-1}
+.SectionLink("links-chapter")
+.Text("About internal links chapter");
+```
 
 ## Show entire
 
@@ -1185,7 +1209,8 @@ Example:
         
         page.Content()
             .PaddingVertical(10)
-            .Text(Placeholders.Paragraphs(), TextStyle.Default.Color(Colors.Grey.Medium));
+            .Text(Placeholders.Paragraphs())
+            .FontColor(Colors.Grey.Medium);
         
         page.Footer().Text(text =>
         {
@@ -1208,14 +1233,14 @@ This container is active when its child requires more than one page to draw. Whe
 
 ```csharp{20}
 .Padding(25)
-.DefaultTextStyle(TextStyle.Default.Size(14))
+.DefaultTextStyle(x => x.FontSize(14))
 .Decoration(decoration =>
 {
     decoration
         .Before()
         .Text(text =>
         {
-            text.DefaultTextStyle(TextStyle.Default.SemiBold().Color(Colors.Blue.Medium));
+            text.DefaultTextStyle(x => x.SemiBold().FontColor(Colors.Blue.Medium));
             
             text.Span("Page ");
             text.CurrentPageNumber();
@@ -1603,7 +1628,7 @@ For most cases, that do not require any complex formatting, the simplified versi
 
 ```csharp
 .Text("Sample text")
-.Text("Red big text", TextStyle.Default.Color("#F00").Size(24))
+.Text("Red big text").FontColor("#F00").FontSize(24)
 ```
 
 When you want to change style in the middle of the text, inject page numbers or include custom components - use text block approach:
@@ -1612,7 +1637,7 @@ When you want to change style in the middle of the text, inject page numbers or 
 .Text(text =>
 {
     text.Span("This is a normal text, followed by an ");
-    text.Span("underlined text.", TextStyle.Default.Underline());
+    text.Span("underlined text.").Underline();
 });
 ```
 
@@ -1623,9 +1648,9 @@ When you want to change style in the middle of the text, inject page numbers or 
 You can define text style using available FluentAPI methods which are described below.
 
 ```csharp
-.Color("#F00")
+.FontColor("#F00")
 .FontType("Times New Roman")
-.Size(24)
+.FontSize(24)
 .LineHeight(1.5f)
 .Italic()
 .BackgroundColor(Colors.Grey.Lighten5)
@@ -1640,10 +1665,10 @@ You these fluent API methods to adjust text position:
 ```csharp
 .Text(text =>
 {
-    text.DefaultTextStyle(TextStyle.Default.Size(20).BackgroundColor(Colors.Green.Lighten3));
+    text.DefaultTextStyle(x => x.FontSize(20).BackgroundColor(Colors.Green.Lighten3));
     
     text.Line("Text following default style.");
-    text.Line("Text with altered style.", TextStyle.Default.Underline());
+    text.Line("Text with altered style.").Underline();
 });
 ```
 
@@ -1677,21 +1702,21 @@ public static class Typography
     public static TextStyle Title => TextStyle
         .Default
         .FontType("Helvetica")
-        .Color("#000000")
-        .Size(20)
+        .FontColor(Colors.Black)
+        .FontSize(20)
         .Bold();
 
     public static TextStyle Headline => TextStyle
         .Default
         .FontType("Helvetica")
-        .Color("#047AED")
-        .Size(14);
+        .FontColor(Colors.Blue.Medium)
+        .FontSize(14);
 
     public static TextStyle Normal => TextStyle
         .Default
         .FontType("Helvetica")
-        .Color("#000000")
-        .Size(10)
+        .FontColor("#000000")
+        .FontSize(10)
         .LineHeight(1.25f)
         .AlignLeft();
 }
@@ -1752,7 +1777,7 @@ Use negative padding to adjust element position to your needs:
 ```csharp{7}
 .Text(text =>
 {
-    text.DefaultTextStyle(TextStyle.Default.Size(20));
+    text.DefaultTextStyle(x => x.FontSize(20));
     text.Span("This is a random image aligned to the baseline: ");
     
     text.Element()
@@ -1783,7 +1808,7 @@ Use new text elements to inject page numbers: current page number where the text
     text.PageNumberOfLocation("location-name");
     
     // it is also possible to pass a style
-    text.CurrentPageNumber(TextStyle.Default.Underline());
+    text.CurrentPageNumber().Underline();
 });
 ```
 
@@ -1800,25 +1825,25 @@ You can also provide page number of internal location:
 });
 ```
 
-### Internal links
+### Section link
 
 ```csharp
-// define your location somewhere in the document:
-.Location("customLocationName")
+// define your section somewhere in the document:
+.Section("customLocationName")
 
 // create a hyperlink to that location
 .Text(text =>
 {
-    text.InternalLocation("Custom location link", "customLocationName");
+    text.SectionLink("Custom location link", "customLocationName");
 });
 ```
 
-### External links
+### Hyperlink
 
 ```csharp
 .Text(text =>
 {
-    text.ExternalLocation("Please visit QuestPDF website", "https://www.questpdf.com");
+    text.Hyperlink("Please visit QuestPDF website", "https://www.questpdf.com");
 });
 ```
 
@@ -1855,7 +1880,8 @@ Sometimes, there is very little space on the page. It is enough to display a cou
 .Border(2)
 .BorderColor(Colors.Green.Darken1)
 .Padding(50)
-.Text("Text outside of bounds", TextStyle.Default.Size(25));
+.Text("Text outside of bounds")
+.FontSize(25);
 ```
 
 ![example](./images/api-reference/translate.png =300x)
