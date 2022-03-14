@@ -41,11 +41,25 @@ Unlike other libraries, it does not rely on the HTML-to-PDF conversion which in 
 
 As an open-source project without funding, I cannot afford advertising QuestPDF in a typical way. Instead, the library relies on community interactions. Please consider sharing a post about QuestPDF and the value it provides. It really does help!
 
-[![GitHub Repo stars](https://img.shields.io/badge/share%20on-reddit-red?logo=reddit)](https://reddit.com/submit?url=https://github.com/QuestPDF/QuestPDF&title=QuestPDF)
-[![GitHub Repo stars](https://img.shields.io/badge/share%20on-hacker%20news-orange?logo=ycombinator)](https://news.ycombinator.com/submitlink?u=https://github.com/QuestPDF/QuestPDF)
-[![GitHub Repo stars](https://img.shields.io/badge/share%20on-twitter-03A9F4?logo=twitter)](https://twitter.com/share?url=https://github.com/QuestPDF/QuestPDF&t=QuestPDF)
-[![GitHub Repo stars](https://img.shields.io/badge/share%20on-facebook-1976D2?logo=facebook)](https://www.facebook.com/sharer/sharer.php?u=https://github.com/QuestPDF/QuestPDF)
-[![GitHub Repo stars](https://img.shields.io/badge/share%20on-linkedin-3949AB?logo=linkedin)](https://www.linkedin.com/shareArticle?url=https://github.com/QuestPDF/QuestPDF&title=QuestPDF)
+<a href="https://reddit.com/submit?url=https://github.com/QuestPDF/QuestPDF&title=QuestPDF">
+    <img src="https://img.shields.io/badge/share%20on-reddit-red?logo=reddit" alt="Share on reddit">
+</a>
+
+<a href="https://news.ycombinator.com/submitlink?u=https://github.com/QuestPDF/QuestPDF">
+    <img src="https://img.shields.io/badge/share%20on-hacker%20news-orange?logo=ycombinator" alt="Share on HackerNews">
+</a>
+
+<a href="https://twitter.com/share?url=https://github.com/QuestPDF/QuestPDF&t=QuestPDF">
+    <img src="https://img.shields.io/badge/share%20on-twitter-03A9F4?logo=twitter" alt="Share on twitter">
+</a>
+
+<a href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/QuestPDF/QuestPDF">
+    <img src="https://img.shields.io/badge/share%20on-facebook-1976D2?logo=facebook" alt="Share on facebook">
+</a>
+
+<a href="https://www.linkedin.com/shareArticle?url=https://github.com/QuestPDF/QuestPDF&title=QuestPDF">
+    <img src="https://img.shields.io/badge/share%20on-linkedin-3949AB?logo=linkedin" alt="Share on linkedin">
+</a>
 
 ## Support development
 
