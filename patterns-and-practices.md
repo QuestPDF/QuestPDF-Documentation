@@ -319,12 +319,12 @@ However you can use a custom font as shown in the section **Accessing custom fon
 
 The QuestPDF library has access to all fonts installed on the hosting system. Sometimes though, you don't have control over fonts installed on the production environment. Or you may want to use self-hosted fonts that come with your application as files or embedded resources. In such case, you need to register those fonts as follows:
 
-```csharp
+```csharp{2,5,13}
 // static method definition
-FontManager.RegisterFontType(string fontName, Stream fontDataStream);
+FontManager.RegisterFontType(Stream fontDataStream);
 
 // perform similar invocation only once, when the application starts or during its initialization step
-FontManager.RegisterFontType("LibreBarcode39", File.OpenRead("LibreBarcode39-Regular.ttf"));
+FontManager.RegisterFontType(File.OpenRead("LibreBarcode39-Regular.ttf")); // use file name
 
 // then, you will have access to the font by its name
 container
@@ -332,7 +332,8 @@ container
     .AlignCenter()
     .AlignMiddle()
     .Text("*QuestPDF*")
-    .FontFamily("LibreBarcode39").FontSize(64);
+    .FontFamily("Libre Barcode 39") // use real font family name
+    .FontSize(64);
 ```
 
 This way, it is possible to generate barcodes:

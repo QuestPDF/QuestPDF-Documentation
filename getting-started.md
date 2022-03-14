@@ -16,6 +16,17 @@ The library is distributed as a nuget package. You can install it as any other n
 
 [![quest pdf logo](./images/nuget.svg =200x)](https://www.nuget.org/packages/QuestPDF/)
 
+```xml
+// Package Manager
+Install-Package QuestPDF
+
+// .NET CLI
+dotnet add package QuestPDF
+
+// Package reference in .csproj file
+<PackageReference Include="QuestPDF" Version="2022.3.0" />
+```
+
 ## Implementation layers
 
 The PDF generation process involves work in three main application layers:
