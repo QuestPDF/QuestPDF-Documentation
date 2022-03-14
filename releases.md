@@ -9,12 +9,12 @@ title: "Releases"
 - Added minimal API to help you quickly start with QuestPDF development and speed up prototyping,
 - Improved exception message when desired font type cannot be found (instead of loading default font on Windows and failing with wrong characters on Linux),
 - Improved support for custom font types: loading all type faces from a file, respecting true font family, using CSS-like algorithm to find best style match,
+- Added support for custom page number formats in the `Text` element, e.g. you can implement roman literal style if required,
+- Improved text API to make it more concise,
+- Extended support for the `Section` element (previously the `Location` element) by tracking: beginning page number, end page number, page length, page number within location,
 - Renaming: the `ExternalLink` element was renamed to the `Hyperlink` element,
 - Renaming: the `Location` element was renamed to the `Section` element,
 - Renaming: the `InternalLink` element was renamed to the `SectionLink` element,
-- Added support for custom page number formats in the `Text` element, e.g. you can implement roman literal style if required,
-- Improved text API to make to concise,
-- Extended support for the `Section` element (previously the `Location` element) by tracking: beginning page number, end page number, page length, page number within location,
 - Updated homepage and GitHub pages content.
 
 ### 2022.02
@@ -198,6 +198,7 @@ Most of the features listed below should be added in the nearest months:
 ### Under consideration
 
 There are also features being actively investigated with lower importance:
+- Relative elements: alignment and translate,
 - Font subsetting to reduce output file size,
 - Font fallback (using alternative fonts when glyphs are not available),
 - Text justification,

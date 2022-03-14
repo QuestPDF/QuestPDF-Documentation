@@ -806,7 +806,11 @@ With using the `MinimalBox` element (notice that the text element takes only nec
 
 ## Page
 
-- This container consists of three slots: header, content and footer.
+This container consists of multiple page-related slots.
+
+### Main slots
+
+Main slots (header, content and footer) can be used to specify page content:
 - The header element is always visible at the top on each page.
 - The footer element is always visible at the bottom on each page.
 - The content element is drawn on the rest of the space (between the header and the footer.).
@@ -844,6 +848,48 @@ Please be careful! When the total height of the header and footer element is gre
 :::
 
 ![example](./images/api-reference/page-example.png =298x)
+
+### Watermark slots
+
+The watermark slots (background and foreground) can be used to add content on the back or on the front of the main content.
+
+```csharp{10-14,16-20}
+.Page(page =>
+{
+    page.Size(PageSizes.A4);
+    page.Margin(1, Unit.Inch);
+    page.DefaultTextStyle(TextStyle.Default.FontSize(16));
+    page.PageColor(Colors.White);
+
+    const string transparentBlue = "#662196f3";
+
+    page.Background()
+        .AlignTop()
+        .ExtendHorizontal()
+        .Height(200)
+        .Background(transparentBlue);
+    
+    page.Foreground()
+        .AlignBottom()
+        .ExtendHorizontal()
+        .Height(250)
+        .Background(transparentBlue);
+    
+    page.Header()
+        .Text("Background and foreground")
+        .Bold().FontColor(Colors.Blue.Darken2).FontSize(36);
+    
+    page.Content().PaddingVertical(25).Column(column =>
+    {
+        column.Spacing(25);
+
+        foreach (var i in Enumerable.Range(0, 100))
+            column.Item().Background(Colors.Grey.Lighten2).Height(75);
+    });
+});
+```
+
+![example](./images/api-reference/page-background-foreground.png =300x)
 
 ## Page break
 
@@ -1649,7 +1695,7 @@ You can define text style using available FluentAPI methods which are described 
 
 ```csharp
 .FontColor("#F00")
-.FontType("Times New Roman")
+.FontFamily("Times New Roman")
 .FontSize(24)
 .LineHeight(1.5f)
 .Italic()
@@ -1721,6 +1767,12 @@ public static class Typography
         .AlignLeft();
 }
 
+```
+
+Then, a predifined typography can be used in the following way:
+
+```csharp
+.Text("My text with predifined style).Style(Typography.Headline);
 ```
 
 ### Font alignment
@@ -1798,6 +1850,8 @@ When injecting custom elements inside the text block, please remember to always 
 
 ### Page numbers
 
+#### Document
+
 Use new text elements to inject page numbers: current page number where the text is located and number of all pages within the document.
 
 ```csharp
@@ -1805,25 +1859,60 @@ Use new text elements to inject page numbers: current page number where the text
 {
     text.CurrentPageNumber();
     text.TotalPages();
-    text.PageNumberOfLocation("location-name");
     
-    // it is also possible to pass a style
+    // it is also possible to style the text
     text.CurrentPageNumber().Underline();
 });
 ```
 
-You can also provide page number of internal location:
+#### Sections
+
+It is also possible to access specific page 
 
 ```csharp
-// define your location somewhere in the document:
-.Location("customLocationName")
+// define your section somewhere in the document:
+.Section("customSection")
 
 // refer to this location position in your list of contents:
 .Text(text =>
 {
-    text.PageNumberOfLocation("customLocationName");
+    // page number where section begins
+    text.BeginPageNumberOfSection("customSection");
+    
+    // page number where section ends
+    text.EndPageNumberOfSection("customSection");
+    
+    // page number relative to section beginning
+    // at section beginning page, method returns 1
+    text.PageNumberWithinSection("customSection");
+    
+    // how many pages section takes
+    text.TotalPagesWithinSection("customSection");
 });
 ```
+
+#### Formatting
+
+It is also possible to format page number using the `Format` method.
+
+```csharp
+.Text(text =>
+{
+    // assumes that FormatAsRomanNumeral 
+    text.CurrentPageNumber().Format(FormatAsRomanNumeral);
+    
+    static string FormatAsRomanNumeral(int? pageNumber)
+    {
+        if (pageNumber == null)
+            return "-------";
+    
+        // proper implementation
+        return "MMXXII";
+    }
+});
+```
+
+Please notice that the formatting function takes `int?` type. QuestPDF performs two-pass rendering algorithm. Only during the second pass, all page numbers are known and defined. In the first phase, your formatting method receives `null` to indicate that the page number is not determined yet. Please return any text that matches expected output in length. 
 
 ### Section link
 
