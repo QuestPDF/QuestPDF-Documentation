@@ -4,6 +4,12 @@ title: "Releases"
 
 ## Release notes
 
+### 2022.04
+
+- previewer
+- WrapAnywhere
+- text wrapping improvements
+
 ### 2022.03
 
 - Added minimal API to help you quickly start with QuestPDF development and speed up prototyping,
@@ -190,9 +196,16 @@ The QuestPDF library offers multiple tools needed to design and generate PDF doc
 ### Next releases
 
 Most of the features listed below should be added in the nearest months:
-- Dynamic component (allows generating dynamic content based on the context, e.g. page number, available space, etc.),
+- Previewer tool improvements:  
+  - add support for SectionLinks,
+  - add support for Hyperlinks,
+  - improved UI for general exceptions,
+  - interactive UI for infinite-layout exceptions,
+  - investigation: per-page performance measurement,
+  - investigation: content and elements inspection,
 - Font shaping (correctly measuring and drawing text) for more complex languages, e.g. Arabic,
 - RTL support for content (placing content in the right-to-left orientation) and text,
+- Dynamic component (allows generating dynamic content based on the context, e.g. page number, available space, etc.),
 - Investigation on how to simplify unit tests and make them easier to manage.
 
 ### Under consideration

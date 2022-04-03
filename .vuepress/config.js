@@ -22,6 +22,7 @@ module.exports = {
             '/': [
                 '/',
                 'getting-started',
+                'document-previewer',
                 'api-reference',
                 'patterns-and-practices',
                 'releases',
