@@ -48,9 +48,9 @@ Other changes:
 
 ### 2021.12
 
-- Improved debugging experience for layout-related exceptions. To make the library predictable, it is (by design) very strict about layouting rules and throws an exception when a constraint cannot be met. In this release, each exception contains an element stack that contains all information needed to identify the issue. By default, this feature is enabled only when debugger is attached.
-- Improved layouting algorithm performance by introducing additional caching layer. This cache reduces the layouting time by half. By default, this feature is enabled only when debugger is not attached (mostly release mode).
-- Reduced GA pressure put by the layouting algorithm. Previously, every element measurement operation was represented by an object and the paging support was done via class hierarchy. New solution uses structs (which are value-types) and enums. This also makes the code more readable and easier to follow.
+- Improved debugging experience for layout-related exceptions. To make the library predictable, it is (by design) very strict about layout rules and throws an exception when a constraint cannot be met. In this release, each exception contains an element stack that contains all information needed to identify the issue. By default, this feature is enabled only when debugger is attached.
+- Improved layout algorithm performance by introducing additional caching layer. This cache reduces the layout time by half. By default, this feature is enabled only when debugger is not attached (mostly release mode).
+- Reduced GA pressure put by the layout algorithm. Previously, every element measurement operation was represented by an object and the paging support was done via class hierarchy. New solution uses structs (which are value-types) and enums. This also makes the code more readable and easier to follow.
 - Added support for generating XPS files which are easier to print in the Windows environment. This was possible due to existing support in SkiaSharp. This change was proposed by **sbrkich**, thank you!
 - Documentation: added article about adding charts to QuestPDF documents. This article was written by **donmurta**, thank you!
 ### 2021.11
@@ -76,7 +76,7 @@ This update is focused on text rendering capabilities:
 - inserting links in text,
 - inserting custom components in text, e.g. an image,
 - inserting page numbers in text (current page, total pages, page of location),
-- layouting engine uses now more font-related metadata when rendering text (e.g. ascent, descent properties),
+- layout engine uses now more font-related metadata when rendering text (e.g. ascent, descent properties),
 - increased rendering performance by introducing short-living cache.
 
 **Breaking change:** 

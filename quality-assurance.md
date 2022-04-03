@@ -4,7 +4,7 @@ Thanks to the architecture of the library, it is easy to choose a proper testing
 
 ## Element-specific testing
 
-In this approach, unit tests are checking if the given element (e.g. Padding, Border) is behaving correctly and is meeting design requirements. That means, if the element applies correct layouting rules, performs expected canvas operations and properly interacts with its children. What is important, each element is tested in separation, in the isolated environment. This is possible because there are no intra-element dependencies or couplings.
+In this approach, unit tests are checking if the given element (e.g. Padding, Border) is behaving correctly and is meeting design requirements. That means, if the element applies correct layout rules, performs expected canvas operations and properly interacts with its children. What is important, each element is tested in separation, in the isolated environment. This is possible because there are no intra-element dependencies or couplings.
 
 To make this type of testing easier, a special testing environment was created. In this environment, each element is tested in separation by injecting mock children. This way, it is possible to check all income and outcome operations performed by the element. During the measuring step:
 
@@ -49,7 +49,7 @@ public void Measure_FitArea_ToWidth()
 
 This testing approach is accomplished by preparing various examples for the documentation. In such a case, each example contains a very simple layout, though still containing multiple elements. This way, it is possible to visually validate the output image to the simple-to-understand and concise code.
 
-Additionally, some library components are in fact a combination of simpler elements. For example, the Grid element does not contain its layouting implementation. It uses the Stack and Row elements to compose more sophisticated structures. For such cases, it is enough to test if the generated structure is the same.
+Additionally, some library components are in fact a combination of simpler elements. For example, the Grid element does not contain its layout implementation. It uses the Stack and Row elements to compose more sophisticated structures. For such cases, it is enough to test if the generated structure is the same.
 
 ## Document testing
 

@@ -82,7 +82,7 @@ public class StandardReport : IDocument
 ```
 
 ::: danger
-Because of the practical layouting limitations, the maximum page height is limited to 14400 points (around 5 meters).
+Because of the practical layout limitations, the maximum page height is limited to 14400 points (around 5 meters).
 :::
 
 ## Length unit types
@@ -898,7 +898,7 @@ Below is the element trace returned by the exception. Nested elements (children)
 
 Additional symbols are used to help you find the problem cause:
 - 🌟 - represents special elements, e.g. page header/content/footer or the debug pointer element,
-- 🔥 - represents an element that causes the layouting exception. Follow the symbol deeper to find the root cause.
+- 🔥 - represents an element that causes the layout exception. Follow the symbol deeper to find the root cause.
 
 ```
 🔥 Page content 🌟

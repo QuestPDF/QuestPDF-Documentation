@@ -39,7 +39,7 @@ By default, the AspectRatio element wants to use entire provided width. You can 
 ```
 
 ::: danger
-Please be careful. This component may try to enforce size constraints that are impossible to meet. Such scenarios end up with the layouting exception.
+Please be careful. This component may try to enforce size constraints that are impossible to meet. Such scenarios end up with the layout exception.
 :::
 
 ## Background
@@ -476,7 +476,7 @@ Please be careful. This component may try to enforce size constraints that are i
 - requires more space than is available,
 - tries to squeeze its child in less space than necessary.
 
-Such scenarios end up with the layouting exception.
+Such scenarios end up with the layout exception.
 :::
 
 ## Hyperlink
@@ -526,7 +526,7 @@ By default, the Image element wants to use entire provided width while preservin
 ```
 
 ::: danger
-Please be careful. This component may try to enforce size constraints that are impossible to meet. Such scenarios end up with the layouting exception.
+Please be careful. This component may try to enforce size constraints that are impossible to meet. Such scenarios end up with the layout exception.
 :::
 
 ### Dynamic images
@@ -844,7 +844,7 @@ Main slots (header, content and footer) can be used to specify page content:
 ```
 
 ::: danger
-Please be careful! When the total height of the header and footer element is greater than the total page's height, there is not space enough for the content. In such a case, the layouting exception is thrown.
+Please be careful! When the total height of the header and footer element is greater than the total page's height, there is not space enough for the content. In such a case, the layout exception is thrown.
 :::
 
 ![example](./images/api-reference/page-example.png =298x)
@@ -1051,7 +1051,7 @@ You can specify the spacing between each column by using the Spacing() method:
 
 ## Scale
 - This component scales the size of its children,
-- The layouting rules, such as available space is being scaled as well so the container follow all size constraints.
+- The layout rules, such as available space is being scaled as well so the container follow all size constraints.
 
 ```csharp
 .Scale(2f)
@@ -1156,7 +1156,7 @@ This container is commonly used with the Column and Row elements to make sure th
 ```
 
 ::: danger
-Please be careful when using the ShowEntire container. If its content requires more space than is available on the page, the rendering process will end up with the layouting exception.
+Please be careful when using the ShowEntire container. If its content requires more space than is available on the page, the rendering process will end up with the layout exception.
 :::
 
 
@@ -1955,7 +1955,7 @@ Sometimes, there is very little space on the page. It is enough to display a cou
 ```
 
 ## Translate
-- This container allows to move its content up/down/left/right regardless of the layouting constraints,
+- This container allows to move its content up/down/left/right regardless of the layout constraints,
 - It applies the same size constraints to its child,
 - The rendered child appears like floating below/above of the other content.
 
@@ -2022,5 +2022,5 @@ Please be careful. This component may try to enforce size constraints that are i
 - requires more space than is available,
 - tries to squeeze its child in less space than necessary.
 
-Such scenarios end up with the layouting exception.
+Such scenarios end up with the layout exception.
 :::

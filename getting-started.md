@@ -208,7 +208,7 @@ So far we have scaffolded a very simple page where each section has a different 
 
 ### Header implementation
 
-This chapter introduces a couple of very important layouting elements: `Row` and `Column`. Before we discuss how they work, let's analyze the new code sample. First of all, when creating a document, we expect that it will contain multiple sections and therefore the amount of code is going to increase significantly. 
+This chapter introduces a couple of very important layout elements: `Row` and `Column`. Before we discuss how they work, let's analyze the new code sample. First of all, when creating a document, we expect that it will contain multiple sections and therefore the amount of code is going to increase significantly. 
 
 To keep the code clean and easy to maintain, you can create additional methods for each section. The general principle is to use a composition of simple layout structures, a structure per method. Most of the API invocations have special overloads designed for **1)** method chaining and **2)** passing method as an argument.
 
