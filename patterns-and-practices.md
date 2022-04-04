@@ -441,6 +441,33 @@ And its corresponding output:
 
 ![example](./images/patterns-and-practices/complex-layout.png =500x)
 
+::: tip
+When implementing complex grids and layouts, please also consider using the `Table` element. [Click here to learn more](/api-reference.html#table)
+:::
+
+## Ordered and bullet lists
+
+Implementing lists is very simple with the `Column` and `Row` elements:
+
+```csharp
+.Column(column =>
+{
+    foreach (var i in Enumerable.Range(1, 8))
+    {
+        column.Item().Row(row =>
+        {
+            row.Spacing(5);
+            row.AutoItem().Text($"{i}."); // text or image
+            row.RelativeItem().Text(Placeholders.Sentence());
+        });
+    }
+});
+```
+
+The result is as follows:
+
+![example](./images/patterns-and-practices/ordered-list.png =500x)
+
 ## Components
 
 A component is a special type of element that can generate content depending on its state. This approach is really common in many web-development libraries and solves multiple issues. You should consider creating your own component when part of the document is going to be reused in other documents. Another good scenario is when you plan to repeat a more complex section. In such a case, you can implement a component that takes input provided as constructor's argument, and generates PDF content. Then, such component can be easily used in a for loop in the document itself. All things considered, components are a useful tool to organize and reuse your code.
