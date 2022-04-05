@@ -4,7 +4,9 @@
 
 The QuestPDF Previewer is a tool designed to simplify and speed up your development lifecycle. First, it shows a preview of your document. But the real magic starts with the hot-reload capability! It observes your code and updates the preview every time you change the implementation. Get real-time results without the need of code recompilation. Save time and enjoy the task!
 
-![example](./images/previewer/animation.gif)
+<video width="100%" controls autoplay loop>
+  <source src="./images/previewer/animation.mp4" type="video/mp4">
+</video>
 
 ::: warning
 The hot-reload feature is available only in the .NET 6 environment and beyond.

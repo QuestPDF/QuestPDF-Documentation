@@ -9,6 +9,8 @@ title: "Releases"
 Release theme:
 Introduced the `QuestPDF Previewer tool` - a hot-reload powered, cross-platform program that visualizes your PDF document and updates its preview every time you make a code change. You don't need to recompile your code after every small adjustment. Save time and enjoy the design process! (available only for dotnet 6 and beyond)
 
+Special thanks to `Bennet Fenner` who came up with the idea, implemented the prototype, actively discussed architectural concepts, and took a crucial role in the testing phase. People like him make open-source a joy!
+
 Other changes:
 - Improved default word-wrapping algorithm to better handle words which do not fit on the available width,
 - Introduced new word-wrapping option 'WrapAnywhere' that wraps word at the last possible character instead of moving it into new line.
