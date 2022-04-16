@@ -25,7 +25,7 @@ dotnet tool install QuestPDF.Previewer --global
 🚀 Optional: you can start an independent previewer application:
 
 ```
-questpdf-preview
+questpdf-previewer
 
 // specify HTTP port on which previewer will communicate (default is 12500)
 questpdf-previewer 12345
