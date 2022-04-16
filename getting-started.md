@@ -361,16 +361,21 @@ public class InvoiceDocument : IDocument
             });
             
             // step 2
-            table.DefaultTextStyle(x => x.SemiBold()).Header(header =>
+            table.Header(header =>
             {
-                header.Cell().Text("#");
-                header.Cell().Text("Product");
-                header.Cell().AlignRight().Text("Unit price");
-                header.Cell().AlignRight().Text("Quantity");
-                header.Cell().AlignRight().Text("Total");
-                
+                header.Cell().Element(CellStyle).Text("#");
+                header.Cell().Element(CellStyle).Text("Product");
+                header.Cell().Element(CellStyle).AlignRight().Text("Unit price");
+                header.Cell().Element(CellStyle).AlignRight().Text("Quantity");
+                header.Cell().Element(CellStyle).AlignRight().Text("Total");
+
                 header.Cell().ColumnSpan(5)
                     .PaddingVertical(5).BorderBottom(1).BorderColor(Colors.Black);
+
+                static IContainer CellStyle(IContainer container)
+                {
+                    return container.DefaultTextStyle(x => x.SemiBold());
+                }
             });
             
             // step 3
@@ -384,7 +389,7 @@ public class InvoiceDocument : IDocument
                 
                 static IContainer CellStyle(IContainer container)
                 {
-                    container.BorderBottom(1).BorderColor(Colors.Grey.Lighten2).PaddingVertical(5);
+                    return container.BorderBottom(1).BorderColor(Colors.Grey.Lighten2).PaddingVertical(5);
                 }
             }
         });
