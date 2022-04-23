@@ -321,10 +321,10 @@ The QuestPDF library has access to all fonts installed on the hosting system. So
 
 ```csharp{2,5,13}
 // static method definition
-FontManager.RegisterFontType(Stream fontDataStream);
+FontManager.RegisterFont(Stream fontDataStream);
 
 // perform similar invocation only once, when the application starts or during its initialization step
-FontManager.RegisterFontType(File.OpenRead("LibreBarcode39-Regular.ttf")); // use file name
+FontManager.RegisterFont(File.OpenRead("LibreBarcode39-Regular.ttf")); // use file name
 
 // then, you will have access to the font by its name
 container
