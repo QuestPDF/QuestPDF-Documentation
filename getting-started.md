@@ -368,13 +368,10 @@ public class InvoiceDocument : IDocument
                 header.Cell().Element(CellStyle).AlignRight().Text("Unit price");
                 header.Cell().Element(CellStyle).AlignRight().Text("Quantity");
                 header.Cell().Element(CellStyle).AlignRight().Text("Total");
-
-                header.Cell().ColumnSpan(5)
-                    .PaddingVertical(5).BorderBottom(1).BorderColor(Colors.Black);
-
+                
                 static IContainer CellStyle(IContainer container)
                 {
-                    return container.DefaultTextStyle(x => x.SemiBold());
+                    return container.DefaultTextStyle(x => x.SemiBold()).PaddingVertical(5).BorderBottom(1).BorderColor(Colors.Black);
                 }
             });
             
