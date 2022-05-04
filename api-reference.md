@@ -1769,10 +1769,10 @@ public static class Typography
 
 ```
 
-Then, a predifined typography can be used in the following way:
+Then, a predefined typography can be used in the following way:
 
 ```csharp
-.Text("My text with predifined style).Style(Typography.Headline);
+.Text("My text with predefined style").Style(Typography.Headline);
 ```
 
 ### Font alignment
