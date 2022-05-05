@@ -148,8 +148,7 @@ Did you know that the Canvas element can also be used to combine QuestPDF with o
 
 - The Column element is a multi-element container. You can put any set of elements you want.
 - The algorithm places element one underneath another. Each element may take the entire width.
-
-By default, all elements should fit on a single page. Otherwise, the entire content is be wrapped to the next page.
+- This container renders its elements on multiple pages when necessary.
 
 ```csharp
 .Column(column =>
