@@ -6,9 +6,9 @@ title: "Releases"
 
 ### 2022.05
 
-This release introduces new `DynamicComponent` element. 
+This release introduces new `DynamicComponent` element. It is useful when you want to generate dynamic and conditional content that is page aware, e.g. per-page totals. [Read more here](/patterns-and-practices.html#dynamic-components).
 
-- Implemented the DynamicComponent element (useful for most advanced cases, e.g. per-page totals),
+Other changes:
 - Extend text rendering capabilities by adding subscript and superscript effects (special thanks to Bennet Fenner),
 - Improved table rendering performance,
 - Previewer tool stability fixes,
@@ -19,7 +19,7 @@ I would like to thank entire community for enormous help in improving and extend
 ### 2022.04
 
 Release theme:
-Introduced the `QuestPDF Previewer tool` - a hot-reload powered, cross-platform program that visualizes your PDF document and updates its preview every time you make a code change. You don't need to recompile your code after every small adjustment. Save time and enjoy the design process! (available only for dotnet 6 and beyond)
+Introduced the `QuestPDF Previewer tool` - a hot-reload powered, cross-platform program that visualizes your PDF document and updates its preview every time you make a code change. You don't need to recompile your code after every small adjustment. Save time and enjoy the design process! (available only for dotnet 6 and beyond). [Read more here](/document-previewer.html).
 
 Special thanks to `Bennet Fenner` who came up with the idea, implemented the prototype, actively discussed architectural concepts, and took a crucial role in the testing phase. People like him make open-source a joy!
 
