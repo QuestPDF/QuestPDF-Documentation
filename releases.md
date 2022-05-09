@@ -4,6 +4,18 @@ title: "Releases"
 
 ## Release notes
 
+### 2022.05
+
+This release introduces new `DynamicComponent` element. 
+
+- Implemented the DynamicComponent element (useful for most advanced cases, e.g. per-page totals),
+- Extend text rendering capabilities by adding subscript and superscript effects (special thanks to Bennet Fenner),
+- Improved table rendering performance,
+- Previewer tool stability fixes,
+- Documentation fixes.
+
+I would like to thank entire community for enormous help in improving and extending the library.
+
 ### 2022.04
 
 Release theme:
@@ -193,37 +205,3 @@ It is never easy to spend hundreds of hours creating a library and then decide t
 
 The first official release of the library. Containing all pieces required to successfully create and generate PDF documents.
 
-
-## Roadmap
-
-The QuestPDF library offers multiple tools needed to design and generate PDF documents. However, there is plenty of ideas under consideration.
-
-### Next releases
-
-Most of the features listed below should be added in the nearest months:
-- Previewer tool improvements:  
-  - add support for SectionLinks,
-  - add support for Hyperlinks,
-  - improved UI for general exceptions,
-  - interactive UI for infinite-layout exceptions,
-  - investigation: per-page performance measurement,
-  - investigation: content and elements inspection,
-- Font shaping (correctly measuring and drawing text) for more complex languages, e.g. Arabic,
-- RTL support for content (placing content in the right-to-left orientation) and text,
-- Dynamic component (allows generating dynamic content based on the context, e.g. page number, available space, etc.),
-- Investigation on how to simplify unit tests and make them easier to manage.
-
-### Under consideration
-
-There are also features being actively investigated with lower importance:
-- Relative elements: alignment and translate,
-- Font subsetting to reduce output file size,
-- Font fallback (using alternative fonts when glyphs are not available),
-- Text justification,
-- Documentation cleanup,
-- Documentation improvements,
-- Custom slots in components (named slots, dynamic slots),
-- Tutorials: adding maps to the document,
-- Allow the Placeholder element to show text instead of an icon,
-- SVG support ([integration with SkiaSharp.Svg](https://www.nuget.org/packages/SkiaSharp.Svg/)),
-- and more...

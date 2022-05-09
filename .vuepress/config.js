@@ -25,6 +25,7 @@ module.exports = {
                 'document-previewer',
                 'api-reference',
                 'patterns-and-practices',
+                'roadmap',
                 'releases',
                 'quality-assurance',
                 'acknowledgements'
