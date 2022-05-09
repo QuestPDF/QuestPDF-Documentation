@@ -1701,6 +1701,8 @@ You can define text style using available FluentAPI methods which are described 
 .BackgroundColor(Colors.Grey.Lighten5)
 .Strikethrough()
 .Underline()
+.Subscript()
+.Superscript()
 ```
 
 ### Default text style within a block
@@ -1735,6 +1737,62 @@ You can easily set up font weight by using one of the following fluent API metho
 .Black()
 .ExtraBlack()
 ```
+
+Please notice that not all fonts support every weight. QuestPDF will match the closest weight available:
+
+![example](./images/api-reference/text-weight.png =200x)
+
+
+### Subscript and superscript
+
+```csharp{9,15}
+.Text(text =>
+{
+    text.DefaultTextStyle(x => x.FontSize(20));
+    text.ParagraphSpacing(10);
+
+    var highlight = TextStyle.Default.BackgroundColor(Colors.Green.Lighten3);
+
+    text.Span("E=mc").Style(highlight);
+    text.Span("2").Superscript().Style(highlight);
+    text.Span(" is the equation of mass–energy equivalence.");
+
+    text.EmptyLine();
+    
+    text.Span("H").Style(highlight);
+    text.Span("2").Subscript().Style(highlight);
+    text.Span("O").Style(highlight);
+    text.Span(" is the chemical formula for water.");
+});
+```
+
+![example](./images/api-reference/text-subscript-superscript.png =500x)
+
+
+### Line height
+
+This settings changes spacing between text lines. Modify the value to make the text more compact or easier to read.
+
+```csharp{3,14}
+.Column(column =>
+{
+    var lineHeights = new[] { 0.8f, 1f, 1.5f };
+    var paragraph = Placeholders.Paragraph();
+
+    foreach (var lineHeight in lineHeights)
+    {
+        column
+            .Item()
+            .Border(1)
+            .Padding(10)
+            .Text(paragraph)
+            .FontSize(16)
+            .LineHeight(lineHeight);
+    }
+});
+```
+
+![example](./images/api-reference/text-line-height.png =500x)
 
 ### Typography pattern
 

@@ -545,7 +545,7 @@ If the component class has parameter-less constructor, you can use the generic `
 
 ### Introduction
 
-Dynamic components are useful when you want to generate different or conditional content on each page. The dynamic component mostly resembles normal components with one important different: the `Compose` method is called for each page. Having access to component internal state, information about pages and available space, you can build more advanced structures.
+Dynamic components are useful when you want to generate different or conditional content on each page. The dynamic component mostly resembles normal components with one important difference: the `Compose` method is called for each page. Having access to component internal state, information about pages and available space, you can build more advanced structures.
 
 In this example, we only use the page information: number of current page and count of all pages in the document. We use both numbers to create something similar to a progress bar that shows where you are in the document.
 
@@ -594,8 +594,20 @@ container.Page(page =>
         foreach (var i in Enumerable.Range(0, 100))
             column.Item().PaddingTop(25).Background(Colors.Grey.Lighten2).Height(50);
     });
+
+    page.Footer().AlignCenter().Text(text =>
+    {
+        text.CurrentPageNumber();
+        text.Span(" / ");
+        text.TotalPages();
+    });
 });
 ```
+
+First page of the document, and one random page from the middle of the document:
+
+![example](./images/patterns-and-practices/dynamic-progress-1.png =300x)
+![example](./images/patterns-and-practices/dynamic-progress-2.png =300x)
 
 ### State management
 
@@ -676,6 +688,11 @@ Please notice that you can instantiate components using constructors with argume
 ```csharp{7}
 page.Header().Dynamic(new FibonacciHeader(17, 19));
 ```
+
+First page of the document, and one random page from the middle of the document:
+
+![example](./images/patterns-and-practices/dynamic-state-1.png =300x)
+![example](./images/patterns-and-practices/dynamic-state-2.png =300x)
 
 ### Table with per-page totals
 
@@ -840,6 +857,9 @@ container
             .Dynamic(new OrdersTable(items));
     });
 ```
+
+![example](./images/patterns-and-practices/dynamic-subtotals-1.png =300x)
+![example](./images/patterns-and-practices/dynamic-subtotals-2.png =300x)
 
 ### Optimized example
 
