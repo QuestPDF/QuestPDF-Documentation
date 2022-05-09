@@ -742,7 +742,7 @@ LineVertical is virtual - it takes entire available height and no width.
 });
 ```
 
-![example](./images/api-reference/line-horizontal.png =100x)
+![example](./images/api-reference/line-vertical.png =100x)
 
 ### Horizontal
 
@@ -760,7 +760,7 @@ LineHorizontal is virtual - it takes entire available width and no height.
 });
 ```
 
-![example](./images/api-reference/line-vertical.png =175x)
+![example](./images/api-reference/line-horizontal.png =175x)
 
 ## Minimal box
 
