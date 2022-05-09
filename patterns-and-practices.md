@@ -609,6 +609,57 @@ First page of the document, and one random page from the middle of the document:
 ![example](./images/patterns-and-practices/dynamic-progress-1.png =300x)
 ![example](./images/patterns-and-practices/dynamic-progress-2.png =300x)
 
+### Footer with alternating text alignment
+
+In this example, we will use new knowledge to implement the footer element with alternating text alignment.
+1) On even pages, align page number to the left.
+2) On odd pages, align page number to the right.
+
+For example:
+
+```
+Page 1 -> Text aligned right.
+Page 2 -> Text aligned left.
+Page 3 -> Text aligned right.
+...
+and so on...
+```
+
+The code is quite simple:
+
+```csharp{10}
+public class FooterWithAlternatingAlignment : IDynamicComponent<int>
+{
+    public int State { get; set; }
+    
+    public DynamicComponentComposeResult Compose(DynamicContext context)
+    {
+        var content = context.CreateElement(element =>
+        {
+            element
+                .Element(x => context.PageNumber % 2 == 0 ? x.AlignLeft() : x.AlignRight())
+                .Text(x =>
+                {
+                    x.CurrentPageNumber();
+                    x.Span(" / ");
+                    x.TotalPages();
+                });
+        });
+        
+        return new DynamicComponentComposeResult()
+        {
+            Content = content,
+            HasMoreContent = false
+        };
+    }
+}
+```
+
+And the result is as follows:
+
+![example](./images/patterns-and-practices/dynamic-alternating-footer-1.png =300x)
+![example](./images/patterns-and-practices/dynamic-alternating-footer-2.png =300x)
+
 ### State management
 
 This example introduces state management in components. Our goal is to create a header component that calculates consecutive terms in the Fibonacci-like sequence and shows their ratio - one calculation per page. Additionally, we want to use different background colors depending on the modulo calculus of the current sequence term.
