@@ -1329,10 +1329,10 @@ Please analyse this simple example showing how to create a simple Table instance
 {
     table.ColumnsDefinition(columns =>
     {
-        columns.RelativeItem();
-        columns.RelativeItem();
-        columns.RelativeItem();
-        columns.RelativeItem();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
     });
 
     // by using custom 'Element' method, we can reuse visual configuration
@@ -1367,10 +1367,10 @@ You don't need to specify position of every cell. When the algorithm detects tha
 {
     table.ColumnsDefinition(columns =>
     {
-        columns.RelativeItem();
-        columns.RelativeItem();
-        columns.RelativeItem();
-        columns.RelativeItem();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
     });
 
     table.Cell().Row(1).Column(1).Element(Block).Text("A");
@@ -1398,10 +1398,10 @@ container
     {
         table.ColumnsDefinition(columns =>
         {
-            columns.ConstantItem(50);
-            columns.ConstantItem(100);
-            columns.RelativeItem(2);
-            columns.RelativeItem(3);
+            columns.ConstantColumn(50);
+            columns.ConstantColumn(100);
+            columns.RelativeColumn(2);
+            columns.RelativeColumn(3);
         });
 
         table.Cell().ColumnSpan(4).LabelCell("Total width: 300px");
@@ -1423,10 +1423,10 @@ Cells can span over multiple rows and/or multiple columns:
 {
     table.ColumnsDefinition(columns =>
     {
-        columns.RelativeItem();
-        columns.RelativeItem();
-        columns.RelativeItem();
-        columns.RelativeItem();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
     });
 
     table.Cell().RowSpan(2).ColumnSpan(2).Element(Block).Text("1");
@@ -1454,9 +1454,9 @@ Cells can overlap each other. This situation is possible when you manually assig
 {
     table.ColumnsDefinition(columns =>
     {
-        columns.RelativeItem();
-        columns.RelativeItem();
-        columns.RelativeItem();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
     });
 
     table.Cell().Row(1).RowSpan(3).Column(1).ColumnSpan(3).Background(Colors.Grey.Lighten3).MinHeight(150);
@@ -1476,10 +1476,10 @@ This feature is very useful when creating complex table structures that are like
 {
     table.ColumnsDefinition(columns =>
     {
-        columns.RelativeItem();
-        columns.RelativeItem();
-        columns.RelativeItem();
-        columns.RelativeItem();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
+        columns.RelativeColumn();
     });
     
     table.ExtendLastCellsToTableBottom();
@@ -1512,10 +1512,10 @@ Please analyse this example to understand how to design report-like document str
 {
     table.ColumnsDefinition(columns =>
     {
-        columns.ConstantItem(100);
-        columns.RelativeItem();
-        columns.ConstantItem(100);
-        columns.RelativeItem();
+        columns.ConstantColumn(100);
+        columns.RelativeColumn();
+        columns.ConstantColumn(100);
+        columns.RelativeColumn();
     });
     
     table.ExtendLastCellsToTableBottom();
@@ -1608,13 +1608,13 @@ container
     
     table.ColumnsDefinition(columns =>
     {
-        columns.RelativeItem();
+        columns.RelativeColumn();
         
-        columns.ConstantItem(75);
-        columns.ConstantItem(75);
+        columns.ConstantColumn(75);
+        columns.ConstantColumn(75);
         
-        columns.ConstantItem(75);
-        columns.ConstantItem(75);
+        columns.ConstantColumn(75);
+        columns.ConstantColumn(75);
     });
     
     table.Header(header =>
