@@ -5,7 +5,7 @@ Copyright (c) 2015-2016 Xamarin, Inc. \
 Copyright (c) 2017-2018 Microsoft Corporation.
 
 [Link to the repository webpage](https://github.com/mono/SkiaSharp) \
-[Link to the license](https://github.com/mono/SkiaSharp/blob/master/LICENSE.md)
+[Link to the license](https://github.com/mono/SkiaSharp/blob/main/LICENSE.md)
 :::
 
 
@@ -34,7 +34,7 @@ Copyright (c) 2021 Charlie Poole, Rob Prouse
 
 
 ::: details FluentAssertions license
-Copyright (c) 2021 Charlie Poole, Rob Prouse
+Copyright (c) 2021 Dennis Doomen
 
 [Link to the repository webpage](https://github.com/fluentassertions/fluentassertions) \
 [Link to the license](https://github.com/fluentassertions/fluentassertions/blob/master/LICENSE)
