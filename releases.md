@@ -4,6 +4,17 @@ title: "Releases"
 
 ## Release notes
 
+### 2022.06
+**Integrated the text-shaping algorithm.** This change significantly improves the Unicode compatibility. Also, it extends support for more advanced languages (e.g. Arabic) that:
+   1) Combine multiple text characters and display them as a single visual glyph.
+   2) Are displayed in the right-to-left order. 
+
+**Improved the exception message when SkiaSharp throws the TypeInitializationException.** On some operating systems, SkiaSharp requires additional dependencies installed as nuget packages. This change should help developers determine how to choose and install them correctly. 
+
+**Fixed:** a rare case when the Row.AutoItem does not calculate properly the width of its content. 
+
+**Fixed:** the QuestPDF Previewer does not work with content-rich documents.
+
 ### 2022.05
 
 This release introduces new `DynamicComponent` element. It is useful when you want to generate dynamic and conditional content that is page aware, e.g. per-page totals. [Read more here](/patterns-and-practices.html#dynamic-components).

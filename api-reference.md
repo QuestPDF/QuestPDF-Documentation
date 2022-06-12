@@ -1993,6 +1993,44 @@ Please notice that the formatting function takes `int?` type. QuestPDF performs 
 });
 ```
 
+### Unicode support
+
+The library supports text shaping capability, useful when generating advanced Unicode-capable text:
+
+```csharp{10}
+.Padding(35)
+.MinimalBox()
+.Background(Colors.Grey.Lighten2)
+.Text(text =>
+{
+    text.DefaultTextStyle(TextStyle.Default.FontSize(20));
+    
+    text.Span("Complex Unicode structure: ");
+    
+    text.Span("T̶̖̔͆͆̽̔ḩ̷̼̫̐̈́̀͜͝͝ì̶͇̤͓̱̣͇͓͉̎s̵̡̟̹͍̜͉̗̾͛̈̐́͋͂͝͠ͅ ̴̨͙͍͇̭̒͗̀́͝ì̷̡̺͉̼̏̏̉̌͝s̷͍͙̗̰̖͙̈̑̂̔͑͊̌̓̊̇͜ ̶̛̼͚͊̅͘ṭ̷̨̘̣̙̖͉͌̏̂̅͑̄̽̕͝ȅ̶̲̲̙̭͈̬̣͔̝͔̈́͝s̸̢̯̪̫͓̭̮̓̀͆͜ț̸̢͉̞̥̤̏̌̓͝").FontColor(Colors.Red.Medium);
+    
+    text.Span(".");
+});
+```
+
+![example](./images/api-reference/text-unicode.png =400x)
+
+### Advanced languages support
+
+Text shaping capability also gives basic support for more advanced languages that:
+1) Display multiple text characters as a single glyph.
+2) Are display in the right-to-left order.
+
+```csharp{4}
+.Padding(25)
+.MinimalBox()
+.Background(Colors.Grey.Lighten2)
+.Text("ينا الألم. في بعض الأحيان ونظراً للالتزامات التي يفرضها علينا")
+.FontSize(20);
+```
+
+![example](./images/api-reference/text-arabic.png =425x)
+
 ### Dealing with pageable text
 
 The text element supports paging. That means part of the text may be moved to the next page if there is not enough space on the current one. There are several approaches to simplify the workflow with text:
