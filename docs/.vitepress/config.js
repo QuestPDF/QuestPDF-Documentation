@@ -2,6 +2,10 @@ export default {
     title: 'QuestPDF',
     description: 'Modern .NET library for PDF document generation',
 
+    head: [
+        ['link', { rel: 'icon', href: '/images/logo-modern.svg', type: 'image/svg' }]
+    ],
+
     themeConfig: {
         logo: '/images/logo-modern.svg',
         nav: [
