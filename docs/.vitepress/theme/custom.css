@@ -1,0 +1,95 @@
+:root {
+    --vp-c-brand: #1E88E5;
+    --vp-c-brand-light: #42A5F5;
+    --vp-home-hero-name-color: transparent;
+    --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #2979FF, #00E5FF);
+    --vp-home-hero-image-background-image: linear-gradient(-45deg, #2979FF66 40%, #88888866 40%);
+    --vp-home-hero-image-filter: blur(48px);
+    --vp-button-brand-bg: #03A9F4;
+    --vp-button-brand-hover-border: #03A9F4;
+    --vp-c-green-dark: #1565C0;
+}
+
+.VPNavBar .title {
+    font-size: 24px !important;
+}
+
+.logo {
+    height: 32px !important;
+    margin-right: 16px !important;
+}
+
+.VPHero img.VPImage {
+    filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.15));
+}
+
+.VPLink.link.active > span.link-text,
+.outline-link.active {
+    font-weight: bold !important;
+}
+
+.VPFeature .title {
+    font-size: 1.25rem;
+}
+
+@media (min-width: 425px) {
+    .VPHero h1 {
+        font-size: 4rem !important;
+        margin-bottom: 2rem !important;
+    }
+
+    .VPHero p.text {
+        font-size: 1.5rem !important;
+        line-height: 2rem !important;
+        margin-bottom: 1rem !important;
+    }
+}
+
+@media (min-width: 960px) {
+    .VPHero h1 {
+        font-size: 5rem !important;
+        margin-bottom: 2rem !important;
+    }
+
+    .VPHero p.text {
+        font-size: 2rem !important;
+        line-height: 2.5rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+}
+
+@media (max-width: 425px) {
+    .VPHero h1 {
+        font-size: 3rem !important;
+        margin-bottom: 2rem !important;
+    }
+
+    .VPHero p.text {
+        font-size: 1.25rem !important;
+        line-height: 2rem !important;
+        margin-bottom: 1rem !important;
+    }
+}
+
+html:not(.dark) {
+    --vp-code-block-bg: #EEE;
+    --vp-code-line-highlight-color: #DDD;
+}
+
+html:not(.dark) .VPDoc img[alt=example] {
+    border: 1px solid #888;
+}
+
+html.dark .VPDoc img[alt=example] {
+    opacity: 0.75;
+}
+
+.VPDoc img[alt=example] {
+    box-shadow: 0 13px 27px -5px rgb(50 50 93 / 25%), 0 8px 16px -8px rgb(0 0 0 / 30%), 0 -6px 16px -6px rgb(0 0 0 / 3%);
+    margin-bottom: 16px;
+    border-radius: 8px;
+}
+
+.VPNav.no-sidebar .container {
+    max-width: 1152px;
+}
