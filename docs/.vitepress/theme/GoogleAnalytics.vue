@@ -1,12 +1,3 @@
-<template>
-  <component :is="'script'">
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-L6Z2378WVB');
-  </component>
-</template>
-
 <script setup>
 import { useRouter } from 'vitepress';
 import { watch } from 'vue';
@@ -19,6 +10,13 @@ function addGoogleAnalyticsScript() {
   plugin.async = true;
 
   document.head.appendChild(plugin);
+}
+
+async function invokeGoogleAnalyticsScript() {
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L6Z2378WVB');
 }
 
 function registerViewChangeListener() {
@@ -39,6 +37,7 @@ function registerViewChangeListener() {
 
 onMounted(() => {
   addGoogleAnalyticsScript();
+  invokeGoogleAnalyticsScript();
   registerViewChangeListener();
 });
 
