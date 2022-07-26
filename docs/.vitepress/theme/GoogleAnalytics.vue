@@ -1,3 +1,7 @@
+<template>
+  wefwef
+</template>
+
 <script setup>
 import { useRouter } from 'vitepress';
 import { watch } from 'vue';
@@ -6,39 +10,36 @@ import { onMounted } from 'vue';
 function addGoogleAnalyticsScript() {
   const plugin = document.createElement("script");
 
-  plugin.setAttribute("src", "https://www.googletagmanager.com/gtag/js?id=G-L6Z2378WVB");
+  plugin.setAttribute("src", "https://www.googletagmanager.com/gtag/js?id=G-WPSQH44KB7");
   plugin.async = true;
 
   document.head.appendChild(plugin);
 }
 
-async function invokeGoogleAnalyticsScript() {
+async function registerGoogleAnalyticsListener() {
+  // register listener
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
-  gtag('config', 'G-L6Z2378WVB');
-}
+  gtag('config', 'G-WPSQH44KB7');
 
-function registerViewChangeListener() {
-  if (typeof window === 'undefined')
-    return;
-
+  // watch current route changes
   const router = useRouter();
   watch(() => router.route.data.relativePath, handleViewChange, { immediate: true });
 
   function handleViewChange(path) {
-    if (!window.ga)
-      return;
-
-    window.ga('set', 'page', path);
-    window.ga('send', 'pageview');
+    gtag('set', 'page_path', path);
+    gtag('event', 'page_view');
   }
 }
 
 onMounted(() => {
+  if (typeof window === 'undefined')
+    return;
+
   addGoogleAnalyticsScript();
-  invokeGoogleAnalyticsScript();
-  registerViewChangeListener();
+  registerGoogleAnalyticsListener();
 });
 
 </script>
