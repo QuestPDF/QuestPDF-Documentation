@@ -1,5 +1,5 @@
 <template>
-  wefwef
+
 </template>
 
 <script setup>
