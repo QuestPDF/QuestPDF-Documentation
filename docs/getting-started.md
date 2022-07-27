@@ -4,7 +4,7 @@
 
 This tutorial introduces you to the essentials of the QuestPDF library by showing you how to implement a basic invoice document. It discusses architectural concepts, then shows how to prepare data layers and finally presents how to use various elements to compose a document's structure. At the end of this tutorial, you will get code capable of generating the full, page-aware invoice similar to the one below. Let's get started!
 
-![invoice](/images/getting-started/invoice.png)
+![invoice](/getting-started/invoice.png)
 
 ::: tip
 You can download, analyse and compile the code yourself by visiting [this GitHub repository](https://github.com/QuestPDF/QuestPDF).
@@ -14,7 +14,7 @@ You can download, analyse and compile the code yourself by visiting [this GitHub
 
 The library is distributed as a nuget package. You can install it as any other nuget package from your IDE, try to search by `QuestPDF`. You can find package details on [on this webpage](https://www.nuget.org/packages/QuestPDF/).
 
-[![quest pdf logo](/images/nuget.svg =200x)](https://www.nuget.org/packages/QuestPDF/)
+[![quest pdf logo](/nuget.svg =200x)](https://www.nuget.org/packages/QuestPDF/)
 
 ```xml
 // Package Manager
@@ -91,7 +91,7 @@ The `Page` element has three slots available: `Header`, `Content` and `Footer`. 
 
 So far we have scaffolded a very simple page where each section has a different colour or size:
 
-![example](/images/getting-started/step-scaffolding.png =595x)
+![example](/getting-started/step-scaffolding.png =595x)
 
 ### Header implementation
 
@@ -166,7 +166,7 @@ public class InvoiceDocument : IDocument
 
 The code above produces the following result:
 
-![example](/images/getting-started/step-header.png =595x)
+![example](/getting-started/step-header.png =595x)
 
 ### Content implementation
 
@@ -214,7 +214,7 @@ public class InvoiceDocument : IDocument
 
 In the code, the content structure is prepared. Please notice that a comments section is displayed conditionally:
 
-![example](/images/getting-started/step-content.png =595x)
+![example](/getting-started/step-content.png =595x)
 
 ### Table generation
 
@@ -283,7 +283,7 @@ public class InvoiceDocument : IDocument
 }
 ```
 
-![example](/images/getting-started/step-table.png =595x)
+![example](/getting-started/step-table.png =595x)
 
 ### Address component
 
@@ -364,7 +364,7 @@ public class InvoiceDocument : IDocument
 }
 ```
 
-![example](/images/getting-started/step-final.png =595x)
+![example](/getting-started/step-final.png =595x)
 
 ## Document generation
 
@@ -391,4 +391,4 @@ There are multiple overloads of the `Generate` method. In the example above, the
 
 Looking for more advanced example that uses the vast majority of available features? Please take a look at the [library's repository](https://github.com/QuestPDF/library/tree/main/QuestPDF.ReportSample). It contains a sample report:
 
-![example](/images/getting-started/complex.jpg)
+![example](/getting-started/complex.jpg)

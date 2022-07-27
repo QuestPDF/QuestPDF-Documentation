@@ -31,4 +31,4 @@ container
     });
 ```
 
-![example](/images/api-reference/debug.png =420x)
+![example](/api-reference/debug.png =420x)

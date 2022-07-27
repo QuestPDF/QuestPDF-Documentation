@@ -63,8 +63,8 @@ container.Page(page =>
 
 First page of the document, and one random page from the middle of the document:
 
-![example](/images/patterns-and-practices/dynamic-progress-1.png =300x)
-![example](/images/patterns-and-practices/dynamic-progress-2.png =300x)
+![example](/patterns-and-practices/dynamic-progress-1.png =300x)
+![example](/patterns-and-practices/dynamic-progress-2.png =300x)
 
 ## Footer with alternating text alignment
 
@@ -114,8 +114,8 @@ public class FooterWithAlternatingAlignment : IDynamicComponent<int>
 
 And the result is as follows:
 
-![example](/images/patterns-and-practices/dynamic-alternating-footer-1.png =300x)
-![example](/images/patterns-and-practices/dynamic-alternating-footer-2.png =300x)
+![example](/patterns-and-practices/dynamic-alternating-footer-1.png =300x)
+![example](/patterns-and-practices/dynamic-alternating-footer-2.png =300x)
 
 ## State management
 
@@ -199,8 +199,8 @@ page.Header().Dynamic(new FibonacciHeader(17, 19));
 
 First page of the document, and one random page from the middle of the document:
 
-![example](/images/patterns-and-practices/dynamic-state-1.png =300x)
-![example](/images/patterns-and-practices/dynamic-state-2.png =300x)
+![example](/patterns-and-practices/dynamic-state-1.png =300x)
+![example](/patterns-and-practices/dynamic-state-2.png =300x)
 
 ## Table with per-page totals
 
@@ -366,8 +366,8 @@ container
     });
 ```
 
-![example](/images/patterns-and-practices/dynamic-subtotals-1.png =300x)
-![example](/images/patterns-and-practices/dynamic-subtotals-2.png =300x)
+![example](/patterns-and-practices/dynamic-subtotals-1.png =300x)
+![example](/patterns-and-practices/dynamic-subtotals-2.png =300x)
 
 ## Optimized example
 

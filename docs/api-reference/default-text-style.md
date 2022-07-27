@@ -33,4 +33,4 @@ This element allows you to override text styles in all its children at once.
 
 Please notice that this element extends existing styles with additional configuration. Those styles can be extended/overridden on later stages of the code.
 
-![example](/images/api-reference/default-text-style.png =220x)
+![example](/api-reference/default-text-style.png =220x)

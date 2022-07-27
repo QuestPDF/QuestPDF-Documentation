@@ -30,10 +30,10 @@ This container is active when its child requires more than one page to draw. Whe
 
 First, let's analyse the results where the `StopPaging` element is **NOT** applied. Part of the text is moved to the next page:
 
-![example](/images/api-reference/stop-paging-without-1.png =300x)
-![example](/images/api-reference/stop-paging-without-2.png =300x)
+![example](/api-reference/stop-paging-without-1.png =300x)
+![example](/api-reference/stop-paging-without-2.png =300x)
 
 However, where the `StopPaging` **IS** applied, the text that does not fit on the first page, is omitted. This behaviour is true for all structures that span multiple pages.
 
-![example](/images/api-reference/stop-paging-with-1.png =300x)
-![example](/images/api-reference/stop-paging-with-2.png =300x)
+![example](/api-reference/stop-paging-with-1.png =300x)
+![example](/api-reference/stop-paging-with-2.png =300x)

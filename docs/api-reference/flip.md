@@ -43,4 +43,4 @@ Example:
 });
 ```
 
-![example](/images/api-reference/flip.png =350x)
+![example](/api-reference/flip.png =350x)

@@ -24,4 +24,4 @@
 });
 ```
 
-![example](/images/api-reference/decoration.png =300x)
+![example](/api-reference/decoration.png =300x)

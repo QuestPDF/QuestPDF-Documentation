@@ -7,4 +7,4 @@
 .Width(100).Height(50).Placeholder();
 ```
 
-![example](/images/api-reference/placeholder-example.png =200x)
+![example](/api-reference/placeholder-example.png =200x)

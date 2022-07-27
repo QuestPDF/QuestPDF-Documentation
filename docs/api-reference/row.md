@@ -26,7 +26,7 @@
 });
 ```
 
-![example](/images/api-reference/row-example.png =740x)
+![example](/api-reference/row-example.png =740x)
 
 You can specify the spacing between each column by using the Spacing() method:
 
@@ -40,4 +40,4 @@ You can specify the spacing between each column by using the Spacing() method:
 });
 ```
 
-![example](/images/api-reference/row-spacing.png =370x)
+![example](/api-reference/row-spacing.png =370x)

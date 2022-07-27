@@ -40,5 +40,5 @@ container.Padding(25).Grid(grid =>
 });
 ```
 
-![example](/images/patterns-and-practices/defined-fonts.png =500x)
+![example](/patterns-and-practices/defined-fonts.png =500x)
 

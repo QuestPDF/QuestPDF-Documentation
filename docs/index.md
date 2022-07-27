@@ -6,7 +6,7 @@ hero:
   text: Modern .NET library for PDF document generation
   tagline: Forget about limitations, feel confidence, enjoy your task and efficiently deliver professional products.
   image:
-    src: /images/logo-modern.svg
+    src: /logo.svg
     alt: VitePress
   actions:
   - theme: brand

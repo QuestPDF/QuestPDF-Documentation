@@ -26,4 +26,4 @@
 });
 ```
 
-![example](/images/api-reference/unconstrained.png =400x)
+![example](/api-reference/unconstrained.png =400x)

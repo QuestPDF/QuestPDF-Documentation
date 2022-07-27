@@ -45,5 +45,5 @@ Example:
 })
 ```
 
-![example](/images/api-reference/skip-once-first.png =300x)
-![example](/images/api-reference/skip-once-second.png =300x)
+![example](/api-reference/skip-once-first.png =300x)
+![example](/api-reference/skip-once-second.png =300x)

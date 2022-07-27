@@ -29,4 +29,4 @@ Example:
 });
 ```
 
-![example](/images/api-reference/scale.png =400x)
+![example](/api-reference/scale.png =400x)

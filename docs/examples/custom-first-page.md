@@ -35,9 +35,9 @@ container.Page(page =>
 
 The code above produces the following results:
 
-![example](/images/patterns-and-practices/special-header-on-first-page-1.png =297x)
-![example](/images/patterns-and-practices/special-header-on-first-page-2.png =297x)
-![example](/images/patterns-and-practices/special-header-on-first-page-3.png =297x)
+![example](/patterns-and-practices/special-header-on-first-page-1.png =297x)
+![example](/patterns-and-practices/special-header-on-first-page-2.png =297x)
+![example](/patterns-and-practices/special-header-on-first-page-3.png =297x)
 
 ::: tip
 Please notice that you can use the `SkipOnce` and `ShowOnce` elements multiple times to achieve more complex requirements. For example:

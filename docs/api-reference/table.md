@@ -41,7 +41,7 @@ Please analyse this simple example showing how to create a simple Table instance
 });
 ```
 
-![example](/images/api-reference/table-basic-usage.png =220x)
+![example](/api-reference/table-basic-usage.png =220x)
 
 ## Automated cell placement
 
@@ -67,7 +67,7 @@ You don't need to specify position of every cell. When the algorithm detects tha
 });
 ```
 
-![example](/images/api-reference/table-partial-automated-cell-placement.png =220x)
+![example](/api-reference/table-partial-automated-cell-placement.png =220x)
 
 
 ## Column definitions
@@ -97,7 +97,7 @@ container
     });
 ```
 
-![example](/images/api-reference/table-columns-definition.png =320x)
+![example](/api-reference/table-columns-definition.png =320x)
 
 ## Row spans and column spans
 
@@ -128,7 +128,7 @@ Cells can span over multiple rows and/or multiple columns:
 });
 ```
 
-![example](/images/api-reference/table-spans.png =220x)
+![example](/api-reference/table-spans.png =220x)
 
 ## Overlapping cells
 
@@ -150,7 +150,7 @@ Cells can overlap each other. This situation is possible when you manually assig
 });
 ```
 
-![example](/images/api-reference/table-overlapping-cells.png =170x)
+![example](/api-reference/table-overlapping-cells.png =170x)
 
 ## Extend last cells to table bottom
 
@@ -181,7 +181,7 @@ This feature is very useful when creating complex table structures that are like
 
 Please notice that the block "C" ends along with the "B" and "D" blocks:
 
-![example](/images/api-reference/table-extend-last-cells-to-table-bottom.png =220x)
+![example](/api-reference/table-extend-last-cells-to-table-bottom.png =220x)
 
 
 ## Report example
@@ -249,7 +249,7 @@ Please analyse this example to understand how to design report-like document str
 });
 ```
 
-![example](/images/api-reference/table-report-example.png =1125x)
+![example](/api-reference/table-report-example.png =1125x)
 
 
 ## Table header / footer
@@ -340,8 +340,8 @@ container
 
 Page 1:
 
-![example](/images/api-reference/table-header-1.png =500x)
+![example](/api-reference/table-header-1.png =500x)
 
 Page 2:
 
-![example](/images/api-reference/table-header-2.png =500x)
+![example](/api-reference/table-header-2.png =500x)

@@ -21,7 +21,7 @@ QuestPDF uses FluentAPI and method chaining to describe document's content. It i
 });
 ```
 
-![example](/images/patterns-and-practices/execution-order-1.png =400x)
+![example](/patterns-and-practices/execution-order-1.png =400x)
 
 This is another good example showing how applying padding changes available space:
 
@@ -46,4 +46,4 @@ This is another good example showing how applying padding changes available spac
 .Background(Colors.Grey.Lighten2);
 ```
 
-![example](/images/patterns-and-practices/execution-order-2.png =200x)
+![example](/patterns-and-practices/execution-order-2.png =200x)

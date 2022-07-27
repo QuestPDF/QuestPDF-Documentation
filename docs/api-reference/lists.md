@@ -19,4 +19,4 @@ Implementing lists is very simple with the `Column` and `Row` elements:
 
 The result is as follows:
 
-![example](/images/patterns-and-practices/ordered-list.png =500x)
+![example](/patterns-and-practices/ordered-list.png =500x)

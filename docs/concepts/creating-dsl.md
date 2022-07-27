@@ -40,7 +40,7 @@ Now, you can easily use newly created DSL language to build the table:
 
 This example produces the following output:
 
-![example](/images/patterns-and-practices/domain-specific-language.png =600x)
+![example](/patterns-and-practices/domain-specific-language.png =600x)
 
 ::: tip
 Please note that this example shows only the concept of using extension methods to build custom API elements. Using this approach you can build and reuse more complex structures. For example, extension methods can expect arguments.

@@ -77,4 +77,4 @@ container
     });
 ```
 
-![example](/images/patterns-and-practices/material-colors.png =450x)
+![example](/patterns-and-practices/material-colors.png =450x)

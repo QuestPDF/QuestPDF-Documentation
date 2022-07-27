@@ -56,7 +56,7 @@ Example usage to create a colorful matrix:
 });
 ```
 
-![example](/images/patterns-and-practices/random-colors.png =300x)
+![example](/patterns-and-practices/random-colors.png =300x)
 
 ## Image
 
@@ -74,4 +74,4 @@ Placeholders.Image(new Size(400, 300));
 .Image(Placeholders.Image);
 ```
 
-![example](/images/patterns-and-practices/image-placeholder.png =350x)
+![example](/patterns-and-practices/image-placeholder.png =350x)

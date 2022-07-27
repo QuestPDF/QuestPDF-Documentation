@@ -41,7 +41,7 @@ Main slots (header, content and footer) can be used to specify page content:
 Please be careful! When the total height of the header and footer element is greater than the total page's height, there is not space enough for the content. In such a case, the layout exception is thrown.
 :::
 
-![example](/images/api-reference/page-example.png =298x)
+![example](/api-reference/page-example.png =298x)
 
 ## Watermark slots
 
@@ -83,7 +83,7 @@ The watermark slots (background and foreground) can be used to add content on th
 });
 ```
 
-![example](/images/api-reference/page-background-foreground.png =300x)
+![example](/api-reference/page-background-foreground.png =300x)
 
 ## Page settings
 
@@ -222,4 +222,4 @@ public class SampleReport : IDocument
 }
 ```
 
-![example](/images/patterns-and-practices/global-text-style.png =595x)
+![example](/patterns-and-practices/global-text-style.png =595x)

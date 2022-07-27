@@ -17,11 +17,11 @@ Copyright (c) 2013-present, Yuxi (Evan) You
 :::
 
 
-::: details VuePress license
+::: details VitePress license
 Copyright (c) 2018-present, Yuxi (Evan) You
 
-[Link to the repository webpage](https://github.com/vuejs/vuepress) \
-[Link to the license](https://github.com/vuejs/vuepress/blob/master/LICENSE)
+[Link to the repository webpage](https://github.com/vuejs/vitepress) \
+[Link to the license](https://github.com/vuejs/vitepress/blob/main/LICENSE)
 :::
 
 

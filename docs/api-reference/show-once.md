@@ -26,10 +26,10 @@ page.Content().PaddingVertical(5).Row(row =>
 });
 ```
 
-![example](/images/api-reference/show-once-first.png =300x)
-![example](/images/api-reference/show-once-second.png =300x)
+![example](/api-reference/show-once-first.png =300x)
+![example](/api-reference/show-once-second.png =300x)
 
 Please also consider an effect without the ShowOnce element applied. Please notice that the content in the right column was paged and took two pages. Therefore, the Row element (parent) also got paged, and as a result, left column was repeated twice:
 
-![example](/images/api-reference/show-once-off-first.png =300x)
-![example](/images/api-reference/show-once-off-second.png =300x)
+![example](/api-reference/show-once-off-first.png =300x)
+![example](/api-reference/show-once-off-second.png =300x)

@@ -61,7 +61,7 @@ Example usage:
 
 The result of sample code looks as follows:
 
-![example](/images/patterns-and-practices/component-example.png =350x)
+![example](/patterns-and-practices/component-example.png =350x)
 
 ::: tip
 If the component class has parameter-less constructor, you can use the generic `Template` method like so:

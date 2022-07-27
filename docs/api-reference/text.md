@@ -22,7 +22,7 @@ When you want to change style in the middle of the text, inject page numbers or 
 });
 ```
 
-![example](/images/api-reference/text-simple-block.png =500x)
+![example](/api-reference/text-simple-block.png =500x)
 
 ## Basic font style
 
@@ -76,7 +76,7 @@ You can easily set up font weight by using one of the following fluent API metho
 
 Please notice that not all fonts support every weight. QuestPDF will match the closest weight available:
 
-![example](/images/api-reference/text-weight.png =200x)
+![example](/api-reference/text-weight.png =200x)
 
 
 ## Subscript and superscript
@@ -102,7 +102,7 @@ Please notice that not all fonts support every weight. QuestPDF will match the c
 });
 ```
 
-![example](/images/api-reference/text-subscript-superscript.png =500x)
+![example](/api-reference/text-subscript-superscript.png =500x)
 
 
 ## Line height
@@ -128,7 +128,7 @@ This settings changes spacing between text lines. Modify the value to make the t
 });
 ```
 
-![example](/images/api-reference/text-line-height.png =500x)
+![example](/api-reference/text-line-height.png =500x)
 
 ## Typography pattern
 
@@ -200,7 +200,7 @@ It is possible to specify additional spacing between paragraphs - blocks of text
 });
 ```
 
-![example](/images/api-reference/text-paragraph-spacing.png =500x)
+![example](/api-reference/text-paragraph-spacing.png =500x)
 
 ## Injecting custom content
 
@@ -215,7 +215,7 @@ Sometimes you may need to inject custom components between text spans. Every inj
 });
 ```
 
-![example](/images/api-reference/text-custom-element.png =450x)
+![example](/api-reference/text-custom-element.png =450x)
 
 Use negative padding to adjust element position to your needs:
 
@@ -235,7 +235,7 @@ Use negative padding to adjust element position to your needs:
 });
 ```
 
-![example](/images/api-reference/text-custom-element-aligned.png =450x)
+![example](/api-reference/text-custom-element-aligned.png =450x)
 
 ::: danger
 When injecting custom elements inside the text block, please remember to always constrain its size. Otherwise, the element will take entire space possible.
@@ -349,7 +349,7 @@ The library supports text shaping capability, useful when generating advanced Un
 });
 ```
 
-![example](/images/api-reference/text-unicode.png =400x)
+![example](/api-reference/text-unicode.png =400x)
 
 ## Advanced languages support
 
@@ -365,7 +365,7 @@ Text shaping capability also gives basic support for more advanced languages tha
 .FontSize(20);
 ```
 
-![example](/images/api-reference/text-arabic.png =425x)
+![example](/api-reference/text-arabic.png =425x)
 
 ## Dealing with pageable text
 

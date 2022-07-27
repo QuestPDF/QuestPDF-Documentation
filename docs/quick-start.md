@@ -4,7 +4,7 @@
 
 The library is available as a nuget package. You can install it as any other nuget package from your IDE, try to search by `QuestPDF`. You can find package details [on this webpage](https://www.nuget.org/packages/QuestPDF/).
 
-[![quest pdf logo](/images/nuget.svg =200x)](https://www.nuget.org/packages/QuestPDF/)
+[![quest pdf logo](/nuget.svg =200x)](https://www.nuget.org/packages/QuestPDF/)
 
 
 ```xml
@@ -65,11 +65,11 @@ Document.Create(container =>
 
 And compare it to the produced PDF file:
 
-![example](/images/minimal-api.png =300x)
+![example](/minimal-api.png =300x)
 
 
 ## Are you ready for more?
 
 The Fluent API of QuestPDF scales really well. It is easy to create and maintain even most complex documents. Read [the Getting started tutorial](https://www.questpdf.com/documentation/getting-started.html) to learn QuestPDF basics and implement an invoice under 200 lines of code. You can also investigate and play with the code from [the example repository](https://github.com/QuestPDF/example-invoice).
 
-![invoice](/images/getting-started/invoice.png =500x)
+![invoice](/getting-started/invoice.png =500x)

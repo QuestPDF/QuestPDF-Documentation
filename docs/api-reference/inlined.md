@@ -27,7 +27,7 @@ void RandomBlock(IContainer container)
 });
 ```
 
-![example](/images/api-reference/inlined-left-bottom.png =400x)
+![example](/api-reference/inlined-left-bottom.png =400x)
 
 Available spacing settings:
 ```csharp
@@ -66,7 +66,7 @@ More examples:
         inlined.Item().Element(RandomBlock);
 });
 ```
-![example](/images/api-reference/inlined-justify-middle.png =400x)
+![example](/api-reference/inlined-justify-middle.png =400x)
 
 ```csharp{3-6}
 .Inlined(inlined =>
@@ -81,4 +81,4 @@ More examples:
 });
 ```
 
-![example](/images/api-reference/inlined-space-around-top.png =400x)
+![example](/api-reference/inlined-space-around-top.png =400x)

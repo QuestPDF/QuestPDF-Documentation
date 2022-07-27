@@ -13,7 +13,7 @@
 });
 ```
 
-![example](/images/api-reference/column.png =350x)
+![example](/api-reference/column.png =350x)
 
 Use the Spacing property to add some space between elements:
 
@@ -28,4 +28,4 @@ Use the Spacing property to add some space between elements:
 });
 ```
 
-![example](/images/api-reference/column-spacing.png =350x)
+![example](/api-reference/column-spacing.png =350x)

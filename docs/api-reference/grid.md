@@ -28,4 +28,4 @@
 });
 ```
 
-![example](/images/api-reference/grid.png =400x)
+![example](/api-reference/grid.png =400x)

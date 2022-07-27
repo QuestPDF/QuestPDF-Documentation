@@ -21,5 +21,5 @@ container
 
 This way, it is possible to generate barcodes:
 
-![example](/images/patterns-and-practices/custom-font.png =400x)
+![example](/patterns-and-practices/custom-font.png =400x)
 

@@ -73,4 +73,4 @@ var entries = new[]
 
 This is a result:
 
-![example](/images/patterns-and-practices/chart.png =400x)
+![example](/patterns-and-practices/chart.png =400x)

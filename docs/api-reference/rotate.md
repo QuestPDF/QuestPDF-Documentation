@@ -38,7 +38,7 @@ Example:
 });
 ```
 
-![example](/images/api-reference/rotate-constrained.png =350x)
+![example](/api-reference/rotate-constrained.png =350x)
 
 ## Free
 - This container allows to rotate its child by any angle provided in degrees,
@@ -63,7 +63,7 @@ Example:
 .Background(Colors.Blue.Medium);
 ```
 
-![example](/images/api-reference/rotate-free.png =300x)
+![example](/api-reference/rotate-free.png =300x)
 
 You can apply additional translation to change the rotation origin point:
 
@@ -89,4 +89,4 @@ You can apply additional translation to change the rotation origin point:
 .Background(Colors.Blue.Medium);
 ```
 
-![example](/images/api-reference/rotate-free-origin.png =300x)
+![example](/api-reference/rotate-free-origin.png =300x)

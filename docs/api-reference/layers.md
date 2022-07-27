@@ -41,5 +41,5 @@
 });
 ```
 
-![example](/images/api-reference/layers-1.png =400x)
-![example](/images/api-reference/layers-2.png =400x)
+![example](/api-reference/layers-1.png =400x)
+![example](/api-reference/layers-2.png =400x)

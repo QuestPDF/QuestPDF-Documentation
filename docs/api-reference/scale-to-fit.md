@@ -23,7 +23,7 @@ This container attempts to scale down its child, so it fits in the available spa
 });
 ```
 
-![example](/images/api-reference/scale-to-fit.png =275x)
+![example](/api-reference/scale-to-fit.png =275x)
 
 ::: danger
 Please notice that this component scales the available space. That means that you may still encounter situations where the child does not fit, e.g. when a child tries to enforce a specific aspect ratio.

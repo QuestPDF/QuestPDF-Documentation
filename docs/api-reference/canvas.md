@@ -20,7 +20,7 @@ This element allows drawing any custom content using the SkiaSharp canvas object
 });
 ```
 
-![example](/images/api-reference/canvas.png =300x)
+![example](/api-reference/canvas.png =300x)
 
 In the next example, we will analyze how to create a rounded rectangle using SkiaSharp and the `Canvas` element. It clearly shows how powerful is this approach:
 
@@ -59,7 +59,7 @@ container
 });
 ```
 
-![example](/images/api-reference/canvas-rounded-rectangle.png =175x)
+![example](/api-reference/canvas-rounded-rectangle.png =175x)
 
 ::: tip
 Did you know that the Canvas element can also be used to combine QuestPDF with other, SkiaSharp-based libraries? A great example of such situation is drawing vector-based charts. Please take a look [at this example](/examples/implementing-charts).

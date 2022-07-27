@@ -3,14 +3,15 @@ export default {
     description: 'Modern .NET library for PDF document generation',
 
     head: [
-        ['link', { rel: 'icon', href: '/images/logo-modern.svg', type: 'image/svg' }]
+        ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg' }]
     ],
 
     themeConfig: {
-        logo: '/images/logo-modern.svg',
+        logo: '/logo.svg',
         nav: [
             { text: 'Quick start', link: '/quick-start' },
             { text: 'API reference', link: '/api-reference/index' },
+            { text: 'Design patterns', link: '/design-patterns' },
             { text: 'GitHub', link: 'https://github.com/QuestPDF/QuestPDF' },
             { text: 'Nuget', link: 'https://www.nuget.org/packages/QuestPDF' }
         ],

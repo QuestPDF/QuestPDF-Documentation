@@ -18,4 +18,4 @@
 .FontSize(25);
 ```
 
-![example](/images/api-reference/translate.png =300x)
+![example](/api-reference/translate.png =300x)
