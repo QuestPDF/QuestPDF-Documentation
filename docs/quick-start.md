@@ -18,7 +18,7 @@ dotnet add package QuestPDF
 <PackageReference Include="QuestPDF" Version="2022.6.0" />
 ```
 
-## Quick start
+## Implementation
 
 How easy it is to start and prototype with QuestPDF? Really easy thanks to its minimal API! Please analyse the code below:
 
