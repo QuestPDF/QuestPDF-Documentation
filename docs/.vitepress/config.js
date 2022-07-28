@@ -11,7 +11,8 @@ export default {
         nav: [
             { text: 'Quick start', link: '/quick-start' },
             { text: 'API reference', link: '/api-reference/index' },
-            { text: 'Design patterns', link: '/design-patterns' },
+            { text: 'Patterns', link: '/design-patterns' },
+            { text: 'Sponsor', link: 'https://github.com/sponsors/QuestPDF' },
             { text: 'GitHub', link: 'https://github.com/QuestPDF/QuestPDF' },
             { text: 'Nuget', link: 'https://www.nuget.org/packages/QuestPDF' }
         ],
