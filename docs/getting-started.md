@@ -27,6 +27,119 @@ dotnet add package QuestPDF
 <PackageReference Include="QuestPDF" Version="2022.6.0" />
 ```
 
+## Implementation layers
+
+The PDF generation process involves work in three main application layers:
+
+1) **Document models** - a set of classes describing PDF document content. In the vast majority of cases, they are just simple POCO classes without any business logic inside.
+
+2) **Data source** - layer where your domain entities are mapped into document models. This layer is usually implemented by creating a separate class that communicates with your persistency abstraction and then maps/translates/aggregates the data into the desired format.
+
+3) **Template** - presentation layer describing how to visualize information and convert it into a PDF file. This process can be achieved in multiple ways, a common scenario is to generate HTML code and then use special "HTML to PDF" converter. The QuestPDF approach is different: this library offers you a special document layout engine. By using simple, yet highly composable elements, you can design complex layouts with ease - all with great fluent API.
+
+## Document models layer
+
+When working on a new PDF document, think about its content and what information should be included. This helps with designing proper models structure. This time, we need to pass basic invoice information, seller's and customer's addresses, list of ordered items and finally optional comments.
+
+```csharp
+public class InvoiceModel
+{
+    public int InvoiceNumber { get; set; }
+    public DateTime IssueDate { get; set; }
+    public DateTime DueDate { get; set; }
+
+    public Address SellerAddress { get; set; }
+    public Address CustomerAddress { get; set; }
+
+    public List<OrderItem> Items { get; set; }
+    public string Comments { get; set; }
+}
+
+public class OrderItem
+{
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    public int Quantity { get; set; }
+}
+
+public class Address
+{
+    public string CompanyName { get; set; }
+    public string Street { get; set; }
+    public string City { get; set; }
+    public string State { get; set; }
+    public object Email { get; set; }
+    public string Phone { get; set; }
+}
+```
+
+## Data source layer
+
+Once models are defined, you need to create a data source class which connects to the persistence layer, prepares and converts data. Although this layer has no limitations and you have full control over its implementation, there are several patterns and practices worth to follow.
+
+Firstly, in the data source class, you can define all necessary business logic. Simple operations can be placed inside the template layer (discussed in the next chapter) but more complex calculations should be kept here or inappropriate services. This way you prevent business logic leakage from your domains.
+
+If you expect to have multiple documents with similar content, for instance, the same header, define a single shared model and a corresponding method to populate it. The QuestPDF library takes the `DRY` (don't repeat yourself) principle to heart by providing the powerful concept of components. You can define your content elements, inject data models to generate proper content and even customize it with slots. Those concepts are similar to other popular libraries like `Vue` or `Angular`.
+
+This tutorial focuses mainly on preparing the layout structure. For this reason, all necessary data is randomly generated.
+
+::: tip
+To improve the workflow, use various helper methods to easily generate fake data. All of them are available in the static `Placeholders` class. This way, it is easy to prototype document structure without implementing a real data source.
+:::
+
+```csharp
+using QuestPDF.Helpers;
+
+public static class InvoiceDocumentDataSource
+{
+    private static Random Random = new Random();
+
+    public static InvoiceModel GetInvoiceDetails()
+    {
+        var items = Enumerable
+            .Range(1, 8)
+            .Select(i => GenerateRandomOrderItem())
+            .ToList();
+
+        return new InvoiceModel
+        {
+            InvoiceNumber = Random.Next(1_000, 10_000),
+            IssueDate = DateTime.Now,
+            DueDate = DateTime.Now + TimeSpan.FromDays(14),
+
+            SellerAddress = GenerateRandomAddress(),
+            CustomerAddress = GenerateRandomAddress(),
+
+            Items = items,
+            Comments = Placeholders.Paragraph()
+        };
+    }
+
+    private static OrderItem GenerateRandomOrderItem()
+    {
+        return new OrderItem
+        {
+            Name = Placeholders.Label(),
+            Price = (decimal) Math.Round(Random.NextDouble() * 100, 2),
+            Quantity = Random.Next(1, 10)
+        };
+    }
+
+    private static Address GenerateRandomAddress()
+    {
+        return new Address
+        {
+            CompanyName = Placeholders.Name(),
+            Street = Placeholders.Label(),
+            City = Placeholders.Label(),
+            State = Placeholders.Label(),
+            Email = Placeholders.Email(),
+            Phone = Placeholders.PhoneNumber()
+        };
+    }
+}
+```
+
 ## Template layer
 
 The most important aspect of document generation is to design and implement its layout. QuestPDF offers multiple tools to achieve the desired results. The most important concepts are discussed in this tutorial. For more information about specific elements, please visit the [API Reference](/api-reference/index).
