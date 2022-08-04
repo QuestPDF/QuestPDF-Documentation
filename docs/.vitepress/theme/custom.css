@@ -3,10 +3,11 @@
     --vp-c-brand-light: #42A5F5;
     --vp-home-hero-name-color: transparent;
     --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #2979FF, #00E5FF);
-    --vp-home-hero-image-background-image: linear-gradient(-45deg, #2979FF66 40%, #88888866 40%);
+     --vp-home-hero-image-background-image: conic-gradient(from 100deg, #2979FF55 70deg, #88888855 70deg);
     --vp-home-hero-image-filter: blur(48px);
     --vp-button-brand-bg: #03A9F4;
     --vp-button-brand-hover-border: #03A9F4;
+    --vp-button-brand-active-border: #03A9F4;
     --vp-c-green-dark: #1565C0;
 }
 
@@ -20,7 +21,7 @@
 }
 
 .VPHero img.VPImage {
-    filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.15));
+    filter: drop-shadow(0 8px 8px rgba(0,  0, 0, 0.25));
 }
 
 .VPLink.link.active > span.link-text,
@@ -92,4 +93,19 @@ html.dark .VPDoc img[alt=example] {
 
 .VPNav.no-sidebar .container {
     max-width: 1152px;
+}
+
+
+html.dark .vp-doc strong,
+html.dark .vp-doc b {
+    color: #81D4FA;
+}
+
+html:not(.dark) .vp-doc strong,
+html:not(.dark) .vp-doc b {
+    color: #01579B;
+}
+
+.vp-doc a {
+    text-decoration: underline;
 }
