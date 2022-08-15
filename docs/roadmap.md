@@ -24,6 +24,12 @@ Please note that QuestPDF is developed mainly by a single person. I am doing my 
 
 ## Under consideration
 
+### Optimizations
+
+- Reduce complexity of rendering simple text blocks (with only one text run) by removing overhead of supporting multiple runs in such cases,
+- Reimplement support of paragraph spacing in text blocks by applying the column element only when applicable (at least two paragraphs),
+- Optimize TextStyle objects by tracking changes and reducing number of allocations.
+
 ### Previewer tool improvements
 
 - Add support for SectionLinks,
@@ -35,7 +41,10 @@ Please note that QuestPDF is developed mainly by a single person. I am doing my 
 
 ### Other ideas
 
-- Investigation on how to simplify unit tests and make them easier to manage.
+- Throw exception (debug mode only) when text uses glyphs not available in current font family,
+- Throw exception (debug mode only) when there is no font style close enough to current text style (e.g. no font with italic bold version),
+- Move generation-related parameters to static global configuration class,
+- Investigation on how to simplify unit tests and make them easier to manage,
 - Relative elements: alignment and translate,
 - Font subsetting to reduce output file size,
 - Text justification,

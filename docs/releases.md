@@ -1,5 +1,49 @@
 # Release notes
 
+## 2022.08
+
+
+### JetBrains help and performance optimization
+
+The QuestPDF project received an enormous help from JetBrains over last months. 
+
+The library was shown during one of episodes of [the OSS Power-Ups program](https://www.youtube.com/watch?v=-iYvZvpLX0g) hosted by Matthias Koch. This gave me a fresh energy to develop new great features. 
+
+Moreover, I got a change to cooperate with Maarten Balliauw, perform a detailed performance analysis and apply multiple fixes. To read more about this effort, please take a look at [this fantastic article](https://blog.jetbrains.com/dotnet/2022/07/27/profiling-questpdf-in-pursuit-of-performance/). Many of the improvements are already applied, making the library faster and more reliable for everyone. Some are inspiration for more fundamental changes that should significantly reduce resource utilization in the nearest future. 
+
+Dear JetBrains team, thank you for helping me making the library flourish, for promoting it across entire the .NET community, for your great patience and professionalism, and finally for making our industry a fantastic place to work.
+
+### Documentation update
+
+The QuestPDF documentation is written manually as MarkDown files. Those files are then compiled together to create a webpage. 
+
+I decided to change the documentation engine from VuePress to VitePress. This makes the webpage much faster, improves its look and feel, as well as increases usability. 
+
+Also, the old documentation structure has been designed nearly two years ago. Since then, the documentation grew over three times in size. Therefore, I have also decided to update its hierarchy, so it should be easier to traverse and find what you need. 
+
+The next step is to rewrite all articles, make descriptions more accurate and provide more examples.
+
+### New default font (breaking change)
+
+In this release, I decided to change the default font from `Calibri` to `Lato`. Lato is an open-source, free for commercial use font created by Polish author Łukasz Dziedzic. 
+
+The font is distributed with the library as embedded resource and part of the dll file / nuget package. This way, as long as you use the default font, you have it available on all environments. Also, the font is around 20x smaller, this should reduce substantially PDF file size (1.57 MB -> 74 KB) when using the default font.
+
+Of course there is caveat, this font does not contain more advanced glyphs, e.g. for Arabic/Chinese/Japanese languages, or for advanced unicode formatting. For such cases, you still need to use a font with proper support.
+
+This effort solves two issues:
+
+1) Makes sure that your code works on all environments (in terms of font availability). You don't get exceptions from a family of "Calibri is not available on Linux by default", etc.
+2) The average PDF output size will decrease drastically for most projects. In many cases, this will reduce the need of font subsetting. Of course, in the average case.
+
+### Others
+
+**Improved**: if you use the font that is not available in the runtime environment, the exception thrown by QuestPDF provides all fonts available.
+
+**Fixed**: a rare case when the `Inlined` element throws the layout overflow exception when generating PDF document.
+
+**Fixed**: memory leak introduced in the 2022.6 release connected to the HarfBuzzSharp library usage.
+
 ## 2022.06
 **Integrated the text-shaping algorithm.** This change significantly improves the Unicode compatibility. Also, it extends support for more advanced languages (e.g. Arabic) that:
    1) Combine multiple text characters and display them as a single visual glyph.
