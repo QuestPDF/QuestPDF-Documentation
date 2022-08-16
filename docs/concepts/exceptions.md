@@ -16,7 +16,7 @@ This exception occurs during the document generation process - when the generati
 
 This exception may be extremely hard to fix because it happens for valid document trees which enforce constraints that are impossible to meet. For example, when you try to draw a rectangle bigger than available space on the page, the rendering engine is going to wrap the content in a hope that on the next page there would be enough space. Generally, such wrapping behaviour is happening all the time and is working nicely - however, there are cases when it can lead to infinite wrapping. When a certain document length threshold is passed, the algorithm stops the rendering process and throws this exception. In such case, please revise your code and search for indivisible elements requiring too much space.
 
-This exception provides an additional element column. It shows which elements have been rendered when the exception was thrown. Please analyse the example below:
+When having a debugger attached, this exception provides an additional property `ElementTrace`. It shows which elements have been rendered when the exception was thrown. Please analyse the example below:
 
 ```csharp{2,8}
 .Padding(10)
@@ -105,3 +105,6 @@ Requested space: PartialRender (Width: 120,00, Height: 20,00)
                                     Min Height: -
                                     Max Height: -
 ```
+::: info
+Remember, this trace is only available, when you have a debugger attached.
+:::
