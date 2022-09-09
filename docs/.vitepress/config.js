@@ -1,6 +1,8 @@
 export default {
+    lang: 'en-US',
     title: 'QuestPDF',
     description: 'Modern .NET library for PDF document generation',
+    cleanUrls: 'with-subfolders',
 
     head: [
         ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg' }]
