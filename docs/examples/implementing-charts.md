@@ -41,7 +41,7 @@ var entries = new[]
         .Default
         .Size(20)
         .SemiBold()
-        .Color(Colors.Blue.Medium)
+        .Color(Colors.Blue.Medium);
 
     column
         .Item()
