@@ -39,9 +39,9 @@ var entries = new[]
 {
     var titleStyle = TextStyle
         .Default
-        .Size(20)
+        .FontSize(20)
         .SemiBold()
-        .Color(Colors.Blue.Medium);
+        .FontColor(Colors.Blue.Medium);
 
     column
         .Item()
