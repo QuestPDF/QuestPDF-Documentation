@@ -51,7 +51,7 @@ byte[] GenerateImage(Size size)
     // logic that generates and returns an image with a specific resolution
 }
 
-.DynamicImage(GenerateImage);
+.Image(GenerateImage);
 ```
 
 ## Limiting image size
