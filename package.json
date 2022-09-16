@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "vitepress": "^1.0.0-alpha.13",
+    "vitepress": "^1.0.0-alpha.15",
     "vue": "^3.2.39",
     "markdown-it-imsize": "^2.0.1"
   },

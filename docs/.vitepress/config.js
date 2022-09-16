@@ -2,6 +2,7 @@ export default {
     lang: 'en-US',
     title: 'QuestPDF',
     description: 'Modern .NET library for PDF document generation',
+    base: '/',
     cleanUrls: 'with-subfolders',
 
     head: [
