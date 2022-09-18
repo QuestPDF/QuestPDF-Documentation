@@ -11,7 +11,7 @@
 
 The code above will throw the exception with the following element trace:
 
-```{10-13}
+```csharp{10-13}
 🔥 Constrained
 --------------
 Available space: (Width: 500, Height: 360)
