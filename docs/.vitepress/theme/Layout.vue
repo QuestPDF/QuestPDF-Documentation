@@ -1,11 +1,15 @@
 <template>
   <default-layout>
     <template #doc-before>
-      <support-alert />
+      <ClientOnly>
+        <support-alert />
+      </ClientOnly>
     </template>
 
     <template #layout-bottom>
-      <google-analytics />
+      <ClientOnly>
+        <google-analytics />
+      </ClientOnly>
     </template>
   </default-layout>
 </template>
