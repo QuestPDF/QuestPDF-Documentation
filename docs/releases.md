@@ -1,5 +1,15 @@
 # Release notes
 
+## 2022.09
+
+1) Implemented font-fallback algorithm
+2) Introduced new Settings API,
+3) Improved rendering performance by 50% (in text-heavy documents),
+4) Significantly reduced memory allocation cost for TextStyle objects,
+5) Implemented optional checking if all font glyphs are available,
+6) Minor text-rendering optimizations.
+
+
 ## 2022.08
 
 

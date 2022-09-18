@@ -6,7 +6,7 @@ Please note that QuestPDF is developed mainly by a single person. I am doing my 
 
 ## Next releases
 
-### 2022.07 - 2022.10
+### 2022.10 - 2022.12
 
 **Documentation redesign** - implementing new features is really important to cover most common requirements. However, it is essential to simplify learning process and help new developers. Current documentation has been designed over a year ago and since then has grown over three times in size. I would like to rethink its structure:
 
@@ -17,8 +17,6 @@ Please note that QuestPDF is developed mainly by a single person. I am doing my 
 5) Investigate better connectivity between code examples, e.g. by generating clickable links in the code.
 6) Prepare documentation to be translated into other languages.
 
-**Improve line breaking algorithm for Asian languages** - not all languages use whitespace to break lines and wrap text. Some of them, such as Chinese, use significantly different [set of rules](https://en.wikipedia.org/wiki/Line_breaking_rules_in_East_Asian_languages). Covering most of them should improve QuestPDF compatibility with Asian languages. This mode will be available as special `TextStyle` flag, possible to set up globally for entire document.
-
 **Right to left support** - this release will continue improving compatibility with more advanced languages. This feature is not only about direction of text but also impact a couple of layout algorithms. For example, the `Table` element should place cells starting from the right-hand side when RTL mode is enabled. Moreover, the developer should be able to enable the RL mode on per-element and per-document basis.
 
 
@@ -26,9 +24,7 @@ Please note that QuestPDF is developed mainly by a single person. I am doing my 
 
 ### Optimizations
 
-- Reduce complexity of rendering simple text blocks (with only one text run) by removing overhead of supporting multiple runs in such cases,
-- Reimplement support of paragraph spacing in text blocks by applying the column element only when applicable (at least two paragraphs),
-- Optimize TextStyle objects by tracking changes and reducing number of allocations.
+- Reduce complexity of rendering simple text blocks (with only one text run) by removing overhead of supporting multiple runs in such cases.
 
 ### Previewer tool improvements
 
@@ -41,9 +37,9 @@ Please note that QuestPDF is developed mainly by a single person. I am doing my 
 
 ### Other ideas
 
-- Throw exception (debug mode only) when text uses glyphs not available in current font family,
+- Improve line breaking algorithm for Asian languages - not all languages use whitespace to break lines and wrap text. Some of them, such as Chinese, use significantly different [set of rules](https://en.wikipedia.org/wiki/Line_breaking_rules_in_East_Asian_languages). Covering most of them should improve QuestPDF compatibility with Asian languages. This mode will be available as special `TextStyle` flag, possible to set up globally for entire document.
+
 - Throw exception (debug mode only) when there is no font style close enough to current text style (e.g. no font with italic bold version),
-- Move generation-related parameters to static global configuration class,
 - Investigation on how to simplify unit tests and make them easier to manage,
 - Relative elements: alignment and translate,
 - Font subsetting to reduce output file size,

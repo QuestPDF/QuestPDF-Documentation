@@ -370,6 +370,76 @@ Text shaping capability also gives basic support for more advanced languages tha
 
 ![example](/api-reference/text-arabic.png =425x)
 
+## Font fallback
+
+Each font file contains a well-specified set of glyphs. Sometimes, to reduce font file size, more advanced glyphs are not present. For example, English uses around a hundred of characters, whereas Chinesee requires thousands of glyphs. Therefore, it is possible that text in document may contain glyphs not available in the configured font. In such cases, an ugly character (usually square with question mark) is rendered.
+
+You can define font fallback in the TexStyle object:
+
+```csharp{4,11}
+TextStyle
+    .Default
+    .FontFamily(Fonts.Calibri)
+    .Fallback(x => x.FontFamily("Segoe UI Emoji"));
+    
+// or
+
+TextStyle
+    .Default
+    .FontFamily(Fonts.Calibri)
+    .Fallback(TextStyle.Default.FontFamily("Segoe UI Emoji"));    
+```
+
+Please notice, that you can provide nested fallbacks for more advanced cases. It is also possible to modify other style properties:
+
+```csharp
+var textStyleWithFallback = TextStyle
+    .Default
+    .FontFamily(Fonts.Calibri)
+    .FontSize(18)
+    
+    .Fallback(x => x
+        .FontFamily("Segoe UI Emoji")
+        .NormalWeight()
+        .Underline()
+
+        .Fallback(y => y
+            .FontFamily("Microsoft YaHei")
+            .SemiBold()
+            .Underline(false)
+            .BackgroundColor(Colors.Red.Lighten4)));
+```
+
+Let's analyse an example:
+
+```csharp{3}
+.Text(text =>
+{
+    text.DefaultTextStyle(textStyleWithFallback);
+    
+    text.Line("This is normal text.");
+    text.EmptyLine();
+    
+    text.Line("Following line should use font fallback:");
+    text.Line("中文文本");
+    text.EmptyLine();
+    
+    text.Line("The following line contains a mix of known and unknown characters.");
+    text.Line("Mixed line: This 中文 is 文文 a mixed 本 本 line 本 中文文本!");
+    text.EmptyLine();
+
+    text.Span("Emojis work out of the box because of font fallback: 😊😅🥳👍❤😍👌");
+});
+```
+
+When the font fallback is not configured:
+
+![example](/api-reference/font-fallback-without.png =460x)
+
+And with configured font fallback. Please notice that additional styles (e.g. red background color) are applied only to glyphs from the associated fallback configuration. This let's you fine tune text parameters, e.g. to match visual text size in various fonts.
+
+![example](/api-reference/font-fallback-with.png =460x)
+
 ## Dealing with pageable text
 
 The text element supports paging. That means part of the text may be moved to the next page if there is not enough space on the current one. There are several approaches to simplify the workflow with text:

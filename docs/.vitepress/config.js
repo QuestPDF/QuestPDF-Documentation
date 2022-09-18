@@ -104,6 +104,7 @@ export default {
             {
                 text: 'Concepts',
                 items: [
+                    { text: 'Settings', link: '/concepts/settings' },
                     { text: 'Document metadata', link: '/concepts/document-metadata' },
                     { text: 'Generating output', link: '/concepts/generating-output' },
                     { text: 'Execution order', link: '/concepts/execution-order' },
