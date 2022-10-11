@@ -287,8 +287,7 @@ container
             .PaddingVertical(5)
             .PaddingHorizontal(10)
             .AlignCenter()
-            .AlignMiddle()
-            .ShowOnce();
+            .AlignMiddle();
     }
     
     table.ColumnsDefinition(columns =>
@@ -333,7 +332,7 @@ container
         table.Cell().Element(CellStyle).Text(page.width * inchesToPoints);
         table.Cell().Element(CellStyle).Text(page.height * inchesToPoints);
                 
-        IContainer CellStyle(IContainer container) => DefaultCellStyle(container, Colors.White); 
+        IContainer CellStyle(IContainer container) => DefaultCellStyle(container, Colors.White).ShowOnce(); 
     }
 });
 ```
