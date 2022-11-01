@@ -223,3 +223,78 @@ public class SampleReport : IDocument
 ```
 
 ![example](/patterns-and-practices/global-text-style.png =595x)
+
+## Global content direction (RTL)
+
+Most languages (such as English, German, Polish, etc.) are using the left-to-right writing direction. However, there are languages (e.g. Arabic) that use the right-to-left content direction. 
+
+The RTL mode applies to many elements in the document layout:
+1) Text position (aligned to the right).
+2) Text direction where text starts on the right side and ends on the left side.
+3) Text word-wrapping algorithm that needs to take into account direction of text when breaking a line.
+4) Order of elements in collections, e.g. the first item in a row should be placed most to the right (in RTL) or to the left (int LTR).
+5) Default content position (aligned to the right).
+
+It is possible to enable the RTL mode globally in the document:
+
+```csharp{7}
+document.Page(page =>
+{
+    page.Size(PageSizes.A5);
+    page.Margin(20);
+    page.PageColor(Colors.White);
+    
+    page.ContentFromRightToLeft();
+    
+    page.Content().Column(column =>
+    {
+        column.Spacing(20);
+        
+        // in RTL: elements are ordered from right to left
+        column.Item().Row(row =>
+        {
+            row.Spacing(10);
+            
+            row.AutoItem().AlignMiddle().Width(20).Height(20).Image(Placeholders.Image);
+            
+            // text automatically detects the type of content: LTR vs RTL 
+            row.RelativeItem()
+                .Text("Document title")
+                .FontSize(24).FontColor(Colors.Blue.Accent1).SemiBold();
+        });
+        
+        // in RTL: elements are ordered from right to left, top to bottom
+        column.Item().Table(table =>
+        {
+            table.ColumnsDefinition(columns =>
+            {
+                columns.RelativeColumn();
+                columns.RelativeColumn();
+                columns.RelativeColumn();
+                columns.RelativeColumn();
+            });
+
+            foreach (var i in Enumerable.Range(0, 9))
+            {
+                var width = (i % 4 == 0) ? 2 : 1;
+
+                table
+                    .Cell()
+                    .ColumnSpan((uint)width)
+                    .Background(i % 4 == 0 ? Colors.Grey.Lighten1 : Colors.Grey.Lighten2)
+                    .Padding(5)
+                    .AlignCenter()
+                    .Text(i)
+                    .FontSize(20);
+            }
+        });
+    });
+```
+
+The result with left-to-right content direction:
+
+![example](/api-reference/page-content-direction-ltr.png =420x)
+
+The result with right-to-left content direction:
+
+![example](/api-reference/page-content-direction-rtl.png =420x)

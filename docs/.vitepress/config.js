@@ -97,6 +97,7 @@ export default {
                     { text: 'Hyperlink', link: '/api-reference/hyperlink' },
                     { text: 'Element', link: '/api-reference/element' },
                     { text: 'Default Text Style', link: '/api-reference/default-text-style' },
+                    { text: 'Content Direction (RTL)', link: '/api-reference/content-direction' },
                     { text: 'Debug Area', link: '/api-reference/debug-area' },
                     { text: 'Debug Pointer', link: '/api-reference/debug-pointer' },
                 ]
