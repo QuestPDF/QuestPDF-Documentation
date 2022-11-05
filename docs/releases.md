@@ -1,5 +1,12 @@
 # Release notes
 
+## 2022.11
+
+1) Added support for the right-to-left content direction.
+2) Fixed: word-wrapping algorithm does not work correctly with right-to-left languages.
+3) Fixed: Page.Size() API incorrectly uses Unit.Inch as default unit. Replaced with Unit.Point for consistency.
+
+
 ## 2022.09
 
 1) Implemented font-fallback algorithm
