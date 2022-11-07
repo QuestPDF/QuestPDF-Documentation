@@ -457,3 +457,45 @@ Sometimes, there is very little space on the page. It is enough to display a cou
 .EnsureSpace(50)
 .Text("A long text here.");
 ```
+
+## Forcing text direction (RTL)
+
+QuestPDF automatically detects text direction and applies proper text alignment. However, it is possible to override text direction. 
+
+```csharp
+TextStyle.Default.DirectionAuto() // default
+TextStyle.Default.DirectionFromLeftToRight()
+TextStyle.Default.DirectionFromRightToLeft()
+```
+
+This may be useful with more advanced corner cases:
+
+```csharp
+.DefaultTextStyle(x => x.FontSize(24).FontFamily("Calibri"))
+.Column(column =>
+{
+    column.Spacing(10);
+    
+    var word = "الجوريتم";
+    var definition = "algorithm in Arabic";
+
+    var text = $"{word} - {definition}";
+    
+    // text direction is automatically detected using the first word
+    column.Item().Text(text);
+    
+    // it is possible to force specific content direction
+    column.Item().Text(text).DirectionFromLeftToRight();
+    column.Item().Text(text).DirectionFromRightToLeft();
+
+    // to combine text in various content directions, split it into segments
+    column.Item().Text(text =>
+    {
+        text.Span(word);
+        text.Span(" - ");
+        text.Span(definition);
+    });
+});
+```
+
+![example](/api-reference/text-direction-forced.png =300x)
