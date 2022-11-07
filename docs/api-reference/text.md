@@ -360,12 +360,13 @@ Text shaping capability also gives basic support for more advanced languages tha
 2) Are display in the right-to-left order.
 
 ```csharp{4}
-.Padding(25)
-.MinimalBox()
-.Background(Colors.Grey.Lighten2)
-.Text("ينا الألم. في بعض الأحيان ونظراً للالتزامات التي يفرضها علينا")
+var text = "في المعلوماتية أو الرياضيات، خوارزمية الترتيب هي خوارزمية تمكن من تنظيم مجموعة عناصر حسب ترتيب محدد.";
+                  
+.Padding(20)
+.ContentFromRightToLeft()
+.Text(text)
 .FontFamily(Fonts.Calibri)
-.FontSize(20);
+.FontSize(22);
 ```
 
 ![example](/api-reference/text-arabic.png =425x)
