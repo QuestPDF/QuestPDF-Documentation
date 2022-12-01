@@ -3,6 +3,7 @@
     <template #doc-before>
       <ClientOnly>
         <support-alert />
+        <survey-alert />
       </ClientOnly>
     </template>
 
@@ -19,8 +20,9 @@ import {defineComponent} from "vue";
 import DefaultTheme from 'vitepress/theme';
 import GoogleAnalytics from "./GoogleAnalytics.vue";
 import SupportAlert from "./SupportAlert.vue";
+import SurveyAlert from "./SurveyAlert.vue";
 
 export default defineComponent({
-  components: {SupportAlert, GoogleAnalytics, DefaultLayout: DefaultTheme.Layout },
+  components: {SupportAlert, SurveyAlert, GoogleAnalytics, DefaultLayout: DefaultTheme.Layout },
 });
 </script>
