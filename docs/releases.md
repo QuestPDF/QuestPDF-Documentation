@@ -1,27 +1,27 @@
 # Release notes
 
 ## 2022.12
-1) Feature: implemented LetterSpacing property for the Text element
-2) Improvement: the Text element API accepts now only string values, objects are not automatically converted anymore
-3) Fix: the Alignment element incorrectly limits size of its child when only one axis is set (horizontal or vertical)
-4) Maintenance: Updated SkiaSharp dependency to 2.88.3
+1) **Feature:** implemented LetterSpacing property for the Text element
+2) **Improvement:** the Text element API accepts now only string values, objects are not automatically converted anymore
+3) **Fix:** the Alignment element incorrectly limits size of its child when only one axis is set (horizontal or vertical)
+4) **Maintenance:** Updated SkiaSharp dependency to 2.88.3
 
 
 ## 2022.11
 
-1) Added support for the right-to-left content direction.
-2) Fixed: word-wrapping algorithm does not work correctly with right-to-left languages.
-3) Fixed: Page.Size() API incorrectly uses Unit.Inch as default unit. Replaced with Unit.Point for consistency.
+1) **Feature:** Added support for the right-to-left content direction.
+2) **Fixed:** word-wrapping algorithm does not work correctly with right-to-left languages.
+3) **Fixed:** Page.Size() API incorrectly uses Unit.Inch as default unit. Replaced with Unit.Point for consistency.
 
 
 ## 2022.09
 
-1) Implemented font-fallback algorithm
-2) Introduced new Settings API,
-3) Improved rendering performance by 50% (in text-heavy documents),
-4) Significantly reduced memory allocation cost for TextStyle objects,
-5) Implemented optional checking if all font glyphs are available,
-6) Minor text-rendering optimizations.
+1) **Feature:** Implemented font-fallback algorithm
+2) **Feature:** Introduced new Settings API,
+3) **Optimization:** increased rendering performance by 50% (in text-heavy documents),
+4) **Optimization:** Significantly reduced memory allocation cost for TextStyle objects,
+5) **Improvement:** Implemented optional checking if all font glyphs are available,
+6) **Optimization:** Minor text-rendering performance adjustments.
 
 
 ## 2022.08
