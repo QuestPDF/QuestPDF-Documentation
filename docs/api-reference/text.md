@@ -140,7 +140,7 @@ Letter spacing allows to increase or decrease space between characters. This set
 
 This settings uses relative units. Example: let's assume your text has font size 20. If letter spacing is set to 0.1, an additional space of 2 points will be added between characters.
 
-```csharp
+```csharp{18}
 .Column(column =>
 {
     var letterSpacing = new[] { -0.05f, 0f, 0.2f };
