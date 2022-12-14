@@ -1,5 +1,12 @@
 # Release notes
 
+## 2022.12
+1) Feature: implemented LetterSpacing property for the Text element
+2) Improvement: the Text element API accepts now only string values, objects are not automatically converted anymore
+3) Fix: the Alignment element incorrectly limits size of its child when only one axis is set (horizontal or vertical)
+4) Maintenance: Updated SkiaSharp dependency to 2.88.3
+
+
 ## 2022.11
 
 1) Added support for the right-to-left content direction.
