@@ -130,6 +130,51 @@ This settings changes spacing between text lines. Modify the value to make the t
 
 ![example](/api-reference/text-line-height.png =500x)
 
+
+## Letter spacing
+
+Letter spacing allows to increase or decrease space between characters. This setting is useful when you want to make the text more compact (by decreasing letter spacing) or easier to read (by increasing letter spacing):
+- Value 0 corresponds to normal spacing defined by a font.
+- Positive values create additional space.
+- Negative values reduce space between characters.
+
+This settings uses relative units. Example: let's assume your text has font size 20. If letter spacing is set to 0.1, an additional space of 2 points will be added between characters.
+
+```csharp
+.Column(column =>
+{
+    var letterSpacing = new[] { -0.05f, 0f, 0.2f };
+    var paragraph = Placeholders.Sentence();
+
+    foreach (var spacing in letterSpacing)
+    {
+        column
+            .Item()
+            .Border(1)
+            .Padding(10)
+            .Column(nestedColumn =>
+            {
+                nestedColumn
+                    .Item()
+                    .Text(paragraph)
+                    .FontSize(18)
+                    .LetterSpacing(spacing);
+
+                nestedColumn
+                    .Item()
+                    .Text($"Letter spacing of {spacing} em")
+                    .FontSize(14)
+                    .Italic()
+                    .FontColor(Colors.Blue.Medium);
+            });
+        
+    }
+});
+```
+
+![example](/api-reference/text-letter-spacing.png =500x)
+
+
 ## Typography pattern
 
 Please consider an example Typography class that describes text styling across all documents:
