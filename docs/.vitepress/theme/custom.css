@@ -33,6 +33,15 @@
     font-size: 1.25rem;
 }
 
+.VPHome {
+    padding-bottom: 0 !important;
+}
+
+.VPHero {
+    padding-top: 198px !important;
+    padding-bottom: 96px !important;
+}
+
 @media (min-width: 425px) {
     .VPHero h1 {
         font-size: 4rem !important;
@@ -48,14 +57,14 @@
 
 @media (min-width: 960px) {
     .VPHero h1 {
-        font-size: 5rem !important;
-        margin-bottom: 2rem !important;
+        font-size: 6rem !important;
+        margin-bottom: 3rem !important;
     }
 
     .VPHero p.text {
-        font-size: 2rem !important;
-        line-height: 2.5rem !important;
-        margin-bottom: 1.5rem !important;
+        font-size: 2.5rem !important;
+        line-height: 3rem !important;
+        margin-bottom: 2rem !important;
     }
 }
 
@@ -75,6 +84,7 @@
 html:not(.dark) {
     --vp-code-block-bg: #EEE;
     --vp-code-line-highlight-color: #DDD;
+    --vp-c-bg-soft: #f6f6f6;
 }
 
 html:not(.dark) .VPDoc img[alt=example] {

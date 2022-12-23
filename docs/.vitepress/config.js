@@ -12,10 +12,16 @@ export default {
     themeConfig: {
         logo: '/logo.svg',
         nav: [
-            { text: 'Quick start', link: '/quick-start' },
-            { text: 'API reference', link: '/api-reference/index' },
-            { text: 'Patterns', link: '/design-patterns' },
-            { text: 'Sponsor', link: 'https://github.com/sponsors/QuestPDF' },
+            { text: 'License', link: 'https://github.com/QuestPDF/QuestPDF' },
+            {
+                text: 'Developers',
+                items: [
+                    { text: 'Quick start', link: '/quick-start' },
+                    { text: 'API reference', link: '/api-reference/index' },
+                    { text: 'Patterns', link: '/design-patterns' },
+                ]
+            },
+            //{ text: 'Sponsor', link: 'https://github.com/sponsors/QuestPDF' },
             { text: 'GitHub', link: 'https://github.com/QuestPDF/QuestPDF' },
             { text: 'Nuget', link: 'https://www.nuget.org/packages/QuestPDF' }
         ],
