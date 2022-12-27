@@ -40,17 +40,17 @@
   <div class="container">
     <h2 class="title">Two sides of QuestPDF</h2>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 32px;">
+    <div class="targets">
 
-      <section class="card">
-        <img class="icon" src="custom/engine.svg" />
-        <h3 class="title">What the community loves</h3>
+      <section class="target-card">
+        <img class="icon" src="custom/community2.svg" />
+        <h3 class="title">Loved by developers</h3>
         <p class="details">This library is created specifically for designing and arranging document layouts, with full paging support. Alternative solutions, such as HTML-based converters, are not designed for this purpose and therefore are often unpredictable and do not produce desired results.</p>
       </section>
 
-      <section class="card">
-        <img class="icon" src="custom/layers.svg" />
-        <h3 class="title">What the business needs</h3>
+      <section class="target-card">
+        <img class="icon" src="custom/success3.svg" />
+        <h3 class="title">Required by business</h3>
         <p class="details">The entire process of implementing PDF document, takes place in your code. Free yourself from slow visual designers and strange technological limitations. Follow simple yet highly effective approaches to create maintainable, high-quality code.</p>
       </section>
 
@@ -79,44 +79,55 @@
 
       <h2 class="title">Designed to be efficient</h2>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; grid-gap: 32px;">
+      <div class="features">
 
-        <section class="card">
-          <img class="icon" src="custom/engine.svg" />
-          <h3 class="title">Rely on solid fundamentals</h3>
+        <section class="feature-card">
+          <img class="icon" src="custom/settings.svg" />
+          <h3 class="title">Layout</h3>
           <p class="details">This library is created specifically for designing and arranging document layouts, with full paging support.</p>
         </section>
 
-        <section class="card">
-          <img class="icon" src="custom/layers.svg" />
-          <h3 class="title">Work with organized code</h3>
+        <section class="feature-card">
+          <img class="icon" src="custom/server2.svg" />
+          <h3 class="title">Multiplatform</h3>
           <p class="details">The entire process of implementing PDF document, takes place in your code. Free yourself from slow visual designers and strange technological limitations. </p>
         </section>
 
-        <section class="card">
-          <img class="icon" src="custom/extend.svg" />
-          <h3 class="title">Compose simple components into complex documents</h3>
+        <section class="feature-card">
+          <img class="icon" src="custom/puzzle.svg" />
+          <h3 class="title">Reusable</h3>
           <p class="details">Do you remember the feeling when your code just works? When your ideas are becoming real without any effort?</p>
         </section>
 
-        <section class="card">
-          <img class="icon" src="custom/compose.svg" />
-          <h3 class="title">Create and reuse components</h3>
+        <section class="feature-card">
+          <img class="icon" src="custom/maintain.svg" />
+          <h3 class="title">Maintenance</h3>
           <p class="details">Feel no fear of complex documents! Create custom, reusable components and divide the document's layout into easy to maintain pieces.</p>
         </section>
 
-        <section class="card">
-          <img class="icon" src="custom/prototype.svg" />
-          <h3 class="title">Prototype with ease</h3>
+        <section class="feature-card">
+          <img class="icon" src="custom/paint2.svg" />
+          <h3 class="title">Prototyping</h3>
           <p class="details">We understand that document generation is often tricky and require multiple iterations. The library offers additional prototyping tools such as random text generator or image placeholder element.</p>
         </section>
 
-        <section class="card">
-          <img class="icon" src="custom/performance.svg" />
-          <h3 class="title">Enjoy fast PDF generation</h3>
+        <section class="feature-card">
+          <img class="icon" src="custom/speed.svg" />
+          <h3 class="title">Performance</h3>
           <p class="details">QuestPDF is created upon SkiaSharp, a well-known graphical library, and converts your data into PDF documents.</p>
         </section>
 
+        <section class="feature-card">
+          <img class="icon" src="custom/book.svg" />
+          <h3 class="title">Learning</h3>
+          <p class="details">QuestPDF is created upon SkiaSharp, a well-known graphical library, and converts your data into PDF documents.</p>
+        </section>
+
+        <section class="feature-card">
+          <img class="icon" src="custom/intellisense.svg" />
+          <h3 class="title">Stability</h3>
+          <p class="details">QuestPDF is created upon SkiaSharp, a well-known graphical library, and converts your data into PDF documents.</p>
+        </section>
       </div>
     </div>
   </div>
@@ -185,19 +196,85 @@ html.dark .video-container {
   background-color: var(--vp-c-bg);
 }
 
-.card {
-  background-color: var(--vp-c-bg-soft);
+
+
+
+.targets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 96px;
+
+  margin-top: 64px;
+}
+
+.target-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /*background-color: var(--vp-c-bg-soft);*/
   /*border: 1px solid var(--vp-c-divider-light);*/
-  border-radius: 12px;
-  padding: 32px;
+  /*border-radius: 12px;*/
+  /*padding: 32px;*/
 }
 
-.card img.icon {
-  max-height: 48px;
-  max-width: 48px;
+.target-card img.icon {
+  align-self: center;
+  height: 96px;
 
-  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+  /*filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));*/
 }
+
+.target-card h3 {
+  text-align: center;
+}
+
+.target-card p.details {
+  text-align: justify;
+}
+
+
+
+
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 64px 96px;
+
+  margin-top: 64px;
+}
+
+.feature-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  grid-gap: 8px 24px;
+}
+
+.feature-card img.icon {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+
+  justify-self: start;
+  align-self: start;
+  height: 48px;
+  width: 48px;
+}
+
+.feature-card h3.title {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+}
+
+.feature-card p.details {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: start;
+  align-self: start;
+}
+
+
+
 
 h2.title {
   font-family: var(--vp-font-family-base);
@@ -218,7 +295,7 @@ h3.title {
 
 p.details {
   color: var(--vp-c-text-2);
-  padding-top: 8px;
+
   line-height: 24px;
   font-size: 1rem;
 }

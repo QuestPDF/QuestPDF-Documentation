@@ -3,11 +3,11 @@
     --vp-c-brand-light: #42A5F5;
     --vp-home-hero-name-color: transparent;
     --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #2979FF, #00E5FF);
-     --vp-home-hero-image-background-image: conic-gradient(from 100deg, #2979FF55 70deg, #88888855 70deg);
+    --vp-home-hero-image-background-image: conic-gradient(from 100deg, #2979FF55 70deg, #88888855 70deg);
     --vp-home-hero-image-filter: blur(48px);
     --vp-button-brand-bg: #03A9F4;
     --vp-button-brand-hover-border: #03A9F4;
-    --vp-button-brand-active-border: #03A9F4;
+    --vp-button-brand-active-border: #2979FF;
     --vp-c-green-dark: #1565C0;
 }
 

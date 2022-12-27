@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1.18807,0,0,1.18807,-2.27266,-3.5642)">
+        <path d="M12,3C10.73,3 9.6,3.8 9.18,5L3,5L3,7L9.17,7C9.5,7.85 10.15,8.5 11,8.83L11,20L1.913,20L1.913,22L22.114,22L22.114,20L13,20L13,8.82C13.85,8.5 14.5,7.85 14.82,7L21,7L21,5L14.83,5C14.4,3.8 13.27,3 12,3" style="fill:url(#_Linear1);fill-rule:nonzero;"/>
+    </g>
+    <g transform="matrix(1.18807,0,0,1.18807,-2.27266,-3.5642)">
+        <path d="M4.95,7L2,14C1.53,16 3,17 5.5,17C8,17 9.56,16 9,14L6.05,7M5.5,8.567L7.842,14L3.158,14L5.5,8.567" style="fill:url(#_Linear2);fill-rule:nonzero;"/>
+    </g>
+    <g transform="matrix(1.18807,0,0,1.18807,13.1722,-3.5642)">
+        <path d="M4.95,7L2,14C1.53,16 3,17 5.5,17C8,17 9.56,16 9,14L6.05,7M5.5,8.567L7.842,14L3.158,14L5.5,8.567" style="fill:url(#_Linear3);fill-rule:nonzero;"/>
+    </g>
+    <defs>
+        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(20.2009,20.2009,-20.2009,20.2009,1.91291,3)"><stop offset="0" style="stop-color:rgb(0,229,255);stop-opacity:0.4"/><stop offset="1" style="stop-color:rgb(41,121,255);stop-opacity:0.4"/></linearGradient>
+        <linearGradient id="_Linear2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(20.2009,20.2009,-20.2009,20.2009,1.91291,3)"><stop offset="0" style="stop-color:rgb(0,229,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(41,121,255);stop-opacity:1"/></linearGradient>
+        <linearGradient id="_Linear3" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(20.2009,20.2009,-20.2009,20.2009,-11.0871,3)"><stop offset="0" style="stop-color:rgb(0,229,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(41,121,255);stop-opacity:1"/></linearGradient>
+    </defs>
+</svg>
