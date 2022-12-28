@@ -12,6 +12,28 @@
         </div>
       </section>
 
+      <div class="statistics">
+
+        <section class="statistics-card">
+          <img class="icon" src="custom/star-stat.svg" />
+          <span class="value">4 400+</span>
+          <span class="label">GitHub stargazers</span>
+        </section>
+
+        <section class="statistics-card">
+          <img class="icon" src="custom/download-stat2.svg" />
+          <span class="value">700 000+</span>
+          <span class="label">Nuget download</span>
+        </section>
+
+        <section class="statistics-card">
+          <img class="icon" src="custom/update-stat2.svg" />
+          <span class="value">50+</span>
+          <span class="label">Library updates</span>
+        </section>
+
+      </div>
+
       <div class="video-container">
         <video class="video" autoplay controls muted loop>
           <source src="previewer/video.mp4" type="video/mp4">
@@ -50,7 +72,7 @@
 
       <section class="target-card">
         <img class="icon" src="custom/success3.svg" />
-        <h3 class="title">Required by business</h3>
+        <h3 class="title">Trusted by business</h3>
         <p class="details">The entire process of implementing PDF document, takes place in your code. Free yourself from slow visual designers and strange technological limitations. Follow simple yet highly effective approaches to create maintainable, high-quality code.</p>
       </section>
 
@@ -276,6 +298,58 @@ html.dark .video-container {
 
 
 
+
+.statistics {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 64px;
+
+  margin: 64px 0;
+}
+
+.statistics-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  grid-gap: 4px 24px;
+}
+
+.statistics-card img.icon {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+
+  justify-self: start;
+  align-self: start;
+  height: 48px;
+  width: 48px;
+}
+
+.statistics-card span.value {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+
+  font-family: var(--vp-font-family-base);
+  color: var(--vp-c-text-1);
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.statistics-card span.label {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: start;
+  align-self: start;
+
+  color: var(--vp-c-text-2);
+  font-size: 1rem;
+}
+
+
+
+
+
+
 h2.title {
   font-family: var(--vp-font-family-base);
   font-size: 2rem;
@@ -301,16 +375,6 @@ p.details {
 }
 
 
-
-
-.companion-screenshot {
-  border-radius: 20px;
-  content: url(custom/companion_light.png);
-}
-
-html.dark .companion-screenshot {
-  content: url(custom/companion_dark.png);
-}
 
 
 
