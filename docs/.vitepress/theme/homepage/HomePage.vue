@@ -16,23 +16,23 @@
 
 <script setup>
 
-import HomePageFeatures from "./homepage/HomePageFeatures.vue";
-import HomePageUsers from "./homepage/HomePageUsers.vue";
-import HomePageDescription from "./homepage/HomePageDescription.vue";
-import HomePageRecommendation from "./homepage/HomePageRecommendation.vue";
+import HomePageFeatures from "./HomePageFeatures.vue";
+import HomePageUsers from "./HomePageUsers.vue";
+import HomePageDescription from "./HomePageDescription.vue";
+import HomePageRecommendation from "./HomePageRecommendation.vue";
 </script>
 
 <style>
 
-.custom-homepage h2.title {
+.custom-homepage h2 {
   font-family: var(--vp-font-family-base);
   font-size: 2rem;
   font-weight: 600;
-  line-height: 1.5rem;
+  line-height: 2.5rem;
   margin-bottom: 2rem;
 }
 
-.custom-homepage h3.title {
+.custom-homepage h3 {
   font-family: var(--vp-font-family-base);
   color: var(--vp-c-text-1);
   font-size: 1.2rem;
@@ -48,28 +48,14 @@ import HomePageRecommendation from "./homepage/HomePageRecommendation.vue";
   font-size: 1rem;
 }
 
-</style>
-
-<style scoped>
-
-
-
-
-.container {
-  padding: 96px 0;
+.custom-homepage .container {
+  padding: 96px 32px;
   margin: 0 auto;
-  max-width: 1152px;
+  max-width: 1216px;
 }
 
-
-.reverse {
+.custom-homepage .reverse {
   background-color: var(--vp-c-bg-soft);
 }
-
-.reverse .card {
-  background-color: var(--vp-c-bg);
-}
-
-
 
 </style>

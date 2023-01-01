@@ -1,7 +1,7 @@
 <template>
   <div class="container">
 
-    <h2 class="title">Designed to be efficient</h2>
+    <h2>Designed to be efficient</h2>
 
     <div class="features">
 
@@ -25,10 +25,16 @@ import { FeaturesContent } from './configuration';
 
 .features {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: 1fr 1fr;
   grid-gap: 64px 96px;
 
   margin-top: 64px;
+}
+
+@media screen and (max-width: 700px) {
+  .features {
+    grid-template-columns: 1fr;
+  }
 }
 
 .feature-card {
@@ -41,7 +47,7 @@ import { FeaturesContent } from './configuration';
   grid-gap: 8px 24px;
 }
 
-@media screen and (max-width: 1000px) and (min-width: 700px) {
+@media screen and (max-width: 1000px) {
   .feature-card {
     grid-template-areas:
       "icon"
@@ -49,7 +55,7 @@ import { FeaturesContent } from './configuration';
       "description";
     grid-template-columns: auto;
     grid-template-rows: auto auto auto;
-    grid-gap: 8px 0;
+    grid-gap: 12px 0;
   }
 }
 

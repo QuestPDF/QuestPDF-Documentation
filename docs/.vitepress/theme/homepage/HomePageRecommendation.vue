@@ -1,11 +1,11 @@
 <template>
     <div class="container">
-      <h2 class="title">Library that truly helps</h2>
+      <h2>Library that truly helps</h2>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 64px;">
+      <div class="recommendations">
         <div class="recommendation" v-for="recommendation of RecommendationsContent" :key="recommendation.author">
-          <p class="recommendation--quote">{{ recommendation.quote }}</p>
-          <p class="recommendation--author">{{ recommendation.author }}</p>
+          <p class="quote">{{ recommendation.quote }}</p>
+          <p class="author">{{ recommendation.author }}</p>
         </div>
       </div>
     </div>
@@ -19,7 +19,19 @@ import { RecommendationsContent } from './configuration';
 
 <style scoped>
 
-.recommendation--quote {
+.recommendations {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 64px 96px;
+}
+
+@media screen and (max-width: 700px) {
+  .recommendations {
+    grid-template-columns: 1fr;
+  }
+}
+
+.quote {
   color: var(--vp-c-text-2);
   font-size: 1rem;
   font-style: italic;
@@ -29,7 +41,7 @@ import { RecommendationsContent } from './configuration';
 }
 
 
-.recommendation--author {
+.author {
   color: var(--vp-c-text-1);
   padding-top: 8px;
   line-height: 24px;

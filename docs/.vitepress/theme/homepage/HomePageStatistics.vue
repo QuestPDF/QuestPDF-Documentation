@@ -19,7 +19,7 @@ import { StatisticsContent } from './configuration';
 .statistics {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 64px;
+  grid-gap: 64px 96px;
 
   margin: 64px 0;
 }
