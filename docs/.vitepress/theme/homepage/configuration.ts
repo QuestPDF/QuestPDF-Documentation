@@ -17,12 +17,12 @@ interface HomePageStatistic {
 
 export const FeaturesContent : HomePageFeature[] = [
     {
-        icon: "custom/settings.svg",
+        icon: "custom/engine.svg",
         title: "Comprehensive layout engine",
         details: "Utilize a layout engine specifically designed for document generation, with full paging support. It gives you high control over the content, optimizes the document's visual structure, and makes your code more flexible."
     },
     {
-        icon: "custom/server2.svg",
+        icon: "custom/multiplatform.svg",
         title: "Multiplatform",
         details: "Feel free to use your preffered code editor (JetBrains Rider, Visual Studio, VS Code, etc.). Run your software on any operating system (Windows, Linux, macOS), cloud platforms (e.g. Azure, AWS), device types (desktop, tablets, phones) and even web browser (via WebAssembly)."
     },
@@ -32,22 +32,22 @@ export const FeaturesContent : HomePageFeature[] = [
         details: "Make your code more manageable by dividing it into classes and methods, exactly how you do it with other features and functionalities. You don't need to learn more skills to make your implementation beautiful."
     },
     {
-        icon: "custom/maintain.svg",
+        icon: "custom/maintenance.svg",
         title: "Efficient maintenance",
         details: "Follow the code-only approach to have better understanding of changes and implementation history. Use your preffered version control system to easily manage fixes, adjustments and improvements. Never get lost in proprietary binary formats or complex HTML implementations."
     },
     {
-        icon: "custom/paint2.svg",
+        icon: "custom/prototyping.svg",
         title: "Quick prototyping",
         details: "Design and adjust visual content using the QuestPDF Previewer tool. It utilizes a hot-reload capability to preview your document without code re-compilation. Use the inspector tool to better understand the layout and its structure."
     },
     {
-        icon: "custom/speed.svg",
+        icon: "custom/performance.svg",
         title: "High performance",
         details: "Enjoy high performance and low resource usage thanks to highly optimized layout engine and graphical library. Generate even 1000 PDF files per minute per core with a thread-safe process."
     },
     {
-        icon: "custom/book.svg",
+        icon: "custom/learning.svg",
         title: "Rewarding learning",
         details: "Quickly go into action and learn library essential features by reading the Getting Started tutorial. Learn more advanced concepts with constantly improving documentation and hundreds of code examples."
     },
@@ -57,7 +57,7 @@ export const FeaturesContent : HomePageFeature[] = [
         details: "The library uses the FluentAPI code style that makes your code more concise and easier to understand. The IntelliSense mechanism available in all major IDEs helps you writing the code efficiently and discover new features."
     },
     {
-        icon: "custom/language.svg",
+        icon: "custom/multilingual.svg",
         title: "Advanced languages support",
         details: "Easily create multilangual documents with advanced text style support, including right-to-left languages (RTL) as well as languages requiring text shaping to properly display glyphs (e.g. Arabic)."
     }
@@ -84,17 +84,17 @@ export const RecommendationsContent : HomePageRecommendation[] = [
 
 export const StatisticsContent : HomePageStatistic[] = [
     {
-        icon: "/custom/star-stat.svg",
+        icon: "/custom/stargazers.svg",
         label: "GitHub stargazers",
         value: "4 450+"
     },
     {
-        icon: "/custom/download-stat2.svg",
+        icon: "/custom/downloads.svg",
         label: "Nuget package downloads",
         value: "700 000+"
     },
     {
-        icon: "/custom/update-stat2.svg",
+        icon: "/custom/updates.svg",
         label: "Feature and quality updates",
         value: "40+"
     }

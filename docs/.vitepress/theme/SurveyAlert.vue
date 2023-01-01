@@ -2,7 +2,7 @@
   <a v-show="showAlert" :href="surveyUrl" target="_blank">
     <div class="alert warning custom-block" style="width: 100%; margin-bottom: 32px; padding: 16px; display: grid; grid-template-columns: auto 1fr 32px; grid-gap: 16px;">
 
-      <img src="/custom/questions.svg" style="width: 32px; align-self: center;" />
+      <img src="/custom/survey.svg" style="width: 32px; align-self: center;" />
 
       <div>
         <b>Let's make the library even better, together!</b> <br>

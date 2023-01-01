@@ -6,13 +6,13 @@
     <div class="targets">
 
       <section class="target-card">
-        <img class="icon" src="/custom/community2.svg" />
+        <img class="icon" src="/custom/community.svg" />
         <h3 class="title">Loved by developers</h3>
         <p class="details">This library is created specifically for designing and arranging document layouts, with full paging support. Alternative solutions, such as HTML-based converters, are not designed for this purpose and therefore are often unpredictable and do not produce desired results.</p>
       </section>
 
       <section class="target-card">
-        <img class="icon" src="/custom/success2.svg" />
+        <img class="icon" src="/custom/business.svg" />
         <h3 class="title">Trusted by business</h3>
         <p class="details">The entire process of implementing PDF document, takes place in your code. Free yourself from slow visual designers and strange technological limitations. Follow simple yet highly effective approaches to create maintainable, high-quality code.</p>
       </section>
