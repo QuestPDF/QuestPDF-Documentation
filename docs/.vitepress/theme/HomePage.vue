@@ -5,10 +5,15 @@
       <section style="display: flex; flex-direction: column;">
         <h2 class="title">What is QuestPDF?</h2>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 64px;">
-          <p class="details">It offers a layouting engine designed with a full paging support in mind. The document consists of many simple elements (e.g. border, background, image, text, padding, table, grid etc.) that are composed together to create more complex structures. </p>
+        <div class="library-details" style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 64px;">
+          <div>
+            <p>QuestPDF is an open-source .NET library for PDF generation.</p>
 
-          <p class="details">This way, as a developer, you can understand the behavior of every element and use them with full confidence. Additionally, the document and all its elements support paging functionality. For example, an element can be moved to the next page (if there is not enough space) or even be split between pages like table's rows.</p>
+            <p>Utilizing several new concepts and approaches, QuestPDF seeks to resolve the challenges inherent in this process. To make implementation as straightforward as possible, the library features a C# Fluent API.</p>
+
+          </div>
+
+          <p>Additionally, the QuestPDF Previewer expedites the development cycle by providing a hot-reload capability, allowing real-time results without recompiling code. Finally, the document structure is rendered through a comprehensive and flexible layout engine.</p>
         </div>
       </section>
 
@@ -16,7 +21,7 @@
 
         <section class="statistics-card">
           <img class="icon" src="custom/star-stat.svg" />
-          <span class="value">4 400+</span>
+          <span class="value">4 450+</span>
           <span class="label">GitHub stargazers</span>
         </section>
 
@@ -28,7 +33,7 @@
 
         <section class="statistics-card">
           <img class="icon" src="custom/update-stat2.svg" />
-          <span class="value">50+</span>
+          <span class="value">40+</span>
           <span class="label">Library updates</span>
         </section>
 
@@ -60,7 +65,7 @@
 <!--  </div>-->
 
   <div class="container">
-    <h2 class="title">Two sides of QuestPDF</h2>
+    <h2 class="title">What you need is here</h2>
 
     <div class="targets">
 
@@ -71,7 +76,7 @@
       </section>
 
       <section class="target-card">
-        <img class="icon" src="custom/success3.svg" />
+        <img class="icon" src="custom/success2.svg" />
         <h3 class="title">Trusted by business</h3>
         <p class="details">The entire process of implementing PDF document, takes place in your code. Free yourself from slow visual designers and strange technological limitations. Follow simple yet highly effective approaches to create maintainable, high-quality code.</p>
       </section>
@@ -105,80 +110,87 @@
 
         <section class="feature-card">
           <img class="icon" src="custom/settings.svg" />
-          <h3 class="title">Layout</h3>
-          <p class="details">This library is created specifically for designing and arranging document layouts, with full paging support.</p>
+          <h3 class="title">Comprehensive layout engine</h3>
+          <p class="details">Utilize a layout engine specifically designed for document generation, with full paging support. It gives you high control over the content, optimizes the document's visual structure, and makes your code more flexible.</p>
         </section>
 
         <section class="feature-card">
           <img class="icon" src="custom/server2.svg" />
           <h3 class="title">Multiplatform</h3>
-          <p class="details">The entire process of implementing PDF document, takes place in your code. Free yourself from slow visual designers and strange technological limitations. </p>
+          <p class="details">Feel free to use your preffered code editor (JetBrains Rider, Visual Studio, VS Code, etc.). Run your software on any operating system (Windows, Linux, macOS), cloud platforms (e.g. Azure, AWS), device types (desktop, tablets, phones) and even web browser (via WebAssembly).</p>
         </section>
 
         <section class="feature-card">
           <img class="icon" src="custom/puzzle.svg" />
-          <h3 class="title">Reusable</h3>
-          <p class="details">Do you remember the feeling when your code just works? When your ideas are becoming real without any effort?</p>
+          <h3 class="title">Reusable code</h3>
+          <p class="details">Make your code more manageable by dividing it into classes and methods, exactly how you do it with other features and functionalities. You don't need to learn more skills to make your implementation beautiful.
+          </p>
         </section>
 
         <section class="feature-card">
           <img class="icon" src="custom/maintain.svg" />
-          <h3 class="title">Maintenance</h3>
-          <p class="details">Feel no fear of complex documents! Create custom, reusable components and divide the document's layout into easy to maintain pieces.</p>
+          <h3 class="title">Efficient maintenance</h3>
+          <p class="details">Follow the code-only approach to have better understanding of changes and implementation history. Use your preffered version control system to easily manage fixes, adjustments and improvements. Never get lost in proprietary binary formats or complex HTML implementations.</p>
         </section>
 
         <section class="feature-card">
           <img class="icon" src="custom/paint2.svg" />
-          <h3 class="title">Prototyping</h3>
-          <p class="details">We understand that document generation is often tricky and require multiple iterations. The library offers additional prototyping tools such as random text generator or image placeholder element.</p>
+          <h3 class="title">Quick prototyping</h3>
+          <p class="details">Design and adjust visual content using the QuestPDF Previewer tool. It utilizes a hot-reload capability to preview your document without code re-compilation. Use the inspector tool to better understand the layout and its structure.</p>
         </section>
 
         <section class="feature-card">
           <img class="icon" src="custom/speed.svg" />
-          <h3 class="title">Performance</h3>
-          <p class="details">QuestPDF is created upon SkiaSharp, a well-known graphical library, and converts your data into PDF documents.</p>
+          <h3 class="title">High performance</h3>
+          <p class="details">Enjoy high performance and low resource usage thanks to highly optimized layout engine and graphical library. Generate even 1000 PDF files per minute per core with a thread-safe process.</p>
         </section>
 
         <section class="feature-card">
           <img class="icon" src="custom/book.svg" />
-          <h3 class="title">Learning</h3>
-          <p class="details">QuestPDF is created upon SkiaSharp, a well-known graphical library, and converts your data into PDF documents.</p>
+          <h3 class="title">Rewarding learning</h3>
+          <p class="details">Quickly go into action and learn library essential features by reading the Getting Started tutorial. Learn more advanced concepts with constantly improving documentation and hundreds of code examples.</p>
         </section>
 
         <section class="feature-card">
           <img class="icon" src="custom/intellisense.svg" />
-          <h3 class="title">Stability</h3>
-          <p class="details">QuestPDF is created upon SkiaSharp, a well-known graphical library, and converts your data into PDF documents.</p>
+          <h3 class="title">Discoverable Fluent API</h3>
+          <p class="details">The library uses the FluentAPI code style that makes your code more concise and easier to understand. The IntelliSense mechanism available in all major IDEs helps you writing the code efficiently and discover new features.</p>
+        </section>
+
+        <section class="feature-card">
+          <img class="icon" src="custom/language.svg" />
+          <h3 class="title">Advanced languages support</h3>
+          <p class="details">Easily create multilangual documents with advanced text style support, including right-to-left languages (RTL) as well as languages requiring text shaping to properly display glyphs (e.g. Arabic).</p>
         </section>
       </div>
     </div>
   </div>
 
-  <div class="container">
-    <h2 class="title">Library that truly helps</h2>
+<!--  <div class="container">-->
+<!--    <h2 class="title">Library that truly helps</h2>-->
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 64px;">
-      <div class="recommendation">
-        <p class="recommendation--quote">This library is amazing, we recently did a small prototype to test RTL and Arabic support, we were impressed with it. Coming from a background where I have used Microsoft Report Designer, Crystal Reports and Fast Reports, this library is better than them all.</p>
-        <p class="recommendation--author">Toss_A_Coin_Yo</p>
-      </div>
+<!--    <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 64px;">-->
+<!--      <div class="recommendation">-->
+<!--        <p class="recommendation&#45;&#45;quote">This library is amazing, we recently did a small prototype to test RTL and Arabic support, we were impressed with it. Coming from a background where I have used Microsoft Report Designer, Crystal Reports and Fast Reports, this library is better than them all.</p>-->
+<!--        <p class="recommendation&#45;&#45;author">Toss_A_Coin_Yo</p>-->
+<!--      </div>-->
 
-      <div class="recommendation">
-        <p class="recommendation--quote">Thanks for your hard work, I really appreciate QuestPDF! One of the most professional, high quality open-source PDFs library I came across so far!</p>
-        <p class="recommendation--author">kbmkbm</p>
-      </div>
+<!--      <div class="recommendation">-->
+<!--        <p class="recommendation&#45;&#45;quote">Thanks for your hard work, I really appreciate QuestPDF! One of the most professional, high quality open-source PDFs library I came across so far!</p>-->
+<!--        <p class="recommendation&#45;&#45;author">kbmkbm</p>-->
+<!--      </div>-->
 
-      <div class="recommendation">
-        <p class="recommendation--quote">Recently made use of this library over another older library and have to say it was a joy to work with. The previewer tool makes making small changes and designing documents such a nice task when matched up with hot reload.</p>
-        <p class="recommendation--author">Lawwley</p>
-      </div>
+<!--      <div class="recommendation">-->
+<!--        <p class="recommendation&#45;&#45;quote">Recently made use of this library over another older library and have to say it was a joy to work with. The previewer tool makes making small changes and designing documents such a nice task when matched up with hot reload.</p>-->
+<!--        <p class="recommendation&#45;&#45;author">Lawwley</p>-->
+<!--      </div>-->
 
-      <div class="recommendation">
-        <p class="recommendation--quote">I have been monitoring this project for a couple of years and finally had the chance to utilize it. Initial thoughts are that it is amazing. Thank you for the incredible amount of work you have put into this!</p>
-        <p class="recommendation--author">yooperdev</p>
-      </div>
-    </div>
-  </div>
+<!--      <div class="recommendation">-->
+<!--        <p class="recommendation&#45;&#45;quote">I have been monitoring this project for a couple of years and finally had the chance to utilize it. Initial thoughts are that it is amazing. Thank you for the incredible amount of work you have put into this!</p>-->
+<!--        <p class="recommendation&#45;&#45;author">yooperdev</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 
 </template>
 
@@ -210,6 +222,7 @@ html.dark .video-container {
   max-width: 1152px;
 }
 
+
 .reverse {
   background-color: var(--vp-c-bg-soft);
 }
@@ -218,6 +231,16 @@ html.dark .video-container {
   background-color: var(--vp-c-bg);
 }
 
+
+
+.library-details p {
+  color: var(--vp-c-text-2);
+
+  line-height: 24px;
+  font-size: 1rem;
+
+  margin-bottom: 1rem;
+}
 
 
 
@@ -259,7 +282,7 @@ html.dark .video-container {
 
 .features {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   grid-gap: 64px 96px;
 
   margin-top: 64px;
@@ -267,14 +290,28 @@ html.dark .video-container {
 
 .feature-card {
   display: grid;
+  grid-template-areas:
+      "icon title"
+      "icon description";
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
   grid-gap: 8px 24px;
 }
 
+@media screen and (max-width: 1000px) and (min-width: 700px) {
+  .feature-card {
+    grid-template-areas:
+      "icon"
+      "title"
+      "description";
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    grid-gap: 8px 0;
+  }
+}
+
 .feature-card img.icon {
-  grid-column: 1;
-  grid-row: 1 / span 2;
+  grid-area: icon;
 
   justify-self: start;
   align-self: start;
@@ -283,14 +320,14 @@ html.dark .video-container {
 }
 
 .feature-card h3.title {
-  grid-column: 2;
-  grid-row: 1;
+  grid-area: title;
+
   margin: 0;
 }
 
 .feature-card p.details {
-  grid-column: 2;
-  grid-row: 2;
+  grid-area: description;
+
   justify-self: start;
   align-self: start;
 }
@@ -301,7 +338,7 @@ html.dark .video-container {
 
 .statistics {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 64px;
 
   margin: 64px 0;
