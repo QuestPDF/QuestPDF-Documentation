@@ -11,7 +11,7 @@
         <path d="M22.293,3.047L20.953,1.707C20.583,1.317 19.933,1.317 19.543,1.707L9,12.25L11.75,15L22.293,4.457C22.683,4.067 22.683,3.417 22.293,3.047M7,14C5.354,14 4,15.354 4,17C4,18.31 2.84,19 2,19C2.92,20.22 4.5,21 6,21C8.194,21 10,19.194 10,17C10,15.354 8.646,14 7,14Z" style="fill:url(#_Linear3);fill-rule:nonzero;"/>
     </g>
     <defs>
-        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(20,20,-20,20,2,2)"><stop offset="0" style="stop-color:rgb(0,229,255);stop-opacity:0.4"/><stop offset="1" style="stop-color:rgb(41,121,255);stop-opacity:0.4"/></linearGradient>
+        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(20,20,-20,20,2,2)"><stop offset="0" style="stop-color:rgb(0,229,255);stop-opacity:0.35"/><stop offset="1" style="stop-color:rgb(41,121,255);stop-opacity:0.35"/></linearGradient>
         <linearGradient id="_Linear2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-20,20,-20,-20,22,3.83333)"><stop offset="0" style="stop-color:rgb(0,229,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(41,121,255);stop-opacity:1"/></linearGradient>
         <linearGradient id="_Linear3" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(37.9971,37.9971,-37.9971,37.9971,-12.2489,-1.11885)"><stop offset="0" style="stop-color:rgb(0,229,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(41,121,255);stop-opacity:1"/></linearGradient>
     </defs>

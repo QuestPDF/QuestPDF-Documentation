@@ -8,7 +8,7 @@
         <path d="M16.23,18L15.11,13.18L18.84,9.95L13.92,9.53L12,5L10.08,9.54L5.16,9.96L8.89,13.19L7.77,18L12,15.45L16.23,18" style="fill:url(#_Linear2);fill-rule:nonzero;"/>
     </g>
     <defs>
-        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(20,20,-20,20,2,2)"><stop offset="0" style="stop-color:rgb(0,229,255);stop-opacity:0.4"/><stop offset="1" style="stop-color:rgb(41,121,255);stop-opacity:0.4"/></linearGradient>
+        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(20,20,-20,20,2,2)"><stop offset="0" style="stop-color:rgb(0,229,255);stop-opacity:0.3"/><stop offset="1" style="stop-color:rgb(41,121,255);stop-opacity:0.3"/></linearGradient>
         <linearGradient id="_Linear2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(20,20,-20,20,2,2)"><stop offset="0" style="stop-color:rgb(0,229,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(41,121,255);stop-opacity:1"/></linearGradient>
     </defs>
 </svg>

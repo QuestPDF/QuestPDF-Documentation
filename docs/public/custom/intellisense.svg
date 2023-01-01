@@ -8,7 +8,7 @@
         <path d="M8,14L8,12L6,12L6,14L8,14M8,11L8,9L6,9L6,11L8,11M8,8L6,8L6,6L8,6L8,8M15,14L15,12L10,12L10,14L15,14M18,11L18,9L10,9L10,11L18,11M18,8L18,6L10,6L10,8L18,8Z" style="fill:url(#_Linear2);fill-rule:nonzero;"/>
     </g>
     <defs>
-        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(20,20,-20,20,2,2)"><stop offset="0" style="stop-color:rgb(0,229,255);stop-opacity:0.4"/><stop offset="1" style="stop-color:rgb(41,121,255);stop-opacity:0.4"/></linearGradient>
+        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(20,20,-20,20,2,2)"><stop offset="0" style="stop-color:rgb(0,229,255);stop-opacity:0.35"/><stop offset="1" style="stop-color:rgb(41,121,255);stop-opacity:0.35"/></linearGradient>
         <linearGradient id="_Linear2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(20,20,-20,20,2,2)"><stop offset="0" style="stop-color:rgb(0,229,255);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(41,121,255);stop-opacity:1"/></linearGradient>
     </defs>
 </svg>
