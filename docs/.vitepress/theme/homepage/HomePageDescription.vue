@@ -1,27 +1,25 @@
 <template>
   <div class="container">
 
-    <section style="display: flex; flex-direction: column;">
-      <h2>What is QuestPDF?</h2>
+    <h2>What is QuestPDF?</h2>
 
-      <div>
-        <p>QuestPDF is <span class="selection">an open-source .NET library for PDF generation</span>. Utilizing several new patterns and practices, QuestPDF seeks to resolve the challenges inherent in this process.</p>
+    <div class="details">
+      <p class="definition">QuestPDF is <span class="selection">an open-source .NET library for PDF generation</span>. Utilizing several new patterns and practices, QuestPDF seeks to resolve the challenges inherent in this process:</p>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 64px;">
-          <div v-for="summary of SummaryContent" style="display: grid; grid-template-columns: auto 1fr; grid-gap: 16px;">
-            <img src="/homepage/tick2.svg" style="width: 24px;">
-            <p>{{ summary }}</p>
-          </div>
+      <div class="summary-list">
+        <div v-for="summary of SummaryContent" class="summary-item">
+          <img src="/homepage/tick.svg" width="24" />
+          <p>{{ summary }}</p>
         </div>
       </div>
-    </section>
 
-    <HomePageStatistics />
+      <div class="video-container">
+        <video class="video" autoplay controls muted loop>
+          <source src="/previewer/video.mp4" type="video/mp4">
+        </video>
+      </div>
 
-    <div class="video-container">
-      <video class="video" autoplay controls muted loop>
-        <source src="/previewer/video.mp4" type="video/mp4">
-      </video>
+      <HomePageStatistics />
     </div>
   </div>
 </template>
@@ -37,57 +35,39 @@ import HomePageStatistics from "./HomePageStatistics.vue";
 
 /* Library details */
 
-.library-details {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 96px;
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
 }
 
-@media screen and (max-width: 700px) {
-  .library-details {
-    grid-template-columns: 1fr;
-  }
-}
-
-.library-details p {
-  color: var(--vp-c-text-2);
-
-  line-height: 24px;
-  font-size: 1rem;
-
-  margin-bottom: 1rem;
+p.definition {
+  color: var(--vp-c-text-1);
+  font-size: 1.25rem;
+  line-height: 2rem;
 }
 
 span.selection {
-  background: var(--vp-c-bg);
+  background: -webkit-linear-gradient(120deg, #2979FF33, #00E5FF33);
+  color: var(--vp-c-text-1);
+  font-weight: 500;
+
   border-radius: 8px;
   padding: 4px 8px;
 }
 
-/* Summary list */
+/* Summary */
 
-li {
-  color: var(--vp-c-text-2);
-
-  line-height: 1.5rem;
-  font-size: 1rem;
-
-  margin-bottom: 8px;
+.summary-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 64px;
 }
 
-li:before {
-  display: inline-block;
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  margin-right: 10px;
-
-  vertical-align: middle;
-
-  background: url('/homepage/tick.svg') no-repeat left center;
-  background-size: contain;
-
-  content: '';
+.summary-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 16px;
 }
 
 /* Video preview */
@@ -96,7 +76,6 @@ li:before {
   background-image: conic-gradient(#EEE 0deg, #CCC 90deg, #2979FF55 135deg, #CCC 180deg, #EEE 270deg, #EEE 360deg);
   padding: 64px;
   border-radius: 12px;
-  margin-top: 32px;
 }
 
 html.dark .video-container {
