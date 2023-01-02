@@ -11,6 +11,10 @@
     </div>
 
     <HomePageRecommendation />
+
+    <div class="reverse-background">
+      <HomePageGettingStarted />
+    </div>
   </div>
 </template>
 
@@ -20,6 +24,8 @@ import HomePageFeatures from "./HomePageFeatures.vue";
 import HomePageUsers from "./HomePageUsers.vue";
 import HomePageDescription from "./HomePageDescription.vue";
 import HomePageRecommendation from "./HomePageRecommendation.vue";
+import HomePageGettingStarted from "./HomePageGettingStarted.vue";
+
 </script>
 
 <style>
@@ -37,7 +43,7 @@ import HomePageRecommendation from "./HomePageRecommendation.vue";
 .custom-homepage h2 {
   font-family: var(--vp-font-family-base);
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 2.5rem;
   margin-bottom: 2rem;
 }

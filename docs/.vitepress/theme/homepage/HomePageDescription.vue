@@ -39,7 +39,7 @@ import HomePageStatistics from "./HomePageStatistics.vue";
 .library-details {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 64px 96px;
+  grid-gap: 96px;
 }
 
 @media screen and (max-width: 700px) {

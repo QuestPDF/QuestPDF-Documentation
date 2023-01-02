@@ -26,7 +26,7 @@ import { FeaturesContent } from './configuration';
 .features {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 64px 96px;
+  grid-gap: 96px;
 
   margin-top: 64px;
 }

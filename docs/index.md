@@ -6,7 +6,7 @@ hero:
   text: Modern .NET library for PDF document generation
   image:
     src: /logo.svg
-    alt: VitePress
+    alt: QuestPDF
   actions:
   - theme: brand
     text: Get Started

@@ -16,8 +16,9 @@ export default {
                 text: 'Documentation',
                 items: [
                     { text: 'Quick start', link: '/quick-start' },
+                    { text: 'Getting started', link: '/getting-started' },
                     { text: 'API reference', link: '/api-reference/index' },
-                    { text: 'Patterns', link: '/design-patterns' },
+                    { text: 'Design patterns', link: '/design-patterns' },
                 ]
             },
             { text: 'License', link: 'https://github.com/QuestPDF/QuestPDF/blob/main/LICENSE' },
