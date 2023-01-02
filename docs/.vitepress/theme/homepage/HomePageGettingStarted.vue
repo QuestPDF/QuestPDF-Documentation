@@ -5,7 +5,9 @@
       <div class="description">
         <h2>Let's get started</h2>
 
-        <p>Utilizing several new concepts and approaches, QuestPDF seeks to resolve the challenges inherent in this process. To make implementation as straightforward as possible, the library features a C# Fluent API.</p>
+        <p>Start learning the QuestPDF library today. You are 250 lines of C# code away from creating a fully functional PDF invoice implementation. </p>
+
+        <p>Read the Getting Started tutorial to familiarize yourself with general library architecture, important layout structures as well as to better understand helpful patterns and practices.</p>
 
         <a class="action" href="/getting-started">Get started</a>
       </div>

@@ -21,19 +21,28 @@ interface HomePageRecommendation {
     author: string;
 }
 
+export const SummaryContent : string[] = [
+    "Design documents in C# with a code-only approach. Take full advantage of your version control system.",
+    "Compose document content with dozens of powerful structural building blocks, e.g. text, image, border, background, table, etc.",
+    "Utilize a comprehensive layout engine, specifically designed for document generation and paging support.",
+    "Develop with concise, discoverable and predictable C# Fluent API.",
+    "Don't be limited to any proprietary scripting language or format. Use all C# features to your advantage.",
+    "Save time with the QuestPDF Previewer tool that provides a hot-reload functionality, allowing real-time document preview without code recompilation."
+];
+
 export const StatisticsContent : HomePageStatistic[] = [
     {
-        icon: "/home-page/stargazers.svg",
+        icon: "/homepage/stargazers.svg",
         label: "GitHub stargazers",
         value: "4 450+"
     },
     {
-        icon: "/home-page/downloads.svg",
+        icon: "/homepage/downloads.svg",
         label: "Nuget package downloads",
         value: "700 000+"
     },
     {
-        icon: "/home-page/updates.svg",
+        icon: "/homepage/updates.svg",
         label: "Feature and quality updates",
         value: "40+"
     }
@@ -41,60 +50,60 @@ export const StatisticsContent : HomePageStatistic[] = [
 
 export const UserGroupsContent : HomePageUserGroup[] = [
     {
-        icon: "/home-page/community.svg",
+        icon: "/homepage/community.svg",
         label: "Loved by developers",
-        description: "This library is created specifically for designing and arranging document layouts, with full paging support. Alternative solutions, such as HTML-based converters, are not designed for this purpose and therefore are often unpredictable and do not produce desired results."
+        description: "The library is created with love for developers by developers. We understand how to design a library that is a joy to work with. Quick learning curve, concise and easy to understand code and fast development loop - this is a definition of productivity and satisfaction. "
     },
     {
-        icon: "/home-page/business.svg",
+        icon: "/homepage/business.svg",
         label: "Trusted by business",
-        description: "The entire process of implementing PDF document, takes place in your code. Free yourself from slow visual designers and strange technological limitations. Follow simple yet highly effective approaches to create maintainable, high-quality code."
+        description: "The QuestPDF library provides a stable foundation for the PDF generation functionality, regarddless of the application type. Constantly improving quality, high stability and developer-friendly architecture - this is a key for every successfull project."
     }
 ];
 
 export const FeaturesContent : HomePageFeature[] = [
     {
-        icon: "home-page/engine.svg",
+        icon: "homepage/engine.svg",
         title: "Comprehensive layout engine",
         description: "Utilize a layout engine specifically designed for document generation, with full paging support. It gives you high control over the content, optimizes the document's visual structure, and makes your code more flexible."
     },
     {
-        icon: "home-page/multiplatform.svg",
+        icon: "homepage/multiplatform.svg",
         title: "Multiplatform",
         description: "Feel free to use your preffered code editor (JetBrains Rider, Visual Studio, VS Code, etc.). Run your software on any operating system (Windows, Linux, macOS), cloud platforms (e.g. Azure, AWS), device types (desktop, tablets, phones) and even web browser (via WebAssembly)."
     },
     {
-        icon: "home-page/puzzle.svg",
+        icon: "homepage/puzzle.svg",
         title: "Reusable code",
         description: "Make your code more manageable by dividing it into classes and methods, exactly how you do it with other features and functionalities. You don't need to learn more skills to make your implementation beautiful."
     },
     {
-        icon: "home-page/maintenance.svg",
+        icon: "homepage/maintenance.svg",
         title: "Efficient maintenance",
         description: "Follow the code-only approach to have better understanding of changes and implementation history. Use your preffered version control system to easily manage fixes, adjustments and improvements. Never get lost in proprietary binary formats or complex HTML implementations."
     },
     {
-        icon: "home-page/prototyping.svg",
+        icon: "homepage/prototyping.svg",
         title: "Quick prototyping",
         description: "Design and adjust visual content using the QuestPDF Previewer tool. It utilizes a hot-reload capability to preview your document without code re-compilation. Use the inspector tool to better understand the layout and its structure."
     },
     {
-        icon: "home-page/performance.svg",
+        icon: "homepage/performance.svg",
         title: "High performance",
         description: "Enjoy high performance and low resource usage thanks to highly optimized layout engine and graphical library. Generate even 1000 PDF files per minute per core with a thread-safe process."
     },
     {
-        icon: "home-page/learning.svg",
+        icon: "homepage/learning.svg",
         title: "Rewarding learning",
         description: "Quickly go into action and learn library essential features by reading the Getting Started tutorial. Learn more advanced concepts with constantly improving documentation and hundreds of code examples."
     },
     {
-        icon: "home-page/intellisense.svg",
+        icon: "homepage/intellisense.svg",
         title: "Discoverable Fluent API",
         description: "The library uses the FluentAPI code style that makes your code more concise and easier to understand. The IntelliSense mechanism available in all major IDEs helps you writing the code efficiently and discover new features."
     },
     {
-        icon: "home-page/multilingual.svg",
+        icon: "homepage/multilingual.svg",
         title: "Advanced languages support",
         description: "Easily create multilangual documents with advanced text style support, including right-to-left languages (RTL) as well as languages requiring text shaping to properly display glyphs (e.g. Arabic)."
     }

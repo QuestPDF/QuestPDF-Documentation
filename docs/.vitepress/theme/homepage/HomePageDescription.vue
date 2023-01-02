@@ -4,15 +4,15 @@
     <section style="display: flex; flex-direction: column;">
       <h2>What is QuestPDF?</h2>
 
-      <div class="library-details" style="">
-        <div>
-          <p>QuestPDF is an open-source .NET library for PDF generation.</p>
+      <div>
+        <p>QuestPDF is <span class="selection">an open-source .NET library for PDF generation</span>. Utilizing several new patterns and practices, QuestPDF seeks to resolve the challenges inherent in this process.</p>
 
-          <p>Utilizing several new concepts and approaches, QuestPDF seeks to resolve the challenges inherent in this process. To make implementation as straightforward as possible, the library features a C# Fluent API.</p>
-
+        <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 64px;">
+          <div v-for="summary of SummaryContent" style="display: grid; grid-template-columns: auto 1fr; grid-gap: 16px;">
+            <img src="/homepage/tick2.svg" style="width: 24px;">
+            <p>{{ summary }}</p>
+          </div>
         </div>
-
-        <p>Additionally, the QuestPDF Previewer expedites the development cycle by providing a hot-reload capability, allowing real-time results without recompiling code. Finally, the document structure is rendered through a comprehensive and flexible layout engine.</p>
       </div>
     </section>
 
@@ -28,6 +28,7 @@
 
 <script setup>
 
+import { SummaryContent } from './configuration';
 import HomePageStatistics from "./HomePageStatistics.vue";
 
 </script>
@@ -55,6 +56,38 @@ import HomePageStatistics from "./HomePageStatistics.vue";
   font-size: 1rem;
 
   margin-bottom: 1rem;
+}
+
+span.selection {
+  background: var(--vp-c-bg);
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+
+/* Summary list */
+
+li {
+  color: var(--vp-c-text-2);
+
+  line-height: 1.5rem;
+  font-size: 1rem;
+
+  margin-bottom: 8px;
+}
+
+li:before {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+
+  vertical-align: middle;
+
+  background: url('/homepage/tick.svg') no-repeat left center;
+  background-size: contain;
+
+  content: '';
 }
 
 /* Video preview */
