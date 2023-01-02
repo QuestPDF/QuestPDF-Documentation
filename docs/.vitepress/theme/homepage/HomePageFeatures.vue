@@ -5,10 +5,10 @@
 
     <div class="features">
 
-      <section class="feature-card" v-for="feature of FeaturesContent" :key="feature.title">
+      <section class="feature" v-for="feature of FeaturesContent" :key="feature.title">
         <img class="icon" :src="feature.icon" />
         <h3 class="title">{{ feature.title }}</h3>
-        <p class="details">{{ feature.details }}</p>
+        <p class="description">{{ feature.description }}</p>
       </section>
 
     </div>
@@ -37,7 +37,7 @@ import { FeaturesContent } from './configuration';
   }
 }
 
-.feature-card {
+.feature {
   display: grid;
   grid-template-areas:
       "icon title"
@@ -48,7 +48,7 @@ import { FeaturesContent } from './configuration';
 }
 
 @media screen and (max-width: 1000px) {
-  .feature-card {
+  .feature {
     grid-template-areas:
       "icon"
       "title"
@@ -59,7 +59,7 @@ import { FeaturesContent } from './configuration';
   }
 }
 
-.feature-card img.icon {
+.feature img.icon {
   grid-area: icon;
 
   justify-self: start;
@@ -68,13 +68,13 @@ import { FeaturesContent } from './configuration';
   width: 48px;
 }
 
-.feature-card h3.title {
+.feature h3.title {
   grid-area: title;
 
   margin: 0;
 }
 
-.feature-card p.details {
+.feature p.description {
   grid-area: description;
 
   justify-self: start;

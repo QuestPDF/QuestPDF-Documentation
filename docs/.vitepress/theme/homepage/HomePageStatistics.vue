@@ -1,6 +1,6 @@
 <template>
   <div class="statistics">
-    <section class="statistics-card" v-for="statistic in StatisticsContent" :key="statistic.label">
+    <section class="statistic" v-for="statistic in StatisticsContent" :key="statistic.label">
       <img class="icon" :src="statistic.icon" />
       <span class="value">{{ statistic.value }}</span>
       <span class="label">{{ statistic.label }}</span>
@@ -24,14 +24,14 @@ import { StatisticsContent } from './configuration';
   margin: 64px 0;
 }
 
-.statistics-card {
+.statistic {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
   grid-gap: 4px 24px;
 }
 
-.statistics-card img.icon {
+.statistic img.icon {
   grid-column: 1;
   grid-row: 1 / span 2;
 
@@ -41,7 +41,7 @@ import { StatisticsContent } from './configuration';
   width: 48px;
 }
 
-.statistics-card span.value {
+.statistic span.value {
   grid-column: 2;
   grid-row: 1;
   margin: 0;
@@ -52,7 +52,7 @@ import { StatisticsContent } from './configuration';
   font-weight: 500;
 }
 
-.statistics-card span.label {
+.statistic span.label {
   grid-column: 2;
   grid-row: 2;
   justify-self: start;

@@ -31,7 +31,7 @@ import { RecommendationsContent } from './configuration';
   }
 }
 
-.quote {
+.recommendation .quote {
   color: var(--vp-c-text-2);
   font-size: 1rem;
   font-style: italic;
@@ -41,7 +41,7 @@ import { RecommendationsContent } from './configuration';
 }
 
 
-.author {
+.recommendation .author {
   color: var(--vp-c-text-1);
   padding-top: 8px;
   line-height: 24px;

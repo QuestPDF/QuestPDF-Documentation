@@ -1,12 +1,12 @@
 <template>
   <div class="custom-homepage">
-    <div class="reverse">
+    <div class="reverse-background">
       <HomePageDescription />
     </div>
 
     <HomePageUsers />
 
-    <div class="reverse">
+    <div class="reverse-background">
       <HomePageFeatures />
     </div>
 
@@ -23,6 +23,16 @@ import HomePageRecommendation from "./HomePageRecommendation.vue";
 </script>
 
 <style>
+
+.custom-homepage .container {
+  padding: 96px 32px;
+  margin: 0 auto;
+  max-width: 1216px;
+}
+
+.custom-homepage .reverse-background {
+  background-color: var(--vp-c-bg-soft);
+}
 
 .custom-homepage h2 {
   font-family: var(--vp-font-family-base);
@@ -41,21 +51,11 @@ import HomePageRecommendation from "./HomePageRecommendation.vue";
   margin: 18px 0 4px 0;
 }
 
-.custom-homepage p.details {
+.custom-homepage p {
   color: var(--vp-c-text-2);
 
-  line-height: 24px;
+  line-height: 1.5rem;
   font-size: 1rem;
-}
-
-.custom-homepage .container {
-  padding: 96px 32px;
-  margin: 0 auto;
-  max-width: 1216px;
-}
-
-.custom-homepage .reverse {
-  background-color: var(--vp-c-bg-soft);
 }
 
 </style>
