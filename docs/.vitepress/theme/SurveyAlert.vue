@@ -2,9 +2,7 @@
   <a v-show="showAlert" :href="surveyUrl" target="_blank">
     <div class="alert warning custom-block" style="width: 100%; margin-bottom: 32px; padding: 16px; display: grid; grid-template-columns: auto 1fr 32px; grid-gap: 16px;">
 
-      <svg style="width: 32px; height: 32px; align-self: center;" viewBox="0 0 24 24">
-        <path fill="currentColor" d="M3,5H9V11H3V5M5,7V9H7V7H5M11,7H21V9H11V7M11,15H21V17H11V15M5,20L1.5,16.5L2.91,15.09L5,17.17L9.59,12.59L11,14L5,20Z" />
-      </svg>
+      <img src="/homepage/survey.svg" style="width: 32px; align-self: center;" />
 
       <div>
         <b>Let's make the library even better, together!</b> <br>

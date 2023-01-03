@@ -3,11 +3,14 @@
     --vp-c-brand-light: #42A5F5;
     --vp-home-hero-name-color: transparent;
     --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #2979FF, #00E5FF);
-     --vp-home-hero-image-background-image: conic-gradient(from 100deg, #2979FF55 70deg, #88888855 70deg);
+    --vp-home-hero-image-background-image: conic-gradient(from 100deg, #2979FF55 70deg, #88888855 70deg);
     --vp-home-hero-image-filter: blur(48px);
     --vp-button-brand-bg: #03A9F4;
-    --vp-button-brand-hover-border: #03A9F4;
     --vp-button-brand-active-border: #03A9F4;
+    --vp-button-brand-hover-bg: #2979FF;
+    --vp-button-brand-hover-border: #2979FF;
+    --vp-button-brand-text: #FFF !important;
+    --vp-button-brand-hover-text: #FFF !important;
     --vp-c-green-dark: #1565C0;
 }
 
@@ -33,6 +36,15 @@
     font-size: 1.25rem;
 }
 
+.VPHome {
+    padding-bottom: 0 !important;
+}
+
+.VPHero {
+    padding: 198px 0 96px 0 !important;
+    margin: 0 32px;
+}
+
 @media (min-width: 425px) {
     .VPHero h1 {
         font-size: 4rem !important;
@@ -48,18 +60,28 @@
 
 @media (min-width: 960px) {
     .VPHero h1 {
-        font-size: 5rem !important;
-        margin-bottom: 2rem !important;
+        font-size: 6rem !important;
+        margin-bottom: 3rem !important;
     }
 
     .VPHero p.text {
-        font-size: 2rem !important;
-        line-height: 2.5rem !important;
-        margin-bottom: 1.5rem !important;
+        font-size: 2.5rem !important;
+        line-height: 3rem !important;
+        margin-bottom: 2rem !important;
+    }
+}
+
+@media (max-width: 960px) {
+    .VPHero {
+        padding: 128px 32px 64px 32px !important;
     }
 }
 
 @media (max-width: 425px) {
+    .VPHero {
+        padding: 96px 24px 48px !important;
+    }
+
     .VPHero h1 {
         font-size: 3rem !important;
         margin-bottom: 2rem !important;
@@ -75,6 +97,7 @@
 html:not(.dark) {
     --vp-code-block-bg: #EEE;
     --vp-code-line-highlight-color: #DDD;
+    --vp-c-bg-soft: #f6f6f6;
 }
 
 html:not(.dark) .VPDoc img[alt=example] {
@@ -108,4 +131,8 @@ html:not(.dark) .vp-doc b {
 
 .vp-doc a {
     text-decoration: underline;
+}
+
+.VPHero .VPButton {
+    font-size: 1rem !important;
 }

@@ -6,15 +6,24 @@ export default {
     cleanUrls: 'with-subfolders',
 
     head: [
-        ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg' }]
+        ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg' }],
+        ['meta', { name: "description", content: "Open-source modern .NET library for PDF document generation. Offering friendly and discoverable C# fluent API. Install now with NuGet." }],
+        ['meta', { name: "keywords", content: "pdf, library, c#, dotnet, report, export, generate, tool, create, render, html, converter, open-source, free" }],
     ],
 
     themeConfig: {
         logo: '/logo.svg',
         nav: [
-            { text: 'Quick start', link: '/quick-start' },
-            { text: 'API reference', link: '/api-reference/index' },
-            { text: 'Patterns', link: '/design-patterns' },
+            {
+                text: 'Documentation',
+                items: [
+                    { text: 'Quick start', link: '/quick-start' },
+                    { text: 'Getting started', link: '/getting-started' },
+                    { text: 'API reference', link: '/api-reference/index' },
+                    { text: 'Design patterns', link: '/design-patterns' },
+                ]
+            },
+            { text: 'License', link: 'https://github.com/QuestPDF/QuestPDF/blob/main/LICENSE' },
             { text: 'GitHub', link: 'https://github.com/QuestPDF/QuestPDF' },
             { text: 'Nuget', link: 'https://www.nuget.org/packages/QuestPDF' }
         ],

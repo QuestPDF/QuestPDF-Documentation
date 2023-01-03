@@ -7,6 +7,10 @@
       </ClientOnly>
     </template>
 
+    <template #home-hero-after>
+      <home-page />
+    </template>
+
     <template #layout-bottom>
       <ClientOnly>
         <google-analytics />
@@ -21,8 +25,9 @@ import DefaultTheme from 'vitepress/theme';
 import GoogleAnalytics from "./GoogleAnalytics.vue";
 import SupportAlert from "./SupportAlert.vue";
 import SurveyAlert from "./SurveyAlert.vue";
+import HomePage from "./homepage/HomePage.vue";
 
 export default defineComponent({
-  components: {SupportAlert, SurveyAlert, GoogleAnalytics, DefaultLayout: DefaultTheme.Layout },
+  components: {HomePage, SupportAlert, SurveyAlert, GoogleAnalytics, DefaultLayout: DefaultTheme.Layout },
 });
 </script>
