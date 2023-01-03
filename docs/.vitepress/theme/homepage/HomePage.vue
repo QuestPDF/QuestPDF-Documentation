@@ -51,7 +51,7 @@ import HomePageGettingStarted from "./HomePageGettingStarted.vue";
 .custom-homepage h3 {
   font-family: var(--vp-font-family-base);
   color: var(--vp-c-text-1);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.5rem;
   margin: 18px 0 4px 0;

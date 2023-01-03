@@ -3,7 +3,7 @@
 
     <section class="getting-started">
       <div class="description">
-        <h2>Let's get started</h2>
+        <h2 style="margin-bottom: 0;">Let's get started</h2>
 
         <p>Begin exploring the QuestPDF library today. You are 250 lines of C# code away from creating a fully functional PDF invoice implementation.</p>
 
