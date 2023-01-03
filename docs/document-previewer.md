@@ -14,7 +14,7 @@ The hot-reload feature is available only in the .NET 6 environment and beyond.
 
 ## Installation
 
-The Previewer tool is available as a nuget tool. Therefore, it is installed on your local development environment and does not change your project.
+The Previewer tool is available as a NuGet tool. Therefore, it is installed on your local development environment and does not change your project.
 
 📁 To install the QuestPDF Previewer, please execute the following command on your PC:
 

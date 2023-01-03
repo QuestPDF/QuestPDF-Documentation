@@ -2,7 +2,7 @@
 
 ## Installation
 
-The library is available as a nuget package. You can install it as any other nuget package from your IDE, try to search by `QuestPDF`. You can find package details [on this webpage](https://www.nuget.org/packages/QuestPDF/).
+The library is available as a NuGet package. You can install it as any other NuGet package from your IDE, try to search by `QuestPDF`. You can find package details [on this webpage](https://www.nuget.org/packages/QuestPDF/).
 
 [![quest pdf logo](/nuget.svg =200x)](https://www.nuget.org/packages/QuestPDF/)
 

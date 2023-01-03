@@ -15,7 +15,7 @@ hero:
     text: View on GitHub
     link: https://github.com/QuestPDF/QuestPDF
   - theme: alt
-    text: View on Nuget
+    text: View on NuGet
     link: https://www.nuget.org/packages/QuestPDF
 ---
 

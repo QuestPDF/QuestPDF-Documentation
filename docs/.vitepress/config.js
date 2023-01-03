@@ -25,7 +25,7 @@ export default {
             },
             { text: 'License', link: 'https://github.com/QuestPDF/QuestPDF/blob/main/LICENSE' },
             { text: 'GitHub', link: 'https://github.com/QuestPDF/QuestPDF' },
-            { text: 'Nuget', link: 'https://www.nuget.org/packages/QuestPDF' }
+            { text: 'NuGet', link: 'https://www.nuget.org/packages/QuestPDF' }
         ],
         sidebar: [
             {

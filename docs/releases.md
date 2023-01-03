@@ -51,7 +51,7 @@ The next step is to rewrite all articles, make descriptions more accurate and pr
 
 In this release, I decided to change the default font from `Calibri` to `Lato`. Lato is an open-source, free for commercial use font created by Polish author Łukasz Dziedzic. 
 
-The font is distributed with the library as embedded resource and part of the dll file / nuget package. This way, as long as you use the default font, you have it available on all environments. Also, the font is around 20x smaller, this should reduce substantially PDF file size (1.57 MB -> 74 KB) when using the default font.
+The font is distributed with the library as embedded resource and part of the dll file / NuGet package. This way, as long as you use the default font, you have it available on all environments. Also, the font is around 20x smaller, this should reduce substantially PDF file size (1.57 MB -> 74 KB) when using the default font.
 
 Of course there is caveat, this font does not contain more advanced glyphs, e.g. for Arabic/Chinese/Japanese languages, or for advanced unicode formatting. For such cases, you still need to use a font with proper support.
 
@@ -73,7 +73,7 @@ This effort solves two issues:
    1) Combine multiple text characters and display them as a single visual glyph.
    2) Are displayed in the right-to-left order. 
 
-**Improved the exception message when SkiaSharp throws the TypeInitializationException.** On some operating systems, SkiaSharp requires additional dependencies installed as nuget packages. This change should help developers determine how to choose and install them correctly. 
+**Improved the exception message when SkiaSharp throws the TypeInitializationException.** On some operating systems, SkiaSharp requires additional dependencies installed as NuGet packages. This change should help developers determine how to choose and install them correctly. 
 
 **Fixed:** a rare case when the Row.AutoItem does not calculate properly the width of its content. 
 

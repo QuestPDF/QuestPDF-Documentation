@@ -35,7 +35,7 @@
 
 ## Going production
 
-[Platform specific dependencies](/going-production/platform-specific-dependencies) - describes additional required nuget packages on various platforms, e.g. Linux or MacOS. 
+[Platform specific dependencies](/going-production/platform-specific-dependencies) - describes additional required NuGet packages on various platforms, e.g. Linux or MacOS. 
 
 [Font management](/going-production/font-management) - shows how to include custom fonts in your project, so to not rely on the runtime environment.
 
