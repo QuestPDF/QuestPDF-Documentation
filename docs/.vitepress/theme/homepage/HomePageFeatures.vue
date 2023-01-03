@@ -6,7 +6,7 @@
     <div class="features">
 
       <section class="feature" v-for="feature of FeaturesContent" :key="feature.title">
-        <img class="icon" :src="feature.icon" />
+        <img class="icon" :src="feature.icon" alt="" />
         <h3 class="title">{{ feature.title }}</h3>
         <p class="description">{{ feature.description }}</p>
       </section>

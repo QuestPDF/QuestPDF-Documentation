@@ -5,7 +5,7 @@
 
     <div class="user-groups">
       <section class="user-group" v-for="group in UserGroupsContent">
-        <img class="icon" :src="group.icon" />
+        <img class="icon" :src="group.icon" alt="" />
         <h3 class="title">{{ group.label }}</h3>
         <p class="details">{{ group.description }}</p>
       </section>

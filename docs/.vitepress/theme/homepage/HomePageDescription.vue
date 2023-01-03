@@ -8,7 +8,7 @@
 
       <div class="summary-list">
         <div v-for="summary of SummaryContent" class="summary-item">
-          <img src="/homepage/tick.svg" width="28" />
+          <img src="/homepage/tick.svg" width="28" alt="" />
           <p>{{ summary }}</p>
         </div>
       </div>

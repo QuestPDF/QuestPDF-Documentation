@@ -12,7 +12,7 @@
         <a class="action" href="/getting-started">Get started</a>
       </div>
 
-      <img src="/invoice.png" />
+      <img src="/invoice.png" alt="Example invoice document implemented and generated with QuestPDF using C# language." />
     </section>
   </div>
 </template>
