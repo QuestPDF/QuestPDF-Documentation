@@ -5,7 +5,7 @@
       <div class="description">
         <h2>Let's get started</h2>
 
-        <p>Start learning the QuestPDF library today. You are 250 lines of C# code away from creating a fully functional PDF invoice implementation. </p>
+        <p>Begin exploring the QuestPDF library today. You are 250 lines of C# code away from creating a fully functional PDF invoice implementation.</p>
 
         <p>Read the Getting Started tutorial to familiarize yourself with general library architecture, important layout structures as well as to better understand helpful patterns and practices.</p>
 
