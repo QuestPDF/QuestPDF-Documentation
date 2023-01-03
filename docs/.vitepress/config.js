@@ -6,7 +6,9 @@ export default {
     cleanUrls: 'with-subfolders',
 
     head: [
-        ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg' }]
+        ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg' }],
+        ['meta', { name: "description", content: "Open-source modern .NET library for PDF document generation. Offering friendly and discoverable C# fluent API. Install now with NuGet." }],
+        ['meta', { name: "keywords", content: "pdf, library, c#, dotnet, report, export, generate, tool, create, render, html, converter, open-source, free" }],
     ],
 
     themeConfig: {
