@@ -6,7 +6,7 @@
 
       <div>
         If you like QuestPDF, please <b>give it a star on GitHub</b>. <br>
-        It takes seconds and help others making the right choice!
+        It takes seconds and helps others make the right choice!
       </div>
 
       <a title="Close" @click.prevent="closeAlert" style="align-self: center; justify-self: right;">
