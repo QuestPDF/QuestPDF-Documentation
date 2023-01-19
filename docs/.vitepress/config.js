@@ -23,7 +23,7 @@ export default {
                     { text: 'Design patterns', link: '/design-patterns' },
                 ]
             },
-            { text: 'License', link: 'https://github.com/QuestPDF/QuestPDF/blob/main/LICENSE' },
+            { text: 'License', link: 'https://github.com/QuestPDF/QuestPDF/blob/main/LICENSE.md' },
             { text: 'GitHub', link: 'https://github.com/QuestPDF/QuestPDF' },
             { text: 'NuGet', link: 'https://www.nuget.org/packages/QuestPDF' }
         ],
