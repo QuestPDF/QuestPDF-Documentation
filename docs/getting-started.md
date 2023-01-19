@@ -16,7 +16,7 @@ The library is distributed as a NuGet package. You can install it as any other N
 
 [![quest pdf logo](/nuget.svg =200x)](https://www.nuget.org/packages/QuestPDF/)
 
-```xml
+```shell
 // Package Manager
 Install-Package QuestPDF
 
@@ -24,7 +24,7 @@ Install-Package QuestPDF
 dotnet add package QuestPDF
 
 // Package reference in .csproj file
-<PackageReference Include="QuestPDF" Version="2022.11.0" />
+<PackageReference Include="QuestPDF" Version="2022.12.1" />
 ```
 
 ## Implementation layers
