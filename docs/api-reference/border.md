@@ -1,14 +1,14 @@
 # Border
 
-- This container renders border on the area provided by its parent.
+- This container renders a border around the area provided by its parent.
 - Use multiple invocations to specify the thickness and colour of the border.
 - Border is virtual, it does not take space, nor move its child.
 
 ```csharp
-// apply border on all sides
+// apply border around all sides
 .Border(1)
 
-// apply border on specified sides
+// apply border along specified sides
 .BorderVertical(2)
 .BorderHorizontal(3)
 

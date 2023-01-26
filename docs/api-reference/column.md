@@ -1,7 +1,7 @@
 # Column
 
-- The Column element is a multi-element container. You can put any set of elements you want.
-- The algorithm places element one underneath another. Each element may take the entire width.
+- The `Column` element is a multi-element container. You can add any elements you want to it.
+- The algorithm places elements one underneath another. Each element may take the entire column width.
 - This container renders its elements on multiple pages when necessary.
 
 ```csharp
@@ -15,7 +15,7 @@
 
 ![example](/api-reference/column.png =350x)
 
-Use the Spacing property to add some space between elements:
+Use the `Spacing` method to add some space between elements:
 
 ```csharp
 .Column(column =>
