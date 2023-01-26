@@ -9,7 +9,7 @@
 .AspectRatio(1f / 2f) // or division
 ```
 
-By default, the AspectRatio element wants to occupy the entire available width. You can change that behavior using one of the following options:
+By default, the `AspectRatio` element wants to occupy the entire available width. You can change that behavior using one of the following options:
 1) `AspectRatioOption.FitWidth` - the element scales to occupy the available width. Default.
 2) `AspectRatioOption.FitHeight` - the element scales to occupy the available height. Good in conjunction with constraining elements.
 3) `AspectRatioOption.FitArea` - this is the combination of the above options. The element scales to occupy the available area while preserving its aspect ratio. This means that sometimes it takes the entire width and sometimes the entire height. This is the safest option.

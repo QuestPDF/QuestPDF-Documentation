@@ -2,7 +2,7 @@
 
 - This container renders a border around the area provided by its parent.
 - Use multiple invocations to specify the thickness and colour of the border.
-- Border is virtual, it does not take space, nor move its child.
+- The border is virtual; it does not take space, nor move its child.
 
 ```csharp
 // apply border around all sides
