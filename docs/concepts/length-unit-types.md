@@ -2,14 +2,14 @@
 
 QuestPDF uses points as default measure unit. Where 1 inch equals to 72 points, according to PDF specification. However, the vast majority of the Fluent API supports additional/optional argument to specify unit type.
 
-| Unit       | Size                 |
-|------------|----------------------|
-| meter      | 100 centimeters      |
-| centimeter | 10 millimeters       |
-| millimeter | 1/10th of centimeter |
-| feet       | 12 inches            |
-| inch       | 1000 mils            |
-| inch       | 72 points            |
+| Unit       | Size             |
+|------------|------------------|
+| meter      | 100 centimeters  |
+| inch       | 2.54 centimeters |
+| centimeter | 10 millimeters   |
+| feet       | 12 inches        |
+| inch       | 1000 mils        |
+| inch       | 72 points        |
 
 Example usage:
 
