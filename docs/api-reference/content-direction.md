@@ -2,13 +2,14 @@
 
 ## Introduction
 
-Most languages (such as English, German, Polish, etc.) are using the left-to-right content direction. However, there are languages (e.g. Arabic) that use the right-to-left content direction.
+Most languages (such as English, German, Polish, etc.) are written left-to-right. However, there are languages (e.g. Arabic) that use a right-to-left script.
 
 The right-to-left content direction significantly changes how the layout is planned:
+
 1) Text position (aligned to the right).
 2) Text direction where text starts on the right side and ends on the left side.
-3) Text word-wrapping algorithm that needs to take into account direction of text when breaking a line.
-4) Order of elements in collections, e.g. the first item in a row should be placed most to the right (in RTL) or to the left (int LTR).
+3) Text word-wrapping algorithm that needs to take into account the direction of text when breaking a line.
+4) Order of elements in collections, e.g. the first item in a row should be placed first on the right (in RTL) or to first on the left (in LTR).
 5) Default content position (aligned to the right).
 
 ## API
@@ -36,7 +37,7 @@ It is possible to set the target direction for all descendants:
 
 ## Examples
 
-The RTL mode is supported in all available elements. Let's quickly analyse a couple of examples to learn on how this mode infers the rendering process. In the `Row` element, the elements are displayed in accordance to the content direction. For example, the first element is put most to the left (in LTR mode) or most to the right (int RTL) mode:
+The RTL mode is supported for all elements. The following examples show how this mode affects the rendering process. In the `Row` element, the elements are displayed in accordance with the content direction. For example, the first element is placed first on the left (in LTR mode) or first on the right (in RTL) mode:
 
 ```csharp
 .ContentFromRightToLeft() // LTR or RTL mode
@@ -53,7 +54,7 @@ The RTL mode is supported in all available elements. Let's quickly analyse a cou
 ![example](/api-reference/content-direction-row.png =585x)
 
 
-Similar situation is visible, when using the `Table` element:
+A similar situation exists when using the `Table` element as shown below:
 
 ```csharp
 .ContentFromRightToLeft() // LTR or RTL mode
@@ -75,6 +76,6 @@ Similar situation is visible, when using the `Table` element:
 
 ![example](/api-reference/content-direction-table.png =585x)
 
-It is important to notice that content direction does NOT impact element alignment:
+It is important to note that content direction does *not* affect element alignment:
 
 ![example](/api-reference/content-direction-inlined.png =585x)

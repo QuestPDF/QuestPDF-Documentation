@@ -1,6 +1,6 @@
 # Background
 
-- This container changes background colour on the area provided by its parent.
+- This container changes background colour of the area provided by its parent.
 
 ```csharp
 .Background("#00FF00")

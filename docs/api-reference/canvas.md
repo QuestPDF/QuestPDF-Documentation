@@ -1,6 +1,6 @@
 # Canvas
 
-This element allows drawing any custom content using the SkiaSharp canvas objects.
+This element is used to draw custom content with the SkiaSharp `Canvas` object.
 
 ```csharp
 .Canvas((canvas, size) =>
@@ -22,7 +22,7 @@ This element allows drawing any custom content using the SkiaSharp canvas object
 
 ![example](/api-reference/canvas.png =300x)
 
-In the next example, we will analyze how to create a rounded rectangle using SkiaSharp and the `Canvas` element. It clearly shows how powerful is this approach:
+The following example shows how to create a rounded rectangle using SkiaSharp and the `Canvas` element. It clearly shows how powerful is this approach:
 
 ```csharp
 container
@@ -62,5 +62,5 @@ container
 ![example](/api-reference/canvas-rounded-rectangle.png =175x)
 
 ::: tip
-Did you know that the Canvas element can also be used to combine QuestPDF with other, SkiaSharp-based libraries? A great example of such situation is drawing vector-based charts. Please take a look [at this example](/examples/implementing-charts).
+Did you know that the `Canvas` element can also be used to combine QuestPDF with other, SkiaSharp-based libraries? A great example of this is drawing vector-based charts. Please take a look [at this example](/examples/implementing-charts).
 :::
