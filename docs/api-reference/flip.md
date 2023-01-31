@@ -1,6 +1,6 @@
 # Flip
-- This container makes a mirror image of its child,
-- It follows all layoting rules and size constraints, as well as enforces them over its child.
+- This container makes a mirror image of its child.
+- The container follows all layout rules and size constraints, and enforces them upon its child.
 
 ```csharp
 .FlipOver()

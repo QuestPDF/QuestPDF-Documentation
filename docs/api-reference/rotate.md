@@ -1,8 +1,8 @@
 # Rotate
 
 ## Constrained
-- This container changes content rotation in 90 degrees increments,
-- The content is always put within the same space and size constraints.
+- This container changes content rotation in 90 degree increments.
+- The content is always placed within the same space and size constraints.
 
 There are two methods available: `.RotateLeft()` and `.RotateRight()`
 
@@ -41,9 +41,9 @@ Example:
 ![example](/api-reference/rotate-constrained.png =350x)
 
 ## Free
-- This container allows to rotate its child by any angle provided in degrees,
-- The content is always put within the same space and size constraints,
-- - The rendered child appears like floating below/above of the other content.
+- This container allows you to rotate its child by any specified angle (in degrees).
+- The content is always placed within the same space and size constraints.
+- The rendered child appears floating below or above other content.
 
 Example:
 
@@ -65,7 +65,7 @@ Example:
 
 ![example](/api-reference/rotate-free.png =300x)
 
-You can apply additional translation to change the rotation origin point:
+You can apply an additional translation to change the rotation origin point:
 
 ```csharp{9-10,14-15}
 .Padding(25)

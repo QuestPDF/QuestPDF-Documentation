@@ -1,8 +1,8 @@
 # Ensure space
 
-Sometimes when rendering multi-page content, we want to make sure that the element on each page takes some minimal space.
-For example, when rendering a table, you may want to show at least 5 rows.
-The EnsureSpace element makes sure that if its child is going to take more pages, it has enough space on its page.
+When rendering multi-page content, you may want to ensure that an element's content uses at least a specified minimum space on each page. This can help prevent fragmentation of content.
+For example, when rendering a table, it may be desirable to render at least 5 rows before a page break.
+The `EnsureSpace` element guarantees that its child is rendered according to the space constraint that you specify.
 
 ```csharp
 .EnsureSpace(100)
@@ -32,7 +32,7 @@ page.Content().Column(column =>
 ![example](/api-reference/ensure-space-first.png =300x)
 ![example](/api-reference/ensure-space-second.png =300x)
 
-Please notice that in the example above, the grey block takes a significant part of the page. There is not much space left for the Text element. In fact, there is less than 100 points. Therefore, the EnsureSpace element decides to wrap to the next page and make sure that its child has enough vertical space to render.
+In the above example, the grey `Background` block takes a significant part of the page, leaving little space for the `Text` element. In fact, the remaining space is less than 100 points, so the `EnsureSpace` element forces a page break to ensure that its child has sufficient vertical space to render without fragmentation.
 
 ![example](/api-reference/ensure-space-off-first.png =300x)
 ![example](/api-reference/ensure-space-off-second.png =300x)

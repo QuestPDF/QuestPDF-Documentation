@@ -1,14 +1,14 @@
 # Debug area
 
-- This container can be used to inspect space taken by its children.
-- It does not alter document's layout.
+- This container can be used to inspect the space taken by its children.
+- The `Debug` container does not alter a document's layout.
 
 ```csharp
 // You can specify text and color,
 // to better distinguish between various debug elements:
 .Debug("Grid example", Colors.Blue.Medium)
 
-// You can skip color, by default it is red:
+// You can skip the color. By default it is red:
 .Debug("Grid example")
 
 // Or use default style:

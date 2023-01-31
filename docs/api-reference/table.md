@@ -1,12 +1,12 @@
 # Table
 
-The Table element is one of the most complex layout-related algorithms available in the QuestPDF library. It can achieve more sophisticated structures than any combination of the Row and the Column elements. It also greatly reduce code complexity. However, it is slightly slower to compute.
+The `Table` element is one of the most complex layout-related algorithms available in the QuestPDF library. It can achieve more sophisticated structures than any combination of the `Row` and the `Column` elements. It also greatly reduce code complexity. However, it is slightly slower to compute.
 
 ## Basic usage
 
-Please analyse this simple example showing how to create a simple Table instance:
-1) You start with column definition that describes width of each column.
-2) And then, you can place any number of items inside. Each item has a corresponding position (Row and Column).
+Please analyse this example showing how to create a simple Table instance:
+1) You start with a column definition that describes the width of each column.
+2) Then, you can place any number of items inside. Each item has a corresponding position (`Row` and `Column`).
 
 ```csharp{4-10,13-16}
 .Border(1)

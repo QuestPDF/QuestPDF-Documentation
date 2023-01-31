@@ -1,11 +1,11 @@
 # Grid
 
-- The Grid elements builds entire layout based on multiple Row elements put inside a Column.
+- The `Grid` element builds an entire layout based on multiple `Row` elements placed inside a `Column`.
 - Space is divided into multiple columns (12 by default).
 - Each item can take multiple columns.
-- If in the row there is not enough space for the item, it is pushed to the next row.
-- If there is more space than necessary, items can be aligned to the left / center or right.
-- It is possible to put space between elements.
+- If there is not enough space for the item in a row, it is pushed to the next row.
+- If there is more space than necessary, items can be aligned to the left, center or right.
+- It is possible to insert space between elements.
 
 ```csharp
 .Grid(grid =>

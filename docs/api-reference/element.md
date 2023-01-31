@@ -1,6 +1,6 @@
 # Element
 
-Sometimes it is useful to alter the document's content based on a condition. It is practically only a syntactic sugar to simplify your code. Use this component to achieve such results without breaking the fluent API chain:
+Sometimes it is useful to alter a document's content based on a condition. The `Element` component can provide the syntactic sugar needed to achieve this without breaking the fluent API chain as illustrated below:
 
 ```csharp{6-7,18}
 // before
@@ -25,7 +25,7 @@ public static IContainer TableCell(this IContainer container, bool applyBackgrou
 }
 ```
 
-It is not required to follow the methods chain. Using this approach, you can also end the chain:
+It is not necessary to follow the method chain. Using this approach, you can also end the chain as shown below:
 
 ```csharp
 public static IContainer TextOrBackground(this IContainer container, string text)

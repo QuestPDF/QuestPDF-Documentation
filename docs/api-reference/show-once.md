@@ -1,8 +1,8 @@
 # Show once
 
 - This container changes the default rendering behaviour.
-- Its child, once fully rendered, is not going to be present on next pages.
-- Useful when creating tables. In such a case, the table structure should be visible on each page but the content inside the cell should not be repeated.
+- Its child, once fully rendered, does not appear on subsequent pages.
+- This is useful when creating tables. In this case, the table *structure* is visible on each page but the *content* inside the cell is not repeated.
 
 ```csharp
 .ShowOnce()
@@ -29,7 +29,7 @@ page.Content().PaddingVertical(5).Row(row =>
 ![example](/api-reference/show-once-first.png =300x)
 ![example](/api-reference/show-once-second.png =300x)
 
-Please also consider an effect without the ShowOnce element applied. Please notice that the content in the right column was paged and took two pages. Therefore, the Row element (parent) also got paged, and as a result, left column was repeated twice:
+Please also consider the result of *omitting* the `ShowOnce` element. Note that the content in the right column was paged and took two pages. Therefore, the `Row` element (parent) was also paged, and as a result, the left column was repeated twice:
 
 ![example](/api-reference/show-once-off-first.png =300x)
 ![example](/api-reference/show-once-off-second.png =300x)

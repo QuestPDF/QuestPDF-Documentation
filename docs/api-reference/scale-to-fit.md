@@ -1,6 +1,6 @@
 # Scale to fit
 
-This container attempts to scale down its child, so it fits in the available space. This approach is useful when your content usually fits in the available space. For special situations, instead of wrapping the content to the next page or causing the infinite layout exception, it may make the content a little smaller to preserve the document look and feel.
+This container attempts to scale down its child so it fits in the available space. This approach is useful when your content usually fits in the available space. For special situations, instead of wrapping the content to the next page or causing the infinite layout exception, it may make the content a little smaller to preserve the document look and feel.
 
 ```csharp{13-15}
 .Padding(25)
@@ -28,5 +28,5 @@ This container attempts to scale down its child, so it fits in the available spa
 ::: danger
 Please notice that this component scales the available space. That means that you may still encounter situations where the child does not fit, e.g. when a child tries to enforce a specific aspect ratio.
 
-The process performs a binary search algorithm - in some cases may cause performance issues.
+The process performs a binary search algorithm - in some cases this may cause performance issues.
 :::

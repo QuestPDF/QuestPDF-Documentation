@@ -3,7 +3,7 @@
 - This container divides available space into individual columns.
 - Columns can have a fixed size (provided in points) or be proportional.
 - You can use pageable content inside each column.
-- If the content of any column wraps, entire container wraps.
+- If the content of any column wraps, the entire container wraps.
 
 ```csharp
 .Row(row =>
@@ -12,7 +12,7 @@
         .Background("#DDD")
         .Padding(10)
         .ExtendVertical()
-        .Text("This column is 100 points width");
+        .Text("This column is 100 points wide");
 
     row.RelativeItem()
         .Background("#BBB")
@@ -28,7 +28,7 @@
 
 ![example](/api-reference/row-example.png =740x)
 
-You can specify the spacing between each column by using the Spacing() method:
+You can specify the spacing between each column by using the `Spacing()` method:
 
 ```csharp
 .Row(row =>

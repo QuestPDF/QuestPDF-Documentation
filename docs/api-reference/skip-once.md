@@ -2,7 +2,7 @@
 
 - This container changes the default rendering behaviour.
 - Its child is not visible on the first occurrence page.
-- If the parent is visible on more than one page, the element is visible on the second page of occurrence and all following ones.
+- If the parent is visible on more than one page, the element is visible on all subsequent pages.
 
 ```csharp
 .SkipOnce()
