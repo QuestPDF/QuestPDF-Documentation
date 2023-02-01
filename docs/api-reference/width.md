@@ -1,6 +1,6 @@
 # Width
 
-Use this container to enforce additional sizing rules: minimum/maximum/exact width,
+Use this container to enforce additional sizing rules: minimum width, maximum width or exact width.
 
 ```csharp
 // adjust width to specific value
@@ -13,8 +13,8 @@ Use this container to enforce additional sizing rules: minimum/maximum/exact wid
 
 ::: danger
 Please be careful. This component may try to enforce size constraints that are impossible to meet when:
-- requires more space than is available,
-- tries to squeeze its child in less space than necessary.
+- it requires more space than is available, or
+- it tries to squeeze its child in less space than is available.
 
-Such scenarios end up with the layout exception.
+Such scenarios result in a layout exception.
 :::

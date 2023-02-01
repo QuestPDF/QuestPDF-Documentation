@@ -1,8 +1,8 @@
 # Unconstrained
 
-- This container takes no space,
-- It removes any size constraints from its child,
-- The rendered child appears like floating below/above of the other content.
+- This container takes no space.
+- It removes any size constraints from its child.
+- The rendered child appears floating below or above the other content.
 
 ```csharp{11-13}
 .Width(400)
