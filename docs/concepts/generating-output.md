@@ -2,7 +2,7 @@
 
 ## Generating PDF files
 
-The library supports generating both PDF files:
+The library supports generation of PDF files:
 
 ```csharp
 report.GeneratePdf("result.pdf");
@@ -10,7 +10,7 @@ report.GeneratePdf("result.pdf");
 
 ## Generating XPS files
 
-The library supports generating both XPS files:
+The library supports generation of XPS files:
 
 ```csharp
 report.GenerateXps("result.xps");
@@ -19,7 +19,7 @@ report.GenerateXps("result.xps");
 
 ## Generating images
 
-The default functionality of the library is generating PDF files based on specified document configuration. In some cases, you may need to generate set of images instead. Such tasks can be done by additional extension methods:
+The default functionality of the library is generating PDF files based on specified document configuration. In some cases, you may need to generate a set of images instead. Such tasks can be done by additional extension methods:
 
 ```csharp
 // generate images as dynamic list of images
@@ -30,5 +30,5 @@ document.GenerateImages(i => $"image-{i}.png");
 ```
 
 ::: tip
-Generated images are in the PNG format. In order to increase resolution of generated images, please modify the value of the `DocumentMetadata.RasterDpi` property. When RasterDpi is set to 72, one PDF point corresponds to one pixel.
+Generated images are in the PNG format. In order to increase the resolution of generated images, please modify the value of the `DocumentMetadata.RasterDpi` property. When RasterDpi is set to 72, one PDF point corresponds to one pixel.
 :::

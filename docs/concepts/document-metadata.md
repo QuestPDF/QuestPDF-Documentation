@@ -1,6 +1,6 @@
 # Document metadata
 
-You can modify the PDF document metadata by returning the `DocumentMetadata` object from the `IDocument.GetMetadata()` method. There are multiple properties available, some of them have default values:
+You can modify the PDF document metadata by returning the `DocumentMetadata` object from the `IDocument.GetMetadata()` method. There are several properties available, and some of them have default values (see below).
 
 ```csharp
 public class DocumentMetadata
@@ -24,5 +24,5 @@ public class DocumentMetadata
 ```
 
 ::: tip
-The `ImageQuality` property controls the trade-off between quality and size. The default value `101` corresponds to lossless encoding. When you use a value less than 100, all images are opaque and encoded using the JPEG algorithm. The smaller the value is, the higher compression is used.
+The `ImageQuality` property controls the trade-off between quality and size. The default value `101` corresponds to lossless encoding. When you use a value less than 100, all images are opaque and encoded using the JPEG algorithm. The smaller the value is, the higher the compression that is used.
 :::

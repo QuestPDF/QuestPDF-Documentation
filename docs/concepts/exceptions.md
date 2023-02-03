@@ -1,22 +1,22 @@
 # Exceptions
 
-During the development process, you may encounter different issues connected to the PDF document rendering process.
-It is important to understand potential sources of such exceptions, their root causes and how to fix them properly.
-In the QuestPDF library, all exceptions have been divided into three groups:
+During the development process, you may encounter different issues associated with the PDF document rendering process.
+It is important to understand the potential sources of such exceptions, their root causes and how to fix them properly.
+In the QuestPDF library, exceptions have been divided into three groups as described below.
 
 ##  DocumentComposeException
 
-This exception may occur during the document composition process. When you are using the fluent API to compose various elements together to create the final layout. Taking into account that during such process you are interacting with report data, using conditions, loops and even additional methods, all those operations may be a source of potential exceptions. All of them have been grouped together in this exception type.
+This exception may occur during the document composition process (when you are using the fluent API to compose various elements to create the final layout). During this process you are interacting with report data, using conditions, loops and even additional methods. All these operations are a potential source of exceptions which have been grouped together in the `DocumentComposeException` type.
 
 ## DocumentDrawingException
 
-This exception occurs during the document generation process - when the generation engine translates elements tree into proper drawing commands. If you encounter such an exception, please contact with us - it is most probably a bug that we want to fix for you! Additionally, if you are using custom components, all exceptions thrown there are going to bubble up with this type of exception.
+This exception occurs during the document generation process (when the generation engine translates the elements tree into proper drawing commands). If you encounter such an exception, please contact us - it is most probably a bug that we want to fix for you! Additionally, if you are using custom components, all exceptions thrown there are going to bubble up as an `DocumentDrawingException` type.
 
 ## DocumentLayoutException
 
-This exception may be extremely hard to fix because it happens for valid document trees which enforce constraints that are impossible to meet. For example, when you try to draw a rectangle bigger than available space on the page, the rendering engine is going to wrap the content in a hope that on the next page there would be enough space. Generally, such wrapping behaviour is happening all the time and is working nicely - however, there are cases when it can lead to infinite wrapping. When a certain document length threshold is passed, the algorithm stops the rendering process and throws this exception. In such case, please revise your code and search for indivisible elements requiring too much space.
+This exception may be extremely hard to fix because it happens for valid document trees which nevertheless enforce constraints that are impossible to meet. For example, when you try to draw a rectangle bigger than the available space on the page, the rendering engine is going to wrap the content in the hopes that on the next page there will be enough space. Generally, such wrapping behaviour happens routinely and works well. However, there are cases when it can lead to infinite wrapping. When a certain document length threshold is passed, the algorithm stops the rendering process and throws `DocumentLayoutException`. In such case, please revise your code and search for indivisible elements requiring too much space.
 
-When having a debugger attached, this exception provides an additional property `ElementTrace`. It shows which elements have been rendered when the exception was thrown. Please analyse the example below:
+When you have a debugger attached, this exception provides an additional `ElementTrace` property showing which elements have been rendered when the exception was thrown. Please analyse the example below:
 
 ```csharp{2,8}
 .Padding(10)

@@ -2,8 +2,8 @@
 
 ## Color definitions
 
-In QuestPDF, multiple element expect color as part of the configuration. Similarly to HTML, there are a couple of supported formats:
-1. Standard format: `RRGGBB` OR `#RRGGBB`
+In QuestPDF, several elements expect a color as part of the configuration. As in HTML, there are a couple of supported formats:
+1. Standard format: `RRGGBB` or `#RRGGBB`
 2. Shorthand format: `RGB` or `#RGB`, e.g. `#123` is an equivalent to `#112233`
 3. Alpha support: `AARRGGBB` or `#AARRGGBB`
 4. Shorthand alpha format: `ARGB` or `#ARGB`
