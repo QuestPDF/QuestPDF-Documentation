@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
-    "vitepress": "1.0.0-alpha.45",
-    "vue": "3.2.47",
-    "markdown-it-imsize": "2.0.1"
+    "vitepress": "^1.0.0-alpha.30",
+    "vue": "^3.2.45",
+    "markdown-it-imsize": "^2.0.1"
   },
   "dependencies": {
 
