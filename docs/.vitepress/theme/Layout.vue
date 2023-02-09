@@ -1,20 +1,6 @@
 <template>
   <default-layout>
-    <template #doc-before>
-      <ClientOnly>
-        <support-alert />
-      </ClientOnly>
-    </template>
 
-    <template #home-hero-after>
-      <home-page />
-    </template>
-
-    <template #layout-bottom>
-      <ClientOnly>
-        <google-analytics />
-      </ClientOnly>
-    </template>
   </default-layout>
 </template>
 
