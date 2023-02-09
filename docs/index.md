@@ -19,3 +19,8 @@ hero:
     link: https://www.nuget.org/packages/QuestPDF
 ---
 
+<script setup>
+import HomePage from '../docs/.vitepress/theme/homepage/HomePage.vue';
+</script>
+
+<HomePage />

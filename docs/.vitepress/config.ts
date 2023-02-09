@@ -1,9 +1,12 @@
-export default {
+import { defineConfig } from 'vitepress'
+import imsize_plugin from 'markdown-it-imsize';
+
+export default defineConfig({
     lang: 'en-US',
     title: 'QuestPDF',
     description: 'Modern .NET library for PDF document generation',
     base: '/',
-    cleanUrls: 'with-subfolders',
+    cleanUrls: true,
 
     head: [
         ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg' }],
@@ -156,7 +159,8 @@ export default {
             dark: 'dark-plus'
         },
         config: (md) => {
-            md.use(require('markdown-it-imsize'))
+            md.use(imsize_plugin)
         }
     }
-}
+});
+
