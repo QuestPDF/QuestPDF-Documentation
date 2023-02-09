@@ -6,10 +6,6 @@
       </ClientOnly>
     </template>
 
-    <template #home-hero-after>
-      <home-page />
-    </template>
-
     <template #layout-bottom>
       <ClientOnly>
         <google-analytics />
