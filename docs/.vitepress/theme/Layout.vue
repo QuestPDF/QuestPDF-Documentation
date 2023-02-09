@@ -1,20 +1,20 @@
 <template>
   <Layout>
-<!--    <template #doc-before>-->
-<!--      <ClientOnly>-->
-<!--        <support-alert />-->
-<!--      </ClientOnly>-->
-<!--    </template>-->
+    <template #doc-before>
+      <ClientOnly>
+        <support-alert />
+      </ClientOnly>
+    </template>
 
-<!--    <template #home-hero-after>-->
-<!--      <home-page />-->
-<!--    </template>-->
+    <template #home-hero-after>
+      <home-page />
+    </template>
 
-<!--    <template #layout-bottom>-->
-<!--      <ClientOnly>-->
-<!--        <google-analytics />-->
-<!--      </ClientOnly>-->
-<!--    </template>-->
+    <template #layout-bottom>
+      <ClientOnly>
+        <google-analytics />
+      </ClientOnly>
+    </template>
   </Layout>
 </template>
 
