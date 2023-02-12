@@ -5,5 +5,5 @@ import './custom.css'
 
 export default {
     ...DefaultTheme,
-    Layout: Layout,
+    //Layout: Layout,
 };
