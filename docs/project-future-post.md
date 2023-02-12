@@ -8,7 +8,7 @@ aside: false
 import RedirectionAlert from '../docs/.vitepress/theme/RedirectionAlert.vue'
 </script>
 
-# QuestPDF development roadmap and licensing opportunities
+# QuestPDF development roadmap, ensuring quality and assessing licensing opportunities
 
 ## What is QuestPDF, and what is its purpose?
 
