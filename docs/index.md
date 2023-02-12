@@ -23,4 +23,6 @@ hero:
 import HomePage from '../docs/.vitepress/theme/homepage/HomePage.vue';
 </script>
 
+<ClientOnly>
 <HomePage />
+</ClientOnly>
