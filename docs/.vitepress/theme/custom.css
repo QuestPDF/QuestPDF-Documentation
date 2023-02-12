@@ -14,6 +14,7 @@
     --vp-button-brand-text: #FFF !important;
     --vp-button-brand-hover-text: #FFF !important;
     --vp-c-green-dark: #1565C0;
+    --vp-layout-max-width: 1216px;
 }
 
 .VPNavBar .title {
@@ -116,11 +117,6 @@ html.dark .VPDoc img[alt=example] {
     border-radius: 8px;
 }
 
-.VPNav.no-sidebar .container {
-    max-width: 1152px;
-}
-
-
 html.dark .vp-doc strong,
 html.dark .vp-doc b {
     color: #81D4FA;
@@ -139,10 +135,13 @@ html:not(.dark) .vp-doc b {
     font-size: 1rem !important;
 }
 
+.VPSidebarItem .is-active p {
+    font-weight: bold !important;
+}
+
 a:has(.alert) {
     text-decoration: none !important;
 }
-
 
 a .alert.warning:hover {
     cursor: pointer;

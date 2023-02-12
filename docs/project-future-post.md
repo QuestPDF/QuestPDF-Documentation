@@ -8,11 +8,11 @@ aside: false
 import RedirectionAlert from '../docs/.vitepress/theme/RedirectionAlert.vue'
 </script>
 
-# QuestPDF roadmap and financing development
+# QuestPDF development roadmap and licensing opportunities
 
 ## What is QuestPDF, and what is its purpose?
 
-QuestPDF is a modern open-source .NET library for PDF document generation. It offers a comprehensive layout engine powered by a concise and discoverable C# Fluent API.
+**QuestPDF is a modern open-source .NET library for PDF document generation.** It offers a comprehensive layout engine powered by a concise and discoverable C# Fluent API.
 
 The video below shows how the development process looks. To learn more, please check [the Getting Started tutorial](/getting-started).
 
@@ -32,7 +32,7 @@ At this moment, the library is a substantial dependency in many free and commerc
 
 ## Long-term roadmap
 
-The objective is to improve the project and make it a first-choice library for PDF generation. There are a couple of milestones on the upcoming roadmap:
+**The objective is to improve the project and make it a first-choice library for PDF generation.** There are a couple of milestones on the upcoming roadmap:
 - extending the Previewer capabilities to not only show the document but also allow to inspect its structure,
 - documentation redesign, more precise descriptions, more examples, text redaction,
 - reducing output file size (e.g., via font subsetting),
@@ -56,19 +56,19 @@ As developers, we rarely discuss the problem of scaling open-source. However, a 
 
 Now it is a time to make a courageous decision, to ask the Community for help and guidance. We set the bar really high. To meet your expectations, the project requires proper funding. Unfortunately, the GitHub Sponsors program does not solve the problem, as it provides an insignificant income compared to the actual job. But still, I highly appreciate everybody who decided to help this way - you are great! 
 
-I have been brainstorming for over two month to find and analyze all available approaches. I am seriously considering a hybrid licensing model. Recently more and more open-source projects are choosing this path.
+I have been brainstorming for over two month to find and analyze all available approaches. **I am seriously considering a hybrid licensing model. Recently more and more open-source projects are choosing this path.**
 
 
 ## Financing the project by being professional
 
 **For the vast majority of users, nothing changes. The library is still open-source, fully featured, and free for commercial usage (via the MIT license).** 
 
-The only difference is applied to enterprise. Every company/individual with high enough (value yet to be determined) annual gross revenue that uses QuestPDF in a closed-source for-profit project will be obligated to purchase the QuestPDF Enterprise license for each year of development. This version will provide additional, professional, high-priority support.
+**The only difference is applied to enterprise.** Every company/individual with high enough (value yet to be determined) annual gross revenue that uses QuestPDF in a closed-source for-profit project will be obligated to purchase the QuestPDF Enterprise license for each year of development. This version will provide additional, professional, high-priority support.
 
 
 ## Extended 2022.X support
 
-The new licensing approach will be applied only to releases `2023.X.Y` and beyond. The licensing model of all prior releases will be unchanged, keeping the MIT license. Furthermore, the last 2022 major release will receive slightly longer quality support to minimize the impact on your projects.
+**The new licensing approach will be applied only to releases `2023.X.Y` and beyond.** The licensing model of all prior releases will be unchanged, keeping the MIT license. Furthermore, the last 2022 major release will receive slightly longer quality support to minimize the impact on your projects.
 
 
 ## Change that benefits all
@@ -81,14 +81,14 @@ I believe that this approach is best for everyone:
 
 ## Let's refine the strategy, together
 
-The general idea is here, but it is not set in stone yet. The reason behind this post is to be transparent and learn from You. We want to explore more perspectives and tune all details. We want to ensure that this transition is an educated decision and will be impactless for existing users. Please share your thoughts and help us find the best way to move the project forward.
+The general idea is here, but it is not set in stone yet. The reason behind this post is to be transparent and learn from You. We want to explore more perspectives and tune all details. We want to ensure that this transition is an educated decision and will be impactless for existing users. **Please share your thoughts and help us find the best way to move the project forward.**
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 32px;">
-    <RedirectionAlert icon="/homepage/survey.svg" content="Take the survey" link="https://github.com/QuestPDF/QuestPDF" />
-    <RedirectionAlert icon="/homepage/discussion.svg" content="Share your comments" link="https://github.com/QuestPDF/QuestPDF" />
+    <RedirectionAlert icon="/homepage/survey.svg" content="Take the survey" link="https://docs.google.com/forms/d/e/1FAIpQLSewmFByWbl95z5FXpBDBCTromDe13u9RTKOdv0lrma-RmdnrQ/formResponse" />
+    <RedirectionAlert icon="/homepage/discussion.svg" content="Share your comments" link="https://github.com/QuestPDF/QuestPDF/discussions/491" />
 </div>
 
 
-Thank you all for being with us on this challenging path. Let's make the world better, piece by piece, together. Fingers crossed!
+**Thank you all for being with us on this challenging path. Let's make the world better, piece by piece, together. Fingers crossed!**
 
 Marcin Ziąbek and QuestPDF contributors.
