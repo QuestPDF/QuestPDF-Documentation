@@ -19,15 +19,11 @@ hero:
     link: https://www.nuget.org/packages/QuestPDF
 ---
 
-[//]: # (<script setup>)
+<script setup>
+import HomePage from '../docs/.vitepress/theme/homepage/HomePage.vue';
+</script>
 
-[//]: # (import HomePage from '../docs/.vitepress/theme/homepage/HomePage.vue';)
 
-[//]: # (</script>)
-
-[//]: # ()
-[//]: # (<ClientOnly>)
-
-[//]: # (<HomePage />)
-
-[//]: # (</ClientOnly>)
+<ClientOnly>
+    <HomePage />
+</ClientOnly>

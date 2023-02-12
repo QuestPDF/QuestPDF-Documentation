@@ -6,7 +6,7 @@ export default defineConfig({
     title: 'QuestPDF',
     description: 'Modern .NET library for PDF document generation',
     base: '/',
-    cleanUrls: true,
+    cleanUrls: false,
 
     head: [
         ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg' }],
