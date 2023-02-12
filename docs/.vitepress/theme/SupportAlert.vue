@@ -39,10 +39,3 @@ onMounted(() => {
 });
 
 </script>
-
-<style scoped>
-  .alert:hover {
-    cursor: pointer;
-    background-color: rgba(255, 197, 23, 0.15);
-  }
-</style>

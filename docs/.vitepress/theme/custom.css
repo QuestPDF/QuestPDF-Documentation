@@ -6,7 +6,9 @@
     --vp-home-hero-image-background-image: conic-gradient(from 100deg, #2979FF55 70deg, #88888855 70deg);
     --vp-home-hero-image-filter: blur(48px);
     --vp-button-brand-bg: #03A9F4;
+    --vp-button-brand-border: #03A9F4;
     --vp-button-brand-active-border: #03A9F4;
+    --vp-button-brand-active-bg: #03A9F4;
     --vp-button-brand-hover-bg: #2979FF;
     --vp-button-brand-hover-border: #2979FF;
     --vp-button-brand-text: #FFF !important;
@@ -135,4 +137,14 @@ html:not(.dark) .vp-doc b {
 
 .VPHero .VPButton {
     font-size: 1rem !important;
+}
+
+a:has(.alert) {
+    text-decoration: none !important;
+}
+
+
+a .alert.warning:hover {
+    cursor: pointer;
+    background-color: rgba(255, 197, 23, 0.15);
 }
