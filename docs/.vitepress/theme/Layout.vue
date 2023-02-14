@@ -2,7 +2,10 @@
   <Layout>
     <template #doc-before>
       <ClientOnly>
-        <support-alert />
+        <div v-show="showAlerts">
+          <support-alert />
+          <survey-alert />
+        </div>
       </ClientOnly>
     </template>
 
@@ -21,4 +24,11 @@ const { Layout } = DefaultTheme
 import GoogleAnalytics from "./GoogleAnalytics.vue";
 import SupportAlert from "./SupportAlert.vue";
 import HomePage from "./homepage/HomePage.vue";
+import SurveyAlert from "./SurveyAlert.vue";
+import {computed} from "vue";
+import {useRoute} from "vitepress";
+
+const showAlerts = computed(() => {
+  return !useRoute().path.includes("project-future");
+})
 </script>
