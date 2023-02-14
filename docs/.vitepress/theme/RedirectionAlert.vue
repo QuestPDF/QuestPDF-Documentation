@@ -17,7 +17,6 @@ defineProps(["icon", "content", "link"])
 .redirection-alert {
   width: 100%;
 
-  margin-bottom: 32px;
   padding: 16px;
 
   display: grid;

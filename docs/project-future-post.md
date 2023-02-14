@@ -83,7 +83,7 @@ I believe that this approach is best for everyone:
 
 The general idea is here, but it is not set in stone yet. The reason behind this post is to be transparent and learn from You. We want to explore more perspectives and tune all details. We want to ensure that this transition is an educated decision and will be impactless for existing users. **Please share your thoughts and help us find the best way to move the project forward.**
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 32px;">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); grid-gap: 8px 32px;">
     <RedirectionAlert icon="/homepage/survey.svg" content="Take the survey" link="https://docs.google.com/forms/d/e/1FAIpQLSewmFByWbl95z5FXpBDBCTromDe13u9RTKOdv0lrma-RmdnrQ/formResponse" />
     <RedirectionAlert icon="/homepage/discussion.svg" content="Share your comments" link="https://github.com/QuestPDF/QuestPDF/discussions/491" />
 </div>
