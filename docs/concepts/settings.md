@@ -1,6 +1,6 @@
 # Settings
 
-There are several parameters that alter the generation process. All of them are available under statically available `Settings` class.
+There are several parameters that alter the generation process. These are available using the static `Settings` class.
 
 ```csharp
 // settings definition with default settings
@@ -19,9 +19,9 @@ QuestPDF.Settings.DocumentLayoutExceptionThreshold = 1000;
 
 ## Maximum document length
 
-This value represents the maximum length of the document that the library produces. This is useful when layout constraints are too strong, e.g. one element does not fit in another. In such cases, the library would produce document of infinite length, consuming all available resources. To break the algorithm and save the environment, the library breaks the rendering process after reaching specified length of document.
+This value represents the maximum length of the document that the library produces. This is useful when layout constraints are too strong, e.g. one element does not fit in another. In such cases, the library would produce a document of infinite length, consuming all available resources. To break the algorithm and save the environment, the library breaks the rendering process after reaching the specified document length.
 
-If your content requires generating longer documents, please assign the most reasonable value.
+If your content requires generating longer documents, please assign a suitable value.
 
 ```csharp
 QuestPDF.Settings.DocumentLayoutExceptionThreshold = 250;
@@ -39,7 +39,7 @@ QuestPDF.Settings.EnableCaching = true;
 
 ## Debugging
 
-This flag generates additional document elements to improve layout debugging experience. When the DocumentLayoutException is thrown, the library is able to provide additional execution context. It includes layout calculation results and path to the problematic area.
+This flag generates additional document elements to improve the layout debugging experience. When `DocumentLayoutException` is thrown, the library is able to provide additional execution context. It includes layout calculation results and the path to the problematic area.
 
 By default, this flag is enabled only when the debugger IS attached.
 
@@ -49,10 +49,10 @@ QuestPDF.Settings.EnableDebugging = false;
 
 ## Checking font glyph availability
 
-This flag enables checking the font glyph availability. 
+This flag enables the checking of font glyph availability. 
 
 If your text contains glyphs that are not present in the specified font:
-1) when this flag is enabled: the DocumentDrawingException is thrown. 
+1) when this flag is enabled: `DocumentDrawingException` is thrown. 
 2) when this flag is disabled: placeholder characters are visible in the produced PDF file. 
 
 Enabling this flag may slightly decrease document generation performance. However, it provides hints that used fonts are not sufficient to produce correct results.

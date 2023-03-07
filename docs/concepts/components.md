@@ -1,14 +1,12 @@
 # Components
 
-A component is a special type of element that can generate content depending on its state. This approach is really common in many web-development libraries and solves multiple issues. You should consider creating your own component when part of the document is going to be reused in other documents. Another good scenario is when you plan to repeat a more complex section. In such a case, you can implement a component that takes input provided as constructor's argument, and generates PDF content. Then, such component can be easily used in a for loop in the document itself. All things considered, components are a useful tool to organize and reuse your code.
+A component is a special type of element that can generate content depending on its state. This approach is really common in many web-development libraries and solves multiple issues. You should consider creating your own component when part of your document will be reused in other documents. Another good application of components is when you plan to repeat a complex section. In this case, you could implement a component that takes input via the constructor parameters, and generates PDF content. Such a component can readily be used in a for loop, for example. All things considered, components are a useful tool to organize and reuse your code.
 
 ::: tip
 Components offer a lot of flexibility and extendability. Because of that, the QuestPDF library will receive several important updates to enhance components features even more. Stay tuned for slots!
 :::
 
-In this tutorial, we will cover a simple component that generates a random image taken from the fantastic webpage called [Lorem Picsum](https://picsum.photos/). To show how component's behaviour can be dynamically changed, the end result will offer optional greyscale flag.
-
-Additionally, the constructor of the template is going to offer of showing only greyscale images.
+In this tutorial, we will create a simple component to generate a random image from the fantastic webpage called [Lorem Picsum](https://picsum.photos/). To show how the component's behaviour can be dynamically changed, an optional `greyscale` flag can be specified in the component constructor.
 
 ```csharp
 //interface
@@ -59,12 +57,12 @@ Example usage:
 });
 ```
 
-The result of sample code looks as follows:
+The result of the sample code is shown below:
 
 ![example](/patterns-and-practices/component-example.png =350x)
 
 ::: tip
-If the component class has parameter-less constructor, you can use the generic `Template` method like so:
+If the component class has a parameterless constructor, you can use the generic `Template` method like this:
 ```csharp
 .Component<ComponentClass>();
 ```

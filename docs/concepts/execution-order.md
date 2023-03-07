@@ -1,6 +1,6 @@
 # Execution order
 
-QuestPDF uses FluentAPI and method chaining to describe document's content. It is very important to remember that the order of methods is strict. That means, in many cases, changing order of invocations will produce different results. To better understand this behavior, let's analyse this simple example:
+QuestPDF uses a fluent API and method chaining to describe a document's content. It is very important to remember that the order of methods is strict. This means that in many cases, changing the order of invocations will produce different results. To better understand this behavior, let's analyse this simple example:
 
 ```csharp{7-8,13-14}
 .Row(row =>

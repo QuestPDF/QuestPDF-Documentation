@@ -2,7 +2,7 @@
 
 ## Text
 
-It is a very common scenario when we know how the document layout should look like, however, we do not have appropriate data to fill it. The Quest PDF library provides a set of helpers to generate random text of different kinds:
+Often we know what a document layout should look like but we do not have appropriate data to fill it. The Quest PDF library provides a set of helpers to generate random text of different kinds:
 
 ```csharp
 using QuestPDF.Helpers;
@@ -60,7 +60,7 @@ Example usage to create a colorful matrix:
 
 ## Image
 
-Use this simple function to generate random image with required size:
+Use this simple function to generate a random image with required size:
 
 ```csharp
 // both functions return a byte array containing a JPG file

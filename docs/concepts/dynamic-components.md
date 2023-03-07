@@ -2,11 +2,11 @@
 
 ## Introduction
 
-Dynamic components are useful when you want to generate different or conditional content on each page. The dynamic component mostly resembles normal components with one important difference: the `Compose` method is called for each page. Having access to component internal state, information about pages and available space, you can build more advanced structures.
+Dynamic components are useful when you want to generate different or conditional content on each page. The dynamic component mostly resembles a normal component with one important difference: the `Compose` method is called for each page. Having access to component internal state, information about pages and available space, you can build more advanced structures.
 
-In this example, we only use the page information: number of current page and count of all pages in the document. We use both numbers to create something similar to a progress bar that shows where you are in the document.
+In this example, we only use the page information: the current page number and total page count. We use both numbers to create something similar to a progress bar that indicates where you are in the document.
 
-Please note that this example does not require state management. Therefore, we declare state as a simple integer and do not use it anywhere else.
+Please note that this example does not require state management, so we declare state as a simple integer and do not use it anywhere else.
 
 ```csharp{7-22}
 public class ProgressHeader : IDynamicComponent<int>
@@ -61,14 +61,14 @@ container.Page(page =>
 });
 ```
 
-First page of the document, and one random page from the middle of the document:
+See below, the first page of the document, and a random page from the middle of the document:
 
 ![example](/patterns-and-practices/dynamic-progress-1.png =300x)
 ![example](/patterns-and-practices/dynamic-progress-2.png =300x)
 
 ## Footer with alternating text alignment
 
-In this example, we will use new knowledge to implement the footer element with alternating text alignment.
+In this example, we use new knowledge to implement the footer element with alternating text alignment.
 1) On even pages, align page number to the left.
 2) On odd pages, align page number to the right.
 
@@ -119,12 +119,12 @@ And the result is as follows:
 
 ## State management
 
-This example introduces state management in components. Our goal is to create a header component that calculates consecutive terms in the Fibonacci-like sequence and shows their ratio - one calculation per page. Additionally, we want to use different background colors depending on the modulo calculus of the current sequence term.
+This example introduces component state management. Our goal is to create a header component that calculates consecutive terms in the Fibonacci-like sequence and shows their ratio - one calculation per page. Additionally, we want to use different background colors depending on the modulo calculus of the current sequence term.
 
 Let's begin with the struct declaration that will hold the state:
 
 ::: warning
-Important: please consider the state as read only. Never mutate already existing state. To perform mutation, create new struct instance and assign it to the State property. The QuestPDF library may perform multiple `Compose` method calls per page. The library may also change the state internally.
+Important: please consider the state to be read-only. Never mutate existing state. To perform mutation, create a new struct instance and assign it to the State property. The QuestPDF library may perform multiple `Compose` method calls per page. The library may also change the state internally.
 :::
 
 ```csharp
@@ -135,7 +135,7 @@ public struct FibonacciHeaderState
 }
 ```
 
-Now, in each `Compose` method invocation, we can calculate new sequence term, properly update state and generate new content to display on the page.
+Now, in each `Compose` method invocation, we can calculate a new sequence term, properly update state and generate new content to display on the page.
 
 ```csharp{23-49}
 public class FibonacciHeader : IDynamicComponent<FibonacciHeaderState>
@@ -175,7 +175,7 @@ public class FibonacciHeader : IDynamicComponent<FibonacciHeaderState>
                 .Text($"{State.Current} / {State.Previous} = {ratio:N5}");
         });
 
-        // please notice that the code assign NEW state, instead of mutating existing one
+        // please note that the code assigns NEW state, instead of mutating the existing one
         State = new FibonacciHeaderState
         {
             Previous = State.Current,
@@ -191,24 +191,24 @@ public class FibonacciHeader : IDynamicComponent<FibonacciHeaderState>
 }
 ```
 
-Please notice that you can instantiate components using constructors with arguments. This way for example, you can pass data from the database:
+Please note that you can instantiate components using constructors with arguments. You can use this to pass data from your database, for example.
 
 ```csharp{7}
 page.Header().Dynamic(new FibonacciHeader(17, 19));
 ```
 
-First page of the document, and one random page from the middle of the document:
+See below, the first page of the document, and a random page from the middle of the document:
 
 ![example](/patterns-and-practices/dynamic-state-1.png =300x)
 ![example](/patterns-and-practices/dynamic-state-2.png =300x)
 
 ## Table with per-page totals
 
-This example presents more common use case. Similarly to the Getting Started tutorial, we will generate an invoice document. The difficulty is hidden in the special requirement: for each page on the invoice, we want to show the total price only for items visible on the page. Therefore, we need to know which items are visible on the page and then calculate the proper value.
+This example presents a more common use case. As in the "Getting Started" tutorial, we will generate an invoice document. However, the complex requirement in this example is that for each page of the invoice, we want to show the total price for items visible on that page. Therefore, we need to know which items are visible on the page in order to calculate the price.
 
 To achieve this requirement, we will implement a simple paging algorithm that will check how many table rows can fit on the page.
 
-Let's begin with a declaring data model and state struct:
+Let's begin by declaring a data model and state struct:
 
 ```csharp
 public class OrderItem
@@ -224,7 +224,7 @@ public struct OrdersTableState
 }
 ```
 
-The implementation of this component is quite simple. For each page, the component generates multiple versions of the layout, testing how much space is required to various number of items in the table. Please notice that the `DynamicContent.CreateElement` method returns an object implementing the `IDynamicElement` interface. This interface can be used to access size of the element. This size can be compared to available space, so the biggest table with the highest number of rows is chosen.
+The implementation of this component is quite simple. For each page, the component generates multiple versions of the layout, testing how much space is required for various numbers of items in the table. Please note that the `DynamicContent.CreateElement` method returns an object implementing the `IDynamicElement` interface. This interface can be used to access the size of the element. This size can be compared to the available space, so the biggest table with the highest number of rows is chosen.
 
 ```csharp
 public class OrdersTable : IDynamicComponent<OrdersTableState>
@@ -252,7 +252,7 @@ public class OrdersTable : IDynamicComponent<OrdersTableState>
             .TakeWhile(x => x.Size.Height <= context.AvailableSize.Height)
             .ToList();
 
-        // update the state, so the component remembers how many items has been already shown on previous pages
+        // update the state, so the component remembers how many items have already been shown on previous pages
         State = new OrdersTableState
         {
             ShownItemsCount = State.ShownItemsCount + possibleItems.Count
@@ -262,15 +262,15 @@ public class OrdersTable : IDynamicComponent<OrdersTableState>
         {
             Content = possibleItems.Last(),
             
-            // check, if all items has been already rendered
+            // check if all items have already been rendered
             HasMoreContent = State.ShownItemsCount < Items.Count
         };
     }
 
     private IDynamicElement ComposeContent(DynamicContext context, int itemsToDisplay)
     {
-        // this method is called multiple times per page
-        // with each calls, the value of the 'itemsToDisplay' argument increases
+        // this method is called multiple times per page.
+        // With each call, the value of the 'itemsToDisplay' argument increases
     
         var total = Items.Skip(State.ShownItemsCount).Take(itemsToDisplay).Sum(x => x.Count * x.Price);
 
@@ -278,7 +278,7 @@ public class OrdersTable : IDynamicComponent<OrdersTableState>
         {
             container
                 .MinimalBox()
-                .Width(context.AvailableSize.Width) // please notice that we need to constraing the element's width to available space
+                .Width(context.AvailableSize.Width) // please notice that we need to constrain the element's width to the available space
                 .Table(table =>
                 {
                     table.ColumnsDefinition(columns =>
@@ -371,12 +371,12 @@ container
 
 ## Optimized example
 
-In the previous example, we generate and measure multiple different sizes (with different number of rows) of table for each page. Therefore, to render one page, we may generate over 10-15 different layout versions, thus making the algorithm not optimal.
+In the previous example, we generate and measure multiple different sizes (with different number of rows) of table for each page. Therefore, to render one page, we may generate over 10-15 different layout versions, which means the algorithm is not optimal.
 
-This example uses the `IDynamicElement.Size` information to better manage generation process:
-1) Generate table header and measure how much space it needs
-2) Generate table footer (subtotal) and measure required space.
-3) Incrementally generate table rows, measure each row, and fill available space. Continue till the next row does not fit and reject it.
+This example uses the `IDynamicElement.Size` information to better manage the generation process:
+1. Generate table header and measure how much space it needs.
+2. Generate table footer (subtotal) and measure the required space.
+3. Incrementally generate table rows, measure each row, and fill available space. Continue until the next row fails to fit and reject it.
 
 This way, we can build the table only once, significantly improving performance. Of course, this algorithm is slightly more complicated:
 
