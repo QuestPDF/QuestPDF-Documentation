@@ -1,6 +1,6 @@
 # Minimal box
 
-The `MinimalBox` element loosens the size constraints provided by its parent. It makes sure that its child is rendered only with necessary space, no bigger.
+The `MinimalBox` element relaxes the size constraints provided by its parent. It makes sure that its child is rendered with the minimum necessary space only.
 
 ```csharp{3-3}
 .Border(4)
@@ -12,10 +12,10 @@ The `MinimalBox` element loosens the size constraints provided by its parent. It
 .FontSize(20);
 ```
 
-Without using the `MinimalBox` element (notice that the text element takes entire space provided by its parent):
+Without using the `MinimalBox` element, notice that the text element occupies the entire space provided by its parent, as shown below:
 
 ![example](/api-reference/minimal-box-without.png =300x)
 
-With using the `MinimalBox` element (notice that the text element takes only necessary space):
+With the `MinimalBox` element, notice that the text element takes the minimum necessary space only, as shown below:
 
 ![example](/api-reference/minimal-box-with.png =300x)

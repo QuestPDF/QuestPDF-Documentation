@@ -1,6 +1,6 @@
 # Default text style
 
-For professional documents, it is important to keep consistent typography. At the same time, documents that contain many text elements (e.g. reports) may become troublesome to configure, even with techniques such as [global text styles](/api-reference/page#global-text-style) or [DSL extensions](/concepts/creating-dsl) (creating more complex structures defined as C# extension methods).
+For professional documents, it is important to maintain consistent typography. At the same time, documents that contain many text elements (e.g. reports) may become troublesome to configure, even with techniques such as [global text styles](/api-reference/page#global-text-style) or [DSL extensions](/concepts/creating-dsl) (creating more complex structures defined as C# extension methods).
 
 This element allows you to override text styles in all its children at once.
 
@@ -31,6 +31,6 @@ This element allows you to override text styles in all its children at once.
     });
 ```
 
-Please notice that this element extends existing styles with additional configuration. Those styles can be extended/overridden on later stages of the code.
+Please note that this element extends existing styles with additional configuration. Those styles can be extended/overridden in later stages of the code.
 
 ![example](/api-reference/default-text-style.png =220x)

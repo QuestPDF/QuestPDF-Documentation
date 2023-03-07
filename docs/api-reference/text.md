@@ -1,23 +1,23 @@
 # Text
 
 - Draws text with default or custom styling.
-- Text always takes as little space as possible.
-- If text is longer, the element may take the entire width and break to the next line.
+- `Text` always takes as little space as possible.
+- If the text string is long, the element may take the entire width and break to the next line.
 - This element supports paging.
 
-For most cases, that do not require any complex formatting, the simplified version of the text component is enough:
+For most cases, that do not require any complex formatting, the simplified version of the `Text` component is enough as illustrated below.
 
 ```csharp
 .Text("Sample text")
 .Text("Red big text").FontColor("#F00").FontSize(24)
 ```
 
-When you want to change style in the middle of the text, inject page numbers or include custom components - use text block approach:
+Use the "text block" approach when you want to change style in the middle of a text string, inject page numbers or include custom components, as shown below:
 
 ```csharp
 .Text(text =>
 {
-    text.Span("This is a normal text, followed by an ");
+    text.Span("This is a normal text, followed by some ");
     text.Span("underlined text.").Underline();
 });
 ```
@@ -26,7 +26,7 @@ When you want to change style in the middle of the text, inject page numbers or 
 
 ## Basic font style
 
-You can define text style using available FluentAPI methods which are described below.
+You can define the text style using the following fluent API methods:
 
 ```csharp
 .FontColor("#F00")
@@ -43,7 +43,7 @@ You can define text style using available FluentAPI methods which are described 
 
 ## Default text style within a block
 
-You these fluent API methods to adjust text position:
+Use these fluent API methods to adjust text position:
 
 ```csharp
 .Text(text =>
@@ -61,7 +61,6 @@ You can easily set up font weight by using one of the following fluent API metho
 
 ```csharp
 .Weight(FontWeight.Normal)
-
 .Thin()
 .ExtraLight()
 .Light()
@@ -74,7 +73,7 @@ You can easily set up font weight by using one of the following fluent API metho
 .ExtraBlack()
 ```
 
-Please notice that not all fonts support every weight. QuestPDF will match the closest weight available:
+Please notice that not all fonts support every weight. QuestPDF will match the closest available weight:
 
 ![example](/api-reference/text-weight.png =200x)
 
@@ -133,8 +132,8 @@ This settings changes spacing between text lines. Modify the value to make the t
 
 ## Letter spacing
 
-Letter spacing allows to increase or decrease space between characters. This setting is useful when you want to make the text more compact (by decreasing letter spacing) or easier to read (by increasing letter spacing):
-- Value 0 corresponds to normal spacing defined by a font.
+Letter spacing allows you to increase or decrease space between characters. This setting is useful when you want to make the text more compact (by decreasing letter spacing) or easier to read (by increasing letter spacing):
+- The value 0 corresponds to the normal spacing defined by a font.
 - Positive values create additional space.
 - Negative values reduce space between characters.
 
@@ -180,7 +179,7 @@ This settings uses relative units. Example: let's assume your text has font size
 Please consider an example Typography class that describes text styling across all documents:
 
 ```csharp
-// single typography class can help with keeping document look&feel consistent
+// single typography class can help with keeping a consistent look & feel in the document
 public static class Typography
 {
     public static TextStyle Title => TextStyle
@@ -215,7 +214,7 @@ Then, a predefined typography can be used in the following way:
 
 ## Font alignment
 
-You these fluent API methods to adjust text position:
+Use the following fluent API methods to adjust text position:
 
 ```csharp
 .Text(text =>
@@ -231,7 +230,7 @@ You these fluent API methods to adjust text position:
 
 ## Custom paragraph spacing
 
-It is possible to specify additional spacing between paragraphs - blocks of text in different lines.
+It is possible to specify additional spacing between paragraphs (blocks of text in different lines).
 
 ```csharp
 .Text(text =>
@@ -262,7 +261,7 @@ Sometimes you may need to inject custom components between text spans. Every inj
 
 ![example](/api-reference/text-custom-element.png =450x)
 
-Use negative padding to adjust element position to your needs:
+Use negative padding to adjust element position to suit your needs:
 
 ```csharp{7}
 .Text(text =>
@@ -283,14 +282,14 @@ Use negative padding to adjust element position to your needs:
 ![example](/api-reference/text-custom-element-aligned.png =450x)
 
 ::: danger
-When injecting custom elements inside the text block, please remember to always constrain its size. Otherwise, the element will take entire space possible.
+When injecting custom elements inside a text block, please remember to always constrain its size. Otherwise, the element will take entire available space.
 :::
 
 ## Page numbers
 
 ### Document
 
-Use new text elements to inject page numbers: current page number where the text is located and number of all pages within the document.
+Use new text elements to inject pagination data, i.e. the current page number, the total page count in the document, etc.
 
 ```csharp
 .Text(text =>
@@ -305,7 +304,7 @@ Use new text elements to inject page numbers: current page number where the text
 
 ### Sections
 
-It is also possible to access specific page
+It is possible to retrieve pagination data for a named section of your document.
 
 ```csharp
 // define your section somewhere in the document:
@@ -331,7 +330,7 @@ It is also possible to access specific page
 
 ### Formatting
 
-It is also possible to format page number using the `Format` method.
+It is possible to format the page number using the `Format` method.
 
 ```csharp
 .Text(text =>
@@ -350,7 +349,7 @@ It is also possible to format page number using the `Format` method.
 });
 ```
 
-Please notice that the formatting function takes `int?` type. QuestPDF performs two-pass rendering algorithm. Only during the second pass, all page numbers are known and defined. In the first phase, your formatting method receives `null` to indicate that the page number is not determined yet. Please return any text that matches expected output in length.
+Please note that the formatting function takes the `int?` type. QuestPDF uses a two-pass rendering algorithm whereby page numbers are only known during the second pass. In the first phase, your formatting method receives `null` to indicate that the page number is not yet determined. Please return any text that matches the expected output in length.
 
 ## Section link
 
@@ -376,7 +375,7 @@ Please notice that the formatting function takes `int?` type. QuestPDF performs 
 
 ## Unicode support
 
-The library supports text shaping capability, useful when generating advanced Unicode-capable text:
+The library supports text shaping capability, which is useful when generating advanced Unicode-capable text:
 
 ```csharp{10}
 .Padding(35)
@@ -401,8 +400,8 @@ The library supports text shaping capability, useful when generating advanced Un
 ## Advanced languages support
 
 Text shaping capability also gives basic support for more advanced languages that:
-1) Display multiple text characters as a single glyph.
-2) Are display in the right-to-left order.
+1. Display multiple text characters as a single glyph.
+2. Are displayed using right-to-left script.
 
 ```csharp{4}
 var text = "في المعلوماتية أو الرياضيات، خوارزمية الترتيب هي خوارزمية تمكن من تنظيم مجموعة عناصر حسب ترتيب محدد.";
@@ -418,7 +417,7 @@ var text = "في المعلوماتية أو الرياضيات، خوارزمي
 
 ## Font fallback
 
-Each font file contains a well-specified set of glyphs. Sometimes, to reduce font file size, more advanced glyphs are not present. For example, English uses around a hundred of characters, whereas Chinesee requires thousands of glyphs. Therefore, it is possible that text in document may contain glyphs not available in the configured font. In such cases, an ugly character (usually square with question mark) is rendered.
+Each font file contains a well-specified set of glyphs. Sometimes, to reduce font file size, more advanced glyphs are not present. For example, English uses around one hundred characters, whereas Chinese requires thousands of glyphs. Therefore, it is possible that text in a document may contain glyphs not available in the configured font. In such cases, an ugly character (usually a square with a question mark) is rendered.
 
 You can define font fallback in the TexStyle object:
 
@@ -436,7 +435,7 @@ TextStyle
     .Fallback(TextStyle.Default.FontFamily("Segoe UI Emoji"));    
 ```
 
-Please notice, that you can provide nested fallbacks for more advanced cases. It is also possible to modify other style properties:
+Please note that you can provide nested fallbacks for more advanced cases. It is also possible to modify other style properties:
 
 ```csharp
 var textStyleWithFallback = TextStyle
@@ -482,22 +481,22 @@ When the font fallback is not configured:
 
 ![example](/api-reference/font-fallback-without.png =460x)
 
-And with configured font fallback. Please notice that additional styles (e.g. red background color) are applied only to glyphs from the associated fallback configuration. This let's you fine tune text parameters, e.g. to match visual text size in various fonts.
+And now with configured font fallback. Please note that additional styles (e.g. red background color) are applied only to glyphs from the associated fallback configuration. This let's you fine tune text parameters, e.g. to match visual text size in various fonts.
 
 ![example](/api-reference/font-fallback-with.png =460x)
 
 ## Dealing with pageable text
 
-The text element supports paging. That means part of the text may be moved to the next page if there is not enough space on the current one. There are several approaches to simplify the workflow with text:
+The `Text` element supports paging. That means part of the text may be moved to the next page if there is not enough space on the current one. There are several approaches to simplify the workflow with text as described below.
 
-To make sure that text is never paged and always filly visible on a single page, please use the `ShowEntire` element:
+To make sure that text is never paged and always fully visible on a single page, please use the `ShowEntire` element:
 
 ```csharp
 .ShowEntire()
 .Text("A long text here will not be paged.");
 ```
 
-Sometimes, there is very little space on the page. It is enough to display a couple of lines but such a short text block may look incorrectly. In such cases, it is better to move the text block to the next page, instead of attempting to perform line breaking. Please adjust the minimum height in the `EnsureSpace` element to match the desired minimum number of lines to display at the end of the page.
+Sometimes, there is very little space on the page. It is enough to display a couple of lines but such a short text block may look awkward. In such cases, it is better to move the text block to the next page instead of attempting to perform line breaking. Please adjust the minimum height in the `EnsureSpace` element to match the desired minimum space to display at the end of the page.
 
 ```csharp
 .EnsureSpace(50)
@@ -514,7 +513,7 @@ TextStyle.Default.DirectionFromLeftToRight()
 TextStyle.Default.DirectionFromRightToLeft()
 ```
 
-This may be useful with more advanced corner cases:
+This may be useful with more advanced edge cases:
 
 ```csharp
 .DefaultTextStyle(x => x.FontSize(24).FontFamily("Calibri"))

@@ -1,12 +1,12 @@
 # Table
 
-The Table element is one of the most complex layout-related algorithms available in the QuestPDF library. It can achieve more sophisticated structures than any combination of the Row and the Column elements. It also greatly reduce code complexity. However, it is slightly slower to compute.
+The `Table` element is one of the most complex layout-related algorithms available in the QuestPDF library. It can achieve more sophisticated structures than any combination of the `Row` and the `Column` elements. It also greatly reduces code complexity. However, it is slightly slower to compute.
 
 ## Basic usage
 
-Please analyse this simple example showing how to create a simple Table instance:
-1) You start with column definition that describes width of each column.
-2) And then, you can place any number of items inside. Each item has a corresponding position (Row and Column).
+Please analyse this example showing how to create a simple Table instance:
+1) You start with a column definition that describes the width of each column.
+2) Then, you can place any number of items inside. Each item has a corresponding position (`Row` and `Column`).
 
 ```csharp{4-10,13-16}
 .Border(1)
@@ -45,7 +45,7 @@ Please analyse this simple example showing how to create a simple Table instance
 
 ## Automated cell placement
 
-You don't need to specify position of every cell. When the algorithm detects that the cell does not have assigned location, it places it in the nearest possible location.
+You don't need to specify the position of every cell. When the algorithm detects that the cell does not have an assigned location, it places it in the nearest possible location.
 
 ```csharp{11-14}
 .Table(table =>
@@ -72,9 +72,9 @@ You don't need to specify position of every cell. When the algorithm detects tha
 
 ## Column definitions
 
-Similarly to the `Row` element, you can define [columns of constant and relative sizes](/api-reference/row).
+Just as with the `Row` element, you can define [columns of constant and relative sizes](/api-reference/row).
 
-**Important:** this example uses extensions methods presented in [the Extending DSL section](/concepts/creating-dsl).
+**Important:** this example uses extension methods presented in [the Extending DSL section](/concepts/creating-dsl).
 
 ```csharp{5-11}
 container
@@ -101,7 +101,7 @@ container
 
 ## Row spans and column spans
 
-Cells can span over multiple rows and/or multiple columns:
+Cells can span multiple rows and/or multiple columns:
 
 ```csharp{11-19}
 .Table(table =>
@@ -132,7 +132,7 @@ Cells can span over multiple rows and/or multiple columns:
 
 ## Overlapping cells
 
-Cells can overlap each other. This situation is possible when you manually assign cell's location:
+Cells can overlap one another. This situation is possible when you manually assign a cell's location:
 
 ```csharp{10-12}
 .Table(table =>
@@ -154,7 +154,7 @@ Cells can overlap each other. This situation is possible when you manually assig
 
 ## Extend last cells to table bottom
 
-This feature is very useful when creating complex table structures that are likely to page. It applies a special rule to last cells within each column. It extends them in such a way that they end on the table's bottom. This behavior may improve visuals of your table.
+This feature is very useful when creating complex table structures that are likely to page. It applies a special rule to the last cells within each column, extending them in such a way that they end at the bottom of the table. This behavior may improve the appearance of your table.
 
 ```csharp{11}
 .Table(table =>
@@ -179,16 +179,16 @@ This feature is very useful when creating complex table structures that are like
 });
 ```
 
-Please notice that the block "C" ends along with the "B" and "D" blocks:
+Please notice that block "C" ends along with the "B" and "D" blocks:
 
 ![example](/api-reference/table-extend-last-cells-to-table-bottom.png =220x)
 
 
 ## Report example
 
-Please analyse this example to understand how to design report-like document structures.
+Please review the following example to understand how to design report-like document structures.
 
-**Important:** this example uses extensions methods presented in [the Extending DSL section](/concepts/creating-dsl).
+**Important:** this example uses extension methods presented in [the Extending DSL section](/concepts/creating-dsl).
 
 ```csharp
 .MinimalBox()
@@ -316,7 +316,7 @@ container
         header.Cell().Element(CellStyle).Text("Width");
         header.Cell().Element(CellStyle).Text("Height");
 
-        // you can extend already existing styles by creating additional methods
+        // you can extend existing styles by creating additional methods
         IContainer CellStyle(IContainer container) => DefaultCellStyle(container, Colors.Grey.Lighten3); 
     });
 

@@ -12,9 +12,9 @@ Use this container to enforce additional sizing rules, e.g. minimum/maximum/exac
 ```
 
 ::: danger
-Please be careful. This component may try to enforce size constraints that are impossible to meet when:
-- requires more space than is available,
-- tries to squeeze its child in less space than necessary.
+Please be careful. This component may try to enforce size constraints that are impossible to meet, e.g. when:
+- the container requires more space than is available, or
+- when it tries to squeeze its child into less space than possible.
 
-Such scenarios end up with the layout exception.
+Such scenarios result in a layout exception.
 :::

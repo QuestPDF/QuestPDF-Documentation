@@ -1,6 +1,6 @@
 # Scale
-- This component scales the size of its children,
-- The layout rules, such as available space is being scaled as well so the container follow all size constraints.
+- This component scales its children.
+- The layout rules, such as available space is also scaled so that the container follows all size constraints.
 
 ```csharp
 .Scale(2f)

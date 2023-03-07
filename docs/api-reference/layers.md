@@ -1,8 +1,8 @@
 # Layers
 
-- This element allows putting elements below and above the main content.
-- The paging algorithm is driven by the PrimaryLayer.
-- You need to specify exactly one PrimaryLayer.
+- This element allows you to place elements below and above the main content.
+- The paging algorithm is driven by the `PrimaryLayer`.
+- You need to specify exactly one `PrimaryLayer`.
 
 ```csharp
 .Layers(layers =>

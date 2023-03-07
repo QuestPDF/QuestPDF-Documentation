@@ -4,10 +4,10 @@ This container consists of multiple page-related slots.
 
 ## Main slots
 
-Main slots (header, content and footer) can be used to specify page content:
-- The header element is always visible at the top on each page.
-- The footer element is always visible at the bottom on each page.
-- The content element is drawn on the rest of the space (between the header and the footer.).
+Main slots (`Header`, `Content` and `Footer`) can be used to specify page content:
+- The `Header` element is always visible at the top of each page.
+- The `Content` element is drawn on the space between the `Header` and the `Footer`.
+- The `Footer` element is always visible at the bottom of each page.
 
 ```csharp
 .Page(page =>
@@ -38,14 +38,14 @@ Main slots (header, content and footer) can be used to specify page content:
 ```
 
 ::: danger
-Please be careful! When the total height of the header and footer element is greater than the total page's height, there is not space enough for the content. In such a case, the layout exception is thrown.
+Please be careful! When the combined heights of the header and footer elements is greater than the total page height, there is insufficient space for the content, in which case a layout exception is thrown.
 :::
 
 ![example](/api-reference/page-example.png =298x)
 
 ## Watermark slots
 
-The watermark slots (background and foreground) can be used to add content on the back or on the front of the main content.
+The watermark slots (background and foreground) can be used to add content behind or in front of the main content, respectively.
 
 ```csharp{10-14,16-20}
 .Page(page =>
@@ -87,7 +87,7 @@ The watermark slots (background and foreground) can be used to add content on th
 
 ## Page settings
 
-It is possible to put pages of various settings within the single document. Please notice that the example below declares two consecutive page sizes (A4 and A3) with various margin values:
+It is possible to create a document containing pages having different settings. For example, the following code inserts an A4 page followed by an A3 page, both with different margins:
 
 ```csharp{10-13,21-24}
 public class StandardReport : IDocument
@@ -125,7 +125,8 @@ public class StandardReport : IDocument
 }
 ```
 
-You easily change page orientation:
+You easily change page orientation as illustrated below:
+
 ```csharp
 // default is portrait
 page.Size(PageSizes.A3);
@@ -139,7 +140,7 @@ page.Size(PageSizes.A3.Landscape());
 
 ## Continuous page size
 
-It is possible to define a page size with known width but dynamic height. In this example, the resulting page has constant width equal to A4 page's width, but its height depends on the content:
+It is possible to define a page size with known width but dynamic height. In the following example, the resulting page has a constant width (equal to the width of an A4 page, but its height depends on the content:
 
 ```csharp{13}
 public class StandardReport : IDocument
@@ -167,24 +168,24 @@ public class StandardReport : IDocument
 ```
 
 ::: danger
-Because of the practical layout limitations, the maximum page height is limited to 14400 points (around 5 meters).
+Because of practical layout limitations, the maximum page height is limited to 14400 points (around 5 meters).
 :::
 
 ## Global text style
 
-The QuestPDF library provides a default set of styles that applied to text.
+The QuestPDF library provides a default set of styles that are applied to text.
 
 ```csharp
 .Text("Text with library default styles")
 ```
 
-You can adjust the text style by providing additional argument:
+You can adjust the text style by providing additional arguments:
 
 ```csharp
 .Text("Red semibold text of size 20").FontSize(20).SemiBold()
 ```
 
-The option above introduces overrides the default style. To get more control you can set a default text style in your document. Please notice that all changes are additive:
+The above option above overrides the default style. To get more control you can set a default text style in your document. Please notice that all changes are additive as shown in the following example
 
 ```csharp{9-10,22-23,27-28}
 public class SampleReport : IDocument
@@ -226,10 +227,10 @@ public class SampleReport : IDocument
 
 ## Global content direction (RTL)
 
-It is possible to globally setup content direction for entire documents. 
+It is possible to globally specify content direction for entire documents. 
 
 ::: tip
-To learn more about how the Content direction works, please read the documentation of the [ContentDirection](/api-reference/content-direction) element.
+To learn more about how the Content direction works, please read the documentation for the [ContentDirection](/api-reference/content-direction) element.
 :::
 
 ```csharp
@@ -243,7 +244,7 @@ document.Page(page =>
 });
 ```
 
-Let's analyse an example:
+A further example follows:
 
 ```csharp{8}
 document.Page(page =>

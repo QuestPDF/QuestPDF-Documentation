@@ -1,6 +1,6 @@
 # Show if
 
-This container allows you to show/hide its child based on a condition. It is practically only a syntactic sugar to simplify code and avoid standard if-statements.
+This container allows you to show/hide its child based on a condition. The `ShowIf` component can provide the syntactic sugar needed to achieve this without breaking the fluent API chain as illustrated below:
 
 ```csharp
 var condition = numberOfElements > 5;

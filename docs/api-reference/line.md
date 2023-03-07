@@ -2,7 +2,7 @@
 
 ## Vertical
 
-LineVertical is virtual - it takes entire available height and no width.
+`LineVertical` is virtual - it occupies the entire available height but no width.
 
 ```csharp{6}
 .Padding(15)
@@ -19,7 +19,7 @@ LineVertical is virtual - it takes entire available height and no width.
 
 ## Horizontal
 
-LineHorizontal is virtual - it takes entire available width and no height.
+`LineHorizontal` is virtual - it occupies the entire available width but no height.
 
 ```csharp{7}
 .Padding(15)

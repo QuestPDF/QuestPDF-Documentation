@@ -1,6 +1,6 @@
 # Stop paging
 
-This container is active when its child requires more than one page to draw. Where the content spans multiple pages, only the first page is visibile. Rest of the content, that normally would be visible on the next pages, is omitted.
+This container is active when its child requires more than one page to draw. Where the content spans multiple pages, only the first page is visible. The remainder of the content (that would normally be visible on subsequent pages), is omitted.
 
 ```csharp{20}
 .Padding(25)
@@ -33,7 +33,7 @@ First, let's analyse the results where the `StopPaging` element is **NOT** appli
 ![example](/api-reference/stop-paging-without-1.png =300x)
 ![example](/api-reference/stop-paging-without-2.png =300x)
 
-However, where the `StopPaging` **IS** applied, the text that does not fit on the first page, is omitted. This behaviour is true for all structures that span multiple pages.
+However, where `StopPaging` **IS** applied, the text that does not fit on the first page, is omitted. This behaviour is evident for all structures that span multiple pages.
 
 ![example](/api-reference/stop-paging-with-1.png =300x)
 ![example](/api-reference/stop-paging-with-2.png =300x)

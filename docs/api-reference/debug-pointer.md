@@ -1,7 +1,7 @@
 # Debug pointer
 
-- This element is useful when finding the root cause of the DocumentLayoutException. When generating target output (e.g. PDF file), this element is ignored.
-- It does not alter document's layout.
+- This element is useful when finding the root cause of a DocumentLayoutException error. When generating target output (e.g. a PDF file), this element is ignored.
+- `DebugPointer` does not alter a document's layout.
 
 ```csharp{2}
 .Width(100)
@@ -9,7 +9,7 @@
 .Width(150);
 ```
 
-The code above will throw the exception with the following element trace:
+The code above throws an exception with the following element trace:
 
 ```csharp{10-13}
 🔥 Constrained
