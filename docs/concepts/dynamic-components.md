@@ -409,17 +409,17 @@ public class OptimizedOrdersTable : IDynamicComponent<OrdersTableState>
         {
             container.MinimalBox().Decoration(decoration =>
             {
-                decoration.Header().Element(header);
+                decoration.Before().Element(header);
 
-                decoration.Content().Box().Stack(stack =>
+                decoration.Content().Column(column =>
                 {
                     foreach (var row in rows)
-                        stack.Item().Element(row.Element);
+                        column.Item().Element(row.Element);
                 });
 
-                decoration.Footer().Element(footer);
+                decoration.After().Element(footer);
             });
-        });
+         });
 
         State = new OrdersTableState
         {
@@ -442,15 +442,14 @@ public class OptimizedOrdersTable : IDynamicComponent<OrdersTableState>
                 .BorderBottom(1)
                 .BorderColor(Colors.Grey.Darken2)
                 .Padding(5)
+                .DefaultTextStyle(TextStyle.Default.SemiBold())
                 .Row(row =>
                 {
-                    var textStyle = TextStyle.Default.SemiBold();
-
-                    row.ConstantItem(30).Text("#", textStyle);
-                    row.RelativeItem().Text("Item name", textStyle);
-                    row.ConstantItem(50).AlignRight().Text("Count", textStyle);
-                    row.ConstantItem(50).AlignRight().Text("Price", textStyle);
-                    row.ConstantItem(50).AlignRight().Text("Total", textStyle);
+                    row.ConstantItem(30).Text("#");
+                    row.RelativeItem().Text("Item name");
+                    row.ConstantItem(50).AlignRight().Text("Count");
+                    row.ConstantItem(50).AlignRight().Text("Price");
+                    row.ConstantItem(50).AlignRight().Text("Total");
                 });
         });
     }
@@ -465,7 +464,8 @@ public class OptimizedOrdersTable : IDynamicComponent<OrdersTableState>
                 .Width(context.AvailableSize.Width)
                 .Padding(5)
                 .AlignRight()
-                .Text($"Subtotal: {total}$", TextStyle.Default.Size(14).SemiBold());
+                .DefaultTextStyle(TextStyle.Default.FontSize(14).SemiBold())
+                .Text($"Subtotal: {total}$");
         });
     }
     
