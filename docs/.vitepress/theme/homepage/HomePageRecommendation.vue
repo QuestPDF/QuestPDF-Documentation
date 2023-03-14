@@ -1,14 +1,14 @@
 <template>
-    <div class="container">
-      <h2>Library that truly helps</h2>
+  <section class="content">
+    <h2>Library that truly helps</h2>
 
-      <div class="recommendations">
-        <div class="recommendation" v-for="recommendation of RecommendationsContent" :key="recommendation.author">
-          <p class="quote">{{ recommendation.quote }}</p>
-          <p class="author">{{ recommendation.author }}</p>
-        </div>
-      </div>
+    <div class="recommendations">
+      <article class="recommendation" v-for="recommendation of RecommendationsContent" :key="recommendation.author">
+        <p class="quote">{{ recommendation.quote }}</p>
+        <p class="author">{{ recommendation.author }}</p>
+      </article>
     </div>
+  </section>
 </template>
 
 <script setup>

@@ -1,18 +1,22 @@
 <template>
   <div class="custom-homepage">
-    <div class="reverse-background">
+    <div class="container reverse-background">
       <HomePageDescription />
     </div>
 
-    <HomePageUsers />
+    <div class="container">
+      <HomePageUsers />
+    </div>
 
-    <div class="reverse-background">
+    <div class="container reverse-background">
       <HomePageFeatures />
     </div>
 
-    <HomePageRecommendation />
+    <div class="container">
+      <HomePageRecommendation />
+    </div>
 
-    <div class="reverse-background">
+    <div class="container reverse-background">
       <HomePageGettingStarted />
     </div>
   </div>
@@ -30,7 +34,11 @@ import HomePageGettingStarted from "./HomePageGettingStarted.vue";
 
 <style>
 
-.custom-homepage .container {
+.custom-homepage > .container {
+  border-top: 1px solid var(--vp-c-gutter);
+}
+
+.custom-homepage section.content {
   padding: 96px 32px;
   margin: 0 auto;
   max-width: 1216px;

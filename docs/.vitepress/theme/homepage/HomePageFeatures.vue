@@ -1,18 +1,18 @@
 <template>
-  <div class="container">
+  <section class="content">
 
     <h2>Designed to be efficient</h2>
 
     <div class="features">
 
-      <section class="feature" v-for="feature of FeaturesContent" :key="feature.title">
+      <article class="feature" v-for="feature of FeaturesContent" :key="feature.title">
         <img class="icon" :src="feature.icon" alt="" />
         <h3 class="title">{{ feature.title }}</h3>
         <p class="description">{{ feature.description }}</p>
-      </section>
+      </article>
 
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>

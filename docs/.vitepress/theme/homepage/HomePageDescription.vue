@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <section class="content">
 
     <h2>What is QuestPDF?</h2>
 
@@ -7,10 +7,10 @@
       <p class="definition">QuestPDF is <span class="selection">an open-source .NET library for PDF generation</span>. Utilizing several new patterns and practices, QuestPDF seeks to resolve the challenges inherent in this process.</p>
 
       <div class="summary-list">
-        <div v-for="summary of SummaryContent" class="summary-item">
+        <article v-for="summary of SummaryContent" class="summary-item">
           <img src="/homepage/tick.svg" width="28" alt="" />
           <p>{{ summary }}</p>
-        </div>
+        </article>
       </div>
 
       <div class="video-container">
@@ -21,7 +21,7 @@
 
       <HomePageStatistics />
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>

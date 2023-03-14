@@ -1,10 +1,10 @@
 <template>
   <div class="statistics">
-    <section class="statistic" v-for="statistic in StatisticsContent" :key="statistic.label">
+    <article class="statistic" v-for="statistic in StatisticsContent" :key="statistic.label">
       <img class="icon" :src="statistic.icon" alt="" />
       <span class="value">{{ statistic.value }}</span>
       <span class="label">{{ statistic.label }}</span>
-    </section>
+    </article>
   </div>
 </template>
 

@@ -1,20 +1,17 @@
 <template>
-  <div class="container">
+  <section class="content getting-started">
+    <div class="description">
+      <h2 style="margin-bottom: 0;">Let's get started</h2>
 
-    <section class="getting-started">
-      <div class="description">
-        <h2 style="margin-bottom: 0;">Let's get started</h2>
+      <p>Begin exploring the QuestPDF library today. You are 250 lines of C# code away from creating a fully functional PDF invoice implementation.</p>
 
-        <p>Begin exploring the QuestPDF library today. You are 250 lines of C# code away from creating a fully functional PDF invoice implementation.</p>
+      <p>Read the Getting Started tutorial to familiarize yourself with general library architecture, important layout structures as well as to better understand helpful patterns and practices.</p>
 
-        <p>Read the Getting Started tutorial to familiarize yourself with general library architecture, important layout structures as well as to better understand helpful patterns and practices.</p>
+      <a class="action" href="/getting-started">Get started</a>
+    </div>
 
-        <a class="action" href="/getting-started">Get started</a>
-      </div>
-
-      <img src="/invoice.png" alt="Example invoice document implemented and generated with QuestPDF using C# language." />
-    </section>
-  </div>
+    <img src="/invoice.png" alt="Example invoice document implemented and generated with QuestPDF using C# language." />
+  </section>
 </template>
 
 <script setup>

@@ -1,17 +1,15 @@
 <template>
-
-  <div class="container">
+  <section class="content">
     <h2>What you need is here</h2>
 
     <div class="user-groups">
-      <section class="user-group" v-for="group in UserGroupsContent">
+      <article class="user-group" v-for="group in UserGroupsContent">
         <img class="icon" :src="group.icon" alt="" />
         <h3 class="title">{{ group.label }}</h3>
         <p class="details">{{ group.description }}</p>
-      </section>
+      </article>
     </div>
-  </div>
-
+  </section>
 </template>
 
 <script setup>
