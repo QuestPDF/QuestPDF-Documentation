@@ -1,0 +1,107 @@
+.custom-page > .container {
+  border-top: 1px solid var(--vp-c-gutter);
+  background-color: var(--vp-c-bg);
+}
+
+.container.no-border {
+  border-top: none;
+}
+
+.custom-page .content {
+  padding: 96px 32px;
+  margin: 0 auto;
+  max-width: 1216px;
+}
+
+.custom-page .reverse-background {
+  background-color: var(--vp-c-bg-soft);
+}
+
+.custom-page h1 {
+  font-family: var(--vp-font-family-base);
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 3.25rem;
+  margin-bottom: 2rem;
+}
+
+.custom-page h2 {
+  font-family: var(--vp-font-family-base);
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.custom-page h3 {
+  font-family: var(--vp-font-family-base);
+  color: var(--vp-c-text-1);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  margin: 18px 0 4px 0;
+}
+
+.custom-page p {
+  color: var(--vp-c-text-2);
+
+  line-height: 1.5rem;
+  font-size: 1rem;
+}
+
+span.highlight-foreground {
+  background: var(--vp-home-hero-name-background);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: var(--vp-home-hero-name-color);
+}
+
+span.highlight-background {
+  background: -webkit-linear-gradient(120deg, #2979FF33, #00E5FF33);
+  color: var(--vp-c-text-1);
+  font-weight: 500;
+
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+
+a.action {
+  display: inline-block;
+  border: 1px solid var(--vp-button-alt-border);
+  text-align: center;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.25s, border-color 0.25s, background-color 0.25s;
+
+  border-radius: 20px;
+  padding: 0 20px;
+  line-height: 38px;
+
+  background-color: var(--vp-button-alt-bg);
+
+  color: var(--vp-button-alt-text);
+  font-size: 1rem;
+}
+
+a.action:hover {
+  border-color: var(--vp-button-alt-hover-border);
+  color: var(--vp-button-alt-hover-text);
+  background-color: var(--vp-button-alt-hover-bg);
+}
+
+a.action.primary {
+  border-color: var(--vp-button-brand-border);
+  color: var(--vp-button-brand-text);
+  background-color: var(--vp-button-brand-bg);
+}
+
+a.action.primary:hover {
+  border-color: var(--vp-button-brand-hover-border);
+  color: var(--vp-button-brand-hover-text);
+  background-color: var(--vp-button-brand-hover-bg);
+}
+
+a.action.disabled {
+  cursor: default !important;
+  background-color: var(--vp-button-alt-bg);
+}

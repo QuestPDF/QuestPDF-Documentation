@@ -7,7 +7,7 @@
 
       <p>Read the Getting Started tutorial to familiarize yourself with general library architecture, important layout structures as well as to better understand helpful patterns and practices.</p>
 
-      <a class="action" href="/getting-started">Get started</a>
+      <a class="action primary" href="/getting-started">Get started</a>
     </div>
 
     <img src="/invoice.png" alt="Example invoice document implemented and generated with QuestPDF using C# language." />
@@ -42,28 +42,5 @@
   .getting-started img {
     place-self: center;
     max-width: min(350px, 80%);
-  }
-
-  a.action {
-    display: inline-block;
-    border: 1px solid var(--vp-button-brand-border);
-    text-align: center;
-    font-weight: 500;
-    white-space: nowrap;
-    transition: color 0.25s, border-color 0.25s, background-color 0.25s;
-
-    border-radius: 20px;
-    padding: 0 20px;
-    line-height: 38px;
-
-    background-color: var(--vp-button-brand-bg);
-
-    color: white;
-    font-size: 1rem;
-  }
-
-  a.action:hover {
-    background-color: var(--vp-button-brand-hover-bg);
-    border-color: var(--vp-button-brand-hover-bg);
   }
 </style>

@@ -4,7 +4,7 @@
     <h2>What is QuestPDF?</h2>
 
     <div class="details">
-      <p class="definition">QuestPDF is <span class="selection">an open-source .NET library for PDF generation</span>. Utilizing several new patterns and practices, QuestPDF seeks to resolve the challenges inherent in this process.</p>
+      <p class="definition">QuestPDF is <span class="highlight-background">an open-source .NET library for PDF generation</span>. Utilizing several new patterns and practices, QuestPDF seeks to resolve the challenges inherent in this process.</p>
 
       <div class="summary-list">
         <article v-for="summary of SummaryContent" class="summary-item">
@@ -45,15 +45,6 @@ p.definition {
   color: var(--vp-c-text-1);
   font-size: 1.25rem;
   line-height: 2rem;
-}
-
-span.selection {
-  background: -webkit-linear-gradient(120deg, #2979FF33, #00E5FF33);
-  color: var(--vp-c-text-1);
-  font-weight: 500;
-
-  border-radius: 8px;
-  padding: 4px 8px;
 }
 
 /* Summary */

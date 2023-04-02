@@ -11,7 +11,7 @@ export default defineConfig({
     head: [
         ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg' }],
         ['meta', { name: "description", content: "Open-source modern .NET library for PDF document generation. Offering comprehensive layout engine powered by concise and discoverable C# Fluent API." }],
-        ['meta', { name: "keywords", content: "pdf, library, c#, dotnet, report, export, generate, tool, create, render, html, converter, open-source, free" }],
+        ['meta', { name: "keywords", content: "pdf, library, c#, csharp, dotnet, report, export, generate, tool, create, render, html, converter, open-source, free" }]
     ],
 
     themeConfig: {
@@ -26,7 +26,14 @@ export default defineConfig({
                     { text: 'Design patterns', link: '/design-patterns' },
                 ]
             },
-            { text: 'License', link: 'https://github.com/QuestPDF/QuestPDF/blob/main/LICENSE.md' },
+            { text: 'Pricing', link: '/pricing' },
+            {
+                text: 'License',
+                items: [
+                    { text: 'Community MIT', link: '/license-community' },
+                    { text: 'Professional and Enterprise', link: '/license-commercial' }
+                ]
+            },
             { text: 'GitHub', link: 'https://github.com/QuestPDF/QuestPDF' },
             { text: 'NuGet', link: 'https://www.nuget.org/packages/QuestPDF' }
         ],
@@ -148,7 +155,7 @@ export default defineConfig({
             }
         ],
         footer: {
-            message: 'Released under the MIT License.',
+            message: 'Released under the MIT License',
             copyright: 'Copyright © 2020-present Marcin Ziąbek CodeFlint'
         }
     },

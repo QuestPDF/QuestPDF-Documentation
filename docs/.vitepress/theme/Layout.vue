@@ -23,12 +23,12 @@ const { Layout } = DefaultTheme
 
 import GoogleAnalytics from "./GoogleAnalytics.vue";
 import SupportAlert from "./SupportAlert.vue";
-import HomePage from "./homepage/HomePage.vue";
 import SurveyAlert from "./SurveyAlert.vue";
 import {computed} from "vue";
 import {useRoute} from "vitepress";
 
 const showAlerts = computed(() => {
-  return !useRoute().path.includes("project-future");
+  const excludedPages = ["project-future", "license", "pricing"];
+  return !excludedPages.some(useRoute().path.includes);
 })
 </script>
