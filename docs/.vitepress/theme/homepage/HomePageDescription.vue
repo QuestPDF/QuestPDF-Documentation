@@ -15,7 +15,7 @@
 
       <div class="video-container">
         <video class="video" autoplay controls muted loop>
-          <source src="/previewer/video.mp4" type="video/mp4">
+          <source src="/previewer/video-compressed.mp4" type="video/mp4">
         </video>
       </div>
 
