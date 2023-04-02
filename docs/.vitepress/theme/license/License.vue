@@ -24,7 +24,7 @@
 
 <style>
 .license-page h3 {
-  margin: 32px 0 12px 0;
+  margin: 32px 0 8px 0;
 }
 
 .license-page .description {
@@ -34,6 +34,6 @@
 }
 
 .license-page p {
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 }
 </style>
