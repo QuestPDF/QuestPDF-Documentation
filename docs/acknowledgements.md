@@ -1,5 +1,13 @@
 # Acknowledgements
 
+::: details Six Labors
+Thank you for developing a fantastic graphics library for the .NET platform.
+
+Special thanks to James Jackson-South for so openly sharing his experience and know-how regarding the licensing opportunities for open-source projects.
+
+[Link to the official webpage](https://sixlabors.com/)
+:::
+
 ::: details SkiaSharp license details
 Copyright (c) 2015-2016 Xamarin, Inc. \
 Copyright (c) 2017-2018 Microsoft Corporation.
