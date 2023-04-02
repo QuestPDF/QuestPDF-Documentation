@@ -3,7 +3,7 @@
     <h1><span class="highlight-foreground">QuestPDF</span> Licenses and Pricing</h1>
 
     <div class="details">
-      <p class="description">If you are consuming the QuestPDF library as a Direct Package Dependency for usage in a Closed Source software in the capacity of a for-profit company/individual with more than 1M USD annual gross revenue, you must purchase the QuestPDF Professional or Enterprise License, depending on number of software developers.</p>
+      <p class="description">Nowadays, we are building upon the work of giants, creating more impactful software than ever before. Regardless of its size and purpose, every project deserves well-maintained dependencies. We are here to offer you a stable and high-quality PDF generation library for efficient development and ease of mind.</p>
 
       <div class="summary-list">
         <article class="summary-item">
