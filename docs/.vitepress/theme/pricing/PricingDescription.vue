@@ -58,7 +58,7 @@
 }
 
 @media screen and (max-width: 800px) {
-  .questions {
+  .summary-list {
     grid-template-columns: 1fr;
   }
 }

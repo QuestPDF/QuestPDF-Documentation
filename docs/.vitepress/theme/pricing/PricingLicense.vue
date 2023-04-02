@@ -1,5 +1,5 @@
 <template>
-  <article class="content">
+  <article class="content license-content">
     <img src="/homepage/license.svg" alt="" class="license-icon" />
 
     <div>
@@ -23,18 +23,31 @@
 </script>
 
 <style scoped>
-.license-icon {
-  width: 128px;
-  place-self: center;
-}
 
-.content {
+.license-content {
   display: grid;
   grid-template-columns: 1fr 3fr;
-  grid-gap: 0 64px;
+  grid-gap: 64px;
+}
+
+.license-icon {
+    width: 128px;
+    place-self: center;
 }
 
 .description {
-  color: var(--vp-c-text-1);
+    color: var(--vp-c-text-1);
 }
+
+@media screen and (max-width: 800px) {
+  .license-content {
+    grid-template-columns: 1fr;
+  }
+
+  .license-icon {
+    width: 64px;
+    justify-self: start;
+  }
+}
+
 </style>
