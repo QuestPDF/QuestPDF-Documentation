@@ -47,7 +47,6 @@ export default defineConfig({
                     { text: 'Previewer', link: '/document-previewer' },
                     { text: 'Releases', link: '/releases' },
                     { text: 'Roadmap', link: '/roadmap' },
-                    { text: 'Project future', link: '/project-future-post' },
                     { text: 'Acknowledgements', link: '/acknowledgements' }
                 ]
             },

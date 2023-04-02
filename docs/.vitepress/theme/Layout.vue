@@ -4,7 +4,6 @@
       <ClientOnly>
         <div v-show="showAlerts">
           <support-alert />
-          <survey-alert />
         </div>
       </ClientOnly>
     </template>
@@ -23,7 +22,6 @@ const { Layout } = DefaultTheme
 
 import GoogleAnalytics from "./GoogleAnalytics.vue";
 import SupportAlert from "./SupportAlert.vue";
-import SurveyAlert from "./SurveyAlert.vue";
 import {computed} from "vue";
 import {useRoute} from "vitepress";
 
