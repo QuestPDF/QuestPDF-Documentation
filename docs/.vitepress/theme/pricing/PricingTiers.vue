@@ -2,6 +2,9 @@
   <article class="content">
     <h2>Where Open-Source Meets Professionalism</h2>
 
+    <p class="description" style="margin-bottom: 32px;"><span class="highlight-background">Important:</span> all library releases with versions up to 2022.12.X are still available under the MIT license, free even for commercial usage. The QuestPDF Professional or Enterprise License applies only to releases 2023.X and beyond.</p>
+
+
     <div class="pricing">
       <section class="pricing-tier">
         <img class="icon" src="/pricing/community.svg" alt="" style="grid-row: span 2; height: 64px;" />
