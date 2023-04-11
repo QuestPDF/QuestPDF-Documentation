@@ -71,6 +71,14 @@ span.highlight-background {
   padding: 4px 8px;
 }
 
+.custom-page a:not(.action) {
+  color: var(--vp-button-brand-bg);
+}
+
+.custom-page a:not(.action):hover {
+  color: var(--vp-button-brand-hover-bg);
+}
+
 a.action {
   display: inline-block;
   border: 1px solid var(--vp-button-alt-border);

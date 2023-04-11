@@ -30,8 +30,18 @@ export default defineConfig({
             {
                 text: 'License',
                 items: [
-                    { text: 'Community MIT', link: '/license-community' },
-                    { text: 'Professional and Enterprise', link: '/license-commercial' }
+                    {
+                        items: [
+                            { text: 'Community MIT', link: '/license-community' },
+                            { text: 'Professional and Enterprise', link: '/license-commercial' },
+                        ]
+                    },
+                    {
+                        items: [
+                            { text: 'Terms of Service', link: '/terms-of-service' },
+                            { text: 'Privacy Policy', link: '/privacy-policy' }
+                        ]
+                    },
                 ]
             },
             { text: 'GitHub', link: 'https://github.com/QuestPDF/QuestPDF' },

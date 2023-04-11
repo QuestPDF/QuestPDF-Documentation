@@ -30,9 +30,11 @@
     filter: drop-shadow(0 8px 8px rgba(0,  0, 0, 0.25));
 }
 
+.VPLink.link.active,
 .VPLink.link.active > span.link-text,
-.outline-link.active {
-    font-weight: bold !important;
+.outline-link.active,
+.VPSidebarItem .is-active p {
+    font-weight: 600 !important;
 }
 
 .VPFeature .title {
@@ -135,10 +137,6 @@ html:not(.dark) .vp-doc b {
     font-size: 1rem !important;
 }
 
-.VPSidebarItem .is-active p {
-    font-weight: bold !important;
-}
-
 a:has(.alert) {
     text-decoration: none !important;
 }
@@ -146,4 +144,8 @@ a:has(.alert) {
 a .alert.warning:hover {
     cursor: pointer;
     background-color: rgba(255, 197, 23, 0.15);
+}
+
+.VPDocAsideOutline .outline-marker {
+    width: 2px;
 }
