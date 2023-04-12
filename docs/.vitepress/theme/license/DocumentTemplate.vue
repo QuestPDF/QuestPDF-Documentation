@@ -1,5 +1,5 @@
 <template>
-  <section class="custom-page license-page">
+  <section class="custom-page document-page">
     <div class="container no-border">
       <div class="content" style="padding-bottom: 48px;">
         <article style="max-width: 800px;">
@@ -23,17 +23,17 @@
 </script>
 
 <style>
-.license-page h3 {
+.document-page h3 {
   margin: 32px 0 8px 0;
 }
 
-.license-page .description {
+.document-page .description {
   color: var(--vp-c-text-1);
   font-size: 1.25rem;
   line-height: 2rem;
 }
 
-.license-page p {
+.document-page p {
   margin-bottom: 24px;
 }
 </style>
