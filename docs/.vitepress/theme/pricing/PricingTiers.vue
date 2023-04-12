@@ -22,7 +22,7 @@
           Unlimited redistributions
         </p>
 
-        <a class="action primary" href="/getting-started">Start learning</a>
+        <a class="action" href="/getting-started">Start learning</a>
       </section>
 
       <section class="pricing-tier">
@@ -40,10 +40,7 @@
           Unlimited redistributions
         </p>
 
-        <div class="available-soon">
-          <a class="action disabled">Purchase</a>
-          <span>available soon</span>
-        </div>
+        <a href="#!" class="action primary paddle_button" :data-product="PaddleConfiguration.professionalLicenseId" data-theme="none">Purchase</a>
       </section>
 
       <section class="pricing-tier">
@@ -61,16 +58,18 @@
           Unlimited redistributions
         </p>
 
-        <div class="available-soon">
-          <a class="action disabled">Purchase</a>
-          <span>available soon</span>
-        </div>
+        <a href="#!" class="action primary paddle_button" :data-product="PaddleConfiguration.enterpriseLicenseId" data-theme="none">Purchase</a>
       </section>
     </div>
   </article>
 </template>
 
 <script setup lang="ts">
+
+import {onMounted} from "vue";
+import {PaddleConfiguration} from "./PaddleConfiguration";
+
+onMounted(() => Paddle.Setup({ vendor: PaddleConfiguration.vendorId }));
 
 </script>
 
