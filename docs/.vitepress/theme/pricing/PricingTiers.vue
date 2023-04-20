@@ -40,7 +40,7 @@
           Unlimited redistributions
         </p>
 
-        <a href="#!" class="action primary paddle_button" :data-product="PaddleConfiguration.professionalLicenseId" data-theme="none">Purchase</a>
+        <a class="action primary" @click="startCheckout(PaddleConfiguration.professionalLicenseId)">Purchase</a>
       </section>
 
       <section class="pricing-tier">
@@ -58,7 +58,7 @@
           Unlimited redistributions
         </p>
 
-        <a href="#!" class="action primary paddle_button" :data-product="PaddleConfiguration.enterpriseLicenseId" data-theme="none">Purchase</a>
+        <a class="action primary" @click="startCheckout(PaddleConfiguration.enterpriseLicenseId)">Purchase</a>
       </section>
     </div>
   </article>
@@ -66,10 +66,25 @@
 
 <script setup lang="ts">
 
-import {onMounted} from "vue";
-import {PaddleConfiguration} from "./PaddleConfiguration";
+import { onMounted } from "vue";
+import { PaddleConfiguration } from "./PaddleConfiguration";
+import { useData } from 'vitepress'
 
-onMounted(() => Paddle.Setup({ vendor: PaddleConfiguration.vendorId }));
+const { isDark } = useData()
+
+onMounted(() => {
+    if (!PaddleConfiguration.isProduction)
+      Paddle.Environment.set('sandbox');
+
+    Paddle.Setup({ vendor: PaddleConfiguration.vendorId })
+});
+
+function startCheckout(productId: number) {
+  Paddle.Checkout.open({
+    product: productId,
+    displayModeTheme: isDark.value ? 'dark' : 'light'
+  });
+}
 
 </script>
 
