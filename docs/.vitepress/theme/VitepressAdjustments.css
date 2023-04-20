@@ -16,6 +16,12 @@
     --vp-layout-max-width: 1216px;
 }
 
+:root:not(.dark) {
+    --vp-code-copy-code-bg: #FFF;
+    --vp-code-copy-code-active-text: inherit;
+    --vp-code-block-bg-light: #FFF;
+}
+
 .VPNavBar .title {
     font-size: 24px !important;
 }
