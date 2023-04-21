@@ -101,7 +101,6 @@ a.action:hover {
   border-color: var(--vp-button-alt-hover-border);
   color: var(--vp-button-alt-hover-text);
   background-color: var(--vp-button-alt-hover-bg);
-  cursor: pointer;
 }
 
 a.action.primary {
