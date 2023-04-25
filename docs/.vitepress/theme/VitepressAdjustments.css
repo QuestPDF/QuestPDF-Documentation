@@ -15,6 +15,11 @@
     --vp-button-brand-hover-text: #FFF !important;
     --vp-c-green-dark: #1565C0;
     --vp-layout-max-width: 1216px;
+    --vp-c-text-light-3: rgba(0, 0, 0, 0.38);
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 .VPNavBar .title {
