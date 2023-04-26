@@ -13,13 +13,18 @@
     --vp-button-brand-hover-border: #2979FF;
     --vp-button-brand-text: #FFF !important;
     --vp-button-brand-hover-text: #FFF !important;
-    --vp-c-green-dark: #1565C0;
     --vp-layout-max-width: 1216px;
     --vp-c-text-light-3: rgba(0, 0, 0, 0.38);
 }
 
 html {
     scroll-behavior: smooth;
+}
+
+:root:not(.dark) {
+    --vp-code-copy-code-bg: #FFF;
+    --vp-code-copy-code-active-text: inherit;
+    --vp-code-block-bg-light: #FFF;
 }
 
 .VPNavBar .title {
@@ -119,7 +124,7 @@ html.dark .VPDoc img[alt=example] {
 }
 
 .VPDoc img[alt=example] {
-    box-shadow: 0 13px 27px -5px rgb(50 50 93 / 25%), 0 8px 16px -8px rgb(0 0 0 / 30%), 0 -6px 16px -6px rgb(0 0 0 / 3%);
+    box-shadow: 0 13px 27px -5px rgb(50 50 93 / 15%), 0 8px 16px -8px rgb(0 0 0 / 10%), 0 -6px 16px -6px rgb(0 0 0 / 5%);
     margin-bottom: 16px;
     border-radius: 8px;
 }
@@ -153,4 +158,19 @@ a .alert.warning:hover {
 
 .VPDocAsideOutline .outline-marker {
     width: 2px;
+}
+
+.custom-block {
+    border-width: 0 0 0 8px;
+    background-color: var(--vp-code-block-bg) !important;
+}
+
+.custom-block :not(.custom-block-title) {
+    color: var(--vp-c-text-1) !important;
+}
+
+.custom-block-title {
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: bold;
 }
