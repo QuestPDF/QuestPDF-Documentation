@@ -8,7 +8,7 @@
       <PricingManifesto />
     </div>
 
-    <div class="container ">
+    <div class="container" id="license">
       <PricingLicense />
     </div>
 

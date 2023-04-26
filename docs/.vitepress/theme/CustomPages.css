@@ -55,7 +55,7 @@
   font-size: 1rem;
 }
 
-span.highlight-foreground {
+.highlight-foreground {
   background: var(--vp-home-hero-name-background);
   background-clip: text;
   -webkit-background-clip: text;
@@ -101,6 +101,7 @@ a.action:hover {
   border-color: var(--vp-button-alt-hover-border);
   color: var(--vp-button-alt-hover-text);
   background-color: var(--vp-button-alt-hover-bg);
+  cursor: pointer;
 }
 
 a.action.primary {
