@@ -3,7 +3,7 @@ export function scrollToAnchor() {
         return;
 
     const navigationHeight = document.querySelector(".VPNav").getBoundingClientRect().height;
-    const itemVerticalPosition = document.querySelector(location.hash).getBoundingClientRect().top;
+    const itemVerticalPosition = document.querySelector(location.hash).getBoundingClientRect().y;
 
     window.scrollTo({
         top: itemVerticalPosition - navigationHeight + 1,
