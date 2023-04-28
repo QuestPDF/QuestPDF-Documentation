@@ -7,7 +7,7 @@
 
       <p>Read the Getting Started tutorial to familiarize yourself with general library architecture, important layout structures as well as to better understand helpful patterns and practices.</p>
 
-      <a class="action primary" href="/getting-started">Get started</a>
+      <a class="action primary" href="quick-start.html">Get started</a>
     </div>
 
     <img src="/invoice.png" alt="Example invoice document implemented and generated with QuestPDF using C# language." />

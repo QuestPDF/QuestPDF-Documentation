@@ -27,7 +27,7 @@
           Unlimited redistributions
         </p>
 
-        <a class="action" href="/getting-started.html">Start learning</a>
+        <a class="action" href="/quick-start.html">Start learning</a>
       </section>
 
       <section class="pricing-tier">
