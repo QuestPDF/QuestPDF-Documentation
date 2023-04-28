@@ -10,7 +10,9 @@
 
         <a class="action" href="/license-commercial.html" style="margin-top: 16px;">Read more</a>
 
-        <p class="description" style="margin-top: 64px;">If you do not meet the criteria described above, you are eligible to use the <span class="highlight-background">QuestPDF Community MIT</span> License, completely for free, including the commercial usage. If you still want to support the library development, please consider purchasing the Processional License.</p>
+        <p class="description" style="margin-top: 64px;">We love and highly appreciate the .NET Community and therefore the vast majority of users are welcome to use the library completely for free. If you do not meet the criteria described above, you are eligible to use the <span class="highlight-background">QuestPDF Community MIT</span> License, without any limitations, even for commercial usage.</p>
+
+        <p class="description" style="margin-top: 16px;">If you still want to support library development, please consider purchasing the Professional License.</p>
 
         <a class="action" href="/license-community.html" style="margin-top: 16px;">Read more</a>
       </div>
