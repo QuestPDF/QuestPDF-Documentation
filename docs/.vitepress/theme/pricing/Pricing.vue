@@ -12,7 +12,7 @@
       <PricingLicense />
     </div>
 
-    <div class="container reverse-background">
+    <div class="container reverse-background" id="tiers">
       <PricingTiers />
     </div>
 
