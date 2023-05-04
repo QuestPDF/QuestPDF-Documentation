@@ -56,6 +56,7 @@ export default defineConfig({
                     { text: 'Introduction', link: '/introduction' },
                     { text: 'Quick start', link: '/quick-start' },
                     { text: 'Getting started', link: '/getting-started' },
+                    { text: 'License configuration', link: '/license-configuration' },
                     { text: 'Previewer', link: '/document-previewer' },
                     { text: 'Releases', link: '/releases' },
                     { text: 'Roadmap', link: '/roadmap' },
