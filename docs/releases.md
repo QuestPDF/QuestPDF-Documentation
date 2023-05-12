@@ -1,10 +1,50 @@
 # Release notes
 
+## 2023.5
+1) **Simplified development loop** by introducing cross-platform methods: GeneratePdfAndShow() and GenerateXpsAndShow()
+2) **New shared image API:** the ability to define a single image resource that is used in multiple places in the document without increasing its size 
+3) **New DocumentSettings API:** target image raster DPI - now, the library automatically resizes all images to achieve desired DPI (dots-per-inch) resolution. It allows for minimizing output file size 
+4) **New DocumentSettings API:** target image compression quality - the ability to specify the balance between size and quality for images in the document. It allows for minimizing output file size 
+5) **Refactoring:** moved the PdfA setting from the DocumentMetadata class to the DocumentSettings class 
+6) **Improved** Image API by providing additional FluentA API methods 
+7) **Improvement:** the GenerateImage element now provides the expected image resolution, abstracting away the physical area size and target image DPI
+
+
+## 2023.4
+This release does not contain any features or quality improvements.
+Its purpose is to mark the QuestPDF shift towards the dual-licensing model.
+Most users are not affected by this change.
+Please visit the https://www.questpdf.com/pricing.html webpage for more information.
+
+
 ## 2022.12
 1) **Feature:** implemented LetterSpacing property for the Text element
 2) **Improvement:** the Text element API accepts now only string values, objects are not automatically converted anymore
 3) **Fix:** the Alignment element incorrectly limits size of its child when only one axis is set (horizontal or vertical)
 4) **Maintenance:** Updated SkiaSharp dependency to 2.88.3
+
+### Version 2022.12.1:
+1) **Fixed:** loading fonts from embedded resource via the FontManager.RegisterFontFromEmbeddedResource method
+2) **Fixed:** better layout calculation stability for the Column element
+3) **Improvement:** exposed missing API method for the Dynamic component, enabling applying more advanced optimizations
+4) **Improvement:** better API documentation for the Settings.DocumentLayoutExceptionThreshold property
+
+### Version 2022.12.2:
+1) **Performance improvements** in various areas
+2) **Enhancement:** Text rendering stability improvements
+3) **Fixed:** the Settings.CheckIfAllTextGlyphsAreAvailable setting does not work correctly
+
+### Version 2022.12.3:
+1) **Fix:** inconsistent text height when using multiple lines with different TextStyles
+2) **Improvement:** added validation for color arguments
+3) **Fix:** the inlined element is shown only once in the header but should be repeated on each page
+
+### Version 2022.12.4:
+1) **Fix:** the TextStyle.Fallback property incorrectly inherits parent's and global properties
+2) **Improvement:** updated the CreateNotMatchingFontException message to mention that the glyph checking operation can be disabled with the Settings.CheckIfAllTextGlyphsAreAvailable setting
+
+### Version 2022.12.6:
+**Fix:** fixed the rendering order of table cells in certain scenarios
 
 
 ## 2022.11
