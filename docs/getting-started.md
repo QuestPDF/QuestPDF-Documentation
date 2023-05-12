@@ -152,6 +152,7 @@ The implementation starts with defining a new class implementing the `IDocument`
 public interface IDocument
 {
     DocumentMetadata GetMetadata();
+    DocumentSettings GetSettings();
     void Compose(IDocumentContainer container);
 }
 ```
@@ -180,6 +181,7 @@ public class InvoiceDocument : IDocument
     }
 
     public DocumentMetadata GetMetadata() => DocumentMetadata.Default;
+    public DocumentSettings GetSettings() => DocumentSettings.Default;
 
     public void Compose(IDocumentContainer container)
     {

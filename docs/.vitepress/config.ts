@@ -137,6 +137,7 @@ export default defineConfig({
                 items: [
                     { text: 'Settings', link: '/concepts/settings' },
                     { text: 'Document metadata', link: '/concepts/document-metadata' },
+                    { text: 'Document settings', link: '/concepts/document-settings' },
                     { text: 'Generating output', link: '/concepts/generating-output' },
                     { text: 'Execution order', link: '/concepts/execution-order' },
                     { text: 'Creating DSL', link: '/concepts/creating-dsl' },
