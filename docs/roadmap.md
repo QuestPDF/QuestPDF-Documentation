@@ -1,22 +1,24 @@
 # Roadmap
 
-::: tip
-Please note that QuestPDF is developed mainly by a single person. I am doing my best to maintain the project and offer the highest stability possible. However, some plans are likely to change over time.
-:::
+# Next release 2023.6
 
-## Primary focus
+1) Merging QuestPDF documents into one PDF file during the generation process.
+2) IntelliSense XML documentation support for all public API methods.
+3) Optimization of FluentAPI implementation.
 
-**Documentation redesign** - implementing new features is really important to cover most common requirements. However, it is essential to simplify learning process and help new developers. Current documentation has been designed over a year ago and since then has grown over three times in size. I would like to rethink its structure:
+# Long-term focus
 
-1) Shorten and simplify the `Getting started` tutorial.
-2) Record short video introducing to basic concepts of QuestPDF.
-3) Improve documentation about each building element: offer more precise behavior descriptions, API reference and more examples.
-5) Investigate better connectivity between code examples, e.g. by generating clickable links in the code.
-
-## Next features
-
-- Font subsetting to reduce output file size,
-- Text justification,
+1) Iterative documentation improvements:
+- Improve documentation about each building element: offer more precise behavior descriptions, API references, and more examples,
+- Investigate better connectivity between code examples, e.g., by generating clickable links in the code,
+- Shorten and simplify the `Getting Started` tutorial,
+- Record a short video introducing the basic concepts of QuestPDF.
+2) Improved text capabilities and language support:
+- Unicode-compliant bi-directional and LTR/RTL Text Support (UAX #9),
+- Unicode-compliant word-break algorithm (UAX #14).
+3) Support for tagged PDFs.
+4) Automated font subsetting to reduce output file size.
+5) New QuestPDF Previewer application to enhance the development experience.
 
 ## Under consideration
 
@@ -31,7 +33,6 @@ Please note that QuestPDF is developed mainly by a single person. I am doing my 
 
 ### Other ideas
 
-- Improve line breaking algorithm for Asian languages - not all languages use whitespace to break lines and wrap text. Some of them, such as Chinese, use significantly different [set of rules](https://en.wikipedia.org/wiki/Line_breaking_rules_in_East_Asian_languages). Covering most of them should improve QuestPDF compatibility with Asian languages. This mode will be available as special `TextStyle` flag, possible to set up globally for entire document.
 - Throw exception (debug mode only) when there is no font style close enough to current text style (e.g. no font with italic bold version),
 - Investigation on how to simplify unit tests and make them easier to manage,
 - Relative elements: alignment and translate,
