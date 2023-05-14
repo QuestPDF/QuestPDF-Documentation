@@ -1,21 +1,21 @@
 # Roadmap
 
-# Next release 2023.6
+## Next release 2023.6
 
 1) Merging QuestPDF documents into one PDF file during the generation process.
 2) IntelliSense XML documentation support for all public API methods.
 3) Optimization of FluentAPI implementation.
 
-# Long-term focus
+## Long-term focus
 
 1) Iterative documentation improvements:
-- Improve documentation about each building element: offer more precise behavior descriptions, API references, and more examples,
-- Investigate better connectivity between code examples, e.g., by generating clickable links in the code,
-- Shorten and simplify the `Getting Started` tutorial,
-- Record a short video introducing the basic concepts of QuestPDF.
+   - Improve documentation about each building element: offer more precise behavior descriptions, API references, and more examples,
+   - Investigate better connectivity between code examples, e.g., by generating clickable links in the code,
+   - Shorten and simplify the `Getting Started` tutorial,
+   - Record a short video introducing the basic concepts of QuestPDF.
 2) Improved text capabilities and language support:
-- Unicode-compliant bi-directional and LTR/RTL Text Support (UAX #9),
-- Unicode-compliant word-break algorithm (UAX #14).
+   - Unicode-compliant bi-directional and LTR/RTL Text Support (UAX #9),
+   - Unicode-compliant word-break algorithm (UAX #14).
 3) Support for tagged PDFs.
 4) Automated font subsetting to reduce output file size.
 5) New QuestPDF Previewer application to enhance the development experience.
