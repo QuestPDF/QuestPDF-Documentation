@@ -2,7 +2,7 @@
 
 ## 2023.5
 1) **Simplified development loop** by introducing cross-platform methods: GeneratePdfAndShow() and GenerateXpsAndShow()
-2) **New shared image API:** the ability to define a single image resource that is used in multiple places in the document without increasing its size 
+2) **New shared image API:** the ability to define a single image resource for usage in multiple places in the document without increasing file size
 3) **New DocumentSettings API:** target image raster DPI - now, the library automatically resizes all images to achieve desired DPI (dots-per-inch) resolution. It allows for minimizing output file size 
 4) **New DocumentSettings API:** target image compression quality - the ability to specify the balance between size and quality for images in the document. It allows for minimizing output file size 
 5) **Refactoring:** moved the PdfA setting from the DocumentMetadata class to the DocumentSettings class 
