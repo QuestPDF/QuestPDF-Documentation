@@ -12,8 +12,7 @@ export default defineConfig({
         ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg' }],
         ['meta', { name: "description", content: "Open-source modern .NET library for PDF document generation. Offering comprehensive layout engine powered by concise and discoverable C# Fluent API." }],
         ['meta', { name: "keywords", content: "pdf, library, c#, csharp, dotnet, report, export, generate, tool, create, render, html, converter, open-source, free" }],
-        ['script', { src: "https://cdn.paddle.com/paddle/paddle.js" }],
-        ['script', { src: "https://kit.fontawesome.com/f81acb164f.js", crossorigin: "anonymous" }]
+        ['script', { src: "https://cdn.paddle.com/paddle/paddle.js" }]
     ],
 
     themeConfig: {

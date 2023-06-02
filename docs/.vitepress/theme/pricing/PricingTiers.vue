@@ -11,9 +11,9 @@
         <article v-if="activeQuestion && !recommendedLicense" class="question">
 
           <div class="progress-indicator">
-            <i v-for="indicator of progressIndicator"
-               class="progress-indicator-step fa-solid fa-circle"
-               :class="{ 'completed': indicator.isCompleted, 'current': indicator.isCurrent, 'future': indicator.isFuture }"></i>
+            <div v-for="indicator of progressIndicator"
+               class="progress-indicator-step"
+               :class="{ 'completed': indicator.isCompleted, 'current': indicator.isCurrent, 'future': indicator.isFuture }"></div>
           </div>
 
           <hr>
@@ -455,29 +455,32 @@ hr {
 }
 
 .progress-indicator-step {
-  font-size: 10px;
+  height: 12px;
+  width: 12px;
+
+  border-radius: 50%;
 }
 
 .progress-indicator-step.completed {
-  color: var(--vp-c-brand);
+  background-color: var(--vp-c-brand);
   opacity: 0.66;
 }
 
 .progress-indicator-step.current {
-  color: var(--vp-c-brand);
+  background-color: var(--vp-c-brand);
   font-size: 15px;
 }
 
 .progress-indicator-step.future {
-  color: var(--vp-c-mute-lighter);
+  background-color: var(--vp-c-mute-lighter);
 }
 
 .progress-indicator-step.future {
-  color: var(--vp-c-mute-darker);
+  background-color: var(--vp-c-mute-darker);
 }
 
 html.dark .progress-indicator-step.future {
-  color: var(--vp-c-mute-lighter);
+  background-color: var(--vp-c-mute-lighter);
 }
 
 
