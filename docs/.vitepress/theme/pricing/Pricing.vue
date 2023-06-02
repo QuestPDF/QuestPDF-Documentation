@@ -4,25 +4,13 @@
       <PricingDescription />
     </div>
 
-    <div class="container reverse-background">
-      <PricingManifesto />
-    </div>
-
-    <div class="container" id="license">
-      <PricingLicense />
-    </div>
-
-    <div class="container reverse-background" id="tiers">
+    <div class="container reverse-background" id="license">
       <PricingTiers />
     </div>
 
-    <div class="container">
-      <PricingFrequentlyAskedQuestions />
-    </div>
-
-    <div class="container reverse-background">
-      <PricingProvider />
-    </div>
+<!--    <div class="container reverse-background">-->
+<!--      <PricingFrequentlyAskedQuestions />-->
+<!--    </div>-->
   </div>
 </template>
 
