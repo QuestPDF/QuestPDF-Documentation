@@ -5,70 +5,25 @@
     <div>
       <h2>What license do you need?</h2>
 
-      <div class="questions">
+      <article v-if="activeQuestion && !recommendedLicense" class="question">
 
-
-        <article v-if="activeQuestion && !recommendedLicense" class="question">
-
-          <div class="progress-indicator">
-            <div v-for="indicator of progressIndicator"
+        <div class="progress-indicator">
+          <div v-for="indicator of progressIndicator"
                class="progress-indicator-step"
                :class="{ 'completed': indicator.isCompleted, 'current': indicator.isCurrent, 'future': indicator.isFuture }"></div>
-          </div>
-
-          <hr>
-
-          <h3 class="title">{{ activeQuestion.content }}</h3>
-
-<!--            <div v-for="answer of question.answers" :key="answer.content" class="answer">-->
-<!--              <i class="fa-regular fa-square-check"></i>-->
-<!--              <i class="fa-solid fa-square-check"></i>-->
-<!--              <i class="fa-regular  fa-square"></i>-->
-<!--            </div>-->
-
-          <div v-for="answer of activeQuestion.answers" :key="answer.content" class="action answer" @click="acceptAnswer(answer)" :class="{ 'primary': answer.isHighlighted() }">
-            {{ answer.content }} <br>
-            <span class="hint">{{ answer.hint }}</span>
-          </div>
-        </article>
-      </div>
-
-      <section class="pricing-tier" v-if="recommendedLicense">
-        <header>
-          <img class="icon" :src="recommendedLicense.icon" alt="" />
-
-          <div>
-            <h3><span class="highlight-foreground" style="font-weight: bold">{{ recommendedLicense.name }}</span> License</h3>
-
-            <template v-if="recommendedLicense.price">
-              <p class="price">{{ recommendedLicense.price }} USD per year</p>
-              <p class="tax-information">+ local tax (if applicable)</p>
-            </template>
-
-            <template v-else>
-              <p class="price">Free forever</p>
-            </template>
-          </div>
-        </header>
-
-        <hr>
-
-        <div class="details">
-          <div v-for="detail of recommendedLicense.details" class="detail">
-            <img :src="convertLicenseDetailTypeToIcon(detail.type)" width="24" alt="">
-            <span>{{ detail.content }}</span>
-          </div>
         </div>
 
         <hr>
 
-        <div style="display: flex; align-self: end; gap: 16px;">
-          <a class="action" @click="reset">Back</a>
+        <h3 class="title">{{ activeQuestion.content }}</h3>
 
-          <a v-if="recommendedLicense.paddleProductId" class="action primary" @click="startCheckout(PaddleConfiguration.professionalLicenseId)">Purchase</a>
-          <a v-else class="action primary" href="/quick-start.html">Start learning</a>
+        <div v-for="answer of activeQuestion.answers" :key="answer.content" class="action answer" @click="acceptAnswer(answer)" :class="{ 'primary': answer.isHighlighted() }">
+          {{ answer.content }} <br>
+          <span class="hint">{{ answer.hint }}</span>
         </div>
-      </section>
+      </article>
+
+      <license-description v-if="recommendedLicense" :license="recommendedLicense" />
     </div>
 
   </section>
@@ -79,6 +34,8 @@
 import { PaddleConfiguration } from "./PaddleConfiguration";
 import { useData } from 'vitepress'
 import {computed, reactive, ref} from "vue";
+import {CommunityLicense, EnterpriseLicense, ProfessionalLicense} from "./LinenseDescriptions";
+import LicenseDescription from "./LicenseDescription.vue";
 
 const { isDark } = useData()
 
@@ -104,74 +61,6 @@ interface LicenseQuestion {
   content: string;
   answers: LicenseAnswer[];
 }
-
-enum LicenseDetailType {
-  Feature,
-  Information,
-  Warning
-}
-
-interface LicenseDetail {
-    type: LicenseDetailType,
-    content: string;
-}
-
-interface License {
-    icon: string;
-    name: string;
-    price: number;
-    paddleProductId: number;
-
-    details: LicenseDetail[];
-}
-
-const LicenseDetailsIncluded : LicenseDetail[] = [
-    { type: LicenseDetailType.Feature, content: "Covers commercial usage" },
-    { type: LicenseDetailType.Feature, content: "Create and deploy unlimited closed-source projects, applications and APIs" },
-    { type: LicenseDetailType.Feature, content: "Redistribute the compiled library, royalty-free, with your applications" }
-]
-
-const CommunityLicense : License = {
-    icon: "/pricing/community.svg",
-    name: "Community",
-
-    price: null,
-    paddleProductId: null,
-
-    details: [
-        ...LicenseDetailsIncluded,
-        { type: LicenseDetailType.Information, content: "This license is perpetual" },
-        { type: LicenseDetailType.Warning, content: "In the future, when upgrading the library to a newer version, please kindly check if you are still eligible to use the Community License" },
-    ]
-};
-
-const ProfessionalLicense : License = {
-    icon: "/pricing/professional.svg",
-    name: "Professional",
-
-    price: 500,
-    paddleProductId: PaddleConfiguration.professionalLicenseId,
-
-    details: [
-        ...LicenseDetailsIncluded,
-        { type: LicenseDetailType.Information, content: "This license is perpetual" },
-        { type: LicenseDetailType.Warning, content: "In the future, when upgrading the library to a newer version, please kindly check if you are still eligible to use the Community License" },
-    ]
-};
-
-const EnterpriseLicense : License = {
-    icon: "/pricing/enterprise.svg",
-    name: "Enterprise",
-
-    price: 3000,
-    paddleProductId: PaddleConfiguration.enterpriseLicenseId,
-
-    details: [
-        ...LicenseDetailsIncluded,
-        { type: LicenseDetailType.Information, content: "This license is perpetual" },
-        { type: LicenseDetailType.Warning, content: "In the future, when upgrading the library to a newer version, please kindly check if you are still eligible to use the Community License" },
-    ]
-};
 
 const state = reactive({
     questionNumber: 0,
@@ -345,36 +234,24 @@ const progressIndicator = computed(() => {
     });
 })
 
-function convertLicenseDetailTypeToIcon(type: LicenseDetailType) {
-    if (type === LicenseDetailType.Feature)
-        return "/pricing/tick.svg";
-
-    if (type === LicenseDetailType.Information)
-        return "/pricing/info.svg";
-
-    if (type === LicenseDetailType.Warning)
-        return "/pricing/alert.svg";
-
-    throw "Unreachable code";
-}
 
 function startCheckout(productId: number) {
-  if (!PaddleConfiguration.isProduction)
-    Paddle.Environment.set('sandbox');
+    if (!PaddleConfiguration.isProduction)
+        Paddle.Environment.set('sandbox');
 
-  Paddle.Setup({
-      vendor: PaddleConfiguration.vendorId
-  });
+    Paddle.Setup({
+        vendor: PaddleConfiguration.vendorId
+    });
 
-  Paddle.Checkout.open({
-    product: productId,
-    displayModeTheme: isDark.value ? 'dark' : 'light'
-  });
+    Paddle.Checkout.open({
+        product: productId,
+        displayModeTheme: isDark.value ? 'dark' : 'light'
+    });
 }
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 .license-content {
   display: grid;
@@ -385,15 +262,6 @@ function startCheckout(productId: number) {
 .license-icon {
   width: 128px;
   place-self: center;
-}
-
-
-
-.questions {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  max-width: 500px;
 }
 
 hr {
@@ -483,79 +351,5 @@ html.dark .progress-indicator-step.future {
   background-color: var(--vp-c-mute-lighter);
 }
 
-
-
-
-.pricing-tier {
-  max-width: 500px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 24px;
-
-  border: 1px solid var(--vp-c-gutter);
-  background-color: var(--vp-c-bg);
-  border-radius: 24px;
-  padding: 32px;
-  transition: all 0.25s ease-in-out;
-}
-
-.pricing-tier header {
-  display: grid;
-  grid-template-columns: 48px 1fr;
-  grid-gap: 0 32px;
-}
-
-.pricing-tier header h3 {
-  font-family: var(--vp-font-family-base);
-  color: var(--vp-c-text-1);
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.5rem;
-  margin-top: 0;
-  margin-bottom: 8px;
-}
-
-.pricing-tier .applicability {
-  color: var(--vp-c-text-2);
-  font-size: 0.875rem;
-}
-
-.pricing-tier hr {
-  margin: 0px -32px;
-  border: 0.5px solid var(--vp-c-gutter);
-  width: calc(100% + 64px);
-}
-
-.pricing p.price {
-  line-height: 1.5rem;
-  font-size: 1.2rem;
-}
-
-.pricing p.tax-information {
-  font-size: 0.875rem;
-  color: var(--vp-c-text-3);
-}
-
-
-
-.pricing-tier .details {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-
-}
-
-.pricing-tier .details .detail {
-  display: flex;
-  flex-direction: row;
-  gap: 12px;
-  align-items: start;
-
-  color: var(--vp-c-text-2);
-  line-height: 1.5rem;
-  font-size: 1rem;
-}
 
 </style>
