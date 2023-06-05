@@ -1,10 +1,11 @@
 export interface LicenseQuestion {
-    content: string;
+    title: string;
     answers: LicenseAnswer[];
 }
 
 export interface LicenseAnswer {
-    content: string;
+    icon: string;
+    title: string;
     hint?: string;
     action: (state: SurveyState) => void;
 }

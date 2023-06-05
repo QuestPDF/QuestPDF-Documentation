@@ -12,14 +12,17 @@
     <hr>
 
     <template v-if="activeQuestion">
-      <h3 class="title">{{ activeQuestion.content }}</h3>
+      <h3 class="title">{{ activeQuestion.title }}</h3>
 
-      <div v-for="answer of activeQuestion.answers" :key="answer.content" class="action answer" @click="acceptAnswer(answer)">
-        {{ answer.content }} <br>
+      <div v-for="answer of activeQuestion.answers" :key="answer.title" class="action answer" @click="acceptAnswer(answer)">
+        <img class="icon" :src="answer.icon" alt="" />
+        <span class="title">{{ answer.title }}</span>
         <span class="hint">{{ answer.hint }}</span>
       </div>
 
-      <div v-if="currentQuestionNumber > 0" class="action answer" @click="showPreviousQuestion">Back</div>
+      <div v-if="currentQuestionNumber > 0" class="action answer" @click="showPreviousQuestion">
+        <span class="title">Back</span>
+      </div>
     </template>
   </article>
 </template>
@@ -107,23 +110,25 @@ hr {
   padding: 24px;
 }
 
-.survey .title {
+.survey h3.title {
   font-family: var(--vp-font-family-base);
   color: var(--vp-c-text-1);
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.5rem;
-  margin: 0 0 16px 0;
+  margin-bottom: 16px;
 }
 
 .survey .answer {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  grid-template-rows: auto auto;
+
   border: none;
-  margin: 0 -24px;
   width: calc(100% + 48px);
+  margin: 0 -24px;
   padding: 16px 24px;
-  line-height: initial;
-  text-align: left;
-  font-weight: 600;
+  grid-gap: 0px 12px;
 }
 
 .survey .answer:hover {
@@ -131,7 +136,24 @@ hr {
   cursor: pointer;
 }
 
-.survey .answer .hint {
+.answer .icon {
+  grid-row: 1 / span 2;
+  grid-column: 1;
+}
+
+.answer .title {
+  grid-row: 1;
+  grid-column: 2;
+
+  color: var(--vp-c-text-2);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.answer .hint {
+  grid-row: 2;
+  grid-column: 2;
+
   color: var(--vp-c-text-2);
   font-size: 0.875rem;
   font-weight: 400;

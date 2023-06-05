@@ -66,7 +66,7 @@ function convertLicenseDetailTypeToIcon(type: LicenseDetailType) {
 <style scoped>
 
 .license-description {
-  max-width: 600px;
+  max-width: 800px;
 
   display: flex;
   flex-direction: column;
@@ -119,10 +119,8 @@ function convertLicenseDetailTypeToIcon(type: LicenseDetailType) {
 }
 
 .license-description .details {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-
+  column-count: 2;
+  column-gap: 64px;
 }
 
 .license-description .details-item {
@@ -134,6 +132,8 @@ function convertLicenseDetailTypeToIcon(type: LicenseDetailType) {
   color: var(--vp-c-text-2);
   line-height: 1.5rem;
   font-size: 1rem;
+
+  margin-bottom: 32px;
 }
 
 </style>
