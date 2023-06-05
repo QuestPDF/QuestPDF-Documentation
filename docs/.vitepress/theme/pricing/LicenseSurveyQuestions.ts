@@ -109,13 +109,15 @@ export const DeveloperThresholdQuestion = {
     answers: [
         {
             icon: AnswerYes,
-            title: "Up to 10",
-            action: x => x.exceededDeveloperCountThreshold = false,
+            title: "Over 10",
+            hint: "software developers are / will be working on projects dependent on the QuestPDF library",
+            action: x => x.exceededDeveloperCountThreshold = true,
         },
         {
             icon: AnswerNo,
-            title: "More than 10",
-            action: x => x.exceededDeveloperCountThreshold = true,
+            title: "Less than 10",
+            hint: "software developers are / will be working on projects dependent on the QuestPDF library",
+            action: x => x.exceededDeveloperCountThreshold = false,
         }
     ]
 };

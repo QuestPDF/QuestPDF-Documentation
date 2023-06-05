@@ -1,16 +1,18 @@
 <template>
-  <article class="content">
-    <h1><span class="highlight-foreground">QuestPDF</span> Licenses and Pricing</h1>
+  <article class="content license-header">
+    <div>
+      <h1><span class="highlight-foreground">QuestPDF</span> Meets Professionalism</h1>
 
-    <div class="details">
-      <p class="description">Nowadays, we are building upon the work of giants, creating more impactful software than ever before. Regardless of its size and purpose, every project deserves well-maintained dependencies. We are here to offer you a stable and high-quality PDF generation library for efficient development and ease of mind.</p>
+      <div class="details">
+        <p>Nowadays, we are building upon the work of giants, creating more impactful software than ever before. Regardless of its size and purpose, every project deserves well-maintained dependencies. We identify the importance of the QuestPDF library in your projects, and therefore want to make sure you can safely and confidently continue the development.</p>
 
-      <p>Open-source projects are an important foundation for the software development ecosystem. Modern applications are depending more and more upon the work of enthusiast and experts. Open-source is not anymore just sharing knowledge and passion with everybody. Over last years, maintaining and developing those projects have became a highly responsible task.</p>
+        <p>We strongly believe that a dual-licensing model is the best solution for all users: providing the best development experience and feature set for everybody and every project, but also offering stability for every professional and enterprise product.</p>
 
-      <p>We identify the importance of the QuestPDF library in your projects, and therefore want to make sure you can safely and confidently continue the development. We strongly believe that a dual-licensing model is the best solution for all users: providing the best development experience and feature set for everybody and every project, but also offering stability for every professional and enterprise product.</p>
-
-      <p>Being a healthy and growing community is our primary goal that motivates us to pursue professionalism.</p>
+        <p>Being a healthy and growing community is our primary goal that motivates us to pursue professionalism.</p>
+      </div>
     </div>
+
+    <img src="/homepage/license.svg" alt="" class="license-icon" />
   </article>
 </template>
 
@@ -19,6 +21,13 @@
 </script>
 
 <style scoped>
+
+.license-header {
+  display: grid;
+  grid-template-columns: 1fr 192px;
+  align-items: center;
+  grid-gap: 128px;
+}
 
 .details {
   display: flex;

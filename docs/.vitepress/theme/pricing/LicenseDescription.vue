@@ -124,6 +124,8 @@ function convertLicenseDetailTypeToIcon(type: LicenseDetailType) {
 }
 
 .license-description .details-item {
+  break-inside: avoid-column;
+
   display: flex;
   flex-direction: row;
   gap: 12px;

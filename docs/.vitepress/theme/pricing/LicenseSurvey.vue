@@ -1,8 +1,6 @@
 <template>
   <article class="survey">
 
-    <img src="/homepage/license.svg" alt="" class="license-icon" />
-
     <div class="progress-indicator">
       <div v-for="indicator of Array.from({ length: SurveyLength }, (v, i) => i)"
            class="progress-indicator-step"

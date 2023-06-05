@@ -1,7 +1,5 @@
 <template>
   <article class="content license-content">
-    <img src="/homepage/license.svg" alt="" class="license-icon" />
-
     <div>
       <h2>What license do you need?</h2>
 
