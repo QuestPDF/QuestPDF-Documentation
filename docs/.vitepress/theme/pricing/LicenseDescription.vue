@@ -66,7 +66,8 @@ function convertLicenseDetailTypeToIcon(type: LicenseDetailType) {
 <style scoped>
 
 .license-description {
-  max-width: 800px;
+  width: 800px;
+  max-width: 100%;
 
   display: flex;
   flex-direction: column;
@@ -136,6 +137,12 @@ function convertLicenseDetailTypeToIcon(type: LicenseDetailType) {
   font-size: 1rem;
 
   margin-bottom: 32px;
+}
+
+@media screen and (max-width: 700px) {
+  .license-description .details {
+    column-count: 1;
+  }
 }
 
 </style>

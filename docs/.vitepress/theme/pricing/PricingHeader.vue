@@ -1,5 +1,5 @@
 <template>
-  <article class="content license-header">
+  <article class="content pricing-header">
     <div>
       <h1><span class="highlight-foreground">QuestPDF</span> Meets Professionalism</h1>
 
@@ -22,11 +22,35 @@
 
 <style scoped>
 
-.license-header {
+.pricing-header {
   display: grid;
-  grid-template-columns: 1fr 192px;
+  grid-template-columns: 1fr auto;
   align-items: center;
   grid-gap: 128px;
+}
+
+.license-icon {
+  width: 192px;
+}
+
+@media screen and (max-width: 1000px) {
+  .pricing-header {
+    grid-gap: 64px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .pricing-header {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+  }
+
+  .license-icon {
+    display: none;
+  }
 }
 
 .details {
@@ -35,30 +59,4 @@
   gap: 32px;
 }
 
-.description {
-  color: var(--vp-c-text-1);
-  font-size: 1.25rem;
-  line-height: 2rem;
-  margin-bottom: 16px;
-}
-
-/* Summary */
-
-.summary-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 32px 64px;
-}
-
-@media screen and (max-width: 800px) {
-  .summary-list {
-    grid-template-columns: 1fr;
-  }
-}
-
-.summary-item {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-gap: 16px;
-}
 </style>

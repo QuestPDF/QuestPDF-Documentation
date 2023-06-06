@@ -1,25 +1,21 @@
 <template>
   <article class="survey">
 
-    <div class="progress-indicator">
-      <div v-for="indicator of Array.from({ length: SurveyLength }, (v, i) => i)"
-           class="progress-indicator-step"
-           :class="{ 'completed': indicator < currentQuestionNumber, 'current': indicator == currentQuestionNumber, 'future': indicator > currentQuestionNumber }"></div>
-    </div>
+    <progress-indicator :length="SurveyLength" :value="currentQuestionNumber" />
 
     <hr>
 
     <template v-if="activeQuestion">
-      <h3 class="title">{{ activeQuestion.title }}</h3>
+      <h3 class="question-title">{{ activeQuestion.title }}</h3>
 
-      <div v-for="answer of activeQuestion.answers" :key="answer.title" class="action answer" @click="acceptAnswer(answer)">
-        <img class="icon" :src="answer.icon" alt="" />
-        <span class="title">{{ answer.title }}</span>
-        <span class="hint">{{ answer.hint }}</span>
+      <div v-for="answer of activeQuestion.answers" :key="answer.title" class="answer" @click="acceptAnswer(answer)">
+        <img class="answer-icon" :src="answer.icon" alt="" />
+        <span class="answer-title">{{ answer.title }}</span>
+        <span class="answer-hint">{{ answer.hint }}</span>
       </div>
 
       <div v-if="currentQuestionNumber > 0" class="action answer" @click="showPreviousQuestion">
-        <span class="title">Back</span>
+        <span class="answer-title">Back</span>
       </div>
     </template>
   </article>
@@ -36,6 +32,7 @@ import {
     DirectPackageDependencyQuestion, ExternalClientQuestion, IntroductionQuestion,
     RevenueThresholdExternalClientQuestion, RevenueThresholdInternalQuestion
 } from "./LicenseSurveyQuestions";
+import ProgressIndicator from "./ProgressIndicator.vue";
 
 const currentQuestionNumber = ref(0);
 
@@ -100,7 +97,8 @@ hr {
   display: flex;
   align-items: start;
   flex-direction: column;
-  max-width: 600px;
+  width: 600px;
+  max-width: 100%;
 
   background: var(--vp-c-bg);
   border: 1px solid var(--vp-c-gutter);
@@ -108,7 +106,7 @@ hr {
   padding: 24px;
 }
 
-.survey h3.title {
+.question-title {
   font-family: var(--vp-font-family-base);
   color: var(--vp-c-text-1);
   font-size: 1.25rem;
@@ -117,7 +115,7 @@ hr {
   margin-bottom: 16px;
 }
 
-.survey .answer {
+.answer {
   display: grid;
   grid-template-columns: 24px 1fr;
   grid-template-rows: auto auto;
@@ -129,26 +127,26 @@ hr {
   grid-gap: 0px 12px;
 }
 
-.survey .answer:hover {
+.answer:hover {
   background: var(--vp-c-bg-soft);
   cursor: pointer;
 }
 
-.answer .icon {
+.answer-icon {
   grid-row: 1 / span 2;
   grid-column: 1;
 }
 
-.answer .title {
+.answer-title {
   grid-row: 1;
   grid-column: 2;
 
-  color: var(--vp-c-text-2);
+  color: var(--vp-c-text-1);
   font-size: 1rem;
   font-weight: 600;
 }
 
-.answer .hint {
+.answer-hint {
   grid-row: 2;
   grid-column: 2;
 
@@ -157,43 +155,14 @@ hr {
   font-weight: 400;
 }
 
-/* SURVEY PROGRESS INDICATOR */
+@media screen and (max-width: 700px) {
+  .survey .answer {
+    grid-gap: 8px 12px;
+  }
 
-.progress-indicator {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
+  .answer-hint {
+    grid-column: 1 / span 2;
+  }
 }
-
-.progress-indicator-step {
-  height: 12px;
-  width: 12px;
-
-  border-radius: 50%;
-}
-
-.progress-indicator-step.completed {
-  background-color: var(--vp-c-brand);
-  opacity: 0.66;
-}
-
-.progress-indicator-step.current {
-  background-color: var(--vp-c-brand);
-  font-size: 15px;
-}
-
-.progress-indicator-step.future {
-  background-color: var(--vp-c-mute-lighter);
-}
-
-.progress-indicator-step.future {
-  background-color: var(--vp-c-mute-darker);
-}
-
-html.dark .progress-indicator-step.future {
-  background-color: var(--vp-c-mute-lighter);
-}
-
 
 </style>

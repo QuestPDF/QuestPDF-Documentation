@@ -10,12 +10,6 @@ export interface LicenseAnswer {
     action: (state: SurveyState) => void;
 }
 
-export enum LicenseType {
-    Community,
-    Professional,
-    Enterprise
-}
-
 export enum OwnerType {
     Internal,
     External
