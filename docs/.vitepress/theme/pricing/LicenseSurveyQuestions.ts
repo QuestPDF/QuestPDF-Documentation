@@ -51,7 +51,7 @@ export const CommercialUsageQuestion = {
 };
 
 export const ExternalClientQuestion = {
-    title: "Is the project created by external client?",
+    title: "Is the project created for an external client?",
     answers: [
         {
             icon: AnswerYes,
