@@ -28,14 +28,18 @@ export default defineConfig({
                     { text: 'Design patterns', link: '/design-patterns' },
                 ]
             },
-            { text: 'Pricing', link: '/pricing' },
             {
                 text: 'License',
                 items: [
                     {
                         items: [
+                            { text: 'License and Pricing', link: '/pricing' }
+                        ]
+                    },
+                    {
+                        items: [
                             { text: 'Community MIT', link: '/license-community' },
-                            { text: 'Professional and Enterprise', link: '/license-commercial' },
+                            { text: 'Professional and Enterprise', link: '/license-commercial' }
                         ]
                     },
                     {
@@ -47,7 +51,8 @@ export default defineConfig({
                 ]
             },
             { text: 'GitHub', link: 'https://github.com/QuestPDF/QuestPDF' },
-            { text: 'NuGet', link: 'https://www.nuget.org/packages/QuestPDF' }
+            { text: 'NuGet', link: 'https://www.nuget.org/packages/QuestPDF' },
+            { text: 'Contact', link: '/contact' },
         ],
         sidebar: [
             {

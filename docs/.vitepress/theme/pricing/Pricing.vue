@@ -4,24 +4,8 @@
       <PricingDescription />
     </div>
 
-    <div class="container reverse-background">
-      <PricingManifesto />
-    </div>
-
-    <div class="container" id="license">
-      <PricingLicense />
-    </div>
-
-    <div class="container reverse-background" id="tiers">
+    <div class="container reverse-background" id="license">
       <PricingTiers />
-    </div>
-
-    <div class="container">
-      <PricingFrequentlyAskedQuestions />
-    </div>
-
-    <div class="container reverse-background">
-      <PricingProvider />
     </div>
   </div>
 </template>
@@ -32,11 +16,7 @@ import { onMounted } from "vue";
 import { scrollToAnchor } from "../helpers";
 
 import PricingTiers from "./PricingTiers.vue";
-import PricingDescription from "./PricingDescription.vue";
-import PricingFrequentlyAskedQuestions from "./PricingFrequentlyAskedQuestions.vue";
-import PricingProvider from "./PricingProvider.vue";
-import PricingLicense from "./PricingLicense.vue";
-import PricingManifesto from "./PricingManifesto.vue";
+import PricingDescription from "./PricingHeader.vue";
 
 onMounted(scrollToAnchor);
 

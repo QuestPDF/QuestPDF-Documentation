@@ -43,7 +43,7 @@
 
       <article>
         <h3>Payments</h3>
-        <p>QuestPDF does not process any order payments through the website. All payments are processed securely through <a href="https://www.paddle.com/">Paddle</a>, a third party online reseller and our Merchant of Record.</p>
+        <p>QuestPDF does not process any order payments through the website. Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.</p>
       </article>
 
       <article>
