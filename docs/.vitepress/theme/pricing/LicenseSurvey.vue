@@ -124,7 +124,7 @@ hr {
   width: calc(100% + 48px);
   margin: 0 -24px;
   padding: 16px 24px;
-  grid-gap: 0px 12px;
+  grid-gap: 0 16px;
 }
 
 .answer:hover {

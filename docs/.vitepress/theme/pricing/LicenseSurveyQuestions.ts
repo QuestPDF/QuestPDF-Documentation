@@ -20,7 +20,7 @@ export const DirectPackageDependencyQuestion = {
         {
             icon: AnswerYes,
             title: "Yes",
-            hint: "QuestpDF is a explicitly referenced in my project",
+            hint: "QuestPDF is a explicitly referenced in my project and/or it explicitly uses QuestPDF API",
             action: x => x.isDirectPackageDependency = true
         },
         {
@@ -44,7 +44,7 @@ export const CommercialUsageQuestion = {
         {
             icon: AnswerNo,
             title: "No",
-            hint: "The project is not created for profit, e.g.: open-source library, project created for Charitable Organization, etc.",
+            hint: "The project is not created for profit, e.g.: open-source library, project created for Charitable Organization, learning purposes, training courses etc.",
             action: x => x.isForProfit = false
         }
     ]
@@ -56,7 +56,7 @@ export const ExternalClientQuestion = {
         {
             icon: AnswerYes,
             title: "Yes",
-            hint: "I am creating the project for external client",
+            hint: "I am creating the project for an external client",
             action: x => x.ownerType = OwnerType.External,
         },
         {
