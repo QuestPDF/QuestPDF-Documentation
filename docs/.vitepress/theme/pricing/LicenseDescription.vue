@@ -4,7 +4,7 @@
       <img class="icon" :src="license.icon" alt="" />
 
       <div>
-        <h3><span class="highlight-foreground" style="font-weight: bold">{{ license.name }}</span> License</h3>
+        <h3>QuestPDF <span class="highlight-foreground" style="font-weight: bold">{{ license.name }}</span> License</h3>
 
         <template v-if="license.price">
           <p class="price">{{ license.price }} USD per year</p>
@@ -66,7 +66,7 @@ function convertLicenseDetailTypeToIcon(type: LicenseDetailType) {
 <style scoped>
 
 .license-description {
-  width: 800px;
+  width: 900px;
   max-width: 100%;
 
   display: flex;

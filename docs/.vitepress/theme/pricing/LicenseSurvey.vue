@@ -111,7 +111,7 @@ hr {
   color: var(--vp-c-text-1);
   font-size: 1.25rem;
   font-weight: 600;
-  line-height: 1.5rem;
+  line-height: 1.75rem;
   margin-bottom: 16px;
 }
 
