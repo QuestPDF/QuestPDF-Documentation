@@ -83,9 +83,13 @@ function convertLicenseDetailTypeToIcon(type: LicenseDetailType) {
 
 .license-description header {
   display: grid;
-  grid-template-columns: 64px 1fr;
+  grid-template-columns: auto 1fr;
   grid-gap: 0 32px;
   align-items: center;
+}
+
+.license-description header .icon {
+  width: 64px;
 }
 
 .license-description header h3 {
@@ -93,7 +97,7 @@ function convertLicenseDetailTypeToIcon(type: LicenseDetailType) {
   color: var(--vp-c-text-1);
   font-size: 1.75rem;
   font-weight: 600;
-  line-height: 1.5rem;
+  line-height: 2rem;
   margin-top: 0;
   margin-bottom: 8px;
 }
@@ -142,6 +146,18 @@ function convertLicenseDetailTypeToIcon(type: LicenseDetailType) {
 @media screen and (max-width: 700px) {
   .license-description .details {
     column-count: 1;
+  }
+
+  .license-description header {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 16px;
+  }
+
+  .license-description header h3 {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
   }
 }
 

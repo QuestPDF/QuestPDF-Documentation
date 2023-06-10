@@ -45,7 +45,7 @@
   }
 
   h1 {
-    font-size: 2.25rem;
+    font-size: 2rem;
   }
 
   .license-icon {
