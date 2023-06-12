@@ -44,10 +44,6 @@
     grid-template-columns: 1fr;
   }
 
-  h1 {
-    font-size: 2rem;
-  }
-
   .license-icon {
     display: none;
   }

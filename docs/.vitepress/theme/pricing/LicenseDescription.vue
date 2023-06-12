@@ -148,6 +148,14 @@ function convertLicenseDetailTypeToIcon(type: LicenseDetailType) {
     column-count: 1;
   }
 
+  .license-description {
+    padding: 24px;
+  }
+
+  .license-description hr {
+    margin: 0px -24px;
+  }
+
   .license-description header {
     display: flex;
     flex-direction: column;
