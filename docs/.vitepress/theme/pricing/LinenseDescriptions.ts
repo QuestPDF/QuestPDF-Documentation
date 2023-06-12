@@ -68,7 +68,7 @@ export const EnterpriseLicense : License = {
     icon: "/pricing/enterprise.svg",
     name: "Enterprise",
 
-    price: 3000,
+    price: 2000,
     paddleProductId: PaddleConfiguration.enterpriseLicenseId,
 
     details: [
