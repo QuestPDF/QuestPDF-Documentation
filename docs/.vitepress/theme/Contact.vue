@@ -9,19 +9,19 @@ interface ContactInformation {
 const contacts : ContactInformation[] = [
     {
         link: "https://github.com/QuestPDF/QuestPDF",
-        image: "/public/contact/github.svg",
+        image: "/contact/github.svg",
         title: "Technical support",
         description: "If you're experiencing any problems or have suggestions to enhance the QuestPDF library, we invite you to seek resolution and share your insights on the GitHub platform.",
     },
     {
         link: "https://www.paddle.com/",
-        image: "/public/contact/paddle.svg",
+        image: "/contact/paddle.svg",
         title: "Payment support",
         description: "Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.",
     },
     {
         link: "mailto:contact@questpdf.com",
-        image: "/public/contact/email.svg",
+        image: "/contact/email.svg",
         title: "General support",
         description: "Contact us via email for non-technical inquiries, feedback, and information about the QuestPDF library. We value your input very highly and are open to help.",
     }
