@@ -33,17 +33,17 @@ const contacts : ContactInformation[] = [
     <div class="container">
       <div class="content">
 
-        <div class="contacts">
+        <section class="contacts">
           <template v-for="contact of contacts" :key="contact">
             <a :href="contact.link" target="_blank">
-              <div class="contact">
-                <img :src="contact.image">
+              <article class="contact">
+                <img :src="contact.image" alt="">
                 <h3>{{ contact.title }}</h3>
                 <p>{{ contact.description }}</p>
-              </div>
+              </article>
             </a>
           </template>
-        </div>
+        </section>
 
       </div>
     </div>
