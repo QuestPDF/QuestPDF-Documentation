@@ -68,8 +68,8 @@ const contacts : ContactInformation[] = [
 }
 
 .contact {
-  width: 500px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 500px;
 }
 
 .contact img {
