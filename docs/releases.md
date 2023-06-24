@@ -1,5 +1,10 @@
 # Release notes
 
+## 2023.6
+1) **Feature:** generating merged PDF documents.
+2) **Improvement:** image loading exception better describes the failure reason
+
+
 ## 2023.5
 1) **Simplified development loop** by introducing cross-platform methods: GeneratePdfAndShow() and GenerateXpsAndShow()
 2) **New shared image API:** the ability to define a single image resource for usage in multiple places in the document without increasing file size

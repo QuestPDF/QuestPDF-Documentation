@@ -1,10 +1,9 @@
 # Roadmap
 
-## Next release 2023.6
+## Next release 2023.7
 
-1) Merging QuestPDF documents into one PDF file during the generation process.
-2) IntelliSense XML documentation support for all public API methods.
-3) Optimization of FluentAPI implementation.
+1) IntelliSense XML documentation support for all public API methods.
+2) Optimization of FluentAPI implementation.
 
 ## Long-term focus
 
