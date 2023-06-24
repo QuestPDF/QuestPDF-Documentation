@@ -6,6 +6,8 @@
 
 [Generating output](/concepts/generating-output) - describes how to generate PDF and XPS documents, as well as image snapshots of each page.
 
+[Merging documents](/concepts/merging-documents) - learn how to generate a single PDF file containing multiple documents.
+
 [Execution order](/concepts/execution-order) - discusses how method invocation order in the Fluent API changes the result.
 
 [Creating DSL](/concepts/creating-dsl) - shows how to compose standard Fluent API methods into C# extension methods to achieve project-specific functionality and simplify code.

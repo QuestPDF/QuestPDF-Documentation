@@ -174,3 +174,11 @@ a .alert.warning:hover {
     letter-spacing: 1px;
     font-weight: bold;
 }
+
+.pdf-viewer {
+    width: 100%;
+    height: 625px;
+
+    box-shadow: 0 13px 27px -5px rgb(50 50 93 / 15%), 0 8px 16px -8px rgb(0 0 0 / 10%), 0 -6px 16px -6px rgb(0 0 0 / 5%);
+    border-radius: 8px;
+}

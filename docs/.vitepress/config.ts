@@ -144,6 +144,7 @@ export default defineConfig({
                     { text: 'Document metadata', link: '/concepts/document-metadata' },
                     { text: 'Document settings', link: '/concepts/document-settings' },
                     { text: 'Generating output', link: '/concepts/generating-output' },
+                    { text: 'Merging documents', link: '/concepts/merging-documents' },
                     { text: 'Execution order', link: '/concepts/execution-order' },
                     { text: 'Creating DSL', link: '/concepts/creating-dsl' },
                     { text: 'Components', link: '/concepts/components' },
