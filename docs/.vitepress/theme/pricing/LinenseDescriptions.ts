@@ -26,7 +26,7 @@ const LicenseDetailsIncluded : LicenseDetail[] = [
     { type: LicenseDetailType.Feature, content: "Redistribute the compiled library, royalty-free, with your applications" }
 ]
 
-const LicenseSubscription = { type: LicenseDetailType.Information, content: "Please note that when you buy a license you get two things: a perpetual license and a subscription. The license entitles you to use the software. The subscription entitles you to software updates for the purchased period and is required as long as you are performing active software development" };
+const LicenseSubscription = { type: LicenseDetailType.Information, content: "Please note that when you buy a license you get two things: a perpetual license and a subscription. The license entitles you to use the software. The subscription entitles you to software updates for the purchased period and is recommended as long as you are performing active software development" };
 const LicenseKey = { type: LicenseDetailType.Information, content: "We trust every user. Therefore, the library does not require any license key. After the purchase, your license is automatically added to our records" };
 
 const LicenseRefundPolicy  = { type: LicenseDetailType.Information, content: "If you are not completely satisfied with the library after the purchase, we provide a 30-day money-back guarantee on all license purchases" };

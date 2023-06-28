@@ -38,6 +38,7 @@ export default defineConfig({
                     },
                     {
                         items: [
+                            { text: 'License Selection Guide', link: '/license-guide' },
                             { text: 'Community MIT', link: '/license-community' },
                             { text: 'Professional and Enterprise', link: '/license-commercial' }
                         ]

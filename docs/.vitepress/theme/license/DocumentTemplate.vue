@@ -9,7 +9,7 @@
     </div>
 
     <div class="container reverse-background">
-      <div class="content" style="padding-top: 32px;">
+      <div class="content" style="padding-top: 0px;">
         <div style="max-width: 800px;">
           <slot name="content"></slot>
         </div>
@@ -24,7 +24,7 @@
 
 <style>
 .document-page h3 {
-  margin: 32px 0 8px 0;
+  margin: 48px 0 8px 0;
 }
 
 .document-page .description {
@@ -33,7 +33,8 @@
   line-height: 2rem;
 }
 
-.document-page p {
+.document-page p:not(:last-child) {
   margin-bottom: 24px;
 }
+
 </style>

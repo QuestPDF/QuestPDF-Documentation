@@ -22,8 +22,14 @@
 
       <article>
         <h3>License Fees</h3>
-        <p>A. If you wish to use the Software in a production environment, you may download and use the Software for one year upon payment of the appropriate license fee as indicated on the pricing page in accordance with the terms and conditions of this Agreement.</p>
-        <p>B. If you wish to use the Software in a non-production environment, you may download and access the source and/or binaries at no charge solely for testing and evaluation purposes and in accordance with all license limitations and restrictions set forth in this Agreement.</p>
+
+        <p><b>A.</b> If you wish to use the Software in a production environment, the purchase of a license is required. This license is perpetual, granting you continued use of the Software in accordance with the terms and conditions of this Agreement. The cost of the license is as indicated on the pricing page.</p>
+
+        <p><b>B.</b> Upon purchasing a license, you are also enrolled in a yearly, recurring subscription for software updates. This subscription is valid for a period of one year from the date of purchase, and it will automatically renew each year unless cancelled. We recommend maintaining your subscription as long as you are performing active software development to ensure you have access to the latest updates and improvements to the Software.</p>
+
+        <p><b>C.</b> However, it should be noted that the perpetual license allows use of only the latest library revision available at the time of or within the active subscription period, in accordance with the terms and conditions of this Agreement.</p>
+
+        <p><b>D.</b> If you wish to use the Software in a non-production environment, such as for testing and evaluation purposes, you may download and access the source and/or binaries at no charge. This access is subject to all license limitations and restrictions set forth in this Agreement.</p>
       </article>
 
       <article>

@@ -1,8 +1,9 @@
 # Release notes
 
 ## 2023.6
-1) **Feature:** generating merged PDF documents.
-2) **Improvement:** image loading exception better describes the failure reason
+1) **Improvement:** the library received a final version of the licensing model, which has been enhanced to be more accommodating to both the business and community.
+2) **Feature:** generating merged PDF documents.
+3) **Improvement:** image loading exception better describes the failure reason
 
 
 ## 2023.5
