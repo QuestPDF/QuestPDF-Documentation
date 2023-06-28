@@ -1,14 +1,12 @@
 <template>
   <article class="content pricing-header">
     <div>
-      <h1><span class="highlight-foreground">QuestPDF</span> Meets Professionalism</h1>
+      <h1><span class="highlight-foreground">QuestPDF</span> License and Pricing</h1>
 
       <div class="details">
-        <p>Nowadays, we are building upon the work of giants, creating more impactful software than ever before. Regardless of its size and purpose, every project deserves well-maintained dependencies. We identify the importance of the QuestPDF library in your projects, and therefore want to make sure you can safely and confidently continue the development.</p>
+        <p>Nowadays, we are creating more impactful software than ever before. Regardless of its size and purpose, every project deserves well-maintained dependencies. We identify the importance of the QuestPDF library in your projects, and therefore want to ensure you can safely and confidently continue the development.</p>
 
         <p>We strongly believe that a dual-licensing model is the best solution for all users: providing the best development experience and feature set for everybody and every project, but also offering stability for every professional and enterprise product.</p>
-
-        <p>Being a healthy and growing community is our primary goal that motivates us to pursue professionalism.</p>
       </div>
     </div>
 
@@ -30,7 +28,7 @@
 }
 
 .license-icon {
-  width: 192px;
+  width: 160px;
 }
 
 @media screen and (max-width: 1000px) {
