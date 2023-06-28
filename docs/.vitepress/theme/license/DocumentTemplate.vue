@@ -24,7 +24,7 @@
 
 <style>
 .document-page h3 {
-  margin: 48px 0 8px 0;
+  margin: 48px 0 8px 0 !important;
 }
 
 .document-page .description {
