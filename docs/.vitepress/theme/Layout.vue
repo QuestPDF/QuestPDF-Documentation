@@ -2,9 +2,7 @@
   <Layout>
     <template #doc-before>
       <ClientOnly>
-        <div v-show="showAlerts">
-          <support-alert />
-        </div>
+        <support-alert />
       </ClientOnly>
     </template>
 
@@ -22,11 +20,5 @@ const { Layout } = DefaultTheme
 
 import GoogleAnalytics from "./GoogleAnalytics.vue";
 import SupportAlert from "./SupportAlert.vue";
-import {computed} from "vue";
-import {useRoute} from "vitepress";
 
-const showAlerts = computed(() => {
-  const excludedPages = ["project-future", "license", "pricing"];
-  return !excludedPages.some(useRoute().path.includes);
-})
 </script>
