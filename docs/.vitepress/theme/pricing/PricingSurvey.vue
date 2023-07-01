@@ -10,7 +10,7 @@
 
           <hr>
 
-          <template>
+          <template v-if="activeQuestion">
             <h3 class="question-title">{{ activeQuestion.title }}</h3>
 
             <div v-for="answer of activeQuestion.answers" :key="answer.title" class="answer" @click="acceptAnswer(answer)">
@@ -34,6 +34,7 @@
 <script setup lang="ts">
 
 import {computed, defineProps, reactive, ref} from "vue";
+import {useRouter} from "vitepress";
 import {LicenseAnswer, LicenseQuestion, OwnerType, SurveyState} from "./LicenseSurveyModels";
 import {
     CommercialUsageQuestion,
@@ -54,6 +55,8 @@ const surveyState = reactive<SurveyState>({
     exceededDeveloperCountThreshold: null
 })
 
+const { go } = useRouter();
+
 const SurveyLength = 5;
 
 function resetSurvey() {
@@ -63,12 +66,16 @@ function resetSurvey() {
     surveyState.exceededAnnualRevenueThreshold = null;
     surveyState.exceededDeveloperCountThreshold = null;
 
-    currentQuestionNumber.value = 0;
+    currentQuestionNumber.value = 1;
 }
 
 function acceptAnswer(answer: LicenseAnswer) {
     answer.action(surveyState);
     currentQuestionNumber.value += 1;
+
+    if (recommendedLicense.value) {
+        go(`/license/summary/${recommendedLicense.value.name}`);
+    }
 }
 
 const activeQuestion = computed(() : LicenseQuestion => {
