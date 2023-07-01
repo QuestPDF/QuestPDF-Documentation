@@ -1,80 +1,130 @@
 <template>
-  <section class="content license-content">
+  <div class="custom-page">
+    <div class="container reverse-background" id="license">
+      <article class="content">
+        <h2>Available QuestPDF Licenses</h2>
 
-    <h2>What license do you need?</h2>
-    <license-survey v-if="!recommendedLicense" :survey-state="surveyState" ref="survey" />
-    <license-description v-if="recommendedLicense" :license="recommendedLicense" @reset="resetSurvey" @checkout="startCheckout" />
+        <div class="pricing">
+          <template v-for="license of licenses">
+            <a :href="getLicenseSummaryUrl(license)">
+              <section class="pricing-tier">
+                <header>
+                  <img class="icon" :src="license.icon" alt="" />
 
-  </section>
+                  <div v-if="license.price">
+                    <h3>Professional</h3>
+                    <p class="price">${{ license.price }} per year</p>
+                    <p class="tax-information">+ local tax (if applicable)</p>
+                  </div>
+
+                  <div v-else>
+                    <h3>Community</h3>
+                    <p class="price">Free forever</p>
+                  </div>
+                </header>
+
+                <hr>
+                <p class="applicability">{{ license.shortTerms }}</p>
+
+                <a class="action primary" :href="getLicenseSummaryUrl(license)">Read details</a>
+              </section>
+            </a>
+          </template>
+        </div>
+      </article>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 
-import { PaddleConfiguration } from "./PaddleConfiguration";
-import { useData } from 'vitepress'
-import {computed, reactive, ref} from "vue";
-import LicenseDescription from "./LicenseDescription.vue";
-import LicenseSurvey  from "./LicenseSurvey.vue";
-import {SurveyState} from "./LicenseSurveyModels";
-import {CommunityLicense, EnterpriseLicense, ProfessionalLicense} from "./LinenseDescriptions";
+import {CommunityLicense, EnterpriseLicense, License, ProfessionalLicense} from "../license/LinenseSummaries";
 
-const { isDark } = useData()
+const licenses = [
+    CommunityLicense,
+    ProfessionalLicense,
+    EnterpriseLicense
+];
 
-const survey = ref(null)
-
-const surveyState = reactive<SurveyState>({
-    isDirectPackageDependency: null,
-    isForProfit: null,
-    ownerType: null,
-    exceededAnnualRevenueThreshold: null,
-    exceededDeveloperCountThreshold: null
-})
-
-function resetSurvey() {
-    surveyState.isForProfit = null;
-    surveyState.isDirectPackageDependency = null;
-    surveyState.ownerType = null;
-    surveyState.exceededAnnualRevenueThreshold = null;
-    surveyState.exceededDeveloperCountThreshold = null;
-
-    survey.value.resetSurvey();
-}
-
-const recommendedLicense = computed(() => {
-    if (surveyState.isDirectPackageDependency == false || surveyState.isForProfit == false || surveyState.exceededAnnualRevenueThreshold == false)
-        return CommunityLicense;
-
-    if (surveyState.isDirectPackageDependency == true && surveyState.isForProfit == true && surveyState.exceededAnnualRevenueThreshold == true && surveyState.exceededDeveloperCountThreshold != null)
-        return surveyState.exceededDeveloperCountThreshold ? EnterpriseLicense : ProfessionalLicense;
-
-    return null;
-})
-
-
-function startCheckout() {
-    const productId = recommendedLicense.value.paddleProductId;
-
-    if (!PaddleConfiguration.isProduction)
-        Paddle.Environment.set('sandbox');
-
-    Paddle.Setup({
-        vendor: PaddleConfiguration.vendorId
-    });
-
-    Paddle.Checkout.open({
-        product: productId,
-        displayModeTheme: isDark.value ? 'dark' : 'light'
-    });
+function getLicenseSummaryUrl(license: License) {
+    return `/license/summary/${license.name.toLowerCase()}`;
 }
 
 </script>
 
-<style scoped lang="scss">
+<style scoped>
+.pricing {
+  margin: 0 auto;
 
-.license-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+  grid-gap: 48px;
+}
+
+.pricing-tier {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  gap: 16px;
+
+  box-shadow: var(--elevation);
+  background-color: var(--vp-c-bg);
+  border-radius: 24px;
+  padding: 32px;
+  transition: all 0.25s ease-in-out;
+}
+
+.pricing-tier:hover {
+  transform: scale(1.075);
+  box-shadow: var(--elevation-hover);
+}
+
+.pricing-tier header {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  grid-gap: 0 32px;
+}
+
+.pricing-tier header h3 {
+  font-family: var(--vp-font-family-base);
+  color: var(--vp-c-text-1);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.pricing-tier .applicability {
+  color: var(--vp-c-text-2);
+  font-size: 0.875rem;
+}
+
+.pricing-tier hr {
+  margin: 0 -32px;
+  border: 0.5px solid var(--vp-c-gutter);
+  width: calc(100% + 64px);
+}
+
+.pricing p.price {
+  line-height: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.pricing p.tax-information {
+  font-size: 0.875rem;
+  color: var(--vp-c-text-3);
+}
+
+.pricing p.features {
+  color: var(--vp-c-text-2);
+  line-height: 1.5rem;
+  font-size: 1rem;
+}
+
+.pricing a.action {
+  align-self: end;
+  margin-top: 16px;
 }
 
 </style>

@@ -5,20 +5,17 @@
     </div>
 
     <div class="container reverse-background" id="license">
-      <PricingTiers />
+      <div class="content">
+        <pricing-menu />
+      </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
-import { onMounted } from "vue";
-import { scrollToAnchor } from "../helpers";
-
-import PricingTiers from "./PricingTiers.vue";
 import PricingDescription from "./PricingHeader.vue";
-
-onMounted(scrollToAnchor);
+import PricingMenu from "./PricingMenu.vue";
 
 </script>
 

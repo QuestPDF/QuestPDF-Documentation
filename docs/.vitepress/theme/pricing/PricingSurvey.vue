@@ -1,24 +1,33 @@
 <template>
-  <article class="survey">
+  <div class="custom-page">
+    <div class="container reverse-background" id="license">
+      <article class="content content-center">
+        <h2>QuestPDF License Survey</h2>
 
-    <progress-indicator :length="SurveyLength" :value="currentQuestionNumber" />
+        <article class="survey">
 
-    <hr>
+          <progress-indicator :length="SurveyLength" :value="currentQuestionNumber" />
 
-    <template v-if="activeQuestion">
-      <h3 class="question-title">{{ activeQuestion.title }}</h3>
+          <hr>
 
-      <div v-for="answer of activeQuestion.answers" :key="answer.title" class="answer" @click="acceptAnswer(answer)">
-        <img class="answer-icon" :src="answer.icon" alt="" />
-        <span class="answer-title">{{ answer.title }}</span>
-        <span class="answer-hint">{{ answer.hint }}</span>
-      </div>
+          <template>
+            <h3 class="question-title">{{ activeQuestion.title }}</h3>
 
-      <div v-if="currentQuestionNumber > 0" class="action answer" @click="showPreviousQuestion">
-        <span class="answer-title">Back</span>
-      </div>
-    </template>
-  </article>
+            <div v-for="answer of activeQuestion.answers" :key="answer.title" class="answer" @click="acceptAnswer(answer)">
+              <img class="answer-icon" :src="answer.icon" alt="" />
+              <span class="answer-title">{{ answer.title }}</span>
+              <span class="answer-hint">{{ answer.hint }}</span>
+            </div>
+
+            <div v-if="currentQuestionNumber > 0" class="action answer" @click="resetSurvey">
+              <span class="answer-title">Reset survey</span>
+            </div>
+          </template>
+        </article>
+
+      </article>
+    </div>
+  </div>
 </template>
 
 
@@ -29,32 +38,40 @@ import {LicenseAnswer, LicenseQuestion, OwnerType, SurveyState} from "./LicenseS
 import {
     CommercialUsageQuestion,
     DeveloperThresholdQuestion,
-    DirectPackageDependencyQuestion, ExternalClientQuestion, IntroductionQuestion,
+    DirectPackageDependencyQuestion, ExternalClientQuestion,
     RevenueThresholdExternalClientQuestion, RevenueThresholdInternalQuestion
 } from "./LicenseSurveyQuestions";
 import ProgressIndicator from "./ProgressIndicator.vue";
+import {CommunityLicense, EnterpriseLicense, ProfessionalLicense} from "../license/LinenseSummaries";
 
-const currentQuestionNumber = ref(0);
+const currentQuestionNumber = ref(1);
 
-const props = defineProps<{
-    surveyState: SurveyState;
-}>();
+const surveyState = reactive<SurveyState>({
+    isDirectPackageDependency: null,
+    isForProfit: null,
+    ownerType: null,
+    exceededAnnualRevenueThreshold: null,
+    exceededDeveloperCountThreshold: null
+})
 
-const SurveyLength = 6;
+const SurveyLength = 5;
 
 function resetSurvey() {
+    surveyState.isForProfit = null;
+    surveyState.isDirectPackageDependency = null;
+    surveyState.ownerType = null;
+    surveyState.exceededAnnualRevenueThreshold = null;
+    surveyState.exceededDeveloperCountThreshold = null;
+
     currentQuestionNumber.value = 0;
 }
 
 function acceptAnswer(answer: LicenseAnswer) {
-    answer.action(props.surveyState);
+    answer.action(surveyState);
     currentQuestionNumber.value += 1;
 }
 
 const activeQuestion = computed(() : LicenseQuestion => {
-    if (currentQuestionNumber.value == 0)
-        return IntroductionQuestion;
-
     if (currentQuestionNumber.value == 1)
         return DirectPackageDependencyQuestion;
 
@@ -65,7 +82,7 @@ const activeQuestion = computed(() : LicenseQuestion => {
         return ExternalClientQuestion;
 
     if (currentQuestionNumber.value == 4)
-        return props.surveyState.ownerType == OwnerType.Internal
+        return surveyState.ownerType == OwnerType.Internal
             ? RevenueThresholdInternalQuestion
             : RevenueThresholdExternalClientQuestion;
 
@@ -75,11 +92,15 @@ const activeQuestion = computed(() : LicenseQuestion => {
     return null;
 })
 
-function showPreviousQuestion() {
-    currentQuestionNumber.value -= 1;
-}
+const recommendedLicense = computed(() => {
+    if (surveyState.isDirectPackageDependency == false || surveyState.isForProfit == false || surveyState.exceededAnnualRevenueThreshold == false)
+        return CommunityLicense;
 
-defineExpose({ resetSurvey })
+    if (surveyState.isDirectPackageDependency == true && surveyState.isForProfit == true && surveyState.exceededAnnualRevenueThreshold == true && surveyState.exceededDeveloperCountThreshold != null)
+        return surveyState.exceededDeveloperCountThreshold ? EnterpriseLicense : ProfessionalLicense;
+
+    return null;
+})
 
 </script>
 

@@ -5,10 +5,10 @@ aside: false
 ---
 
 <script setup>
-import LicenseCommunity from '.vitepress/theme/license/LicenseCommunity.vue';
+import PricingTiers from '../.vitepress/theme/pricing/PricingTiers.vue';
 </script>
 
 <ClientOnly>
-    <LicenseCommunity />
+    <PricingTiers />
 </ClientOnly>
 

@@ -28,19 +28,15 @@ export default defineConfig({
                     { text: 'Design patterns', link: '/design-patterns' },
                 ]
             },
+            { text: 'Pricing', link: '/pricing/' },
             {
                 text: 'License',
                 items: [
                     {
                         items: [
-                            { text: 'License and Pricing', link: '/pricing' }
-                        ]
-                    },
-                    {
-                        items: [
-                            { text: 'License Selection Guide', link: '/license-guide' },
-                            { text: 'Community MIT', link: '/license-community' },
-                            { text: 'Professional and Enterprise', link: '/license-commercial' }
+                            { text: 'License Selection Guide', link: '/license/guide' },
+                            { text: 'Community MIT', link: '/license/community' },
+                            { text: 'Professional and Enterprise', link: '/license/professional-enterprise' }
                         ]
                     },
                     {
@@ -62,7 +58,7 @@ export default defineConfig({
                     { text: 'Introduction', link: '/introduction' },
                     { text: 'Quick start', link: '/quick-start' },
                     { text: 'Getting started', link: '/getting-started' },
-                    { text: 'License configuration', link: '/license-configuration' },
+                    { text: 'License configuration', link: '/license/configuration' },
                     { text: 'Previewer', link: '/document-previewer' },
                     { text: 'Releases', link: '/releases' },
                     { text: 'Roadmap', link: '/roadmap' },

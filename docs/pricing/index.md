@@ -5,7 +5,7 @@ aside: false
 ---
 
 <script setup>
-import Pricing from '../docs/.vitepress/theme/pricing/Pricing.vue';
+import Pricing from '../.vitepress/theme/pricing/Pricing.vue';
 </script>
 
 <ClientOnly>

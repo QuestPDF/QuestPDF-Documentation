@@ -13,7 +13,7 @@ hero:
     link: /quick-start
   - theme: alt
     text: Licenses and Pricing
-    link: /pricing
+    link: /pricing/
   - theme: alt
     text: GitHub
     link: https://github.com/QuestPDF/QuestPDF

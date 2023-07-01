@@ -7,7 +7,7 @@
         <h3>QuestPDF <span class="highlight-foreground" style="font-weight: bold">{{ license.name }}</span> License</h3>
 
         <template v-if="license.price">
-          <p class="price">{{ license.price }} USD per year</p>
+          <p class="price">${{ license.price }} per year</p>
           <p class="tax-information">+ local tax (if applicable)</p>
         </template>
 
@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 
-import { License, LicenseDetailType } from "./LinenseDescriptions";
+import { License, LicenseDetailType } from "../license/LinenseSummaries";
 import { defineProps, defineEmits } from "vue";
 
 const props = defineProps<{

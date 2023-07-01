@@ -30,7 +30,7 @@ const contacts : ContactInformation[] = [
 
 <template>
   <div class="custom-page">
-    <div class="container">
+    <div class="container reverse-background">
       <div class="content">
 
         <section class="contacts">
@@ -56,14 +56,14 @@ const contacts : ContactInformation[] = [
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 64px;
+  gap: 48px;
 
   margin: 0 -24px;
 }
 
 @media screen and (max-width: 700px) {
   .contacts {
-    gap: 64px;
+    gap: 32px;
   }
 }
 
@@ -73,7 +73,7 @@ const contacts : ContactInformation[] = [
 }
 
 .contact img {
-  height: 64px;
+  height: 48px;
 }
 
 .contact {
@@ -81,13 +81,13 @@ const contacts : ContactInformation[] = [
   transition: 0.2s ease-in-out;
   background-color: var(--vp-c-bg);
   border-radius: 24px;
-  border: 1px solid transparent;
+  box-shadow: var(--elevation);
+  border: 1px solid var(--vp-c-gutter);
 }
 
 .contact:hover {
   transform: scale(1.05);
-  background-color: var(--vp-c-bg-soft);
-  border-color: var(--vp-c-gutter);
+  box-shadow: var(--elevation-hover);
 }
 
 </style>
