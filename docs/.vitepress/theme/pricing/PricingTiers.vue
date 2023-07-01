@@ -69,6 +69,7 @@ function getLicenseSummaryUrl(license: License) {
 
   box-shadow: var(--elevation);
   background-color: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-gutter);
   border-radius: 24px;
   padding: 32px;
   transition: all 0.25s ease-in-out;
