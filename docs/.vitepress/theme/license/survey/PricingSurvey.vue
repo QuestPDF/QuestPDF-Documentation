@@ -26,19 +26,19 @@
             </div>
 
             <div v-if="currentQuestionNumber > 1" class="action answer" @click="resetSurvey">
-              <img class="answer-icon" src="/pricing/answer-reset.svg" alt="" />
+              <img class="answer-icon" src="/license/answer-reset.svg" alt="" />
               <span class="answer-title">Start over</span>
             </div>
           </template>
         </article>
 
         <article v-else class="survey card">
-          <h2>QuestPDF <span class="highlight-foreground">{{ recommendedLicense.name }}</span> License</h2>
+          <h2 style="margin-bottom: 1rem">QuestPDF <span class="highlight-foreground">{{ recommendedLicense.name }}</span> License</h2>
           <p>Congratulations! We found the best license for you!</p>
 
           <hr>
 
-          <div style="display: flex; flex-direction: row; gap: 8px; align-self: end;">
+          <div style="display: flex; flex-direction: row; gap: 16px; align-self: end;">
             <a class="action" @click="resetSurvey">Redo survey</a>
             <a class="action primary" :href="getLicenseSummaryUrl(recommendedLicense)">Read details</a>
           </div>
@@ -61,7 +61,7 @@ import {
     RevenueThresholdExternalClientQuestion, RevenueThresholdInternalQuestion
 } from "./LicenseSurveyQuestions";
 import ProgressIndicator from "./ProgressIndicator.vue";
-import {CommunityLicense, EnterpriseLicense, License, ProfessionalLicense} from "../license/LinenseSummaries";
+import {CommunityLicense, EnterpriseLicense, License, ProfessionalLicense} from "../LinenseSummaries";
 
 const currentQuestionNumber = ref(1);
 
@@ -129,14 +129,6 @@ function getLicenseSummaryUrl(license: License) {
 
 <style scoped>
 
-hr {
-  border: none;
-  border-top: 1px solid var(--vp-c-gutter);
-  margin: 24px -32px;
-  width: calc(100% + 64px);
-  padding: 0;
-}
-
 .survey {
   display: flex;
   align-items: start;
@@ -151,6 +143,8 @@ hr {
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.75rem;
+
+  margin-top: 0;
   margin-bottom: 16px;
 }
 

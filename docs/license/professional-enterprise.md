@@ -5,7 +5,7 @@ aside: false
 ---
 
 <script setup>
-import LicenseCommercial from '../.vitepress/theme/license/LicenseCommercial.vue';
+import LicenseCommercial from '../.vitepress/theme/license/documents/LicenseCommercial.vue';
 </script>
 
 <ClientOnly>

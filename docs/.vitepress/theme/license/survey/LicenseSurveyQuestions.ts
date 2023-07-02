@@ -1,7 +1,7 @@
 import {OwnerType} from "./LicenseSurveyModels";
 
-const AnswerYes = "/pricing/answer-yes.svg";
-const AnswerNo = "/pricing/answer-no.svg";
+const AnswerYes = "/license/answer-yes.svg";
+const AnswerNo = "/license/answer-no.svg";
 
 export const DirectPackageDependencyQuestion = {
     title: "Are you consuming the QuestPDF library as a Direct Package Dependency?",

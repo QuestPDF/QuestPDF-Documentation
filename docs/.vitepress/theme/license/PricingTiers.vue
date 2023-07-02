@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 
-import {CommunityLicense, EnterpriseLicense, License, ProfessionalLicense} from "../license/LinenseSummaries";
+import {CommunityLicense, EnterpriseLicense, License, ProfessionalLicense} from "./LinenseSummaries";
 
 const licenses = [
     CommunityLicense,
@@ -93,9 +93,8 @@ function getLicenseSummaryUrl(license: License) {
 }
 
 .pricing-tier hr {
-  margin: 0 -32px;
-  border: 0.5px solid var(--vp-c-gutter);
-  width: calc(100% + 64px);
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .pricing p.price {

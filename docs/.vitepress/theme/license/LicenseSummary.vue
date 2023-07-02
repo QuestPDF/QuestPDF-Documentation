@@ -25,13 +25,13 @@ const emit = defineEmits(['reset', 'checkout']);
 
 function convertLicenseDetailTypeToIcon(type: LicenseDetailType) {
     if (type === LicenseDetailType.Feature)
-        return "/pricing/tick.svg";
+        return "/license/tick.svg";
 
     if (type === LicenseDetailType.Information)
-        return "/pricing/info.svg";
+        return "/license/info.svg";
 
     if (type === LicenseDetailType.Warning)
-        return "/pricing/alert.svg";
+        return "/license/alert.svg";
 
     throw "Unreachable code";
 }
@@ -100,7 +100,7 @@ function back() {
         
         <section v-if="license.price == null" class="support-card card" style="margin-top: 48px;">
           <div class="support-card-content">
-            <img src="/pricing/github-sponsors.svg" alt="" style="width: 64px">
+            <img src="/license/github-sponsors.svg" alt="" style="width: 64px">
 
             <div>
               <h3 style="margin-top: 0; margin-bottom: 8px;">Beyond License Compliance</h3>
@@ -147,6 +147,11 @@ function back() {
   line-height: 2rem;
   margin-top: 0;
   margin-bottom: 8px;
+}
+
+.license-description hr {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .license-description p.price {

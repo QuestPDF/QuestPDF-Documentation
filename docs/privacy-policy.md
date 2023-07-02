@@ -5,7 +5,7 @@ aside: false
 ---
 
 <script setup>
-import PrivacyPolicy from '.vitepress/theme/license/PrivacyPolicy.vue';
+import PrivacyPolicy from '.vitepress/theme/license/documents/PrivacyPolicy.vue';
 </script>
 
 <ClientOnly>

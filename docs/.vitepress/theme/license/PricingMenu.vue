@@ -11,14 +11,14 @@ interface LicensePage {
 const licensePages : LicensePage[] = [
     {
         link: "/license/guide",
-        image: "/pricing/selection.svg",
+        image: "/license/selection.svg",
         title: "License Selection Guide",
         description: "Explore our detailed article covering all rules related to the three available QuestPDF licenses. We did out best to simplify all nuances.",
         buttonText: "Read guide"
     },
     {
-        link: "/pricing/survey",
-        image: "/pricing/survey.svg",
+        link: "/license/survey",
+        image: "/license/survey.svg",
         title: "Not sure which license to choose?",
         description: "Answer a few quick questions and our survey tool will suggest the most suitable license for your use-case, as well as provide all necessary details.",
         buttonText: "Take survey"

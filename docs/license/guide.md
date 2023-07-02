@@ -5,7 +5,7 @@ aside: false
 ---
 
 <script setup>
-import LicenseGuide from '../.vitepress/theme/license/LicenseGuide.vue';
+import LicenseGuide from '../.vitepress/theme/license/documents/LicenseGuide.vue';
 </script>
 
 <ClientOnly>

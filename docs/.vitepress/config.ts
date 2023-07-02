@@ -28,7 +28,7 @@ export default defineConfig({
                     { text: 'Design patterns', link: '/design-patterns' },
                 ]
             },
-            { text: 'Pricing', link: '/pricing/' },
+            { text: 'Pricing', link: '/license/' },
             {
                 text: 'License',
                 items: [

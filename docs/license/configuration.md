@@ -11,7 +11,7 @@ Being a healthy and growing community is the primary goal that motivates us to p
 ::: warning
 Before using code snippets in this documentation, please make sure you are eligible for the chosen license.
 
-More details can be found on the [QuestPDF License and Pricing](https://www.questpdf.com/pricing.html) page.
+More details can be found on the [QuestPDF License and Pricing](https://www.questpdf.com/license.html) page.
 :::
 
 
