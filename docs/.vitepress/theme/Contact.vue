@@ -30,13 +30,13 @@ const contacts : ContactInformation[] = [
 
 <template>
   <div class="custom-page">
-    <div class="container">
+    <div class="container reverse-background">
       <div class="content">
 
         <section class="contacts">
           <template v-for="contact of contacts" :key="contact">
             <a :href="contact.link" target="_blank">
-              <article class="contact">
+              <article class="contact card">
                 <img :src="contact.image" alt="">
                 <h3>{{ contact.title }}</h3>
                 <p>{{ contact.description }}</p>
@@ -56,14 +56,12 @@ const contacts : ContactInformation[] = [
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 64px;
-
-  margin: 0 -24px;
+  gap: 48px;
 }
 
 @media screen and (max-width: 700px) {
   .contacts {
-    gap: 64px;
+    gap: 32px;
   }
 }
 
@@ -73,21 +71,7 @@ const contacts : ContactInformation[] = [
 }
 
 .contact img {
-  height: 64px;
-}
-
-.contact {
-  padding: 24px;
-  transition: 0.2s ease-in-out;
-  background-color: var(--vp-c-bg);
-  border-radius: 24px;
-  border: 1px solid transparent;
-}
-
-.contact:hover {
-  transform: scale(1.05);
-  background-color: var(--vp-c-bg-soft);
-  border-color: var(--vp-c-gutter);
+  height: 48px;
 }
 
 </style>

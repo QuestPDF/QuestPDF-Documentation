@@ -5,7 +5,7 @@ aside: false
 ---
 
 <script setup>
-import LicenseCommunity from '.vitepress/theme/license/LicenseCommunity.vue';
+import LicenseCommunity from '../.vitepress/theme/license/documents/LicenseCommunity.vue';
 </script>
 
 <ClientOnly>

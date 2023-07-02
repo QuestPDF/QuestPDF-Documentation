@@ -5,9 +5,9 @@ aside: false
 ---
 
 <script setup>
-import Pricing from '../docs/.vitepress/theme/pricing/Pricing.vue';
+import LicenseIndex from '../.vitepress/theme/license/page/LicenseIndex.vue';
 </script>
 
 <ClientOnly>
-    <Pricing />
+    <LicenseIndex />
 </ClientOnly>

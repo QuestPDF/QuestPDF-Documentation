@@ -9,7 +9,7 @@
 
 <template>
   <div class="progress-indicator">
-    <div v-for="indicator of Array.from({ length: props.length }, (v, i) => i)"
+    <div v-for="indicator of Array.from({ length: props.length }, (v, i) => i + 1)"
          class="progress-indicator-step"
          :class="{ 'completed': indicator < props.value, 'current': indicator == props.value, 'future': indicator > props.value }"></div>
   </div>

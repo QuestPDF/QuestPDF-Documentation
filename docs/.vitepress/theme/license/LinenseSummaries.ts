@@ -14,6 +14,8 @@ export interface LicenseDetail {
 export interface License {
     icon: string;
     name: string;
+    shortTerms: string;
+
     price: number;
     paddleProductId: number;
 
@@ -33,8 +35,9 @@ const LicenseRefundPolicy  = { type: LicenseDetailType.Information, content: "If
 const LicenseTrial  = { type: LicenseDetailType.Warning, content: "Before making a license purchase, please evaluate the library in a non-production environment" };
 
 export const CommunityLicense : License = {
-    icon: "/pricing/community.svg",
+    icon: "/license/community.svg",
     name: "Community",
+    shortTerms: "Applicable only for companies and individuals with less than $1M USD annual gross revenue.",
 
     price: null,
     paddleProductId: null,
@@ -47,8 +50,9 @@ export const CommunityLicense : License = {
 };
 
 export const ProfessionalLicense : License = {
-    icon: "/pricing/professional.svg",
+    icon: "/license/professional.svg",
     name: "Professional",
+    shortTerms: "Applicable for individuals and companies with at most 10 software developers",
 
     price: 500,
     paddleProductId: PaddleConfiguration.professionalLicenseId,
@@ -65,8 +69,9 @@ export const ProfessionalLicense : License = {
 };
 
 export const EnterpriseLicense : License = {
-    icon: "/pricing/enterprise.svg",
+    icon: "/license/enterprise.svg",
     name: "Enterprise",
+    shortTerms: "Applicable for individuals and companies with any number of software developers",
 
     price: 2000,
     paddleProductId: PaddleConfiguration.enterpriseLicenseId,

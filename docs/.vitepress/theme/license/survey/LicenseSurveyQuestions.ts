@@ -1,18 +1,7 @@
 import {OwnerType} from "./LicenseSurveyModels";
 
-const AnswerYes = "/pricing/answer-yes.svg";
-const AnswerNo = "/pricing/answer-no.svg";
-
-export const IntroductionQuestion = {
-    title: "Please answer a couple of simple questions to learn which license suits you best.",
-    answers: [
-        {
-            icon: AnswerYes,
-            title: "Start",
-            action: () => {}
-        }
-    ]
-};
+const AnswerYes = "/license/answer-yes.svg";
+const AnswerNo = "/license/answer-no.svg";
 
 export const DirectPackageDependencyQuestion = {
     title: "Are you consuming the QuestPDF library as a Direct Package Dependency?",

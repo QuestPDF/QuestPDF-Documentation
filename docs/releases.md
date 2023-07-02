@@ -20,7 +20,7 @@
 This release does not contain any features or quality improvements.
 Its purpose is to mark the QuestPDF shift towards the dual-licensing model.
 Most users are not affected by this change.
-Please visit the https://www.questpdf.com/pricing.html webpage for more information.
+Please visit the https://www.questpdf.com/license.html webpage for more information.
 
 
 ## 2022.12
