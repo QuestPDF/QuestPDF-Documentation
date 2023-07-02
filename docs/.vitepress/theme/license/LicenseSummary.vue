@@ -59,9 +59,9 @@ function back() {
 <template>
   <div class="custom-page">
     <div class="container reverse-background">
-      <article class="content content-center">
+      <article class="content content-center" style="max-width: 100%; width: 900px;">
 
-        <section class="license-description" v-if="license">
+        <section v-if="license" class="license-description card">
           <header>
             <img class="icon" :src="license.icon" alt="" />
 
@@ -106,19 +106,10 @@ function back() {
 <style scoped>
 
 .license-description {
-  width: 900px;
-  max-width: 100%;
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
-
-  border: 1px solid var(--vp-c-gutter);
-  background-color: var(--vp-c-bg);
-  border-radius: 24px;
-  padding: 32px;
-  transition: all 0.25s ease-in-out;
 }
 
 .license-description header {
@@ -140,17 +131,6 @@ function back() {
   line-height: 2rem;
   margin-top: 0;
   margin-bottom: 8px;
-}
-
-.license-description .applicability {
-  color: var(--vp-c-text-2);
-  font-size: 0.875rem;
-}
-
-.license-description hr {
-  margin: 0px -32px;
-  border: 0.5px solid var(--vp-c-gutter);
-  width: calc(100% + 64px);
 }
 
 .license-description p.price {
@@ -186,14 +166,6 @@ function back() {
 @media screen and (max-width: 700px) {
   .license-description .details {
     column-count: 1;
-  }
-
-  .license-description {
-    padding: 24px;
-  }
-
-  .license-description hr {
-    margin: 0px -24px;
   }
 
   .license-description header {

@@ -5,7 +5,7 @@
     <div class="pricing">
       <template v-for="license of licenses">
         <a :href="getLicenseSummaryUrl(license)">
-          <section class="pricing-tier">
+          <section class="pricing-tier card">
             <header>
               <img class="icon" :src="license.icon" alt="" />
 
@@ -63,18 +63,6 @@ function getLicenseSummaryUrl(license: License) {
   align-items: flex-start;
   gap: 16px;
   height: 100%;
-
-  box-shadow: var(--elevation);
-  background-color: var(--vp-c-bg);
-  border: 1px solid var(--vp-c-gutter);
-  border-radius: 24px;
-  padding: 32px;
-  transition: all 0.25s ease-in-out;
-}
-
-.pricing-tier:hover {
-  transform: scale(1.075);
-  box-shadow: var(--elevation-hover);
 }
 
 .pricing-tier header {
@@ -95,17 +83,12 @@ function getLicenseSummaryUrl(license: License) {
 }
 
 .pricing-tier header h3 {
-  font-family: var(--vp-font-family-base);
-  color: var(--vp-c-text-1);
   font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.5rem;
   margin-top: 0;
   margin-bottom: 8px;
 }
 
 .pricing-tier .applicability {
-  color: var(--vp-c-text-2);
   font-size: 0.875rem;
 }
 
@@ -123,12 +106,6 @@ function getLicenseSummaryUrl(license: License) {
 .pricing p.tax-information {
   font-size: 0.875rem;
   color: var(--vp-c-text-3);
-}
-
-.pricing p.features {
-  color: var(--vp-c-text-2);
-  line-height: 1.5rem;
-  font-size: 1rem;
 }
 
 .pricing a.action {

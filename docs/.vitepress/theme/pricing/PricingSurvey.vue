@@ -10,7 +10,7 @@
     <div class="container reverse-background">
       <article class="content content-center">
 
-        <article v-if="!recommendedLicense" class="survey">
+        <article v-if="!recommendedLicense" class="survey card">
 
           <progress-indicator :length="SurveyLength" :value="currentQuestionNumber" />
 
@@ -32,7 +32,7 @@
           </template>
         </article>
 
-        <article v-else class="survey">
+        <article v-else class="survey card">
           <h2>QuestPDF <span class="highlight-foreground">{{ recommendedLicense.name }}</span> License</h2>
           <p>Congratulations! We found the best license for you!</p>
 
@@ -132,8 +132,8 @@ function getLicenseSummaryUrl(license: License) {
 hr {
   border: none;
   border-top: 1px solid var(--vp-c-gutter);
-  margin: 24px -24px;
-  width: calc(100% + 48px);
+  margin: 24px -32px;
+  width: calc(100% + 64px);
   padding: 0;
 }
 
@@ -143,11 +143,6 @@ hr {
   flex-direction: column;
   width: 600px;
   max-width: 100%;
-
-  background: var(--vp-c-bg);
-  border: 1px solid var(--vp-c-gutter);
-  border-radius: 16px;
-  padding: 24px;
 }
 
 .question-title {
@@ -165,9 +160,9 @@ hr {
   grid-template-rows: auto auto;
 
   border: none;
-  width: calc(100% + 48px);
-  margin: 0 -24px;
-  padding: 16px 24px;
+  width: calc(100% + 64px);
+  margin: 0 -32px;
+  padding: 16px 32px;
   grid-gap: 0 16px;
 }
 

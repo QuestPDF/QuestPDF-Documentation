@@ -35,7 +35,7 @@ const licensePages : LicensePage[] = [
   <div class="menu">
     <template v-for="licensePage of licensePages">
       <a :href="licensePage.link">
-        <article  class="menu-item">
+        <article  class="menu-item card">
           <img :src="licensePage.image" alt="">
           <h3>{{ licensePage.title }}</h3>
           <p>{{ licensePage.description }}</p>
@@ -64,13 +64,6 @@ const licensePages : LicensePage[] = [
         "_ action";
   grid-gap: 8px;
   gap: 8px;
-
-  padding: 32px;
-  transition: 0.2s ease-in-out;
-  background-color: var(--vp-c-bg);
-  border-radius: 24px;
-  box-shadow: var(--elevation);
-  border: 1px solid var(--vp-c-gutter);
 }
 
 @media screen and (max-width: 450px) {
@@ -78,12 +71,6 @@ const licensePages : LicensePage[] = [
     display: flex;
     flex-direction: column;
   }
-}
-
-.menu-item:hover {
-  transform: scale(1.05);
-  box-shadow: var(--elevation-hover);
-  cursor: pointer;
 }
 
 .menu-item img {
