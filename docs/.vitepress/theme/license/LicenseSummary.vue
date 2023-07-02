@@ -45,7 +45,7 @@ function startCheckout() {
     });
 
     Paddle.Checkout.open({
-        product: license.paddleProductId,
+        product: license.value.paddleProductId,
         displayModeTheme: isDark.value ? 'dark' : 'light'
     });
 }
