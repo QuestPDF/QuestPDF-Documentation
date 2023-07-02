@@ -61,7 +61,6 @@ function getLicenseSummaryUrl(license: License) {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
   height: 100%;
 }
 
@@ -92,11 +91,6 @@ function getLicenseSummaryUrl(license: License) {
   font-size: 0.875rem;
 }
 
-.license-tier hr {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
 .license-tier p.price {
   line-height: 1.5rem;
   font-size: 1.2rem;
@@ -109,7 +103,7 @@ function getLicenseSummaryUrl(license: License) {
 
 .license-tier a.action {
   align-self: flex-end;
-  margin-top: 16px;
+  margin-top: 32px;
 }
 
 </style>
