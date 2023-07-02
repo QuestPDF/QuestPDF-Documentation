@@ -93,7 +93,7 @@ function back() {
           <div style="display: flex; align-self: end; gap: 16px;">
             <a class="action" @click="back">Back</a>
 
-            <a v-if="license.paddleProductId" class="action primary" @click="startCheckout">Purchase</a>
+            <a v-if="license.paddleProductId" class="action primary" @click="startCheckout">Purchase license</a>
             <a v-else class="action primary" href="/quick-start.html">Start learning</a>
           </div>
         </section>

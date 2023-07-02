@@ -22,9 +22,9 @@
             </header>
 
             <hr>
-            <p class="applicability">{{ license.shortTerms }}</p>
 
-            <a class="action primary" :href="getLicenseSummaryUrl(license)">Read details</a>
+            <p class="applicability">{{ license.shortTerms }}</p>
+            <a class="action primary" :href="getLicenseSummaryUrl(license)">Learn more</a>
           </section>
         </a>
       </template>
@@ -97,18 +97,18 @@ function getLicenseSummaryUrl(license: License) {
   margin-bottom: 0;
 }
 
-.license p.price {
+.license-tier p.price {
   line-height: 1.5rem;
   font-size: 1.2rem;
 }
 
-.license p.tax-information {
+.license-tier p.tax-information {
   font-size: 0.875rem;
   color: var(--vp-c-text-3);
 }
 
-.license a.action {
-  align-self: end;
+.license-tier a.action {
+  align-self: flex-end;
   margin-top: 16px;
 }
 
