@@ -17,9 +17,6 @@ hero:
   - theme: alt
     text: GitHub
     link: https://github.com/QuestPDF/QuestPDF
-  - theme: alt
-    text: NuGet
-    link: https://www.nuget.org/packages/QuestPDF
 ---
 
 <script setup>

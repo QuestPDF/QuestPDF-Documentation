@@ -97,6 +97,22 @@ function back() {
             <a v-else class="action primary" href="/quick-start.html">Start learning</a>
           </div>
         </section>
+        
+        <section v-if="license.price == null" class="support-card card" style="margin-top: 48px;">
+          <div class="support-card-content">
+            <img src="/pricing/github-sponsors.svg" alt="" style="width: 64px">
+
+            <div>
+              <h3 style="margin-top: 0; margin-bottom: 8px;">Beyond License Compliance</h3>
+              <p>We're delighted to give you access to the QuestPDF library at no cost. If you're interested in supporting its development and help us maintain its quality, please consider becoming a GitHub Sponsor or purchasing a higher level license. Your help is highly appreciated!</p>
+            </div>
+          </div>
+
+          <div style="grid-area: action; display: flex; flex-direction: row; gap: 16px; flex-wrap: wrap; margin-top: 32px; justify-content: end;">
+            <a class="action" href="https://github.com/sponsors/QuestPDF" target="_blank">Sponsor with GitHub</a>
+            <a class="action" href="/license/summary/professional">Purchase a higher license</a>
+          </div>
+        </section>
 
       </article>
     </div>
@@ -180,5 +196,19 @@ function back() {
     line-height: 1.75rem;
   }
 }
+
+.support-card-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+@media screen and (max-width: 450px) {
+  .support-card-content {
+    flex-direction: column;
+  }
+}
+
 
 </style>
