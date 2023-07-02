@@ -10,7 +10,7 @@
               <img class="icon" :src="license.icon" alt="" />
 
               <div v-if="license.price">
-                <h3>Professional</h3>
+                <h3>{{ license.name }}</h3>
                 <p class="price">${{ license.price }} per year</p>
                 <p class="tax-information">+ local tax (if applicable)</p>
               </div>
