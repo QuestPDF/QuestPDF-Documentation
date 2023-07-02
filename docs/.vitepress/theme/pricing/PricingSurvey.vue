@@ -2,7 +2,7 @@
   <div class="custom-page">
     <div class="container reverse-background" id="license">
       <article class="content content-center">
-        <h2>QuestPDF License Survey</h2>
+        <h2><span class="highlight-foreground">QuestPDF</span> License Survey</h2>
 
         <article class="survey">
 
@@ -19,7 +19,8 @@
               <span class="answer-hint">{{ answer.hint }}</span>
             </div>
 
-            <div v-if="currentQuestionNumber > 0" class="action answer" @click="resetSurvey">
+            <div v-if="currentQuestionNumber > 1" class="action answer" @click="resetSurvey">
+              <img class="answer-icon" src="/pricing/answer-reset.svg" alt="" />
               <span class="answer-title">Reset survey</span>
             </div>
           </template>

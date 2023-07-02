@@ -2,7 +2,7 @@
   <div class="custom-page">
     <div class="container reverse-background" id="license">
       <article class="content">
-        <h2>Available QuestPDF Licenses</h2>
+        <h2>Available <span class="highlight-foreground">QuestPDF</span> Licenses</h2>
 
         <div class="pricing">
           <template v-for="license of licenses">
@@ -57,7 +57,7 @@ function getLicenseSummaryUrl(license: License) {
   margin: 0 auto;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(325px, 100%), 1fr));
   grid-gap: 48px;
 }
 

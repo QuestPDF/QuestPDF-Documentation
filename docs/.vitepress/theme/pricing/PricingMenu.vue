@@ -55,7 +55,7 @@ const licensePages : LicensePage[] = [
 
 .menu {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(400px, 100%), 1fr));
   gap: 48px;
 }
 
@@ -76,6 +76,13 @@ const licensePages : LicensePage[] = [
   border: 1px solid var(--vp-c-gutter);
 }
 
+@media screen and (max-width: 450px) {
+  .menu-item {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 .menu-item:hover {
   transform: scale(1.05);
   box-shadow: var(--elevation-hover);
@@ -84,6 +91,7 @@ const licensePages : LicensePage[] = [
 
 .menu-item img {
   grid-area: icon;
+  align-self: start;
   height: 56px;
   margin-right: 16px;
   margin-bottom: 16px;
