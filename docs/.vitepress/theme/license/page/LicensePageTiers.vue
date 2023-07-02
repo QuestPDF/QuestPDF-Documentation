@@ -2,10 +2,10 @@
   <article>
     <h2>Available Licenses</h2>
 
-    <div class="pricing">
+    <div class="licenses">
       <template v-for="license of licenses">
         <a :href="getLicenseSummaryUrl(license)">
-          <section class="pricing-tier card">
+          <section class="license-tier card">
             <header>
               <img class="icon" :src="license.icon" alt="" />
 
@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 
-import {CommunityLicense, EnterpriseLicense, License, ProfessionalLicense} from "./LinenseSummaries";
+import {CommunityLicense, EnterpriseLicense, License, ProfessionalLicense} from "../LinenseSummaries";
 
 const licenses = [
     CommunityLicense,
@@ -49,7 +49,7 @@ function getLicenseSummaryUrl(license: License) {
 </script>
 
 <style scoped>
-.pricing {
+.licenses {
   margin: 0 auto;
 
   display: grid;
@@ -57,7 +57,7 @@ function getLicenseSummaryUrl(license: License) {
   grid-gap: 48px;
 }
 
-.pricing-tier {
+.license-tier {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -65,49 +65,49 @@ function getLicenseSummaryUrl(license: License) {
   height: 100%;
 }
 
-.pricing-tier header {
+.license-tier header {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-gap: 32px;
 }
 
 @media screen and (max-width: 450px) {
-  .pricing-tier header {
+  .license-tier header {
     display: flex;
     flex-direction: column;
   }
 }
 
-.pricing-tier header img {
+.license-tier header img {
   width: 48px;
 }
 
-.pricing-tier header h3 {
+.license-tier header h3 {
   font-size: 1.5rem;
   margin-top: 0;
   margin-bottom: 8px;
 }
 
-.pricing-tier .applicability {
+.license-tier .applicability {
   font-size: 0.875rem;
 }
 
-.pricing-tier hr {
+.license-tier hr {
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.pricing p.price {
+.license p.price {
   line-height: 1.5rem;
   font-size: 1.2rem;
 }
 
-.pricing p.tax-information {
+.license p.tax-information {
   font-size: 0.875rem;
   color: var(--vp-c-text-3);
 }
 
-.pricing a.action {
+.license a.action {
   align-self: end;
   margin-top: 16px;
 }

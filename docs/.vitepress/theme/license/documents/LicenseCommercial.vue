@@ -5,7 +5,7 @@
 
       <p class="description">QuestPDF hereby grants you a non-exclusive license to the QuestPDF Software Library for .NET ("the Software").</p>
 
-      <a class="action primary" href="/license/tiers" style="margin-top: 16px;">Purchase license</a>
+      <a class="action primary" href="/license/" style="margin-top: 16px;">Purchase license</a>
     </template>
 
     <template #content>

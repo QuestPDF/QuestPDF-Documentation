@@ -1,16 +1,16 @@
 <template>
   <div class="custom-page">
     <div class="container no-border">
-      <PricingDescription />
+      <license-header />
     </div>
 
     <div class="container reverse-background">
       <div class="content">
-        <pricing-tiers />
+        <license-page-tiers />
       </div>
 
       <div class="content">
-        <pricing-menu />
+        <license-page-menu />
       </div>
     </div>
   </div>
@@ -18,9 +18,9 @@
 
 <script setup lang="ts">
 
-import PricingDescription from "./PricingHeader.vue";
-import PricingMenu from "./PricingMenu.vue";
-import PricingTiers from "./PricingTiers.vue";
+import LicenseHeader from "./LicenseHeader.vue";
+import LicensePageMenu from "./LicensePageMenu.vue";
+import LicensePageTiers from "./LicensePageTiers.vue";
 
 </script>
 

@@ -7,7 +7,7 @@
 
       <p class="description">The licensing options for QuestPDF include the Community MIT license (which is free), and two tiers of paid licenses: the Professional License and the Enterprise License.</p>
 
-      <a class="action primary" href="/license" style="margin-top: 16px;">Purchase license</a>
+      <a class="action primary" href="/license/" style="margin-top: 16px;">Purchase license</a>
     </template>
 
     <template #content>
@@ -61,7 +61,5 @@ import DocumentTemplate from "./DocumentTemplate.vue";
 </script>
 
 <style scoped>
-a {
-  font-weight: 600;
-}
+
 </style>

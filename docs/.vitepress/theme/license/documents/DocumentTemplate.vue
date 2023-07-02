@@ -27,6 +27,10 @@
   margin: 48px 0 8px 0 !important;
 }
 
+.document-page a {
+  font-weight: 600;
+}
+
 .document-page .description {
   color: var(--vp-c-text-1);
   font-size: 1.25rem;

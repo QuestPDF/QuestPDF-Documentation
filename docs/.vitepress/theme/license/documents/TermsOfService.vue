@@ -16,9 +16,7 @@
 
       <article>
         <h3>Licenses</h3>
-        <p>If you are consuming the QuestPDF library as a Direct Package Dependency for usage in a Closed Source software in the capacity of a for-profit company/individual with more than 1M USD annual gross revenue, you must purchase the QuestPDF <a href="/license/summary/commercial.html">Professional</a> or <a href="/license/summary/enterprise.html"></a> License, depending on number of software developers. Prices of the aforementioned licenses are available on the <a href="/license.html">Pricing page</a>.</p>
-        <p>If you do not meet the criteria described above, you are eligible to use the QuestPDF <a href="/license-community.html">Community MIT</a> License, completely for free, including the commercial usage.</p>
-        <p>Ownership of the product is governed by the usage license selected by the seller. We trust every user and therefore the library does not require any license key. After the purchase, your license is is automatically added to our records.</p>
+        <p>When choosing a license for your usage of the QuestPDF programming library, you must adhere to the guidelines and conditions set forth in the <a href="/license/guide.html">License Selection Guide</a>, which is integral to these Terms of Service. Please review these rules carefully before choosing a license.</p>
       </article>
 
       <article>

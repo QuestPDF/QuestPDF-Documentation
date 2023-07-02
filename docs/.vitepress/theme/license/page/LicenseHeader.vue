@@ -1,5 +1,5 @@
 <template>
-  <article class="content pricing-header">
+  <article class="content license-header">
     <div>
       <h1><span class="highlight-foreground">QuestPDF</span> License and Pricing</h1>
 
@@ -20,7 +20,7 @@
 
 <style scoped>
 
-.pricing-header {
+.license-header {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
@@ -32,13 +32,13 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .pricing-header {
+  .license-header {
     grid-gap: 64px;
   }
 }
 
 @media screen and (max-width: 700px) {
-  .pricing-header {
+  .license-header {
     grid-template-columns: 1fr;
   }
 

@@ -5,10 +5,10 @@ aside: false
 ---
 
 <script setup>
-import PricingSurvey from '../.vitepress/theme/license/survey/PricingSurvey.vue';
+import LicenseSurvey from '../.vitepress/theme/license/survey/LicenseSurvey.vue';
 </script>
 
 <ClientOnly>
-    <PricingSurvey />
+    <LicenseSurvey />
 </ClientOnly>
 
