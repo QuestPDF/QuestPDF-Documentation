@@ -1,8 +1,14 @@
 <template>
   <div class="custom-page">
-    <div class="container reverse-background" id="license">
+    <div class="container">
+      <article class="content">
+        <h1><span class="highlight-foreground">QuestPDF</span> License Survey</h1>
+        <p class="description">Not sure which license to choose? Answer a few quick questions and our survey tool will suggest the most suitable license for your use-case, as well as provide all necessary details.</p>
+      </article>
+    </div>
+
+    <div class="container reverse-background">
       <article class="content content-center">
-        <h2><span class="highlight-foreground">QuestPDF</span> License Survey</h2>
 
         <article class="survey">
 

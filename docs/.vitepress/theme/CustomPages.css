@@ -61,6 +61,12 @@
   font-size: 1rem;
 }
 
+.custom-page .description {
+  color: var(--vp-c-text-1);
+  font-size: 1.25rem;
+  line-height: 2rem;
+}
+
 .highlight-foreground {
   background: var(--vp-home-hero-name-background);
   background-clip: text;

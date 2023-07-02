@@ -1,9 +1,14 @@
 <template>
   <div class="custom-page">
+    <div class="container" id="license">
+      <article class="content">
+        <h1>Available <span class="highlight-foreground">QuestPDF</span> Licenses</h1>
+        <p class="description">Not sure which license to choose? Do you already know what license you need? Brilliant! Now, simply select your license and discover all the crucial information you'll need for the next steps. It is as simple as that!</p>
+      </article>
+    </div>
+
     <div class="container reverse-background" id="license">
       <article class="content">
-        <h2>Available <span class="highlight-foreground">QuestPDF</span> Licenses</h2>
-
         <div class="pricing">
           <template v-for="license of licenses">
             <a :href="getLicenseSummaryUrl(license)">
