@@ -38,7 +38,7 @@
 
           <hr>
 
-          <div style="display: flex; flex-direction: row; gap: 16px; align-self: end;">
+          <div style="display: flex; flex-direction: row; gap: 16px; align-self: end; justify-content: flex-end; flex-wrap: wrap;">
             <a class="action" @click="resetSurvey">Redo survey</a>
             <a class="action primary" :href="getLicenseSummaryUrl(recommendedLicense)">Read details</a>
           </div>
@@ -190,6 +190,10 @@ function getLicenseSummaryUrl(license: License) {
 
 @media screen and (max-width: 700px) {
   .survey .answer {
+    width: calc(100% + 48px);
+    margin: 0 -24px;
+    padding: 16px 24px;
+
     grid-gap: 8px 12px;
   }
 
