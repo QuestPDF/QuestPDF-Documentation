@@ -3,7 +3,7 @@
     <div class="container" id="license">
       <article class="content">
         <h1>Available <span class="highlight-foreground">QuestPDF</span> Licenses</h1>
-        <p class="description">Not sure which license to choose? Do you already know what license you need? Brilliant! Now, simply select your license and discover all the crucial information you'll need for the next steps. It is as simple as that!</p>
+        <p class="sub-header">Not sure which license to choose? Do you already know what license you need? Brilliant! Now, simply select your license and discover all the crucial information you'll need for the next steps. It is as simple as that!</p>
       </article>
     </div>
 
