@@ -3,14 +3,14 @@
     <div class="container">
       <article class="content">
         <h1><span class="highlight-foreground">QuestPDF</span> License Survey</h1>
-        <p class="description">Not sure which license to choose? Answer a few quick questions and our survey tool will suggest the most suitable license for your use-case, as well as provide all necessary details.</p>
+        <p class="sub-header">Not sure which license to choose? Answer a few quick questions and our survey tool will suggest the most suitable license for your use-case, as well as provide all necessary details.</p>
       </article>
     </div>
 
     <div class="container reverse-background">
       <article class="content content-center">
 
-        <article class="survey">
+        <article v-if="!recommendedLicense" class="survey">
 
           <progress-indicator :length="SurveyLength" :value="currentQuestionNumber" />
 
@@ -27,9 +27,21 @@
 
             <div v-if="currentQuestionNumber > 1" class="action answer" @click="resetSurvey">
               <img class="answer-icon" src="/pricing/answer-reset.svg" alt="" />
-              <span class="answer-title">Reset survey</span>
+              <span class="answer-title">Start over</span>
             </div>
           </template>
+        </article>
+
+        <article v-else class="survey">
+          <h2>QuestPDF <span class="highlight-foreground">{{ recommendedLicense.name }}</span> License</h2>
+          <p>Congratulations! We found the best license for you!</p>
+
+          <hr>
+
+          <div style="display: flex; flex-direction: row; gap: 8px; align-self: end;">
+            <a class="action" @click="resetSurvey">Redo survey</a>
+            <a class="action primary" :href="getLicenseSummaryUrl(recommendedLicense)">Read details</a>
+          </div>
         </article>
 
       </article>
@@ -41,7 +53,6 @@
 <script setup lang="ts">
 
 import {computed, defineProps, reactive, ref} from "vue";
-import {useRouter} from "vitepress";
 import {LicenseAnswer, LicenseQuestion, OwnerType, SurveyState} from "./LicenseSurveyModels";
 import {
     CommercialUsageQuestion,
@@ -50,7 +61,7 @@ import {
     RevenueThresholdExternalClientQuestion, RevenueThresholdInternalQuestion
 } from "./LicenseSurveyQuestions";
 import ProgressIndicator from "./ProgressIndicator.vue";
-import {CommunityLicense, EnterpriseLicense, ProfessionalLicense} from "../license/LinenseSummaries";
+import {CommunityLicense, EnterpriseLicense, License, ProfessionalLicense} from "../license/LinenseSummaries";
 
 const currentQuestionNumber = ref(1);
 
@@ -61,8 +72,6 @@ const surveyState = reactive<SurveyState>({
     exceededAnnualRevenueThreshold: null,
     exceededDeveloperCountThreshold: null
 })
-
-const { go } = useRouter();
 
 const SurveyLength = 5;
 
@@ -79,10 +88,6 @@ function resetSurvey() {
 function acceptAnswer(answer: LicenseAnswer) {
     answer.action(surveyState);
     currentQuestionNumber.value += 1;
-
-    if (recommendedLicense.value) {
-        go(`/license/summary/${recommendedLicense.value.name}`);
-    }
 }
 
 const activeQuestion = computed(() : LicenseQuestion => {
@@ -115,6 +120,10 @@ const recommendedLicense = computed(() => {
 
     return null;
 })
+
+function getLicenseSummaryUrl(license: License) {
+    return `/license/summary/${license.name.toLowerCase()}`;
+}
 
 </script>
 

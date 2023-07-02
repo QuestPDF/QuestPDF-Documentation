@@ -4,7 +4,11 @@
       <PricingDescription />
     </div>
 
-    <div class="container reverse-background" id="license">
+    <div class="container reverse-background">
+      <div class="content">
+        <pricing-tiers />
+      </div>
+
       <div class="content">
         <pricing-menu />
       </div>
@@ -16,6 +20,7 @@
 
 import PricingDescription from "./PricingHeader.vue";
 import PricingMenu from "./PricingMenu.vue";
+import PricingTiers from "./PricingTiers.vue";
 
 </script>
 

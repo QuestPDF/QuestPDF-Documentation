@@ -11,17 +11,10 @@ interface LicensePage {
 const licensePages : LicensePage[] = [
     {
         link: "/license/guide",
-        image: "/pricing/article.svg",
+        image: "/pricing/selection.svg",
         title: "License Selection Guide",
         description: "Explore our detailed article covering all rules related to the three available QuestPDF licenses. We did out best to simplify all nuances.",
         buttonText: "Read guide"
-    },
-    {
-        link: "/pricing/tiers",
-        image: "/pricing/selection.svg",
-        title: "I know which license I need",
-        description: "Brilliant! Now, simply select your license and discover all the crucial information you'll need for the next steps. It is as simple as that!",
-        buttonText: "Select license"
     },
     {
         link: "/pricing/survey",
@@ -36,17 +29,21 @@ const licensePages : LicensePage[] = [
 
 <template>
 
-<section class="menu">
-  <template v-for="licensePage of licensePages">
-    <a :href="licensePage.link">
-      <article  class="menu-item">
-        <img :src="licensePage.image" alt="">
-        <h3>{{ licensePage.title }}</h3>
-        <p>{{ licensePage.description }}</p>
-        <a class="action primary" :href="licensePage.link">{{ licensePage.buttonText }}</a>
-      </article>
-    </a>
-  </template>
+<section>
+  <h2>Let us help</h2>
+
+  <div class="menu">
+    <template v-for="licensePage of licensePages">
+      <a :href="licensePage.link">
+        <article  class="menu-item">
+          <img :src="licensePage.image" alt="">
+          <h3>{{ licensePage.title }}</h3>
+          <p>{{ licensePage.description }}</p>
+          <a class="action" :href="licensePage.link">{{ licensePage.buttonText }}</a>
+        </article>
+      </a>
+    </template>
+  </div>
 </section>
 
 </template>

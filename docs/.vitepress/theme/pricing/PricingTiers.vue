@@ -1,44 +1,35 @@
 <template>
-  <div class="custom-page">
-    <div class="container" id="license">
-      <article class="content">
-        <h1>Available <span class="highlight-foreground">QuestPDF</span> Licenses</h1>
-        <p class="sub-header">Not sure which license to choose? Do you already know what license you need? Brilliant! Now, simply select your license and discover all the crucial information you'll need for the next steps. It is as simple as that!</p>
-      </article>
+  <article>
+    <h2>Available Licenses</h2>
+
+    <div class="pricing">
+      <template v-for="license of licenses">
+        <a :href="getLicenseSummaryUrl(license)">
+          <section class="pricing-tier">
+            <header>
+              <img class="icon" :src="license.icon" alt="" />
+
+              <div v-if="license.price">
+                <h3>Professional</h3>
+                <p class="price">${{ license.price }} per year</p>
+                <p class="tax-information">+ local tax (if applicable)</p>
+              </div>
+
+              <div v-else>
+                <h3>Community</h3>
+                <p class="price">Free forever</p>
+              </div>
+            </header>
+
+            <hr>
+            <p class="applicability">{{ license.shortTerms }}</p>
+
+            <a class="action primary" :href="getLicenseSummaryUrl(license)">Read details</a>
+          </section>
+        </a>
+      </template>
     </div>
-
-    <div class="container reverse-background" id="license">
-      <article class="content">
-        <div class="pricing">
-          <template v-for="license of licenses">
-            <a :href="getLicenseSummaryUrl(license)">
-              <section class="pricing-tier">
-                <header>
-                  <img class="icon" :src="license.icon" alt="" />
-
-                  <div v-if="license.price">
-                    <h3>Professional</h3>
-                    <p class="price">${{ license.price }} per year</p>
-                    <p class="tax-information">+ local tax (if applicable)</p>
-                  </div>
-
-                  <div v-else>
-                    <h3>Community</h3>
-                    <p class="price">Free forever</p>
-                  </div>
-                </header>
-
-                <hr>
-                <p class="applicability">{{ license.shortTerms }}</p>
-
-                <a class="action primary" :href="getLicenseSummaryUrl(license)">Read details</a>
-              </section>
-            </a>
-          </template>
-        </div>
-      </article>
-    </div>
-  </div>
+  </article>
 </template>
 
 <script setup lang="ts">
@@ -71,6 +62,7 @@ function getLicenseSummaryUrl(license: License) {
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+  height: 100%;
 
   box-shadow: var(--elevation);
   background-color: var(--vp-c-bg);
@@ -87,8 +79,19 @@ function getLicenseSummaryUrl(license: License) {
 
 .pricing-tier header {
   display: grid;
-  grid-template-columns: 48px 1fr;
-  grid-gap: 0 32px;
+  grid-template-columns: auto 1fr;
+  grid-gap: 32px;
+}
+
+@media screen and (max-width: 450px) {
+  .pricing-tier header {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.pricing-tier header img {
+  width: 48px;
 }
 
 .pricing-tier header h3 {
