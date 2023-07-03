@@ -45,7 +45,7 @@ export const CommunityLicense : License = {
     details: [
         ...LicenseDetailsIncluded,
         { type: LicenseDetailType.Information, content: "This license is perpetual and entitles you to use the software" },
-        { type: LicenseDetailType.Warning, content: "This license is applicable only for companies and individuals with less than $1M USD annual gross revenue, or projects using the library as a direct package dependency, or non-for-profit projects" },
+        { type: LicenseDetailType.Warning, content: "This license is applicable only for companies and individuals with less than $1M USD annual gross revenue, or projects using the library as a transitive dependency, or non-for-profit projects" },
         { type: LicenseDetailType.Warning, content: "In the future, when upgrading the library to a newer version, please kindly check if you are still eligible to use the Community MIT License" },
     ]
 };
