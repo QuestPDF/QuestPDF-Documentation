@@ -125,7 +125,6 @@ function back() {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 24px;
 }
 
 .license-description header {
@@ -147,11 +146,6 @@ function back() {
   line-height: 2rem;
   margin-top: 0;
   margin-bottom: 8px;
-}
-
-.license-description hr {
-  margin-top: 0;
-  margin-bottom: 0;
 }
 
 .license-description p.price {
