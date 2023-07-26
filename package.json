@@ -5,8 +5,8 @@
   "license": "MIT",
   "devDependencies": {
     "markdown-it-imsize": "^2.0.1",
-    "sass": "^1.63.6",
-    "vitepress": "1.0.0-beta.4",
+    "sass": "^1.64.1",
+    "vitepress": "1.0.0-beta.6",
     "vue": "3.3.4"
   },
   "scripts": {
