@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {CommunityLicense, EnterpriseLicense, License, LicenseDetailType, ProfessionalLicense} from "./LinenseSummaries";
 import {defineProps, defineEmits, computed} from "vue";
-import {useData} from "vitepress";
+import {useData, useRouter} from "vitepress";
 import {PaddleConfiguration} from "./PaddleConfiguration";
+import {watch} from "vue/dist/vue";
 
 const { isDark } = useData()
 
@@ -36,12 +37,17 @@ function convertLicenseDetailTypeToIcon(type: LicenseDetailType) {
     throw "Unreachable code";
 }
 
+
 function startCheckout() {
+    // register listener
+    function gtag() { dataLayer.push(arguments); }
+
     if (!PaddleConfiguration.isProduction)
         Paddle.Environment.set('sandbox');
 
     Paddle.Setup({
-        vendor: PaddleConfiguration.vendorId
+        vendor: PaddleConfiguration.vendorId,
+        eventCallback: data => gtag('event', data.event)
     });
 
     Paddle.Checkout.open({
