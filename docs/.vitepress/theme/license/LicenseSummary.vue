@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import {CommunityLicense, EnterpriseLicense, License, LicenseDetailType, ProfessionalLicense} from "./LinenseSummaries";
-import {defineProps, defineEmits, computed} from "vue";
-import {useData, useRouter} from "vitepress";
+import {defineEmits, computed} from "vue";
+import {useData} from "vitepress";
 import {PaddleConfiguration} from "./PaddleConfiguration";
-import {watch} from "vue/dist/vue";
 
 const { isDark } = useData()
 
