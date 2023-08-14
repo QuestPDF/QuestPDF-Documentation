@@ -348,4 +348,9 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
 /docs/.vitepress/dist/
+/docs/.vitepress/cache/
+
+.yarn/
+.idea/
