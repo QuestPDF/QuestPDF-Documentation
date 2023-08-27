@@ -85,6 +85,54 @@ The watermark slots (background and foreground) can be used to add content behin
 
 ![example](/api-reference/page-background-foreground.png =300x)
 
+Let's consider a more advanced example that adds additional visual elements on the side of actual content. This can be easily achieved with watermark slots:
+
+```csharp{10-30}
+document.Page(page =>
+{
+    const float horizontalMargin = 1.5f;
+    const float verticalMargin = 1f;
+    
+    page.Size(PageSizes.A4);
+    page.MarginVertical(verticalMargin, Unit.Inch);
+    page.MarginHorizontal(horizontalMargin, Unit.Inch);
+
+    page.Background()
+        .PaddingVertical(verticalMargin, Unit.Inch)
+        .RotateRight()
+        .Decoration(decoration =>
+        {
+            decoration.Before().RotateRight().RotateRight().Element(DrawSide);
+            decoration.Content().Extend();
+            decoration.After().Element(DrawSide);
+
+            void DrawSide(IContainer container)
+            {
+                container
+                    .Height(horizontalMargin, Unit.Inch)
+                    .AlignMiddle()
+                    .Row(row =>
+                    {   
+                        row.AutoItem().PaddingRight(16).Text("COMPANY NAME").FontSize(16).FontColor(Colors.Red.Medium);
+                        row.RelativeItem().PaddingTop(12).ExtendHorizontal().LineHorizontal(2).LineColor(Colors.Red.Medium);
+                    });
+            }
+        });
+    
+    page.Content().Column(column =>
+    {
+        column.Spacing(25);
+
+        foreach (var i in Enumerable.Range(1, 100))
+            column.Item().Background(Colors.Grey.Lighten2).Height(75).AlignCenter().AlignMiddle().Text(i.ToString()).FontSize(16);
+    });
+});
+```
+
+That produces the following result:
+
+![example](/api-reference/page-slots-advanced.png =595x)
+
 ## Page settings
 
 It is possible to create a document containing pages having different settings. For example, the following code inserts an A4 page followed by an A3 page, both with different margins:
