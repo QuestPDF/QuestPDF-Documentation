@@ -1,10 +1,23 @@
 # Release notes
 
 ## 2023.6
+
+### Version 2023.6.0
 1) **Improvement:** the library received a final version of the licensing model, which has been enhanced to be more accommodating to both the business and community.
 2) **Feature:** generating merged PDF documents.
-3) **Improvement:** image loading exception better describes the failure reason
+3) **Improvement:** image loading exception better describes the failure reason.
 
+### Version 2023.6.1
+1) **Fix:** incorrect layout exception when debugging is disabled
+2) **Fix:** the page number functionality for sections do not work (#609)
+3) **Improvement:** enhanced the message about the QuestPDF Previewer application version incompatibility
+
+### Version 2023.6.2
+1) **Fix:** improved `Image.FitUnproportionally` behavior to ensure it now respects minimal size constraints and doesn't just expand to use all the available space.
+2) **Adjustment:** increased the default DPI setting from 144 to 288 to better match industry standards and provide visuals of expected quality. To counterbalance for potential output size increase, the image quality has been decreased from "very high" to "high" (JPEG 90 to 75).
+
+### Version 2023.6.3
+1) **Fix:** the `GeneratePdfAndShow` method does not always properly open the generated PDF file in a default application due to a timing issue.
 
 ## 2023.5
 1) **Simplified development loop** by introducing cross-platform methods: GeneratePdfAndShow() and GenerateXpsAndShow()
