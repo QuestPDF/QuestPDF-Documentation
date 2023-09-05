@@ -14,7 +14,7 @@ const contacts : ContactInformation[] = [
         description: "If you're experiencing any problems or have suggestions to enhance the QuestPDF library, we invite you to seek resolution and share your insights on the GitHub platform.",
     },
     {
-        link: "https://www.paddle.com/",
+        link: "https://www.paddle.com/about/procurement",
         image: "/contact/paddle.svg",
         title: "Payment support",
         description: "Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.",
