@@ -31,24 +31,16 @@
 }
 
 .progress-indicator-step.completed {
-  background-color: var(--vp-c-brand);
-  opacity: 0.66;
+  background-color: var(--vp-c-brand-2);
 }
 
 .progress-indicator-step.current {
-  background-color: var(--vp-c-brand);
+  background-color: var(--vp-c-brand-1);
   font-size: 15px;
 }
 
 .progress-indicator-step.future {
-  background-color: var(--vp-c-mute-lighter);
+  background-color: var(--vp-c-gray-1);
 }
 
-.progress-indicator-step.future {
-  background-color: var(--vp-c-mute-darker);
-}
-
-html.dark .progress-indicator-step.future {
-  background-color: var(--vp-c-mute-lighter);
-}
 </style>

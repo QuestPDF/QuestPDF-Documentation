@@ -17,7 +17,12 @@ export default defineConfig({
 
     themeConfig: {
         logo: '/logo.svg',
-        search: { provider: 'local' },
+        search: {
+            provider: 'local',
+            options: {
+                detailedView: true
+            }
+        },
         nav: [
             {
                 text: 'Documentation',
