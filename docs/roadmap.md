@@ -1,8 +1,8 @@
 # Roadmap
 
-## Next release 2023.7
+## Next releases
 
-1) IntelliSense XML documentation support for all public API methods.
+1) Improving development experience when debugging infinite layout exceptions,
 2) Optimization of FluentAPI implementation.
 
 ## Long-term focus

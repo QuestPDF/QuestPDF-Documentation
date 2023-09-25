@@ -1,5 +1,9 @@
 # Release notes
 
+## 2023.9
+1) In-code IntelliSense documentation for all public APIs,
+2) Improvement: the Row element respects now available vertical space, which is closer to expected behavior
+
 ## 2023.6
 
 ### Version 2023.6.0
