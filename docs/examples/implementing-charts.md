@@ -2,7 +2,14 @@
 
 There are many ways on how to implement charts in the QuestPDF documents. By utilizing the `Canvas` element and SkiaSharp-compatible charting libraries, it is possible to achieve vector charts.
 
-Please analyse this simple example which utilizes the `microcharts` library ([NuGet site](https://www.NuGet.org/packages/Microcharts/)):
+Please analyse this simple example which utilizes the `microcharts` library.
+
+:::tip
+The `microcharts` library is available under a permissive MIT license.
+More information can be found on its official [GitHub page](https://github.com/microcharts-dotnet/Microcharts) or [NuGet page](https://www.NuGet.org/packages/Microcharts/).
+
+Please consider giving them a star on GitHub.
+:::
 
 ```csharp
 // prepare data
