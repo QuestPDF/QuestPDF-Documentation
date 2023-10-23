@@ -2,8 +2,11 @@
   <div class="statistics">
     <article class="statistic" v-for="statistic in StatisticsContent" :key="statistic.label">
       <img class="icon" :src="statistic.icon" alt="" />
-      <span class="value">{{ statistic.value }}</span>
-      <span class="label">{{ statistic.label }}</span>
+
+      <div class="title">
+        <span class="value">{{ statistic.value }}</span>
+        <span class="label">{{ statistic.label }}</span>
+      </div>
     </article>
   </div>
 </template>
@@ -23,36 +26,36 @@ import { StatisticsContent } from './configuration';
 }
 
 .statistic {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr;
-  grid-gap: 4px 24px;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  gap: 24px;
 }
 
 .statistic img.icon {
-  grid-column: 1;
-  grid-row: 1 / span 2;
+  height: 64px;
+  width: 64px;
+}
 
-  justify-self: start;
-  align-self: start;
-  height: 48px;
-  width: 48px;
+.statistic .title {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: -4px;
 }
 
 .statistic span.value {
-  grid-column: 2;
-  grid-row: 1;
   margin: 0;
 
   font-family: var(--vp-font-family-base);
   color: var(--vp-c-text-1);
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-size: 1.75rem;
+  font-weight: 600;
 }
 
 .statistic span.label {
-  grid-column: 2;
-  grid-row: 2;
   justify-self: start;
   align-self: start;
 
