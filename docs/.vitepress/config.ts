@@ -65,7 +65,7 @@ export default defineConfig({
                     { text: 'Getting started', link: '/getting-started' },
                     { text: 'License configuration', link: '/license/configuration' },
                     { text: 'Previewer', link: '/document-previewer' },
-                    { text: 'Releases', link: '/releases' },
+                    { text: 'Releases', link: 'https://github.com/QuestPDF/QuestPDF/releases' },
                     { text: 'Roadmap', link: '/roadmap' },
                     { text: 'Acknowledgements', link: '/acknowledgements' }
                 ]
