@@ -28,9 +28,8 @@ const LicenseDetailsIncluded : LicenseDetail[] = [
     { type: LicenseDetailType.Feature, content: "Redistribute the compiled library, royalty-free, with your applications" }
 ]
 
-const LicenseSubscription = { type: LicenseDetailType.Information, content: "Please note that when you buy a license you get two things: a perpetual license and a subscription. The license entitles you to use the software. The subscription entitles you to software updates for the purchased period and is recommended as long as you are performing active software development" };
-const LicenseKey = { type: LicenseDetailType.Information, content: "We trust every user. Therefore, the library does not require any license key. After the purchase, your license is automatically added to our records" };
-
+const LicenseLicense = { type: LicenseDetailType.Information, content: "This is a perpetual license that allows you to use the library indefinitely." };
+const LicenseSubscription = { type: LicenseDetailType.Information, content: "The subscription entitles you to software updates for the purchased period and is recommended as long as you are performing active software development" };
 const LicenseRefundPolicy  = { type: LicenseDetailType.Information, content: "If you are not completely satisfied with the library after the purchase, we provide a 30-day money-back guarantee on all license purchases" };
 const LicenseTrial  = { type: LicenseDetailType.Warning, content: "Before making a license purchase, please evaluate the library in a non-production environment" };
 
@@ -61,8 +60,8 @@ export const ProfessionalLicense : License = {
     details: [
         ...LicenseDetailsIncluded,
         { type: LicenseDetailType.Feature, content: "Up to 10 developers working on QuestPDF-dependent projects" },
+        LicenseLicense,
         LicenseSubscription,
-        LicenseKey,
         LicenseRefundPolicy,
         LicenseTrial,
         { type: LicenseDetailType.Warning, content: "In the future, when upgrading the library to a newer version, please kindly check if you are still eligible to use the Professional License" },
@@ -80,8 +79,8 @@ export const EnterpriseLicense : License = {
     details: [
         ...LicenseDetailsIncluded,
         { type: LicenseDetailType.Feature, content: "Unlimited software developers" },
+        LicenseLicense,
         LicenseSubscription,
-        LicenseKey,
         LicenseRefundPolicy,
         LicenseTrial
     ]
