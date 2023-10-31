@@ -52,7 +52,7 @@ function startCheckout() {
     Paddle.Checkout.open({
         product: license.value.paddleProductId,
         displayModeTheme: isDark.value ? 'dark' : 'light',
-        successUrl: "https://questpdf.com/license/purchase-success"
+        successUrl: "https://www.questpdf.com/license/purchase-success"
     });
 }
 
@@ -112,7 +112,7 @@ function startCheckout() {
 
           <div style="grid-area: action; display: flex; flex-direction: row; gap: 16px; flex-wrap: wrap; margin-top: 32px; justify-content: end;">
             <a class="action" href="https://github.com/sponsors/QuestPDF" target="_blank">Become GitHub Sponsor</a>
-            <a class="action" href="/license/summary/professional">Purchase a higher license</a>
+            <a class="action primary" href="/license/summary/professional">Purchase a higher license</a>
           </div>
         </section>
 
