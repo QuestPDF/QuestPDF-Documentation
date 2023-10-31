@@ -23,7 +23,7 @@
 
 import { ref, onMounted } from 'vue';
 
-const alertId = "alert-help";
+const alertId = "alert-support-request";
 const showAlert = ref(true);
 
 function closeAlert() {

@@ -6,11 +6,15 @@
 
     <div class="container reverse-background">
       <div class="content">
-        <license-page-tiers />
+        <ClientOnly>
+          <license-page-tiers />
+        </ClientOnly>
       </div>
 
       <div class="content">
-        <license-page-menu />
+        <ClientOnly>
+          <license-page-menu />
+        </ClientOnly>
       </div>
     </div>
   </div>

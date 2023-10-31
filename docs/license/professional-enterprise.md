@@ -8,7 +8,4 @@ aside: false
 import LicenseCommercial from '../.vitepress/theme/license/documents/LicenseCommercial.vue';
 </script>
 
-<ClientOnly>
-    <LicenseCommercial />
-</ClientOnly>
-
+<LicenseCommercial />

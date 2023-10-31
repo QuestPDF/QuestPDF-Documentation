@@ -8,7 +8,4 @@ aside: false
 import LicensePurchaseSuccess from '../.vitepress/theme/license/LicensePurchaseSuccess.vue';
 </script>
 
-<ClientOnly>
-    <LicensePurchaseSuccess />
-</ClientOnly>
-
+<LicensePurchaseSuccess />

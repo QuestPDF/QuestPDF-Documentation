@@ -8,7 +8,4 @@ aside: false
 import TermsOfService from '.vitepress/theme/license/documents/TermsOfService.vue';
 </script>
 
-<ClientOnly>
-    <terms-of-service />
-</ClientOnly>
-
+<TermsOfService />

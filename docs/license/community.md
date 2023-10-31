@@ -8,7 +8,5 @@ aside: false
 import LicenseCommunity from '../.vitepress/theme/license/documents/LicenseCommunity.vue';
 </script>
 
-<ClientOnly>
-    <LicenseCommunity />
-</ClientOnly>
+<LicenseCommunity />
 

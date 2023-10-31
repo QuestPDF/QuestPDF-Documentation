@@ -8,6 +8,4 @@ aside: false
 import LicenseIndex from '../.vitepress/theme/license/page/LicenseIndex.vue';
 </script>
 
-<ClientOnly>
-    <LicenseIndex />
-</ClientOnly>
+<LicenseIndex />

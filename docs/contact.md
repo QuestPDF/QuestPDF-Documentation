@@ -8,6 +8,4 @@ aside: false
 import Contact from '.vitepress/theme/Contact.vue';
 </script>
 
-<ClientOnly>
-    <Contact />
-</ClientOnly>
+<Contact />

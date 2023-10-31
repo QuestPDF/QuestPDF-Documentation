@@ -8,7 +8,4 @@ aside: false
 import PrivacyPolicy from '.vitepress/theme/license/documents/PrivacyPolicy.vue';
 </script>
 
-<ClientOnly>
-    <privacy-policy />
-</ClientOnly>
-
+<PrivacyPolicy />

@@ -8,7 +8,5 @@ aside: false
 import LicenseGuide from '../.vitepress/theme/license/documents/LicenseGuide.vue';
 </script>
 
-<ClientOnly>
-    <LicenseGuide />
-</ClientOnly>
+<LicenseGuide />
 
