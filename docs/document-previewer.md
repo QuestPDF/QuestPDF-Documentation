@@ -51,6 +51,7 @@ To preview your document, you need to slightly modify your code.
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
+using QuestPDF.Previewer;
 
 // code in your main method
 var document = Document.Create(container =>
