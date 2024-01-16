@@ -7,7 +7,7 @@
   "devDependencies": {
     "markdown-it-imsize": "^2.0.1",
     "sass": "^1.69.7",
-    "vitepress": "1.0.0-rc.36",
+    "vitepress": "1.0.0-rc.37",
     "vue": "3.4.14"
   },
   "scripts": {

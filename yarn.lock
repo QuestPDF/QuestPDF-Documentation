@@ -570,13 +570,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-vue@npm:^5.0.2":
-  version: 5.0.2
-  resolution: "@vitejs/plugin-vue@npm:5.0.2"
+"@vitejs/plugin-vue@npm:^5.0.3":
+  version: 5.0.3
+  resolution: "@vitejs/plugin-vue@npm:5.0.3"
   peerDependencies:
     vite: ^5.0.0
     vue: ^3.2.25
-  checksum: 238d3c556d7d6d93d7ff2f3990361fb4ca8e9ec0d9e14e24fac15945062adbba3ba157a41fbf128116b7910dfeab0004bb2f3b39e0ce66bd50d0683e095c56e6
+  checksum: f89658de11db0c8c12d4c90a90c1545174d6bd37afaaf6dd205eb45743d516f3bcb966ab953e553656d77e0fa8094dd9e89eb92b1c2541fcf29b88c32e57d1a3
   languageName: node
   linkType: hard
 
@@ -686,24 +686,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vueuse/core@npm:10.7.1, @vueuse/core@npm:^10.7.1":
-  version: 10.7.1
-  resolution: "@vueuse/core@npm:10.7.1"
+"@vueuse/core@npm:10.7.2, @vueuse/core@npm:^10.7.2":
+  version: 10.7.2
+  resolution: "@vueuse/core@npm:10.7.2"
   dependencies:
     "@types/web-bluetooth": ^0.0.20
-    "@vueuse/metadata": 10.7.1
-    "@vueuse/shared": 10.7.1
+    "@vueuse/metadata": 10.7.2
+    "@vueuse/shared": 10.7.2
     vue-demi: ">=0.14.6"
-  checksum: 792f853fcb5808eabac1142563693341d6393f798fe636a4db823514be407b3a264aaee555b09debdac41795f2ed457ce16ebc4ada754e27dc37f84fe3f97d5d
+  checksum: 0a1e9433f4f4cd40838bcb4a055c16f48303ced860d53c4541458103b72b52c261836c3d7896719412f24e5d9e460870db3ab74f3b18b399d46c2dc1dc1ec613
   languageName: node
   linkType: hard
 
-"@vueuse/integrations@npm:^10.7.1":
-  version: 10.7.1
-  resolution: "@vueuse/integrations@npm:10.7.1"
+"@vueuse/integrations@npm:^10.7.2":
+  version: 10.7.2
+  resolution: "@vueuse/integrations@npm:10.7.2"
   dependencies:
-    "@vueuse/core": 10.7.1
-    "@vueuse/shared": 10.7.1
+    "@vueuse/core": 10.7.2
+    "@vueuse/shared": 10.7.2
     vue-demi: ">=0.14.6"
   peerDependencies:
     async-validator: "*"
@@ -743,23 +743,23 @@ __metadata:
       optional: true
     universal-cookie:
       optional: true
-  checksum: 1fcc62b574bca990634d9cde6ae305f86cf0de930445f44aee56cc14bbf0f1c958910a7f3b8fb1a4336d1c8371c7bc9a454d878b28ba2c1f600bef9ea62bddea
+  checksum: 2a2a795d7ab4384eeccfd46cf69ee976005117e6cf63ead5156c3c4a47126c93399dbf66117d3f665038d824c2790867ad439ceeee234cc32207f13d4ad3f53e
   languageName: node
   linkType: hard
 
-"@vueuse/metadata@npm:10.7.1":
-  version: 10.7.1
-  resolution: "@vueuse/metadata@npm:10.7.1"
-  checksum: 250b0adb83d6bdb46371e4bacff91b5a5b7923e56545e38966cbee50de9858657c6ba6c923d4dfab45a1eeee32c78efe6d3725785cfbdf42c1ca6052ba044ccf
+"@vueuse/metadata@npm:10.7.2":
+  version: 10.7.2
+  resolution: "@vueuse/metadata@npm:10.7.2"
+  checksum: 51bb8d451ff6c867fc9d315559f3ca8ce206a7da65f3dc0124c4ccc69fa608ec0d8ed050e282a69da29a0b8a9528904b1d0e1084bbc08a07ec7a1439e5dffb14
   languageName: node
   linkType: hard
 
-"@vueuse/shared@npm:10.7.1":
-  version: 10.7.1
-  resolution: "@vueuse/shared@npm:10.7.1"
+"@vueuse/shared@npm:10.7.2":
+  version: 10.7.2
+  resolution: "@vueuse/shared@npm:10.7.2"
   dependencies:
     vue-demi: ">=0.14.6"
-  checksum: 5f79b68e2c2c9af4f07d748306d671ebc94d7c065a3b9a3e87879b1432bb339fb3d85f74ac2d46c0856947b36bda78dc7f5922354d16abe4071f540c11c626c5
+  checksum: c03cbbd7cdf640ff3179ea26bf98879cbbc71cdedd994c8a5a519cb90d96b3ae088dbc5411e904681a76470849ff9a110a1c4c136eca0d94081f1c64ca850798
   languageName: node
   linkType: hard
 
@@ -1875,7 +1875,7 @@ __metadata:
   dependencies:
     markdown-it-imsize: ^2.0.1
     sass: ^1.69.7
-    vitepress: 1.0.0-rc.36
+    vitepress: 1.0.0-rc.37
     vue: 3.4.14
   languageName: unknown
   linkType: soft
@@ -2029,28 +2029,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shikiji-core@npm:0.9.17, shikiji-core@npm:^0.9.17":
-  version: 0.9.17
-  resolution: "shikiji-core@npm:0.9.17"
-  checksum: bbe8053e02703714e61ecf14604566b80ac63fc7564e578e253bcd1df40943cabff3b108f706466a317793e861c1b18ab7aa38787703675118cf8585ed0eddd5
+"shikiji-core@npm:0.9.19, shikiji-core@npm:^0.9.19":
+  version: 0.9.19
+  resolution: "shikiji-core@npm:0.9.19"
+  checksum: c3c2d6569d0e6ba75ec98f4dc4329ae3d34d469f9f1aad906520d8e086332ba1b2b236b7cd7016ed3316bc2345b61daa766d193bc507a6b1a90823cf98b222c8
   languageName: node
   linkType: hard
 
-"shikiji-transformers@npm:^0.9.17":
-  version: 0.9.17
-  resolution: "shikiji-transformers@npm:0.9.17"
+"shikiji-transformers@npm:^0.9.19":
+  version: 0.9.19
+  resolution: "shikiji-transformers@npm:0.9.19"
   dependencies:
-    shikiji: 0.9.17
-  checksum: c49b008f4ea26c35e084f214cbd664f4d3d7a60ca2c4c3b18a48a7f98fb0423c908f3f8a556cce0e516e9b2ce238dfa3d9a9bfd8cef1d512cbc7c451da1800b2
+    shikiji: 0.9.19
+  checksum: 61545810738d6346f363984be5dadaddf661d5f3334033b813b939018eb91a9c60ba43a3516740bf12d3e6d585e2305674f7ca57ca08651bf025ee542865907b
   languageName: node
   linkType: hard
 
-"shikiji@npm:0.9.17, shikiji@npm:^0.9.17":
-  version: 0.9.17
-  resolution: "shikiji@npm:0.9.17"
+"shikiji@npm:0.9.19, shikiji@npm:^0.9.19":
+  version: 0.9.19
+  resolution: "shikiji@npm:0.9.19"
   dependencies:
-    shikiji-core: 0.9.17
-  checksum: 23be94898eec062a24191a9bd5691037d1ee016ddd56ee92426b5fe6652fff6e01cea4ccaa79a6af07dfe3094b84f54324de346ad1474ca55cbe42913a09092b
+    shikiji-core: 0.9.19
+  checksum: 43620eeb0bd8f2ce797eeb178aca99dd8596de0b44c215fc36354faa4cd49073535bd2806e3a6d17997d603afbd067bee07b8cec0443624c710342629496a8cb
   languageName: node
   linkType: hard
 
@@ -2263,25 +2263,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitepress@npm:1.0.0-rc.36":
-  version: 1.0.0-rc.36
-  resolution: "vitepress@npm:1.0.0-rc.36"
+"vitepress@npm:1.0.0-rc.37":
+  version: 1.0.0-rc.37
+  resolution: "vitepress@npm:1.0.0-rc.37"
   dependencies:
     "@docsearch/css": ^3.5.2
     "@docsearch/js": ^3.5.2
     "@types/markdown-it": ^13.0.7
-    "@vitejs/plugin-vue": ^5.0.2
+    "@vitejs/plugin-vue": ^5.0.3
     "@vue/devtools-api": ^6.5.1
-    "@vueuse/core": ^10.7.1
-    "@vueuse/integrations": ^10.7.1
+    "@vueuse/core": ^10.7.2
+    "@vueuse/integrations": ^10.7.2
     focus-trap: ^7.5.4
     mark.js: 8.11.1
     minisearch: ^6.3.0
-    shikiji: ^0.9.17
-    shikiji-core: ^0.9.17
-    shikiji-transformers: ^0.9.17
+    shikiji: ^0.9.19
+    shikiji-core: ^0.9.19
+    shikiji-transformers: ^0.9.19
     vite: ^5.0.11
-    vue: ^3.4.5
+    vue: ^3.4.14
   peerDependencies:
     markdown-it-mathjax3: ^4.3.2
     postcss: ^8.4.33
@@ -2292,7 +2292,7 @@ __metadata:
       optional: true
   bin:
     vitepress: bin/vitepress.js
-  checksum: 0d14a3d9fb23af770199f676b86d91b365f883b4a02182d20ff97591f6a774b36e2302c497052e758467bd9ff9941ed09e692cb10cad8e36d3afc3bb8288c4b5
+  checksum: 0c7763b5398e16250263c5db4c9df0e63cd41930676777187eeec402743d81395614e379f696de2a2e0988b51bb95bd67befc31d2ddd9f17de36c1d7a6014fce
   languageName: node
   linkType: hard
 
@@ -2312,7 +2312,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue@npm:3.4.14, vue@npm:^3.4.5":
+"vue@npm:3.4.14, vue@npm:^3.4.14":
   version: 3.4.14
   resolution: "vue@npm:3.4.14"
   dependencies:
