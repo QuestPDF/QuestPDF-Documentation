@@ -580,19 +580,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/compiler-core@npm:3.4.14":
-  version: 3.4.14
-  resolution: "@vue/compiler-core@npm:3.4.14"
-  dependencies:
-    "@babel/parser": ^7.23.6
-    "@vue/shared": 3.4.14
-    entities: ^4.5.0
-    estree-walker: ^2.0.2
-    source-map-js: ^1.0.2
-  checksum: df7767c63273555ec46719757d1b240ef4ad6643847fbf574b30c2e7049e640dfedb698cffb06ad399257f452eb8a08484ba0ff80ff5650e1ea4257d0c3374d6
-  languageName: node
-  linkType: hard
-
 "@vue/compiler-core@npm:3.4.15":
   version: 3.4.15
   resolution: "@vue/compiler-core@npm:3.4.15"
@@ -606,16 +593,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/compiler-dom@npm:3.4.14":
-  version: 3.4.14
-  resolution: "@vue/compiler-dom@npm:3.4.14"
-  dependencies:
-    "@vue/compiler-core": 3.4.14
-    "@vue/shared": 3.4.14
-  checksum: 03b06006d780819ccb758baf0ac243d7c3c6502405149fe162f60389529ca02af9af47d2674047908952f63143e5e539a74eee27e51a8ad79b91bb9bdb357aa7
-  languageName: node
-  linkType: hard
-
 "@vue/compiler-dom@npm:3.4.15":
   version: 3.4.15
   resolution: "@vue/compiler-dom@npm:3.4.15"
@@ -623,23 +600,6 @@ __metadata:
     "@vue/compiler-core": 3.4.15
     "@vue/shared": 3.4.15
   checksum: 373968c2c603f4eb9ebbf5f31ca2dc89991c4c1b0cee0213e613ad8b4ee632a33174e92bd91e0f8ff65f55188b46b742b91269a098c1e421d8f8bc919d5adc25
-  languageName: node
-  linkType: hard
-
-"@vue/compiler-sfc@npm:3.4.14":
-  version: 3.4.14
-  resolution: "@vue/compiler-sfc@npm:3.4.14"
-  dependencies:
-    "@babel/parser": ^7.23.6
-    "@vue/compiler-core": 3.4.14
-    "@vue/compiler-dom": 3.4.14
-    "@vue/compiler-ssr": 3.4.14
-    "@vue/shared": 3.4.14
-    estree-walker: ^2.0.2
-    magic-string: ^0.30.5
-    postcss: ^8.4.33
-    source-map-js: ^1.0.2
-  checksum: 2ce5c4e6323cf6eb304bc56a4b0079cb3c9c064493e02f29df3db5a08c99c1dc5eff88d7e97f1cb1177d66b397fbf40c9f3a2a19f71688e563fbf10d06c6a490
   languageName: node
   linkType: hard
 
@@ -660,16 +620,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/compiler-ssr@npm:3.4.14":
-  version: 3.4.14
-  resolution: "@vue/compiler-ssr@npm:3.4.14"
-  dependencies:
-    "@vue/compiler-dom": 3.4.14
-    "@vue/shared": 3.4.14
-  checksum: faff2e3815020ec232d50835c28e99108d50f88795adba0d08faed330405c48d16be10648ccef9a4d6fad9ac2e6d747b9d15b0cfaddb98ae305212483d40d1da
-  languageName: node
-  linkType: hard
-
 "@vue/compiler-ssr@npm:3.4.15":
   version: 3.4.15
   resolution: "@vue/compiler-ssr@npm:3.4.15"
@@ -687,31 +637,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/reactivity@npm:3.4.14":
-  version: 3.4.14
-  resolution: "@vue/reactivity@npm:3.4.14"
-  dependencies:
-    "@vue/shared": 3.4.14
-  checksum: bf7eb456f5462f34fb189d2292bc4f0afe0e8f98c92a17774f5029ea35003ec74dc1195ffa986e9114b86619cbe89854dc0ada87e6e96565bc351ab233bd76eb
-  languageName: node
-  linkType: hard
-
 "@vue/reactivity@npm:3.4.15":
   version: 3.4.15
   resolution: "@vue/reactivity@npm:3.4.15"
   dependencies:
     "@vue/shared": 3.4.15
   checksum: e1f8ef7ec3e933b5dd5e3aa3e281c38d1fd2834772016ea5193058d80342704afbed0e7728cf31eb5762c2705785eec98b3d154ae22005691bee5b35125a4d7c
-  languageName: node
-  linkType: hard
-
-"@vue/runtime-core@npm:3.4.14":
-  version: 3.4.14
-  resolution: "@vue/runtime-core@npm:3.4.14"
-  dependencies:
-    "@vue/reactivity": 3.4.14
-    "@vue/shared": 3.4.14
-  checksum: b3b167a9ed472ed5d8e6cc660debcc5ee1e4be72940e14469aff36defadb534551aafe759a98f26be51d8e541447ef1700f8eab4bf2a1fa432b843de8050fdc6
   languageName: node
   linkType: hard
 
@@ -722,17 +653,6 @@ __metadata:
     "@vue/reactivity": 3.4.15
     "@vue/shared": 3.4.15
   checksum: 6ab6721410ce5379d3a0de8632527be5cae26adda33854bd32117cf395713d41980f47b3774ba4dfbe7242377397d61a5728aa14b6a0fbd9e8f77049ef1ca4a4
-  languageName: node
-  linkType: hard
-
-"@vue/runtime-dom@npm:3.4.14":
-  version: 3.4.14
-  resolution: "@vue/runtime-dom@npm:3.4.14"
-  dependencies:
-    "@vue/runtime-core": 3.4.14
-    "@vue/shared": 3.4.14
-    csstype: ^3.1.3
-  checksum: ae9da6479280a4028bfa3bc6adf47537c6633de7b7d7a1a6b21b2a765034efcbf39b47c7cc6c87099831aa22b0e534c0eb8834f1ae6c75f8b5197d6b239976a2
   languageName: node
   linkType: hard
 
@@ -747,18 +667,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/server-renderer@npm:3.4.14":
-  version: 3.4.14
-  resolution: "@vue/server-renderer@npm:3.4.14"
-  dependencies:
-    "@vue/compiler-ssr": 3.4.14
-    "@vue/shared": 3.4.14
-  peerDependencies:
-    vue: 3.4.14
-  checksum: c744e2fdf6ef70660ce7183cb3738424b884f7260cae97545091f664cb3c42604b6345651be2815d861f64e39061613e32b198095ee31a90e4629eef83b18d7c
-  languageName: node
-  linkType: hard
-
 "@vue/server-renderer@npm:3.4.15":
   version: 3.4.15
   resolution: "@vue/server-renderer@npm:3.4.15"
@@ -768,13 +676,6 @@ __metadata:
   peerDependencies:
     vue: 3.4.15
   checksum: de93ccffe7008a12974d6f82024238f7b7b25817aae6846dabdcfb8534a6ce01528f7b13447b2561394112e4b6fd1bd125c3391c0ac9d849c6de167bf44f4e55
-  languageName: node
-  linkType: hard
-
-"@vue/shared@npm:3.4.14":
-  version: 3.4.14
-  resolution: "@vue/shared@npm:3.4.14"
-  checksum: 6945de71cc74b4f26e6e3310f4e98f627ed950ffebd32ff5e864df9001708918432fec8fe2840797f7915163c4ffaee334d73fac812f96a3b1ea15bd08a5ceea
   languageName: node
   linkType: hard
 
@@ -1974,7 +1875,7 @@ __metadata:
   dependencies:
     markdown-it-imsize: ^2.0.1
     sass: ^1.69.7
-    vitepress: 1.0.0-rc.39
+    vitepress: 1.0.0-rc.40
     vue: 3.4.15
   languageName: unknown
   linkType: soft
@@ -2128,28 +2029,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shikiji-core@npm:0.9.19, shikiji-core@npm:^0.9.19":
-  version: 0.9.19
-  resolution: "shikiji-core@npm:0.9.19"
-  checksum: c3c2d6569d0e6ba75ec98f4dc4329ae3d34d469f9f1aad906520d8e086332ba1b2b236b7cd7016ed3316bc2345b61daa766d193bc507a6b1a90823cf98b222c8
+"shikiji-core@npm:0.10.1, shikiji-core@npm:^0.10.0":
+  version: 0.10.1
+  resolution: "shikiji-core@npm:0.10.1"
+  checksum: 4a3eec18088be959cf49c06b750089fd703622f63f565e673574906136e74b328f5633ad0d1e00ba402e652736f1ab6523d9a33e4ee3ae83981e1726c07402f9
   languageName: node
   linkType: hard
 
-"shikiji-transformers@npm:^0.9.19":
-  version: 0.9.19
-  resolution: "shikiji-transformers@npm:0.9.19"
+"shikiji-transformers@npm:^0.10.0":
+  version: 0.10.1
+  resolution: "shikiji-transformers@npm:0.10.1"
   dependencies:
-    shikiji: 0.9.19
-  checksum: 61545810738d6346f363984be5dadaddf661d5f3334033b813b939018eb91a9c60ba43a3516740bf12d3e6d585e2305674f7ca57ca08651bf025ee542865907b
+    shikiji: 0.10.1
+  checksum: a4ccfa3f3058eec088df1f701f0816d3e2049591a345718d4a93c111f7051905d4ef491b3dd65547a6b48fee47bc6da49923068b9e4b04cb8bf0b5134b6e595b
   languageName: node
   linkType: hard
 
-"shikiji@npm:0.9.19, shikiji@npm:^0.9.19":
-  version: 0.9.19
-  resolution: "shikiji@npm:0.9.19"
+"shikiji@npm:0.10.1, shikiji@npm:^0.10.0":
+  version: 0.10.1
+  resolution: "shikiji@npm:0.10.1"
   dependencies:
-    shikiji-core: 0.9.19
-  checksum: 43620eeb0bd8f2ce797eeb178aca99dd8596de0b44c215fc36354faa4cd49073535bd2806e3a6d17997d603afbd067bee07b8cec0443624c710342629496a8cb
+    shikiji-core: 0.10.1
+  checksum: 1b6229d6735f65b577bc4244cd22f26b36e913bed530285a17e0c071b9a951e7da249e6f899979649a030c56ddd8cf28cb69c4bccafee2dcac3484739a44ee13
   languageName: node
   linkType: hard
 
@@ -2322,9 +2223,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^5.0.11":
-  version: 5.0.11
-  resolution: "vite@npm:5.0.11"
+"vite@npm:^5.0.12":
+  version: 5.0.12
+  resolution: "vite@npm:5.0.12"
   dependencies:
     esbuild: ^0.19.3
     fsevents: ~2.3.3
@@ -2358,13 +2259,13 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 262e41f25ce0cc5fc3c2065b1796f64ec115d3ac2d9625dbfb36d6628ba10e63684ef5515bb2ff1aa8e34c6f89e9c10e8211cb88f6c7f0da6869362851345437
+  checksum: b97b6f1c204d9091d0973626827a6e9d8e8b1959ebd0877b6f76e7068e1e7adf9ecd3b1cc382cbab9d421e3eeca5e1a95f27f9c1734439b229f5a58ef2052fa4
   languageName: node
   linkType: hard
 
-"vitepress@npm:1.0.0-rc.39":
-  version: 1.0.0-rc.39
-  resolution: "vitepress@npm:1.0.0-rc.39"
+"vitepress@npm:1.0.0-rc.40":
+  version: 1.0.0-rc.40
+  resolution: "vitepress@npm:1.0.0-rc.40"
   dependencies:
     "@docsearch/css": ^3.5.2
     "@docsearch/js": ^3.5.2
@@ -2376,11 +2277,11 @@ __metadata:
     focus-trap: ^7.5.4
     mark.js: 8.11.1
     minisearch: ^6.3.0
-    shikiji: ^0.9.19
-    shikiji-core: ^0.9.19
-    shikiji-transformers: ^0.9.19
-    vite: ^5.0.11
-    vue: ^3.4.14
+    shikiji: ^0.10.0
+    shikiji-core: ^0.10.0
+    shikiji-transformers: ^0.10.0
+    vite: ^5.0.12
+    vue: ^3.4.15
   peerDependencies:
     markdown-it-mathjax3: ^4.3.2
     postcss: ^8.4.33
@@ -2391,7 +2292,7 @@ __metadata:
       optional: true
   bin:
     vitepress: bin/vitepress.js
-  checksum: 3d6539e02b6aa232d22106cf98b207398ff230db4268ad29c7bbc9d53623d4fba19645de89eb35e1232c7d0ee80ac3318fce6197804212a43dfec26e74c4a685
+  checksum: 4b205c31a5060bd0fc36a76a85ca1255df11af9e88453a0ac01f7a01f68840c0c3b8614228d6ab28653f38ad24ad2a0a16841b4a715557a283a57e2a317c0f8c
   languageName: node
   linkType: hard
 
@@ -2411,7 +2312,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue@npm:3.4.15":
+"vue@npm:3.4.15, vue@npm:^3.4.15":
   version: 3.4.15
   resolution: "vue@npm:3.4.15"
   dependencies:
@@ -2426,24 +2327,6 @@ __metadata:
     typescript:
       optional: true
   checksum: 6e9ff02c9bd46cb47ff2225e7b51b75b00343b7f52076a56c2a90ce15de88c1de1aaa6b176ac39ca324479ee208b7f7e7992f54a353b0ee6b303081ac5ab30b0
-  languageName: node
-  linkType: hard
-
-"vue@npm:^3.4.14":
-  version: 3.4.14
-  resolution: "vue@npm:3.4.14"
-  dependencies:
-    "@vue/compiler-dom": 3.4.14
-    "@vue/compiler-sfc": 3.4.14
-    "@vue/runtime-dom": 3.4.14
-    "@vue/server-renderer": 3.4.14
-    "@vue/shared": 3.4.14
-  peerDependencies:
-    typescript: "*"
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: 2d61756faa881f884f780679629cb8144c95709077a73c2a033b79f454532a693863243990292b19f0c158a1c1f214c86bac8a7e0afbfe7b17ced67048f91d8a
   languageName: node
   linkType: hard
 
