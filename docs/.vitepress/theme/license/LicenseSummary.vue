@@ -52,7 +52,7 @@ function startCheckout() {
     Paddle.Checkout.open({
         product: license.value.paddleProductId,
         displayModeTheme: isDark.value ? 'dark' : 'light',
-        successUrl: "https://www.questpdf.com/license/purchase-success.html"
+        success: "https://www.questpdf.com/license/purchase-success.html"
     });
 }
 
