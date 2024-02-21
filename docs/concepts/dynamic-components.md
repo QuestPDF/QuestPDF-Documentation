@@ -494,9 +494,10 @@ public class OptimizedOrdersTable : IDynamicComponent<OrdersTableState>
                     });
             });
 
-            var elementHeight = element.Size.Height;
-                
-            if (totalHeight + elementHeight > context.AvailableSize.Height)
+            var elementHeight = element.Size.Height;   
+               
+            // it is important to use the Size.Epsilon constant to avoid floating point comparison issues
+            if (totalHeight + elementHeight > context.AvailableSize.Height + Size.Epsilon)
                 break;
                 
             totalHeight += elementHeight;
