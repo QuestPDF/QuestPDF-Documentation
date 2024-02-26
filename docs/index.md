@@ -17,6 +17,8 @@ hero:
   - theme: alt
     text: GitHub
     link: https://github.com/QuestPDF/QuestPDF
+
+markdownStyles: false
 ---
 
 <script setup>
