@@ -10,6 +10,11 @@ For example: the SkiaSharp.NativeAssets.Linux.NoDependencies NuGet ensures that 
 
 ## Support for custom environments (Blazor WebAssembly)
 
+::: danger
+The WebAssembly support is likely to be deprecated in the 2024.3.0 release. 
+Please consider using the server-side Blazor or using the 2023.12.X release.
+:::
+
 The QuestPDF library has a dependency called SkiaSharp which is used to render the final PDF file.
 QuestPDF works without problems in Blazor WebAssembly but you need to provide a suitable version of SkiaSharp on runtime.
 

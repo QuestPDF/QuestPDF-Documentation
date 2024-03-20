@@ -70,7 +70,7 @@ export const FeaturesContent : HomePageFeature[] = [
     {
         icon: "homepage/multiplatform.svg",
         title: "Multiplatform",
-        description: "Feel free to use your preffered code editor (JetBrains Rider, Visual Studio, VS Code, etc.). Run your software on any operating system (Windows, Linux, macOS), cloud platforms (e.g. Azure, AWS), device types (desktop, tablets, phones) and even web browser (via WebAssembly)."
+        description: "Feel free to use your preferred code editor (JetBrains Rider, Visual Studio, VS Code, etc.). Run your software on any operating system (Windows, Linux, macOS), cloud platforms (e.g. Azure, AWS)."
     },
     {
         icon: "homepage/intellisense.svg",
