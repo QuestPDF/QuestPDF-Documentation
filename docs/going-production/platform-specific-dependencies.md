@@ -11,8 +11,10 @@ For example: the SkiaSharp.NativeAssets.Linux.NoDependencies NuGet ensures that 
 ## Support for custom environments (Blazor WebAssembly)
 
 ::: danger
-The WebAssembly support is likely to be deprecated in the 2024.3.0 release. 
-Please consider using the server-side Blazor or using the 2023.12.X release.
+Support for WebAssembly is likely to be deprecated in the 2024.3.0 release. 
+However, we are exploring the possibility of reintroducing support for this platform in the 2024.4.0 release.
+
+Please consider using server-side Blazor or the 2023.12.X release, which will continue to receive extended quality support.
 :::
 
 The QuestPDF library has a dependency called SkiaSharp which is used to render the final PDF file.
@@ -37,3 +39,12 @@ Subsecuent builds can be slower as the toolchain now compiles Skia to WebAssembl
 Another thing to consider is that WebAssembly code runs on a secured sandbox and it can't access system fonts.
 For this reason any PDF created with QuestPDF in Blazor WebAssembly will not embed the used fonts. The final font used for rendering will be determined by the PDF viewer.
 However you can use a custom font as shown in the section **Accessing custom fonts**.
+
+## Support for mobile platforms
+
+:::danger
+Support for mobile platforms (Android, iOS, MacCatalyst) has been deprecated as of the 2024.3.0 release. 
+Future reconsideration of this decision may occur, depending on community feedback and the adoption of MAUI.
+
+Please consider the 2023.12.X release, which will receive extended quality support.
+:::
