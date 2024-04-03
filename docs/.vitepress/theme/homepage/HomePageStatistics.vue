@@ -42,7 +42,7 @@ import { StatisticsContent } from './configuration';
   flex-direction: column;
   justify-self: center;
   justify-content: center;
-  gap: 4px;
+  gap: 8px;
   margin-bottom: -4px;
 }
 
@@ -51,7 +51,7 @@ import { StatisticsContent } from './configuration';
 
   font-family: var(--vp-font-family-base);
   color: var(--vp-c-text-1);
-  font-size: 1.75rem;
+  font-size: 2rem;
   font-weight: 600;
 }
 
@@ -60,7 +60,7 @@ import { StatisticsContent } from './configuration';
   align-self: start;
 
   color: var(--vp-c-text-2);
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 </style>
