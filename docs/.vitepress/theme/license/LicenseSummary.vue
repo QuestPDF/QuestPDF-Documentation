@@ -71,7 +71,7 @@ function startCheckout() {
               <h3>QuestPDF <span class="highlight-foreground" style="font-weight: bold">{{ license.name }}</span> License</h3>
 
               <template v-if="license.price">
-                <p class="price">${{ license.price }} per year</p>
+                <p class="price">${{ license.price }}</p>
                 <p class="tax-information">+ local tax (if applicable)</p>
               </template>
 
@@ -106,12 +106,11 @@ function startCheckout() {
 
             <div>
               <h3 style="margin-top: 0; margin-bottom: 8px;">Beyond License Compliance</h3>
-              <p>We're delighted to give you access to the QuestPDF library at no cost. If you're interested in supporting its development and help us maintain its quality, please consider becoming a GitHub Sponsor or purchasing a higher level license. Your help is highly appreciated!</p>
+              <p>We're delighted to give you access to the QuestPDF library at no cost. If you're interested in supporting its development and help us maintain its quality, please consider purchasing the QuestPDF Professional license. Your help is highly appreciated!</p>
             </div>
           </div>
 
-          <div style="grid-area: action; display: flex; flex-direction: row; gap: 16px; flex-wrap: wrap; margin-top: 32px; justify-content: end;">
-            <a class="action" href="https://github.com/sponsors/QuestPDF" target="_blank">Become GitHub Sponsor</a>
+          <div style="grid-area: action; display: flex; flex-direction: row; margin-top: 32px; justify-content: end;">
             <a class="action primary" href="/license/summary/professional">Purchase a higher license</a>
           </div>
         </section>

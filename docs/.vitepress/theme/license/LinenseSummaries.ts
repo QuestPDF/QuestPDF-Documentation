@@ -29,7 +29,7 @@ const LicenseDetailsIncluded : LicenseDetail[] = [
 ]
 
 const LicenseLicense = { type: LicenseDetailType.Information, content: "This is a perpetual license that allows you to use the library indefinitely." };
-const LicenseSubscription = { type: LicenseDetailType.Information, content: "The subscription entitles you to software updates for the purchased period and is recommended as long as you are performing active software development" };
+const LicenseSubscription = { type: LicenseDetailType.Information, content: "The purchase also starts an optional subscription that entitles you to software updates for the purchased period and is recommended as long as you are performing active software development. You can resign at any time for any reason" };
 const LicenseRefundPolicy  = { type: LicenseDetailType.Information, content: "If you are not completely satisfied with the library after the purchase, we provide a 30-day money-back guarantee on all license purchases" };
 const LicenseTrial  = { type: LicenseDetailType.Warning, content: "Before making a license purchase, please evaluate the library in a non-production environment" };
 
