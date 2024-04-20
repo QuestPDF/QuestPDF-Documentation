@@ -31,6 +31,10 @@ You can define the text style using the following fluent API methods:
 ```csharp
 .FontColor("#F00")
 .FontFamily("Times New Roman")
+
+// you can also provide fallback font families
+.FontFamily("Times New Roman", "Calibri" "Noto Color Emoji") 
+
 .FontSize(24)
 .LineHeight(1.5f)
 .Italic()
@@ -223,9 +227,18 @@ Use the following fluent API methods to adjust text position:
     text.AlignLeft();
     text.AlignCenter();
     text.AlignRight();
+    text.AlignStart();
+    text.AlignEnd();
+    text.Justify();
     
     text.Span("Sample text");
 });
+```
+
+You can also use the shorthand version:
+
+```csharp
+.Text("Sample text").Justify();
 ```
 
 ## Custom paragraph spacing
@@ -424,66 +437,9 @@ You can define font fallback in the TexStyle object:
 ```csharp{4,11}
 TextStyle
     .Default
-    .FontFamily(Fonts.Calibri)
-    .Fallback(x => x.FontFamily("Segoe UI Emoji"));
-    
-// or
-
-TextStyle
-    .Default
-    .FontFamily(Fonts.Calibri)
-    .Fallback(TextStyle.Default.FontFamily("Segoe UI Emoji"));    
+    .FontFamily(Fonts.Calibri, "Segoe UI Emoji");
 ```
 
-Please note that you can provide nested fallbacks for more advanced cases. It is also possible to modify other style properties:
-
-```csharp
-var textStyleWithFallback = TextStyle
-    .Default
-    .FontFamily(Fonts.Calibri)
-    .FontSize(18)
-    
-    .Fallback(x => x
-        .FontFamily("Segoe UI Emoji")
-        .NormalWeight()
-        .Underline()
-
-        .Fallback(y => y
-            .FontFamily("Microsoft YaHei")
-            .SemiBold()
-            .Underline(false)
-            .BackgroundColor(Colors.Red.Lighten4)));
-```
-
-Let's analyse an example:
-
-```csharp{3}
-.Text(text =>
-{
-    text.DefaultTextStyle(textStyleWithFallback);
-    
-    text.Line("This is normal text.");
-    text.EmptyLine();
-    
-    text.Line("Following line should use font fallback:");
-    text.Line("中文文本");
-    text.EmptyLine();
-    
-    text.Line("The following line contains a mix of known and unknown characters.");
-    text.Line("Mixed line: This 中文 is 文文 a mixed 本 本 line 本 中文文本!");
-    text.EmptyLine();
-
-    text.Span("Emojis work out of the box because of font fallback: 😊😅🥳👍❤😍👌");
-});
-```
-
-When the font fallback is not configured:
-
-![example](/api-reference/font-fallback-without.png =460x)
-
-And now with configured font fallback. Please note that additional styles (e.g. red background color) are applied only to glyphs from the associated fallback configuration. This let's you fine tune text parameters, e.g. to match visual text size in various fonts.
-
-![example](/api-reference/font-fallback-with.png =460x)
 
 ## Dealing with pageable text
 
