@@ -78,7 +78,6 @@ export default defineConfig({
                     { text: 'Background', link: '/api-reference/background' },
                     { text: 'Border', link: '/api-reference/border' },
                     { text: 'Line', link: '/api-reference/line' },
-                    { text: 'Canvas', link: '/api-reference/canvas' },
                     { text: 'Placeholder', link: '/api-reference/placeholder' },
                 ]
             },
@@ -156,6 +155,7 @@ export default defineConfig({
                     { text: 'Basic fonts', link: '/concepts/basic-fonts' },
                     { text: 'Prototyping', link: '/concepts/prototyping' },
                     { text: 'Exceptions', link: '/concepts/exceptions' },
+                    { text: 'SkiaSharp integration', link: '/concepts/skia-sharp-integration' },
                 ]
             },
             {

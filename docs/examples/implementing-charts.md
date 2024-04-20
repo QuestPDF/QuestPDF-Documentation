@@ -11,6 +11,11 @@ More information can be found on its official [GitHub page](https://github.com/m
 Please consider giving them a star on GitHub.
 :::
 
+:::warning
+This functionality relies on the SkiaSharp library and the additional integration layer. 
+Please read more about it in the [SkiaSharp integration](/concepts/skia-sharp-integration) section.
+:::
+
 ```csharp
 // prepare data
 var entries = new[]
@@ -61,7 +66,7 @@ var entries = new[]
         .Border(1)
         .ExtendHorizontal()
         .Height(300)
-        .Canvas((canvas, size) =>
+        .SkiaSharpCanvas((canvas, size) =>
         {
             var chart = new BarChart
             {
