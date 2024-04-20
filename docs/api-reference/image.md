@@ -194,39 +194,6 @@ Please note that because the `Image` element uses a proper scaling setting by de
 
 The library supports SVG images. You can use them in the same way as raster images.
 
-:::tip
-To enable this feature, please install the `Svg.Skia` nuget in your repository.
-
-This library is available under a permissive MIT license.
-More information can be found on its official [GitHub page](https://github.com/wieslawsoltes/Svg.Skia)  or [NuGet page](https://www.nuget.org/packages/Svg.Skia).
-
-Please consider giving them a star on GitHub or even [sponsor](https://github.com/sponsors/wieslawsoltes) people working on this project.
-:::
-
-Anywhere in your code, please declare the following class that integrates the `Svg.Skia` library with QuestPDF:
-
-```csharp
-using QuestPDF.Fluent;
-using QuestPDF.Infrastructure;
-using Svg.Skia;
-
-public static class SvgExtensions
-{
-    public static void Svg(this IContainer container, SKSvg svg)
-    {
-        container
-            .AlignCenter()
-            .AlignMiddle()
-            .ScaleToFit()
-            .Width(svg.Picture.CullRect.Width)
-            .Height(svg.Picture.CullRect.Height)
-            .Canvas((canvas, space) => canvas.DrawPicture(svg.Picture));
-    }
-}
-```
-
-Then, you can use the `Svg` element anywhere in your document:
-
 ```csharp{2-3,15}
 // declare the Svg image in a scope available during entire PDF document generation process
 using var svg = new SKSvg();
@@ -242,7 +209,7 @@ Document
             
             page.Content()
                 .Padding(25)
-                .Svg(svg);
+                .Svg("pdf-icon.svg");
         });
     })
     .GeneratePdfAndShow();
@@ -252,3 +219,9 @@ Document
 <object data="/api-reference/document-svg.pdf" type="application/pdf" class="pdf-viewer">
   <p>Unable to display PDF file. <a href="/api-reference/document-svg.pdf">Download</a> instead.</p>
 </object>
+
+
+:::warning
+QuestPDF releases prior to 2024.3.0 required to use the `Svg.Skia` nuget library with additional integration code.
+It is no longer necessary and you can safely remove both the nuget dependency and integration code (likely the `SvgExtensions` class).
+:::
