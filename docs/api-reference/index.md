@@ -12,8 +12,6 @@
 
 [Line](/api-reference/line) - draws vertical or horizontal line.
 
-[Canvas](/api-reference/canvas) - allows you to extend the standard set of visual elements by giving access to the low-level SkiaSharp API.
-
 [Placeholder](/api-reference/placeholder) - draws a simple placeholder image for prototyping purposes.
 
 
