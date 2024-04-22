@@ -220,8 +220,24 @@ Document
   <p>Unable to display PDF file. <a href="/api-reference/document-svg.pdf">Download</a> instead.</p>
 </object>
 
-
 :::warning
+The SVG module displays SVGs as images with high capabilities and compliance. 
+Most SVG files are expected to render correctly, particularly those from popular design tools. 
+However, there are some limitations to be aware of. 
+If an SVG file does not render as expected after considering the following points, please file an issue.
+
+- Direct inclusion of CSS styles within SVGs is not supported. Use tools to convert CSS styles to SVG attributes where possible.
+- RGBA color syntax is not supported; use separate attributes for color and opacity (`fill-opacity` and `stroke-opacity`).
+- Certain SVG elements are not supported and might need to be rewritten or excluded (`<altGlyph>`,` <animate>`, `<cursor>`, `<feComponentTransfer>`, `<feConvolveMatrix>`, `<feTile>`, `<feDropShadow>`, `<font>`, `<foreignObject>`, `<glyph>`, `<script>`, `<view>`).
+- The module allows SVGs to use fonts available in your application, but there are restrictions on how the font-family attribute can be set.
+- SVGs containing other SVGs through specific elements are not supported. Please use only a single font family name.
+- Use of certain deprecated attributes in gradients is not supported and alternatives may not work reliably.
+- SVGs that render in browsers might not display correctly due to stricter error handling in the SVG module.
+
+This information is based on https://shopify.github.io/react-native-skia/docs/images-svg/#svg-support
+:::
+
+:::info
 QuestPDF releases prior to 2024.3.0 required to use the `Svg.Skia` nuget library with additional integration code.
 It is no longer necessary and you can safely remove both the nuget dependency and integration code (likely the `SvgExtensions` class).
 :::
