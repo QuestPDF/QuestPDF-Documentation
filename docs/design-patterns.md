@@ -14,6 +14,8 @@
 
 [Components](/concepts/components) - explains how you can prepare implement reusable layout structures shared across many document types.
 
+[Font management](/concepts/font-management.md) - shows how to include custom fonts in your project, so to not rely on the runtime environment.
+
 [Dynamic components](/concepts/dynamic-components) - describes how to implement most advanced layouts by generating conditional, page-specific content.
 
 [Length unit types](/concepts/length-unit-types) - list of standard length unit types that can be used instead of points.
@@ -35,10 +37,3 @@
 
 [Implementing charts](/examples/implementing-charts) - implementing charts and injecting them to the document.
 
-## Going production
-
-[Platform specific dependencies](/going-production/platform-specific-dependencies) - describes additional required NuGet packages on various platforms, e.g. Linux or MacOS. 
-
-[Font management](/concepts/font-management.md) - shows how to include custom fonts in your project, so to not rely on the runtime environment.
-
-[Reducing output size](/going-production/reducing-output-size) - discusses various techniques used to reduce size of the PDF output file.
