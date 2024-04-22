@@ -194,10 +194,31 @@ Please note that because the `Image` element uses a proper scaling setting by de
 
 The library supports SVG images. You can use them in the same way as raster images.
 
-```csharp{2-3,15}
-// declare the Svg image in a scope available during entire PDF document generation process
-using var svg = new SKSvg();
-svg.Load("pdf-icon.svg");
+In the following example, the image is loaded and parsed on demand:
+
+```csharp{11-12}
+Document
+    .Create(document =>
+    {
+        document.Page(page =>
+        {
+            page.Size(PageSizes.A7.Landscape());
+            page.Margin(25);
+            
+            page.Content()
+                .Padding(25)
+                .Svg(SvgImage.FromFile("pdf-icon.svg"))
+                .FitArea();
+        });
+    })
+    .GeneratePdfAndShow();
+```
+
+You can also improve performance by loading and parsing the image only once:
+
+```csharp{1-2,14-15}
+// in global or static context
+var image = SvgImage.FromFile("pdf-icon.svg");
 
 Document
     .Create(document =>
@@ -209,7 +230,8 @@ Document
             
             page.Content()
                 .Padding(25)
-                .Svg("pdf-icon.svg");
+                .Svg(image))
+                .FitArea();
         });
     })
     .GeneratePdfAndShow();
