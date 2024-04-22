@@ -39,6 +39,6 @@
 
 [Platform specific dependencies](/going-production/platform-specific-dependencies) - describes additional required NuGet packages on various platforms, e.g. Linux or MacOS. 
 
-[Font management](/going-production/font-management) - shows how to include custom fonts in your project, so to not rely on the runtime environment.
+[Font management](/concepts/font-management.md) - shows how to include custom fonts in your project, so to not rely on the runtime environment.
 
 [Reducing output size](/going-production/reducing-output-size) - discusses various techniques used to reduce size of the PDF output file.
