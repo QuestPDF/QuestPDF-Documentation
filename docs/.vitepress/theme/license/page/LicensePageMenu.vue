@@ -13,7 +13,7 @@ const licensePages : LicensePage[] = [
         link: "/license/guide",
         image: "/license/selection.svg",
         title: "License Selection Guide",
-        description: "Explore our detailed article covering all rules related to the three available QuestPDF licenses. We did out best to simplify all nuances.",
+        description: "Explore our detailed article covering all rules related to the three available QuestPDF licenses. We did our best to simplify all nuances.",
         buttonText: "Read guide"
     },
     {
