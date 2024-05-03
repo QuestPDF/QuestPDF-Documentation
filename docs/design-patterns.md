@@ -37,3 +37,4 @@
 
 [Implementing charts](/examples/implementing-charts) - implementing charts and injecting them to the document.
 
+[Integrating with ASP.NET](/examples/aspnet-integration) - how to return PDF files generated within ASP.NET endpoints.

@@ -165,6 +165,7 @@ export default defineConfig({
                     { text: 'Complex layouts', link: '/examples/complex-layouts' },
                     { text: 'Custom first page', link: '/examples/custom-first-page' },
                     { text: 'Implementing charts', link: '/examples/implementing-charts' },
+                    { text: 'Integration with ASP.NET', link: '/examples/aspnet-integration' },
                 ]
             }
         ],
