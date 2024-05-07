@@ -31,6 +31,7 @@ const LicenseDetailsIncluded : LicenseDetail[] = [
 const LicenseLicense = { type: LicenseDetailType.Information, content: "This is a perpetual license that allows you to use the library indefinitely. It also includes one year of free feature and quality updates" };
 const LicenseSubscription = { type: LicenseDetailType.Information, content: "The purchase also starts an optional subscription that entitles you to software updates for the purchased period and is recommended as long as you are performing active software development. You can resign at any time for any reason" };
 const LicenseRefundPolicy  = { type: LicenseDetailType.Information, content: "If you are not completely satisfied with the library after the purchase, we provide a 30-day money-back guarantee on all license purchases" };
+const LicensePaymentOptions  = { type: LicenseDetailType.Information, content: "If you require different payment terms or a direct invoice, please email us at <a href='mailto:contact@questpdf.com'>contact@questpdf.com</a>." };
 const LicenseTrial  = { type: LicenseDetailType.Warning, content: "Before making a license purchase, please evaluate the library in a non-production environment" };
 
 export const CommunityLicense : License = {
@@ -62,6 +63,7 @@ export const ProfessionalLicense : License = {
         { type: LicenseDetailType.Feature, content: "Up to 10 developers working on QuestPDF-dependent projects" },
         LicenseLicense,
         LicenseSubscription,
+        LicensePaymentOptions,
         LicenseRefundPolicy,
         LicenseTrial,
         { type: LicenseDetailType.Warning, content: "In the future, when upgrading the library to a newer version, please kindly check if you are still eligible to use the Professional License" },
@@ -81,6 +83,7 @@ export const EnterpriseLicense : License = {
         { type: LicenseDetailType.Feature, content: "Unlimited software developers" },
         LicenseLicense,
         LicenseSubscription,
+        LicensePaymentOptions,
         LicenseRefundPolicy,
         LicenseTrial
     ]

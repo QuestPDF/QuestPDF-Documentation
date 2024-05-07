@@ -86,7 +86,7 @@ function startCheckout() {
           <div class="details">
             <div v-for="detail of license.details" class="details-item">
               <img :src="convertLicenseDetailTypeToIcon(detail.type)" width="24" alt="">
-              <span>{{ detail.content }}</span>
+              <span v-html="detail.content" />
             </div>
           </div>
 
