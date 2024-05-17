@@ -485,21 +485,24 @@ public class InvoiceDocument : IDocument
 
 Once all pieces are ready, the generation process is straightforward:
 
-```csharp{5-7}
+```csharp{8-10}
+using System.IO;
+using QuestPDF.Drawing;
+using QuestPDF.Fluent;
+using QuestPDF.Infrastructure;
+
 static void Main(string[] args)
 {
-    var filePath = "invoice.pdf";
-
     var model = InvoiceDocumentDataSource.GetInvoiceDetails();
     var document = new InvoiceDocument(model);
-    document.GeneratePdf(filePath);
-
-    Process.Start("explorer.exe", filePath);
+    document.GeneratePdfAndShow();
+    
+    // document.GeneratePdf("invoice.pdf");
 }
 ```
 
 ::: tip
-There are multiple overloads of the `Generate` method. In the example above, the document has been saved into a new file. Additionally, there is an overload that returns a byte array. If you are working on the webserver and care about memory consumption, please use the overload that accepts a stream as an argument.
+You can download, analyse and compile the code yourself by visiting [this GitHub repository](https://github.com/QuestPDF/QuestPDF).
 :::
 
 ## Complex example
