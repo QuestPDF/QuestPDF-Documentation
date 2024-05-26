@@ -7,7 +7,7 @@ This tutorial introduces you to the essentials of the QuestPDF library by showin
 ![invoice](/getting-started/invoice.png)
 
 ::: tip
-You can download, analyse and compile the code yourself by visiting [this GitHub repository](https://github.com/QuestPDF/QuestPDF).
+You can download, analyse and compile the code yourself by visiting [this GitHub repository](https://github.com/QuestPDF/QuestPDF-ExampleInvoice).
 :::
 
 ## Installation
@@ -502,7 +502,7 @@ static void Main(string[] args)
 ```
 
 ::: tip
-You can download, analyse and compile the code yourself by visiting [this GitHub repository](https://github.com/QuestPDF/QuestPDF).
+You can download, analyse and compile the code yourself by visiting [this GitHub repository](https://github.com/QuestPDF/QuestPDF-ExampleInvoice).
 :::
 
 ## Complex example
