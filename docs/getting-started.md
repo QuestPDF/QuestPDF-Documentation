@@ -41,7 +41,7 @@ The PDF generation process involves work in three main application layers:
 
 When working on a new PDF document, think about its content and what information should be included. This helps with designing proper models structure. This time, we need to pass basic invoice information, seller's and customer's addresses, list of ordered items and finally optional comments.
 
-```csharp
+```c#
 public class InvoiceModel
 {
     public int InvoiceNumber { get; set; }
@@ -87,7 +87,7 @@ This tutorial focuses mainly on preparing the layout structure. For this reason,
 To improve the workflow, use various helper methods to easily generate fake data. All of them are available in the static `Placeholders` class. This way, it is easy to prototype document structure without implementing a real data source.
 :::
 
-```csharp
+```c#
 using QuestPDF.Helpers;
 
 public static class InvoiceDocumentDataSource
@@ -148,7 +148,7 @@ The most important aspect of document generation is to design and implement its 
 
 The implementation starts with defining a new class implementing the `IDocument` interface. This interface contains two methods: `GetMetadata()` and `Compose()`. The first one is used for providing basic document's information about author, keywords, DPI settings and so on. The latter gives a container where you should place all content.
 
-```csharp
+```c#
 public interface IDocument
 {
     DocumentMetadata GetMetadata();
@@ -165,7 +165,7 @@ The class below implements the basic document structure. Please note how differe
 
 Most of the elements are simple containers, that is they have only a single child. In such cases, the method chaining is used for describing documents content. However, there are more advanced elements which offer multiple slots to fill.
 
-```csharp
+```c#
 using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
@@ -214,7 +214,7 @@ This chapter introduces a couple of very important layout elements: `Row` and `C
 
 To keep the code clean and easy to maintain, you can create additional methods for each section. The general principle is to use a composition of simple layout structures, a structure per method. Most of the API invocations have special overloads designed for **1)** method chaining and **2)** passing method as an argument.
 
-```csharp
+```c#
 public class InvoiceDocument : IDocument
 {
     /* code omitted */
@@ -287,7 +287,7 @@ The code above produces the following result:
 
 In the document generation world, it is expected that a single document has multiple pages. The QuestPDF library assumes that certain elements should be repeated across the page, for example, header and footer. Additionally, it offers a great mechanism to support paging content. It is not desired to split the content in any place, usually, we want to define explicitly where it should happen if needed.
 
-```csharp
+```c#
 public class InvoiceDocument : IDocument
 {
     /* code omitted */
@@ -343,7 +343,7 @@ Let's implement the table in three simple steps:
 2) **Step 2** implements table's header. This is a special section: when table takes multiple pages, the header content is present on every page.
 2) **Step 3** uses a foreach-loop to iterates over all products and then generates set of cells for each of them.
 
-```csharp
+```c#
 public class InvoiceDocument : IDocument
 {
     /* code omitted */
@@ -406,7 +406,7 @@ The last skill to master is how to reuse code and implementation. When creating 
 
 To properly solve all of the scenarios above, use the component approach. This way you create independent, project-specific elements that can be reused and easily maintained. The implementation starts with the `IComponent` interface:
 
-```csharp
+```c#
 public interface IComponent
 {
     void Compose(IContainer container);
@@ -415,7 +415,7 @@ public interface IComponent
 
 Creating components is very similar to extracting code into separate methods. This time, the separation is even greater because you move the code into a new class, in a new file, and additionally, you can easily provide arguments to the component.
 
-```csharp
+```c#
 public class AddressComponent : IComponent
 {
     private string Title { get; }
@@ -447,7 +447,7 @@ public class AddressComponent : IComponent
 
 The code below shows how to use the newly implemented component:
 
-```csharp{11-16}
+```c#{11-16}
 public class InvoiceDocument : IDocument
 {
     /* code omitted */
@@ -485,7 +485,7 @@ public class InvoiceDocument : IDocument
 
 Once all pieces are ready, the generation process is straightforward:
 
-```csharp{8-10}
+```c#{8-10}
 using System.IO;
 using QuestPDF.Drawing;
 using QuestPDF.Fluent;

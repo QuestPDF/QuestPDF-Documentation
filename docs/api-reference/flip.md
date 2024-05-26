@@ -2,7 +2,7 @@
 - This container makes a mirror image of its child.
 - The container follows all layout rules and size constraints, and enforces them upon its child.
 
-```csharp
+```c#
 .FlipOver()
 
 .FlipHorizontal()
@@ -11,7 +11,7 @@
 
 Example:
 
-```csharp{16-20}
+```c#{16-20}
 .Padding(20)
 .Grid(grid =>
 {

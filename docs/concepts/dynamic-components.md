@@ -8,7 +8,7 @@ In this example, we only use the page information: the current page number and t
 
 Please note that this example does not require state management, so we declare state as a simple integer and do not use it anywhere else.
 
-```csharp{7-22}
+```c#{7-22}
 public class ProgressHeader : IDynamicComponent<int>
 {
     public int State { get; set; }
@@ -37,7 +37,7 @@ public class ProgressHeader : IDynamicComponent<int>
 
 Using the dynamic component is very simple. Just use the `Dynamic` method and provide an instance of your component.
 
-```csharp{7}
+```c#{7}
 container.Page(page =>
 {
     page.Size(PageSizes.A6);
@@ -84,7 +84,7 @@ and so on...
 
 The code is quite simple:
 
-```csharp{10}
+```c#{10}
 public class FooterWithAlternatingAlignment : IDynamicComponent<int>
 {
     public int State { get; set; }
@@ -127,7 +127,7 @@ Let's begin with the struct declaration that will hold the state:
 Important: please consider the state to be read-only. Never mutate existing state. To perform mutation, create a new struct instance and assign it to the State property. The QuestPDF library may perform multiple `Compose` method calls per page. The library may also change the state internally.
 :::
 
-```csharp
+```c#
 public struct FibonacciHeaderState
 {
     public int Previous { get; set; }
@@ -137,7 +137,7 @@ public struct FibonacciHeaderState
 
 Now, in each `Compose` method invocation, we can calculate a new sequence term, properly update state and generate new content to display on the page.
 
-```csharp{23-49}
+```c#{23-49}
 public class FibonacciHeader : IDynamicComponent<FibonacciHeaderState>
 {
     public FibonacciHeaderState State { get; set; }
@@ -193,7 +193,7 @@ public class FibonacciHeader : IDynamicComponent<FibonacciHeaderState>
 
 Please note that you can instantiate components using constructors with arguments. You can use this to pass data from your database, for example.
 
-```csharp{7}
+```c#{7}
 page.Header().Dynamic(new FibonacciHeader(17, 19));
 ```
 
@@ -210,7 +210,7 @@ To achieve this requirement, we will implement a simple paging algorithm that wi
 
 Let's begin by declaring a data model and state struct:
 
-```csharp
+```c#
 public class OrderItem
 {
     public string ItemName { get; set; } = Placeholders.Label();
@@ -226,7 +226,7 @@ public struct OrdersTableState
 
 The implementation of this component is quite simple. For each page, the component generates multiple versions of the layout, testing how much space is required for various numbers of items in the table. Please note that the `DynamicContent.CreateElement` method returns an object implementing the `IDynamicElement` interface. This interface can be used to access the size of the element. This size can be compared to the available space, so the biggest table with the highest number of rows is chosen.
 
-```csharp
+```c#
 public class OrdersTable : IDynamicComponent<OrdersTableState>
 {
     private IList<OrderItem> Items { get; }
@@ -340,7 +340,7 @@ public class OrdersTable : IDynamicComponent<OrdersTableState>
 }
 ```
 
-```csharp
+```c#
 // generate random data
 var items = Enumerable.Range(0, 25).Select(x => new OrderItem()).ToList();
 
@@ -380,7 +380,7 @@ This example uses the `IDynamicElement.Size` information to better manage the ge
 
 This way, we can build the table only once, significantly improving performance. Of course, this algorithm is slightly more complicated:
 
-```csharp
+```c#
 public class OptimizedOrdersTable : IDynamicComponent<OrdersTableState>
 {
     private ICollection<OrderItem> Items { get; }

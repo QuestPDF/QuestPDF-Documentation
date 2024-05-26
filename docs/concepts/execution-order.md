@@ -2,7 +2,7 @@
 
 QuestPDF uses a fluent API and method chaining to describe a document's content. It is very important to remember that the order of methods is strict. This means that in many cases, changing the order of invocations will produce different results. To better understand this behavior, let's analyse this simple example:
 
-```csharp{7-8,13-14}
+```c#{7-8,13-14}
 .Row(row =>
 {
     row.Spacing(25);
@@ -25,7 +25,7 @@ QuestPDF uses a fluent API and method chaining to describe a document's content.
 
 This is another good example showing how applying padding changes available space:
 
-```csharp
+```c#
 .Padding(25)
 .Border(2)
 .Width(150)

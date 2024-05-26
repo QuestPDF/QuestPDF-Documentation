@@ -5,7 +5,7 @@
 - You can use pageable content inside each column.
 - If the content of any column wraps, the entire container wraps.
 
-```csharp
+```c#
 .Row(row =>
 {
     row.ConstantItem(100)
@@ -30,7 +30,7 @@
 
 You can specify the spacing between each column by using the `Spacing()` method:
 
-```csharp
+```c#
 .Row(row =>
 {
     row.Spacing(20);

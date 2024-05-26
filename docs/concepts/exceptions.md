@@ -18,7 +18,7 @@ This exception may be extremely hard to fix because it happens for valid documen
 
 When you have a debugger attached, this exception provides an additional `ElementTrace` property showing which elements have been rendered when the exception was thrown. Please analyse the example below:
 
-```csharp{2,8}
+```c#{2,8}
 .Padding(10)
 .Width(100)
 .Background(Colors.Grey.Lighten3)

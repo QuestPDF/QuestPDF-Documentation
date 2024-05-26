@@ -16,14 +16,14 @@ The right-to-left content direction significantly changes how the layout is plan
 
 You can set content direction using the following API:
 
-```csharp
+```c#
 .ContentFromLeftToRight() // default
 .ContentFromRightToLeft()
 ```
 
 It is possible to set the target direction for all descendants:
 
-```csharp
+```c#
 .ContentFromRightToLeft()
 .Column(column => 
 {
@@ -39,7 +39,7 @@ It is possible to set the target direction for all descendants:
 
 The RTL mode is supported for all elements. The following examples show how this mode affects the rendering process. In the `Row` element, the elements are displayed in accordance with the content direction. For example, the first element is placed first on the left (in LTR mode) or first on the right (in RTL) mode:
 
-```csharp
+```c#
 .ContentFromRightToLeft() // LTR or RTL mode
 .Row(row =>
 {
@@ -56,7 +56,7 @@ The RTL mode is supported for all elements. The following examples show how this
 
 A similar situation exists when using the `Table` element as shown below:
 
-```csharp
+```c#
 .ContentFromRightToLeft() // LTR or RTL mode
 .Table(table =>
 {

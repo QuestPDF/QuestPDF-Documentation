@@ -4,7 +4,7 @@
 
 The library supports generation of PDF files:
 
-```csharp
+```c#
 report.GeneratePdf("result.pdf");
 ```
 
@@ -12,7 +12,7 @@ report.GeneratePdf("result.pdf");
 
 The library supports generation of XPS files:
 
-```csharp
+```c#
 report.GenerateXps("result.xps");
 ```
 
@@ -21,7 +21,7 @@ report.GenerateXps("result.xps");
 
 The default functionality of the library is generating PDF files based on specified document configuration. In some cases, you may need to generate a set of images instead. Such tasks can be done by additional extension methods:
 
-```csharp
+```c#
 // generate images as dynamic list of images
 IEnumerable<byte[]> images = document.GenerateImages();
 

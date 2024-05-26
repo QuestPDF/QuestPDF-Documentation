@@ -4,7 +4,7 @@ By combining various elements, you can build complex layouts. When designing try
 
 Please consider the code below. Please note that it uses example DSL elements from the previous section.
 
-```csharp
+```c#
 .Column(column =>
 {
     column.Item().Row(row =>

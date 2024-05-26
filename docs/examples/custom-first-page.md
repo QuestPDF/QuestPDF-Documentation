@@ -2,7 +2,7 @@
 
 It is a common requirement to have a special header on the first page on your document. Then all consecutive pages should have a normal header. This requirement can be easily achieved by using the `ShowOnce` and the `SkipOnce` elements, like so:
 
-```csharp{8-9}
+```c#{8-9}
 container.Page(page =>
 {
     page.Size(PageSizes.A6);

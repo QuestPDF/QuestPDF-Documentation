@@ -9,7 +9,7 @@ To integrate SkiaSharp with QuestPDF, please copy the following code to your pro
 1) `SkiaSharpCanvas` - draws content and integrates it with the SVG element. It is useful when you want to draw vector-based content.
 2) `SkiaSharpRasterized` - draws content and integrates it with the Image element. It is useful when SkiaSharp cannot successfully convert the content to SVG.
 
-```csharp
+```c#
 public static class SkiaSharpHelpers
 {
     public static void SkiaSharpCanvas(this IContainer container, Action<SKCanvas, Size> drawOnCanvas)
@@ -48,7 +48,7 @@ public static class SkiaSharpHelpers
 
 ## Examples
 
-```csharp
+```c#
 .SkiaSharpCanvas((canvas, size) =>
 {
     using var paint = new SKPaint
@@ -70,7 +70,7 @@ public static class SkiaSharpHelpers
 
 The following example shows how to create a rounded rectangle using SkiaSharp and the `Canvas` element. It clearly shows how powerful is this approach:
 
-```csharp
+```c#
 container
 .Background(Colors.Grey.Lighten2)
 .Padding(25)

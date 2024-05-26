@@ -7,7 +7,7 @@
 - The image is loaded into a SkiaSharp.Image object. Note that all limitations are derived. For example, available image formats may differ by platform.
 - You can use images in any common raster format, e.g. JPG, PNG, BMB, etc. [More details](https://docs.microsoft.com/en-us/dotnet/api/skiasharp.skencodedimageformat)
 
-```csharp
+```c#
 // it is possible to provide an image as:
  
 // 1) a binary array
@@ -28,25 +28,25 @@ By default, the `Image` element wants to use the entire available width while pr
 
 1) **FitWidth** - the element scales to take the entire available width. Default.
 
-```csharp
+```c#
 container.Image("path/myFile.png").FitWidth();
 ```
 
 2) **FitHeight** - the element scales to take the entire available height. Good in conjunction with constraining elements.
 
-```csharp
+```c#
 container.Image("path/myFile.png").FitHeight();
 ```
 
 3) **FitArea** - this is the combination of both of the above options  The element scales to occupy the entire available area with preserving its aspect ratio. This means that sometimes it occupies the entire width and sometimes the entire height. This is the safest option.
 
-```csharp
+```c#
 container.Image("path/myFile.png").FitArea();
 ```
 
 4) **FitUnproportionally** - the element resizes itself to occupy the entire available space. It does not preserve proportions. The image may look incorrectly scaled, and is not desired in most of the cases.
 
-```csharp
+```c#
 container.Image("path/myFile.png").FitUnproportionally();
 ```
 
@@ -56,7 +56,7 @@ Please be careful. This component may try to enforce size constraints that are i
 
 ### Image compression
 
-```csharp{9,15}
+```c#{9,15}
 .Column(column =>
 {
     column.Spacing(10);
@@ -83,7 +83,7 @@ You configure the image compression globally using the `DocumentSettings` class.
 
 ### Image DPI
 
-```csharp{9,15}
+```c#{9,15}
 .Column(column =>
 {
     column.Spacing(10);
@@ -118,7 +118,7 @@ Let's consider the following scenario: you want to generate a list of items, eac
 
 All the steps above have negative impact from the performance perspective and the final PDF file size.
 
-```csharp{9}
+```c#{9}
 .Column(column =>
 {
     column.Spacing(15);
@@ -138,7 +138,7 @@ All the steps above have negative impact from the performance perspective and th
 
 To fix this problem, you can load image and use it as a shared resource:
 
-```csharp{5,11}
+```c#{5,11}
 .Column(column =>
 {
     column.Spacing(15);
@@ -165,7 +165,7 @@ To fix this problem, you can load image and use it as a shared resource:
 - This element behaves similarly to static images.
 - As an argument, it expects a function that takes available space and returns an image in a binary format.
 
-```csharp{7-7}
+```c#{7-7}
 // somewhere in your code
 byte[] GenerateImage(Size size)
 {
@@ -181,7 +181,7 @@ The PDF standard uses points to describe size, where there are 72 points in 1 in
 
 To force an image to take a specified area, you can use any of the constraining elements. The simplest ones are `Width` and `Height`, e.g.:
 
-```csharp
+```c#
 container
     .Width(1, Unit.Inch)
     .Image(ImageElement.Image)
@@ -196,7 +196,7 @@ The library supports SVG images. You can use them in the same way as raster imag
 
 In the following example, the image is loaded and parsed on demand:
 
-```csharp{11-12}
+```c#{11-12}
 Document
     .Create(document =>
     {
@@ -216,7 +216,7 @@ Document
 
 You can also improve performance by loading and parsing the image only once:
 
-```csharp{1-2,14-15}
+```c#{1-2,14-15}
 // in global or static context
 var image = SvgImage.FromFile("pdf-icon.svg");
 

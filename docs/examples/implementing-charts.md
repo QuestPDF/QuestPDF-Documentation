@@ -16,7 +16,7 @@ This functionality relies on the SkiaSharp library and the additional integratio
 Please read more about it in the [SkiaSharp integration](/concepts/skia-sharp-integration) section.
 :::
 
-```csharp
+```c#
 // prepare data
 var entries = new[]
 {

@@ -22,7 +22,7 @@ dotnet add package QuestPDF
 
 How easy it is to start and prototype with QuestPDF? Really easy thanks to its minimal API! Please analyse the code below:
 
-```csharp
+```c#
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;

@@ -8,7 +8,7 @@ There are two methods available: `.RotateLeft()` and `.RotateRight()`
 
 Example:
 
-```csharp{17-18}
+```c#{17-18}
 .Padding(20)
 .Grid(grid =>
 {
@@ -47,7 +47,7 @@ Example:
 
 Example:
 
-```csharp{9}
+```c#{9}
 .Padding(25)
 .Background(Colors.Grey.Lighten2)
 
@@ -67,7 +67,7 @@ Example:
 
 You can apply an additional translation to change the rotation origin point:
 
-```csharp{9-10,14-15}
+```c#{9-10,14-15}
 .Padding(25)
 .Background(Colors.Grey.Lighten2)
 

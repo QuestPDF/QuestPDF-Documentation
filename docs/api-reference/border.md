@@ -4,7 +4,7 @@
 - Use multiple invocations to specify the thickness and colour of the border.
 - The border is virtual; it does not take space, nor move its child.
 
-```csharp
+```c#
 // apply border around all sides
 .Border(1)
 
@@ -24,7 +24,7 @@
 
 ## Simple example
 
-```csharp{3-7}
+```c#{3-7}
 .Padding(25)
 
 .BorderLeft(6)
@@ -48,7 +48,7 @@
 
 Use the `Container` API to divide multiple border configurations:
 
-```csharp{6}
+```c#{6}
 .Padding(25)
 
 .BorderTop(5)

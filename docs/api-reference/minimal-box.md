@@ -2,7 +2,7 @@
 
 The `MinimalBox` element relaxes the size constraints provided by its parent. It makes sure that its child is rendered with the minimum necessary space only.
 
-```csharp{3-3}
+```c#{3-3}
 .Border(4)
 .BorderColor(Colors.Blue.Medium)
 .MinimalBox()

@@ -7,7 +7,7 @@
 - If there is more space than necessary, items can be aligned to the left, center or right.
 - It is possible to insert space between elements.
 
-```csharp
+```c#
 .Grid(grid =>
 {
     grid.VerticalSpacing(15);

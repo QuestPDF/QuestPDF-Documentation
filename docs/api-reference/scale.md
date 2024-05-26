@@ -2,7 +2,7 @@
 - This component scales its children.
 - The layout rules, such as available space is also scaled so that the container follows all size constraints.
 
-```csharp
+```c#
 .Scale(2f)
 
 .ScaleHorizontal(2f)
@@ -11,7 +11,7 @@
 
 Example:
 
-```csharp{10}
+```c#{10}
 .Column(column =>
 {
     var scales = new[] { 0.75f, 1f, 1.25f, 1.5f };

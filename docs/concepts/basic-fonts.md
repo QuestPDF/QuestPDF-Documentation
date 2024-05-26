@@ -1,7 +1,7 @@
 # Basic fonts
 
 The library offers a list of simple and popular fonts.
-```csharp
+```c#
 Fonts.Calibri
 Fonts.Candara
 Fonts.Arial
@@ -10,7 +10,7 @@ Fonts.Arial
 
 Example:
 
-```csharp
+```c#
 var fonts = new[]
 {
     Fonts.Calibri,

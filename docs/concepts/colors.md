@@ -12,7 +12,7 @@ In QuestPDF, several elements expect a color as part of the configuration. As in
 
 You can access any color defined in the Material Design colors set. Please find more details [on the official webpage](https://material.io/design/color/the-color-system.html).
 
-```csharp
+```c#
 // base colors:
 Colors.Black
 Colors.White
@@ -45,7 +45,7 @@ Colors.DeepOrange.Accent4
 
 Example usage:
 
-```csharp
+```c#
 var colors = new[]
 {
     Colors.Green.Darken4,

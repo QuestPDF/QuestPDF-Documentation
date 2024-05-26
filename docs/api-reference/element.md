@@ -2,7 +2,7 @@
 
 Sometimes it is useful to alter a document's content based on a condition. The `Element` component can provide the syntactic sugar needed to achieve this without breaking the fluent API chain as illustrated below:
 
-```csharp{6-7,18}
+```c#{6-7,18}
 // before
 public static IContainer TableCell(this IContainer container, bool applyBackground = false)
 {
@@ -27,7 +27,7 @@ public static IContainer TableCell(this IContainer container, bool applyBackgrou
 
 It is not necessary to follow the method chain. Using this approach, you can also end the chain as shown below:
 
-```csharp
+```c#
 public static IContainer TextOrBackground(this IContainer container, string text)
 {
     return container

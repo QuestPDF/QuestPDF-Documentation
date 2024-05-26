@@ -7,14 +7,14 @@
 
 For most cases, that do not require any complex formatting, the simplified version of the `Text` component is enough as illustrated below.
 
-```csharp
+```c#
 .Text("Sample text")
 .Text("Red big text").FontColor("#F00").FontSize(24)
 ```
 
 Use the "text block" approach when you want to change style in the middle of a text string, inject page numbers or include custom components, as shown below:
 
-```csharp
+```c#
 .Text(text =>
 {
     text.Span("This is a normal text, followed by some ");
@@ -28,7 +28,7 @@ Use the "text block" approach when you want to change style in the middle of a t
 
 You can define the text style using the following fluent API methods:
 
-```csharp
+```c#
 .FontColor("#F00")
 .FontFamily("Times New Roman")
 
@@ -49,7 +49,7 @@ You can define the text style using the following fluent API methods:
 
 Use these fluent API methods to adjust text position:
 
-```csharp
+```c#
 .Text(text =>
 {
     text.DefaultTextStyle(x => x.FontSize(20).BackgroundColor(Colors.Green.Lighten3));
@@ -63,7 +63,7 @@ Use these fluent API methods to adjust text position:
 
 You can easily set up font weight by using one of the following fluent API methods:
 
-```csharp
+```c#
 .Weight(FontWeight.Normal)
 .Thin()
 .ExtraLight()
@@ -84,7 +84,7 @@ Please notice that not all fonts support every weight. QuestPDF will match the c
 
 ## Subscript and superscript
 
-```csharp{9,15}
+```c#{9,15}
 .Text(text =>
 {
     text.DefaultTextStyle(x => x.FontSize(20));
@@ -112,7 +112,7 @@ Please notice that not all fonts support every weight. QuestPDF will match the c
 
 This settings changes spacing between text lines. Modify the value to make the text more compact or easier to read.
 
-```csharp{3,14}
+```c#{3,14}
 .Column(column =>
 {
     var lineHeights = new[] { 0.8f, 1f, 1.5f };
@@ -143,7 +143,7 @@ Letter spacing allows you to increase or decrease space between characters. This
 
 This settings uses relative units. Example: let's assume your text has font size 20. If letter spacing is set to 0.1, an additional space of 2 points will be added between characters.
 
-```csharp{18}
+```c#{18}
 .Column(column =>
 {
     var letterSpacing = new[] { -0.05f, 0f, 0.2f };
@@ -182,7 +182,7 @@ This settings uses relative units. Example: let's assume your text has font size
 
 Please consider an example Typography class that describes text styling across all documents:
 
-```csharp
+```c#
 // single typography class can help with keeping a consistent look & feel in the document
 public static class Typography
 {
@@ -212,7 +212,7 @@ public static class Typography
 
 Then, a predefined typography can be used in the following way:
 
-```csharp
+```c#
 .Text("My text with predefined style").Style(Typography.Headline);
 ```
 
@@ -220,7 +220,7 @@ Then, a predefined typography can be used in the following way:
 
 Use the following fluent API methods to adjust text position:
 
-```csharp
+```c#
 .Text(text =>
 {
     // pick alignment
@@ -237,7 +237,7 @@ Use the following fluent API methods to adjust text position:
 
 You can also use the shorthand version:
 
-```csharp
+```c#
 .Text("Sample text").Justify();
 ```
 
@@ -245,7 +245,7 @@ You can also use the shorthand version:
 
 It is possible to specify additional spacing between paragraphs (blocks of text in different lines).
 
-```csharp
+```c#
 .Text(text =>
 {
     text.ParagraphSpacing(10);
@@ -263,7 +263,7 @@ It is possible to specify additional spacing between paragraphs (blocks of text 
 
 Sometimes you may need to inject custom components between text spans. Every injected element is aligned to the baseline.
 
-```csharp
+```c#
 .Text(text =>
 {
     text.Span("This is a random image aligned to the baseline: ");
@@ -276,7 +276,7 @@ Sometimes you may need to inject custom components between text spans. Every inj
 
 Use negative padding to adjust element position to suit your needs:
 
-```csharp{7}
+```c#{7}
 .Text(text =>
 {
     text.DefaultTextStyle(x => x.FontSize(20));
@@ -304,7 +304,7 @@ When injecting custom elements inside a text block, please remember to always co
 
 Use new text elements to inject pagination data, i.e. the current page number, the total page count in the document, etc.
 
-```csharp
+```c#
 .Text(text =>
 {
     text.CurrentPageNumber();
@@ -319,7 +319,7 @@ Use new text elements to inject pagination data, i.e. the current page number, t
 
 It is possible to retrieve pagination data for a named section of your document.
 
-```csharp
+```c#
 // define your section somewhere in the document:
 .Section("customSection")
 
@@ -345,7 +345,7 @@ It is possible to retrieve pagination data for a named section of your document.
 
 It is possible to format the page number using the `Format` method.
 
-```csharp
+```c#
 .Text(text =>
 {
     // assumes that FormatAsRomanNumeral 
@@ -366,7 +366,7 @@ Please note that the formatting function takes the `int?` type. QuestPDF uses a 
 
 ## Section link
 
-```csharp
+```c#
 // define your section somewhere in the document:
 .Section("customLocationName")
 
@@ -379,7 +379,7 @@ Please note that the formatting function takes the `int?` type. QuestPDF uses a 
 
 ## Hyperlink
 
-```csharp
+```c#
 .Text(text =>
 {
     text.Hyperlink("Please visit QuestPDF website", "https://www.questpdf.com");
@@ -390,7 +390,7 @@ Please note that the formatting function takes the `int?` type. QuestPDF uses a 
 
 The library supports text shaping capability, which is useful when generating advanced Unicode-capable text:
 
-```csharp{10}
+```c#{10}
 .Padding(35)
 .MinimalBox()
 .Background(Colors.Grey.Lighten2)
@@ -416,7 +416,7 @@ Text shaping capability also gives basic support for more advanced languages tha
 1. Display multiple text characters as a single glyph.
 2. Are displayed using right-to-left script.
 
-```csharp{4}
+```c#{4}
 var text = "في المعلوماتية أو الرياضيات، خوارزمية الترتيب هي خوارزمية تمكن من تنظيم مجموعة عناصر حسب ترتيب محدد.";
                   
 .Padding(20)
@@ -434,7 +434,7 @@ Each font file contains a well-specified set of glyphs. Sometimes, to reduce fon
 
 You can define font fallback in the TexStyle object:
 
-```csharp{4,11}
+```c#{4,11}
 TextStyle
     .Default
     .FontFamily(Fonts.Calibri, "Segoe UI Emoji");
@@ -445,7 +445,7 @@ TextStyle
 
 It is possible to limit the number of lines displayed in a text block. The text will be truncated and an ellipsis will be added at the end.
 
-```csharp{3,8}
+```c#{3,8}
 // when using shorthand Fluent API
 .Text(Placeholders.Paragraph())
 .ClampLines(3);
@@ -465,7 +465,7 @@ It is possible to limit the number of lines displayed in a text block. The text 
 It is also possible to customize the ellipsis:
 
 
-```csharp{2}
+```c#{2}
 .Text(Placeholders.Paragraph())
 .ClampLines(3, " [...]");
 ```
@@ -479,14 +479,14 @@ The `Text` element supports paging. That means part of the text may be moved to 
 
 To make sure that text is never paged and always fully visible on a single page, please use the `ShowEntire` element:
 
-```csharp
+```c#
 .ShowEntire()
 .Text("A long text here will not be paged.");
 ```
 
 Sometimes, there is very little space on the page. It is enough to display a couple of lines but such a short text block may look awkward. In such cases, it is better to move the text block to the next page instead of attempting to perform line breaking. Please adjust the minimum height in the `EnsureSpace` element to match the desired minimum space to display at the end of the page.
 
-```csharp
+```c#
 .EnsureSpace(50)
 .Text("A long text here.");
 ```
@@ -495,7 +495,7 @@ Sometimes, there is very little space on the page. It is enough to display a cou
 
 QuestPDF automatically detects text direction and applies proper text alignment. However, it is possible to override text direction. 
 
-```csharp
+```c#
 TextStyle.Default.DirectionAuto() // default
 TextStyle.Default.DirectionFromLeftToRight()
 TextStyle.Default.DirectionFromRightToLeft()
@@ -503,7 +503,7 @@ TextStyle.Default.DirectionFromRightToLeft()
 
 This may be useful with more advanced edge cases:
 
-```csharp
+```c#
 .DefaultTextStyle(x => x.FontSize(24).FontFamily("Calibri"))
 .Column(column =>
 {

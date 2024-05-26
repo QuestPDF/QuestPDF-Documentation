@@ -2,7 +2,7 @@
 
 This container is active when its child requires more than one page to draw. Where the content spans multiple pages, only the first page is visible. The remainder of the content (that would normally be visible on subsequent pages), is omitted.
 
-```csharp{20}
+```c#{20}
 .Padding(25)
 .DefaultTextStyle(x => x.FontSize(14))
 .Decoration(decoration =>

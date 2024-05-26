@@ -5,7 +5,7 @@
 - Specify the target location by providing a proper section name.
 - The link always redirects the user to the beginning of the section.
 
-```csharp{1-1}
+```c#{1-1}
 .SectionLink("links-chapter")
 .Text("About internal links chapter");
 ```

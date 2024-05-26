@@ -4,7 +4,7 @@ Use this container to prevent the element from being paged. If there is not enou
 
 This container is commonly used with the `Column` and `Row` elements to make sure that their content is fully visible on a single page.
 
-```csharp
+```c#
 .ShowEntire()
 // element that will not be paged
 ```

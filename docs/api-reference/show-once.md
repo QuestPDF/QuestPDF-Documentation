@@ -4,12 +4,12 @@
 - Its child, once fully rendered, does not appear on subsequent pages.
 - This is useful when creating tables. In this case, the table *structure* is visible on each page but the *content* inside the cell is not repeated.
 
-```csharp
+```c#
 .ShowOnce()
 ```
 
 Example:
-```csharp{7}
+```c#{7}
 page.Content().PaddingVertical(5).Row(row =>
 {
     row.RelativeItem()

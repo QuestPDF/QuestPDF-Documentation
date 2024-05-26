@@ -2,7 +2,7 @@
 
 - This container adds space around its child.
 
-```csharp
+```c#
 // apply padding on all sides
 .Padding(5)
 

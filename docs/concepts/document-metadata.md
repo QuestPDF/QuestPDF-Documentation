@@ -2,7 +2,7 @@
 
 You can modify the PDF document metadata by returning the `DocumentMetadata` object from the `IDocument.GetMetadata()` method. There are several properties available, and some of them have default values (see below).
 
-```csharp
+```c#
 public class DocumentMetadata
 {
     public string? Title { get; set; }

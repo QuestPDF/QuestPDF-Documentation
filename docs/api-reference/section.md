@@ -5,7 +5,7 @@
 - You can create links in the document which redirect the user to the section.
 - A `Section` also stores additional data, e.g. the start/end page, page length, etc. These values can be accessed within the `Text` element API.
 
-```csharp{1-1}
+```c#{1-1}
 .Section("links-chapter")
 .Decoration(decoration =>
 {

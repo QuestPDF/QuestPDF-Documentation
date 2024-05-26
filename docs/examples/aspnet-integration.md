@@ -5,7 +5,7 @@
 Please setup the license configuration in the `Startup.cs` or `Program.cs` file depending on your project configuration.
 This code should be executed only once, when the application starts or during its initialization step.
 
-```csharp
+```c#
 // please kindly ensure what license is appropriate for your project
 QuestPDF.Settings.License = LicenseType.Community;
 ```
@@ -16,7 +16,7 @@ Learn more about the licensing and related configuration [here](https://www.ques
 
 ## Generating PDF files in controller endpoints
 
-```csharp{8-13}
+```c#{8-13}
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase

@@ -4,7 +4,7 @@
 - The algorithm places elements one underneath another. Each element may take the entire column width.
 - This container renders its elements on multiple pages when necessary.
 
-```csharp
+```c#
 .Column(column =>
 {
     column.Item().Background(Colors.Grey.Medium).Height(50);
@@ -17,7 +17,7 @@
 
 Use the `Spacing` method to add some space between elements:
 
-```csharp
+```c#
 .Column(column =>
 {
     column.Spacing(15);

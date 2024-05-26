@@ -8,7 +8,7 @@ Components offer a lot of flexibility and extendability. Because of that, the Qu
 
 In this tutorial, we will create a simple component to generate a random image from the fantastic webpage called [Lorem Picsum](https://picsum.photos/). To show how the component's behaviour can be dynamically changed, an optional `greyscale` flag can be specified in the component constructor.
 
-```csharp
+```c#
 //interface
 public interface IComponent
 {
@@ -41,7 +41,7 @@ public class LoremPicsum : IComponent
 
 Example usage:
 
-```csharp{7}
+```c#{7}
 .Column(column =>
 {
     column.Spacing(10);
@@ -63,7 +63,7 @@ The result of the sample code is shown below:
 
 ::: tip
 If the component class has a parameterless constructor, you can use the generic `Template` method like this:
-```csharp
+```c#
 .Component<ComponentClass>();
 ```
 :::

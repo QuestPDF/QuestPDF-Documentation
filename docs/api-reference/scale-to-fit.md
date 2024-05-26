@@ -2,7 +2,7 @@
 
 This container attempts to scale down its child so it fits in the available space. This approach is useful when your content usually fits in the available space. For special situations, instead of wrapping the content to the next page or causing the infinite layout exception, it may make the content a little smaller to preserve the document look and feel.
 
-```csharp{13-15}
+```c#{13-15}
 .Padding(25)
 .Column(column =>
 {

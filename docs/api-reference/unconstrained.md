@@ -4,7 +4,7 @@
 - It removes any size constraints from its child.
 - The rendered child appears floating below or above the other content.
 
-```csharp{11-13}
+```c#{11-13}
 .Width(400)
 .Height(350)
 .Padding(25)

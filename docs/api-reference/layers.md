@@ -4,7 +4,7 @@
 - The paging algorithm is driven by the `PrimaryLayer`.
 - You need to specify exactly one `PrimaryLayer`.
 
-```csharp
+```c#
 .Layers(layers =>
 {
     // layer below main content

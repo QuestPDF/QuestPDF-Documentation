@@ -2,7 +2,7 @@
 
 Use this container to enforce additional sizing rules: minimum width, maximum width or exact width.
 
-```csharp
+```c#
 // adjust width to specific value
 .Width(50)
 

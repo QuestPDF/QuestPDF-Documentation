@@ -9,7 +9,7 @@ All documents will simply be merged together.
 For example: let's suppose that two documents are merged, first with 2 pages and second with 3 pages.
 The resulting document will have 5 pages, and page numbers will be: 1, 2, 1, 2, 3.
 
-```csharp{6}
+```c#{6}
 Document
     .Merge(
         GenerateReport("Short Document 1", 5),
@@ -32,7 +32,7 @@ That means, all page number related APIs will return continuous numbers.
 For example: let's suppose that two documents are merged, first with 2 pages and second with 3 pages.
 The resulting document will have 5 pages, and page numbers will be: 1, 2, 3, 4, 5.
 
-```csharp{6}
+```c#{6}
 Document
     .Merge(
         GenerateReport("Short Document 1", 5),
@@ -51,7 +51,7 @@ Document
 
 The following code is used to generate sample documents that will be merged together.
 
-```csharp
+```c#
 static Document GenerateReport(string title, int itemsCount)
 {
     return Document.Create(document =>

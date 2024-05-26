@@ -2,7 +2,7 @@
 
 This container allows you to show/hide its child based on a condition. The `ShowIf` component can provide the syntactic sugar needed to achieve this without breaking the fluent API chain as illustrated below:
 
-```csharp
+```c#
 var condition = numberOfElements > 5;
 
 // c# if-statement approach

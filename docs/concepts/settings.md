@@ -2,7 +2,7 @@
 
 There are several parameters that alter the generation process. These are available using the static `Settings` class.
 
-```csharp
+```c#
 // settings definition with default settings
 public static class Settings
 {
@@ -23,7 +23,7 @@ This value represents the maximum length of the document that the library produc
 
 If your content requires generating longer documents, please assign a suitable value.
 
-```csharp
+```c#
 QuestPDF.Settings.DocumentLayoutExceptionThreshold = 250;
 ```
 
@@ -33,7 +33,7 @@ This flag generates additional document elements to cache layout calculation res
 
 By default, this flag is enabled only when the debugger is NOT attached.
 
-```csharp
+```c#
 QuestPDF.Settings.EnableCaching = true;
 ```
 
@@ -43,7 +43,7 @@ This flag generates additional document elements to improve the layout debugging
 
 By default, this flag is enabled only when the debugger IS attached.
 
-```csharp
+```c#
 QuestPDF.Settings.EnableDebugging = false;
 ```
 
@@ -59,6 +59,6 @@ Enabling this flag may slightly decrease document generation performance. Howeve
 
 By default, this flag is enabled only when the debugger IS attached.
 
-```csharp
+```c#
 QuestPDF.Settings.CheckIfAllTextGlyphsAreAvailable = false;
 ```

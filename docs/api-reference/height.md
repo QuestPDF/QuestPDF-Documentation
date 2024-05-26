@@ -2,7 +2,7 @@
 
 Use this container to enforce additional sizing rules, e.g. minimum/maximum/exact height.
 
-```csharp
+```c#
 // adjust the height to a specific value
 .Height(50)
 

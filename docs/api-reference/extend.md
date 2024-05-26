@@ -2,7 +2,7 @@
 
 - This container extends its size to take the maximum available space.
 
-```csharp
+```c#
 .Extend()
 .ExtendVertical()
 .ExtendHorizontal()

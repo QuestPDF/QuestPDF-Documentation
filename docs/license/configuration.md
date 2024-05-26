@@ -21,15 +21,15 @@ Please use the following code to configure the appropriate license.
 
 You need to execute this code only once when the application starts, most likely in the `Program.cs` or the `Startup.cs` file.
 
-```csharp
+```c#
 QuestPDF.Settings.License = LicenseType.Community;
 ```
 
-```csharp
+```c#
 QuestPDF.Settings.License = LicenseType.Professional;
 ```
 
-```csharp
+```c#
 QuestPDF.Settings.License = LicenseType.Enterprise;
 ```
 

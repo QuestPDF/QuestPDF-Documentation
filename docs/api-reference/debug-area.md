@@ -3,7 +3,7 @@
 - This container can be used to inspect the space taken by its children.
 - The `Debug` container does not alter a document's layout.
 
-```csharp
+```c#
 // You can specify text and color,
 // to better distinguish between various debug elements:
 .Debug("Grid example", Colors.Blue.Medium)
@@ -17,7 +17,7 @@
 
 Example:
 
-```csharp{4}
+```c#{4}
 container
     .Padding(25)
     .Debug("Grid example", Colors.Blue.Medium)

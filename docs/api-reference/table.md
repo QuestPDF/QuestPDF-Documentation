@@ -8,7 +8,7 @@ Please analyse this example showing how to create a simple Table instance:
 1) You start with a column definition that describes the width of each column.
 2) Then, you can place any number of items inside. Each item has a corresponding position (`Row` and `Column`).
 
-```csharp{4-10,13-16}
+```c#{4-10,13-16}
 .Border(1)
 .Table(table =>
 {
@@ -47,7 +47,7 @@ Please analyse this example showing how to create a simple Table instance:
 
 You don't need to specify the position of every cell. When the algorithm detects that the cell does not have an assigned location, it places it in the nearest possible location.
 
-```csharp{11-14}
+```c#{11-14}
 .Table(table =>
 {
     table.ColumnsDefinition(columns =>
@@ -76,7 +76,7 @@ Just as with the `Row` element, you can define [columns of constant and relative
 
 **Important:** this example uses extension methods presented in [the Extending DSL section](/concepts/creating-dsl).
 
-```csharp{5-11}
+```c#{5-11}
 container
     .Padding(10)
     .Table(table =>
@@ -103,7 +103,7 @@ container
 
 Cells can span multiple rows and/or multiple columns:
 
-```csharp{11-19}
+```c#{11-19}
 .Table(table =>
 {
     table.ColumnsDefinition(columns =>
@@ -134,7 +134,7 @@ Cells can span multiple rows and/or multiple columns:
 
 Cells can overlap one another. This situation is possible when you manually assign a cell's location:
 
-```csharp{10-12}
+```c#{10-12}
 .Table(table =>
 {
     table.ColumnsDefinition(columns =>
@@ -156,7 +156,7 @@ Cells can overlap one another. This situation is possible when you manually assi
 
 This feature is very useful when creating complex table structures that are likely to page. It applies a special rule to the last cells within each column, extending them in such a way that they end at the bottom of the table. This behavior may improve the appearance of your table.
 
-```csharp{11}
+```c#{11}
 .Table(table =>
 {
     table.ColumnsDefinition(columns =>
@@ -190,7 +190,7 @@ Please review the following example to understand how to design report-like docu
 
 **Important:** this example uses extension methods presented in [the Extending DSL section](/concepts/creating-dsl).
 
-```csharp
+```c#
 .MinimalBox()
 .Border(1)
 .Table(table =>
@@ -258,7 +258,7 @@ It is also possible to define table headers and footers. If your table contains 
 
 Please note that header and footer sections have their own set of rows - they do not count in the content section.
 
-```csharp{43-60}
+```c#{43-60}
 var pageSizes = new List<(string name, double width, double height)>()
 {
     ("Letter (ANSI A)", 8.5f, 11),

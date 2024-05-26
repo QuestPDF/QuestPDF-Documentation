@@ -4,7 +4,7 @@ When rendering multi-page content, you may want to ensure that an element's cont
 For example, when rendering a table, it may be desirable to render at least 5 rows before a page break.
 The `EnsureSpace` element guarantees that its child is rendered according to the space constraint that you specify.
 
-```csharp
+```c#
 .EnsureSpace(100)
 .Column(column =>
 {
@@ -13,7 +13,7 @@ The `EnsureSpace` element guarantees that its child is rendered according to the
 ```
 
 Example:
-```csharp{11}
+```c#{11}
 page.Content().Column(column =>
 {
     column

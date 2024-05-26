@@ -4,7 +4,7 @@
 
 Often we know what a document layout should look like but we do not have appropriate data to fill it. The Quest PDF library provides a set of helpers to generate random text of different kinds:
 
-```csharp
+```c#
 using QuestPDF.Helpers;
 
 Placeholders.LoremIpsum();
@@ -32,7 +32,7 @@ Placeholders.Percent();
 
 You can access a random color picked from the Material Design colors set. Colors are returned as text in the HEX format.
 
-```csharp
+```c#
 // bright color, lighten-2
 Placeholders.BackgroundColor();
 
@@ -42,7 +42,7 @@ Placeholders.Color();
 
 Example usage to create a colorful matrix:
 
-```csharp
+```c#
 .Padding(25)
 .Grid(grid =>
 {
@@ -62,7 +62,7 @@ Example usage to create a colorful matrix:
 
 Use this simple function to generate a random image with required size:
 
-```csharp
+```c#
 // both functions return a byte array containing a JPG file
 Placeholders.Image(400, 300);
 Placeholders.Image(new Size(400, 300));

@@ -2,7 +2,7 @@
 
 The QuestPDF library has access to all fonts installed on the hosting system. Sometimes though, you don't have control over fonts installed on the production environment. Or you may want to use self-hosted fonts that come with your application as files or embedded resources. In such case, you need to register those fonts as follows:
 
-```csharp{2,5,13}
+```c#{2,5,13}
 // static method definition
 FontManager.RegisterFont(Stream fontDataStream);
 

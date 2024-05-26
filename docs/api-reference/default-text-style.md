@@ -4,7 +4,7 @@ For professional documents, it is important to maintain consistent typography. A
 
 This element allows you to override text styles in all its children at once.
 
-```csharp{1}
+```c#{1}
 .DefaultTextStyle(x => x.Bold().Underline())
 .Column(column =>
 { 

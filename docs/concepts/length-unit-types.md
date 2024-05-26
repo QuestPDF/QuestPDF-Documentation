@@ -13,7 +13,7 @@ QuestPDF uses points as default measure unit. Where 1 inch equals to 72 points, 
 
 Example usage:
 
-```csharp
+```c#
 // all invocations are equal
 .Padding(72)
 .Padding(1, Unit.Inch)

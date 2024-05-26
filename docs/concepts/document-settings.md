@@ -2,7 +2,7 @@
 
 You can modify the PDF document metadata by returning the `DocumentSettings` object from the `IDocument.GetSettings()` method. There are several properties available, and some of them have default values (see below).
 
-```csharp
+```c#
 public class DocumentSettings
 {
     public bool PdfA { get; set; } = false;

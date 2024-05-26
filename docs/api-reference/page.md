@@ -9,7 +9,7 @@ Main slots (`Header`, `Content` and `Footer`) can be used to specify page conten
 - The `Content` element is drawn on the space between the `Header` and the `Footer`.
 - The `Footer` element is always visible at the bottom of each page.
 
-```csharp
+```c#
 .Page(page =>
 {
     page.MarginHorizontal(40);
@@ -47,7 +47,7 @@ Please be careful! When the combined heights of the header and footer elements i
 
 The watermark slots (background and foreground) can be used to add content behind or in front of the main content, respectively.
 
-```csharp{10-14,16-20}
+```c#{10-14,16-20}
 .Page(page =>
 {
     page.Size(PageSizes.A4);
@@ -87,7 +87,7 @@ The watermark slots (background and foreground) can be used to add content behin
 
 Let's consider a more advanced example that adds additional visual elements on the side of actual content. This can be easily achieved with watermark slots:
 
-```csharp{10-30}
+```c#{10-30}
 document.Page(page =>
 {
     const float horizontalMargin = 1.5f;
@@ -137,7 +137,7 @@ That produces the following result:
 
 It is possible to create a document containing pages having different settings. For example, the following code inserts an A4 page followed by an A3 page, both with different margins:
 
-```csharp{10-13,21-24}
+```c#{10-13,21-24}
 public class StandardReport : IDocument
 {
     // metadata
@@ -175,7 +175,7 @@ public class StandardReport : IDocument
 
 You easily change page orientation as illustrated below:
 
-```csharp
+```c#
 // default is portrait
 page.Size(PageSizes.A3);
 
@@ -190,7 +190,7 @@ page.Size(PageSizes.A3.Landscape());
 
 It is possible to define a page size with known width but dynamic height. In the following example, the resulting page has a constant width (equal to the width of an A4 page, but its height depends on the content:
 
-```csharp{13}
+```c#{13}
 public class StandardReport : IDocument
 {
     // metadata
@@ -223,19 +223,19 @@ Because of practical layout limitations, the maximum page height is limited to 1
 
 The QuestPDF library provides a default set of styles that are applied to text.
 
-```csharp
+```c#
 .Text("Text with library default styles")
 ```
 
 You can adjust the text style by providing additional arguments:
 
-```csharp
+```c#
 .Text("Red semibold text of size 20").FontSize(20).SemiBold()
 ```
 
 The above option above overrides the default style. To get more control you can set a default text style in your document. Please notice that all changes are additive as shown in the following example
 
-```csharp{9-10,22-23,27-28}
+```c#{9-10,22-23,27-28}
 public class SampleReport : IDocument
 {
     public DocumentMetadata GetMetadata() => new DocumentMetadata();
@@ -281,7 +281,7 @@ It is possible to globally specify content direction for entire documents.
 To learn more about how the Content direction works, please read the documentation for the [ContentDirection](/api-reference/content-direction) element.
 :::
 
-```csharp
+```c#
 document.Page(page =>
 {
     // default setting
@@ -294,7 +294,7 @@ document.Page(page =>
 
 A further example follows:
 
-```csharp{8}
+```c#{8}
 document.Page(page =>
 {
     page.Size(PageSizes.A5);

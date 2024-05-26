@@ -4,7 +4,7 @@ The existing Fluent API offers a clear and easy-to-understand way of describing 
 
 In the example below, we will create a simple table where label cells have a grey background, and value cells have a white background. First, let's create corresponding extension methods:
 
-```csharp
+```c#
 static class SimpleExtension
 {
     private static IContainer Cell(this IContainer container, bool dark)
@@ -25,7 +25,7 @@ static class SimpleExtension
 
 Now, you can employ the newly created domain-specific language (DSL) to build the table:
 
-```csharp
+```c#
 .Grid(grid =>
 {
     grid.Columns(10);

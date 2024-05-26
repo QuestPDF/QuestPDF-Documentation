@@ -4,12 +4,12 @@
 - Its child is not visible on the first occurrence page.
 - If the parent is visible on more than one page, the element is visible on all subsequent pages.
 
-```csharp
+```c#
 .SkipOnce()
 ```
 
 Example:
-```csharp{9-12,14-17}
+```c#{9-12,14-17}
 .RenderDocument(container =>
 {
     container.Page(page =>

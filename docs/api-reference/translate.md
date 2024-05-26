@@ -4,7 +4,7 @@
 - It applies the same size constraints to its child.
 - The rendered child appears floating below or above other content.
 
-```csharp{5-6}
+```c#{5-6}
 .Background("#FFF")
 .MinimalBox()
 .Padding(25)

@@ -4,7 +4,7 @@
 
 `LineVertical` is virtual - it occupies the entire available height but no width.
 
-```csharp{6}
+```c#{6}
 .Padding(15)
 .DefaultTextStyle(x => x.FontSize(16))
 .Row(row =>
@@ -21,7 +21,7 @@
 
 `LineHorizontal` is virtual - it occupies the entire available width but no height.
 
-```csharp{7}
+```c#{7}
 .Padding(15)
 .MinimalBox()
 .DefaultTextStyle(x => x.FontSize(16))

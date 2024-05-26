@@ -5,7 +5,7 @@
 - The `Content` element is visible only once. It is often used along with content that spans multiple pages.
 - The `After` element is always visible below the content. When the element is visible on multiple pages, the `After` element is repeated on each page.
 
-```csharp
+```c#
 .Decoration(decoration =>
 {
     decoration

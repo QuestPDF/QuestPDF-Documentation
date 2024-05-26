@@ -2,7 +2,7 @@
 
 Implementing lists is very simple with the `Column` and `Row` elements:
 
-```csharp
+```c#
 .Column(column =>
 {
     foreach (var i in Enumerable.Range(1, 8))

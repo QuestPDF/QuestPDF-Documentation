@@ -1,6 +1,6 @@
 # Inlined
 
-```csharp{16-24}
+```c#{16-24}
 // this method just generates blocks with random size and color for examples below
 void RandomBlock(IContainer container)
 {
@@ -30,7 +30,7 @@ void RandomBlock(IContainer container)
 ![example](/api-reference/inlined-left-bottom.png =400x)
 
 Available spacing settings:
-```csharp
+```c#
 .VerticalSpacing(30)
 .HorizontalSpacing(40)
 
@@ -39,7 +39,7 @@ Available spacing settings:
 ```
 
 Available horizontal alignments:
-```csharp
+```c#
 .AlignLeft()
 .AlignRight()
 .AlignCenter()
@@ -48,14 +48,14 @@ Available horizontal alignments:
 ```
 
 Available baseline alignments:
-```csharp
+```c#
 .BaselineBottom()
 .BaselineMiddle()
 .BaselineTop()
 ```
 
 More examples:
-```csharp{3-5}
+```c#{3-5}
 .Inlined(inlined =>
 {
     inlined.Spacing(20);
@@ -68,7 +68,7 @@ More examples:
 ```
 ![example](/api-reference/inlined-justify-middle.png =400x)
 
-```csharp{3-6}
+```c#{3-6}
 .Inlined(inlined =>
 {
     inlined.VerticalSpacing(50);
