@@ -441,6 +441,38 @@ TextStyle
 ```
 
 
+## Clamping lines with ellipsis
+
+It is possible to limit the number of lines displayed in a text block. The text will be truncated and an ellipsis will be added at the end.
+
+```csharp{3,8}
+// when using shorthand Fluent API
+.Text(Placeholders.Paragraph())
+.ClampLines(3);
+
+// or when using tech-rich Fluent API
+.Text(text =>
+{
+    text.ClampLines(3);
+
+    text.Span("Paragraph: ").Bold;
+    text.Span(Placeholders.Paragraph());
+});
+```
+
+![example](/api-reference/text-line-clamp.png =300x)
+
+It is also possible to customize the ellipsis:
+
+
+```csharp{2}
+.Text(Placeholders.Paragraph())
+.ClampLines(3, " [...]");
+```
+
+![example](/api-reference/text-line-clamp-custom-ellipsis.png =300x)
+
+
 ## Dealing with pageable text
 
 The `Text` element supports paging. That means part of the text may be moved to the next page if there is not enough space on the current one. There are several approaches to simplify the workflow with text as described below.
