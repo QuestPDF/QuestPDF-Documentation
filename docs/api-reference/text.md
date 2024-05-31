@@ -178,6 +178,48 @@ This settings uses relative units. Example: let's assume your text has font size
 ![example](/api-reference/text-letter-spacing.png =500x)
 
 
+## Word Spacing
+
+Word spacing allows you to increase or decrease space between words. This setting is useful when you want to make the text more compact (by decreasing word spacing) or easier to read (by increasing word spacing):
+- The value 0 corresponds to the normal spacing defined by a font.
+- Positive values create additional space.
+- Negative values reduce space between characters.
+
+This settings uses relative units. Example: let's assume your text has font size 20. If letter spacing is set to 0.1, an additional space of 2 points will be added between characters.
+
+```c#{17}
+.Column(column =>
+{
+    var wordSpacing = new[] { -0.2f, 0f, 0.2f };
+    var paragraph = Placeholders.Sentence();
+
+    foreach (var spacing in wordSpacing)
+    {
+        column
+            .Item()
+            .Border(1)
+            .Padding(10)
+            .Column(nestedColumn =>
+            {
+                nestedColumn.Item()
+                    .Text(paragraph)
+                    .FontSize(16)
+                    .WordSpacing(spacing);
+
+                nestedColumn.Item()
+                    .Text($"Word spacing of {spacing} em")
+                    .FontSize(10)
+                    .Italic()
+                    .FontColor(Colors.Blue.Medium);
+            });
+        
+    }
+});
+```
+
+![example](/api-reference/text-word-spacing.png =500x)
+
+
 ## Typography pattern
 
 Please consider an example Typography class that describes text styling across all documents:
@@ -241,23 +283,59 @@ You can also use the shorthand version:
 .Text("Sample text").Justify();
 ```
 
-## Custom paragraph spacing
+## Paragraph spacing
 
-It is possible to specify additional spacing between paragraphs (blocks of text in different lines).
+Paragraph spacing is the space added between paragraphs to improve readability and structure in a document. Its purpose is to visually separate paragraphs, making the text easier to navigate and more aesthetically pleasing.
 
-```c#
+```c#{2}
+.Text(Placeholders.Paragraphs())
+.ParagraphSpacing(10);
+```
+
+![example](/api-reference/text-paragraph-spacing.png =400x)
+
+
+## First line indentation
+
+Paragraph first line indentation is the practice of indenting the first line of a paragraph by a specified amount. Its purpose is to visually distinguish the beginning of a new paragraph, enhancing the document's readability and structure.
+
+```c#{2}
+.Text(Placeholders.Paragraphs())
+.ParagraphFirstLineIndentation(20);
+```
+
+![example](/api-reference/text-first-line-indentation.png =400x)
+
+
+## Clamping lines with ellipsis
+
+
+Line clamping is a technique used to limit the number of lines displayed for a block of text, truncating the content and often adding an ellipsis ("...") to indicate that there is more text not currently visible. Its purpose is to manage text overflow and maintain a clean layout in user interfaces.
+
+```c#{3,8}
+// when using shorthand Fluent API
+.Text(Placeholders.Paragraph())
+.ClampLines(3);
+
+// or when using tech-rich Fluent API
 .Text(text =>
 {
-    text.ParagraphSpacing(10);
-    
-    text.Line("Paragraph 1");
-    text.Line("Paragraph 2");
-    text.Line("Paragraph 3");
-    text.Line(Placeholders.LoremIpsum());
+    text.ClampLines(3);
+
+    text.Span("Paragraph: ").Bold;
+    text.Span(Placeholders.Paragraph());
 });
 ```
 
-![example](/api-reference/text-paragraph-spacing.png =500x)
+![example](/api-reference/text-line-clamp.png =300x)
+
+It is also possible to customize the ellipsis:
+
+```c#{2}
+.Text(Placeholders.Paragraph())
+.ClampLines(3, " [...]");
+```
+
 
 ## Injecting custom content
 
@@ -440,35 +518,6 @@ TextStyle
     .FontFamily(Fonts.Calibri, "Segoe UI Emoji");
 ```
 
-
-## Clamping lines with ellipsis
-
-It is possible to limit the number of lines displayed in a text block. The text will be truncated and an ellipsis will be added at the end.
-
-```c#{3,8}
-// when using shorthand Fluent API
-.Text(Placeholders.Paragraph())
-.ClampLines(3);
-
-// or when using tech-rich Fluent API
-.Text(text =>
-{
-    text.ClampLines(3);
-
-    text.Span("Paragraph: ").Bold;
-    text.Span(Placeholders.Paragraph());
-});
-```
-
-![example](/api-reference/text-line-clamp.png =300x)
-
-It is also possible to customize the ellipsis:
-
-
-```c#{2}
-.Text(Placeholders.Paragraph())
-.ClampLines(3, " [...]");
-```
 
 ![example](/api-reference/text-line-clamp-custom-ellipsis.png =300x)
 
