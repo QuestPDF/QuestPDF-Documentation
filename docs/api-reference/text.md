@@ -258,11 +258,11 @@ Then, a predefined typography can be used in the following way:
 .Text("My text with predefined style").Style(Typography.Headline);
 ```
 
-## Font alignment
+## Text alignment
 
 Use the following fluent API methods to adjust text position:
 
-```c#
+```c#{4-9}
 .Text(text =>
 {
     // pick alignment
@@ -282,6 +282,40 @@ You can also use the shorthand version:
 ```c#
 .Text("Sample text").Justify();
 ```
+
+Example:
+
+```c#
+var text = Placeholders.Paragraph();
+
+content.Padding(20).Column(column =>
+{
+    column.Spacing(20);
+    
+    IContainer BlockStyle(IContainer container) => container.Background(Colors.Grey.Lighten3).Padding(10);
+    
+    column.Item().Text("Left alignment").Bold();
+    column.Item().Element(BlockStyle).Text(text).AlignLeft();
+    
+    column.Item().Text("Center alignment").Bold();
+    column.Item().Element(BlockStyle).Text(text).AlignCenter();
+    
+    column.Item().Text("Right alignment").Bold();
+    column.Item().Element(BlockStyle).Text(text).AlignRight();
+    
+    column.Item().Text("Start alignment").Bold();
+    column.Item().Element(BlockStyle).Text(text).AlignStart();
+    
+    column.Item().Text("End alignment").Bold();
+    column.Item().Element(BlockStyle).Text(text).AlignEnd();
+    
+    column.Item().Text("Justify alignment").Bold();
+    column.Item().Element(BlockStyle).Text(text).Justify();
+});
+```
+
+![example](/api-reference/text-alignment.png =500x)
+
 
 ## Paragraph spacing
 
