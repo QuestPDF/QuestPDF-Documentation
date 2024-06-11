@@ -157,6 +157,7 @@ export default defineConfig({
                     { text: 'Prototyping', link: '/concepts/prototyping' },
                     { text: 'Exceptions', link: '/concepts/exceptions' },
                     { text: 'SkiaSharp integration', link: '/concepts/skia-sharp-integration' },
+                    { text: 'Application optimization', link: '/concepts/application-optimization' },
                 ]
             },
             {
