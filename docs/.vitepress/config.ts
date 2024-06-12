@@ -155,6 +155,7 @@ export default defineConfig({
                     { text: 'Colors', link: '/concepts/colors' },
                     { text: 'Basic fonts', link: '/concepts/basic-fonts' },
                     { text: 'Prototyping', link: '/concepts/prototyping' },
+                    { text: 'Complex Graphics', link: '/concepts/complex-graphics' },
                     { text: 'Exceptions', link: '/concepts/exceptions' },
                     { text: 'SkiaSharp integration', link: '/concepts/skia-sharp-integration' },
                     { text: 'Application optimization', link: '/concepts/application-optimization' },
