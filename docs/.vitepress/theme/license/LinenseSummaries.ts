@@ -55,7 +55,7 @@ export const ProfessionalLicense : License = {
     name: "Professional",
     shortTerms: "Applicable for individuals and companies with at most 10 software developers",
 
-    price: 499,
+    price: 699,
     paddleProductId: PaddleConfiguration.professionalLicenseId,
 
     details: [
