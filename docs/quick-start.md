@@ -81,17 +81,16 @@ We are incredibly grateful to the YouTube Community for their positive reviews a
 
 ### Nick Chapsas: The Easiest Way to Create PDFs in .NET
 
-[![Nick Chapsas The Easiest Way to Create PDFs in .NET](https://img.youtube.com/vi/_M0IgtGWnvE/0.jpg)](https://www.youtube.com/watch?v=_M0IgtGWnvE)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_M0IgtGWnvE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Claudio Bernasconi: QuestPDF - The BEST PDF Generator for .NET?!
 
-[![Claudio Bernasconi QuestPDF - The BEST PDF Generator for .NET?!](https://img.youtube.com/vi/T89A_7dz1P8/0.jpg)](https://www.youtube.com/watch?v=T89A_7dz1P8)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/T89A_7dz1P8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### JetBrains: OSS Power-Ups: QuestPDF
 
-[![JetBrains OSS Power-Ups: QuestPDF](https://img.youtube.com/vi/-iYvZvpLX0g/0.jpg)](https://www.youtube.com/watch?v=-iYvZvpLX0g)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-iYvZvpLX0g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### Programming with Felipe Gavilan: Generating PDFs with C# - Very Easy (two examples)
 
-[![Felipe Gavilan Generating PDFs with C# - Very Easy (two examples)](https://img.youtube.com/vi/bhR4Cmg16gs/0.jpg)](https://www.youtube.com/watch?v=bhR4Cmg16gs)
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bhR4Cmg16gs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
