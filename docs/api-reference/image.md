@@ -245,7 +245,7 @@ Document
 :::tip
 If your SVG image contains text, please ensure that the font is available in your application:
 - when the `QuestPDF.Settings.UseEnvironmentFonts` is set to `true`, the font should be installed in the operating system,
-- when the `QuestPDF.Settings.UseEnvironmentFonts` is set to `false`, the font files should be deployed along with the application or registered with the `FontManager` class.
+- when the `QuestPDF.Settings.UseEnvironmentFonts` is set to `false`, the font files should be deployed along with the application.
 :::
 
 :::warning
