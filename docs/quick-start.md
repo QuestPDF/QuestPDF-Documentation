@@ -73,3 +73,25 @@ And compare it to the produced PDF file:
 The Fluent API of QuestPDF scales really well. It is easy to create and maintain even most complex documents. Read [the Getting started tutorial](/getting-started.html) to learn QuestPDF basics and implement an invoice under 200 lines of code. You can also investigate and play with the code from [the example repository](https://github.com/QuestPDF/example-invoice).
 
 ![invoice](/getting-started/invoice.png =500x)
+
+
+## Or watch a video created by our fantastic Community
+
+We are incredibly grateful to the YouTube community for their positive reviews and recommendations of the QuestPDF library. Your support is invaluable to us!
+
+### Nick Chapsas: The Easiest Way to Create PDFs in .NET
+
+[![Nick Chapsas The Easiest Way to Create PDFs in .NET](https://img.youtube.com/vi/_M0IgtGWnvE/0.jpg)](https://www.youtube.com/watch?v=_M0IgtGWnvE)
+
+### Claudio Bernasconi: QuestPDF - The BEST PDF Generator for .NET?!
+
+[![Claudio Bernasconi QuestPDF - The BEST PDF Generator for .NET?!](https://img.youtube.com/vi/T89A_7dz1P8/0.jpg)](https://www.youtube.com/watch?v=T89A_7dz1P8)
+
+### JetBrains: OSS Power-Ups: QuestPDF
+
+[![JetBrains OSS Power-Ups: QuestPDF](https://img.youtube.com/vi/-iYvZvpLX0g/0.jpg)](https://www.youtube.com/watch?v=-iYvZvpLX0g)
+
+### Programming with Felipe Gavilan: Generating PDFs with C# - Very Easy (two examples)
+
+[![Felipe Gavilan Generating PDFs with C# - Very Easy (two examples)](https://img.youtube.com/vi/bhR4Cmg16gs/0.jpg)](https://www.youtube.com/watch?v=-bhR4Cmg16gs)
+
