@@ -77,7 +77,7 @@ The Fluent API of QuestPDF scales really well. It is easy to create and maintain
 
 ## Or watch a video created by our fantastic Community
 
-We are incredibly grateful to the YouTube community for their positive reviews and recommendations of the QuestPDF library. Your support is invaluable to us!
+We are incredibly grateful to the YouTube Community for their positive reviews and recommendations of the QuestPDF library. Your support and feedback are invaluable and motivate us to keep improving and expanding this project. Thank you for helping us grow and reach more developers!
 
 ### Nick Chapsas: The Easiest Way to Create PDFs in .NET
 
@@ -93,5 +93,5 @@ We are incredibly grateful to the YouTube community for their positive reviews a
 
 ### Programming with Felipe Gavilan: Generating PDFs with C# - Very Easy (two examples)
 
-[![Felipe Gavilan Generating PDFs with C# - Very Easy (two examples)](https://img.youtube.com/vi/bhR4Cmg16gs/0.jpg)](https://www.youtube.com/watch?v=-bhR4Cmg16gs)
+[![Felipe Gavilan Generating PDFs with C# - Very Easy (two examples)](https://img.youtube.com/vi/bhR4Cmg16gs/0.jpg)](https://www.youtube.com/watch?v=bhR4Cmg16gs)
 
