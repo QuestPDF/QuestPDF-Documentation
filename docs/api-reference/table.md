@@ -89,7 +89,7 @@ container
             columns.RelativeColumn(3);
         });
 
-        table.Cell().ColumnSpan(4).LabelCell("Total width: 300px");
+        table.Cell().ColumnSpan(4).LabelCell("Total width: 400px");
         table.Cell().ValueCell("50px");
         table.Cell().ValueCell("100px");
         table.Cell().ValueCell("100px");
@@ -97,7 +97,7 @@ container
     });
 ```
 
-![example](/api-reference/table-columns-definition.png =320x)
+![example](/api-reference/table-columns-definition.png =440x)
 
 ## Row spans and column spans
 
