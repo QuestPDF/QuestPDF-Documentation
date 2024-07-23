@@ -123,6 +123,7 @@ export default defineConfig({
                     { text: 'Decoration', link: '/api-reference/decoration' },
                     { text: 'Layers', link: '/api-reference/layers' },
                     { text: 'List', link: '/api-reference/lists' },
+                    { text: 'Multi Column', link: '/api-reference/multi-column' },
                 ]
             },
             {
