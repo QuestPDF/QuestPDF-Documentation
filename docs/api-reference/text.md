@@ -370,6 +370,8 @@ It is also possible to customize the ellipsis:
 .ClampLines(3, " [...]");
 ```
 
+![example](/api-reference/text-line-clamp-custom-ellipsis.png =300x)
+
 
 ## Injecting custom content
 
@@ -552,8 +554,6 @@ TextStyle
     .FontFamily(Fonts.Calibri, "Segoe UI Emoji");
 ```
 
-
-![example](/api-reference/text-line-clamp-custom-ellipsis.png =300x)
 
 
 ## Dealing with pageable text
