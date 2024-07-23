@@ -373,6 +373,44 @@ It is also possible to customize the ellipsis:
 ![example](/api-reference/text-line-clamp-custom-ellipsis.png =300x)
 
 
+## Font Features
+
+Font features are a set of typographic features that can be applied to text to enhance its appearance. They are used to control various aspects of text rendering.
+
+To better understand what font features are, please consider example definitions. Please note that there are many more various font features. Most fonts support only a handful of them, having some of them enabled by default:
+- **Ligatures** in typography are specific character combinations that are designed to improve the aesthetics and readability of certain letter pairs. For example, in some fonts, when you type certain combinations of letters like 'fi' or 'fl', they will be replaced with a single, joined glyph.
+- **Kerning** in typography refers to the adjustment of space between characters in a proportional font. It's used to achieve a visually pleasing result by adjusting the spacing of specific character pairs. For example, in many fonts, the pair 'AV' is kerned so that the 'A' and 'V' are closer together than they would be by default.
+
+Font features are always encoded as 4-character long strings. For example, the ligatures feature is encode as `liga`, while the kernig feature as `kern`.
+For a list of available features, refer to the `QuestPDF.Helpers.FontFeatures` class.
+
+::: tip
+Please note that fonts usually support only a subset of font features. 
+If you try to enable a feature that is not supported by the font, it will be ignored.
+Moreover, some fonts have features enabled by default, and you may not see any difference when enabling them.
+:::
+
+```c#{8,14}
+.Row(row =>
+{
+    row.Spacing(25);
+    
+    row.RelativeItem().Column(column =>
+    {
+        column.Item().Text("Without ligatures").FontSize(16);
+        column.Item().Text("fly and fight").FontSize(32).DisableFontFeature(FontFeatures.StandardLigatures);
+    });
+    
+    row.RelativeItem().Column(column =>
+    {
+        column.Item().Text("With ligatures").FontSize(16);
+        column.Item().Text("fly and fight").FontSize(32).EnableFontFeature(FontFeatures.StandardLigatures);
+    });
+});
+```
+
+![example](/api-reference/text-font-features.png =500x)
+
 ## Injecting custom content
 
 Sometimes you may need to inject custom components between text spans. Every injected element is aligned to the baseline.
