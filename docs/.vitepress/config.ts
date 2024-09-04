@@ -31,6 +31,7 @@ export default defineConfig({
                     { text: 'Getting started', link: '/getting-started' },
                     { text: 'API reference', link: '/api-reference/index' },
                     { text: 'Design patterns', link: '/design-patterns' },
+                    { text: 'Companion App', link: '/companion/usage' },
                 ]
             },
             { text: 'Pricing', link: '/license/' },
@@ -68,6 +69,15 @@ export default defineConfig({
                     { text: 'Releases', link: 'https://github.com/QuestPDF/QuestPDF/releases' },
                     { text: 'Roadmap', link: 'https://github.com/QuestPDF/QuestPDF/discussions/621' },
                     { text: 'Acknowledgements', link: '/acknowledgements' }
+                ]
+            },
+            {
+                text: 'Companion App <div class="VPBadge tip">preview</div>',
+                items: [
+                    { text: 'Introduction and Usage', link: '/companion/usage' },
+                    { text: 'Download', link: '/companion/download' },
+                    { text: 'Features', link: '/companion/features' },
+                    { text: 'Warnings', link: '/companion/warnings' }
                 ]
             },
             {
