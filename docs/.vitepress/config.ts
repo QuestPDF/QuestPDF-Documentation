@@ -77,7 +77,8 @@ export default defineConfig({
                     { text: 'Introduction and Usage', link: '/companion/usage' },
                     { text: 'Download', link: '/companion/download' },
                     { text: 'Features', link: '/companion/features' },
-                    { text: 'Warnings', link: '/companion/warnings' }
+                    { text: 'Warnings', link: '/companion/warnings' },
+                    { text: 'Previewer (legacy)', link: '/document-previewer' },
                 ]
             },
             {

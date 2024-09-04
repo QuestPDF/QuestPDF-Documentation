@@ -59,7 +59,7 @@ document.ShowInCompanion(12345);
 :::warning
 The QuestPDF Companion integration requires the library version **2024.10** or newer.
 
-If you cannot update, please use the legacy [QuestPDF Previewer application](http://localhost:5173/document-previewer.html).
+If you cannot update, please use the legacy [QuestPDF Previewer application](/document-previewer.html).
 :::
 
 
