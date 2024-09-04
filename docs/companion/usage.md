@@ -7,6 +7,9 @@ First, it shows a preview of your document. But the real magic starts with the h
 It observes your code and updates the preview every time you change the implementation. 
 Get real-time results without the need of code recompilation. Save time and enjoy the task!
 
+![Application screenshot](/companion/application-light.png =1762x){.companion-screenshot .light-only}
+![Application screenshot](/companion/application-dark.png =1762x){.companion-screenshot .dark-only}
+
 :::info
 Read more about features availble in the Companion App in the [Features](/companion/features) section.
 :::

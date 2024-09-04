@@ -3,8 +3,8 @@
 The companion app provides a preview of the document. The preview is interactive and allows you to navigate the document, select elements, and measure distances.
 
 
-![Application screenshot](/companion/application-light.png =1802x){.companion-screenshot .light-only}
-![Application screenshot](/companion/application-dark.png =1802x){.companion-screenshot .dark-only}
+![Application screenshot](/companion/application-light.png =1762x){.companion-screenshot .light-only}
+![Application screenshot](/companion/application-dark.png =1762x){.companion-screenshot .dark-only}
 
 
 ## Document hierarchy
@@ -16,6 +16,9 @@ The tree-structure uses a similar compact concept as C# Fluent API. Each node in
 | Shortcut   | Description                    |
 |------------|--------------------------------|
 | ctrl + W   | Hide / show document hierarchy |
+
+![Application screenshot](/companion/hierarchy-hidden-light.png =1762x){.companion-screenshot .light-only}
+![Application screenshot](/companion/hierarchy-hidden-dark.png =1762x){.companion-screenshot .dark-only}
 
 
 ## Document preview
@@ -42,16 +45,16 @@ The document preview section (on the right side of the screen) displays the docu
 
 Use the magnifier feature (shortcut: `key 1`) to quickly see document's structure details without the need of zooming and adjusting the preview.
 
-![Application screenshot](/companion/magnifier-light.png =1802x){.companion-screenshot .light-only}
-![Application screenshot](/companion/magnifier-dark.png =1802x){.companion-screenshot .dark-only}
+![Application screenshot](/companion/magnifier-light.png =1774x){.companion-screenshot .light-only}
+![Application screenshot](/companion/magnifier-dark.png =1774x){.companion-screenshot .dark-only}
 
 
 ## Coordinate picker
 
 The coordinate picker feature (shortcut: `key 2`) allows you to pick the coordinates of the selected element. This feature is useful when you need to know the position of an element in the document.
 
-![Application screenshot](/companion/pick-coordinates-light.png =1802x){.companion-screenshot .light-only}
-![Application screenshot](/companion/pick-coordinates-dark.png =1802x){.companion-screenshot .dark-only}
+![Application screenshot](/companion/measurement-point-light.png =1774x){.companion-screenshot .light-only}
+![Application screenshot](/companion/measurement-point-dark.png =1774x){.companion-screenshot .dark-only}
 
 
 ## Size measurement
@@ -60,11 +63,11 @@ This feature allows you to measure the size of visual elements in the document, 
 
 You can measure the size of the content vertically (shortcut: `key 3`) or horizontally (shortcut: `key 4`).
 
-![Application screenshot](/companion/measure-vertically-light.png =1802x){.companion-screenshot .light-only}
-![Application screenshot](/companion/measure-vertically-dark.png =1802x){.companion-screenshot .dark-only}
+![Application screenshot](/companion/measurement-vertical-light.png =1774x){.companion-screenshot .light-only}
+![Application screenshot](/companion/measurement-vertical-dark.png =1774x){.companion-screenshot .dark-only}
 
-![Application screenshot](/companion/measure-horizontally-light.png =1802x){.companion-screenshot .light-only}
-![Application screenshot](/companion/measure-horizontally-dark.png =1802x){.companion-screenshot .dark-only}
+![Application screenshot](/companion/measurement-horizontal-light.png =1774x){.companion-screenshot .light-only}
+![Application screenshot](/companion/measurement-horizontal-dark.png =1774x){.companion-screenshot .dark-only}
 
 
 ## Element selection
@@ -81,8 +84,8 @@ If the element is visible on multiple pages, you can use arrows keys to navigate
 | arrow down | Next element occurrence     |
 | esc        | Clear element selection     |
 
-![Application screenshot](/companion/selected-element-light.png =1802x){.companion-screenshot .light-only}
-![Application screenshot](/companion/selected-element-dark.png =1802x){.companion-screenshot .dark-only}
+![Application screenshot](/companion/selection-light.png =1762x){.companion-screenshot .light-only}
+![Application screenshot](/companion/selection-dark.png =1762x){.companion-screenshot .dark-only}
 
 
 ## Content searching
@@ -98,8 +101,8 @@ The selected search result is highlighted in both structure tree view and on the
 | arrow up   | Previous found element |
 | arrow down | Next found element     |
 
-![Application screenshot](/companion/application-light.png =1802x){.companion-screenshot .light-only}
-![Application screenshot](/companion/application-dark.png =1802x){.companion-screenshot .dark-only}
+![Application screenshot](/companion/search-light.png =1762x){.companion-screenshot .light-only}
+![Application screenshot](/companion/search-dark.png =1762x){.companion-screenshot .dark-only}
 
 
 ## Go to implementation
@@ -142,8 +145,8 @@ When an element is selected, additional information about the layout issue is di
 You can review the reason for the layout wrap or layout overflow.
 Use that hint and your knowledge about structure elements behavior to resolve the layout issue.
 
-![Application screenshot](/companion/selected-element-light.png =1802x){.companion-screenshot .light-only}
-![Application screenshot](/companion/selected-element-dark.png =1802x){.companion-screenshot .dark-only}
+![Application screenshot](/companion/layout-error-light.png =2472x){.companion-screenshot .light-only}
+![Application screenshot](/companion/layout-error-dark.png =2472x){.companion-screenshot .dark-only}
 
 
 ## Settings
@@ -151,8 +154,7 @@ Use that hint and your knowledge about structure elements behavior to resolve th
 The companion app provides a set of customization options to adjust the appearance and behavior of the previewer, including:
 - Light and dark theme,
 - Default IDE for code navigation,
-- Changing port number on which the application will communicate,
-- Capability of hiding/showing various panels.
+- Changing port number on which the application will communicate.
 
-![Application screenshot](/companion/settings-light.png =1802x){.companion-screenshot .light-only}
-![Application screenshot](/companion/settings-dark.png =1802x){.companion-screenshot .dark-only}
+![Application screenshot](/companion/settings-light.png =600x){.companion-screenshot .light-only}
+![Application screenshot](/companion/settings-dark.png =600x){.companion-screenshot .dark-only}
