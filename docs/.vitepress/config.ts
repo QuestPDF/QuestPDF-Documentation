@@ -71,7 +71,7 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Companion App <div class="VPBadge tip">preview</div>',
+                text: 'Companion App <div class="VPBadge tip" style="margin-left: 8px;">new</div>',
                 items: [
                     { text: 'Introduction and Usage', link: '/companion/usage' },
                     { text: 'Download', link: '/companion/download' },
