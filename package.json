@@ -6,7 +6,7 @@
   "type": "module",
   "devDependencies": {
     "markdown-it-imsize": "^2.0.1",
-    "sass": "^1.79.5",
+    "sass": "^1.80.4",
     "vitepress": "1.4.1",
     "vue": "3.5.12"
   },
