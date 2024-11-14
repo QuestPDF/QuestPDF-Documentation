@@ -34,12 +34,12 @@ export const StatisticsContent : HomePageStatistic[] = [
     {
         icon: "/homepage/stargazers.svg",
         label: "GitHub stargazers",
-        value: "11 900 +"
+        value: "12 9000 +"
     },
     {
         icon: "/homepage/downloads.svg",
         label: "NuGet package downloads",
-        value: "6 450 000 +"
+        value: "6 750 000 +"
     },
     {
         icon: "/homepage/updates.svg",
