@@ -59,7 +59,6 @@ export const ProfessionalLicense : License = {
     paddleProductId: PaddleConfiguration.professionalLicenseId,
 
     details: [
-        { type: LicenseDetailType.Warning, content: "Effective 1 July 2024, there has been a slight increase in the price of this license. If this adjustment impacts your procurement process, please contact us at <a href='mailto:contact@questpdf.com'>contact@questpdf.com</a> for appropriate discount coupon codes. Thank you for your understanding." },
         ...LicenseDetailsIncluded,
         { type: LicenseDetailType.Feature, content: "Up to 10 developers working on QuestPDF-dependent projects" },
         LicenseLicense,
