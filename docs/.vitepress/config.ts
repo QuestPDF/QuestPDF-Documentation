@@ -27,11 +27,20 @@ export default defineConfig({
             {
                 text: 'Documentation',
                 items: [
-                    { text: 'Quick start', link: '/quick-start' },
-                    { text: 'Getting started', link: '/getting-started' },
-                    { text: 'API reference', link: '/api-reference/index' },
-                    { text: 'Design patterns', link: '/design-patterns' },
-                    { text: 'Companion App', link: '/companion/usage' },
+                    {
+                      items: [
+                          { text: 'Quick start', link: '/quick-start' },
+                          { text: 'Getting started', link: '/getting-started' },
+                          { text: 'API reference', link: '/api-reference/index' },
+                          { text: 'Design patterns', link: '/design-patterns' },
+                      ]
+                    },
+                    {
+                        items: [
+                            { text: 'Document operations <div class="VPBadge tip" style="margin-left: 8px;">new</div>', link: '/concepts/document-operations' },
+                            { text: 'Companion App <div class="VPBadge tip" style="margin-left: 8px;">new</div>', link: '/companion/usage' },
+                        ]
+                    }
                 ]
             },
             { text: 'Pricing', link: '/license/' },
@@ -152,6 +161,7 @@ export default defineConfig({
             {
                 text: 'Concepts',
                 items: [
+                    { text: 'Document operations <div class="VPBadge tip" style="margin-left: 8px;">new</div>', link: '/concepts/document-operations' },
                     { text: 'Settings', link: '/concepts/settings' },
                     { text: 'Document metadata', link: '/concepts/document-metadata' },
                     { text: 'Document settings', link: '/concepts/document-settings' },
@@ -179,6 +189,7 @@ export default defineConfig({
                     { text: 'Custom first page', link: '/examples/custom-first-page' },
                     { text: 'Implementing charts', link: '/examples/implementing-charts' },
                     { text: 'Integration with ASP.NET', link: '/examples/aspnet-integration' },
+                    { text: 'ZUGFeRD <div class="VPBadge tip" style="margin-left: 8px;">new</div>', link: '/examples/zugferd' },
                 ]
             }
         ],
