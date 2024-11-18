@@ -16,6 +16,22 @@ Copyright (c) 2017-2018 Microsoft Corporation.
 [Link to the license](https://github.com/mono/SkiaSharp/blob/main/LICENSE.md)
 :::
 
+::: details Skia license details
+Copyright (c) 2024 Google
+BSD 3-Clause "New" or "Revised" License
+
+[Link to the repository webpage](https://github.com/google/skia/tree/main) \
+[Link to the license](https://github.com/google/skia/blob/main/LICENSE)
+:::
+
+::: details qpdf license details
+Copyright (c) 2015-2016 Xamarin, Inc. \
+Copyright (c) 2017-2018 Microsoft Corporation.
+
+[Link to the repository webpage](https://github.com/qpdf/qpdf) \
+[Link to the license](https://github.com/qpdf/qpdf/blob/main/LICENSE.txt)
+:::
+
 
 ::: details Vue license
 Copyright (c) 2013-present, Yuxi (Evan) You
