@@ -39,7 +39,7 @@ export const StatisticsContent : HomePageStatistic[] = [
     {
         icon: "/homepage/downloads.svg",
         label: "NuGet package downloads",
-        value: "6 750 000 +"
+        value: "6 800 000 +"
     },
     {
         icon: "/homepage/updates.svg",
