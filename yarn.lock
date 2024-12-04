@@ -420,6 +420,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@iconify-json/simple-icons@npm:^1.2.10":
+  version: 1.2.14
+  resolution: "@iconify-json/simple-icons@npm:1.2.14"
+  dependencies:
+    "@iconify/types": "*"
+  checksum: 4578937010d45b9af40207815a488cbdae77ddb10ef70bb921b73793ca9accf27c99018f76a406063331f3634f78960f27f1c826bc94b2f1dcf77be0b9151d0d
+  languageName: node
+  linkType: hard
+
+"@iconify/types@npm:*":
+  version: 2.0.0
+  resolution: "@iconify/types@npm:2.0.0"
+  checksum: 029f58542c160e9d4a746869cf2e475b603424d3adf3994c5cc8d0406c47e6e04a3b898b2707840c1c5b9bd5563a1660a34b110d89fce43923baca5222f4e597
+  languageName: node
+  linkType: hard
+
 "@isaacs/cliui@npm:^8.0.2":
   version: 8.0.2
   resolution: "@isaacs/cliui@npm:8.0.2"
@@ -2464,7 +2480,7 @@ __metadata:
   dependencies:
     markdown-it-imsize: ^2.0.1
     sass: ^1.80.7
-    vitepress: 1.4.5
+    vitepress: 1.5.0
     vue: 3.5.13
   languageName: unknown
   linkType: soft
@@ -2995,12 +3011,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitepress@npm:1.4.5":
-  version: 1.4.5
-  resolution: "vitepress@npm:1.4.5"
+"vitepress@npm:1.5.0":
+  version: 1.5.0
+  resolution: "vitepress@npm:1.5.0"
   dependencies:
     "@docsearch/css": ^3.6.2
     "@docsearch/js": ^3.6.2
+    "@iconify-json/simple-icons": ^1.2.10
     "@shikijs/core": ^1.22.2
     "@shikijs/transformers": ^1.22.2
     "@shikijs/types": ^1.22.2
@@ -3026,7 +3043,7 @@ __metadata:
       optional: true
   bin:
     vitepress: bin/vitepress.js
-  checksum: 7ee6268228004168d95e76c96047d9444a2247707e2996f781d28258d8e2e4e9df7e6f0bd427381b5fc0d99bd5accdbe84d58320d8c0604882a3191ee5429263
+  checksum: 7b3e657d046f1fa6d85ce070274972542c603ada1fb749d168e5e6924e1b7cbf6890fd363081d709445c77ebfb2bf818657f4abf80cb657d49b78568254f85dc
   languageName: node
   linkType: hard
 

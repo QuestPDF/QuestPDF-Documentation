@@ -7,7 +7,7 @@
   "devDependencies": {
     "markdown-it-imsize": "^2.0.1",
     "sass": "^1.80.7",
-    "vitepress": "1.4.5",
+    "vitepress": "1.5.0",
     "vue": "3.5.13"
   },
   "scripts": {
@@ -17,5 +17,6 @@
   },
   "engines": {
     "node": "20.x"
-  }
+  },
+  "packageManager": "yarn@3.5.1+sha512.8cd0e31bd60779ef4ca92b855fb3462c7ec35ce8b345752b7349a68239776417f46d41d79c8047242d9c93b48a1516f64c7444ebe747d9a02bf26868e6fa1f2b"
 }
