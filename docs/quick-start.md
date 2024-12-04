@@ -15,7 +15,7 @@ Install-Package QuestPDF
 dotnet add package QuestPDF
 
 // Package reference in .csproj file
-<PackageReference Include="QuestPDF" Version="2024.10.0" />
+<PackageReference Include="QuestPDF" Version="2024.12.0" />
 ```
 
 ## Implementation
