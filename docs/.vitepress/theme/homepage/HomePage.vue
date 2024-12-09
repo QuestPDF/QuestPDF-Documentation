@@ -5,15 +5,7 @@
     </div>
 
     <div class="container">
-      <HomePageUsers />
-    </div>
-
-    <div class="container reverse-background">
       <HomePageFeatures />
-    </div>
-
-    <div class="container">
-      <HomePageRecommendation />
     </div>
 
     <div class="container reverse-background">
@@ -25,9 +17,7 @@
 <script setup>
 
 import HomePageFeatures from "./HomePageFeatures.vue";
-import HomePageUsers from "./HomePageUsers.vue";
 import HomePageDescription from "./HomePageDescription.vue";
-import HomePageRecommendation from "./HomePageRecommendation.vue";
 import HomePageGettingStarted from "./HomePageGettingStarted.vue";
 
 </script>
