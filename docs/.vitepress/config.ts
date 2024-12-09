@@ -207,6 +207,11 @@ export default defineConfig({
         config: (md) => {
             md.use(imsize_plugin)
         }
+    },
+
+    sitemap: {
+        hostname: 'https://www.questpdf.com',
+        lastmodDateOnly: true
     }
 });
 
