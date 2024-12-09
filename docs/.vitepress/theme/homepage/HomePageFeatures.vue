@@ -1,7 +1,7 @@
 <template>
   <section class="content">
 
-    <h2>Designed to be efficient</h2>
+    <h2>What you need is here</h2>
 
     <div class="features">
 
