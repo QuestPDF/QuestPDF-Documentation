@@ -1,18 +1,8 @@
 <template>
   <section class="content">
-
-    <h2>What is QuestPDF?</h2>
+    <h2>Designed to be efficient</h2>
 
     <div class="details">
-      <p class="definition">QuestPDF is <span class="highlight-background">an open-source .NET library for PDF generation</span>. Utilizing several new patterns and practices, QuestPDF seeks to resolve the challenges inherent in this process.</p>
-
-      <div class="summary-list">
-        <article v-for="summary of SummaryContent" class="summary-item">
-          <img src="/homepage/tick.svg" width="28" alt="" />
-          <p>{{ summary }}</p>
-        </article>
-      </div>
-
       <div class="video-container">
         <video class="video" autoplay controls muted loop>
           <source src="/previewer/video-compressed.mp4" type="video/mp4">
@@ -26,7 +16,6 @@
 
 <script setup>
 
-import { SummaryContent } from './configuration';
 import HomePageStatistics from "./HomePageStatistics.vue";
 
 </script>
@@ -41,31 +30,11 @@ import HomePageStatistics from "./HomePageStatistics.vue";
   gap: 64px;
 }
 
-p.definition {
-  color: var(--vp-c-text-1);
-  font-size: 1.25rem;
-  line-height: 2rem;
-}
-
-/* Summary */
-
-.summary-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 64px;
-}
-
-.summary-item {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-gap: 16px;
-}
-
 /* Video preview */
 
 .video-container {
   background-image: conic-gradient(#EEE 0deg, #CCC 90deg, #2979FF55 135deg, #CCC 180deg, #EEE 270deg, #EEE 360deg);
-  padding: 64px;
+  padding: 48px;
   border-radius: 12px;
 }
 

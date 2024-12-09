@@ -21,15 +21,6 @@ interface HomePageRecommendation {
     author: string;
 }
 
-export const SummaryContent : string[] = [
-    "Design documents using C# and employ a code-only approach. Utilize your version control system to its fullest potential.",
-    "Compose document content with a range of powerful and predictable structural elements, such as text, image, border, background, table, and more.",
-    "Utilize a comprehensive layout engine, specifically designed for document generation and paging support.",
-    "Write code using concise and easy-to-understand C# Fluent API. Utilize IntelliSense to quickly discover available options.",
-    "Don't be limited to any proprietary scripting language or format. Follow your experience and leverage all of the features that C# has to offer.",
-    "Save time thanks to a hot-reload capability, allowing real-time document preview without code recompilation."
-];
-
 export const StatisticsContent : HomePageStatistic[] = [
     {
         icon: "/homepage/stargazers.svg",

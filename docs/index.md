@@ -3,7 +3,7 @@ layout: home
 
 hero:
   name: QuestPDF
-  text: Modern .NET library for PDF document generation
+  text: Modern, open-source C# library for PDF document generation
   image:
     src: /logo.svg
     alt: QuestPDF
