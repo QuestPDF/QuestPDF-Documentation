@@ -1,7 +1,7 @@
 .Column(column =>
 {
-    if (Model.HasComments != null)
-        column.Item().Text(Model.HasComments);
+    if (Model.Comments != null)
+        column.Item().Text(Model.Comments);
 
     foreach(var item in Model.Items)
        column.Item().Element(c => CreateItem(c, item);

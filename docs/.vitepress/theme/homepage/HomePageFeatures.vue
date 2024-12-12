@@ -39,7 +39,6 @@ const features = [
     }
 ];
 
-
 </script>
 
 <style scoped>

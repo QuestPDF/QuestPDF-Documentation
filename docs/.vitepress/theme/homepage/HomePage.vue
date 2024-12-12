@@ -9,6 +9,10 @@
     </div>
 
     <div class="container reverse-background">
+      <HomePageCompanion />
+    </div>
+
+    <div class="container">
       <HomePageFeatures />
     </div>
 
@@ -44,6 +48,7 @@ import HomePageLicense from "./HomePageLicense.vue";
 import HomePageMultiplatform from "./HomePageMultiplatform.vue";
 import HomePageDocumentOperations from "./HomePageDocumentOperations.vue";
 import HomePageCodeFocusedApproach from "./HomePageCodeFocusedApproach.vue";
+import HomePageCompanion from "./HomePageCompanion.vue";
 
 </script>
 
