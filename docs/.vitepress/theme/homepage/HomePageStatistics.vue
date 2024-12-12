@@ -1,15 +1,13 @@
 <template>
   <section class="content">
-    <div class="statistics">
-      <article class="statistic" v-for="statistic in StatisticsContent.slice(0, 2)" :key="statistic.label">
-        <img class="icon" :src="statistic.icon" alt="" />
+    <article class="statistic" v-for="statistic in StatisticsContent.slice(0, 2)" :key="statistic.label">
+      <img class="icon" :src="statistic.icon" alt="" />
 
-        <div class="title">
-          <span class="value">{{ statistic.value }}</span>
-          <span class="label">{{ statistic.label }}</span>
-        </div>
-      </article>
-    </div>
+      <div class="title">
+        <span class="value">{{ statistic.value }}</span>
+        <span class="label">{{ statistic.label }}</span>
+      </div>
+    </article>
   </section>
 </template>
 
@@ -21,7 +19,7 @@ import { StatisticsContent } from './configuration';
 
 <style scoped>
 
-.statistics {
+.content {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -29,7 +27,7 @@ import { StatisticsContent } from './configuration';
 }
 
 @media screen and (max-width: 750px) {
-  .statistics {
+  .content {
     flex-direction: column;
     justify-content: center;
     gap: 64px;

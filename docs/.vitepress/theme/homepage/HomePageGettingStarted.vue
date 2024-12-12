@@ -1,7 +1,7 @@
 <template>
-  <section class="content getting-started">
+  <section class="content">
     <div class="description">
-      <h2 style="margin-bottom: 0;">Let's get started</h2>
+      <h2>Let's get started</h2>
 
       <p class="sub-header">Follow our detailed tutorial, and see how easy it is to produce a fully functional invoice with fewer than 250 lines of C# code.</p>
 
@@ -17,27 +17,26 @@
 </script>
 
 <style scoped>
-  .getting-started {
+  .content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 64px 96px;
   }
 
   @media screen and (max-width: 700px) {
-    .getting-started {
+    .content {
       grid-template-columns: 1fr;
     }
   }
 
-  .getting-started .description {
+  .description {
     place-self: center;
     display: flex;
     flex-direction: column;
     align-items: start;
-    gap: 32px;
   }
 
-  .getting-started img {
+  img {
     place-self: center;
     max-width: min(350px, 75%);
   }

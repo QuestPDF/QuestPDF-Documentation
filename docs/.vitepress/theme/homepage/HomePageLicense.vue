@@ -3,12 +3,12 @@
 </script>
 
 <template>
-  <section class="content getting-started">
+  <section class="content">
 
     <img src="/homepage/license.svg" alt="Example invoice document implemented and generated with QuestPDF using C# language." />
 
     <div class="description">
-      <h2 style="margin-bottom: 0;">Sustainable License</h2>
+      <h2>Sustainable License</h2>
 
       <p class="sub-header">To maintain high-quality development and support while keeping the library free for most users, we use a fair pricing model where only larger organizations help by providing necessary funding for the project.</p>
 
@@ -23,7 +23,7 @@
 </template>
 
 <style scoped>
-  .getting-started {
+  .content {
     max-width: 800px;
     display: grid;
     grid-template-columns: auto 1fr;
@@ -31,15 +31,14 @@
     justify-items: start;
   }
 
-  .getting-started .description {
+  .description {
     place-self: center;
     display: flex;
     flex-direction: column;
     align-items: start;
-    gap: 32px;
   }
 
-  .getting-started img {
+  img {
     place-self: center;
     width: 128px;
   }
@@ -52,13 +51,17 @@
     background-color: var(--vp-custom-block-warning-bg);
   }
 
+  .action {
+    margin-top: 1.25rem;
+  }
+
   @media screen and (max-width: 700px) {
-    .getting-started {
+    .content {
       grid-template-columns: 1fr;
       grid-gap: 32px;
     }
 
-    .getting-started img {
+    img {
       place-self: center;
       width: 72px;
     }

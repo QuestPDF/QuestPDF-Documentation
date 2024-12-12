@@ -13,6 +13,14 @@
     </div>
 
     <div class="container">
+      <HomePageMultiplatform />
+    </div>
+
+    <div class="container reverse-background">
+      <HomePageDocumentOperations />
+    </div>
+
+    <div class="container">
       <HomePageLicense />
     </div>
 
@@ -29,6 +37,8 @@ import HomePageDescription from "./HomePageDescription.vue";
 import HomePageGettingStarted from "./HomePageGettingStarted.vue";
 import HomePageStatistics from "./HomePageStatistics.vue";
 import HomePageLicense from "./HomePageLicense.vue";
+import HomePageMultiplatform from "./HomePageMultiplatform.vue";
+import HomePageDocumentOperations from "./HomePageDocumentOperations.vue";
 
 </script>
 
