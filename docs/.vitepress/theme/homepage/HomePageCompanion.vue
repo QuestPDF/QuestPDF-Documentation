@@ -46,7 +46,7 @@ const SummaryContent = [
   align-content: stretch;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
   .content {
     grid-template-columns: 1fr;
     grid-gap: 32px;

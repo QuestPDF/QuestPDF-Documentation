@@ -1,7 +1,7 @@
 <template>
   <div class="custom-page">
     <div class="container video-container">
-      <HomePageDescription />
+      <HomePageCodeAnimation />
     </div>
 
     <div class="container">
@@ -41,7 +41,6 @@
 <script setup>
 
 import HomePageFeatures from "./HomePageFeatures.vue";
-import HomePageDescription from "./HomePageDescription.vue";
 import HomePageGettingStarted from "./HomePageGettingStarted.vue";
 import HomePageStatistics from "./HomePageStatistics.vue";
 import HomePageLicense from "./HomePageLicense.vue";
@@ -49,6 +48,7 @@ import HomePageMultiplatform from "./HomePageMultiplatform.vue";
 import HomePageDocumentOperations from "./HomePageDocumentOperations.vue";
 import HomePageCodeFocusedApproach from "./HomePageCodeFocusedApproach.vue";
 import HomePageCompanion from "./HomePageCompanion.vue";
+import HomePageCodeAnimation from "./HomePageCodeAnimation.vue";
 
 </script>
 

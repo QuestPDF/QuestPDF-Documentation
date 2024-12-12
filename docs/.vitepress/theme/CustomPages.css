@@ -189,9 +189,11 @@ a.action.disabled {
 .code-container {
   background-color: #FFFFFF; /* from shiki light-plus */
   font-size: 14px;
+  line-height: 1.5;
 
   border-radius: 12px;
   overflow: hidden;
+  tab-size: 4;
 
   filter: drop-shadow(0 16px 16px rgba(0,  0, 0, 0.1));
 }
@@ -200,10 +202,17 @@ html.dark .code-container {
   background-color: #1E1E1E; /* from shiki dark-plus */
 }
 
+
+@media screen and (max-width: 1000px) {
+  .code-container pre {
+    tab-size: 2;
+  }
+}
+
 @media screen and (max-width: 700px) {
   .code-container {
     font-size: 12px;
-
+    line-height: 1.25;
     overflow: scroll;
   }
 }
@@ -211,7 +220,7 @@ html.dark .code-container {
 .code-container .line {
   display: inline-block;
   padding: 0 16px;
-  width: 100%;
+  width: calc(100% + 2 * 16px);
 }
 
 .code-container .line-highlighted {
@@ -219,7 +228,7 @@ html.dark .code-container {
 }
 
 html.dark .code-container .line-highlighted {
-  background-color: #093478;
+  background-color: #222b37;
 }
 
 .code-container .line-removed {
