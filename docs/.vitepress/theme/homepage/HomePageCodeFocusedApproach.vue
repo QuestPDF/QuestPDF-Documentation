@@ -5,52 +5,51 @@ import lightPlus from 'shiki/themes/light-plus.mjs';
 import csharp from 'shiki/langs/csharp.mjs';
 import {onMounted, ref, watch} from "vue";
 import {useData} from "vitepress";
-import documentOperationCode from './documentOperationCodeExample.cs?raw';
+import codeOrganization from './organizationCodeExample.cs?raw';
 
 const { isDark } = useData()
 const highlightedCode = ref('');
 
 async function highlightCode() {
-    const highlighter = await getSingletonHighlighter({
-        themes: [ darkPlus, lightPlus ],
-        langs: [ csharp ]
-    });
+  const highlighter = await getSingletonHighlighter({
+    themes: [ darkPlus, lightPlus ],
+    langs: [ csharp ]
+  });
 
-    highlightedCode.value =  highlighter.codeToHtml(documentOperationCode, {
-        lang: 'csharp',
-        theme: isDark.value ? 'dark-plus' :'light-plus'
-    })
+  highlightedCode.value =  highlighter.codeToHtml(codeOrganization, {
+    lang: 'csharp',
+    theme: isDark.value ? 'dark-plus' :'light-plus',
+    transformers: [
+      {
+        line(node, line) {
+          if (line == 13)
+            this.addClassToHast(node, 'line-removed')
+
+          if (line == 14)
+            this.addClassToHast(node, 'line-added')
+        }
+      }
+    ]
+  })
 }
 
 watch(isDark, highlightCode);
 onMounted(highlightCode);
-
-const SummaryContent = [
-    "Merge documents",
-    "Attach files",
-    "Extract pages",
-    "Encrypt / decrypt",
-    "Extend metadata",
-    "Limit access",
-    "Optimize for Web",
-    "Overlay / underlay"
-]
 
 </script>
 
 <template>
   <section class="content">
     <div class="description">
-      <h2>Perform common PDF operations</h2>
+      <h2>Code-First Paradigm</h2>
 
-      <div class="summary-list">
-        <article v-for="summary of SummaryContent" class="summary-item">
-          <img src="/homepage/tick.svg" width="20" alt="" />
-          <p>{{ summary }}</p>
-        </article>
-      </div>
+      <p class="sub-header">
+        Using C# to design PDF documents leverages powerful control structures like if-statements, for-loops, and methods, enabling dynamic and highly customizable content generation.
+      </p>
 
-      <a class="action" href="/concepts/document-operations">Read more</a>
+      <p class="sub-header">
+        It promotes best practices such as modular design and reusability while seamlessly integrating with source control systems for collaboration and versioning.
+      </p>
     </div>
 
     <div class="code-container" v-html="highlightedCode"></div>
@@ -100,22 +99,6 @@ html.dark .code-container {
   background-color: #1E1E1E; /* from shiki dark-plus */
 }
 
-/* Summary */
-
-.summary-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 16px;
-}
-
-.summary-item {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-gap: 12px;
-  align-items: center;
-}
-
-
 </style>
 
 <style>
@@ -124,6 +107,22 @@ html.dark .code-container {
   display: inline-block;
   padding: 0 16px;
   width: 100%;
+}
+
+.code-container .line-removed {
+  background-color: #FFCDD2;
+}
+
+.code-container .line-added {
+  background-color: #C8E6C9;
+}
+
+html.dark .code-container .line-removed {
+  background-color: #5c1010;
+}
+
+html.dark .code-container .line-added {
+  background-color: #103912;
 }
 
 </style>

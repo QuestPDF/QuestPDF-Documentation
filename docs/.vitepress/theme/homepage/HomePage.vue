@@ -12,6 +12,10 @@
       <HomePageFeatures />
     </div>
 
+    <div class="container reverse-background">
+      <HomePageCodeFocusedApproach />
+    </div>
+
     <div class="container">
       <HomePageMultiplatform />
     </div>
@@ -39,6 +43,7 @@ import HomePageStatistics from "./HomePageStatistics.vue";
 import HomePageLicense from "./HomePageLicense.vue";
 import HomePageMultiplatform from "./HomePageMultiplatform.vue";
 import HomePageDocumentOperations from "./HomePageDocumentOperations.vue";
+import HomePageCodeFocusedApproach from "./HomePageCodeFocusedApproach.vue";
 
 </script>
 
