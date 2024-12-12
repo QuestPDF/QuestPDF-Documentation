@@ -1,14 +1,16 @@
 <template>
-  <div class="statistics">
-    <article class="statistic" v-for="statistic in StatisticsContent" :key="statistic.label">
-      <img class="icon" :src="statistic.icon" alt="" />
+  <section class="content">
+    <div class="statistics">
+      <article class="statistic" v-for="statistic in StatisticsContent.slice(0, 2)" :key="statistic.label">
+        <img class="icon" :src="statistic.icon" alt="" />
 
-      <div class="title">
-        <span class="value">{{ statistic.value }}</span>
-        <span class="label">{{ statistic.label }}</span>
-      </div>
-    </article>
-  </div>
+        <div class="title">
+          <span class="value">{{ statistic.value }}</span>
+          <span class="label">{{ statistic.label }}</span>
+        </div>
+      </article>
+    </div>
+  </section>
 </template>
 
 <script setup>
@@ -20,9 +22,18 @@ import { StatisticsContent } from './configuration';
 <style scoped>
 
 .statistics {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 64px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 128px;
+}
+
+@media screen and (max-width: 750px) {
+  .statistics {
+    flex-direction: column;
+    justify-content: center;
+    gap: 64px;
+  }
 }
 
 .statistic {
@@ -61,6 +72,17 @@ import { StatisticsContent } from './configuration';
 
   color: var(--vp-c-text-2);
   font-size: 1.2rem;
+}
+
+@media screen and (max-width: 700px) {
+  .statistic img.icon {
+    height: 48px;
+    width: 48px;
+  }
+
+  .statistic span.value {
+    font-size: 1.75rem;
+  }
 }
 
 </style>

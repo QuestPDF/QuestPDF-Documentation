@@ -3,11 +3,9 @@
     <div class="description">
       <h2 style="margin-bottom: 0;">Let's get started</h2>
 
-      <p>Begin exploring the QuestPDF library today. You are 250 lines of C# code away from creating a fully functional PDF invoice implementation.</p>
+      <p class="sub-header">Follow our detailed tutorial, and see how easy it is to produce a fully functional invoice with fewer than 250 lines of C# code.</p>
 
-      <p>Read the Getting Started tutorial to familiarize yourself with general library architecture, important layout structures as well as to better understand helpful patterns and practices.</p>
-
-      <a class="action primary" href="quick-start.html">Get started</a>
+      <a class="action primary" href="getting-started.html">Get started</a>
     </div>
 
     <img src="/invoice.png" alt="Example invoice document implemented and generated with QuestPDF using C# language." />
@@ -41,6 +39,6 @@
 
   .getting-started img {
     place-self: center;
-    max-width: min(350px, 80%);
+    max-width: min(350px, 75%);
   }
 </style>

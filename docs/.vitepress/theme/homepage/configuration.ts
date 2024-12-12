@@ -4,51 +4,22 @@ interface HomePageStatistic {
     value: string;
 }
 
-interface HomePageUserGroup {
-    icon: string;
-    label: string;
-    description: string;
-}
-
 interface HomePageFeature {
     icon: string;
     title: string;
     description: string;
 }
 
-interface HomePageRecommendation {
-    quote: string;
-    author: string;
-}
-
 export const StatisticsContent : HomePageStatistic[] = [
     {
         icon: "/homepage/stargazers.svg",
         label: "GitHub stargazers",
-        value: "12 150 +"
+        value: "12 200 +"
     },
     {
         icon: "/homepage/downloads.svg",
         label: "NuGet package downloads",
-        value: "7 150 000 +"
-    },
-    {
-        icon: "/homepage/updates.svg",
-        label: "Feature, quality and security updates",
-        value: "110 +"
-    }
-];
-
-export const UserGroupsContent : HomePageUserGroup[] = [
-    {
-        icon: "/homepage/community.svg",
-        label: "Loved by developers",
-        description: "QuestPDF has been created with love for developers, by developers. We understand how to design a library that offers enjoyable and rewarding experience. A quick learning curve, concise and easy-to-understand code, and a fast development loop - this is a definition of productivity and satisfaction."
-    },
-    {
-        icon: "/homepage/business.svg",
-        label: "Trusted by business",
-        description: "The QuestPDF library provides a stable foundation for PDF generation functionality, regardless of the application type. Its constantly improving quality, high stability, and developer-friendly architecture make it a key for any successful project. Moreover, its open-source nature ensures its reliability and safety."
+        value: "7 200 000 +"
     }
 ];
 
@@ -94,25 +65,3 @@ export const FeaturesContent : HomePageFeature[] = [
         description: "Easily create multilingual documents with advanced text style support, including right-to-left (RTL) languages as well as languages requiring text shaping to display glyphs correctly (e.g. Arabic)."
     }
 ];
-
-export const RecommendationsContent : HomePageRecommendation[] = [
-    {
-        quote: "This library is amazing, we recently did a small prototype to test RTL and Arabic support, we were impressed with it. Coming from a background where I have used Microsoft Report Designer, Crystal Reports and Fast Reports, this library is better than them all.",
-        author: "Toss_A_Coin_Yo"
-    },
-    {
-        quote: "Thanks for your hard work, I really appreciate QuestPDF! One of the most professional, high quality open-source PDFs library I came across so far!",
-        author: "kbmkbm"
-    },
-    {
-        quote: "Recently made use of this library over another older library and have to say it was a joy to work with. The previewer tool makes making small changes and designing documents such a nice task when matched up with hot reload.",
-        author: "Lawwley"
-    },
-    {
-        quote: "I have been monitoring this project for a couple of years and finally had the chance to utilize it. Initial thoughts are that it is amazing. Thank you for the incredible amount of work you have put into this!",
-        author: "yooperdev"
-    }
-];
-
-
-

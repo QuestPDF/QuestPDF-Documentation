@@ -21,7 +21,7 @@
 
 @media screen and (max-width: 768px) {
   .custom-page .content {
-    padding: 128px 24px;
+    padding: 64px 24px;
   }
 }
 
@@ -93,7 +93,7 @@
   font-size: 1rem;
 }
 
-.custom-page .sub-header {
+.custom-page p.sub-header {
   color: var(--vp-c-text-1);
   font-size: 1.25rem;
   line-height: 2rem;
@@ -174,5 +174,11 @@ a.action.disabled {
   .custom-page h2 {
     font-size: 1.75rem;
     line-height: 2.25rem;
+  }
+
+  .custom-page p.sub-header {
+    color: var(--vp-c-text-1);
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
