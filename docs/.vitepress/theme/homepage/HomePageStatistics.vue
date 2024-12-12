@@ -1,6 +1,6 @@
 <template>
   <section class="content">
-    <article class="statistic" v-for="statistic in StatisticsContent.slice(0, 2)" :key="statistic.label">
+    <article class="statistic" v-for="statistic in statistics" :key="statistic.label">
       <img class="icon" :src="statistic.icon" alt="" />
 
       <div class="title">
@@ -13,7 +13,18 @@
 
 <script setup>
 
-import { StatisticsContent } from './configuration';
+const statistics = [
+    {
+        icon: "/homepage/stargazers.svg",
+        label: "GitHub stargazers",
+        value: "12 200 +"
+    },
+    {
+        icon: "/homepage/downloads.svg",
+        label: "NuGet package downloads",
+        value: "7 200 000 +"
+    }
+];
 
 </script>
 

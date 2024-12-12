@@ -1,11 +1,10 @@
 <template>
   <section class="content">
-
     <h2>What you need is here</h2>
 
     <div class="features">
 
-      <article class="feature" v-for="feature of FeaturesContent" :key="feature.title">
+      <article class="feature" v-for="feature of features" :key="feature.title">
         <img class="icon" :src="feature.icon" alt="" />
         <h3 class="title">{{ feature.title }}</h3>
         <p class="description">{{ feature.description }}</p>
@@ -17,7 +16,29 @@
 
 <script setup>
 
-import { FeaturesContent } from './configuration';
+const features = [
+    {
+        icon: "homepage/engine.svg",
+        title: "Comprehensive Layout Engine",
+        description: "A layout engine tailored for document generation, offering advanced paging and precise content control."
+    },
+    {
+        icon: "homepage/puzzle.svg",
+        title: "Rich Toolkit",
+        description: "Craft documents with intuitive, reusable components and over 50 layout elements for complex designs."
+    },
+    {
+        icon: "homepage/performance.svg",
+        title: "High Performance",
+        description: "Generate thousands of pages per second with minimal CPU and memory usage."
+    },
+    {
+        icon: "homepage/multilingual.svg",
+        title: "Advanced Language Support",
+        description: "Seamlessly create multilingual documents with support for RTL, text shaping, and bi-directional content."
+    }
+];
+
 
 </script>
 
