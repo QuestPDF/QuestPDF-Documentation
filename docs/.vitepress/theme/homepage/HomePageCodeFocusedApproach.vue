@@ -84,46 +84,4 @@ onMounted(highlightCode);
   margin-top: 32px;
 }
 
-/* Code Block */
-
-.code-container {
-  background-color: #FFFFFF; /* from shiki light-plus */
-  font-size: 14px;
-
-  border-radius: 12px;
-  overflow: hidden;
-
-  filter: drop-shadow(0 16px 16px rgba(0,  0, 0, 0.1));
-}
-
-html.dark .code-container {
-  background-color: #1E1E1E; /* from shiki dark-plus */
-}
-
-</style>
-
-<style>
-
-.code-container .line {
-  display: inline-block;
-  padding: 0 16px;
-  width: 100%;
-}
-
-.code-container .line-removed {
-  background-color: #FFCDD2;
-}
-
-.code-container .line-added {
-  background-color: #C8E6C9;
-}
-
-html.dark .code-container .line-removed {
-  background-color: #5c1010;
-}
-
-html.dark .code-container .line-added {
-  background-color: #103912;
-}
-
 </style>
