@@ -36,11 +36,26 @@ const platforms = [
 }
 
 .icons {
-  display: flex; flex-direction: row; align-content: center; gap: 32px; margin-top: 24px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin-top: 24px;
 }
 
 .icons > img {
   height: 48px;
+}
+
+@media screen and (max-width: 700px) {
+  .icons {
+    gap: 24px;
+  }
+
+  .icons > img {
+    height: 40px;
+  }
 }
 
 </style>

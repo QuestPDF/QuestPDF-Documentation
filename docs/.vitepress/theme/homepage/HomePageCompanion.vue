@@ -46,6 +46,13 @@ const SummaryContent = [
   align-content: stretch;
 }
 
+@media screen and (max-width: 700px) {
+  .content {
+    grid-template-columns: 1fr;
+    grid-gap: 32px;
+  }
+}
+
 img {
   filter: drop-shadow(0 16px 16px rgba(0,  0, 0, 0.1));
 }

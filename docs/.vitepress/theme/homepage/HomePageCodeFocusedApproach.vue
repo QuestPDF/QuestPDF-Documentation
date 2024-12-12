@@ -41,7 +41,7 @@ onMounted(highlightCode);
 <template>
   <section class="content">
     <div class="description">
-      <h2>Code-First Paradigm</h2>
+      <h2>Code-Focused Paradigm</h2>
 
       <p class="sub-header">
         Using C# to design PDF documents leverages powerful control structures like if-statements, for-loops, and methods, enabling dynamic and highly customizable content generation.
@@ -68,6 +68,7 @@ onMounted(highlightCode);
 @media screen and (max-width: 700px) {
   .content {
     grid-template-columns: 1fr;
+    grid-gap: 32px;
   }
 }
 

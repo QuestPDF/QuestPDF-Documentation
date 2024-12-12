@@ -69,6 +69,7 @@ const SummaryContent = [
 @media screen and (max-width: 700px) {
   .content {
     grid-template-columns: 1fr;
+    grid-gap: 32px;
   }
 }
 

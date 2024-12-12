@@ -40,4 +40,8 @@
     place-self: center;
     max-width: min(350px, 75%);
   }
+
+  html.dark img {
+    opacity: 0.8;
+  }
 </style>

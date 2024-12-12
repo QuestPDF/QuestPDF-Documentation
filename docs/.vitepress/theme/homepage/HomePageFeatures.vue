@@ -54,6 +54,7 @@ const features = [
 @media screen and (max-width: 700px) {
   .features {
     grid-template-columns: 1fr;
+    grid-gap: 64px;
   }
 }
 
