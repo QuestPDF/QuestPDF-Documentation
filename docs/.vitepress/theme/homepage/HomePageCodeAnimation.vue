@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import csharp from 'shiki/langs/csharp.mjs';
 import {onMounted, ref, watch} from "vue";
 import {useData} from "vitepress";
 import createCodeHighlighter from "./createCodeHighlighter";
 
 const code = ref('');
+const highlightedLines = ref<{start: number; end: number} | null>(null);
 const highlightedCode = ref('');
-const decoration = ref<{start: number; end: number} | null>(null);
+
 const stepImageIndex = ref(1);
 const title = ref("");
 
@@ -26,7 +26,7 @@ async function refreshHighlightedCode() {
             line(node, line) {
               node.properties['data-line'] = line
 
-              if (decoration.value && line >= decoration.value.start && line <= decoration.value.end)
+              if (highlightedLines.value && line >= highlightedLines.value.start && line <= highlightedLines.value.end)
                 this.addClassToHast(node, 'line-highlighted')
             }
           }
@@ -53,8 +53,8 @@ async function appendText(position: number, text: string) {
     code.value = code.value.slice(0, position) + letter + code.value.slice(position);
     position++;
 
-    if (letter == '\n' && decoration.value)
-      decoration.value = { start: decoration.value.start, end: decoration.value.end + 1 };
+    if (letter == '\n' && highlightedLines.value)
+      highlightedLines.value = { start: highlightedLines.value.start, end: highlightedLines.value.end + 1 };
 
     await new Promise(r => setTimeout(r, animationSpeed));
   }
@@ -88,11 +88,11 @@ async function deleteTextAfter(afterText: string, deleteText: string) {
 }
 
 function highlightLine(lineNumber: number) {
-  decoration.value = { start: lineNumber, end: lineNumber };
+  highlightedLines.value = { start: lineNumber, end: lineNumber };
 }
 
 function clearHighlight() {
-  decoration.value = null;
+  highlightedLines.value = null;
 }
 
 async function wait() {
@@ -135,7 +135,6 @@ async function animate() {
   stepImageIndex.value++;
   await wait();
 
-
   title.value = "Add header text";
   clearHighlight();
   await appendTextInLine(7, "\n\n");
@@ -173,8 +172,8 @@ async function animate() {
   highlightLine(20);
   await deleteText(".Text(\"Footer!\");")
   await appendTextAfter(".AlignCenter()\n", "\t\t\t\t.Text(text => \n\t\t\t\t{\n \n \n\t\t\t\t});");
-  await appendTextInLine("22", "\t\t\t\t\ttext.Span(\"Page \");");
-  await appendTextInLine("23", "\t\t\t\t\ttext.CurrentPageNumber();");
+  await appendTextInLine(22, "\t\t\t\t\ttext.Span(\"Page \");");
+  await appendTextInLine(23, "\t\t\t\t\ttext.CurrentPageNumber();");
   stepImageIndex.value++;
   await wait();
 
@@ -189,8 +188,8 @@ async function animate() {
   title.value = "Add placeholder text";
   highlightLine(17);
   await deleteText(".Background(Colors.LightBlue.Lighten3);");
-  await appendTextInLine("17", ".Column(column => \n\t\t\t\t{\n \n\t\t\t\t});");
-  await appendTextInLine("19", "\t\t\t\t\tcolumn.Item()\n\t\t\t\t\t\t.Text(Placeholders.LoremIpsum());");
+  await appendTextInLine(17, ".Column(column => \n\t\t\t\t{\n \n\t\t\t\t});");
+  await appendTextInLine(19, "\t\t\t\t\tcolumn.Item()\n\t\t\t\t\t\t.Text(Placeholders.LoremIpsum());");
   stepImageIndex.value++;
   await wait();
 
@@ -204,7 +203,6 @@ async function animate() {
   await wait();
 
   title.value = "Add placeholder image";
-
   clearHighlight();
   await appendTextInLine(21, "\n\n");
   highlightLine(23);
@@ -214,13 +212,13 @@ async function animate() {
 
   title.value = "Adjust spacing between text and image";
   clearHighlight();
-  await appendTextInLine("18", "\n \n");
+  await appendTextInLine(18, "\n \n");
   highlightLine(19);
   await appendTextInLine(19, "\t\t\t\t\tcolumn.Spacing(8);");
   stepImageIndex.value++;
   await wait();
 
-  decoration.value = null;
+  highlightedLines.value = null;
   clearHighlight();
   await refreshHighlightedCode();
   title.value = "Completed document";
@@ -239,7 +237,7 @@ async function animate() {
     <div class="animation-container">
       <div class="code-container" v-html="highlightedCode"></div>
 
-      <img :src="'/homepage/QuickStartAnimation/Step' + stepImageIndex + '.webp'" />
+      <img :src="'/homepage/quick-start-animation/step' + stepImageIndex + '.webp'" />
     </div>
   </section>
 </template>
@@ -271,6 +269,10 @@ async function animate() {
 .animation-container > * {
   border-radius: 12px;
   filter: drop-shadow(0 4px 8px #0002);
+}
+
+html.dark img {
+  opacity: 0.8;
 }
 
 </style>
