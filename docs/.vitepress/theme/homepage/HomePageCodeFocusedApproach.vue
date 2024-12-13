@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { getSingletonHighlighter } from 'shiki';
-import darkPlus from 'shiki/themes/dark-plus.mjs';
-import lightPlus from 'shiki/themes/light-plus.mjs';
-import csharp from 'shiki/langs/csharp.mjs';
+import createCodeHighlighter from './createCodeHighlighter'
 import {onMounted, ref, watch} from "vue";
 import {useData} from "vitepress";
 import codeOrganization from './organizationCodeExample.cs?raw';
@@ -11,12 +8,9 @@ const { isDark } = useData()
 const highlightedCode = ref('');
 
 async function highlightCode() {
-  const highlighter = await getSingletonHighlighter({
-    themes: [ darkPlus, lightPlus ],
-    langs: [ csharp ]
-  });
+  const codeHighlighter = await createCodeHighlighter();
 
-  highlightedCode.value =  highlighter.codeToHtml(codeOrganization, {
+  highlightedCode.value = codeHighlighter.codeToHtml(codeOrganization, {
     lang: 'csharp',
     theme: isDark.value ? 'dark-plus' :'light-plus',
     transformers: [
