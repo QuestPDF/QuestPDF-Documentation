@@ -230,7 +230,7 @@ onUnmounted(() => observer.value?.disconnect());
     <h2>Quick Start&nbsp;&nbsp;👋</h2>
 
     <p class="sub-header">
-      Step {{ tutorialStepNumber }} / 14: <span class="highlight-background shine">{{ title }}</span>
+      Step {{ tutorialStepNumber }} / 13: <span class="highlight-background shine">{{ title }}</span>
     </p>
 
     <div class="animation-container">
