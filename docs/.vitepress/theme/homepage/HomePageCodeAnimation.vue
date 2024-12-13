@@ -7,7 +7,8 @@ const code = ref('');
 const highlightedLines = ref<{start: number; end: number} | null>(null);
 const highlightedCode = ref('');
 
-const stepImageIndex = ref(1);
+const tutorialStepNumber = ref(1);
+const imageIndex = ref(0);
 const title = ref("");
 
 const { isDark } = useData();
@@ -99,6 +100,15 @@ async function wait() {
   await new Promise(r => setTimeout(r, waitSpeed));
 }
 
+async function waitAndProceedToNextStep(stepName: string) {
+  imageIndex.value++;
+  await wait();
+
+  clearHighlight();
+  title.value = stepName;
+  tutorialStepNumber.value++;
+}
+
 
 /* Animation configuration */
 
@@ -114,114 +124,76 @@ async function animate() {
     '\t.GeneratePdfAndShow();'
 
   code.value = startCode;
+  title.value = "Start with a blank document";
 
-  title.value = "Begin with a blank document";
-  clearHighlight();
-  await wait();
-
-  title.value = "Add element with solid background";
-  clearHighlight();
+  await waitAndProceedToNextStep("Insert an element with a solid background");
   await appendTextInLine(6, "\n\n");
   highlightLine(8);
   await appendTextInLine(8, "\t\t\tpage.Content()\n\t\t\t\t.Background(Colors.LightBlue.Lighten3);");
-  stepImageIndex.value++;
-  await wait();
 
-  title.value = "Adjust page's margin";
-  clearHighlight();
+  await waitAndProceedToNextStep("Set the page margins");
   await appendTextInLine(6, "\n");
   highlightLine(7);
   await appendTextInLine(7, "\t\t\tpage.Margin(0.3f, Unit.Inch);");
-  stepImageIndex.value++;
-  await wait();
 
-  title.value = "Add header text";
-  clearHighlight();
+  await waitAndProceedToNextStep("Add a header with text");
   await appendTextInLine(7, "\n\n");
   highlightLine(9);
   await appendTextInLine(9, "\t\t\tpage.Header()\n\t\t\t\t.Text(\"Hello PDF!\");");
-  stepImageIndex.value++;
-  await wait();
 
-  title.value = "Improve header text styling";
+  await waitAndProceedToNextStep("Style the header text");
   highlightLine(11);
   await deleteTextAfter(".Text(\"Hello PDF!\");", ";");
   await appendTextAfter(".Text(\"Hello PDF!\")", "\n");
   highlightLine(11);
   await appendTextInLine(11, "\t\t\t\t.FontSize(28)\n\t\t\t\t.Bold()\n\t\t\t\t.FontColor(Colors.Blue.Darken2);");
-  stepImageIndex.value++;
-  await wait();
 
-  title.value = "Add footer";
-  clearHighlight();
+  await waitAndProceedToNextStep("Insert a footer");
   await appendTextInLine(16, "\n\n");
   highlightLine(18);
   await appendTextInLine(18, "\t\t\tpage.Footer()\n\t\t\t\t.Text(\"Footer!\");");
-  stepImageIndex.value++;
-  await wait();
 
-  title.value = "Position footer on the center";
-  clearHighlight();
+  await waitAndProceedToNextStep("Center-align the footer");
   await appendTextAfter("page.Footer()", "\n");
   highlightLine(19);
   await appendTextInLine(19, "\t\t\t\t.AlignCenter()");
-  stepImageIndex.value++;
-  await wait();
 
-  title.value = "Add page number to footer";
+  await waitAndProceedToNextStep("Include a page number in the footer");
   highlightLine(20);
   await deleteText(".Text(\"Footer!\");")
   await appendTextAfter(".AlignCenter()\n", "\t\t\t\t.Text(text => \n\t\t\t\t{\n \n \n\t\t\t\t});");
   await appendTextInLine(22, "\t\t\t\t\ttext.Span(\"Page \");");
   await appendTextInLine(23, "\t\t\t\t\ttext.CurrentPageNumber();");
-  stepImageIndex.value++;
-  await wait();
 
-  title.value = "Adjust spacing between content";
-  clearHighlight();
+  await waitAndProceedToNextStep("Adjust the spacing between content sections");
   await appendTextAfter(".Content()", "\n");
   highlightLine(16);
   await appendTextInLine(16, "\t\t\t\t.PaddingVertical(8)");
-  stepImageIndex.value++;
-  await wait();
 
-  title.value = "Add placeholder text";
+  await waitAndProceedToNextStep("Add placeholder text");
   highlightLine(17);
   await deleteText(".Background(Colors.LightBlue.Lighten3);");
   await appendTextInLine(17, ".Column(column => \n\t\t\t\t{\n \n\t\t\t\t});");
   await appendTextInLine(19, "\t\t\t\t\tcolumn.Item()\n\t\t\t\t\t\t.Text(Placeholders.LoremIpsum());");
-  stepImageIndex.value++;
-  await wait();
 
-  title.value = "Justify text";
-  clearHighlight();
+  await waitAndProceedToNextStep("Justify the placeholder text");
   await deleteTextAfter(".Text(Placeholders.LoremIpsum())", ";");
   await appendTextInLine(20, "\n");
   highlightLine(21);
   await appendTextInLine(21, "\t\t\t\t\t\t.Justify();");
-  stepImageIndex.value++;
-  await wait();
 
-  title.value = "Add placeholder image";
-  clearHighlight();
+  await waitAndProceedToNextStep("Insert a placeholder image");
   await appendTextInLine(21, "\n\n");
   highlightLine(23);
   await appendTextInLine(23, "\t\t\t\t\tcolumn.Item()\n\t\t\t\t\t\t.AspectRatio(16 / 9f)\n\t\t\t\t\t\t.Image(Placeholders.Image);");
-  stepImageIndex.value++;
-  await wait();
 
-  title.value = "Adjust spacing between text and image";
-  clearHighlight();
+  await waitAndProceedToNextStep("Adjust spacing between the text and image");
   await appendTextInLine(18, "\n \n");
   highlightLine(19);
   await appendTextInLine(19, "\t\t\t\t\tcolumn.Spacing(8);");
-  stepImageIndex.value++;
-  await wait();
 
-  highlightedLines.value = null;
-  clearHighlight();
+  await waitAndProceedToNextStep("Celebrate your completed document! 🎉");
   await refreshHighlightedCode();
-  title.value = "Completed document";
 }
 
 </script>
@@ -231,14 +203,16 @@ async function animate() {
     <h2>Quick Start</h2>
 
     <p class="sub-header">
-      Step: <span class="highlight-background">{{ title }}</span>
+      Step {{ tutorialStepNumber }} / 14: <span class="highlight-background shine">{{ title }}</span>
     </p>
 
     <div class="animation-container">
       <div class="code-container" v-html="highlightedCode"></div>
 
-      <img :src="'/homepage/quick-start-animation/step' + stepImageIndex + '.webp'" />
+      <img :src="'/homepage/quick-start-animation/step' + imageIndex + '.webp'" />
     </div>
+
+    <a class="action" href="getting-started.html">Learn more</a>
   </section>
 </template>
 
@@ -273,6 +247,10 @@ async function animate() {
 
 html.dark img {
   opacity: 0.8;
+}
+
+.action {
+  margin-top: 32px;
 }
 
 </style>
