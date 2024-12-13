@@ -153,6 +153,7 @@ a.action.primary {
   border-color: var(--vp-button-brand-border);
   color: var(--vp-button-brand-text);
   background-color: var(--vp-button-brand-bg);
+  font-weight: bold;
 }
 
 a.action.primary:hover {

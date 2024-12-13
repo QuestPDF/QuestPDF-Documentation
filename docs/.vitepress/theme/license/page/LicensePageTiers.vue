@@ -70,13 +70,6 @@ function getLicenseSummaryUrl(license: License) {
   grid-gap: 32px;
 }
 
-@media screen and (max-width: 450px) {
-  .license-tier header {
-    display: flex;
-    flex-direction: column;
-  }
-}
-
 .license-tier header img {
   width: 48px;
 }

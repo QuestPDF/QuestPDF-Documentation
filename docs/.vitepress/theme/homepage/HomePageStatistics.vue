@@ -22,7 +22,7 @@ const statistics = [
     {
         icon: "/homepage/downloads.svg",
         label: "NuGet package downloads",
-        value: "7 200 000 +"
+        value: "7 250 000 +"
     }
 ];
 
