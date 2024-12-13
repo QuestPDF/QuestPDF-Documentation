@@ -24,7 +24,7 @@
 
 <style scoped>
   .content {
-    max-width: 800px;
+    max-width: 800px !important;
     display: grid;
     grid-template-columns: auto 1fr;
     grid-gap: 64px;
