@@ -192,10 +192,13 @@ a.action.disabled {
   line-height: 1.5;
 
   border-radius: 12px;
-  overflow: hidden;
   tab-size: 4;
 
   filter: drop-shadow(0 16px 16px rgba(0,  0, 0, 0.1));
+}
+
+.code-container pre {
+  overflow: hidden;
 }
 
 html.dark .code-container {

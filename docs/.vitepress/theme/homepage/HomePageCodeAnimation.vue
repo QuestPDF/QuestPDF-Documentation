@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, ref, watch} from "vue";
+import {onMounted, onUnmounted, ref, watch} from "vue";
 import {useData} from "vitepress";
 import createCodeHighlighter from "./createCodeHighlighter";
 
@@ -8,7 +8,7 @@ const highlightedLines = ref<{start: number; end: number} | null>(null);
 const highlightedCode = ref('');
 
 const tutorialStepNumber = ref(1);
-const imageIndex = ref(0);
+const imageIndex = ref(1);
 const title = ref("");
 
 const { isDark } = useData();
@@ -39,8 +39,8 @@ watch(code, refreshHighlightedCode)
 watch(isDark, refreshHighlightedCode)
 
 onMounted(() => {
+  resetAnimation();
   refreshHighlightedCode();
-  animate();
 });
 
 
@@ -112,7 +112,7 @@ async function waitAndProceedToNextStep(stepName: string) {
 
 /* Animation configuration */
 
-async function animate() {
+function resetAnimation() {
   const startCode = 'Document\n' +
     '\t.Create(document =>\n' +
     '\t{\n' +
@@ -125,8 +125,13 @@ async function animate() {
 
   code.value = startCode;
   title.value = "Start with a blank document";
+  clearHighlight();
+}
 
-  await waitAndProceedToNextStep("Insert an element with a solid background");
+async function animate() {
+  await new Promise(r => setTimeout(r, 1000));
+
+  title.value ="Insert an element with a solid background";
   await appendTextInLine(6, "\n\n");
   highlightLine(8);
   await appendTextInLine(8, "\t\t\tpage.Content()\n\t\t\t\t.Background(Colors.LightBlue.Lighten3);");
@@ -196,11 +201,33 @@ async function animate() {
   await refreshHighlightedCode();
 }
 
+
+/* Animation control observer */
+const observer = ref<IntersectionObserver | null>(null);
+const isAnimationRunning = ref(false);
+
+onMounted(() => {
+  observer.value = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (isAnimationRunning.value || !entry.isIntersecting)
+        return;
+
+      isAnimationRunning.value = true;
+      animate();
+    });
+  }, { threshold: 0.5 });
+
+  const target = document.querySelector('#homepage-quick-start-animation');
+  observer.value.observe(target);
+});
+
+onUnmounted(() => observer.value?.disconnect());
+
 </script>
 
 <template>
-  <section class="content">
-    <h2>Quick Start</h2>
+  <section class="content" id="homepage-quick-start-animation">
+    <h2>Quick Start&nbsp;&nbsp;👋</h2>
 
     <p class="sub-header">
       Step {{ tutorialStepNumber }} / 14: <span class="highlight-background shine">{{ title }}</span>
@@ -212,7 +239,7 @@ async function animate() {
       <img :src="'/homepage/quick-start-animation/step' + imageIndex + '.webp'" />
     </div>
 
-    <a class="action" href="getting-started.html">Learn more</a>
+    <a class="action primary" href="getting-started.html">Learn more</a>
   </section>
 </template>
 
