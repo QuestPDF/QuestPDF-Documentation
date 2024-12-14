@@ -130,6 +130,7 @@ function resetAnimation() {
 
 async function animate() {
   await new Promise(r => setTimeout(r, 1000));
+  tutorialStepNumber.value++;
 
   title.value ="Insert an element with a solid background";
   await appendTextInLine(6, "\n\n");
@@ -230,7 +231,7 @@ onUnmounted(() => observer.value?.disconnect());
     <h2>Quick Start&nbsp;&nbsp;👋</h2>
 
     <p class="sub-header">
-      Step {{ tutorialStepNumber }} / 13: <span class="highlight-background shine">{{ title }}</span>
+      Step {{ tutorialStepNumber }} / 14: <span class="highlight-background shine">{{ title }}</span>
     </p>
 
     <div class="animation-container">
