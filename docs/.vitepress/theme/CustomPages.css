@@ -35,11 +35,10 @@
   border: 1px solid var(--vp-c-gutter);
   border-radius: 24px;
   padding: 32px;
-  transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out !important;
 }
 
 .custom-page a:hover .card {
-  transform: scale(1.075);
   box-shadow: var(--elevation-hover);
 }
 

@@ -8,15 +8,15 @@
     <img src="/homepage/license.svg" alt="Example invoice document implemented and generated with QuestPDF using C# language." />
 
     <div class="description">
-      <h2>Sustainable License</h2>
+      <h2>Sustainable and Fair License</h2>
 
-      <p class="sub-header">To maintain high-quality development and support while keeping the library free for most users, we use a fair pricing model where only larger organizations help by providing necessary funding for the project.</p>
+      <p class="sub-header">By offering free access to most users and premium licenses for larger organizations, the project maintains its commitment to excellence while ensuring sustainable, long-term development for all.</p>
 
       <div class="license-warning">
         The library is free to use for any individual or business with less than 1 million USD annual gross revenue, or operates as a non-profit organization, or is a FOSS project.
       </div>
 
-      <a class="action" href="/license">Read more</a>
+      <a class="action" href="/license">Check Pricing</a>
     </div>
 
   </section>

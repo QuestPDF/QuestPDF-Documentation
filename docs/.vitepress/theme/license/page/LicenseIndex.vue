@@ -5,11 +5,17 @@
     </div>
 
     <div class="container reverse-background">
-      <div class="content">
-        <ClientOnly>
-          <license-page-tiers />
-        </ClientOnly>
-      </div>
+      <ClientOnly>
+        <license-page-tiers />
+      </ClientOnly>
+    </div>
+
+    <div class="container">
+      <license-general-description />
+    </div>
+
+    <div class="container reverse-background">
+      <license-help />
     </div>
   </div>
 </template>
@@ -18,6 +24,8 @@
 
 import LicenseHeader from "./LicenseHeader.vue";
 import LicensePageTiers from "./LicensePageTiers.vue";
+import LicenseGeneralDescription from "./LicenseTerms.vue";
+import LicenseHelp from "./LicenseHelp.vue";
 
 </script>
 

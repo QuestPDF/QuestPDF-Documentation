@@ -3,14 +3,7 @@
     <div>
       <h1><span class="highlight-foreground">QuestPDF</span> License and Pricing</h1>
 
-      <div class="details">
-        <p>QuestPDF is an open-source library committed to long-term sustainability and continuous improvement.</p>
-
-        <p>To maintain high-quality development and support while keeping the library free for most users, we use a fair pricing model where only larger organizations help by providing necessary funding for the project.</p>
-
-        <a class="action" href="/license/guide" style="margin-top: 16px;">License selection guide</a>
-      </div>
-
+      <p class="sub-header" style="max-width: 700px">By offering free access to most users and premium licenses for larger organizations, the project maintains its commitment to excellence while ensuring sustainable, long-term development for all.</p>
     </div>
 
     <img src="/homepage/license.svg" alt="" class="license-icon" />
@@ -25,13 +18,13 @@
 
 .license-header {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto auto;
   align-items: center;
   grid-gap: 128px;
 }
 
 .license-icon {
-  width: 160px;
+  width: 128px;
 }
 
 @media screen and (max-width: 1000px) {
@@ -48,19 +41,6 @@
   .license-icon {
     display: none;
   }
-}
-
-.details {
-  display: flex;
-  align-items: start;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.details p {
-  color: var(--vp-c-text-1);
-  font-size: 1.25rem;
-  line-height: 2rem;
 }
 
 </style>
