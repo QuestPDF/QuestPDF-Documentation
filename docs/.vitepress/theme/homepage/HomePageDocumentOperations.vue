@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import csharp from 'shiki/langs/csharp.mjs';
 import {onMounted, ref, watch} from "vue";
 import {useData} from "vitepress";
 import documentOperationCode from './documentOperationCodeExample.cs?raw';
