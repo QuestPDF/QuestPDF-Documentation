@@ -1,29 +1,33 @@
 <script setup lang="ts">
 interface ContactInformation {
-    link: string;
     image: string;
     title: string;
     description: string;
+    link: string;
+    linkLabel: string;
 }
 
 const contacts : ContactInformation[] = [
     {
-        link: "https://github.com/QuestPDF/QuestPDF",
         image: "/contact/github.svg",
-        title: "Technical support",
+        title: "Community Support",
         description: "If you're experiencing any problems or have suggestions to enhance the QuestPDF library, we invite you to seek resolution and share your insights on the GitHub platform.",
+        link: "https://github.com/QuestPDF/QuestPDF",
+        linkLabel: "Visit GitHub"
     },
     {
-        link: "https://www.paddle.com/about/procurement",
         image: "/contact/paddle.svg",
         title: "Payment support",
-        description: "Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.",
+        description: "We collaborate with Paddle, our Merchant of Record, to ensure compliance with tax regulations and payment security. Paddle provides all customer service inquiries and handles returns.",
+        link: "https://www.paddle.com/about/procurement",
+        linkLabel: "Go to Paddle"
     },
     {
-        link: "mailto:contact@questpdf.com",
         image: "/contact/email.svg",
-        title: "General support",
-        description: "Contact us via email for non-technical inquiries, feedback, and information about the QuestPDF library. We value your input very highly and are open to help.",
+        title: "Support",
+        description: "Contact us via email for dedicated support, non-technical inquiries, feedback, and information about the QuestPDF library. We value your input very highly and are open to help.",
+        link: "mailto:contact@questpdf.com",
+        linkLabel: "Contact us",
     }
 ]
 </script>
@@ -35,13 +39,13 @@ const contacts : ContactInformation[] = [
 
         <section class="contacts">
           <template v-for="contact of contacts" :key="contact">
-            <a :href="contact.link" target="_blank">
-              <article class="contact card">
-                <img :src="contact.image" alt="">
-                <h3>{{ contact.title }}</h3>
-                <p>{{ contact.description }}</p>
-              </article>
-            </a>
+            <article class="contact card">
+              <img :src="contact.image" alt="">
+              <h3>{{ contact.title }}</h3>
+              <p>{{ contact.description }}</p>
+
+              <a class="action" :href="contact.link" target="_blank" style="margin-top: 16px">{{ contact.linkLabel }}</a>
+            </article>
           </template>
         </section>
 

@@ -29,7 +29,7 @@ const terms = [
     {
       icon: "/license/payment-details.svg",
       title: "Safe Transaction",
-      description: "We collaborate with Paddle, our Merchant of Record, to ensure compliance with tax regulations and payment security. The Paddle company details will be additionally visible on the invoice/payment. <a href='https://drive.google.com/file/d/1mUy9-Hzp3VpP8P7fL4mt9TlFA8I-dWGD/view' target='_blank'>Paddle details</a>"
+      description: "We collaborate with Paddle, our Merchant of Record, to ensure compliance with tax regulations and payment security. The Paddle company details will be additionally visible on the invoice/payment. <a href='https://www.paddle.com/about/procurement' target='_blank'>Paddle details</a>"
     }
 ];
 
