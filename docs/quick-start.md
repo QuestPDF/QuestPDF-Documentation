@@ -90,7 +90,7 @@ This code generates a PDF document with the following layout:
 
 ## Are you ready for more?
 
-QuestPDF's Fluent API scales seamlessly with your document complexity. Whether you're creating simple reports or sophisticated documents, the intuitive syntax remains consistent and maintainable. To explore its full potential, check out [the Getting started tutorial](/getting-started.html), where you'll learn to create a professional invoice in less than 200 lines of code. You can also examine and experiment with the code hosted on [the GitHub repository](https://github.com/QuestPDF/example-invoice).
+QuestPDF's Fluent API scales seamlessly with your document complexity. Whether you're creating simple reports or sophisticated documents, the intuitive syntax remains consistent and maintainable. To explore its full potential, check out [the Getting started tutorial](/getting-started), where you'll learn to create a professional invoice in less than 200 lines of code. You can also examine and experiment with the code hosted on [the GitHub repository](https://github.com/QuestPDF/example-invoice).
 
 ![invoice](/getting-started/invoice.png =500x)
 
