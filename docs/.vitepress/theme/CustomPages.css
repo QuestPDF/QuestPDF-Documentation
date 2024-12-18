@@ -35,7 +35,6 @@
   border: 1px solid var(--vp-c-gutter);
   border-radius: 24px;
   padding: 32px;
-  transition: all 0.25s ease-in-out !important;
 }
 
 .custom-page a:hover .card {
@@ -129,7 +128,6 @@ a.action {
   text-align: center;
   font-weight: 500;
   white-space: nowrap;
-  transition: color 0.25s, border-color 0.25s, background-color 0.25s;
 
   border-radius: 20px;
   padding: 0 20px;
