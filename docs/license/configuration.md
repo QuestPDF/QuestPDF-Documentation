@@ -1,39 +1,33 @@
 # License configuration
 
-## Introduction
+QuestPDF is an open-source library committed to long-term sustainability and continuous improvement.
 
-QuestPDF is a modern open-source library.
-
-We identify the importance of the QuestPDF library in your projects, and therefore want to ensure you can safely and confidently continue the development.
-
-Being a healthy and growing community is the primary goal that motivates us to pursue professionalism.
+By offering free access to most users and premium licenses for larger organizations, the project maintains its commitment to excellence while ensuring sustainable, long-term development for all.
 
 ::: warning
-Before using code snippets in this documentation, please make sure you are eligible for the chosen license.
+The library is free to use for any individual or business with less than 1 million USD annual gross revenue, or operates as a non-profit organization, or is a FOSS project.
 
-More details can be found on the [QuestPDF License and Pricing](/license/) page.
+More details can be found on the [QuestPDF License and Pricing page](/license/).
 :::
 
+## Software Activation
 
-## Code change
+We trust our users and clients. Therefore, the software does not require any license key. Instead, you can select and configure the appropriate license in your code.
 
-Please use the following code to configure the appropriate license.
-
-You need to execute this code only once when the application starts, most likely in the `Program.cs` or the `Startup.cs` file.
+The library does not perform any network calls, does not send any data to external servers, and does not collect any personal information. All computations are performed locally on your machine.
 
 ```c#
 QuestPDF.Settings.License = LicenseType.Community;
-```
-
-```c#
+// or
 QuestPDF.Settings.License = LicenseType.Professional;
-```
-
-```c#
+// or
 QuestPDF.Settings.License = LicenseType.Enterprise;
 ```
 
 ::: tip
-The library does not require any license key.
-We trust our users, and therefore the process is simple.
+Please ensure that you are eligible for the chosen license before using it in your project.
+
+By choosing the right license, you help ensure that our project remains transparent, sustainable, and continuously improving for everyone.
+
+Thank you for supporting QuestPDF! ❤️
 :::
