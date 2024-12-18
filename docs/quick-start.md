@@ -1,13 +1,29 @@
 # Quick start
 
+## What is QuestPDF?
+
+### Modern approach for PDF generation
+
+QuestPDF is a modern C# library that takes a fresh approach to PDF document generation. Instead of relying on HTML conversion like many other solutions, it provides a dedicated layout engine optimized specifically for creating PDF documents.
+
+### Component-Based Architecture
+
+At its core, QuestPDF works by composing simple elements (like text, images, tables, and grids) into more complex layouts. Think of it as building with LEGO blocks – each piece has a clear purpose, and you can combine them confidently to create sophisticated documents. 
+
+### Code-focused Paradigm
+
+Since the library uses pure C# language, you can leverage familiar programming concepts like loops and conditionals to create dynamic documents. It promotes best practices such as modular design and reusability while seamlessly integrating with source control systems for collaboration and versioning.
+
 ## Installation
 
-The library is available as a NuGet package. You can install it as any other NuGet package from your IDE, try to search by `QuestPDF`. You can find package details [on this webpage](https://www.nuget.org/packages/QuestPDF/).
+QuestPDF is available as a NuGet package. You can install it through your IDE by searching for QuestPDF:
+- [Visual Studio](https://learn.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio)
+- [Visual Code](https://code.visualstudio.com/docs/csharp/package-management)
+- [JetBrains Rider](https://www.jetbrains.com/help/rider/Using_NuGet.html)
 
-[![quest pdf logo](/nuget.svg =200x)](https://www.nuget.org/packages/QuestPDF/)
+Or use one of the following methods:
 
-
-```shell
+```c#
 // Package Manager
 Install-Package QuestPDF
 
@@ -18,9 +34,13 @@ dotnet add package QuestPDF
 <PackageReference Include="QuestPDF" Version="2024.12.0" />
 ```
 
+Check the package details [on the NuGet website](https://www.nuget.org/packages/QuestPDF/):
+
+[![quest pdf logo](/nuget.svg =150x)](https://www.nuget.org/packages/QuestPDF/)
+
 ## Implementation
 
-How easy it is to start and prototype with QuestPDF? Really easy thanks to its minimal API! Please analyse the code below:
+QuestPDF's minimal API makes it incredibly easy to create and prototype PDF documents. Here's a simple example that demonstrates its intuitive syntax:
 
 ```c#
 using QuestPDF.Fluent;
@@ -63,34 +83,25 @@ Document.Create(container =>
 .GeneratePdf("hello.pdf");
 ```
 
-And compare it to the produced PDF file:
+This code generates a PDF document with the following layout:
 
 ![example](/minimal-api.png =300x)
 
 
 ## Are you ready for more?
 
-The Fluent API of QuestPDF scales really well. It is easy to create and maintain even most complex documents. Read [the Getting started tutorial](/getting-started.html) to learn QuestPDF basics and implement an invoice under 200 lines of code. You can also investigate and play with the code from [the example repository](https://github.com/QuestPDF/example-invoice).
+QuestPDF's Fluent API scales seamlessly with your document complexity. Whether you're creating simple reports or sophisticated documents, the intuitive syntax remains consistent and maintainable. To explore its full potential, check out [the Getting started tutorial](/getting-started.html), where you'll learn to create a professional invoice in less than 200 lines of code. You can also examine and experiment with the code hosted on [the GitHub repository](https://github.com/QuestPDF/example-invoice).
 
 ![invoice](/getting-started/invoice.png =500x)
 
-
-## Or watch a video created by our fantastic Community
+## Learn from the Community
 
 We are incredibly grateful to the YouTube Community for their positive reviews and recommendations of the QuestPDF library. Your support and feedback are invaluable and motivate us to keep improving and expanding this project. Thank you for helping us grow and reach more developers!
 
-### Nick Chapsas: The Easiest Way to Create PDFs in .NET
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_M0IgtGWnvE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-### Claudio Bernasconi: QuestPDF - The BEST PDF Generator for .NET?!
-
+<br>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/T89A_7dz1P8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-### JetBrains: OSS Power-Ups: QuestPDF
-
+<br>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/-iYvZvpLX0g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-### Programming with Felipe Gavilan: Generating PDFs with C# - Very Easy (two examples)
-
+<br>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/bhR4Cmg16gs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

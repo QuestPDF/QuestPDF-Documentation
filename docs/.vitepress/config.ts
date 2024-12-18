@@ -70,7 +70,6 @@ export default defineConfig({
             {
                 text: 'Introduction',
                 items: [
-                    { text: 'Introduction', link: '/introduction' },
                     { text: 'Quick start', link: '/quick-start' },
                     { text: 'Getting started', link: '/getting-started' },
                     { text: 'License configuration', link: '/license/configuration' },
