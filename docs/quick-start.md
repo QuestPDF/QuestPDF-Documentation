@@ -87,6 +87,19 @@ This code generates a PDF document with the following layout:
 
 ![example](/minimal-api.png =300x)
 
+::: warning SUSTAINABLE AND FAIR LICENSE
+By offering free access to most users and premium licenses for larger organizations, the project maintains its commitment to excellence while ensuring sustainable, long-term development for all.
+
+The library is free to use for any individual or business with less than 1 million USD annual gross revenue, or operates as a non-profit organization, or is a FOSS project.
+:::
+
+::: tip
+For learning and evaluation, you can use the free QuestPDF Community license.
+
+More details can be found on the [QuestPDF License and Pricing page](/license/).
+:::
+
+
 
 ## Are you ready for more?
 

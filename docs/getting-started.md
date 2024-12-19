@@ -1,45 +1,32 @@
 # Getting started
 
-## What to expect
+QuestPDF is a modern .NET library for PDF document generation that emphasizes clean architecture and developer productivity. In this tutorial, we'll build a professional invoice document while exploring the core concepts that make QuestPDF powerful and intuitive to use.
 
-This tutorial introduces you to the essentials of the QuestPDF library by showing you how to implement a basic invoice document. It discusses architectural concepts, then shows how to prepare data layers and finally presents how to use various elements to compose a document's structure. At the end of this tutorial, you will get code capable of generating the full, page-aware invoice similar to the one below. Let's get started!
+By the end, you'll have a fully functional, paginated invoice generator that looks like this:
 
-![invoice](/getting-started/invoice.png)
+![invoice](/getting-started/invoice.png =595x)
 
 ::: tip
-You can download, analyse and compile the code yourself by visiting [this GitHub repository](https://github.com/QuestPDF/QuestPDF-ExampleInvoice).
+Before starting this tutorial, please familiarize yourself with [the Quick Start tutorial](/quick-start).
+
+You can download, review, and compile the complete example from [this GitHub repository](https://github.com/QuestPDF/QuestPDF-ExampleInvoice).
 :::
 
-## Installation
 
-The library is distributed as a NuGet package. You can install it as any other NuGet package from your IDE, try to search by `QuestPDF`. You can find package details on [on this webpage](https://www.nuget.org/packages/QuestPDF/).
+## Suggested architecture
 
-[![quest pdf logo](/nuget.svg =200x)](https://www.nuget.org/packages/QuestPDF/)
+QuestPDF recommends a clear three-layer architecture for both maintainability and clarity:
 
-```shell
-// Package Manager
-Install-Package QuestPDF
+1) **Document Models** - define the raw data that appears in your PDF, such as invoice details or report content. These classes remain free of business logic and focus solely on representing structured information.
 
-// .NET CLI
-dotnet add package QuestPDF
+2) **Data Source** - handle asynchronous data fetching, transformations, and calculations. Here, you perform database queries, map domain entities to the document models, and load external resources (Images) to prepare all the information needed to render the document. 
 
-// Package reference in .csproj file
-<PackageReference Include="QuestPDF" Version="2024.12.0" />
-```
+3) **Template** - use C# features (such as loops, conditional logic, helper methods) and QuestPDF Fluent API to design the visual layout and appearance of your document.
 
-## Implementation layers
-
-The PDF generation process involves work in three main application layers:
-
-1) **Document models** - a set of classes describing PDF document content. In the vast majority of cases, they are just simple POCO classes without any business logic inside.
-
-2) **Data source** - layer where your domain entities are mapped into document models. This layer is usually implemented by creating a separate class that communicates with your persistency abstraction and then maps/translates/aggregates the data into the desired format.
-
-3) **Template** - presentation layer describing how to visualize information and convert it into a PDF file. This process can be achieved in multiple ways, a common scenario is to generate HTML code and then use special "HTML to PDF" converter. The QuestPDF approach is different: this library offers you a special document layout engine. By using simple, yet highly composable elements, you can design complex layouts with ease - all with great fluent API.
 
 ## Document models layer
 
-When working on a new PDF document, think about its content and what information should be included. This helps with designing proper models structure. This time, we need to pass basic invoice information, seller's and customer's addresses, list of ordered items and finally optional comments.
+First, let's define the data structure for our invoice. These models capture all the information we need to display:
 
 ```c#
 public class InvoiceModel
@@ -75,17 +62,10 @@ public class Address
 
 ## Data source layer
 
-Once models are defined, you need to create a data source class which connects to the persistence layer, prepares and converts data. Although this layer has no limitations and you have full control over its implementation, there are several patterns and practices worth to follow.
+Next, implement a class that retrieves and prepares your invoice data. 
+In a real application, this might query a database, download images from storage, or call an external API. 
 
-Firstly, in the data source class, you can define all necessary business logic. Simple operations can be placed inside the template layer (discussed in the next chapter) but more complex calculations should be kept here or inappropriate services. This way you prevent business logic leakage from your domains.
-
-If you expect to have multiple documents with similar content, for instance, the same header, define a single shared model and a corresponding method to populate it. The QuestPDF library takes the `DRY` (don't repeat yourself) principle to heart by providing the powerful concept of components. You can define your content elements, inject data models to generate proper content and even customize it with slots. Those concepts are similar to other popular libraries like `Vue` or `Angular`.
-
-This tutorial focuses mainly on preparing the layout structure. For this reason, all necessary data is randomly generated.
-
-::: tip
-To improve the workflow, use various helper methods to easily generate fake data. All of them are available in the static `Placeholders` class. This way, it is easy to prototype document structure without implementing a real data source.
-:::
+For this tutorial, we'll use a sample data generator:
 
 ```c#
 using QuestPDF.Helpers;
@@ -142,30 +122,19 @@ public static class InvoiceDocumentDataSource
 
 ## Template layer
 
-The most important aspect of document generation is to design and implement its layout. QuestPDF offers multiple tools to achieve the desired results. The most important concepts are discussed in this tutorial. For more information about specific elements, please visit the [API Reference](/api-reference/index).
+With data ready, focus on how it should appear in the final PDF. 
+QuestPDF’s layout engine uses a fluent API to define pages, headers, footers, and content sections.
 
-### Scaffolding page structure
 
-The implementation starts with defining a new class implementing the `IDocument` interface. This interface contains two methods: `GetMetadata()` and `Compose()`. The first one is used for providing basic document's information about author, keywords, DPI settings and so on. The latter gives a container where you should place all content.
+### Basic page structure
 
-```c#
-public interface IDocument
-{
-    DocumentMetadata GetMetadata();
-    DocumentSettings GetSettings();
-    void Compose(IDocumentContainer container);
-}
-```
+As the first step, we’ll implement a single page with a simple header, content area, and footer.
+The class below implements the `IDocument` interface and uses the `Compose` method to define the document’s structure.
 
-::: tip
-This tutorial uses the default metadata configuration. If you want to override it, just create and return new `Metadata` object with an appropriate configuration. Most of the properties are self-explanatory.
-:::
+Each fluent API call creates a container with its own style, size, alignment constraints and layout behavior — making their order important. 
+While most elements are simple containers holding a single child, some advanced elements offer multiple slots to accommodate more complex layouts.
 
-The class below implements the basic document structure. Please note how different Fluent API invocations are chained together. Each invocation creates a separate container with an appropriate style, visuals, size or alignment constraints, etc. Therefore, the order of methods is really important and swapping elements may provide different results.
-
-Most of the elements are simple containers, that is they have only a single child. In such cases, the method chaining is used for describing documents content. However, there are more advanced elements which offer multiple slots to fill.
-
-```c#
+```c#{18-29}
 using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
@@ -198,21 +167,21 @@ public class InvoiceDocument : IDocument
 }
 ```
 
-The `Page` element has three slots available: `Header`, `Content` and `Footer`. Moreover, there are additional rules for them:
-
-1) **Header** is placed always at the top.
-2) **Footer** is placed always at the bottom.
-3) **Content** takes entire space left.
-
-So far we have scaffolded a very simple page where each section has a different colour or size:
+This initial scaffolding sets up basic sections. You’ll refine them in the following steps.
 
 ![example](/getting-started/step-scaffolding.png =595x)
 
-### Header implementation
 
-This chapter introduces a couple of very important layout elements: `Row` and `Column`. Before we discuss how they work, let's analyze the new code sample. First of all, when creating a document, we expect that it will contain multiple sections and therefore the amount of code is going to increase significantly. 
+### Implementing header and footer
 
-To keep the code clean and easy to maintain, you can create additional methods for each section. The general principle is to use a composition of simple layout structures, a structure per method. Most of the API invocations have special overloads designed for **1)** method chaining and **2)** passing method as an argument.
+Implement header and footer of the document using the most common QuestPDF visual, positional, and layout components.
+
+The code also uses local methods to define the header and content sections. 
+This approach produces cleaner code and makes it easier to maintain and understand.
+
+::: tip
+Please hover your cursor over the code to see the explanation of various API calls.
+:::
 
 ```c#
 public class InvoiceDocument : IDocument
@@ -229,7 +198,6 @@ public class InvoiceDocument : IDocument
                 page.Header().Element(ComposeHeader);
                 page.Content().Element(ComposeContent);
 
-                    
                 page.Footer().AlignCenter().Text(x =>
                 {
                     x.CurrentPageNumber();
@@ -241,13 +209,13 @@ public class InvoiceDocument : IDocument
 
     void ComposeHeader(IContainer container)
     {
-        var titleStyle = TextStyle.Default.FontSize(20).SemiBold().FontColor(Colors.Blue.Medium);
-    
         container.Row(row =>
         {
             row.RelativeItem().Column(column =>
             {
-                column.Item().Text($"Invoice #{Model.InvoiceNumber}").Style(titleStyle);
+                column.Item()
+                    .Text($"Invoice #{Model.InvoiceNumber}")
+                    .FontSize(20).SemiBold().FontColor(Colors.Blue.Medium);
 
                 column.Item().Text(text =>
                 {
@@ -279,13 +247,15 @@ public class InvoiceDocument : IDocument
 }
 ```
 
-The code above produces the following result:
+The code above generates the following output:
 
 ![example](/getting-started/step-header.png =595x)
 
+
 ### Content implementation
 
-In the document generation world, it is expected that a single document has multiple pages. The QuestPDF library assumes that certain elements should be repeated across the page, for example, header and footer. Additionally, it offers a great mechanism to support paging content. It is not desired to split the content in any place, usually, we want to define explicitly where it should happen if needed.
+Define general structure of the primary content. 
+Please note that you can freely use C# features such as conditions and loops.
 
 ```c#
 public class InvoiceDocument : IDocument
@@ -327,21 +297,20 @@ public class InvoiceDocument : IDocument
 }
 ```
 
-In the code, the content structure is prepared. Please notice that a comments section is displayed conditionally:
+Here's the result generated by the code snippet above:
 
 ![example](/getting-started/step-content.png =595x)
 
+
 ### Table generation
 
-In this step, we will introduce the `Table` element. This element allows you to put multiple cells.
+Table is one of the most flexible and powerful elements in QuestPDF.
 
-You can specify the exact position of the cell by using the `Row(X)` and the `Column(X)` methods. However, by default, the position can also be automatically determined by the algorithm. Each cell can also take multiple rows and/or columns. To specify such behavior, use the `RowSpan(X)`and the `ColumnSpan(X)` methods.
+Begin by defining the number, position, and size of your columns. 
+After that, add cells which can be either auto-arranged by the layout engine or explicitly placed at specific rows and columns. 
+You can even have cells span multiple columns or rows.
 
-Let's implement the table in three simple steps:
-
-1) **Step 1** defines number and sizes of columns. Similarly to the `Row` element, you can create columns of constant and relative widths.
-2) **Step 2** implements table's header. This is a special section: when table takes multiple pages, the header content is present on every page.
-2) **Step 3** uses a foreach-loop to iterates over all products and then generates set of cells for each of them.
+Note the use of the CellStyle local function, which applies consistent styling to cells in a single, reusable manner.
 
 ```c#
 public class InvoiceDocument : IDocument
@@ -352,7 +321,6 @@ public class InvoiceDocument : IDocument
     {
         container.Table(table =>
         {
-            // step 1
             table.ColumnsDefinition(columns =>
             {
                 columns.ConstantColumn(25);
@@ -362,7 +330,6 @@ public class InvoiceDocument : IDocument
                 columns.RelativeColumn();
             });
             
-            // step 2
             table.Header(header =>
             {
                 header.Cell().Element(CellStyle).Text("#");
@@ -377,7 +344,6 @@ public class InvoiceDocument : IDocument
                 }
             });
             
-            // step 3
             foreach (var item in Model.Items)
             {
                 table.Cell().Element(CellStyle).Text(Model.Items.IndexOf(item) + 1);
@@ -402,18 +368,12 @@ public class InvoiceDocument : IDocument
 
 ### Address component
 
-The last skill to master is how to reuse code and implementation. When creating multiple different document types, usually they share common sections, for example, header with a company logo. And sometimes, your page has multiple sections with the same structure but different information. Moreover, some section may be so complex that they should be extracted away into separate classes.
+To prevent duplication and improve maintainability, move recurring sections into reusable components. 
+For example, addresses often appear multiple times with the same layout. 
+By implementing IComponent, you can pass arguments and reuse this logic throughout your project.
 
-To properly solve all of the scenarios above, use the component approach. This way you create independent, project-specific elements that can be reused and easily maintained. The implementation starts with the `IComponent` interface:
-
-```c#
-public interface IComponent
-{
-    void Compose(IContainer container);
-}
-```
-
-Creating components is very similar to extracting code into separate methods. This time, the separation is even greater because you move the code into a new class, in a new file, and additionally, you can easily provide arguments to the component.
+This approach is similar to extracting code into methods, but it goes further. 
+Components reside in their own classes and files, making it simple to provide arguments and fully encapsulate their layout logic.
 
 ```c#
 public class AddressComponent : IComponent
@@ -445,7 +405,7 @@ public class AddressComponent : IComponent
 }
 ```
 
-The code below shows how to use the newly implemented component:
+The code below demonstrates how to integrate and use the newly created component:
 
 ```c#{11-16}
 public class InvoiceDocument : IDocument
@@ -481,11 +441,12 @@ public class InvoiceDocument : IDocument
 
 ![example](/getting-started/step-final.png =595x)
 
-## Document generation
 
-Once all pieces are ready, the generation process is straightforward:
+## Generating document
 
-```c#{8-10}
+Use the following code to generate the document:
+
+```c#{10-12}
 using System.IO;
 using QuestPDF.Drawing;
 using QuestPDF.Fluent;
@@ -501,12 +462,15 @@ static void Main(string[] args)
 }
 ```
 
-::: tip
-You can download, analyse and compile the code yourself by visiting [this GitHub repository](https://github.com/QuestPDF/QuestPDF-ExampleInvoice).
+::: warning SUSTAINABLE AND FAIR LICENSE
+By offering free access to most users and premium licenses for larger organizations, the project maintains its commitment to excellence while ensuring sustainable, long-term development for all.
+
+The library is free to use for any individual or business with less than 1 million USD annual gross revenue, or operates as a non-profit organization, or is a FOSS project.
 :::
 
-## Complex example
+::: tip
+For learning and evaluation, you can use the free QuestPDF Community license.
 
-Looking for more advanced example that uses the vast majority of available features? Please take a look at the [library's repository](https://github.com/QuestPDF/library/tree/main/Source/QuestPDF.ReportSample). It contains a sample report:
+More details can be found on the [QuestPDF License and Pricing page](/license/).
+:::
 
-![example](/getting-started/complex.jpg)
