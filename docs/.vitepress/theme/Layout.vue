@@ -10,6 +10,8 @@
       <ClientOnly>
         <google-analytics />
       </ClientOnly>
+
+      <intellisense />
     </template>
   </Layout>
 </template>
@@ -20,5 +22,6 @@ const { Layout } = DefaultTheme
 
 import GoogleAnalytics from "./GoogleAnalytics.vue";
 import SupportAlert from "./SupportAlert.vue";
+import Intellisense from "./Intellisense.vue";
 
 </script>
