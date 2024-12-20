@@ -1,5 +1,8 @@
 <template>
-  <div id="intellisense"></div>
+  <div id="intellisense">
+    <div class="title">{{ title }}</div>
+    <div class="description">{{ description }}</div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -7,6 +10,10 @@ import DefaultTheme from 'vitepress/theme';
 const { Layout } = DefaultTheme
 
 import {onContentUpdated} from "vitepress";
+import {ref} from "vue";
+
+const title = ref<String>('');
+const description = ref<String>('');
 
 const API_DOCUMENTATION = {
   "Text": "Supports drawing text of different styles.",
@@ -64,14 +71,16 @@ onContentUpdated(() => {
       if (Object.keys(API_DOCUMENTATION).indexOf(span.textContent) < 0)
         continue;
 
-      const documentation = API_DOCUMENTATION[span.textContent];
+      span.classList.add('intellisense-available');
 
       span.addEventListener("mouseenter", () => {
         const position = span.getBoundingClientRect();
 
-        intellisense.textContent = documentation;
+        title.value = span.textContent;
+        description.value = API_DOCUMENTATION[span.textContent];
+
         intellisense.style.display = "block";
-        intellisense.style.top = `${position.top + position.height + window.scrollY + 8}px`;
+        intellisense.style.top = `${position.top + position.height + window.scrollY + 12}px`;
         intellisense.style.left = `${position.x}px`;
       });
 
@@ -88,6 +97,9 @@ onContentUpdated(() => {
 </script>
 
 <style>
+
+/* INTELLISENSE POPUP DIALOG */
+
 #intellisense:before {
   background-color: white;
   position: absolute;
@@ -107,7 +119,47 @@ onContentUpdated(() => {
 
   max-width: 400px;
   border-radius: 8px;
-  padding: 2px 8px;
+  padding: 4px 8px;
   filter: drop-shadow(0 4px 8px #0001);
 }
+
+#intellisense .title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+#intellisense .description {
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+@media screen and (max-width: 600px) {
+  #intellisense {
+    left: 16px !important;
+    right: 16px !important;
+    max-width: calc(100vw - 32px);
+  }
+}
+
+/* CODE INTERACTION HIGHLIGHTING */
+
+code .intellisense-available {
+  cursor: pointer;
+}
+
+code:hover .intellisense-available {
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+}
+
+code .intellisense-available:hover {
+  text-decoration: none;
+  background-color: var(--vp-c-bg);
+  filter: drop-shadow(0 4px 8px #0001);
+  border: 1px solid var(--vp-c-border);
+  margin: -2px -3px;
+  padding: 2px;
+  border-radius: 4px;
+}
+
 </style>

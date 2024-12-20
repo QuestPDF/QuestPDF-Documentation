@@ -9,9 +9,8 @@
     <template #layout-bottom>
       <ClientOnly>
         <google-analytics />
+        <intellisense />
       </ClientOnly>
-
-      <intellisense />
     </template>
   </Layout>
 </template>
