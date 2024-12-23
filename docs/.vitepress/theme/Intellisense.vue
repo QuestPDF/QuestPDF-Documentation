@@ -1,7 +1,8 @@
 <template>
-  <div id="intellisense">
+  <div id="intellisense" @click="redirectToDocumentation">
     <div class="title">{{ title }}</div>
     <div class="description">{{ description }}</div>
+    <div v-if="isMobile" class="link">Read more</div>
   </div>
 </template>
 
@@ -9,8 +10,10 @@
 import {onContentUpdated, useRouter} from "vitepress";
 import {onMounted, ref} from "vue";
 
-const title = ref<String>('');
-const description = ref<String>('');
+const title = ref<string>('');
+const description = ref<string>('');
+const linkUrl = ref<string>('');
+const isMobile = ref<boolean>(false);
 
 const router = useRouter();
 
@@ -229,7 +232,6 @@ const API_DOCUMENTATION = [
 
 function applyIntellisense() {
   const codeElements = document.querySelectorAll('code');
-  const intellisense = document.getElementById('intellisense');
 
   function registerIntellisense(codeElement: HTMLElement) {
     const spans = codeElement.querySelectorAll('span');
@@ -240,22 +242,18 @@ function applyIntellisense() {
 
       span.classList.add('intellisense-available');
 
-      span.addEventListener("mouseenter", () => {
-        const documentation = API_DOCUMENTATION.find(x => x.triggers.includes(span.textContent));
+      if (isMobile.value) {
+        span.addEventListener("click", x => { showIntellisense(span); x.stopPropagation(); });
+      }
+      else {
+        span.addEventListener("mouseenter", () => showIntellisense(span));
+        span.addEventListener("mouseleave", () => hideIntellisense());
+        span.addEventListener("click", () => redirectToDocumentation());
+      }
+    }
 
-        title.value = span.textContent;
-        description.value = documentation.description;
-        span.addEventListener("click", () => router.go(documentation.linkUrl));
-
-        const position = span.getBoundingClientRect();
-        intellisense.style.display = "block";
-        intellisense.style.top = `${position.top + position.height + window.scrollY + 12}px`;
-        intellisense.style.left = `${position.x}px`;
-      });
-
-      span.addEventListener("mouseleave", () => {
-        intellisense.style.display = "none";
-      });
+    if (isMobile.value) {
+      codeElement.addEventListener("click", () => hideIntellisense());
     }
   }
 
@@ -263,7 +261,37 @@ function applyIntellisense() {
     registerIntellisense(codeElement);
 }
 
-onMounted(applyIntellisense);
+function showIntellisense(span: HTMLSpanElement) {
+  const intellisense = document.getElementById('intellisense');
+  const documentation = API_DOCUMENTATION.find(x => x.triggers.includes(span.textContent));
+
+  title.value = span.textContent;
+  description.value = documentation.description;
+  linkUrl.value = documentation.linkUrl;
+
+  const position = span.getBoundingClientRect();
+  intellisense.style.display = "block";
+  intellisense.style.top = `${position.top + position.height + window.scrollY + 12}px`;
+  intellisense.style.left = `${position.x}px`;
+}
+
+function hideIntellisense() {
+  const intellisense = document.getElementById('intellisense');
+  intellisense.style.display = "none";
+  intellisense.style.top = '0';
+  intellisense.style.left = '0';
+}
+
+function redirectToDocumentation() {
+  hideIntellisense();
+  router.go(linkUrl.value);
+}
+
+onMounted(() => {
+  isMobile.value = window.innerWidth < 600;
+  applyIntellisense();
+});
+
 onContentUpdated(applyIntellisense);
 
 </script>
@@ -311,6 +339,10 @@ onContentUpdated(applyIntellisense);
     right: 16px !important;
     max-width: calc(100vw - 32px);
   }
+}
+
+#intellisense .link {
+  color: var(--vp-code-link-color);
 }
 
 /* CODE INTERACTION HIGHLIGHTING */
