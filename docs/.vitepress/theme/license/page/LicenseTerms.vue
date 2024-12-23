@@ -4,7 +4,7 @@ const terms = [
     {
       icon: "/license/license-terms.svg",
       title: "Perpetual License",
-      description: "Each license is perpetual / lifetime and comes with one year of free feature, quality and security updates."
+      description: "Each license is perpetual / lifetime and comes with one year of free feature, quality and security updates. It is not a subscription."
     },
     {
       icon: "/license/license-renewal.svg",

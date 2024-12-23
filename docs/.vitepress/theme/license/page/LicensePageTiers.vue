@@ -87,7 +87,6 @@ const CommunityLicense: License = {
 const ProfessionalLicense: License = {
   icon: "/license/professional.svg",
   name: "Professional",
-  shortTerms: "For organizations with software development teams with at most 10 developers",
   price: 699,
   paddleProductId: PaddleConfiguration.professionalLicenseId,
   details: [
@@ -109,7 +108,6 @@ const ProfessionalLicense: License = {
 const EnterpriseLicense: License = {
   icon: "/license/enterprise.svg",
   name: "Enterprise",
-  shortTerms: "For organizations with software development teams of any size",
   price: 1999,
   paddleProductId: PaddleConfiguration.enterpriseLicenseId,
   details: [
