@@ -1,20 +1,35 @@
+---
+outline: false
+---
+
+
 # Height
 
-Use this container to enforce additional sizing rules, e.g. minimum/maximum/exact height.
+Use this element to control the veertical size of its content.
 
-```c#
-// adjust the height to a specific value
-.Height(50)
+| Method        | Description                             |
+|---------------|-----------------------------------------|
+| **Height**    | Sets the exact height of its content.   |
+| **MinHeight** | Sets the minimum height of its content. |
+| **MaxHeight** | Sets the maximum height of its content. |
 
-// set a constraint on the minimum and/or maximum height
-.MinHeight(50)
-.MaxHeight(100)
+
+## Example
+
+The following example demonstrates a container with a fixed height of 100 pt and a width of 200 pt.
+
+```c#{4}
+container
+    .Width(300)
+    .Padding(25)
+    .Height(100)
+    .AspectRatio(2f, AspectRatioOption.FitHeight)
+    .Background(Colors.Grey.Lighten1);
 ```
 
-::: danger
-Please be careful. This component may try to enforce size constraints that are impossible to meet, e.g. when:
-- the container requires more space than is available, or
-- when it tries to squeeze its child into less space than possible.
+![example](/api-reference/height.webp =300x)
 
-Such scenarios result in a layout exception.
-:::
+
+<br>
+
+<!--@include: tip-layout-constraints.md-->
