@@ -1,26 +1,48 @@
+---
+outline: false
+---
+
+
 # Debug area
 
-- This container can be used to inspect the space taken by its children.
-- The `Debug` container does not alter a document's layout.
+The DebugArea element helps you visually debug document layouts by drawing a labeled box around its content. 
+This aids in understanding spacing, alignment and pinpointing specific sections of the document during development.
 
-```c#
-// You can specify text and color,
-// to better distinguish between various debug elements:
-.Debug("Grid example", Colors.Blue.Medium)
+<!--@include: tip-debugging.md--> 
 
-// You can skip the color. By default it is red:
-.Debug("Grid example")
 
-// Or use default style:
-.Debug()
+## API
+
+You can specify text and color to better distinguish between various debug elements:
+
+```c#{2}
+container
+    .Debug("Grid example", Colors.Blue.Medium)
+    // content
 ```
 
-Example:
+It is also possible to skip the color (it is red by default), and even the label:
 
-```c#{4}
+```c#{2,6}
 container
+    .Debug("Grid example")
+    // content
+
+container
+    .Debug()
+    // content
+```
+
+<!--@include: tip-color.md--> 
+
+## Example
+
+```c#{5}
+container
+    .Width(250)
+    .Height(250)
     .Padding(25)
-    .Debug("Grid example", Colors.Blue.Medium)
+    .DebugArea("Grid example", Colors.Blue.Medium)
     .Grid(grid =>
     {
         grid.Columns(3);
@@ -31,4 +53,4 @@ container
     });
 ```
 
-![example](/api-reference/debug.png =420x)
+![example](/api-reference/debug-area.webp =375x)
