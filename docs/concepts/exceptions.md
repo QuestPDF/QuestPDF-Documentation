@@ -1,22 +1,64 @@
+---
+outline: false
+---
+
+
 # Exceptions
 
-During the development process, you may encounter different issues associated with the PDF document rendering process.
-It is important to understand the potential sources of such exceptions, their root causes and how to fix them properly.
-In the QuestPDF library, exceptions have been divided into three groups as described below.
+While developing with QuestPDF, you might encounter issues during the PDF rendering process. 
+Understanding the potential sources of these exceptions, their root causes, and the appropriate fixes is crucial. 
+QuestPDF categorizes exceptions into three distinct groups:
+
+<!--@include: ../api-reference/tip-debugging.md--> 
+
 
 ##  DocumentComposeException
 
-This exception may occur during the document composition process (when you are using the fluent API to compose various elements to create the final layout). During this process you are interacting with report data, using conditions, loops and even additional methods. All these operations are a potential source of exceptions which have been grouped together in the `DocumentComposeException` type.
+This exception arises during the document composition phase, where you use the Fluent API to assemble various elements and create the final layout. 
+Common tasks in this phase include working with your input data, applying conditions, iterating through loops, and calling additional methods.
+
+#### Possible Causes:
+- Invalid or unexpected data being processed.
+- Incorrect or incomplete API usage.
+- Errors in custom logic such as conditions or loops.
+
+#### Resolution:
+- Review the stack trace to identify the problematic code.
+- Validate input data before composing the document.
+- Debug your composition logic for potential issues in method calls or API interactions.
+
 
 ## DocumentDrawingException
 
-This exception occurs during the document generation process (when the generation engine translates the elements tree into proper drawing commands). If you encounter such an exception, please contact us - it is most probably a bug that we want to fix for you! Additionally, if you are using custom components, all exceptions thrown there are going to bubble up as an `DocumentDrawingException` type.
+This exception occurs during the document generation phase, when the rendering engine converts the layout tree into drawing commands. 
+Unlike DocumentComposeException, this type typically stems from internal issues or problems with custom components.
+
+::: info
+If you encounter this exception, it could indicate a bug in the QuestPDF library. 
+Please reach out to our support team with the error details, and we’ll work to resolve it promptly.
+:::
+
+::: warning
+If you are using [Dynamic Components](/concepts/dynamic-components), all exceptions thrown there are going to bubble up as this type of exception. 
+In such case, please review the implementation of your dynamic components.
+:::
+
 
 ## DocumentLayoutException
 
-This exception may be extremely hard to fix because it happens for valid document trees which nevertheless enforce constraints that are impossible to meet. For example, when you try to draw a rectangle bigger than the available space on the page, the rendering engine is going to wrap the content in the hopes that on the next page there will be enough space. Generally, such wrapping behaviour happens routinely and works well. However, there are cases when it can lead to infinite wrapping. When a certain document length threshold is passed, the algorithm stops the rendering process and throws `DocumentLayoutException`. In such case, please revise your code and search for indivisible elements requiring too much space.
+This exception can be challenging to resolve as it occurs with valid document trees that impose constraints impossible to satisfy. 
 
-When you have a debugger attached, this exception provides an additional `ElementTrace` property showing which elements have been rendered when the exception was thrown. Please analyse the example below:
+For instance, attempting to draw a rectangle larger than the available page space triggers the rendering engine to wrap the content, hoping sufficient space will be available on the next page.
+
+
+### Enhanced Debugging Context
+
+When the `QuestPDF.Settings.EnableDebugging` is set to `true`, or the debugger is attached, the library provides additional information to help you diagnose and resolve layout issues.
+
+
+### Example
+
+The code below contains conflicting size constraints.
 
 ```c#{2,8}
 .Padding(10)
@@ -30,81 +72,78 @@ When you have a debugger attached, this exception provides an additional `Elemen
 });
 ```
 
-Below is the element trace returned by the exception. Nested elements (children) are indented. Sometimes you may find additional, library-specific elements.
-
-Additional symbols are used to help you find the problem cause:
-- 🌟 - represents special elements, e.g. page header/content/footer or the debug pointer element,
-- 🔥 - represents an element that causes the layout exception. Follow the symbol deeper to find the root cause.
+And generates the following exception: 
 
 ```
-🔥 Page content 🌟
-------------------
-Available space: (Width: 500, Height: 360)
-Requested space: PartialRender (Width: 120,00, Height: 20,00)
+The provided document content contains conflicting size constraints. For example, some elements may require more space than is available. 
 
-    🔥 Background
-    -------------
-    Available space: (Width: 500, Height: 360)
-    Requested space: PartialRender (Width: 120,00, Height: 20,00)
-    Color: #ffffff
+The layout issue is likely present in the following part of the document: 
 
-        🔥 Padding
-        ----------
-        Available space: (Width: 500, Height: 360)
-        Requested space: PartialRender (Width: 120,00, Height: 20,00)
-        Top: 10
-        Right: 10
-        Bottom: 10
-        Left: 10
+-> Document
 
-            🔥 Constrained
-            --------------
-            Available space: (Width: 480, Height: 340)
-            Requested space: PartialRender (Width: 100,00, Height: 0,00)
-            Min Width: 100
-            Max Width: 100
-            Min Height: -
-            Max Height: -
+-> Page
 
-                🔥 Background
-                -------------
-                Available space: (Width: 100, Height: 340)
-                Requested space: PartialRender (Width: 0,00, Height: 0,00)
-                Color: #eeeeee
+-> Page
 
-                    🔥 Example debug pointer 🌟
-                    ---------------------------
-                    Available space: (Width: 100, Height: 340)
-                    Requested space: PartialRender (Width: 0,00, Height: 0,00)
+-> Content
 
-                        🔥 Column
-                        --------
-                        Available space: (Width: 100, Height: 340)
-                        Requested space: PartialRender (Width: 0,00, Height: 0,00)
+-> Content
 
-                            🔥 Padding
-                            ----------
-                            Available space: (Width: 100, Height: 340)
-                            Requested space: PartialRender (Width: 0,00, Height: 0,00)
-                            Top: 0
-                            Right: 0
-                            Bottom: -0
-                            Left: 0
+-> In method:   content
+   Called from: Render
+   Source path: /Users/marcinziabek/RiderProjects/QuestPDF/Source/QuestPDF.Examples/Engine/RenderingTest.cs
+   Line number: 100
 
-                                🔥 BinaryColumn
-                                --------------
-                                Available space: (Width: 100, Height: 340)
-                                Requested space: PartialRender (Width: 0,00, Height: 0,00)
+-> Example debug pointer
 
-                                    🔥 Constrained
-                                    --------------
-                                    Available space: (Width: 100, Height: 340)
-                                    Requested space: Wrap
-                                    Min Width: 150
-                                    Max Width: 150
-                                    Min Height: -
-                                    Max Height: -
+
+
+To learn more, please analyse the document measurement of the problematic location: 
+
+🔴 Column
+==========
+Available Space: (Width: 100,000, Height: 340,000)
+Space Plan: Wrap
+Wrap Reason: The available space is not sufficient for even partially rendering a single item.
+----------
+
+
+   ⚪️ TextBlock
+   =============
+   Alignment: Start
+   Content Direction: LeftToRight
+   Line Clamp: -
+   Line Clamp Ellipsis: -
+   Paragraph Spacing: 0
+   Paragraph First Line Indentation: 0
+   Text: Test
+
+
+   🚨 Constrained 🚨
+   ==================
+   Available Space: (Width: 100,000, Height: 340,000)
+   Space Plan: Wrap
+   Wrap Reason: The available horizontal space is less than the minimum width.
+   ------------------
+   Content Direction: LeftToRight
+   Min Width: 150
+   Max Width: 150
+   Min Height: -
+   Max Height: -
+   Enforce Size When Empty: False
+
+
+      🟢 Empty
+      =========
+      Available Space: (Width: 0,000, Height: 0,000)
+      Space Plan: FullRender (Width: 0,000, Height: 0,000)
+      ---------
+
+
+Legend: 
+🚨 - Element that is likely the root cause of the layout issue based on library heuristics and prediction. 
+🔴 - Element that cannot be drawn due to the provided layout constraints. This element likely causes the layout issue, or one of its descendant children is responsible for the problem. 
+🟡 - Element that can be partially drawn on the page and will also be rendered on the consecutive page. In more complex layouts, this element may also cause issues or contain a child that is the actual root cause.
+🟢 - Element that is successfully and completely drawn on the page.
+⚪️ - Element that has not been drawn on the faulty page. Its children are omitted.
 ```
-::: info
-Remember, this trace is only available, when you have a debugger attached.
-:::
