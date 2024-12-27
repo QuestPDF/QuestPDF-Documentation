@@ -23,14 +23,9 @@ container
 
 It is also possible to skip the color (it is red by default), and even the label:
 
-```c#{2,6}
-container
-    .Debug("Grid example")
-    // content
-
-container
-    .Debug()
-    // content
+```c#
+.Debug("Grid example")
+.Debug()
 ```
 
 <!--@include: tip-color.md--> 
