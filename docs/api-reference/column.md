@@ -10,6 +10,7 @@ The Column element arranges content vertically, stacking items one below another
 It supports paging functionality, allowing content to flow naturally across multiple pages when needed.
 When required, child items are split across pages, ensuring that the content is not cut off.
 
+
 ## Basic usage
 
 The Column element uses a lambda function to define its content. 

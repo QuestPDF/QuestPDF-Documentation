@@ -1,43 +1,95 @@
+---
+outline: false
+---
+
+
 # Row
 
-- This container divides available space into individual columns.
-- Columns can have a fixed size (provided in points) or be proportional.
-- You can use pageable content inside each column.
-- If the content of any column wraps, the entire container wraps.
+Draws a collection of elements horizontally.
+
+It supports paging functionality, allowing content to flow naturally across multiple pages when needed.
+When required, child items are split across pages, ensuring that the content is not cut off.
+
+
+## Item Types
+
+For a row element with a width of 100 points that has three items (a relative item of size 1, a relative item of size 5, and a constant item of size 10 points),
+the items will occupy sizes of 15 points, 75 points, and 10 points respectively.
+
+| Method           | Description                                                                                          |
+|------------------|------------------------------------------------------------------------------------------------------|
+| **ConstantItem** | Adds a new item to the row element with a specified constant size.                                   |
+| **RelativeItem** | Adds a new item to the row element. This item occupies space proportionally to other relative items. |
+| **AutoItem**     | Adds a new item to the row element. The size of this item adjusts based on its content.              |
+
+
+For ConstantItem, you can optionally specify the unit value (default is `Unit.Points`).
 
 ```c#
-.Row(row =>
-{
-    row.ConstantItem(100)
-        .Background("#DDD")
-        .Padding(10)
-        .ExtendVertical()
-        .Text("This column is 100 points wide");
-
-    row.RelativeItem()
-        .Background("#BBB")
-        .Padding(10)
-        .Text("This column takes 1/3 of the available space");
-
-    row.RelativeItem(2)
-        .Background("#DDD")
-        .Padding(10)
-        .Text("This column takes 2/3 of the available space");
-});
+row.ConstantItem(5, Unit.Centimetre);
 ```
 
-![example](/api-reference/row-example.png =740x)
+<!--@include: tip-unit.md--> 
 
-You can specify the spacing between each column by using the `Spacing()` method:
+
+## Basic usage
+
+The Row element uses a lambda function to define its content.
+Inside the lambda, you can add multiple items using the `Item` method.
+
+```c#{4,6,11,16}
+container
+    .Padding(25)
+    .Width(325)
+    .Row(row =>
+    {
+        row.ConstantItem(100)
+            .Background(Colors.Grey.Medium)
+            .Padding(10)
+            .Text("100pt");
+
+        row.RelativeItem()
+            .Background(Colors.Grey.Lighten1)
+            .Padding(10)
+            .Text("75pt");
+
+        row.RelativeItem(2)
+            .Background(Colors.Grey.Lighten2)
+            .Padding(10)
+            .Text("150pt");
+    });
+```
+
+![example](/api-reference/row-simple.webp =375x)
+
+
+## Spacing
+
+You can adjust the horizontal spacing between items using the `Spacing` method.
+
+```c#{7}
+container
+    .Padding(25)
+    .Width(220)
+    .Height(50)
+    .Row(row =>
+    {
+        row.Spacing(10);
+
+        row.RelativeItem(2).Background(Colors.Grey.Darken1);
+        row.RelativeItem(3).Background(Colors.Grey.Medium);
+        row.RelativeItem(5).Background(Colors.Grey.Lighten1);
+    });
+```
+
+![example](/api-reference/row-spacing.webp =270x)
+
+<br>
+
+Optionally, you can specify the unit value (default is `Unit.Points`).
 
 ```c#
-.Row(row =>
-{
-    row.Spacing(20);
-    row.RelativeItem(2).Border(1).Background(Colors.Grey.Lighten1);
-    row.RelativeItem(3).Border(1).Background(Colors.Grey.Lighten2);
-    row.RelativeItem(4).Border(1).Background(Colors.Grey.Lighten3);
-});
+row.Spacing(5, Unit.Millimeters);
 ```
 
-![example](/api-reference/row-spacing.png =370x)
+<!--@include: tip-unit.md--> 
