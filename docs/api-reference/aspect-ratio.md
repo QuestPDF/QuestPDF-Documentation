@@ -1,3 +1,8 @@
+---
+outline: false
+---
+
+
 # Aspect Ratio
 
 Constrains its content to maintain a given width-to-height ratio.

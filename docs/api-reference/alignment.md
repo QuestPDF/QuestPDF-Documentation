@@ -1,3 +1,8 @@
+---
+outline: false
+---
+
+
 # Alignment
 
 The Alignment element controls the positioning of its child content within the available space.

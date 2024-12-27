@@ -1,3 +1,8 @@
+---
+outline: false
+---
+
+
 # Background
 
 Sets a solid background color behind its content.
