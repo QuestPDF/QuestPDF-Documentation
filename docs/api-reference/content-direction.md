@@ -1,43 +1,57 @@
+---
+outline: false
+---
+
+
 # Content Direction
 
-## Introduction
+The ContentDirection element controls the flow direction of content in your document, supporting both left-to-right (LTR) and right-to-left (RTL) layouts. 
+This is essential for proper text alignment and content organization when working with different languages.
 
-Most languages (such as English, German, Polish, etc.) are written left-to-right. However, there are languages (e.g. Arabic) that use a right-to-left script.
+```c#
+container
+    .ContentFromRightToLeft()
+    // content in right-to-left direction
+```
 
-The right-to-left content direction significantly changes how the layout is planned:
-
-1) Text position (aligned to the right).
-2) Text direction where text starts on the right side and ends on the left side.
-3) Text word-wrapping algorithm that needs to take into account the direction of text when breaking a line.
-4) Order of elements in collections, e.g. the first item in a row should be placed first on the right (in RTL) or to first on the left (in LTR).
-5) Default content position (aligned to the right).
 
 ## API
 
-You can set content direction using the following API:
+| Method                     | Description                                                                                       |
+|----------------------------|---------------------------------------------------------------------------------------------------|
+| **ContentFromLeftToRight** | Sets the left-to-right (LTR) direction for its entire content.<br> This is a **default** setting. |
+| **ContentFromRightToLeft** | Sets the right-to-left (RTL) direction for its entire content.                                    |
 
-```c#
-.ContentFromLeftToRight() // default
-.ContentFromRightToLeft()
-```
 
-It is possible to set the target direction for all descendants:
 
-```c#
+## Overriding content direction
+
+It is also possible to override the content direction for specific elements:
+
+```c#{1,10}
 .ContentFromRightToLeft()
 .Column(column => 
 {
-    // this content uses inherited right-to-left content direction
-    column.Item() // ... content
+    column
+        .Item() 
+        // content with inherited RTL content direction
         
-    // this item overrides the content direction to right-to-left    
-    column.Item().ContentFromLeftToRight() // ... content     
+    column
+        .Item()
+        .ContentFromLeftToRight() 
+        // content with overridden LTR content direction     
 });
 ```
 
-## Examples
 
-The RTL mode is supported for all elements. The following examples show how this mode affects the rendering process. In the `Row` element, the elements are displayed in accordance with the content direction. For example, the first element is placed first on the left (in LTR mode) or first on the right (in RTL) mode:
+## Impact On Content
+
+This element impacts several key aspects:
+- Text alignment and positioning
+- Text direction and word wrapping
+- Element ordering in collections (Row, Table etc.)
+- Default content alignment
+- Content flow direction
 
 ```c#
 .ContentFromRightToLeft() // LTR or RTL mode
@@ -51,31 +65,7 @@ The RTL mode is supported for all elements. The following examples show how this
 });
 ```
 
-![example](/api-reference/content-direction-row.png =585x)
-
-
-A similar situation exists when using the `Table` element as shown below:
-
-```c#
-.ContentFromRightToLeft() // LTR or RTL mode
-.Table(table =>
-{
-    table.ColumnsDefinition(columns =>
-    {
-        columns.RelativeColumn();
-        columns.RelativeColumn();
-        columns.RelativeColumn();
-    });
-    
-    table.Cell().Height(50).Background(Colors.Red.Lighten1);
-    table.Cell().Height(50).Background(Colors.Green.Lighten1);
-    table.Cell().Height(50).Background(Colors.Blue.Lighten1);
-    table.Cell().ColumnSpan(2).Height(50).Background(Colors.Orange.Lighten1);
-});
-```
-
-![example](/api-reference/content-direction-table.png =585x)
-
-It is important to note that content direction does *not* affect element alignment:
-
-![example](/api-reference/content-direction-inlined.png =585x)
+| LTR                                                                                                                                          | RTL                                                                                                                                           |
+|----------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| Items are typically aligned to the left. For most containers, the first item is positioned on the left, while the last item is on the right. | Items are typically aligned to the right. For most containers, the first item is positioned on the right, while the last item is on the left. |
+| ![example](/api-reference/content-direction-ltr.webp =250x)                                                                                  | ![example](/api-reference/content-direction-rtl.webp =250x)                                                                                   |
