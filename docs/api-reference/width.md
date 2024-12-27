@@ -1,20 +1,46 @@
+---
+outline: false
+---
+
+
 # Width
 
-Use this container to enforce additional sizing rules: minimum width, maximum width or exact width.
+Use this element to control the horizontal size of its content.
 
-```c#
-// adjust width to specific value
-.Width(50)
+| Method       | Description                            |
+|--------------|----------------------------------------|
+| **Width**    | Sets the exact width of its content.   |
+| **MinWidth** | Sets the minimum width of its content. |
+| **MaxWidth** | Sets the maximum width of its content. |
 
-// set a constraint on the minimum and/or maximum width
-.MinWidth(50)
-.MaxWidth(100)
+
+## Example
+
+The following example shows how text content adjusts to the specified width constraints.
+
+```c#{9,14}
+container
+    .Width(300)
+    .Padding(25)
+    .Column(column =>
+    {
+        column.Spacing(25);
+        
+        column.Item()
+            .MinWidth(200)
+            .Background(Colors.Grey.Lighten3)
+            .Text("Lorem ipsum");
+        
+        column.Item()
+            .MaxWidth(100)
+            .Background(Colors.Grey.Lighten3)
+            .Text("dolor sit amet");
+    });
 ```
 
-::: danger
-Please be careful. This component may try to enforce size constraints that are impossible to meet when:
-- it requires more space than is available, or
-- it tries to squeeze its child in less space than is available.
+![example](/api-reference/width.webp =300x)
 
-Such scenarios result in a layout exception.
-:::
+
+<br>
+
+<!--@include: tip-layout-constraints.md-->
