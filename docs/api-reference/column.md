@@ -1,31 +1,61 @@
+---
+outline: false
+---
+
+
 # Column
 
-- The `Column` element is a multi-element container. You can add any elements you want to it.
-- The algorithm places elements one underneath another. Each element may take the entire column width.
-- This container renders its elements on multiple pages when necessary.
+The Column element arranges content vertically, stacking items one below another. 
 
-```c#
-.Column(column =>
-{
-    column.Item().Background(Colors.Grey.Medium).Height(50);
-    column.Item().Background(Colors.Grey.Lighten1).Height(100);
-    column.Item().Background(Colors.Grey.Lighten2).Height(150);
-});
+It supports paging functionality, allowing content to flow naturally across multiple pages when needed.
+When required, child items are split across pages, ensuring that the content is not cut off.
+
+## Basic usage
+
+The Column element uses a lambda function to define its content. 
+Inside the lambda, you can add multiple items using the `Item` method.
+
+```c#{4-9}
+container
+    .Width(250)
+    .Padding(25)
+    .Column(column =>
+    {
+        column.Item().Background(Colors.Grey.Medium).Height(50);
+        column.Item().Background(Colors.Grey.Lighten1).Height(75);
+        column.Item().Background(Colors.Grey.Lighten2).Height(100);
+    });
 ```
 
-![example](/api-reference/column.png =350x)
+![example](/api-reference/column-simple.webp =250x)
 
-Use the `Spacing` method to add some space between elements:
 
-```c#
-.Column(column =>
-{
-    column.Spacing(15);
+## Spacing
 
-    column.Item().Background(Colors.Grey.Medium).Height(50);
-    column.Item().Background(Colors.Grey.Lighten1).Height(100);
-    column.Item().Background(Colors.Grey.Lighten2).Height(150);
-});
+You can adjust the vertical spacing between items using the `Spacing` method.
+
+```c#{6}
+container
+    .Width(250)
+    .Padding(25)
+    .Column(column =>
+    {
+        column.Spacing(25);
+        
+        column.Item().Background(Colors.Grey.Medium).Height(50);
+        column.Item().Background(Colors.Grey.Lighten1).Height(75);
+        column.Item().Background(Colors.Grey.Lighten2).Height(100);
+    });
 ```
 
-![example](/api-reference/column-spacing.png =350x)
+![example](/api-reference/column-spacing.webp =250x)
+
+<br>
+
+Optionally, you can specify the unit value (default is `Unit.Points`).
+
+```c#
+column.Spacing(5, Unit.Millimeters);
+```
+
+<!--@include: tip-unit.md--> 

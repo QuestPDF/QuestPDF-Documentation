@@ -25,7 +25,7 @@ Half of the border thickness extends inward from the content edge, and half exte
 | **BorderTop**        | Sets a border on the top side of its content.              |
 | **BorderBottom**     | Sets a border on the bottom side of its content.           |
 
-Each methods requires a thickness value as a parameter. Optionally, you can specify the unit value (default is `Unit.Points`).
+Each method requires a thickness value as a parameter. Optionally, you can specify the unit value (default is `Unit.Points`).
 
 ```c#
 container.Border(1);
