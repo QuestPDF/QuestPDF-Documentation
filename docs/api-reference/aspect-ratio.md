@@ -1,23 +1,47 @@
 # Aspect Ratio
 
-- Aspect ratio is the ratio between width and height. For example, if a component is 200 points in width and 100 points in height, its aspect ratio is equal to 2.
-- This container calculates the desired size, and scales itself to take as much space as possible.
-- Supports paging: on each page, the aspect ratio constraint is preserved.
+Constrains its content to maintain a given width-to-height ratio.
+
+## API
+
+Specify the aspect-ratio value either as a number or a division of two numbers: 
 
 ```c#
 .AspectRatio(0.5) // use a ratio
 .AspectRatio(1f / 2f) // or division
 ```
 
-By default, the `AspectRatio` element wants to occupy the entire available width. You can change that behavior using one of the following options:
-1) `AspectRatioOption.FitWidth` - the element scales to occupy the available width. Default.
-2) `AspectRatioOption.FitHeight` - the element scales to occupy the available height. Good in conjunction with constraining elements.
-3) `AspectRatioOption.FitArea` - this is the combination of the above options. The element scales to occupy the available area while preserving its aspect ratio. This means that sometimes it takes the entire width and sometimes the entire height. This is the safest option.
+Additionally, you can specify how the content should be adjusted to meet the aspect ratio:
 
 ```c#
 .AspectRatio(0.5, AspectRatioOption.FitArea)
 ```
 
+### Fitting Options
+
+| Method                          | Description                                                                                                                                                                                                                  |
+|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| AspectRatioOption.**FitWidth**  | Adjusts content to occupy the full width available. Used as the **default** setting in the library.                                                                                                                          |
+| AspectRatioOption.**FitHeight** | Adjusts content to fill the available height. Often used with height-constraining elements.                                                                                                                                  |
+| AspectRatioOption.**FitArea**   | Adjusts content to fill the available area while maintaining its aspect ratio. This may result in the content fully occupying either the width or height, depending on its dimensions. Often used with constraining elements |
+
 ::: danger
-Please be careful. This component may try to enforce size constraints that are impossible to meet. Such scenarios result in a layout exception.
+This container enforces strict space constraints.
+The DocumentLayoutException may be thrown if these constraints can't be satisfied.
 :::
+
+
+## Example
+
+```c#{4}
+container
+    .Width(300)
+    .Height(300)
+    .AspectRatio(3f/4f, AspectRatioOption.FitArea)
+    .Background(Colors.Grey.Lighten2)
+    .AlignCenter()
+    .AlignMiddle()
+    .Text("3:4 Content Area");
+```
+
+![example](/api-reference/aspect-ratio.webp =300x)
