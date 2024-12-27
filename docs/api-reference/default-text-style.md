@@ -1,36 +1,47 @@
+---
+outline: false
+---
+
+
 # Default text style
 
-For professional documents, it is important to maintain consistent typography. At the same time, documents that contain many text elements (e.g. reports) may become troublesome to configure, even with techniques such as [global text styles](/api-reference/page#global-text-style) or [DSL extensions](/concepts/creating-dsl) (creating more complex structures defined as C# extension methods).
+Applies a default text style to all nested Text elements. 
+Please note that this element extends and overrides existing styles with additional configuration.
 
-This element allows you to override text styles in all its children at once.
 
-```c#{1}
+## API
+
+Depending on your use-case, you can provide a TextStyle object or use a lambda expression:
+
+```c#
 .DefaultTextStyle(x => x.Bold().Underline())
-.Column(column =>
-{ 
-    column.Item().Text("Default style applies to all children");
-    column.Item().Text("You can override certain styles").Underline(false).FontColor(Colors.Green.Darken2);
-    
-    column.Item().PaddingTop(10).Border(1).Grid(grid =>
-    {
-        grid.Columns(4);
+.DefaultTextStyle(TextStyle.Default.Bold().Underline())
+```
 
-        foreach (var i in Enumerable.Range(1, 16))
-        {
-            grid.Item()
-                .Border(1)
-                .BorderColor(Colors.Grey.Lighten1)
-                .Background(Colors.Grey.Lighten3)
-                .Width(50)
-                .Height(50)
-                .AlignCenter()
-                .AlignMiddle()
-                .Text(i)
-                .FontSize(16 + i / 4);   
-        }
-    });
+
+## Example
+
+```c#{4,16}
+container
+    .Width(400)
+    .Padding(25)
+    .DefaultTextStyle(x => x.Bold().Underline())
+    .Column(column =>
+    { 
+        column.Spacing(10);
+        
+        column.Item().Text("Inherited bold and underline");
+        
+        column.Item()
+            .Text("Disabled underline, inherited bold and adjusted font color")
+            .Underline(false).FontColor(Colors.Green.Darken2);
+
+        column.Item()
+            .DefaultTextStyle(x => x.DecorationWavy().FontColor(Colors.LightBlue.Darken3))
+            .Text("Changed underline type and adjusted font color");
+    });   
 ```
 
 Please note that this element extends existing styles with additional configuration. Those styles can be extended/overridden in later stages of the code.
 
-![example](/api-reference/default-text-style.png =220x)
+![example](/api-reference/default-text-style.webp =400x)
