@@ -1,8 +1,15 @@
+---
+outline: false
+---
+
+
 # Show if
 
-This container allows you to show/hide its child based on a condition. The `ShowIf` component can provide the syntactic sugar needed to achieve this without breaking the fluent API chain as illustrated below:
+The ShowIf element provides a simple way to conditionally display or hide content without breaking the fluent API chain. 
+This is particularly useful when you need to show or hide sections of your document based on runtime conditions.
 
-```c#
+
+```c#{8-11,19}
 var condition = numberOfElements > 5;
 
 // c# if-statement approach
@@ -20,6 +27,7 @@ var condition = numberOfElements > 5;
 .Row(row =>
 {
     row.RelativeItem().Text("One");
+    
     row.RelativeItem().ShowIf(condition).Text("Two");
 });
 ```
