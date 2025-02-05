@@ -1,4 +1,4 @@
-# Basics
+# Text
 
 ## Simple usage
 
@@ -10,6 +10,8 @@ container
 ```
 
 ![example](/api-reference/text-basic.webp =153x)
+
+## Customization
 
 The `Text` method returns a descriptor that allows further customization of the text style.
 

@@ -55,6 +55,7 @@ The injected element can be positioned in relation to the text baseline or font 
 | **Bottom**        | Aligns the bottom edge of the injected element with the top edge of the font. If the injected element is very tall, the extra space will rise from the bottom and extend upward. |
 | **Middle**        | Aligns the middle of the injected element with the middle of the text. If the injected element is very tall, the extra space will grow equally from the top and bottom.          |
 
+#### Example:
 
 ```c#{5,11}
 .Text(text =>

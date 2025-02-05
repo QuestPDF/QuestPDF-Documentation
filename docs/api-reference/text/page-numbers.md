@@ -39,6 +39,12 @@ Document.Create(document =>
 
 The following methods allow you to display page numbers relative to a specific section of the document.
 
+::: tip
+[Section](/api-reference/section) defines part of the document that can be further referenced by name, e.g. for page numbering or linking.
+:::
+
+#### Available methods
+
 | Method                       | Description                                                                                                                                                                                      |
 |------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **BeginPageNumberOfSection** | Appends text showing the number of the first page of the specified <see cref="ElementExtensions.Section">Section</see>.                                                                          |
@@ -46,9 +52,7 @@ The following methods allow you to display page numbers relative to a specific s
 | **PageNumberWithinSection**  | Appends text showing the page number relative to the beginning of the given <see cref="ElementExtensions.Section">Section</see>. For a section spanning pages 20 to 50, page 35 will show as 15. |
 | **TotalPagesWithinSection**  | Appends text showing the total number of pages within the given <see cref="ElementExtensions.Section">Section</see>. For a section spanning pages 20 to 50, the total is 30 pages.               |
 
-::: tip
-[Section](/api-reference/section) defines part of the document that can be further referenced by name, e.g. for page numbering or linking.
-:::
+#### Example
 
 First, define a section somewhere in the document:
 
