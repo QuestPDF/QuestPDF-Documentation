@@ -90,7 +90,18 @@ export default defineConfig({
             {
                 text: 'Visual elements',
                 items: [
-                    { text: 'Text', link: '/api-reference/text' },
+                    {
+                        text: 'Text',
+                        items: [
+                            { text: 'Basics', link: '/api-reference/text/basics' },
+                            { text: 'Text Style', link: '/api-reference/text/text-style' },
+                            { text: 'Paragraph Style', link: '/api-reference/text/paragraph-style' },
+                            { text: 'Page Numbers', link: '/api-reference/text/page-numbers' },
+                            { text: 'Injecting Custom Content', link: '/api-reference/text/injecting-custom-content' },
+                            { text: 'Style inheritance', link: '/api-reference/text/style-inheritance' },
+                            { text: 'Font management', link: '/api-reference/text/font-management' },
+                        ]
+                    },
                     { text: 'Image', link: '/api-reference/image' },
                     { text: 'Background', link: '/api-reference/background' },
                     { text: 'Border', link: '/api-reference/border' },
