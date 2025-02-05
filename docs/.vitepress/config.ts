@@ -179,7 +179,6 @@ export default defineConfig({
                     { text: 'Execution order', link: '/concepts/execution-order' },
                     { text: 'Creating DSL', link: '/concepts/creating-dsl' },
                     { text: 'Components', link: '/concepts/components' },
-                    { text: 'Font management', link: '/concepts/font-management' },
                     { text: 'Dynamic components', link: '/concepts/dynamic-components' },
                     { text: 'Length unit types', link: '/concepts/length-unit-types' },
                     { text: 'Colors', link: '/concepts/colors' },
