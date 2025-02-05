@@ -14,8 +14,6 @@
 
 [Components](/concepts/components) - explains how you can prepare implement reusable layout structures shared across many document types.
 
-[Font management](/concepts/font-management.md) - shows how to include custom fonts in your project, so to not rely on the runtime environment.
-
 [Dynamic components](/concepts/dynamic-components) - describes how to implement most advanced layouts by generating conditional, page-specific content.
 
 [Length unit types](/concepts/length-unit-types) - list of standard length unit types that can be used instead of points.
