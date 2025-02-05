@@ -30,10 +30,7 @@ Additionally, you can specify how the content should be adjusted to meet the asp
 | AspectRatioOption.**FitHeight** | Adjusts content to fill the available height. Often used with height-constraining elements.                                                                                                                                  |
 | AspectRatioOption.**FitArea**   | Adjusts content to fill the available area while maintaining its aspect ratio. This may result in the content fully occupying either the width or height, depending on its dimensions. Often used with constraining elements |
 
-::: danger
-This container enforces strict space constraints.
-The DocumentLayoutException may be thrown if these constraints can't be satisfied.
-:::
+<!--@include: tip-layout-constraints.md-->
 
 
 ## Example

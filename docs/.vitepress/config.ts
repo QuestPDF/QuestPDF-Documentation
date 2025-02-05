@@ -99,10 +99,19 @@ export default defineConfig({
                             { text: 'Page Numbers', link: '/api-reference/text/page-numbers' },
                             { text: 'Injecting Custom Content', link: '/api-reference/text/injecting-custom-content' },
                             { text: 'Style inheritance', link: '/api-reference/text/style-inheritance' },
-                            { text: 'Font management', link: '/api-reference/text/font-management' },
+                            { text: 'Font management', link: '/api-reference/text/font-management' }
                         ]
                     },
-                    { text: 'Image', link: '/api-reference/image' },
+                    {
+                        text: 'Image',
+                        items: [
+                            { text: 'Basics', link: '/api-reference/image/basics' },
+                            { text: 'Optimization', link: '/api-reference/image/optimization' },
+                            { text: 'Shared Images', link: '/api-reference/image/shared' },
+                            { text: 'SVG', link: '/api-reference/image/svg' },
+                            { text: 'Images Of Dynamic Size', link: '/api-reference/image/dynamic' }
+                        ]
+                    },
                     { text: 'Background', link: '/api-reference/background' },
                     { text: 'Border', link: '/api-reference/border' },
                     { text: 'Line', link: '/api-reference/line' },
