@@ -65,6 +65,24 @@ Example:
 ![example](/api-reference/text-paragraph-alignment.webp =400x)
 
 
+## Default Text Style
+
+Applies a consistent style for the whole content within the Text element.
+
+```c#{3}
+.Text(text =>
+{
+    text.DefaultTextStyle(x => x.Light().LetterSpacing(-0.1f).WordSpacing(0.1f));
+
+    text.Span("Changing typography settings helps creating ");
+    text.Span("significant").LetterSpacing(0.2f).Black().BackgroundColor(Colors.Grey.Lighten2);
+    text.Span(" visual contrast.");
+});
+```
+
+![example](/api-reference/text-paragraph-default-style.webp =358x)
+
+
 ## Paragraph Spacing
 
 Adjusts the vertical gap between successive paragraphs (separated by line breaks),

@@ -49,12 +49,10 @@ The `Text` method returns a descriptor that allows further customization of the 
 
 It is also possible to format specific parts of the text content using spans:
 
-```c#{3,5,7,9}
+```c#{5,7,9,11}
 container
     .Text(text =>
     {
-        text.AlignCenter();
-    
         text.Span("The ");
         text.Span("chemical formula").Underline();
         text.Span(" of ");
