@@ -65,7 +65,7 @@
 
 [Page](/api-reference/page) - allows you to manage page settings, e.g. size, margin, color, watermark, etc. 
 
-[Table](/api-reference/table) - arranges its children using a table-layout algorithm. Supports row and column spanning.
+[Table](/api-reference/table/basics) - arranges its children using a table-layout algorithm. Supports row and column spanning.
 
 [Column](/api-reference/column) - places its children vertically, one under another.
 

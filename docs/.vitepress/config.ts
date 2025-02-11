@@ -151,8 +151,14 @@ export default defineConfig({
             {
                 text: 'Layout elements',
                 items: [
-                    { text: 'Page', link: '/api-reference/page' },
-                    { text: 'Table', link: '/api-reference/table' },
+                    {
+                        text: 'Page',
+                        items: [
+                            { text: 'Basics', link: '/api-reference/page/basics' },
+                            { text: 'Slots', link: '/api-reference/page/slots' },
+                            { text: 'Settings', link: '/api-reference/page/settings' }
+                        ]
+                    },
                     {
                         text: 'Table',
                         items: [
