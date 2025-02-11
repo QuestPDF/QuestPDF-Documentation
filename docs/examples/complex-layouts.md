@@ -52,5 +52,5 @@ And its corresponding output:
 ![example](/patterns-and-practices/complex-layout.png =500x)
 
 ::: tip
-When implementing complex grids and layouts, please also consider using the `Table` element. [Click here to learn more](/api-reference/table)
+When implementing complex grids and layouts, please also consider using the `Table` element. [Click here to learn more](/api-reference/table/basics)
 :::

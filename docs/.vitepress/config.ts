@@ -153,6 +153,15 @@ export default defineConfig({
                 items: [
                     { text: 'Page', link: '/api-reference/page' },
                     { text: 'Table', link: '/api-reference/table' },
+                    {
+                        text: 'Table',
+                        items: [
+                            { text: 'Basics', link: '/api-reference/table/basics' },
+                            { text: 'Cell style pattern', link: '/api-reference/table/cell-style-pattern' },
+                            { text: 'Header and footer', link: '/api-reference/table/header-and-footer' },
+                            { text: 'Overlapping cells', link: '/api-reference/table/overlapping-cells' }
+                        ]
+                    },
                     { text: 'Column', link: '/api-reference/column' },
                     { text: 'Row', link: '/api-reference/row' },
                     { text: 'Grid', link: '/api-reference/grid' },
