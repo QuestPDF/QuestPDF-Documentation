@@ -1,217 +1,182 @@
-# Page settings
+# Page Settings
 
-## Styling
+This section describes how to configure the page settings in your document.
 
-It is possible to create a document containing pages having different settings. For example, the following code inserts an A4 page followed by an A3 page, both with different margins:
+## Page Color
 
-```c#{10-13,21-24}
-public class StandardReport : IDocument
-{
-    // metadata
-
-    public void Compose(IDocumentContainer container)
-    {
-        container
-            .Page(page =>
-            {
-                page.MarginVertical(80);
-                page.MarginHorizontal(100);
-                page.PageColor(Colors.Grey.Medium); // transparent is default
-                page.Size(PageSizes.A3);
-                    
-                page.Header().Element(ComposeHeader);
-                page.Content().Element(ComposeBigContent);
-                page.Footer().AlignCenter().PageNumber();
-            })
-            .Page(page =>
-            {
-                // you can specify multiple page types in the document
-                // with independent configurations
-                page.Margin(50)
-                page.Size(PageSizes.A4);
-                    
-                page.Header().Element(ComposeHeader);
-                page.Content().Element(ComposeSmallContent);
-                page.Footer().AlignCenter().PageNumber();
-            });
-    }
-
-    // content implementation
-}
-```
-
-You easily change page orientation as illustrated below:
-
-```c#
-// default is portrait
-page.Size(PageSizes.A3);
-
-// explicit portrait orientation
-page.Size(PageSizes.A3.Portrait());
-
-// change to landscape orientation
-page.Size(PageSizes.A3.Landscape());
-```
-
-## Continuous page size
-
-It is possible to define a page size with known width but dynamic height. In the following example, the resulting page has a constant width (equal to the width of an A4 page, but its height depends on the content:
-
-```c#{13}
-public class StandardReport : IDocument
-{
-    // metadata
-
-    public void Compose(IDocumentContainer container)
-    {
-        container
-            .Page(page =>
-            {
-                page.MarginVertical(40);
-                page.MarginHorizontal(60);
-                
-                page.ContinuousSize(PageSizes.A4.Width);
-                    
-                page.Header().Element(ComposeHeader);
-                page.Content().Element(ComposeContent);
-                page.Footer().AlignCenter().PageNumber();
-            });
-    }
-
-    // content implementation
-}
-```
-
-::: danger
-Because of practical layout limitations, the maximum page height is limited to 14400 points (around 5 meters).
-:::
-
-## Global text style
-
-The QuestPDF library provides a default set of styles that are applied to text.
-
-```c#
-.Text("Text with library default styles")
-```
-
-You can adjust the text style by providing additional arguments:
-
-```c#
-.Text("Red semibold text of size 20").FontSize(20).SemiBold()
-```
-
-The above option above overrides the default style. To get more control you can set a default text style in your document. Please notice that all changes are additive as shown in the following example
-
-```c#{9-10,22-23,27-28}
-public class SampleReport : IDocument
-{
-    public DocumentMetadata GetMetadata() => new DocumentMetadata();
-
-    public void Compose(IDocumentContainer container)
-    {
-        container.Page(page =>
-        {
-            // all text in this set of pages has size 20
-            page.DefaultTextStyle(TextStyle.Default.FontSize(20));
-            
-            page.Margin(20);
-            page.Size(PageSizes.A4);
-            page.PageColor(Colors.White);
-
-            page.Content().Column(column =>
-            {
-                column.Item().Text(Placeholders.Sentence());
-                
-                column.Item().Text(text =>
-                {
-                    // text in this block is additionally semibold
-                    text.DefaultTextStyle(x => x.SemiBold());
-
-                    text.Line(Placeholders.Sentence());
-                    
-                    // this text has size 20 but also semibold and red
-                    text.Span(Placeholders.Sentence()).FontColor(Colors.Red.Medium);
-                });
-            });
-        });
-    }
-}
-```
-
-![example](/patterns-and-practices/global-text-style.png =595x)
-
-## Global content direction (RTL)
-
-It is possible to globally specify content direction for entire documents.
-
-::: tip
-To learn more about how the Content direction works, please read the documentation for the [ContentDirection](/api-reference/content-direction) element.
-:::
+You can set the background color of your document pages using the PageColor method. 
+Colors can be specified using predefined constants, hexadecimal values, or named color variants:
 
 ```c#
 document.Page(page =>
 {
-    // default setting
-    page.ContentFromLeftToRight();
-    
-    // optional RTL mode
-    page.ContentFromRightToLeft();
-});
-```
-
-A further example follows:
-
-```c#{8}
-document.Page(page =>
-{
-    page.Size(PageSizes.A5);
-    page.Margin(20);
     page.PageColor(Colors.White);
-    
-    page.DefaultTextStyle(x => x.FontFamily("Calibri").FontSize(20));
-    page.ContentFromRightToLeft();
-    
-    page.Content().Column(column =>
-    {
-        column.Spacing(20);
-
-        column.Item()
-            .Text("مثال على الفاتورة") // example invoice
-            .FontSize(32).FontColor(Colors.Blue.Darken2).SemiBold();
-        
-        column.Item().Table(table =>
-        {
-            table.ColumnsDefinition(columns =>
-            {
-                columns.RelativeColumn();
-                columns.ConstantColumn(75);
-                columns.ConstantColumn(100);
-            });
-
-            table.Cell().Element(HeaderStyle).Text("وصف السلعة"); // item description
-            table.Cell().Element(HeaderStyle).Text("كمية"); // quantity
-            table.Cell().Element(HeaderStyle).Text("سعر"); // price
-
-            var items = new[]
-            {
-                "دورة البرمجة", // programming course
-                "دورة تصميم الرسومات", // graphics design course
-                "تحليل وتصميم الخوارزميات", // analysis and design of algorithms
-            };
-            
-            foreach (var item in items)
-            {
-                var price = Placeholders.Random.NextDouble() * 100;
-                                    
-                table.Cell().Text(item);
-                table.Cell().Text(Placeholders.Random.Next(1, 10));
-                table.Cell().Text($"USD${price:F2}");
-            }
-
-            static IContainer HeaderStyle(IContainer x) => x.BorderBottom(1).PaddingVertical(5);
-        });
-    });
+    // or
+    page.PageColor("#F0F0F0");
+    // or
+    page.PageColor(Colors.Grey.Lighten3);
 });
 ```
 
-![example](/api-reference/page-content-direction-rtl.png =420x)
+<!--@include: ../tip-color.md-->
+
+## Page Size
+
+QuestPDF offers multiple ways to define the dimensions of a page. 
+You can set exact sizes in various units, choose from standard presets, or allow the library to adapt the page size dynamically based on your content.
+
+<!--@include: ../tip-unit.md-->
+
+### Specific Page Size
+
+Configures the exact dimensions of every page within the set.
+
+```c#
+document.Page(page =>
+{
+    page.Size(595, 842); // in points
+    // or
+    page.Size(21, 29.7f, Unit.Centimeter);
+    // or
+    page.Size(PageSizes.A4);
+});
+```
+
+### Continuous Page Size
+
+Enables the continuous page size mode, allowing the page's height to adjust according to content while retaining a constant specified width.
+
+This configuration is useful for output types like receipts, scrolls, or other cases where the length of the page can continuously expand.
+
+```c#
+document.Page(page =>
+{
+    page.ContinuousSize(215);
+    // or
+    page.ContinuousSize(76, Unit.Millimeter);
+});
+```
+
+
+### Flexible Page Size
+
+Enables the flexible page size mode, where the output page's dimensions can vary based on its content.
+It is possible to specify the minimum and maximum dimensions for the page, or both.
+
+Please note that with this setting, individual pages within the document may have different sizes.
+
+```c#
+document.Page(page =>
+{
+    page.MinSize(400, 600);
+    // and / or
+    page.MaxSize(800, 1200);
+    
+    // also supports units and PageSizes
+});
+```
+
+### Predefined Page Size
+
+For convenience, QuestPDF provides commonly used page size presets, including optional orientation:
+
+```c#
+using QuestPDF.Helpers;
+
+document.Page(page =>
+{
+    page.Size(PageSizes.A4);
+    page.Size(PageSizes.A3);
+    page.Size(PageSizes.Letter);
+    page.Size(PageSizes.Legal);
+    
+    // it is also possible to specify the orientation
+    page.Size(PageSizes.A4.Portrait());
+    page.Size(PageSizes.A4.Landscape());
+});
+```
+
+
+## Margin
+
+Margins add empty space around the main layout (header, content, and footer). 
+You can configure each side individually or use combined methods for convenience:
+
+| Method               | Summary                                                                  |
+|----------------------|--------------------------------------------------------------------------|
+| **MarginLeft**       | Adds empty space to the left of the primary layer.                       |
+| **MarginRight**      | Adds empty space to the right of the primary layer.                      |
+| **MarginTop**        | Adds empty space above the primary layer.                                |
+| **MarginBottom**     | Adds empty space below the primary layer.                                |
+| **MarginVertical**   | Adds empty space vertically (top and bottom) around the primary layer.   |
+| **MarginHorizontal** | Adds empty space horizontally (left and right) around the primary layer. |
+| **Margin**           | Adds empty space around the primary layer.                               |
+
+```c#
+document.Page(page =>
+{
+    page.MarginVertical(32);
+    page.MarginHorizontal(2, Unit.Centimeter);
+});
+```
+
+
+## Default Text Style
+
+You can apply a default text style to every text element within a page. 
+This is particularly helpful for setting consistent fonts, sizes, and colors across your document:
+[Learn more](/api-reference/text/style-inheritance)
+
+```c#
+document.Page(page =>
+{
+    page.DefaultTextStyle(TextStyle.Default.FontSize(20));
+    // or
+    page.DefaultTextStyle(x => x.FontSize(20));
+});
+```
+
+
+## Content Direction
+
+QuestPDF supports both left-to-right (LTR) and right-to-left (RTL) layouts to accommodate languages with different reading directions.
+This option applies a global content direction to the entire page set.
+[Learn more](/api-reference/content-direction)
+
+```c#
+document.Page(page =>
+{
+    page.ContentFromLeftToRight();
+    // or
+    page.ContentFromRightToLeft();
+});
+```
+
+
+## Documents with multiple page settings
+
+You can apply different settings to each page set in the document. 
+This flexibility allows you to mix sizes, orientations, styles, or margins as needed:
+
+```c#
+Document
+    .Create(document =>
+    {
+        document.Page(page =>
+        {
+            page.Size(PageSizes.A4);
+            page.Margin(1, Unit.Inch);
+    
+            page.Content().AlignCenter().AlignMiddle().Text("A4 PORTAIT");
+        });
+    
+        document.Page(page =>
+        {
+            page.Size(PageSizes.A5.Landscape());
+            page.Margin(2f, Unit.Centimeter);
+    
+            page.Content().AlignCenter().AlignMiddle().Text("A5 LANDSCAPE");
+        });
+    })
+    .GeneratePdf();
+```

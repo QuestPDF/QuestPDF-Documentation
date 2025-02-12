@@ -1,132 +1,120 @@
-# Slots
+# Page Slots
 
-## Main slots
+The Page container is a multi-child container that allows you to define the layout of the page. 
+It provides several slots that can be used to add content to the page.
 
-Main slots (`Header`, `Content` and `Footer`) can be used to specify page content:
-- The `Header` element is always visible at the top of each page.
-- The `Content` element is drawn on the space between the `Header` and the `Footer`.
-- The `Footer` element is always visible at the bottom of each page.
+## Main Slots
+
+The main slots are Header, Content, and Footer.
+
+| Slot               | Description                                                                                                                                                                                         |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| page.**Header()**  | Represents the segment at the very top of the page, just above the main content. This container does not support paging capability. It is expected to be fully displayed on every page.             |
+| page.**Content()** | Represents the primary content, located between the header and footer. This container supports paging capability and determines the final length of the document.                                   |
+| page.**Footer()**  | Represents the section at the very bottom of the page, just below the main content. This container does not support paging capability. It is expected to be fully displayed on every page. |
+
 
 ```c#
 .Page(page =>
 {
-    page.MarginHorizontal(40);
-    page.MarginVertical(60);
-
-    page.Header()
-        .Height(60)
-        .Background(Colors.Grey.Lighten1)
-        .AlignCenter()
-        .AlignMiddle()
-        .Text("Header");
-
-    page.Content()
-        .Background(Colors.Grey.Lighten2)
-        .AlignCenter()
-        .AlignMiddle()
-        .Text("Content");
-
-    page.Footer()
-        .Height(30)
-        .Background(Colors.Grey.Lighten1)
-        .AlignCenter()
-        .AlignMiddle()
-        .Text("Footer");
-});
-```
-
-::: danger
-Please be careful! When the combined heights of the header and footer elements is greater than the total page height, there is insufficient space for the content, in which case a layout exception is thrown.
-:::
-
-![example](/api-reference/page-example.png =298x)
-
-## Watermark slots
-
-The watermark slots (background and foreground) can be used to add content behind or in front of the main content, respectively.
-
-```c#{10-14,16-20}
-.Page(page =>
-{
-    page.Size(PageSizes.A4);
-    page.Margin(1, Unit.Inch);
-    page.DefaultTextStyle(TextStyle.Default.FontSize(16));
-    page.PageColor(Colors.White);
-
-    const string transparentBlue = "#662196f3";
-
-    page.Background()
-        .AlignTop()
-        .ExtendHorizontal()
-        .Height(200)
-        .Background(transparentBlue);
-    
-    page.Foreground()
-        .AlignBottom()
-        .ExtendHorizontal()
-        .Height(250)
-        .Background(transparentBlue);
-    
-    page.Header()
-        .Text("Background and foreground")
-        .Bold().FontColor(Colors.Blue.Darken2).FontSize(36);
-    
-    page.Content().PaddingVertical(25).Column(column =>
+    document.Page(page =>
     {
-        column.Spacing(25);
-
-        foreach (var i in Enumerable.Range(0, 100))
-            column.Item().Background(Colors.Grey.Lighten2).Height(75);
+        page.Size(PageSizes.A4);
+        page.Margin(2, Unit.Centimetre);
+        page.DefaultTextStyle(x => x.FontSize(24));
+    
+        page.Header()
+            .Background(Colors.Grey.Lighten1)
+            .Height(125)
+            .AlignCenter()
+            .AlignMiddle()
+            .Text("Header");
+        
+        page.Content()
+            .Background(Colors.Grey.Lighten2)
+            .AlignCenter()
+            .AlignMiddle()
+            .Text("Content");
+        
+        page.Footer()
+            .Background(Colors.Grey.Lighten1)
+            .Height(75)
+            .AlignCenter()
+            .AlignMiddle()
+            .Text("Footer");
     });
 });
 ```
 
-![example](/api-reference/page-background-foreground.png =300x)
+![example](/api-reference/page-main-slots.webp =396x)
 
-Let's consider a more advanced example that adds additional visual elements on the side of actual content. This can be easily achieved with watermark slots:
 
-```c#{10-30}
+## Foreground Slot
+
+Represents a layer drawn in front of the primary layer (header + content + footer), serving as a watermark.
+It is not affected by the Margin configuration and always occupy the entire page.
+
+```c#{18}
 document.Page(page =>
 {
-    const float horizontalMargin = 1.5f;
-    const float verticalMargin = 1f;
-    
     page.Size(PageSizes.A4);
-    page.MarginVertical(verticalMargin, Unit.Inch);
-    page.MarginHorizontal(horizontalMargin, Unit.Inch);
+    page.Margin(2, Unit.Centimetre);
+    page.DefaultTextStyle(x => x.FontSize(20));
 
-    page.Background()
-        .PaddingVertical(verticalMargin, Unit.Inch)
-        .RotateRight()
-        .Decoration(decoration =>
-        {
-            decoration.Before().RotateRight().RotateRight().Element(DrawSide);
-            decoration.Content().Extend();
-            decoration.After().Element(DrawSide);
-
-            void DrawSide(IContainer container)
-            {
-                container
-                    .Height(horizontalMargin, Unit.Inch)
-                    .AlignMiddle()
-                    .Row(row =>
-                    {   
-                        row.AutoItem().PaddingRight(16).Text("COMPANY NAME").FontSize(16).FontColor(Colors.Red.Medium);
-                        row.RelativeItem().PaddingTop(12).ExtendHorizontal().LineHorizontal(2).LineColor(Colors.Red.Medium);
-                    });
-            }
-        });
+    page.Header()
+        .PaddingBottom(1, Unit.Centimetre)
+        .Text("Report")
+        .FontSize(30)
+        .Bold();
     
-    page.Content().Column(column =>
-    {
-        column.Spacing(25);
+    page.Content()
+        .Text(Placeholders.Paragraphs())
+        .ParagraphSpacing(1, Unit.Centimetre)
+        .Justify();
 
-        foreach (var i in Enumerable.Range(1, 100))
-            column.Item().Background(Colors.Grey.Lighten2).Height(75).AlignCenter().AlignMiddle().Text(i.ToString()).FontSize(16);
-    });
+    page.Foreground().Svg("Resources/draft-foreground.svg").FitArea();
 });
 ```
 
-That produces the following result:
+![example](/api-reference/page-foreground.webp =396x)
 
-![example](/api-reference/page-slots-advanced.png =595x)
+## Background Slot
+
+Represents a layer drawn behind the primary layer (header + content + footer).
+It is not affected by the Margin configuration and always occupy the entire page.
+
+```c#{5}
+document.Page(page =>
+{ 
+    page.Size(PageSizes.A4.Landscape());
+
+    page.Background().Svg("Resources/certificate-background.svg").FitArea();
+
+    page.Content() 
+        .PaddingLeft(10, Unit.Centimetre)
+        .PaddingRight(5 , Unit.Centimetre)
+        .AlignMiddle()
+        .Column(column =>
+        {
+            column.Item().Height(50).Svg("Resources/questpdf-logo.svg");
+            
+            column.Item().Height(50);
+            
+            column.Item().Text("CERTIFICATE").FontSize(64).ExtraBlack();
+            
+            column.Item().Height(25);
+            
+            column.Item()
+                .Shrink().BorderBottom(1).Padding(10)
+                .Text("Marcin Ziąbek").FontSize(32).Italic();
+            
+            column.Item().Height(10); 
+            
+            column.Item()
+                .Text($"has successfully completed the course \"QuestPDF Basics\" on {DateTime.Now:dd MMM yyyy}.")
+                .FontSize(20).Light();
+        });
+});
+```
+
+![example](/api-reference/page-background.webp =561x)
