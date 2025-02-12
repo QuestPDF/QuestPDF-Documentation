@@ -11,7 +11,10 @@
 
       <p style="margin-top: 8px;">For added convenience, we can prepare quotes, accept purchase orders, and create direct invoices.</p>
 
-      <p style="margin-top: 8px;">Additionally, we collaborate with software resellers to offer flexible purchasing options.</p>
+      <p style="margin-top: 8px;">
+        Additionally, we collaborate with software resellers to offer flexible purchasing options: <br>
+        We recommended the following resellers: SoftwareOne, QBS Software, and BSR Software.
+      </p>
 
       <a class="action primary" href="mailto:contact@questpdf.com" style="margin-top: 24px;">Contact us</a>
     </div>
