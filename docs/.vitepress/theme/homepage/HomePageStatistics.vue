@@ -17,12 +17,12 @@ const statistics = [
     {
         icon: "/homepage/stargazers.svg",
         label: "GitHub stargazers",
-        value: "12 400 +"
+        value: "12 450 +"
     },
     {
         icon: "/homepage/downloads.svg",
         label: "NuGet package downloads",
-        value: "7 900 000 +"
+        value: "8 000 000 +"
     }
 ];
 
