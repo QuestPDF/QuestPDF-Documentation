@@ -20,8 +20,6 @@
 
 [Colors](/concepts/colors) - list of predefined colors based on the material design.
 
-[Basic fonts](/concepts/basic-fonts) - a collection of standard PDF fonts.
-
 [Prototyping](/concepts/prototyping) - learn how to use various additional tools to speed up prototyping process.
 
 [Exceptions](/concepts/exceptions) - explains all exception types thrown by QuestPDF and how to tackle them.
