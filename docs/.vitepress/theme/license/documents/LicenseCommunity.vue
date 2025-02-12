@@ -7,7 +7,7 @@
 
       <p class="description">Please kindly check if you are eligible to use this license.</p>
 
-      <a class="action primary" href="/license/summary/community" style="margin-top: 16px;">Learn more</a>
+      <a class="action primary" href="/license" style="margin-top: 16px;">Learn more</a>
     </template>
 
     <template #content>
