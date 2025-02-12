@@ -60,3 +60,23 @@ column.Spacing(5, Unit.Millimeters);
 ```
 
 <!--@include: tip-unit.md--> 
+
+
+## Custom spacing
+
+You can adjust the spacing between items individually by adding an empty item with a specific height.
+
+```c#
+.Column(column =>
+{
+    column.Item().Background(Colors.Grey.Darken1).Height(50);
+    column.Item().Height(10);
+    column.Item().Background(Colors.Grey.Medium).Height(50);
+    column.Item().Height(20);
+    column.Item().Background(Colors.Grey.Lighten1).Height(50);
+    column.Item().Height(30);
+    column.Item().Background(Colors.Grey.Lighten2).Height(50);
+});
+```
+
+![example](/api-reference/column-spacing-custom.webp =250x)

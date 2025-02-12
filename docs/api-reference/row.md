@@ -93,3 +93,23 @@ row.Spacing(5, Unit.Millimeters);
 ```
 
 <!--@include: tip-unit.md--> 
+
+
+## Custom spacing
+
+You can adjust the spacing between items individually by adding an empty ConstantItem with a specific width.
+
+```c#
+.Row(row =>
+{
+    row.RelativeItem().Background(Colors.Grey.Darken1);
+    row.ConstantItem(10);
+    row.RelativeItem().Background(Colors.Grey.Medium);
+    row.ConstantItem(20);
+    row.RelativeItem().Background(Colors.Grey.Lighten1);
+    row.ConstantItem(30);
+    row.RelativeItem().Background(Colors.Grey.Lighten2);
+});
+```
+
+![example](/api-reference/row-spacing-custom.webp =250x)
