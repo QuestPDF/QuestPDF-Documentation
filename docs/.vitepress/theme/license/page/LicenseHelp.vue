@@ -13,7 +13,7 @@
 
       <p style="margin-top: 8px;">
         Additionally, we collaborate with software resellers to offer flexible purchasing options: <br>
-        We recommended the following resellers: SoftwareOne, QBS Software, and BSR Software.
+        We recommended the following resellers: <a href="https://www.softwareone.com/" target="_blank">SoftwareOne</a>, <a href="https://www.qbssoftware.com/" target="_blank">QBS Software</a>, and <a href="https://www.bsrsoftware.co.uk/" target="_blank">BSR Software</a>.
       </p>
 
       <a class="action primary" href="mailto:contact@questpdf.com" style="margin-top: 24px;">Contact us</a>
