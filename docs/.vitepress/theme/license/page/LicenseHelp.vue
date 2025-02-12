@@ -12,7 +12,7 @@
       <p style="margin-top: 8px;">For added convenience, we can prepare quotes, accept purchase orders, and create direct invoices.</p>
 
       <p style="margin-top: 8px;">
-        Additionally, we collaborate with software resellers to offer flexible purchasing options: <br>
+        Additionally, we collaborate with software resellers to offer flexible purchasing options.<br>
         We recommended the following resellers: <a href="https://www.softwareone.com/" target="_blank">SoftwareOne</a>, <a href="https://www.qbssoftware.com/" target="_blank">QBS Software</a>, and <a href="https://www.bsrsoftware.co.uk/" target="_blank">BSR Software</a>.
       </p>
 

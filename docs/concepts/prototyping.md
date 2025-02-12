@@ -1,8 +1,15 @@
 # Prototyping
 
+Placeholders in QuestPDF let you quickly generate random text, numbers, colors, and images. 
+They are useful for prototyping document layouts or creating test data when real information is not yet available. 
+
+This guide outlines how to use each type of placeholder.
+
+
+
 ## Text
 
-Often we know what a document layout should look like but we do not have appropriate data to fill it. The Quest PDF library provides a set of helpers to generate random text of different kinds:
+QuestPDF provides a range of text placeholders that cover common scenarios:
 
 ```c#
 using QuestPDF.Helpers;
@@ -28,50 +35,114 @@ Placeholders.Decimal();
 Placeholders.Percent();
 ```
 
-## Colors
-
-You can access a random color picked from the Material Design colors set. Colors are returned as text in the HEX format.
+#### Example
 
 ```c#
-// bright color, lighten-2
-Placeholders.BackgroundColor();
-
-// medium
-Placeholders.Color();
-```
-
-Example usage to create a colorful matrix:
-
-```c#
-.Padding(25)
-.Grid(grid =>
+.Column(column =>
 {
-    grid.Columns(5);
+    column.Spacing(15);
+
+    AddItem("Name", Placeholders.Name());
+    AddItem("Email", Placeholders.Email());
+    AddItem("Phone", Placeholders.PhoneNumber());
+    AddItem("Date", Placeholders.ShortDate());
+    AddItem("Time", Placeholders.Time());
     
-    Enumerable
-        .Range(0, 25)
-        .Select(x => Placeholders.BackgroundColor())
-        .ToList()
-        .ForEach(x => grid.Item().Height(50).Background(x));
+    void AddItem(string label, string value)
+    {
+        column.Item().Text(text =>
+        {
+            text.Span($"{label}: ").Bold();
+            text.Span(value);
+        });
+    }
 });
 ```
 
-![example](/patterns-and-practices/random-colors.png =300x)
+![example](/patterns-and-practices/placeholders-text.webp =370x)
+
+
+## Colors
+
+QuestPDF can produce random colors based on the Material Design palette, returning them as a string in the `#RRGGBB` format.
+
+```c#
+// bright color (lighten-2)
+Placeholders.BackgroundColor();
+
+// medium intensity color
+Placeholders.Color();
+```
+
+#### BackgroundColor example
+
+```c#{11}
+.Grid(grid =>
+{
+    grid.Columns(5);
+    grid.Spacing(5);
+
+    foreach (var _ in Enumerable.Range(0, 25))
+    {
+        grid.Item()
+            .Height(50)
+            .Width(50)
+            .Background(Placeholders.BackgroundColor());
+    }
+});
+```
+
+![example](/patterns-and-practices/placeholders-color-background.webp =320x)
+
+
+#### Color example
+
+```c#{7}
+.Column(column =>
+{
+    column.Spacing(10);
+
+    foreach (var i in Enumerable.Range(0, 5))
+    {
+        column.Item()
+            .Text(Placeholders.Sentence())
+            .FontColor(Placeholders.Color());
+    }
+});
+```
+
+![example](/patterns-and-practices/placeholders-color.webp =500x)
+
 
 ## Image
 
-Use this simple function to generate a random image with required size:
+The image `Placeholders.Image` method generates a soft color gradient. 
+It returns a byte array in JPEG format and can be embedded directly in QuestPDF elements.
+
+Use these placeholders to simulate images in your layout, ensuring you can test image placement, sizing, and alignment before real images become available.
 
 ```c#
-// both functions return a byte array containing a JPG file
-Placeholders.Image(400, 300);
-Placeholders.Image(new Size(400, 300));
+.Width(200)
+.Column(column =>
+{
+    column.Spacing(10);
 
-// example usage
-.Padding(25)
-.Width(300)
-.AspectRatio(3 / 2f)
-.Image(Placeholders.Image);
+    // provide an exact image resolution
+    column.Item()
+        .Image(Placeholders.Image(100, 50));
+    
+    // specify physical width and height of the image
+    column.Item()
+        .Width(200)
+        .Height(150)
+        .Image(Placeholders.Image);
+    
+    // specify target physical width and aspect ratio
+    column.Item()
+        .Width(200)
+        .AspectRatio(3 / 2f)
+        .Image(Placeholders.Image);
+});
 ```
 
-![example](/patterns-and-practices/image-placeholder.png =350x)
+![example](/patterns-and-practices/placeholders-image.webp =250x)
