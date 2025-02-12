@@ -206,7 +206,6 @@ export default defineConfig({
                     { text: 'Dynamic components', link: '/concepts/dynamic-components' },
                     { text: 'Length unit types', link: '/concepts/length-unit-types' },
                     { text: 'Colors', link: '/concepts/colors' },
-                    { text: 'Basic fonts', link: '/concepts/basic-fonts' },
                     { text: 'Prototyping', link: '/concepts/prototyping' },
                     { text: 'Complex Graphics', link: '/concepts/complex-graphics' },
                     { text: 'Exceptions', link: '/concepts/exceptions' },
