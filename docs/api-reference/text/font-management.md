@@ -64,7 +64,7 @@ You can also register fonts under custom names to simplify usage within your doc
 ```c#
 // load the font at startup
 using var fontStream = File.OpenRead("LibreBarcode39-Regular.ttf");
-FontManager.RegisterFontWithCustomName(fontStream, "MyBarcodeFont");
+FontManager.RegisterFontWithCustomName("MyBarcodeFont", fontStream);
 
 // use it during document generation
 container
