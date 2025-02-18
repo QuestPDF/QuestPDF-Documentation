@@ -116,6 +116,10 @@ export default defineConfig({
                     { text: 'Border', link: '/api-reference/border' },
                     { text: 'Line', link: '/api-reference/line' },
                     { text: 'Placeholder', link: '/api-reference/placeholder' },
+                    { text: 'Charts', link: '/api-reference/charts' },
+                    { text: 'Barcodes / QR Codes', link: '/api-reference/barcodes' },
+                    { text: 'Maps', link: '/api-reference/maps' },
+                    { text: 'Complex Graphics', link: '/api-reference/complex-graphics' },
                 ]
             },
             {
