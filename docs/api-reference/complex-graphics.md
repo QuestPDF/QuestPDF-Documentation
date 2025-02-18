@@ -5,9 +5,12 @@ One powerful way to achieve this is by embedding SVG content dynamically.
 This allows you to draw custom shapes, gradients, and other visual elements that go beyond available functionalities.
 
 
-## Example
+## Rounded Rectangle
 
-This example shows how to draw a rounded rectangle with a linear gradient behind text content.
+This example shows how to draw a custom rectangle behind the text. 
+It fills the available space, has rounded corners, and a gradient fill.
+
+```csharp
 
 ```c#{3-17}
 .Layers(layers =>
@@ -38,4 +41,41 @@ This example shows how to draw a rounded rectangle with a linear gradient behind
 });
 ```
 
-![example](/api-reference/complex-graphics.webp =240x)
+![example](/api-reference/complex-graphics-rounded-rectangle-with-gradient.webp =240x)
+
+
+## Dotted Line
+
+This example creates structure similar to a table of contents with dotted lines connecting the page numbers to the titles.
+
+```c#{15-22}
+.Column(column =>
+{
+    column.Spacing(5);
+    
+    foreach (var i in Enumerable.Range(1, 5))
+    {
+        var pageNumber = i * 7 + 4;
+        
+        column.Item().Row(row =>
+        {
+            row.AutoItem().Text($"{i}.");
+            row.ConstantItem(10);
+            row.AutoItem().Text(Placeholders.Label());
+
+            row.RelativeItem().PaddingHorizontal(3).TranslateY(20).Height(2).Svg(size =>
+            {
+                return $"""
+                        <svg width="{size.Width}" height="{size.Height}" xmlns="http://www.w3.org/2000/svg">
+                            <line x1="0" y1="0" x2="{size.Width}" y2="0" fill="none" stroke="black" stroke-width="2" stroke-dasharray="2 6" />
+                        </svg>
+                        """;
+            });
+
+            row.AutoItem().Text($"{pageNumber}");
+        });
+    }
+});
+```
+
+![example](/api-reference/complex-graphics-dotted-line.webp =500x)
