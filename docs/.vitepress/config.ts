@@ -147,36 +147,6 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Positional elements',
-                items: [
-                    { text: 'Width', link: '/api-reference/width' },
-                    { text: 'Height', link: '/api-reference/height' },
-                    { text: 'Alignment', link: '/api-reference/alignment' },
-                    { text: 'Padding', link: '/api-reference/padding' },
-                    { text: 'Aspect Ratio', link: '/api-reference/aspect-ratio' },
-                    { text: 'Extend', link: '/api-reference/extend' },
-                    { text: 'Minimal box', link: '/api-reference/minimal-box' },
-                    { text: 'Translate', link: '/api-reference/translate' },
-                    { text: 'Rotate', link: '/api-reference/rotate' },
-                    { text: 'Scale', link: '/api-reference/scale' },
-                    { text: 'Scale to fit', link: '/api-reference/scale-to-fit' },
-                    { text: 'Flip', link: '/api-reference/flip' },
-                    { text: 'Unconstrained', link: '/api-reference/unconstrained' },
-                ]
-            },
-            {
-                text: 'Content flow elements',
-                items: [
-                    { text: 'Page break', link: '/api-reference/page-break' },
-                    { text: 'Show if', link: '/api-reference/show-if' },
-                    { text: 'Show once', link: '/api-reference/show-once' },
-                    { text: 'Skip once', link: '/api-reference/skip-once' },
-                    { text: 'Show entire', link: '/api-reference/show-entire' },
-                    { text: 'Ensure space', link: '/api-reference/ensure-space' },
-                    { text: 'Stop paging', link: '/api-reference/stop-paging' },
-                ]
-            },
-            {
                 text: 'Layout elements',
                 items: [
                     {
@@ -204,6 +174,36 @@ export default defineConfig({
                     { text: 'Layers', link: '/api-reference/layers' },
                     { text: 'List', link: '/api-reference/lists' },
                     { text: 'Multi Column', link: '/api-reference/multi-column' },
+                ]
+            },
+            {
+                text: 'Positional elements',
+                items: [
+                    { text: 'Width', link: '/api-reference/width' },
+                    { text: 'Height', link: '/api-reference/height' },
+                    { text: 'Alignment', link: '/api-reference/alignment' },
+                    { text: 'Padding', link: '/api-reference/padding' },
+                    { text: 'Aspect Ratio', link: '/api-reference/aspect-ratio' },
+                    { text: 'Extend', link: '/api-reference/extend' },
+                    { text: 'Minimal box', link: '/api-reference/minimal-box' },
+                    { text: 'Translate', link: '/api-reference/translate' },
+                    { text: 'Rotate', link: '/api-reference/rotate' },
+                    { text: 'Scale', link: '/api-reference/scale' },
+                    { text: 'Scale to fit', link: '/api-reference/scale-to-fit' },
+                    { text: 'Flip', link: '/api-reference/flip' },
+                    { text: 'Unconstrained', link: '/api-reference/unconstrained' },
+                ]
+            },
+            {
+                text: 'Content flow elements',
+                items: [
+                    { text: 'Page break', link: '/api-reference/page-break' },
+                    { text: 'Show if', link: '/api-reference/show-if' },
+                    { text: 'Show once', link: '/api-reference/show-once' },
+                    { text: 'Skip once', link: '/api-reference/skip-once' },
+                    { text: 'Show entire', link: '/api-reference/show-entire' },
+                    { text: 'Ensure space', link: '/api-reference/ensure-space' },
+                    { text: 'Stop paging', link: '/api-reference/stop-paging' },
                 ]
             },
             {
