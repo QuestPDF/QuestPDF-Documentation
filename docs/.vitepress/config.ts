@@ -88,7 +88,31 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Visual elements',
+                text: 'Important concepts',
+                items: [
+                    {
+                        text: 'Generating content',
+                        items: [
+                            { text: 'Output types', link: '/concepts/generating-output' },
+                            { text: 'Global settings', link: '/concepts/settings' },
+                            { text: 'Document metadata', link: '/concepts/document-metadata' },
+                            { text: 'Document settings', link: '/concepts/document-settings' },
+                            { text: 'Merged documents', link: '/concepts/merging-documents' },
+                            { text: 'Common exceptions', link: '/concepts/exceptions' },
+                        ]
+                    },
+                    { text: 'Document operations', link: '/concepts/document-operations' },
+                    { text: 'Prototyping', link: '/concepts/prototyping' },
+                    { text: 'Colors', link: '/concepts/colors' },
+                    { text: 'Length unit types', link: '/concepts/length-unit-types' },
+                    { text: 'Code patterns', link: '/concepts/creating-dsl' },
+                    { text: 'Components', link: '/concepts/components' },
+                    { text: 'Dynamic components', link: '/concepts/dynamic-components' },
+                    { text: 'Execution order', link: '/concepts/execution-order' },
+                ]
+            },
+            {
+                text: 'Visual content',
                 items: [
                     {
                         text: 'Text',
@@ -196,23 +220,8 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Concepts',
+                text: 'Miscellaneous',
                 items: [
-                    { text: 'Document operations <div class="VPBadge tip" style="margin-left: 8px;">new</div>', link: '/concepts/document-operations' },
-                    { text: 'Settings', link: '/concepts/settings' },
-                    { text: 'Document metadata', link: '/concepts/document-metadata' },
-                    { text: 'Document settings', link: '/concepts/document-settings' },
-                    { text: 'Generating output', link: '/concepts/generating-output' },
-                    { text: 'Merging documents', link: '/concepts/merging-documents' },
-                    { text: 'Execution order', link: '/concepts/execution-order' },
-                    { text: 'Creating DSL', link: '/concepts/creating-dsl' },
-                    { text: 'Components', link: '/concepts/components' },
-                    { text: 'Dynamic components', link: '/concepts/dynamic-components' },
-                    { text: 'Length unit types', link: '/concepts/length-unit-types' },
-                    { text: 'Colors', link: '/concepts/colors' },
-                    { text: 'Prototyping', link: '/concepts/prototyping' },
-                    { text: 'Complex Graphics', link: '/concepts/complex-graphics' },
-                    { text: 'Exceptions', link: '/concepts/exceptions' },
                     { text: 'SkiaSharp integration', link: '/concepts/skia-sharp-integration' },
                     { text: 'Application optimization', link: '/concepts/application-optimization' },
                 ]
