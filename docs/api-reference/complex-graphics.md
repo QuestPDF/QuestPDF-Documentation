@@ -10,8 +10,6 @@ This allows you to draw custom shapes, gradients, and other visual elements that
 This example shows how to draw a custom rectangle behind the text. 
 It fills the available space, has rounded corners, and a gradient fill.
 
-```csharp
-
 ```c#{3-17}
 .Layers(layers =>
 {
