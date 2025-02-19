@@ -39,7 +39,7 @@ using ZXing;
 using ZXing.OneD;
 using ZXing.Rendering;
 
-// inside your document's implementation
+// somewhere in your document's implementation
 .Background(Colors.Grey.Lighten3)
 .Padding(25)
 .Row(row =>
@@ -93,7 +93,7 @@ using ZXing;
 using ZXing.QrCode;
 using ZXing.Rendering;
 
-// inside your document's implementation
+// somewhere in your document's implementation
 .Background(Colors.Grey.Lighten3)
 .Padding(25)
 .Row(row =>

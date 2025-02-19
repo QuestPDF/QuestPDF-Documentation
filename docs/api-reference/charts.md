@@ -27,6 +27,10 @@ Below is a sample layout showing U.S. energy consumption by source in 2021.
 ScottPlot is responsible for creating the SVG string, which QuestPDF then embeds in the PDF.
 
 ```c#
+using ScottPlot;
+using Colors = QuestPDF.Helpers.Colors;
+
+// somewhere in your document's implementation
 .Column(column =>
 {
     column.Spacing(10);
@@ -77,6 +81,10 @@ This example creates a bar chart showing the popularity of various C# versions i
 [Source](https://www.jetbrains.com/lp/devecosystem-2023/csharp/)
 
 ```c#
+using ScottPlot;
+using Colors = QuestPDF.Helpers.Colors;
+
+// somewhere in your document's implementation
 .Column(column =>
 {
     column.Spacing(10);
