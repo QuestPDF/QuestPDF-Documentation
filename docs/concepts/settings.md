@@ -1,64 +1,71 @@
 # Settings
 
-There are several parameters that alter the generation process. These are available using the static `Settings` class.
+QuestPDF provides several configurable settings to fine-tune the document generation process. 
+These settings are accessible via the static `QuestPDF.Settings` class.
 
-```c#
-// settings definition with default settings
-public static class Settings
-{
-    public static int DocumentLayoutExceptionThreshold { get; set; } = 250;
-    public static bool EnableCaching { get; set; } = !System.Diagnostics.Debugger.IsAttached;
-    public static bool EnableDebugging { get; set; } = System.Diagnostics.Debugger.IsAttached;
-    public static bool CheckIfAllTextGlyphsAreAvailable { get; set; } = System.Diagnostics.Debugger.IsAttached;
-}
-
-// adjust properties wherever you want
-// best in the startup code
-QuestPDF.Settings.DocumentLayoutExceptionThreshold = 1000;
-```
-
-## Maximum document length
-
-This value represents the maximum length of the document that the library produces. This is useful when layout constraints are too strong, e.g. one element does not fit in another. In such cases, the library would produce a document of infinite length, consuming all available resources. To break the algorithm and save the environment, the library breaks the rendering process after reaching the specified document length.
-
-If your content requires generating longer documents, please assign a suitable value.
-
-```c#
-QuestPDF.Settings.DocumentLayoutExceptionThreshold = 250;
-```
 
 ## Caching
 
-This flag generates additional document elements to cache layout calculation results. In the vast majority of cases, this significantly improves performance, while slightly increasing memory consumption.
+This flag generates additional document elements to cache layout calculation results.
+In the vast majority of cases, this significantly improves performance, while slightly increasing memory consumption.
 
-By default, this flag is enabled only when the debugger is NOT attached.
-
-```c#
+```csharp
+// enabled by default
 QuestPDF.Settings.EnableCaching = true;
 ```
 
+
 ## Debugging
 
-This flag generates additional document elements to improve the layout debugging experience. When `DocumentLayoutException` is thrown, the library is able to provide additional execution context. It includes layout calculation results and the path to the problematic area.
+This flag generates additional document elements to improve layout debugging experience.
 
-By default, this flag is enabled only when the debugger IS attached.
+When the provided content contains size constraints impossible to meet, the library generates an enhanced exception message with additional location and layout measurement details.
 
-```c#
+```csharp
+// by default, enabled only when debugger is attached
 QuestPDF.Settings.EnableDebugging = false;
 ```
 
-## Checking font glyph availability
 
-This flag enables the checking of font glyph availability. 
+## Checking Font Glyph Availability
 
+This flag enables checking the font glyph availability. 
 If your text contains glyphs that are not present in the specified font:
-1) when this flag is enabled: `DocumentDrawingException` is thrown. 
-2) when this flag is disabled: placeholder characters are visible in the produced PDF file. 
+- when this flag is **enabled**: the `DocumentDrawingException` is thrown.
+- when this flag is **disabled**: placeholder characters are visible in the produced PDF file. 
 
-Enabling this flag may slightly decrease document generation performance. However, it provides hints that used fonts are not sufficient to produce correct results.
+::: info
+Enabling this flag may slightly decrease document generation performance.
+However, it provides hints that used fonts are not sufficient to produce correct results.
+:::
 
-By default, this flag is enabled only when the debugger IS attached.
-
-```c#
+```csharp
+// by default, enabled only when debugger is attached
 QuestPDF.Settings.CheckIfAllTextGlyphsAreAvailable = false;
+```
+
+
+## Using System Fonts
+
+Decides whether the application should use the fonts available in the environment:
+- when this flag is **enabled**: the application will use the fonts installed on the system where it is running. This is the default behavior.
+- when this flag is **disabled**: the application will only use the fonts that have been registered using the `FontManager` class in the QuestPDF library.
+
+This property is useful when you want to control the fonts used by your application, especially in cases where the environment might not have the necessary fonts installed.
+
+```csharp
+// enabled by default
+QuestPDF.Settings.UseEnvironmentFonts = true;
+```
+
+
+## Font Discovery Paths
+
+Specifies the collection of paths where the library will automatically search for font files to register.
+
+By default, this collection contains the application files path.
+You can add additional paths to this collection to include more directories for automatic font registration.
+
+```csharp
+QuestPDF.Settings.FontDiscoveryPaths.Add("/custom/font/directory");
 ```
