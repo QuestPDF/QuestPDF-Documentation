@@ -1,36 +1,49 @@
 # Line
 
+The Line component allows you to render simple yet customizable vertical and horizontal lines within your layout. 
+
+These lines can serve as visual dividers, helping to structure and improve the readability of your content. 
+You can specify the thickness of the line and optionally customize its color.
+
 ## Vertical
 
-`LineVertical` is virtual - it occupies the entire available height but no width.
+Renders a vertical line with a specified thickness.
 
-```c#{6}
-.Padding(15)
-.DefaultTextStyle(x => x.FontSize(16))
-.Row(row =>
-{
-    row.AutoItem().Text("Left text");
-    row.AutoItem().PaddingHorizontal(10).LineVertical(1).LineColor(Colors.Grey.Medium);
-    row.AutoItem().Text("Right text");
-});
+```c#{8-9}
+container
+    .Row(row =>
+    {
+        row.AutoItem().Text("Text on the left");
+        
+        row.AutoItem()
+            .PaddingHorizontal(15)
+            .LineVertical(3)
+            .LineColor(Colors.Blue.Medium); // optional
+        
+        row.AutoItem().Text("Text on the right");
+    });
 ```
 
-![example](/api-reference/line-vertical.png =175x)
+![example](/api-reference/line-vertical.webp =360x)
+
 
 ## Horizontal
 
-`LineHorizontal` is virtual - it occupies the entire available width but no height.
+Renders a horizontal line with a specified thickness.
 
-```c#{7}
-.Padding(15)
-.MinimalBox()
-.DefaultTextStyle(x => x.FontSize(16))
-.Column(column =>
-{
-    column.Item().Text("Above text");
-    column.Item().PaddingVertical(5).LineHorizontal(1).LineColor(Colors.Grey.Medium);
-    column.Item().Text("Below text");
-});
+```c#{8-9}
+container
+    .Column(column =>
+    {
+        column.Item().Text("Text above the line");
+        
+        column.Item()
+            .PaddingVertical(10)
+            .LineHorizontal(2)
+            .LineColor(Colors.Blue.Medium); // optional
+        
+        column.Item().Text("Text below the line");
+    });
 ```
 
-![example](/api-reference/line-horizontal.png =100x)
+![example](/api-reference/line-horizontal.webp =215x)
