@@ -1,45 +1,54 @@
 # Layers
 
-- This element allows you to place elements below and above the main content.
-- The paging algorithm is driven by the `PrimaryLayer`.
-- You need to specify exactly one `PrimaryLayer`.
+The Layers element adds content either underneath (as a background) or on top of (as a watermark) the main content.
 
-```c#
-.Layers(layers =>
+The main layer supports paging, can span multiple pages, and determines the container's target length.
+Additional layers can also span multiple pages and are repeated on each one.
+
+| Method           | Description                                      |
+|------------------|--------------------------------------------------|
+| **PrimaryLayer** | Sets the primary content for the container.      |
+| **Layer**        | Specifies an additional layer for the container. |
+
+::: warning
+Exactly one `PrimaryLayer` must be defined.
+:::
+
+::: tip
+The order of code execution determines the drawing order:
+- If the layer is defined before the primary layer, it's drawn underneath the primary content (as a background).
+- If defined after the primary layer, it's drawn in front of the primary content (as a watermark).
+:::
+
+
+### Example
+
+A common use-case for this element is to add background content behind the main content.
+
+```c#{7-22}
+.Column(column =>
 {
-    // layer below main content
-    layers
-        .Layer()
-        .Height(100)
-        .Width(100)
-        .Background(Colors.Grey.Lighten3);
-
-    layers
-        .PrimaryLayer()
-        .Padding(25)
-        .Column(column =>
+    column.Item().PaddingBottom(15).Text("Proposed Business Card Design:").Bold();
+    
+    column.Item()
+        .AspectRatio(4 / 3f)
+        .Layers(layers =>
         {
-            column.Spacing(5);
+            layers.Layer().Image("Resources/card-background.jpg").FitUnproportionally();
 
-            foreach (var _ in Enumerable.Range(0, 7))
-                column.Item().Text(Placeholders.Sentence());
+            layers.PrimaryLayer()
+                .TranslateY(75)
+                .Column(innerColumn =>
+                {
+                    innerColumn.Item()
+                        .AlignCenter()
+                        .Text("Horizon Ventures")
+                        .Bold().FontSize(32).FontColor(Colors.Blue.Darken2);
+
+                    innerColumn.Item().AlignCenter().Text("Your journey begins here");
+                });
         });
-
-    // layer above the main content    
-    layers
-        .Layer()
-        .AlignCenter()
-        .AlignMiddle()
-        .Text("Watermark")
-        .FontSize(48).Bold().FontColor(Colors.Green.Lighten3);
-
-    layers
-        .Layer()
-        .AlignBottom()
-        .PageNumber("Page {number}")
-        .FontSize(16).FontColor(Colors.Green.Medium);
 });
 ```
 
-![example](/api-reference/layers-1.png =400x)
-![example](/api-reference/layers-2.png =400x)
+![example](/api-reference/layers.webp =450x)
