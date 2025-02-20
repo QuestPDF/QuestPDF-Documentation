@@ -25,23 +25,25 @@ If the main `content` spans across multiple pages, both the `before` and `after`
 
 A typical use-case for this method is to render a table that spans multiple pages, with a consistent caption or header on each page.
 
-```c#{4,7,13}
+```c#{4,7,16}
 container
-    .MaxHeight(300)
-    .MaxWidth(300)
+    .Background(Colors.Grey.Lighten3)
+    .Padding(15)
     .Decoration(decoration =>
     {
         decoration
             .Before()
-            .Background(Colors.Grey.Medium)
-            .Padding(10)
-            .Text("Notes").FontColor("#FFF").Bold();
-    
+            .DefaultTextStyle(x => x.Bold())
+            .Column(column =>
+            {
+                column.Item().ShowOnce().Text("Customer Instructions:");
+                column.Item().SkipOnce().Text("Customer Instructions [continued]:");
+            });
+
         decoration
             .Content()
-            .Background(Colors.Grey.Lighten3)
-            .Padding(10)
-            .Text(Helpers.Placeholders.LoremIpsum());
+            .PaddingTop(10)
+            .Text("Please wrap the item in elegant gift paper and include a small blank card for a personal message. If possible, remove any price tags or invoices from the package. Make sure the wrapping is secure but easy to open without damaging the contents.");
     });
 ```
 
