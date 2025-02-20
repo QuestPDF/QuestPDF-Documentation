@@ -24,6 +24,7 @@ Placeholders.Paragraphs();
 Placeholders.Email();
 Placeholders.Name();
 Placeholders.PhoneNumber();
+Placeholders.WebpageUrl();
 
 Placeholders.Time();
 Placeholders.ShortDate();

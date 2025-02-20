@@ -198,6 +198,7 @@ export default defineConfig({
                 text: 'Content flow elements',
                 items: [
                     { text: 'Page break', link: '/api-reference/page-break' },
+                    { text: 'Repeat', link: '/api-reference/repeat' },
                     { text: 'Show if', link: '/api-reference/show-if' },
                     { text: 'Show once', link: '/api-reference/show-once' },
                     { text: 'Skip once', link: '/api-reference/skip-once' },
