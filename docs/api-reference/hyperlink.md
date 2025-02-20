@@ -1,11 +1,45 @@
 # Hyperlink
 
-- This container creates a hyperlink around its child area.
-- The container redirects the user outside the document, e.g. to the webpage.
-- `Hyperlink` can be used on any content, e.g. text, image or even complex structures like tables.
+The Hyperlink element creates a clickable area that redirects the user to a designated webpage.
 
-```c#{2-2}
-.Padding(10)
-.Hyperlink("https://www.questpdf.com")
-.Text("QuestPDF Webpage");
+### Content
+
+Hyperlink can span any content, including text, images, or other elements.
+
+```c#{10}
+.Column(column =>
+{
+    column.Spacing(25);
+    
+    column.Item()
+        .Text("Clicking the NuGet logo will redirect you to the NuGet website.");
+
+    column.Item()
+        .Width(150)
+        .Hyperlink("https://www.nuget.org/")
+        .Svg("Resources/nuget-logo.svg");
+});
 ```
+
+<object data="/api-reference/hyperlink-element.pdf" type="application/pdf" class="pdf-viewer" style="height: 230px">
+  <p>Unable to display PDF file. <a href="/api-reference/hyperlink-element.pdf">Download</a> instead.</p>
+</object>
+
+
+### Inside text
+
+Hyperlinks can also be placed inside text elements.
+
+```c#{5}
+container
+    .Text(text =>
+    {
+        text.Span("Click ");
+        text.Hyperlink("here", "https://www.nuget.org/").Underline().FontColor(Colors.Blue.Darken2);
+        text.Span(" to visit the official NuGet website.");
+    });
+```
+
+<object data="/api-reference/hyperlink-text.pdf" type="application/pdf" class="pdf-viewer" style="height: 135px">
+  <p>Unable to display PDF file. <a href="/api-reference/hyperlink-text.pdf">Download</a> instead.</p>
+</object>
