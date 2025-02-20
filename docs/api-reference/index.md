@@ -86,8 +86,6 @@
 
 [Section](/api-reference/section) - specifies a multi-page area spanning its children. Used to create internal document links and for showing custom page numbers.
 
-[Section Link](/api-reference/section-link) - creates a link to the specified section. Redirects the user to the page containing the section's first occurrence.
-
 [Hyperlink](/api-reference/hyperlink) - creates a link to an external location, e.g. redirects the user to a webpage.
 
 [Element](/api-reference/element) - allows you to break the Fluent API chain and inject dynamic content using a lambda expression.
