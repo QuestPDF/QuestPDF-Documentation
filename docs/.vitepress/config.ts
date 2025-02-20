@@ -210,7 +210,6 @@ export default defineConfig({
                 text: 'Other elements',
                 items: [
                     { text: 'Section', link: '/api-reference/section' },
-                    { text: 'Section Link', link: '/api-reference/section-link' },
                     { text: 'Hyperlink', link: '/api-reference/hyperlink' },
                     { text: 'Element', link: '/api-reference/element' },
                     { text: 'Default Text Style', link: '/api-reference/default-text-style' },
