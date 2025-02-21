@@ -213,6 +213,7 @@ export default defineConfig({
                     { text: 'Section', link: '/api-reference/section' },
                     { text: 'Hyperlink', link: '/api-reference/hyperlink' },
                     { text: 'Element', link: '/api-reference/element' },
+                    { text: 'Lazy (Memory Optimization)', link: '/api-reference/lazy' },
                     { text: 'Default Text Style', link: '/api-reference/default-text-style' },
                     { text: 'Content Direction (RTL)', link: '/api-reference/content-direction' },
                     { text: 'Debug Area', link: '/api-reference/debug-area' },
