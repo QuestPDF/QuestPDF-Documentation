@@ -144,6 +144,7 @@ export default defineConfig({
                     { text: 'Barcodes / QR Codes', link: '/api-reference/barcodes' },
                     { text: 'Maps', link: '/api-reference/maps' },
                     { text: 'Complex Graphics', link: '/api-reference/complex-graphics' },
+                    { text: 'SkiaSharp Integration', link: '/api-reference/skiasharp-integration' },
                 ]
             },
             {
