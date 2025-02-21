@@ -8,10 +8,7 @@ outline: false
 QuestPDF supports multiple ways to integrate dynamic complex graphics into PDF documents. 
 
 The preferred method is to generate an SVG image, as it ensures scalability and lightweight nature. 
-However, in cases where the SVG is not sufficient, 
-
-
-However, if you need to use SkiaSharp, this tutorial shows how to integrate it into QuestPDF.
+However, in cases where this approach is not sufficient, you can use the SkiaSharp library to create custom graphics and effects.
 
 ::: info
 This section provides examples of how to integrate the SkiaSharp library with QuestPDF.
