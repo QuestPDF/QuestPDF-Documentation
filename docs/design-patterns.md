@@ -27,10 +27,6 @@
 
 ## Examples
 
-[Complex layouts](/examples/complex-layouts) - how to combine the Row and Columns elements to accomplish complex and scalable visual layouts.
-
 [Custom first page](/examples/custom-first-page) - using the ShowOnce and SkipOnce elements to achieve custom first page in the document.
-
-[Implementing charts](/examples/implementing-charts) - implementing charts and injecting them to the document.
 
 [Integrating with ASP.NET](/examples/aspnet-integration) - how to return PDF files generated within ASP.NET endpoints.

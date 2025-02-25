@@ -222,18 +222,9 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Miscellaneous',
-                items: [
-                    { text: 'SkiaSharp integration', link: '/concepts/skia-sharp-integration' },
-                    { text: 'Application optimization', link: '/concepts/application-optimization' },
-                ]
-            },
-            {
                 text: 'Examples',
                 items: [
-                    { text: 'Complex layouts', link: '/examples/complex-layouts' },
                     { text: 'Custom first page', link: '/examples/custom-first-page' },
-                    { text: 'Implementing charts', link: '/examples/implementing-charts' },
                     { text: 'Integration with ASP.NET', link: '/examples/aspnet-integration' },
                     { text: 'ZUGFeRD <div class="VPBadge tip" style="margin-left: 8px;">new</div>', link: '/examples/zugferd' },
                 ]

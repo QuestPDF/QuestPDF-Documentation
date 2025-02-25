@@ -87,3 +87,26 @@ QuestPDF.Settings.CheckIfAllTextGlyphsAreAvailable = true;
 ```
 
 When enabled, the library will throw an exception if any glyphs are missing from the selected font.
+
+
+## Removing the default Lato font
+
+QuestPDF includes the Lato font by default to ensure a seamless experience when generating PDFs. 
+However, if you are using your own fonts and want to optimize your package size, you can safely remove Lato from the output.
+
+To follow this approach, please add the following snippet to your `.csproj` file:
+
+```xml{3-5,7-9}
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <Target Name="QuestPDF_DoNotIncludeLatoFont_AfterBuild" AfterTargets="Build">
+        <RemoveDir Directories="$(OutDir)/LatoFont" />
+    </Target>
+
+    <Target Name="QuestPDF_DoNotIncludeLatoFont_AfterPublish" AfterTargets="Publish">
+        <RemoveDir Directories="$(PublishDir)/LatoFont" />
+    </Target>
+
+</Project>
+
+```
