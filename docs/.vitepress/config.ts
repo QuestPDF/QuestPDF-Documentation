@@ -94,11 +94,11 @@ export default defineConfig({
                         text: 'Generating content',
                         items: [
                             { text: 'Output types', link: '/concepts/generating-output' },
-                            { text: 'Global settings', link: '/concepts/settings' },
+                            { text: 'Global settings', link: '/concepts/global-settings' },
                             { text: 'Document metadata', link: '/concepts/document-metadata' },
                             { text: 'Document settings', link: '/concepts/document-settings' },
                             { text: 'Merged documents', link: '/concepts/merging-documents' },
-                            { text: 'Common exceptions', link: '/concepts/exceptions' },
+                            { text: 'Common exceptions', link: '/concepts/common-exceptions' },
                         ]
                     },
                     { text: 'Document operations', link: '/concepts/document-operations' },

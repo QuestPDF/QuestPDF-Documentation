@@ -1,6 +1,6 @@
 # Generating output
 
-The primary of the QuestPDF library is to generate PDF files. 
+The primary goal of the QuestPDF library is to generate PDF files. 
 However, it also supports other output formats such as XPS, SVG and images.
 
 ::: warning

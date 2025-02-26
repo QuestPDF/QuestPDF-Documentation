@@ -39,7 +39,7 @@ Please reach out to our support team with the error details, and we’ll work to
 :::
 
 ::: warning
-If you are using [Dynamic Components](/concepts/dynamic-components), all exceptions thrown there are going to bubble up as this type of exception. 
+If you are using [Dynamic Components](/concepts/code-patterns/dynamic-components), all exceptions thrown there are going to bubble up as this type of exception. 
 In such case, please review the implementation of your dynamic components.
 :::
 

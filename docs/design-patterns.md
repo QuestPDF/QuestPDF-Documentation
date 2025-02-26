@@ -8,21 +8,13 @@
 
 [Merging documents](/concepts/merging-documents) - learn how to generate a single PDF file containing multiple documents.
 
-[Execution order](/concepts/execution-order) - discusses how method invocation order in the Fluent API changes the result.
-
-[Creating DSL](/concepts/creating-dsl) - shows how to compose standard Fluent API methods into C# extension methods to achieve project-specific functionality and simplify code.
-
-[Components](/concepts/components) - explains how you can prepare implement reusable layout structures shared across many document types.
-
-[Dynamic components](/concepts/dynamic-components) - describes how to implement most advanced layouts by generating conditional, page-specific content.
-
 [Length unit types](/concepts/length-unit-types) - list of standard length unit types that can be used instead of points.
 
 [Colors](/concepts/colors) - list of predefined colors based on the material design.
 
 [Prototyping](/concepts/prototyping) - learn how to use various additional tools to speed up prototyping process.
 
-[Exceptions](/concepts/exceptions) - explains all exception types thrown by QuestPDF and how to tackle them.
+[Exceptions](/concepts/common-exceptions) - explains all exception types thrown by QuestPDF and how to tackle them.
 
 
 ## Examples
