@@ -177,7 +177,6 @@ export default defineConfig({
                     },
                     { text: 'Column', link: '/api-reference/column' },
                     { text: 'Row', link: '/api-reference/row' },
-                    { text: 'Grid', link: '/api-reference/grid' },
                     { text: 'Inlined', link: '/api-reference/inlined' },
                     { text: 'Decoration', link: '/api-reference/decoration' },
                     { text: 'Layers', link: '/api-reference/layers' },
