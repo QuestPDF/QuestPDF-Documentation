@@ -1,32 +1,38 @@
 # Scale to fit
 
-This container attempts to scale down its child so it fits in the available space. This approach is useful when your content usually fits in the available space. For special situations, instead of wrapping the content to the next page or causing the infinite layout exception, it may make the content a little smaller to preserve the document look and feel.
+This container dynamically adjusts its content to fit within the available space by proportionally scaling it down if necessary. 
 
-```c#{13-15}
-.Padding(25)
-.Column(column =>
+By attempting to shrink its child elements, it prevents common layout issues such as infinite layout exceptions. 
+It is particularly useful when your content generally fits within the available space but occasionally needs slight adjustments to maintain a consistent appearance.
+
+:::warning
+This container determines the optimal scale value through multiple iterations. 
+For complex content, this may introduce a significant performance overhead.
+:::
+
+```c#{12-15}
+container.Column(column =>
 {
-    var text = Placeholders.Paragraph();
+    const string text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
-    foreach (var i in Enumerable.Range(2, 5))
+    foreach (var i in Enumerable.Range(4, 5))
     {
         column
             .Item()
-            .MinimalBox()
+            .Shrink()
             .Border(1)
-            .Padding(5)
-            .Width(i * 40) // sizes from 80x40 to 240x120
-            .Height(i * 20)
+            .Padding(15)
+            .Width(i * 50) // sizes from 200x100 to 450x175
+            .Height(i * 25)
             .ScaleToFit()
             .Text(text);
     }
 });
 ```
 
-![example](/api-reference/scale-to-fit.png =275x)
+![example](/api-reference/scale-to-fit.webp =480x)
 
 ::: danger
-Please notice that this component scales the available space. That means that you may still encounter situations where the child does not fit, e.g. when a child tries to enforce a specific aspect ratio.
-
-The process performs a binary search algorithm - in some cases this may cause performance issues.
+This component scales the available space, not the content directly. 
+As a result, you may still encounter situations where content doesn't fit properly, especially when a child element enforces a specific aspect ratio or has other fixed dimensional constraints.
 :::
