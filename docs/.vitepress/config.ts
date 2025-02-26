@@ -105,10 +105,18 @@ export default defineConfig({
                     { text: 'Prototyping', link: '/concepts/prototyping' },
                     { text: 'Colors', link: '/concepts/colors' },
                     { text: 'Length unit types', link: '/concepts/length-unit-types' },
-                    { text: 'Code patterns', link: '/concepts/creating-dsl' },
-                    { text: 'Components', link: '/concepts/components' },
-                    { text: 'Dynamic components', link: '/concepts/dynamic-components' },
-                    { text: 'Execution order', link: '/concepts/execution-order' },
+                    {
+                        text: 'Code patterns',
+                        items: [
+                            { text: 'Execution order', link: '/concepts/code-patterns/execution-order' },
+                            { text: 'Document structure', link: '/concepts/code-patterns/document-structure' },
+                            { text: 'Local helpers', link: '/concepts/code-patterns/local-helpers' },
+                            { text: 'Content styling', link: '/concepts/code-patterns/content-styling' },
+                            { text: 'Extension methods', link: '/concepts/code-patterns/extension-methods' },
+                            { text: 'Components', link: '/concepts/code-patterns/components' },
+                            { text: 'Dynamic components', link: '/concepts/code-patterns/dynamic-components' },
+                        ]
+                    }
                 ]
             },
             {
