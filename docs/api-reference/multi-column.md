@@ -1,108 +1,123 @@
+---
+outline: false
+---
+
+
 # Multi Column Layout
 
-A multi-column layout organizes content into vertical columns, similar to a newspaper or magazine layout.
-
-This approach allows for efficient use of horizontal space and can improve readability, especially for wide containers or screens. The content flows from one column to the next, and the number of columns can be adjusted based on the container's width or specific design requirements.
-
+A multi-column layout arranges content into vertical columns, similar to newspaper or magazine formatting. 
+This approach optimizes horizontal space and enhances readability, especially for wide containers or screens. 
 
 ::: warning
-This layout is expensive to calculate and may cause significant performance reduction.
+Multi-column layouts require significant computational resources, which may impact performance.
 :::
 
 
 ## Example
 
-```csharp
-.MultiColumn(multiColumn =>
+**The Content() method** provides access to the container where your primary content will be distributed across multiple columns.
+This container serves as the main content area for your multi-column layout and supports all available layout elements.
+
+**The Columns() method** defines the number of vertical columns in your layout. 
+This setting establishes the basic structure of the grid layout.
+
+**The Spacing() method** configures the horizontal space between adjacent columns. 
+This setting affects the visual presentation of your column arrangement. 
+Positive values increase separation between columns, while negative values may cause overlap (though this is rarely desirable).
+
+```c#
+container.MultiColumn(multiColumn =>
 {
-    // control number of columns, default is 2
-    multiColumn.Columns(4);
-    
-    // control space between columns, default is 0
+    multiColumn.Columns(3);
     multiColumn.Spacing(25);
-    
-    // set container primary content
+
     multiColumn
         .Content()
         .Column(column =>
         {
-            column.Spacing(10);
+            column.Spacing(15);
 
-            foreach (var sectionId in Enumerable.Range(0, 10))
+            foreach (var sectionId in Enumerable.Range(0, 3))
             {
                 foreach (var textId in Enumerable.Range(0, 3))
                     column.Item().Text(Placeholders.Paragraph()).Justify();
 
-                foreach (var blockId in Enumerable.Range(0, 3))
-                    column.Item().Width(50 + blockId * 10).Height(25).Background(Placeholders.BackgroundColor());
+                column.Item().AspectRatio(21 / 9f).Image(Placeholders.Image);
             }
         });
 });
 ```
 
-![example](/api-reference/multi-column.png =842x)
+![example](/api-reference/multicolumn-example.webp =650x)
 
-## Custom spacer
 
-A custom spacer can be added between columns to create a visual separation. The spacer can be any layout element, such as a line or a text block.
+## Spacer
 
-```csharp{4,7-11}
-.MultiColumn(multiColumn =>
+Use the Spacer approach to create a visual break between content sections, improving readability and aesthetics.
+The container's dimensions are determined by the height of the columns and the configured spacing. 
+It supports all available layout elements.
+
+```c#{6-10}
+container.MultiColumn(multiColumn =>
 {
-        multiColumn.Columns(3);
-        multiColumn.Spacing(25);
-        multiColumn.BalanceHeight();
-        
-        multiColumn
-            .Spacer()
-            .AlignCenter()
-            .LineVertical(2)
-            .LineColor(Colors.Grey.Medium);
-        
-        multiColumn
-            .Content()
-            .Column(column =>
-            {
-                column.Spacing(10);
+    multiColumn.Columns(2);
+    multiColumn.Spacing(50);
 
-                foreach (var blockId in Enumerable.Range(0, 100))
-                    column.Item().Height(50).Background(Placeholders.BackgroundColor());
-            });
-    });
-```
-
-![example](/api-reference/multi-column-spacer.png =420x)
-
-
-## Balance height
-
-Controls the content distribution across columns to achieve balanced heights:
-- **When enabled:** content flow is adjusted to equalize column heights. Each column will have approximately the same height.
-- **When disabled:** layout occupies the full vertical space. The last column may be shorter or empty, depending on content quantity.
-
-```csharp{4}
-.MultiColumn(multiColumn =>
-{
-    multiColumn.Columns(3);
-    multiColumn.BalanceHeight(true); // enabled by default 
-    multiColumn.Spacing(10);
+    multiColumn
+        .Spacer()
+        .AlignCenter()
+        .LineVertical(2)
+        .LineColor(Colors.Grey.Medium);
     
     multiColumn
         .Content()
         .Column(column =>
         {
-            column.Spacing(10);
+            column.Spacing(15);
 
-            foreach (var sectionId in Enumerable.Range(0, 8))
-                column.Item().Text(Placeholders.Paragraph());
+            foreach (var textId in Enumerable.Range(0, 5))
+                column.Item().Text(Placeholders.Paragraph()).Justify();
         });
 });
 ```
 
-With `BalanceHeight(true)`:
+![example](/api-reference/multicolumn-spacer.webp =450x)
 
-![example](/api-reference/multi-column-balance-height-enabled.png =420x)
 
-With `BalanceHeight(false)`:
 
-![example](/api-reference/multi-column-balance-height-disabled.png =420x)
+## Balance height
+
+The BalanceHeight() method controls how content is distributed across columns. 
+This feature helps create a more aesthetically pleasing and professional layout by ensuring columns have similar heights.
+
+```c#{4}
+container.MultiColumn(multiColumn =>
+{
+    multiColumn.Spacing(30);
+    multiColumn.BalanceHeight();
+
+    multiColumn
+        .Content()
+        .Column(column =>
+        {
+            column.Spacing(15);
+            
+            foreach (var textId in Enumerable.Range(0, 8))
+                column.Item().Text(Placeholders.Paragraph()).Justify();
+        });
+});
+```
+
+
+#### BalanceHeight disabled
+
+The layout occupies the entire vertical space, often leaving the last column shorter or empty if there is less content to fill it.
+
+![example](/api-reference/multicolumn-balance-height-without.webp =396x)
+
+
+#### BalanceHeight enabled
+
+The layout engine distributes elements so that each column ends up with approximately the same height.
+
+![example](/api-reference/multicolumn-balance-height-with.webp =396x)
