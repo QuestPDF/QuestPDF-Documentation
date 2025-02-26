@@ -32,31 +32,16 @@ container
 
 ## Example
 
-```c#{16}
-container
-    .Column(column =>
-    {
-        column.Spacing(15);
-
-        column.Item().Text("Business details:").Bold().FontColor(Colors.Blue.Darken2);
-        
-        AddContactItem("Resources/Icons/phone.svg", Placeholders.PhoneNumber());
-        AddContactItem("Resources/Icons/email.svg", Placeholders.Email());
-        AddContactItem("Resources/Icons/web.svg", Placeholders.WebpageUrl());
-
-        void AddContactItem(string iconPath, string label)
-        {
-            column.Item().Row(row =>
-            {
-                row.ConstantItem(32).AspectRatio(1).Svg(iconPath);
-                row.ConstantItem(15);
-                row.AutoItem().AlignMiddle().Text(label);
-            });
-        }
-    });
+```c#{5}
+container.Column(column =>
+{
+    column.Item().Text("The classic PDF icon looks like this:").Bold();
+    column.Item().Height(15);
+    column.Item().Svg(svgContent);
+});
 ```
 
-![example](/api-reference/svg.webp =412x)
+![example](/api-reference/image-svg.webp =250x)
 
 
 ## Preloading
