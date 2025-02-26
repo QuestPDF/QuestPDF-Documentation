@@ -71,8 +71,6 @@
 
 [Row](/api-reference/row) - places its children horizontally, one alongside another.
 
-[Grid](/api-reference/grid) - arranges its children using  grid-layout algorithm. Available space is divided into a set of equally-spaced columns. Its child can occupy any number of columns.
-
 [Inlined](/api-reference/inlined) - draws its elements in a line. Supports various element alignments.
 
 [Decoration](/api-reference/decoration) - places additional content before and/or after its children. The additional content is repeated on all pages.
