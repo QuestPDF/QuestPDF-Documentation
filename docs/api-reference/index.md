@@ -29,7 +29,7 @@
 
 [Extend](/api-reference/extend) - extends child size to fit the entire content vertically and/or horizontally.
 
-[Minimal box](/api-reference/minimal-box) - minimizes child size to the smallest possible. Useful when the parent element provides more space than is necessary.
+[Shrink](/api-reference/shrink) - minimizes child size to the smallest possible. Useful when the parent element provides more space than is necessary.
 
 [Translate](/api-reference/translate) - virtually moves the child horizontally and/or vertically in spaces.
 
@@ -85,8 +85,6 @@
 [Section](/api-reference/section) - specifies a multi-page area spanning its children. Used to create internal document links and for showing custom page numbers.
 
 [Hyperlink](/api-reference/hyperlink) - creates a link to an external location, e.g. redirects the user to a webpage.
-
-[Element](/api-reference/element) - allows you to break the Fluent API chain and inject dynamic content using a lambda expression.
 
 [Default Text Style](/api-reference/default-text-style) - applies additional text styling for all text elements inside its hierarchy.
 
