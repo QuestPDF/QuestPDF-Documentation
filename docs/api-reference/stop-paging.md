@@ -1,39 +1,35 @@
+---
+outline: false
+---
+
+
 # Stop paging
 
-This container is active when its child requires more than one page to draw. Where the content spans multiple pages, only the first page is visible. The remainder of the content (that would normally be visible on subsequent pages), is omitted.
+Renders the element exclusively on the first page. 
+Any portion of the element that doesn't fit is omitted.
 
-```c#{20}
-.Padding(25)
-.DefaultTextStyle(x => x.FontSize(14))
-.Decoration(decoration =>
-{
-    decoration
-        .Before()
-        .Text(text =>
-        {
-            text.DefaultTextStyle(x => x.SemiBold().FontColor(Colors.Blue.Medium));
-            
-            text.Span("Page ");
-            text.CurrentPageNumber();
-        });
-    
-    decoration
-        .Content()
-        .Column(column =>
-        {
-            column.Spacing(25);
-            column.Item().StopPaging().Text(Placeholders.LoremIpsum());
-            column.Item().ExtendHorizontal().Height(75).Background(Colors.Grey.Lighten2);
-        });
-});
+```c#{6}
+const string bookDescription = "\"Master Modern C# Development\" is a comprehensive guide that takes you from the basics to advanced concepts in C# programming. Perfect for beginners and intermediate developers looking to enhance their skills with practical examples and real-world applications. Covering object-oriented programming, LINQ, asynchronous programming, and the latest .NET features, this book provides step-by-step explanations to help you write clean, efficient, and scalable code. Whether you're building desktop, web, or cloud applications, this resource equips you with the knowledge and best practices to become a confident C# developer.";
+
+container
+    .Width(400)
+    .Height(300)
+    .StopPaging()
+    .Decoration(decoration =>
+    {
+        decoration.Before().Text("Book description:").Bold();
+        decoration.Content().Text(bookDescription);
+    });
 ```
 
-First, let's analyse the results where the `StopPaging` element is **NOT** applied. Part of the text is moved to the next page:
+#### Without StopPaging
 
-![example](/api-reference/stop-paging-without-1.png =300x)
-![example](/api-reference/stop-paging-without-2.png =300x)
+<object data="/api-reference/stop-paging-disabled.pdf" type="application/pdf" class="pdf-viewer" style="height: 700px">
+  <p>Unable to display PDF file. <a href="/api-reference/stop-paging-disabled.pdf">Download</a> instead.</p>
+</object>
 
-However, where `StopPaging` **IS** applied, the text that does not fit on the first page, is omitted. This behaviour is evident for all structures that span multiple pages.
+#### With StopPaging
 
-![example](/api-reference/stop-paging-with-1.png =300x)
-![example](/api-reference/stop-paging-with-2.png =300x)
+<object data="/api-reference/stop-paging-enabled.pdf" type="application/pdf" class="pdf-viewer" style="height: 700px">
+  <p>Unable to display PDF file. <a href="/api-reference/stop-paging-enabled.pdf">Download</a> instead.</p>
+</object>
