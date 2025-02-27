@@ -14,39 +14,22 @@ outline: false
 
 ## Example
 
-```c#{19-23}
-container
-    .Width(350)
-    .Height(350)
-    .Padding(20)
-    .Grid(grid =>
-    {
-        grid.Columns(2);
-        grid.Spacing(10);
+```c#{12}
+container.Column(column =>
+{
+    column.Spacing(15);
 
-        foreach (var turns in Enumerable.Range(0, 4))
-        {
-            grid.Item()
-                .Width(150)
-                .Height(150)
-                .Background(Colors.Grey.Lighten2)
-                .Padding(10)
-                .Element(element =>
-                {
-                    if (turns == 1 || turns == 2)
-                        element = element.FlipHorizontal();
-
-                    if (turns == 2 || turns == 3)
-                        element = element.FlipVertical();
-
-                    return element;
-                })
-                .Shrink()
-                .Background(Colors.White)
-                .Padding(10)
-                .Text($"Flipped {turns}").FontSize(16);
-        }
-    });
+    column.Item()
+        .Text("Read the message below by putting a mirror on the right side of the screen.");
+    
+    column.Item()
+        .AlignLeft()
+        .Background(Colors.Red.Lighten5)
+        .Padding(10)
+        .FlipHorizontal()
+        .Text("This is a secret message.")
+        .FontColor(Colors.Red.Darken2);
+});
 ```
 
 ![example](/api-reference/flip.webp =350x)
