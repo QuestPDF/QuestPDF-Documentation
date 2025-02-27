@@ -193,7 +193,7 @@ export default defineConfig({
                     { text: 'Padding', link: '/api-reference/padding' },
                     { text: 'Aspect Ratio', link: '/api-reference/aspect-ratio' },
                     { text: 'Extend', link: '/api-reference/extend' },
-                    { text: 'Minimal box', link: '/api-reference/minimal-box' },
+                    { text: 'Shrink', link: '/api-reference/shrink' },
                     { text: 'Translate', link: '/api-reference/translate' },
                     { text: 'Rotate', link: '/api-reference/rotate' },
                     { text: 'Scale', link: '/api-reference/scale' },
@@ -220,7 +220,6 @@ export default defineConfig({
                 items: [
                     { text: 'Section', link: '/api-reference/section' },
                     { text: 'Hyperlink', link: '/api-reference/hyperlink' },
-                    { text: 'Element', link: '/api-reference/element' },
                     { text: 'Lazy (Memory Optimization)', link: '/api-reference/lazy' },
                     { text: 'Default Text Style', link: '/api-reference/default-text-style' },
                     { text: 'Content Direction (RTL)', link: '/api-reference/content-direction' },
