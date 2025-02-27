@@ -1,92 +1,82 @@
 # Rotate
 
 ## Constrained
-- This container changes content rotation in 90 degree increments.
-- The content is always placed within the same space and size constraints.
 
-There are two methods available: `.RotateLeft()` and `.RotateRight()`
+Constrained rotation enables you to rotate an element by exactly 90 degrees, either clockwise or counterclockwise, while maintaining the content within the same space and size constraints.
 
-Example:
+| Method          | Description                                      |
+|-----------------|--------------------------------------------------|
+| **RotateLeft**  | Rotates its content 90 degrees counterclockwise. |
+| **RotateRight** | Rotates its content 90 degrees clockwise.        |
 
-```c#{17-18}
-.Padding(20)
-.Grid(grid =>
+::: warning
+When applying rotation, be aware that it changes the dimensional behavior of your elements. 
+What was previously considered width may become height and vice versa. 
+This affects how other properties like alignment and padding work on the rotated element.
+:::
+ 
+```c#{4}
+container.Row(row =>
 {
-    grid.Columns(2);
-    grid.Spacing(10);
+    row.AutoItem()
+        .RotateLeft()
+        .AlignCenter()
+        .Text("Definition")
+        .Bold().FontColor(Colors.Blue.Darken2);
     
-    foreach (var turns in Enumerable.Range(0, 4))
-    {
-        grid.Item()
-            .Width(200)
-            .Height(200)
-            .Background(Colors.Grey.Lighten2)
-            .Padding(10)
-            .Element(element =>
-            {
-                foreach (var x in Enumerable.Range(0, turns))
-                    element = element.RotateRight();
-
-                return element;
-            })
-            .MinimalBox()
-            .Background(Colors.White)
-            .Padding(10)
-            .Text($"Rotated {turns * 90}°")
-            .FontSize(20);
-    }
+    row.AutoItem()
+        .PaddingHorizontal(15)
+        .LineVertical(2).LineColor(Colors.Blue.Medium);
+    
+    row.RelativeItem()
+        .Background(Colors.Blue.Lighten5)
+        .Padding(15)
+        .Text(text =>
+        {
+            text.Span("A variable").Bold();
+            text.Span(" is a named storage location in memory that holds a value which can be modified during program execution.");
+        });
 });
 ```
 
-![example](/api-reference/rotate-constrained.png =350x)
+![example](/api-reference/rotate.webp =500x)
 
 ## Free
-- This container allows you to rotate its child by any specified angle (in degrees).
-- The content is always placed within the same space and size constraints.
-- The rendered child appears floating below or above other content.
 
-Example:
+Rotates its content clockwise by a given angle.
 
-```c#{9}
-.Padding(25)
-.Background(Colors.Grey.Lighten2)
+```c#{24}
+container
+    .Background(Colors.Grey.Lighten2)
+    .Padding(25)
+    .Row(row =>
+    {
+        row.Spacing(25);
+        
+        AddIcon(0);
+        AddIcon(30);
+        AddIcon(45);
+        AddIcon(80);
 
-.AlignCenter()
-.AlignMiddle()
-
-.Background(Colors.White)
-
-.Rotate(30)
-
-.Width(100)
-.Height(100)
-.Background(Colors.Blue.Medium);
+        void AddIcon(float angle)
+        {
+            const float itemSize = 100;
+            
+            row.AutoItem()
+                .Width(itemSize)
+                .AspectRatio(1)
+                
+                .TranslateX(itemSize / 2)
+                .TranslateY(itemSize / 2)
+                
+                .Rotate(angle)
+                
+                .TranslateX(-itemSize / 2)
+                .TranslateY(-itemSize / 2)
+                
+                .Svg("Resources/compass.svg");
+        }
+    });
 ```
 
-![example](/api-reference/rotate-free.png =300x)
-
-You can apply an additional translation to change the rotation origin point:
-
-```c#{9-10,14-15}
-.Padding(25)
-.Background(Colors.Grey.Lighten2)
-
-.AlignCenter()
-.AlignMiddle()
-
-.Background(Colors.White)
-
-.TranslateX(50)
-.TranslateY(50)
-
-.Rotate(30)
-
-.TranslateX(-50)
-.TranslateY(-50)
-
-.Width(100)
-.Height(100)
-.Background(Colors.Blue.Medium);
-```
-
-![example](/api-reference/rotate-free-origin.png =300x)
+![example](/api-reference/rotate-free.webp =525x)
