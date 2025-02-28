@@ -21,7 +21,7 @@ Combine this element with SkipOnce to achieve more complex behaviors, e.g.:
 
 TODO: add explanation
 
-```c#{9-12,14-17}
+```c#{22,24}
 container
     .Column(column =>
     {
