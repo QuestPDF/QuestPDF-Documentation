@@ -19,6 +19,6 @@
 
 ## Examples
 
-[Custom first page](/examples/custom-first-page) - using the ShowOnce and SkipOnce elements to achieve custom first page in the document.
+[Custom first page](/examples/custom-header-on-first-page) - using the ShowOnce and SkipOnce elements to achieve custom first page in the document.
 
 [Integrating with ASP.NET](/examples/aspnet-integration) - how to return PDF files generated within ASP.NET endpoints.

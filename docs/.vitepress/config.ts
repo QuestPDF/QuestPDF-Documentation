@@ -231,7 +231,7 @@ export default defineConfig({
             {
                 text: 'Examples',
                 items: [
-                    { text: 'Custom first page', link: '/examples/custom-first-page' },
+                    { text: 'Custom header on first page', link: '/examples/custom-header-on-first-page' },
                     { text: 'Integration with ASP.NET', link: '/examples/aspnet-integration' },
                     { text: 'ZUGFeRD <div class="VPBadge tip" style="margin-left: 8px;">new</div>', link: '/examples/zugferd' },
                 ]
