@@ -4,11 +4,6 @@ If the container spans multiple pages, its content is omitted on the first page 
 
 A common use-case for this element is when displaying a consistent header across pages but needing to conditionally show/hide specific fragments on the first page.
 
-The SkipOnce element provides control over content visibility across multiple pages.
-When applied to content that spans multiple pages, it hides the content on its first occurrence and displays it on subsequent pages.
-
-This element is particularly useful when you need different content on the first page compared to following pages, such as headers or watermarks that should appear only on continuation pages.
-
 ::: tip
 Combine this element with SkipOnce to achieve more complex behaviors, e.g.:
 - `container.SkipOnce().ShowOnce()` ensures the child element is displayed only on the second page.
