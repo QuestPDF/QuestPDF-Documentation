@@ -1,21 +1,25 @@
 # Translate
 
-- This container allows you to move its content up, down, left and right regardless of layout constraints.
-- It applies the same size constraints to its child.
-- The rendered child appears floating below or above other content.
+This container allows you to precisely position content by moving it horizontally and vertically relative to its original position, independent of layout constraints. 
 
-```c#{5-6}
-.Background("#FFF")
-.MinimalBox()
-.Padding(25)
-.Background(Colors.Green.Lighten3)
-.TranslateX(15)
-.TranslateY(15)
-.Border(2)
-.BorderColor(Colors.Green.Darken1)
-.Padding(50)
-.Text("Text outside of bounds")
-.FontSize(25);
+When you apply translation, the element maintains its original size constraints while shifting its visual position.
+
+| Method         | Description                                                                                                                                                      |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **TranslateX** | Moves content along the horizontal axis. A positive value moves content to the right; a negative value moves it to the left. Does not alter the available space. |
+| **TranslateY** | Moves content along the vertical axis. A positive value moves content downwards; a negative value moves it upwards. Does not alter the available space.          |
+
+```c#{4-5}
+container
+    .Padding(50)
+    .Background(Colors.Blue.Lighten3)
+    .TranslateX(25)
+    .TranslateY(25)
+    .Border(4)
+    .BorderColor(Colors.Blue.Darken2)
+    .Padding(50)
+    .Text("Moved content")
+    .FontSize(25);
 ```
 
-![example](/api-reference/translate.png =300x)
+![example](/api-reference/translate.webp =367x)
