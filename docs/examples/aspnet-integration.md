@@ -2,7 +2,7 @@
 
 ## License configuration
 
-Please setup the license configuration in the `Startup.cs` or `Program.cs` file depending on your project configuration.
+Configure your license in either the Startup.cs or Program.cs file depending on your project configuration. 
 This code should be executed only once, when the application starts or during its initialization step.
 
 ```c#
@@ -16,7 +16,10 @@ Learn more about the licensing and related configuration [here](https://www.ques
 
 ## Generating PDF files in controller endpoints
 
-```c#{8-13}
+This section demonstrates how to generate and return a PDF file in an ASP.NET controller endpoint using QuestPDF. 
+The example below creates a simple PDF document and sends it as a response when the endpoint is accessed.
+
+```c#{5-14}
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
