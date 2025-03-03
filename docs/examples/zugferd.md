@@ -42,6 +42,12 @@ DocumentOperation
    .Save("zugferd-invoice.pdf");
 ```
 
-:::tip
+::: tip
 ZUGFeRD comes in different versions with varying requirements. This documentation covers ZUGFeRD 2.1, which is based on the UN/CEFACT Cross Industry Invoice (CII) standard. When implementing ZUGFeRD support, ensure you're using the correct version for your needs and that all components (XML schema, metadata, and PDF/A version) align with that version.
+:::
+
+::: warning
+The validation process varies between different validation tools, with potentially different results for each tool. 
+
+For QuestPDF-generated documents, we specifically use the Adobe Acrobat Pro Preflight tool to validate PDF/A-3b and ZUGFeRD compliance.
 :::
