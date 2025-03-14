@@ -73,6 +73,7 @@ export default defineConfig({
                     { text: 'Quick start', link: '/quick-start' },
                     { text: 'Getting started', link: '/getting-started' },
                     { text: 'License configuration', link: '/license/configuration' },
+                    { text: 'Roadmap', link: 'https://github.com/orgs/QuestPDF/projects/8' },
                     { text: 'Releases', link: 'https://github.com/QuestPDF/QuestPDF/releases' },
                     { text: 'Acknowledgements', link: '/acknowledgements' }
                 ]
