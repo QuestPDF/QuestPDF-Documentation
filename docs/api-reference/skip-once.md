@@ -14,9 +14,9 @@ Combine this element with SkipOnce to achieve more complex behaviors, e.g.:
 
 ### Example
 
-TODO: add explanation
+In this example, the SkipOnce and ShowOnce elements are combined to ensure that if a glossary term spans multiple pages, the header displays "Continued" on the second and subsequent pages.
 
-```c#{22,24}
+```c#{20-29}
 container
     .Column(column =>
     {
