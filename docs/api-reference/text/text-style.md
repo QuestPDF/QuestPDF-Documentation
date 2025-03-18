@@ -153,6 +153,10 @@ Please note that not all fonts support every weight. If the specified weight isn
 
 ![example](/api-reference/text-font-weight.webp =494x)
 
+:::warning
+QuestPDF does not currently support fonts with variable weights.
+:::
+
 
 ## Italic
 
