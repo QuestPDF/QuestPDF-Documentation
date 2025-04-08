@@ -201,6 +201,7 @@ export default defineConfig({
                     { text: 'Unconstrained', link: '/api-reference/unconstrained' },
                     { text: 'Extend', link: '/api-reference/extend' },
                     { text: 'Shrink', link: '/api-reference/shrink' },
+                    { text: 'Z-Index', link: '/api-reference/zindex' },
                 ]
             },
             {
