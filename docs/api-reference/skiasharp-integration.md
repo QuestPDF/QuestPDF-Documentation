@@ -37,7 +37,7 @@ This class provides two extension methods that bridge QuestPDF's container syste
 
 Copy the following code into your project to enable SkiaSharp integration:
 
-```c#
+```c#{10,24}
 using System.Text;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
@@ -172,7 +172,7 @@ While vector graphics are preferred for most cases, some visual effects and comp
 
 The following example demonstrates how to draw an image with rounded corners and apply a drop shadow effect.
 
-```c#{9}
+```c#{10}
 Document.Create(document =>
 {
     document.Page(page =>
