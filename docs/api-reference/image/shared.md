@@ -11,6 +11,11 @@ In the naive approach, for each item, the following steps occur:
 
 Because these steps are repeated for every list item, the overall process becomes inefficient, and the PDF may end up including multiple copies of the same image.
 
+:::info
+Starting with the 2025.4.0 version, the library automatically detects when static assets (images loaded via local file paths) are used, and enhances performance by caching them to avoid redundant processing.
+:::
+
+
 #### Example: inefficient image processing
 
 Below is an example where the image is loaded and processed for each item:
