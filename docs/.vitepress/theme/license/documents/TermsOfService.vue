@@ -9,9 +9,10 @@
     <template #content>
       <article>
         <h3>General Terms</h3>
-        <p>By accessing and placing an order with QuestPDF (Marcin Ziąbek CodeFlint), you confirm that you are in agreement with and bound by the terms and conditions contained in the Terms Of Service outlined below. These terms apply to the entire website and any email or other type of communication between you and QuestPDF.</p>
-        <p>Under no circumstances shall QuestPDF team be liable for any direct, indirect, special, incidental or consequential damages, including, but not limited to, loss of data or profit, arising out of the use, or the inability to use, the materials on this site, even if QuestPDF team or an authorized representative has been advised of the possibility of such damages. If your use of materials from this site results in the need for servicing, repair or correction of equipment or data, you assume any costs thereof.</p>
-        <p>QuestPDF will not be responsible for any outcome that may occur during the course of usage of our resources. We reserve the rights to change prices and revise the resources usage policy in any moment.</p>
+        <p>By accessing and placing an order with QuestPDF (Marcin Ziąbek CodeFlint), you confirm that you are in agreement with and bound by the terms and conditions contained in the Terms of Service outlined below. These terms apply to the entire website, any software or licenses offered by QuestPDF, and any email or other type of communication between you and QuestPDF.</p>
+        <p>Under no circumstances shall the QuestPDF team be liable for any direct, indirect, special, incidental, or consequential damages—including, but not limited to, loss of data, profits, or business opportunities—arising from the use of, or inability to use, our materials, even if QuestPDF or an authorized representative has been advised of the possibility of such damages. If your use of materials from this site results in the need for servicing, repair, or correction of equipment or data, you assume all associated costs.</p>
+        <p>QuestPDF will not be responsible for any outcome that may occur during the use of our resources. We reserve the right to modify prices and revise our usage policies at any time without prior notice.</p>
+        <p>Notwithstanding the above limitations, QuestPDF is committed to delivering high-quality software and professional support. We welcome your feedback and strive to continuously improve and collaborate to enhance our offerings.</p>
       </article>
 
       <article>
@@ -51,7 +52,9 @@
 
       <article>
         <h3>Changes</h3>
-        <p>If we change our terms of use we will post those changes on this page. Registered users will be sent an email that outlines changes made to the terms of use.</p>
+        <p>If we update our Terms of Use, we will post those changes prominently on this page. It is your responsibility to periodically review this page to remain informed of any updates.</p>
+        <p>For significant changes affecting your rights or obligations, we will make reasonable efforts to notify you through announcements on our website.</p>
+        <p>This document was last updated on 9 April 2025.</p>
       </article>
     </template>
   </document-template>
