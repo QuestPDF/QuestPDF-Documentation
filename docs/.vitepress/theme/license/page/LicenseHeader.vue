@@ -6,7 +6,7 @@
       <p class="sub-header" style="max-width: 700px">By offering free access to most users and premium licenses for larger organizations, the project maintains its commitment to excellence while ensuring sustainable, long-term development for all.</p>
     </div>
 
-    <img src="/homepage/license.svg" alt="" class="license-icon" />
+    <img src="/license/header.svg" alt="" class="license-icon" />
   </article>
 </template>
 
