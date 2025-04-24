@@ -1,5 +1,7 @@
 ---
 layout: home
+title: QuestPDF
+titleTemplate: C# PDF Generation Library
 
 hero:
   name: QuestPDF

@@ -10,8 +10,9 @@ export default defineConfig({
 
     head: [
         ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg' }],
-        ['meta', { name: "description", content: "Open-source modern .NET library for PDF document generation. Offering comprehensive layout engine powered by concise and discoverable C# Fluent API." }],
-        ['meta', { name: "keywords", content: "pdf, library, c#, csharp, dotnet, .NET, report, export, generate, generation, tool, create, render, html, html2pdf, converter, open-source, free" }],
+        ['meta', { name: "title", content: "C# PDF Generation Library | QuestPDF for .NET" }],
+        ['meta', { name: "description", content: "Generate and manipulate PDF documents in your .NET applications using the QuestPDF library and its C# Fluent API. Build invoices, quotes, and reports with ease." }],
+        ['meta', { name: "keywords", content: "PDF, C#, csharp, dotnet, .NET, aspnet, ASP.NET, QuestPDF, open-source, foss, nuget, nuget package, C# PDF library, .NET PDF generation, ASP.NET PDF generation, PDF report generator, reporting tool for .NET, hot reload, Companion App, export to PDF, generate PDF in C#, create PDF from HTML, html to pdf, html2pdf, dynamic PDF generation, open-source PDF toolkit, PDF rendering library .NET, c# high-performance PDF generation, c# commercial PDF library, free PDF generator for .NET" }],
         ['script', { src: "https://cdn.paddle.com/paddle/paddle.js", async: "true" }]
     ],
 
