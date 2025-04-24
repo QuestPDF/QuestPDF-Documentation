@@ -34,12 +34,12 @@ const features = [
   {
     icon: "homepage/layers.svg",
     title: "Modular and Maintainable C# Code",
-    description: "Compose clear, modular PDF layouts with reusable well organized classes and methods. Refactor safely with IntelliSense - your logic stays seamlessly integrated with your domain code."
+    description: "Implement modular PDF layouts with reusable well-organized classes and methods. Refactor safely with IntelliSense - your logic stays seamlessly integrated with your domain code."
   },
   {
     icon: "homepage/csharp.svg",
     title: "Familiar Programming Concepts",
-    description: "Use conditions, loops, LINQ, and extension methods to effortlessly build dynamic, data-driven PDF documents tailored to your unique business needs."
+    description: "Use conditions, loops, LINQ, and extension methods to effortlessly generate dynamic, data-driven PDF documents tailored to your unique business needs."
   },
   {
     icon: "homepage/git.svg",
