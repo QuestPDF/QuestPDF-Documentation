@@ -1,6 +1,6 @@
 <template>
   <section class="content">
-    <h2>What you need is here</h2>
+    <h2>Exactly what you need</h2>
 
     <div class="features">
 
@@ -20,22 +20,22 @@ const features = [
     {
         icon: "homepage/engine.svg",
         title: "Comprehensive Layout Engine",
-        description: "A layout engine tailored for document generation, offering advanced paging and precise content control."
+        description: "A powerful layout engine built specifically for PDF generation. Gain full control over document structure, precise content positioning, and automatic pagination for complex reports and invoices."
     },
     {
         icon: "homepage/puzzle.svg",
         title: "Rich Toolkit",
-        description: "Craft documents with intuitive, reusable components and over 50 layout elements for complex designs."
+        description: "Accelerate your PDF development workflow with a rich set of reusable components and over 50 layout elements. Easily implement data-driven documents using a Fluent C# API."
     },
     {
         icon: "homepage/performance.svg",
         title: "High Performance",
-        description: "Generate thousands of pages per second with minimal CPU and memory usage."
+        description: "Generate PDF files at scale with up to thousands of pages per second - while maintaining minimal CPU and memory usage. Perfect for high-throughput .NET applications."
     },
     {
         icon: "homepage/multilingual.svg",
         title: "Advanced Language Support",
-        description: "Seamlessly create multilingual documents with support for RTL, text shaping, and bi-directional content."
+        description: "Create multilingual PDF documents with full support for right-to-left (RTL) languages, advanced text shaping, and bi-directional layout handling."
     }
 ];
 
