@@ -3,9 +3,9 @@
     <div class="description">
       <h2>Let's get started</h2>
 
-      <p class="sub-header">Follow our detailed tutorial, and see how easy it is to produce a fully functional invoice with fewer than 250 lines of C# code.</p>
+      <p class="sub-header">Follow our detailed tutorial, and see how easy it is to generate a fully functional invoice with fewer than 250 lines of C# code.</p>
 
-      <a class="action primary" href="getting-started.html">Get started</a>
+      <a class="action primary" href="getting-started.html">Read tutorial</a>
     </div>
 
     <img src="/invoice.png" alt="Example invoice document implemented and generated with QuestPDF using C# language." />

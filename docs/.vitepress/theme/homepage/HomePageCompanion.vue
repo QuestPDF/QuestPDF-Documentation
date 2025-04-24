@@ -3,7 +3,7 @@
     <div class="details">
       <h2>Companion App</h2>
 
-      <p class="sub-header">Accelerate your development with live document preview powered by the hot-reload capability, eliminating the need for code recompilation.</p>
+      <p class="sub-header">Accelerate your development with live document preview powered by the hot-reload capability, eliminating the need for C# code recompilation.</p>
 
       <div class="summary-list">
         <article v-for="summary of SummaryContent" class="summary-item">
@@ -29,7 +29,7 @@ const { isDark } = useData();
 const mode = computed(() => isDark.value ? "dark" : "light");
 
 const SummaryContent = [
-    "Explore document structure and hierarchy",
+    "Explore PDF document structure and hierarchy",
     "Quickly magnify and measure content",
     "Debug runtime exceptions with stack traces and code snippets",
     "Identify, understand and solve layout errors",

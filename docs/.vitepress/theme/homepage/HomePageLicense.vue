@@ -72,7 +72,7 @@ const SummaryContent = [
       grid-gap: 32px;
     }
 
-    img {
+    .license-icon {
       place-self: center;
       width: 72px;
     }
