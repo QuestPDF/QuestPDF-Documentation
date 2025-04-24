@@ -19,7 +19,7 @@ const platforms = [
     <h2>Multiplatform</h2>
 
     <p class="sub-header" style="max-width: 600px;">
-      The library supports all major operating systems, integrates seamlessly with leading IDEs as well as popular cloud platforms and technologies to ensure maximum flexibility.
+      Supports all major operating systems and works seamlessly with leading IDEs, cloud platforms, and modern development tools.
     </p>
 
     <div class="icons">

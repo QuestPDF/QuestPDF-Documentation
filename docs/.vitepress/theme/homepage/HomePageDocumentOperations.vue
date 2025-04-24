@@ -37,6 +37,8 @@ const SummaryContent = [
     <div class="description">
       <h2>Perform common PDF operations</h2>
 
+      <p class="sub-header">Leverage a powerful C# Fluent API to create, customize, and manage your PDF documents with ease.</p>
+
       <div class="summary-list">
         <article v-for="summary of SummaryContent" class="summary-item">
           <img src="/homepage/tick.svg" width="20" alt="" />
@@ -83,7 +85,7 @@ const SummaryContent = [
 
 .summary-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
   grid-gap: 16px;
 }
 
