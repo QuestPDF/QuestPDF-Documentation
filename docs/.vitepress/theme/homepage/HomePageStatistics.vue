@@ -1,13 +1,17 @@
 <template>
   <section class="content">
-    <article class="statistic" v-for="statistic in statistics" :key="statistic.label">
-      <img class="icon" :src="statistic.icon" alt="" />
+    <h2>Trusted by the .NET Community</h2>
 
-      <div class="title">
-        <span class="value">{{ statistic.value }}</span>
-        <span class="label">{{ statistic.label }}</span>
-      </div>
-    </article>
+    <div class="articles">
+      <article class="statistic" v-for="statistic in statistics" :key="statistic.label">
+        <img class="icon" :src="statistic.icon" alt="" />
+
+        <div class="title">
+          <span class="value">{{ statistic.value }}</span>
+          <span class="label">{{ statistic.label }}</span>
+        </div>
+      </article>
+    </div>
   </section>
 </template>
 
@@ -15,14 +19,14 @@
 
 const statistics = [
     {
-        icon: "/homepage/stargazers.svg",
+        icon: "/homepage/github.svg",
         label: "GitHub stargazers",
-        value: "12 750 +"
+        value: "12 775 +"
     },
     {
-        icon: "/homepage/downloads.svg",
+        icon: "/homepage/nuget.svg",
         label: "NuGet package downloads",
-        value: "9 400 000 +"
+        value: "9 500 000 +"
     }
 ];
 
@@ -32,13 +36,20 @@ const statistics = [
 
 .content {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.articles {
+  display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 128px;
 }
 
 @media screen and (max-width: 750px) {
-  .content {
+  .articles {
     flex-direction: column;
     justify-content: center;
     gap: 64px;
