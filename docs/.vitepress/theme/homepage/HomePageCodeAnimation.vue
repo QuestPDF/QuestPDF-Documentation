@@ -46,8 +46,8 @@ onMounted(() => {
 
 /* Animation engine */
 
-const animationSpeed = 50;
-const waitSpeed = 2000;
+const animationSpeed = 75;
+const waitSpeed = 3500;
 
 async function appendText(position: number, text: string) {
   for (let letter of text) {
@@ -112,6 +112,8 @@ async function waitAndProceedToNextStep(stepName: string) {
 
 /* Animation configuration */
 
+const primaryAction = ref<HTMLAnchorElement | null>(null);
+
 function resetAnimation() {
   const startCode = 'Document\n' +
     '\t.Create(document =>\n' +
@@ -128,8 +130,17 @@ function resetAnimation() {
   clearHighlight();
 }
 
+function scrollToPrimaryActionButton() {
+  if (primaryAction.value) {
+    primaryAction.value.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
+  }
+}
+
 async function animate() {
-  await new Promise(r => setTimeout(r, 1000));
+  await new Promise(r => setTimeout(r, waitSpeed));
   tutorialStepNumber.value++;
 
   title.value ="Insert an element with a solid background";
@@ -198,8 +209,11 @@ async function animate() {
   highlightLine(19);
   await appendTextInLine(19, "\t\t\t\t\tcolumn.Spacing(8);");
 
-  await waitAndProceedToNextStep("Celebrate your completed document! 🎉");
+  await waitAndProceedToNextStep("Celebrate your completed document!  🎉");
   await refreshHighlightedCode();
+
+  await new Promise(r => setTimeout(r, waitSpeed));
+  scrollToPrimaryActionButton();
 }
 
 
@@ -228,10 +242,16 @@ onUnmounted(() => observer.value?.disconnect());
 
 <template>
   <section class="content" id="homepage-quick-start-animation">
-    <h2>Quick Start&nbsp;&nbsp;👋</h2>
+    <h2 id="introduction">Quick start&nbsp;&nbsp;👋</h2>
 
-    <p class="sub-header">
-      Step {{ tutorialStepNumber }} / 14: <span class="highlight-background shine">{{ title }}</span>
+    <p class="sub-header" style="max-width: 900px;">
+      Learn how easy it is to design, implement and generate PDF documents using QuestPDF.
+      Effortlessly create documents of all types such as invoices and reports.
+    </p>
+
+    <p class="sub-header" style="display: flex; flex-direction: row; align-items: center; gap: 16px;">
+      <span class="highlight-background shine">{{ title }}</span>
+      <img v-if="isAnimationRunning && tutorialStepNumber == 1" src="/homepage/spinner-third-solid.svg" class="loading-icon">
     </p>
 
     <div class="animation-container">
@@ -240,7 +260,7 @@ onUnmounted(() => observer.value?.disconnect());
       <img :src="'/homepage/quick-start-animation/step' + imageIndex + '.webp'" />
     </div>
 
-    <a class="action primary" href="getting-started.html">Learn more</a>
+    <a ref="primaryAction" class="action primary" href="/getting-started">Read tutorial</a>
   </section>
 </template>
 
@@ -279,6 +299,27 @@ html.dark img {
 
 .action {
   margin-top: 32px;
+  scroll-margin-block-end: 32px;
+}
+
+
+
+
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-icon {
+  height: 24px;
+  display: inline-block;
+  transform-origin: center center;
+  animation: spin 1s linear infinite;
 }
 
 </style>
