@@ -2,7 +2,7 @@
   <section class="content">
     <h2>Trusted by the .NET Community</h2>
 
-    <div class="articles">
+    <div class="statistics">
       <article class="statistic" v-for="statistic in statistics" :key="statistic.label">
         <img class="icon" :src="statistic.icon" alt="" />
 
@@ -21,12 +21,12 @@ const statistics = [
     {
         icon: "/homepage/github.svg",
         label: "GitHub stargazers",
-        value: "12 775 +"
+        value: "12 800 +"
     },
     {
         icon: "/homepage/nuget.svg",
         label: "NuGet package downloads",
-        value: "9 500 000 +"
+        value: "9 650 000 +"
     }
 ];
 
@@ -41,7 +41,7 @@ const statistics = [
   gap: 32px;
 }
 
-.articles {
+.statistics {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -49,7 +49,7 @@ const statistics = [
 }
 
 @media screen and (max-width: 750px) {
-  .articles {
+  .statistics {
     flex-direction: column;
     justify-content: center;
     gap: 64px;
