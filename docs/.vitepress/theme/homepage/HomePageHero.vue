@@ -50,6 +50,10 @@ async function randomizePdf() {
       (child as SVGGElement).style.opacity = (child == children[currentImageIndex]) ? 1 : 0;
 
     currentImageIndex++;
+
+    if (currentImageIndex >= children.length)
+      currentImageIndex = 0;
+
     await new Promise(resolve => setTimeout(resolve, 3500));
   }
 }
