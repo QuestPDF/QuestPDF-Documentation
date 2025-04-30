@@ -1,6 +1,10 @@
 <template>
-  <div class="custom-page">
-    <div class="container video-container">
+  <div class="custom-page home-page">
+    <div class="container hero-container">
+      <HomePageHero />
+    </div>
+
+    <div class="container reverse-background">
       <HomePageCodeAnimation />
     </div>
 
@@ -9,15 +13,15 @@
     </div>
 
     <div class="container reverse-background">
-      <HomePageCompanion />
+      <HomePageCodeFocusedApproach />
     </div>
 
     <div class="container">
-      <HomePageFeatures />
+      <HomePageCompanion />
     </div>
 
     <div class="container reverse-background">
-      <HomePageCodeFocusedApproach />
+      <HomePageFeatures />
     </div>
 
     <div class="container">
@@ -49,17 +53,63 @@ import HomePageDocumentOperations from "./HomePageDocumentOperations.vue";
 import HomePageCodeFocusedApproach from "./HomePageCodeFocusedApproach.vue";
 import HomePageCompanion from "./HomePageCompanion.vue";
 import HomePageCodeAnimation from "./HomePageCodeAnimation.vue";
+import HomePageHero from "./HomePageHero.vue";
 
 </script>
 
 <style>
 
-.video-container {
-  background-image: conic-gradient(#F8F8F8 0deg, #DDD 90deg, #2979FF55 135deg, #DDD 180deg, #F8F8F8 270deg, #F8F8F8 360deg);
+.VPNavBar .container {
+  max-width: 1152px;;
 }
 
-html.dark .video-container {
-  background-image: conic-gradient(#222 0deg, #111 90deg, #2979FF33 135deg, #111 180deg, #222 270deg, #222 360deg);
+.VPNavBar.top .VPNavBarAppearance {
+  --vp-c-divider: var(--vp-c-text-3);
+  --vp-input-border-color: var(--vp-c-text-3);
 }
+
+.VPNavBar.top #local-search {
+  display: none !important;
+}
+
+.hero-container .action.primary {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))
+}
+
+
+/* Background */
+
+.home-page {
+  margin-top: -64px;
+}
+
+.hero-container {
+  padding-top: 64px;
+}
+
+.hero-container {
+  background: radial-gradient(circle at 75% 50%, #2979ff60, #0098ff40, #00b4ff20, #00ceff10, #00e5ff08);
+  border-top: none !important;
+}
+
+@media screen and (max-width: 1440px) {
+  .hero-container {
+    background: radial-gradient(circle at 80% 50%, #2979ff60, #0098ff40, #00b4ff20, #00ceff10, #00e5ff08);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero-container {
+    background: radial-gradient(circle at 85% 50%, #2979ff60, #0098ff40, #00b4ff20, #00ceff10, #00e5ff08);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .hero-container {
+    background: radial-gradient(circle at 50% 200px, #2979ff60, #0098ff40, #00b4ff20, #00ceff10, #00e5ff08);
+    border-top: none !important;
+  }
+}
+
 
 </style>

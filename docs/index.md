@@ -3,23 +3,6 @@ layout: home
 title: QuestPDF
 titleTemplate: C# PDF Generation Library
 
-hero:
-  name: QuestPDF
-  text: Modern, open-source C# library for PDF document generation
-  image:
-    src: /logo.svg
-    alt: QuestPDF
-  actions:
-  - theme: brand
-    text: Get Started
-    link: /quick-start
-  - theme: alt
-    text: Licenses and Pricing
-    link: /license/
-  - theme: alt
-    text: GitHub
-    link: https://github.com/QuestPDF/QuestPDF
-
 markdownStyles: false
 ---
 

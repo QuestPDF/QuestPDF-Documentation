@@ -136,6 +136,8 @@ function scrollToPrimaryActionButton() {
       behavior: "smooth",
       block: "end",
     });
+
+    primaryAction.value.classList.add("highlight");
   }
 }
 
@@ -297,16 +299,10 @@ html.dark img {
   opacity: 0.8;
 }
 
-.action {
-  margin-top: 32px;
-  scroll-margin-block-end: 32px;
-}
 
+/* Loading icon */
 
-
-
-
-@keyframes spin {
+@keyframes loading-icon-animation {
   from {
     transform: rotate(0deg);
   }
@@ -319,7 +315,28 @@ html.dark img {
   height: 24px;
   display: inline-block;
   transform-origin: center center;
-  animation: spin 1s linear infinite;
+  animation: loading-icon-animation 1s linear infinite;
+}
+
+
+/* Highlight CTA button */
+
+@keyframes highlight-cta-animation {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.action.primary {
+  margin-top: 32px;
+  scroll-margin-block-end: 128px;
+}
+
+.action.primary.highlight {
+  box-shadow: var(--elevation);
+  animation: highlight-cta-animation 1s ease-in-out alternate;
+  animation-delay: 1s;
+  animation-iteration-count: 5;
 }
 
 </style>
