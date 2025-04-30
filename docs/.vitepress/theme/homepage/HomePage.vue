@@ -8,35 +8,35 @@
       <HomePageCodeAnimation />
     </div>
 
-    <div class="container">
+    <div class="container reveal-animation">
       <HomePageStatistics />
     </div>
 
-    <div class="container reverse-background">
+    <div class="container reverse-background reveal-animation">
       <HomePageCodeFocusedApproach />
     </div>
 
-    <div class="container">
+    <div class="container reveal-animation">
       <HomePageCompanion />
     </div>
 
-    <div class="container reverse-background">
+    <div class="container reverse-background reveal-animation">
       <HomePageFeatures />
     </div>
 
-    <div class="container">
+    <div class="container reveal-animation">
       <HomePageMultiplatform />
     </div>
 
-    <div class="container reverse-background">
+    <div class="container reverse-background reveal-animation">
       <HomePageDocumentOperations />
     </div>
 
-    <div class="container">
+    <div class="container reveal-animation">
       <HomePageLicense />
     </div>
 
-    <div class="container reverse-background">
+    <div class="container reverse-background reveal-animation">
       <HomePageGettingStarted />
     </div>
   </div>
@@ -54,6 +54,21 @@ import HomePageCodeFocusedApproach from "./HomePageCodeFocusedApproach.vue";
 import HomePageCompanion from "./HomePageCompanion.vue";
 import HomePageCodeAnimation from "./HomePageCodeAnimation.vue";
 import HomePageHero from "./HomePageHero.vue";
+import {onMounted} from "vue";
+
+/* Reveal animation */
+
+onMounted(() => {
+    const intersectionObserver = new IntersectionObserver((entries) => {
+        for (let entry of entries.filter(x => x.isIntersecting)) {
+            entry.target.classList.add('is-visible');
+            intersectionObserver.unobserve(entry.target);
+        }
+    });
+
+    const observableElements = document.querySelectorAll('.reveal-animation > *');
+    observableElements.forEach(x => intersectionObserver.observe(x));
+})
 
 </script>
 
@@ -111,5 +126,21 @@ import HomePageHero from "./HomePageHero.vue";
   }
 }
 
+
+/* Reveal section animation */
+
+.reveal-animation > * {
+  opacity: 0;
+  transform: translateY(16px) scale(0.95);
+
+  transition: opacity 0.75s ease-out, transform 0.75s ease-out;
+  transition-delay: 0.25s;
+  will-change: opacity, transform;
+}
+
+.reveal-animation > *.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
 
 </style>
