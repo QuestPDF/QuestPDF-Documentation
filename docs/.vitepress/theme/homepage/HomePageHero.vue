@@ -15,6 +15,9 @@
     </div>
 
     <div class="content-icon">
+      <div class="content-icon-background-static"></div>
+      <div class="content-icon-background-rays"></div>
+
       <div class="animation-scene">
         <div class="animation-translate-y">
           <div class="animation-rotate-y">
@@ -76,10 +79,14 @@ onMounted(randomizePdf);
 
 .content-text {
   grid-area: text;
+  z-index: 2;
 }
 
 .content-icon {
   grid-area: icon;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 1024px) {
@@ -118,6 +125,40 @@ onMounted(randomizePdf);
     display: none;
   }
 }
+
+
+/* Background gradient */
+
+.content-icon-background-static {
+  content: "";
+  position: absolute;
+  width: max(125vh, 125vw);
+  height: max(125vh, 125vw);
+  border-radius: 50%;
+  filter: blur(100px);
+  background: radial-gradient(circle, #2979ff60, #0098ff40, #00b4ff20, #00ceff10, #00e5ff08);
+}
+
+@keyframes content-icon-background-rays-animation {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.content-icon-background-rays {
+  content: "";
+  position: absolute;
+  width: max(200vh, 200vw);
+  height: max(200vh, 200vw);
+  border-radius: 50%;
+  opacity: 0.08;
+  background: repeating-conic-gradient(#FFF0 0deg 30deg, #FFFF 30deg 60deg);
+  animation: content-icon-background-rays-animation 120s linear infinite;
+}
+
+html.dark .content-icon-background-rays {
+  opacity: 0.01;
+}
+
 
 
 /* Content styles */
@@ -197,10 +238,6 @@ h1 {
 
 #homepage-hero-pdf {
   filter: drop-shadow(0 12px 12px rgba(0, 0, 0, 0.2));
-}
-
-#homepage-hero-pdf #types > * {
-  transition: all 0.5s ease-in-out;
 }
 
 </style>

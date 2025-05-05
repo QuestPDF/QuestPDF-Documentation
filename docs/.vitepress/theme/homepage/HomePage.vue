@@ -100,30 +100,12 @@ onMounted(() => {
 
 .hero-container {
   padding-top: 64px;
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-container {
-  background: radial-gradient(circle at 75% 50%, #2979ff60, #0098ff40, #00b4ff20, #00ceff10, #00e5ff08);
   border-top: none !important;
-}
-
-@media screen and (max-width: 1440px) {
-  .hero-container {
-    background: radial-gradient(circle at 80% 50%, #2979ff60, #0098ff40, #00b4ff20, #00ceff10, #00e5ff08);
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .hero-container {
-    background: radial-gradient(circle at 85% 50%, #2979ff60, #0098ff40, #00b4ff20, #00ceff10, #00e5ff08);
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .hero-container {
-    background: radial-gradient(circle at 50% 200px, #2979ff60, #0098ff40, #00b4ff20, #00ceff10, #00e5ff08);
-    border-top: none !important;
-  }
 }
 
 
