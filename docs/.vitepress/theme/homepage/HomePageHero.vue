@@ -132,11 +132,10 @@ onMounted(randomizePdf);
 .content-icon-background-static {
   content: "";
   position: absolute;
-  width: max(125vh, 125vw);
-  height: max(125vh, 125vw);
+  width: 150vmax;
+  height: 150vmax;
   border-radius: 50%;
-  filter: blur(100px);
-  background: radial-gradient(circle, #2979ff60, #0098ff40, #00b4ff20, #00ceff10, #00e5ff08);
+  background: radial-gradient(circle farthest-side, #2979ff60, #0098ff40, #00b4ff20, #00ceff10, #00e5ff08, #00e5ff00);
 }
 
 @keyframes content-icon-background-rays-animation {
@@ -147,8 +146,8 @@ onMounted(randomizePdf);
 .content-icon-background-rays {
   content: "";
   position: absolute;
-  width: max(200vh, 200vw);
-  height: max(200vh, 200vw);
+  width: 200vmax;
+  height: 200vmax;
   border-radius: 50%;
   opacity: 0.08;
   background: repeating-conic-gradient(#FFF0 0deg 30deg, #FFFF 30deg 60deg);
