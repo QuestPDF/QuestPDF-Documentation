@@ -120,7 +120,9 @@ onMounted(randomizePdf);
   h1 br {
     display: none;
   }
+}
 
+@media screen and (max-width: 900px) {
   .tagline br {
     display: none;
   }
