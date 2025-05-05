@@ -100,10 +100,10 @@ DocumentOperation
 
 | Option            | Description                                                                                                                     |
 |-------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| FilePath          | The file path of the overlay/underlay PDF file to be used                                                                       |
-| TargetPages       | Specifies the range of pages in the output document where the overlay/underlay will be applied                                  |
-| SourcePages       | Specifies the range of pages in the overlay/underlay file to be used initially                                                  |
-| RepeatSourcePages | Specifies an optional range of pages in the overlay/underlay file that will repeat after the initial source pages are exhausted |
+| **FilePath**          | The file path of the overlay/underlay PDF file to be used                                                                       |
+| **TargetPages**       | Specifies the range of pages in the output document where the overlay/underlay will be applied                                  |
+| **SourcePages**       | Specifies the range of pages in the overlay/underlay file to be used initially                                                  |
+| **RepeatSourcePages** | Specifies an optional range of pages in the overlay/underlay file that will repeat after the initial source pages are exhausted |
 
 A simple overlay example:
 
@@ -208,31 +208,22 @@ DocumentOperation
     .Save("encrypted-256bit.pdf");
 ```
 
+## Document Decryption
+
+Removes any existing encryption from the current PDF document, effectively making it accessible without a password or encryption restrictions.
+
+It is also possible to remove security restrictions associated with digitally signed PDF files.
+
+```csharp
+DocumentOperation
+    .LoadFile("input.pdf", "password")
+    .Decrypt()
+    .RemoveRestrictions()
+    .Save("encrypted-256bit.pdf");
+```
+
+
 ## File Attachments
-
-### Configuration Options
-
-| Option           | Description                                                                                                                                         |
-|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| Key              | Sets the key for the attachment, specific to the PDF format. Defaults to the file name without its path                                             |
-| FilePath         | The file path of the attachment. The specified file must exist                                                                                      |
-| AttachmentName   | Specifies the display name for the attachment. This name is typically shown to the user and used by most graphical PDF viewers when saving the file |
-| CreationDate     | Specifies the creation date of the attachment. Defaults to the file's creation time                                                                 |
-| ModificationDate | Specifies the modification date of the attachment. Defaults to the file's last modified time                                                        |
-| MimeType         | Specifies the MIME type of the attachment (e.g., "text/plain", "application/pdf", "image/png")                                                      |
-| Description      | Sets a description for the attachment, which may be displayed by some PDF viewers                                                                   |
-| Replace          | Indicates whether to replace an existing attachment with the same key                                                                               |
-| Relationship     | Specifies the relationship of the embedded file to the document for PDF/A-3b compliance                                                             |
-
-### Attachment Relationships
-
-| Relationship | Description                                                                              |
-|--------------|------------------------------------------------------------------------------------------|
-| Data         | Indicates data files relevant to the document (e.g., supporting datasets or data tables) |
-| Source       | Represents a source file directly used to create the document                            |
-| Alternative  | An alternative representation of the document content (e.g., XML, HTML)                  |
-| Supplement   | A file supplementing the content, like additional resources                              |
-| Unspecified  | No specific relationship is defined                                                      |
 
 A simple attachment example:
 
@@ -247,6 +238,31 @@ DocumentOperation
     })
     .Save("with-attachment.pdf");
 ```
+
+### Configuration Options
+
+| Option           | Description                                                                                                                                         |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Key**              | Sets the key for the attachment, specific to the PDF format. Defaults to the file name without its path                                             |
+| **FilePath**         | The file path of the attachment. The specified file must exist                                                                                      |
+| **AttachmentName**   | Specifies the display name for the attachment. This name is typically shown to the user and used by most graphical PDF viewers when saving the file |
+| **CreationDate**     | Specifies the creation date of the attachment. Defaults to the file's creation time                                                                 |
+| **ModificationDate** | Specifies the modification date of the attachment. Defaults to the file's last modified time                                                        |
+| **MimeType**         | Specifies the MIME type of the attachment (e.g., "text/plain", "application/pdf", "image/png")                                                      |
+| **Description**      | Sets a description for the attachment, which may be displayed by some PDF viewers                                                                   |
+| **Replace**          | Indicates whether to replace an existing attachment with the same key                                                                               |
+| **Relationship**     | Specifies the relationship of the embedded file to the document for PDF/A-3b compliance                                                             |
+
+### Attachment Relationships
+
+| Relationship | Description                                                                              |
+|--------------|------------------------------------------------------------------------------------------|
+| **Data**         | Indicates data files relevant to the document (e.g., supporting datasets or data tables) |
+| **Source**       | Represents a source file directly used to create the document                            |
+| **Alternative**  | An alternative representation of the document content (e.g., XML, HTML)                  |
+| **Supplement**   | A file supplementing the content, like additional resources                              |
+| **Unspecified**  | No specific relationship is defined                                                      |
+
 
 ### PDF/A-3b Compliant Attachment
 
