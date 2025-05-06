@@ -2416,7 +2416,7 @@ __metadata:
   resolution: "questpdf.documentation@workspace:."
   dependencies:
     markdown-it-imsize: ^2.0.1
-    sass: ^1.83.4
+    sass: ^1.86.3
     vitepress: 1.6.3
     vue: 3.5.13
   languageName: unknown
@@ -2568,9 +2568,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.83.4":
-  version: 1.85.0
-  resolution: "sass@npm:1.85.0"
+"sass@npm:^1.86.3":
+  version: 1.87.0
+  resolution: "sass@npm:1.87.0"
   dependencies:
     "@parcel/watcher": ^2.4.1
     chokidar: ^4.0.0
@@ -2581,7 +2581,7 @@ __metadata:
       optional: true
   bin:
     sass: sass.js
-  checksum: 53c70831d1235f9ee40489a8bdde9b3304ba350df78417c4edaa8a8ac79426208054a69ac9b6d53c4dc5837362e552a92e3bcaa975a1a3e8975c0af9fbccfe1c
+  checksum: 83d166fc6f03ed679460c21351c783d57a61c32fe1afdacf647ce477dd5611f03b1cff27444cccd59d3a5bd1453471fbbcdba7b9e7fc510e4f57226e125e4e01
   languageName: node
   linkType: hard
 
