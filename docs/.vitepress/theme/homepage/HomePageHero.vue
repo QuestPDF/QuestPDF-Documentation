@@ -151,7 +151,7 @@ onMounted(randomizePdf);
   width: 200vmax;
   height: 200vmax;
   border-radius: 50%;
-  opacity: 0.08;
+  opacity: 0.1;
   background: repeating-conic-gradient(#FFF0 0deg 30deg, #FFFF 30deg 60deg);
   animation: content-icon-background-rays-animation 120s linear infinite;
 }
