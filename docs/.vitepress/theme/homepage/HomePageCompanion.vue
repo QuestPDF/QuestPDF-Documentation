@@ -15,7 +15,9 @@
       <a class="action" href="/companion/features">Read more</a>
     </div>
 
-    <img :src="`/companion/application-${mode}.png`" alt="Companion App" />
+    <ClientOnly>
+      <img :src="`/companion/application-${mode}.png`" alt="Companion App" />
+    </ClientOnly>
   </section>
 </template>
 
