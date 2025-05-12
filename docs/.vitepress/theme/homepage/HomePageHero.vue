@@ -151,13 +151,13 @@ onMounted(randomizePdf);
   width: 200vmax;
   height: 200vmax;
   border-radius: 50%;
-  opacity: 0.1;
+  opacity: 0.125;
   background: repeating-conic-gradient(#FFF0 0deg 30deg, #FFFF 30deg 60deg);
   animation: content-icon-background-rays-animation 120s linear infinite;
 }
 
 html.dark .content-icon-background-rays {
-  opacity: 0.01;
+  opacity: 0.015;
 }
 
 
@@ -238,7 +238,11 @@ h1 {
 }
 
 #homepage-hero-pdf {
-  filter: drop-shadow(0 12px 12px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+}
+
+html.dark #homepage-hero-pdf {
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
 }
 
 </style>
