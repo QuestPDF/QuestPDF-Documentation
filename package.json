@@ -5,6 +5,7 @@
   "license": "MIT",
   "type": "module",
   "devDependencies": {
+    "@paddle/paddle-js": "^1.4.1",
     "markdown-it-imsize": "^2.0.1",
     "sass": "^1.86.3",
     "vitepress": "1.6.3",

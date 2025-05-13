@@ -476,6 +476,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@paddle/paddle-js@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "@paddle/paddle-js@npm:1.4.1"
+  checksum: 29c92813204c43b8091ea5fb3877e625d6c1641887755ecf2ba31450bcec6d437f69ba41daf5fb1d3b2a207c371827c44ee0c08327d4c36f28d3d09bdae293e7
+  languageName: node
+  linkType: hard
+
 "@parcel/watcher-android-arm64@npm:2.4.1":
   version: 2.4.1
   resolution: "@parcel/watcher-android-arm64@npm:2.4.1"
@@ -2415,6 +2422,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "questpdf.documentation@workspace:."
   dependencies:
+    "@paddle/paddle-js": ^1.4.1
     markdown-it-imsize: ^2.0.1
     sass: ^1.86.3
     vitepress: 1.6.3

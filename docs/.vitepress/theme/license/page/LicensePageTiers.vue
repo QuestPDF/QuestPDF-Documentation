@@ -29,7 +29,7 @@
 
         <div style="flex-grow: 1"></div>
 
-        <a v-if="license.price" class="action primary" @click="startCheckout(license)">Purchase</a>
+        <a v-if="license.price" class="action primary" @click="paddle.startCheckout(license.paddlePriceId)">Purchase</a>
         <a v-else class="action" href="/getting-started.html">Start learning</a>
       </section>
     </div>
@@ -38,10 +38,9 @@
 
 <script setup lang="ts">
 
-import {PaddleConfiguration} from "../PaddleConfiguration";
-import {useData} from "vitepress";
+import {usePaddle} from "../../paddle";
 
-const {isDark} = useData();
+const paddle = usePaddle();
 
 enum LicenseDetailType {
   Feature,
@@ -54,7 +53,7 @@ interface License {
   name: string;
 
   price: number;
-  paddleProductId: number;
+  paddlePriceId: string;
 
   details: { type: LicenseDetailType, content: string }[];
 }
@@ -63,7 +62,7 @@ const CommunityLicense: License = {
   icon: "/license/community.svg",
   name: "Community",
   price: null,
-  paddleProductId: null,
+  paddlePriceId: null,
   details: [
     {
       type: LicenseDetailType.Information,
@@ -88,7 +87,7 @@ const ProfessionalLicense: License = {
   icon: "/license/professional.svg",
   name: "Professional",
   price: 699,
-  paddleProductId: PaddleConfiguration.professionalLicenseId,
+  paddlePriceId: paddle.professionalLicensePriceId,
   details: [
     {
       type: LicenseDetailType.Feature,
@@ -109,7 +108,7 @@ const EnterpriseLicense: License = {
   icon: "/license/enterprise.svg",
   name: "Enterprise",
   price: 1999,
-  paddleProductId: PaddleConfiguration.enterpriseLicenseId,
+  paddlePriceId: paddle.enterpriseLicensePriceId,
   details: [
     {
       type: LicenseDetailType.Feature,
@@ -147,25 +146,6 @@ function convertLicenseDetailTypeToIcon(type: LicenseDetailType) {
     return "/license/alert.svg";
 
   throw "Unreachable code";
-}
-
-function startCheckout(license: License) {
-  // register listener
-  function gtag() { dataLayer.push(arguments); }
-
-  if (!PaddleConfiguration.isProduction)
-    Paddle.Environment.set('sandbox');
-
-  Paddle.Setup({
-    vendor: PaddleConfiguration.vendorId,
-    eventCallback: data => gtag('event', data.event)
-  });
-
-  Paddle.Checkout.open({
-    product: license.paddleProductId,
-    displayModeTheme: isDark.value ? 'dark' : 'light',
-    success: "https://www.questpdf.com/license/purchase-success.html"
-  });
 }
 
 </script>

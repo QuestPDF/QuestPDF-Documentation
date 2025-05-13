@@ -22,5 +22,7 @@ const { Layout } = DefaultTheme
 import GoogleAnalytics from "./GoogleAnalytics.vue";
 import SupportAlert from "./SupportAlert.vue";
 import Intellisense from "./Intellisense.vue";
+import {usePaddle} from "./paddle.ts";
 
+usePaddle();
 </script>
