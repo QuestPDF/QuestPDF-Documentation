@@ -3,14 +3,18 @@
     <h2>Trusted by the .NET Community</h2>
 
     <div class="statistics">
-      <article class="statistic" v-for="statistic in statistics" :key="statistic.label">
-        <img class="icon" :src="statistic.icon" alt="" />
+      <template v-for="statistic in statistics" :key="statistic.label">
+        <a :href="statistic.link" target="_blank">
+          <article class="statistic">
+            <img class="icon" :src="statistic.icon" alt="" />
 
-        <div class="title">
-          <span class="value">{{ statistic.value }}</span>
-          <span class="label">{{ statistic.label }}</span>
-        </div>
-      </article>
+            <div class="title">
+              <span class="value">{{ statistic.value }}</span>
+              <span class="label">{{ statistic.label }}</span>
+            </div>
+          </article>
+        </a>
+      </template>
     </div>
   </section>
 </template>
@@ -21,11 +25,13 @@ const statistics = [
     {
         icon: "/homepage/github.svg",
         label: "GitHub stargazers",
+        link: "https://github.com/QuestPDF/QuestPDF",
         value: "12 825 +"
     },
     {
         icon: "/homepage/nuget.svg",
         label: "NuGet package downloads",
+        link: "https://www.nuget.org/packages/QuestPDF/",
         value: "9 800 000 +"
     }
 ];
