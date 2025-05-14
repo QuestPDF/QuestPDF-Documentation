@@ -1,4 +1,9 @@
-# Code pattern: Capture Content Position
+---
+outline: false
+---
+
+
+# Code pattern: capture content position
 
 When generating PDF documents, you sometimes need to create elements that depend on the position of other content already placed in the document. 
 
@@ -14,11 +19,15 @@ It is expected behavior, as the document generation process requires two renderi
 Your implementation should handle these cases gracefully, as shown in the example above.
 :::
 
-### Example
+## Example
 
 The following example demonstrates how to implement a demo of proofreading functionality. 
 It highlights incorrect words in red with strikethrough formatting and adds corrected versions in green.
 Finally, it places an icon beside each correction for easy identification.
+
+![example](/patterns-and-practices/code-pattern-element-position-locator.webp =575x)
+
+### Capturing position
 
 To implement this feature, we need to capture two types of positions: the position of the entire text container as a reference point, and the specific positions of each mistake that needs an icon.
 
@@ -71,6 +80,9 @@ Document
 .GeneratePdf("file.pdf");
 ```
 
+
+### Generating dependent content
+
 The dynamic component below uses the captured positions to generate and place correction icons. 
 Notice how we retrieve both the container position and the positions of each mistake marker to calculate the proper placement of each icon.
 
@@ -119,5 +131,3 @@ public class DynamicTextSpanPositionCapture : IDynamicComponent
     }
 }
 ```
-
-![example](/patterns-and-practices/code-pattern-element-position-locator.webp =575x)
