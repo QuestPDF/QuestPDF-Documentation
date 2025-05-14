@@ -116,6 +116,7 @@ export default defineConfig({
                             { text: 'Extension methods', link: '/concepts/code-patterns/extension-methods' },
                             { text: 'Components', link: '/concepts/code-patterns/components' },
                             { text: 'Dynamic components', link: '/concepts/code-patterns/dynamic-components' },
+                            { text: 'Capture content position', link: '/concepts/code-patterns/capture-content-position' },
                         ]
                     }
                 ]
