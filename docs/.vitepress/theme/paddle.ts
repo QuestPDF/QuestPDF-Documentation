@@ -29,11 +29,13 @@ const configuration = productionConfiguration;
 
 const paddle = ref<Paddle | null>(null);
 
-initializePaddle({
-  token: configuration.token,
-  environment: configuration.isProduction ? 'production' : 'sandbox',
-})
-.then(x => paddle.value = x)
+if (typeof window !== 'undefined') {
+  initializePaddle({
+    token: configuration.token,
+    environment: configuration.isProduction ? 'production' : 'sandbox',
+  })
+    .then(x => paddle.value = x)
+}
 
 export const usePaddle = () => {
   const {isDark} = useData();
