@@ -37,8 +37,8 @@ export default defineConfig({
                     },
                     {
                         items: [
-                            { text: 'Document operations <div class="VPBadge tip" style="margin-left: 8px;">new</div>', link: '/concepts/document-operations' },
-                            { text: 'Companion App <div class="VPBadge tip" style="margin-left: 8px;">new</div>', link: '/companion/usage' },
+                            { text: 'Document operations <span class="VPBadge tip" style="margin-left: 8px;">new</span>', link: '/concepts/document-operations' },
+                            { text: 'Companion App <span class="VPBadge tip" style="margin-left: 8px;">new</span>', link: '/companion/usage' },
                         ]
                     }
                 ]
@@ -79,7 +79,7 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Companion App <div class="VPBadge tip" style="margin-left: 8px;">new</div>',
+                text: 'Companion App <span class="VPBadge tip" style="margin-left: 8px;">new</span>',
                 items: [
                     { text: 'Introduction and Usage', link: '/companion/usage' },
                     { text: 'Download', link: '/companion/download' },
@@ -236,7 +236,7 @@ export default defineConfig({
                 items: [
                     { text: 'Custom header on first page', link: '/examples/custom-header-on-first-page' },
                     { text: 'Integration with ASP.NET', link: '/examples/aspnet-integration' },
-                    { text: 'ZUGFeRD <div class="VPBadge tip" style="margin-left: 8px;">new</div>', link: '/examples/zugferd' },
+                    { text: 'ZUGFeRD <span class="VPBadge tip" style="margin-left: 8px;">new</span>', link: '/examples/zugferd' },
                 ]
             }
         ],
