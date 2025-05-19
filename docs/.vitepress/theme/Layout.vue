@@ -1,9 +1,7 @@
 <template>
   <Layout>
     <template #doc-before>
-      <ClientOnly>
-        <support-alert />
-      </ClientOnly>
+      <support-alert />
     </template>
 
     <template #layout-bottom>
