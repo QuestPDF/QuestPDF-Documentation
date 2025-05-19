@@ -7,7 +7,6 @@
     <template #layout-bottom>
       <ClientOnly>
         <google-analytics />
-        <intellisense />
         <paddle-integration />
       </ClientOnly>
     </template>
@@ -20,7 +19,6 @@ const { Layout } = DefaultTheme
 
 import GoogleAnalytics from "./GoogleAnalytics.vue";
 import SupportAlert from "./SupportAlert.vue";
-import Intellisense from "./Intellisense.vue";
 import PaddleIntegration from "./PaddleIntegration.vue";
 
 </script>
