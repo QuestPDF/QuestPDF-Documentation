@@ -10,6 +10,7 @@
       <ClientOnly>
         <google-analytics />
         <intellisense />
+        <paddle-integration />
       </ClientOnly>
     </template>
   </Layout>
@@ -22,7 +23,6 @@ const { Layout } = DefaultTheme
 import GoogleAnalytics from "./GoogleAnalytics.vue";
 import SupportAlert from "./SupportAlert.vue";
 import Intellisense from "./Intellisense.vue";
-import {usePaddle} from "./paddle.ts";
+import PaddleIntegration from "./PaddleIntegration.vue";
 
-usePaddle();
 </script>
