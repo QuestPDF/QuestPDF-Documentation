@@ -22,7 +22,7 @@
 
         <div class="details">
           <div v-for="detail of license.details" class="details-item">
-            <img :src="convertLicenseDetailTypeToIcon(detail.type)" width="20" alt="">
+            <img :src="convertLicenseDetailTypeToIcon(detail.type)" width="20" style="margin-top: 1px;" alt="">
             <p>{{ detail.content }}</p>
           </div>
         </div>
