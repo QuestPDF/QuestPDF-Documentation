@@ -100,7 +100,11 @@ const ProfessionalLicense: License = {
     {
       type: LicenseDetailType.Feature,
       content: "Ensures library sustainability"
-    }
+    },
+    {
+      type: LicenseDetailType.Information,
+      content: "To support ongoing development and long-term sustainability, the licence price will increase to $999 on 1 July 2025",
+    },
   ]
 };
 
