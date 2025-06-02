@@ -7,9 +7,9 @@
   "devDependencies": {
     "@paddle/paddle-js": "^1.4.1",
     "markdown-it-imsize": "^2.0.1",
-    "sass": "^1.86.3",
+    "sass": "^1.88.0",
     "vitepress": "1.6.3",
-    "vue": "3.5.14"
+    "vue": "3.5.16"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",
