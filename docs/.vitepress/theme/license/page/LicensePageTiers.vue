@@ -86,7 +86,7 @@ const CommunityLicense: License = {
 const ProfessionalLicense: License = {
   icon: "/license/professional.svg",
   name: "Professional",
-  price: 699,
+  price: 999,
   paddlePriceId: paddle.professionalLicensePriceId,
   details: [
     {
@@ -103,7 +103,7 @@ const ProfessionalLicense: License = {
     },
     {
       type: LicenseDetailType.Information,
-      content: "To support ongoing development and long-term sustainability, the licence price will increase to $999 on 1 July 2025",
+      content: "To support ongoing development, the licence price has been increased on 1 July 2025. If it impacts your procurement process, please feel free to contact us."
     },
   ]
 };
