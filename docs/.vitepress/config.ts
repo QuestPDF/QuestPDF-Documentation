@@ -125,6 +125,15 @@ export default defineConfig({
                 text: 'Visual content',
                 items: [
                     {
+                        text: 'Styled Container',
+                        items: [
+                            { text: 'Background', link: '/api-reference/background' },
+                            { text: 'Border', link: '/api-reference/border' },
+                            { text: 'Rounded Corners', link: '/api-reference/rounded-corners' },
+                            { text: 'Shadows', link: '/api-reference/shadow' },
+                        ]
+                    },
+                    {
                         text: 'Text',
                         items: [
                             { text: 'Basics', link: '/api-reference/text/basics' },
@@ -146,8 +155,6 @@ export default defineConfig({
                             { text: 'Images Of Dynamic Size', link: '/api-reference/image/dynamic' }
                         ]
                     },
-                    { text: 'Background', link: '/api-reference/background' },
-                    { text: 'Border', link: '/api-reference/border' },
                     { text: 'Line', link: '/api-reference/line' },
                     { text: 'Placeholder', link: '/api-reference/placeholder' },
                     { text: 'Charts', link: '/api-reference/charts' },
