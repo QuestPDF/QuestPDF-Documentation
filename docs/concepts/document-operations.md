@@ -288,15 +288,34 @@ DocumentOperation
 
 The `ExtendMetadata` method extends the current document's XMP metadata by adding content within the `rdf:Description` tag. This allows for adding additional descriptive metadata to the PDF, which is useful for compliance standards like PDF/A or for industry-specific metadata (e.g., ZUGFeRD).
 
-```csharp
-var metadata = @"<custom:Metadata xmlns:custom='http://example.com/custom'>
-    <custom:Value>Example metadata</custom:Value>
-</custom:Metadata>";
+::: warning
+Please ensure that the document is PDF/A-3b compliant before extending its metadata.
+:::
 
-var operation = DocumentOperation
-    .LoadFile("input.pdf")
-    .ExtendMetadata(metadata)
-    .Save("with-metadata.pdf");
+```csharp
+var path = "test.pdf";
+
+// step 1: generate a PDF document
+Document
+  .Create(document =>
+  {
+    document.Page(page =>
+    {
+      page.Content().Text("Your invoice content");
+    });
+  })
+  .WithSettings(new DocumentSettings() { PdfA = true }) // important
+  .GeneratePdf(path);
+
+// step 2: extend the metadata of the PDF document
+var metadata = @"<custom:Metadata xmlns:custom='http://example.com/custom'>
+                   <custom:Value>Example metadata</custom:Value>
+                 </custom:Metadata>";
+
+DocumentOperation
+  .LoadFile(path)
+  .ExtendMetadata(metadata)
+  .Save("testWithMeta.pdf");
 ```
 
 ## Advanced Examples
