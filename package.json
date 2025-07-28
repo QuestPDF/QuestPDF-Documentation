@@ -9,7 +9,7 @@
     "markdown-it-imsize": "^2.0.1",
     "sass": "^1.88.0",
     "vitepress": "1.6.3",
-    "vue": "3.5.17"
+    "vue": "3.5.18"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",
