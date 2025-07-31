@@ -101,10 +101,6 @@ const ProfessionalLicense: License = {
       type: LicenseDetailType.Feature,
       content: "Ensures library sustainability"
     },
-    {
-      type: LicenseDetailType.Information,
-      content: "To support ongoing development, the licence price has been increased on 1 July 2025. If it impacts your procurement process, please feel free to contact us."
-    },
   ]
 };
 
