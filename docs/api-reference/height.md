@@ -5,7 +5,7 @@ outline: false
 
 # Height
 
-Use this element to control the veertical size of its content.
+Use this element to control the vertical size of its content.
 
 | Method        | Description                             |
 |---------------|-----------------------------------------|

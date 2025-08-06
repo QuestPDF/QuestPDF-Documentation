@@ -1,6 +1,6 @@
 # Document settings
 
-It is possible to fine-tuning of the document generation process:
+It is possible to fine-tune the document generation process:
 
 ```c#{9-16}
 Document
