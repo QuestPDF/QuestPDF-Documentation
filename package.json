@@ -8,8 +8,8 @@
     "@paddle/paddle-js": "^1.4.2",
     "markdown-it-imsize": "^2.0.1",
     "sass": "^1.88.0",
-    "vitepress": "1.6.3",
-    "vue": "3.5.18"
+    "vitepress": "1.6.4",
+    "vue": "3.5.20"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",
