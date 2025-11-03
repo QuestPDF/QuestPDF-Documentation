@@ -80,3 +80,45 @@ You can adjust the spacing between items individually by adding an empty item wi
 ```
 
 ![example](/api-reference/column-spacing-custom.webp =250x)
+
+
+## Uniform item width
+
+By default, all items in a Column match the width of the widest item.
+This ensures consistent visual alignment, but sometimes it can result in unwanted visual stretching.
+
+To disable this behavior, use the `ShrinkHorizontal` API:
+
+```c#{12}
+.Column(column =>
+{
+    column.Spacing(15);
+    
+    column.Item()
+        .Element(LabelStyle)
+        .Text("REST API");
+    
+    column.Item()
+        .Element(LabelStyle)
+        .Text("Garbage Collection");
+    
+    column.Item()
+        .Element(LabelStyle)
+        .Text("Object-Oriented Programming");
+    
+    // use helper method to apply the same style to all labels
+    static IContainer LabelStyle(IContainer container) => container
+        .ShrinkHorizontal()
+        .Background(Colors.Grey.Lighten3)
+        .CornerRadius(15)
+        .Padding(15);
+});
+```
+
+#### Default behavior (consistent item height)
+
+![example](/api-reference/column-uniform-width-enabled.webp =400x)
+
+#### Effect with ShrinkVertical applied
+
+![example](/api-reference/column-uniform-width-disabled.webp =400x)
