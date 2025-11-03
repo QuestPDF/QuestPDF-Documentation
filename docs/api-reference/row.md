@@ -113,3 +113,41 @@ You can adjust the spacing between items individually by adding an empty Constan
 ```
 
 ![example](/api-reference/row-spacing-custom.webp =250x)
+
+
+## Uniform item height
+
+By default, all items in a Row match the height of the tallest item. 
+This ensures consistent visual alignment, but sometimes it can result in unwanted visual stretching.
+
+To disable this behavior, use the `ShrinkVertical` API:
+
+```c#{15}
+.Row(row =>
+{
+    row.Spacing(15);
+    
+    row.RelativeItem()
+        .Element(LabelStyle)
+        .Text("Programming blends logic and creativity, transforming abstract ideas into working systems. It teaches precision, patience, and the joy of solving problems step by step.");
+    
+    row.RelativeItem()
+        .Element(LabelStyle)
+        .Text("Programming is the craft of turning clear logic into living systems that think and create.");
+    
+    // use helper method to apply the same style to both labels
+    static IContainer LabelStyle(IContainer container) => container
+        .ShrinkVertical()
+        .Background(Colors.Grey.Lighten3)
+        .CornerRadius(15)
+        .Padding(15);
+});
+```
+
+#### Default behavior (consistent item height)
+
+![example](/api-reference/row-uniform-height-disabled.webp =700x)
+
+#### Effect with ShrinkVertical applied
+
+![example](/api-reference/row-uniform-height-enabled.webp =700x)
