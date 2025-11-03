@@ -29,31 +29,38 @@ Here's a complete example showing how to create a ZUGFeRD-compliant PDF document
 
 ```csharp
 Document
-   .Create(document =>
-   {
-       document.Page(page =>
-       {
-           page.Content().Text("Your invoice content");
-       });
-   })
-   .WithSettings(new DocumentSettings { PdfA = true }) // PDF/A-3b
-   .GeneratePdf("invoice.pdf");
+    .Create(document =>
+    {
+        document.Page(page =>
+        {
+            page.Content().Text("Your invoice content");
+        });
+    })
+    .WithMetadata(new DocumentMetadata
+    {
+        Title = "Conformance Test: ZUGFeRD",
+        Author = "SampleCompany",
+        Subject = "ZUGFeRD Test Document",
+        Language = "en-US"
+    })
+    .WithSettings(new DocumentSettings { PdfA = true }) // PDF/A-3b
+    .GeneratePdf("invoice-bbb.pdf");
 
 DocumentOperation
-   .LoadFile("invoice.pdf")
-   .AddAttachment(new DocumentOperation.DocumentAttachment
-   {
-       Key = "factur-zugferd",
-       FilePath = "resource-factur-x.xml",
-       AttachmentName = "factur-x.xml",
-       MimeType = "text/xml",
-       Description = "Factur-X Invoice",
-       Relationship = DocumentOperation.DocumentAttachmentRelationship.Source,
-       CreationDate = DateTime.UtcNow,
-       ModificationDate = DateTime.UtcNow
-   })
-   .ExtendMetadata(File.ReadAllText("resource-zugferd-metadata.xml"))
-   .Save("zugferd-invoice.pdf");
+    .LoadFile("invoice.pdf")
+    .AddAttachment(new DocumentOperation.DocumentAttachment
+    {
+        Key = "factur-zugferd",
+        FilePath = "resource-factur-x.xml",
+        AttachmentName = "factur-x.xml",
+        MimeType = "text/xml",
+        Description = "Factur-X Invoice",
+        Relationship = DocumentOperation.DocumentAttachmentRelationship.Source,
+        CreationDate = DateTime.UtcNow,
+        ModificationDate = DateTime.UtcNow
+    })
+    .ExtendMetadata(File.ReadAllText("resource-zugferd-metadata.xml"))
+    .Save("zugferd-invoice.pdf");
 ```
 
 ::: tip
