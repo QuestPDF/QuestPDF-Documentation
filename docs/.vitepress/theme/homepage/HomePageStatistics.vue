@@ -26,13 +26,13 @@ const statistics = [
         icon: "/homepage/github.svg",
         label: "GitHub stargazers",
         link: "https://github.com/QuestPDF/QuestPDF",
-        value: "13 425 +"
+        value: "13 500 +"
     },
     {
         icon: "/homepage/nuget.svg",
         label: "NuGet package downloads",
         link: "https://www.nuget.org/packages/QuestPDF/",
-        value: "13 100 000 +"
+        value: "13 500 000 +"
     }
 ];
 
