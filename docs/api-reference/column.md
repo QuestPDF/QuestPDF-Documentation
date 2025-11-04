@@ -115,7 +115,7 @@ To disable this behavior, use the `ShrinkHorizontal` API:
 });
 ```
 
-#### Default behavior (consistent item height)
+#### Default behavior (consistent item width)
 
 ![example](/api-reference/column-uniform-width-enabled.webp =400x)
 
