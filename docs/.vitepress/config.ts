@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import imsize_plugin from 'markdown-it-imsize';
+import llmstxt from 'vitepress-plugin-llms'
 
 export default defineConfig({
     lang: 'en-US',
@@ -7,6 +8,10 @@ export default defineConfig({
     description: 'Modern .NET library for PDF document generation',
     base: '/',
     cleanUrls: false,
+
+    vite: {
+      plugins: [llmstxt()]
+    },
 
     head: [
         ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg' }],
