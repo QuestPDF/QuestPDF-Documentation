@@ -16,14 +16,17 @@ This documentation covers ZUGFeRD 2.1, which is based on the UN/CEFACT Cross Ind
 When implementing ZUGFeRD support, ensure you're using the correct version for your needs and that all components (XML schema, metadata, and PDF/A version) align with that version.
 :::
 
-::: warning
-The validation process varies between different tools, with potentially different outcomes.
+::: tip QUALITY ASSURANCE
+The validation process can vary across different tools, often producing different results.
 
-For QuestPDF-generated documents, we specifically use the Adobe Acrobat Pro Preflight tool to validate PDF/A-3b and ZUGFeRD compliance.
+At QuestPDF, as part of our CI/CD pipeline, we use automated document validation with [veraPDF](https://verapdf.org/) (to verify PDF/A-3b compliance) and the [Mustang Project](https://www.mustangproject.org/) (to verify ZUGFeRD compliance).
+Both tools are open-source and free to use.
+
+In addition, we periodically perform manual validation using the Adobe Acrobat Pro Preflight tool to further ensure compliance.
 :::
 
 
-## Creating ZUGFeRD Documents
+## Document Creation
 
 Here's a complete example showing how to create a ZUGFeRD-compliant PDF document:
 
