@@ -521,4 +521,32 @@ This is essential for decorative elements—such as background shapes, ornamenta
 
 Ignoring these elements prevents screen readers from announcing confusing, non-essential content, leading to a much cleaner and more understandable experience for the user.
 
-`public static IContainer SemanticIgnore(this IContainer container)`
+```csharp{17,24}
+Document
+    .Create(document =>
+    {
+        document.Page(page =>
+        {
+            page.Margin(60);
+
+            page.Content()
+                .PaddingVertical(30)
+                .Column(column =>
+                {
+                    column.Spacing(25);
+
+                    column.Item().Text("This photo has semantic meaning:");
+                    
+                    column.Item()
+                        .SemanticImage("A beautiful landscape")
+                        .Image("Resources/photo.jpeg");
+                    
+                    column.Item().Text("While this one doesn't:");
+                    
+                    column.Item()
+                        .SemanticIgnore()
+                        .Image("Resources/decoration-image.jpeg");
+                });
+        });
+    });
+```
