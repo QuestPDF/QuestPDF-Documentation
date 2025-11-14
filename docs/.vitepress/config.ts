@@ -111,6 +111,7 @@ export default defineConfig({
                     { text: 'Prototyping', link: '/concepts/prototyping' },
                     { text: 'Colors', link: '/concepts/colors' },
                     { text: 'Length unit types', link: '/concepts/length-unit-types' },
+                    { text: 'Accessibility <span class="VPBadge tip" style="margin-left: 8px;">alpha</span>', link: '/concepts/accessibility' },
                     {
                         text: 'Code patterns',
                         items: [
@@ -248,7 +249,7 @@ export default defineConfig({
                 items: [
                     { text: 'Custom header on first page', link: '/examples/custom-header-on-first-page' },
                     { text: 'Integration with ASP.NET', link: '/examples/aspnet-integration' },
-                    { text: 'ZUGFeRD <span class="VPBadge tip" style="margin-left: 8px;">new</span>', link: '/examples/zugferd' },
+                    { text: 'ZUGFeRD', link: '/examples/zugferd' },
                 ]
             }
         ],
