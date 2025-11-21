@@ -3183,7 +3183,7 @@ __metadata:
     markdown-it-imsize: ^2.0.1
     sass: ^1.93.3
     vitepress: 1.6.4
-    vitepress-plugin-llms: ^1.9.1
+    vitepress-plugin-llms: ^1.9.3
     vue: 3.5.24
   languageName: unknown
   linkType: soft
@@ -3871,9 +3871,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitepress-plugin-llms@npm:^1.9.1":
-  version: 1.9.1
-  resolution: "vitepress-plugin-llms@npm:1.9.1"
+"vitepress-plugin-llms@npm:^1.9.3":
+  version: 1.9.3
+  resolution: "vitepress-plugin-llms@npm:1.9.3"
   dependencies:
     gray-matter: ^4.0.3
     markdown-it: ^14.1.0
@@ -3889,7 +3889,7 @@ __metadata:
     tokenx: ^1.1.0
     unist-util-remove: ^4.0.0
     unist-util-visit: ^5.0.0
-  checksum: ac76acda9ebd831b7f08fea7ab76beb0b8d4e0ca63a4609b94eda6b100baa08bf3e1f5d154c646acf49b386d40133bc418984b98f8485d262b666295b0420cf6
+  checksum: 49a12c52cb46547e43df30664217c5b959c61b50e7e673712b512292152af07a59875062fac9cfbdb082fbb36d112ead43d74c0eae11b15f7540fb679f71d486
   languageName: node
   linkType: hard
 
