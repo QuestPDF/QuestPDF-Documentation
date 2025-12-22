@@ -30,11 +30,18 @@
 }
 
 .custom-page .card {
-  box-shadow: var(--elevation);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
   background-color: var(--vp-c-bg);
-  border: 1px solid var(--vp-c-gutter);
   border-radius: 24px;
   padding: 32px;
+}
+
+.custom-page .card img {
+  height: 48px;
+}
+
+.custom-page h3 {
+  margin-bottom: 8px;
 }
 
 .custom-page a:hover .card {

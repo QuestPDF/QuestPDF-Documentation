@@ -21,7 +21,7 @@ const standards = [
     </div>
 
     <div class="standard-cards">
-      <div class="standard-card archival">
+      <div class="standard-card light-shadow">
         <div class="card-header">
           <span class="card-label">Archival</span>
           <span class="card-standard">PDF/A</span>
@@ -40,7 +40,7 @@ const standards = [
         </div>
       </div>
 
-      <div class="standard-card accessibility">
+      <div class="standard-card light-shadow">
         <div class="card-header">
           <span class="card-label">Accessibility</span>
           <span class="card-standard">PDF/UA</span>
@@ -85,7 +85,6 @@ loc
 .standard-card {
   padding: 24px;
   background-color: var(--vp-c-bg-alt);
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
   border-radius: 16px;
 
 }

@@ -7,7 +7,7 @@
 
     <div class="features">
 
-      <article class="feature" v-for="feature of features" :key="feature.title">
+      <article class="card" v-for="feature of features" :key="feature.title">
         <img class="icon" :src="feature.icon" alt="" />
         <h3 class="title">{{ feature.title }}</h3>
         <p class="description">{{ feature.description }}</p>
@@ -59,39 +59,6 @@ const features = [
     grid-template-columns: 1fr;
     grid-gap: 64px;
   }
-}
-
-.feature {
-  display: flex;
-  flex-direction: column;
-
-  background-color: var(--vp-c-bg);
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
-  border-radius: 16px;
-  padding: 32px;
-}
-
-.feature img.icon {
-  grid-area: icon;
-
-  justify-self: start;
-  align-self: start;
-  height: 48px;
-  width: 48px;
-}
-
-.feature h3.title {
-  grid-area: title;
-
-  margin-top: 24px;
-  margin-bottom: 8px;
-}
-
-.feature p.description {
-  grid-area: description;
-
-  justify-self: start;
-  align-self: start;
 }
 
 </style>
