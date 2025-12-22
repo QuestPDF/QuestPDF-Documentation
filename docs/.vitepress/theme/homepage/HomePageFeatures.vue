@@ -39,6 +39,16 @@ const features = [
         icon: "homepage/multilingual.svg",
         title: "Advanced Language Support",
         description: "Create multilingual documents with full RTL language support, advanced text shaping, and bi-directional layout handling."
+    },
+    {
+        icon: "homepage/accessibility.svg",
+        title: "Accessibility Compliance",
+        description: "Produce fully accessible, PDF/UA compliant documents with automatic tagging. Ensure your content is inclusive and readable by screen readers and assistive technologies."
+    },
+    {
+        icon: "homepage/compression.svg",
+        title: "Optimized File Size",
+        description: "Drastically reduce file sizes without compromising quality. Benefit from automatic font subsetting, optimal image compression, and efficient file compression."
     }
 ];
 
@@ -48,16 +58,21 @@ const features = [
 
 .features {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 32px;
 
   margin-top: 64px;
 }
 
+@media screen and (max-width: 1100px) {
+  .features {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media screen and (max-width: 700px) {
   .features {
     grid-template-columns: 1fr;
-    grid-gap: 64px;
   }
 }
 
