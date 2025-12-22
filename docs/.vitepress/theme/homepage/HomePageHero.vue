@@ -1,69 +1,39 @@
+<script setup>
+import HomePageHeroImage from "./HomePageHeroImage.vue";
+</script>
 <template>
-  <section class="content gradient">
+  <section class="content">
+    <div class="background-gradient" />
+    <div class="background-grid" />
+
     <div class="content-text">
       <h1>
-        Modern <span class="highlight-foreground">PDF library</span><br>
-        for C# developers
+        <span class="highlight-foreground">Code-first</span> PDF<br> generation library
       </h1>
 
       <div class="tagline">
-        Generate and manipulate PDF documents in your .NET applications<br>
-        using the open-source QuestPDF library and its C# Fluent API.
+        Design PDFs the way you design software - with clean code, instant preview, and predictable layouts.
       </div>
 
       <a class="action primary" style="margin-top: 32px" href="#introduction">Show introduction</a>
-    </div>
 
-    <div class="content-icon">
-      <div class="content-icon-background-static"></div>
-      <div class="content-icon-background-rays"></div>
-
-      <div class="animation-scene">
-        <div class="animation-translate-y">
-          <div class="animation-rotate-y">
-            <div class="animation-rotation-scale">
-              <div ref="page" v-html="pdfPage" id="homepage-hero-pdf"></div>
-            </div>
-          </div>
+      <div class="hero-trust">
+        <div class="trust-item">
+          <img src="/homepage/stargazers-small.svg" width="24" height="24" alt="" />
+          <span><strong>14K</strong> GitHub stars</span>
+        </div>
+        <div class="trust-divider"></div>
+        <div class="trust-item">
+          <img src="/homepage/downloads-small.svg" width="24" height="24" alt="" />
+          <span><strong>15M</strong> NuGet downloads</span>
         </div>
       </div>
     </div>
+
+    <home-page-hero-image />
   </section>
 </template>
 
-<script setup lang="ts">
-
-import {onMounted, ref} from "vue";
-import pdfPage from './pdf-pages.svg?raw';
-
-const page = ref<HTMLElement | null>(null);
-
-async function randomizePdf() {
-  if (page.value == null)
-    return;
-
-  const types = page.value.querySelector("#types");
-  const children = Array.from(types?.children || []) as SVGElement[];
-  children.sort(() => Math.random() - 0.5);
-
-  let currentImageIndex = 0;
-
-  while (true) {
-    for (const child of children)
-      (child as SVGGElement).style.opacity = (child == children[currentImageIndex]) ? 1 : 0;
-
-    currentImageIndex++;
-
-    if (currentImageIndex >= children.length)
-      currentImageIndex = 0;
-
-    await new Promise(resolve => setTimeout(resolve, 3500));
-  }
-}
-
-onMounted(randomizePdf);
-
-</script>
 
 <style scoped>
 
@@ -71,7 +41,7 @@ onMounted(randomizePdf);
 
 .content {
   display: grid;
-  grid-template-columns: 1fr 180px;
+  grid-template-columns: 1fr 400px;
   grid-template-rows: auto;
   grid-template-areas: "text icon";
   grid-gap: 64px;
@@ -111,7 +81,7 @@ onMounted(randomizePdf);
   }
 
   .content-icon {
-    max-width: 120px;
+    max-width: 100px;
     justify-self: center;
   }
 }
@@ -122,23 +92,7 @@ onMounted(randomizePdf);
   }
 }
 
-@media screen and (max-width: 900px) {
-  .tagline br {
-    display: none;
-  }
-}
-
-
 /* Background gradient */
-
-.content-icon-background-static {
-  content: "";
-  position: absolute;
-  width: 150vmax;
-  height: 150vmax;
-  border-radius: 50%;
-  background: radial-gradient(circle farthest-side, #2979ff60, #0098ff40, #00b4ff20, #00ceff10, #00e5ff08, #00e5ff00);
-}
 
 @keyframes content-icon-background-rays-animation {
   0%   { transform: rotate(0deg); }
@@ -151,7 +105,7 @@ onMounted(randomizePdf);
   width: 200vmax;
   height: 200vmax;
   border-radius: 50%;
-  opacity: 0.125;
+  opacity: 0.1;
   background: repeating-conic-gradient(#FFF0 0deg 30deg, #FFFF 30deg 60deg);
   animation: content-icon-background-rays-animation 120s linear infinite;
 }
@@ -167,13 +121,14 @@ html.dark .content-icon-background-rays {
 h1 {
   font-size: 3.5rem !important;
   line-height: 4rem !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
 }
 
 .tagline {
+  max-width: 650px;
   font-size: 1.5rem !important;
   line-height: 2rem !important;
-  color: var(--vp-c-text-1) !important;
+  color: var(--vp-c-text-2) !important;
 }
 
 @media screen and (max-width: 1024px) {
@@ -201,48 +156,85 @@ h1 {
 }
 
 
-/* PDF Animation */
+/* Background */
 
-.animation-scene {
-  perspective: 800px;
+.background-gradient {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(ellipse 75% 100% at 50% 0%, color-mix(in srgb, var(--vp-c-brand-2) 15%, transparent), transparent);
 }
 
-@keyframes animated-pdf-translate-y {
-  0%   { transform: translateY(-16px); }
-  100% { transform: translateY(16px); }
+.background-grid {
+  position: absolute;
+  inset: 0;
+  --grid-thickness: 2px;
+  --grid-color: var(--vp-c-brand-1);
+
+  background-image:
+      linear-gradient(var(--vp-c-brand-3) var(--grid-thickness), transparent var(--grid-thickness)),
+      linear-gradient(90deg, var(--vp-c-brand-3) var(--grid-thickness), transparent var(--grid-thickness));
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 75% 75% at 50% 0%, #0001 25%, transparent 100%);
 }
 
-@keyframes animated-pdf-rotate-y {
-  0%   { transform: rotateY(-24deg); }
-  100% { transform: rotateY(-16deg);  }
+html.dark .background-grid {
+  --grid-thickness: 1px;
+  --grid-color: var(--vp-c-brand-3);
 }
 
-@keyframes animated-pdf-scale {
-  0%   { transform: scale(1); }
-  100% { transform: scale(1.05);  }
+
+/* Trust Indicators */
+
+.hero-trust {
+  display: flex;
+  block-size: min-content;
+  align-items: center;
+  gap: 32px;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid color-mix(in srgb, var(--vp-c-brand-2) 10%, transparent);
+  width: fit-content;
+
+  --icon-color: var(--vp-c-brand-3);
 }
 
-.animation-translate-y {
-  transform-style: preserve-3d;
-  animation: animated-pdf-translate-y 7s ease-in-out infinite alternate;
+@media screen and (max-width: 768px) {
+  .hero-trust {
+    width: initial;
+  }
 }
 
-.animation-rotate-y {
-  transform-style: preserve-3d;
-  animation: animated-pdf-rotate-y 11s ease-in-out infinite alternate;
+html.dark .hero-trust {
+  --icon-color: var(--vp-c-brand-1);
 }
 
-.animation-rotation-scale {
-  transform-style: preserve-3d;
-  animation: animated-pdf-scale 19s ease-in-out infinite alternate;
+@media screen and (max-width: 600px) {
+  .hero-trust {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .trust-divider {
+    display: none;
+  }
 }
 
-#homepage-hero-pdf {
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+  color: var(--hp-text-muted);
 }
 
-html.dark #homepage-hero-pdf {
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+.trust-item svg {
+  color: var(--icon-color);
+  flex-shrink: 0;
+}
+
+.trust-item strong {
+  color: var(--vp-c-text-1);
+  font-weight: 700;
 }
 
 </style>

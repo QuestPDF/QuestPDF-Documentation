@@ -1,13 +1,15 @@
 <template>
   <section class="content">
     <div class="details">
+      <div class="section-tag">Development Tool</div>
+
       <h2>Companion App</h2>
 
-      <p class="sub-header">Accelerate your development with live document preview powered by the hot-reload capability, eliminating the need for C# code recompilation.</p>
+      <p class="sub-header">Accelerate development with live document preview and hot-reload capability. See your changes instantly without recompiling.</p>
 
       <div class="summary-list">
         <article v-for="summary of SummaryContent" class="summary-item">
-          <img src="/homepage/tick.svg" width="20" alt="" />
+          <img src="/homepage/square-check.svg" width="24" alt="" />
           <p>{{ summary }}</p>
         </article>
       </div>

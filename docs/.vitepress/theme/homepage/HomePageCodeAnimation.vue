@@ -2,6 +2,7 @@
 import {onMounted, onUnmounted, ref, watch} from "vue";
 import {useData} from "vitepress";
 import createCodeHighlighter from "./createCodeHighlighter";
+import HomePageCodeContainer from "./HomePageCodeContainer.vue";
 
 const code = ref('');
 const highlightedLines = ref<{start: number; end: number} | null>(null);
@@ -257,7 +258,7 @@ onUnmounted(() => observer.value?.disconnect());
     </p>
 
     <div class="animation-container">
-      <div class="code-container" v-html="highlightedCode"></div>
+      <home-page-code-container file-name="HelloWorld.cs" :highlighted-code="highlightedCode" />
 
       <img :src="'/homepage/quick-start-animation/step' + imageIndex + '.webp'" />
     </div>

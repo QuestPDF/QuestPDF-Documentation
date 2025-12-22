@@ -3,6 +3,7 @@ import {onMounted, ref, watch} from "vue";
 import {useData} from "vitepress";
 import documentOperationCode from './documentOperationCodeExample.cs?raw';
 import createCodeHighlighter from "./createCodeHighlighter";
+import HomePageCodeContainer from "./HomePageCodeContainer.vue";
 
 const { isDark } = useData()
 const highlightedCode = ref('');
@@ -37,11 +38,11 @@ const SummaryContent = [
     <div class="description">
       <h2>Perform common PDF operations</h2>
 
-      <p class="sub-header">Leverage a powerful C# Fluent API to create, customize, and manage your PDF documents with ease.</p>
+      <p class="sub-header">Go beyond generation. Merge, encrypt, extract, and manipulate existing PDF documents with a powerful fluent C# API.</p>
 
       <div class="summary-list">
         <article v-for="summary of SummaryContent" class="summary-item">
-          <img src="/homepage/tick.svg" width="20" alt="" />
+          <img src="/homepage/square-check.svg" width="24" alt="" />
           <p>{{ summary }}</p>
         </article>
       </div>
@@ -49,7 +50,7 @@ const SummaryContent = [
       <a class="action" href="/concepts/document-operations">Read more</a>
     </div>
 
-    <div class="code-container" v-html="highlightedCode"></div>
+    <home-page-code-container file-name="DocumentOperation.cs" :highlighted-code="highlightedCode" />
   </section>
 </template>
 

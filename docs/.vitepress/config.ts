@@ -14,14 +14,14 @@ export default defineConfig({
     },
 
     head: [
-        ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg' }],
+        ['link', { rel: 'icon', href: '/logo.webp', type: 'image/webp' }],
         ['meta', { name: "title", content: "C# PDF Generation Library | QuestPDF for .NET" }],
         ['meta', { name: "description", content: "Generate and edit PDF documents in your .NET applications using the QuestPDF library and its C# Fluent API. Build invoices, reports and data exports with ease." }],
         ['meta', { name: "keywords", content: "PDF, C#, csharp, dotnet, .NET, aspnet, ASP.NET, QuestPDF, open-source, foss, nuget, nuget package, C# PDF library, .NET PDF generation, ASP.NET PDF generation, PDF report generator, reporting tool for .NET, hot reload, Companion App, export to PDF, generate PDF in C#, create PDF from HTML, html to pdf, html2pdf, dynamic PDF generation, open-source PDF toolkit, PDF rendering library .NET, c# high-performance PDF generation, c# commercial PDF library, free PDF generator for .NET" }],
     ],
 
     themeConfig: {
-        logo: '/logo.svg',
+        logo: '/logo.webp',
         search: {
             provider: 'local',
             options: {

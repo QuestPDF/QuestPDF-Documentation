@@ -1,6 +1,9 @@
 <template>
   <section class="content">
-    <h2>Trusted by the .NET Community</h2>
+    <div class="section-header">
+      <h2>Trusted by the .NET Community</h2>
+      <p class="sub-header">Join thousands of developers and companies building PDF solutions with QuestPDF</p>
+    </div>
 
     <div class="statistics">
       <template v-for="statistic in statistics" :key="statistic.label">
@@ -32,7 +35,19 @@ const statistics = [
         icon: "/homepage/nuget.svg",
         label: "NuGet package downloads",
         link: "https://www.nuget.org/packages/QuestPDF/",
-        value: "14 500 000 +"
+        value: "14 800 000 +"
+    },
+    {
+      icon: "/homepage/nuget.svg",
+      label: "Updates released",
+      link: "https://www.nuget.org/packages/QuestPDF/",
+      value: "110 +"
+    },
+    {
+      icon: "/homepage/nuget.svg",
+      label: "Quality tests",
+      link: "https://www.nuget.org/packages/QuestPDF/",
+      value: "1 200 +"
     }
 ];
 
@@ -48,10 +63,11 @@ const statistics = [
 }
 
 .statistics {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
   flex-direction: row;
   justify-content: center;
-  gap: 128px;
 }
 
 @media screen and (max-width: 750px) {
@@ -67,11 +83,15 @@ const statistics = [
   flex-direction: row;
   justify-items: center;
   gap: 24px;
+
+  border: 1px solid #8882;
+  border-radius: 12px;
+  padding: 24px;
 }
 
 .statistic img.icon {
-  height: 64px;
-  width: 64px;
+  height: 48px;
+  width: 48px;
 }
 
 .statistic .title {
@@ -88,7 +108,7 @@ const statistics = [
 
   font-family: var(--vp-font-family-base);
   color: var(--vp-c-text-1);
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 600;
 }
 
@@ -107,7 +127,7 @@ const statistics = [
   }
 
   .statistic span.value {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
 }
 

@@ -1,6 +1,9 @@
 <template>
   <section class="content">
-    <h2>Exactly what you need</h2>
+    <div class="section-header">
+      <h2>Everything you need to generate PDFs</h2>
+      <p class="sub-header">A comprehensive toolkit designed for professional PDF document generation in .NET applications</p>
+    </div>
 
     <div class="features">
 
@@ -20,22 +23,22 @@ const features = [
     {
         icon: "homepage/engine.svg",
         title: "Comprehensive Layout Engine",
-        description: "A powerful layout engine built specifically for PDF generation. Gain full control over document structure, precise content positioning, and automatic pagination for complex reports and invoices."
+        description: "A powerful layout engine built specifically for PDF generation. Gain full control over document structure, precise content positioning, and automatic pagination."
     },
     {
         icon: "homepage/puzzle.svg",
         title: "Rich Toolkit",
-        description: "Accelerate your PDF development workflow with a rich set of reusable components and over 50 layout elements. Easily implement data-driven documents using a Fluent C# API."
+        description: "Accelerate development with 50+ layout elements and reusable components. Easily implement data-driven documents using a fluent C# API."
     },
     {
         icon: "homepage/performance.svg",
         title: "High Performance",
-        description: "Generate PDF files at scale with up to thousands of pages per second - while maintaining minimal CPU and memory usage. Perfect for high-throughput .NET applications."
+        description: "Generate thousands of pages per second while maintaining minimal CPU and memory usage. Perfect for high-throughput enterprise applications."
     },
     {
         icon: "homepage/multilingual.svg",
         title: "Advanced Language Support",
-        description: "Create multilingual PDF documents with full support for right-to-left (RTL) languages, advanced text shaping, and bi-directional layout handling."
+        description: "Create multilingual documents with full RTL language support, advanced text shaping, and bi-directional layout handling."
     }
 ];
 
@@ -46,7 +49,7 @@ const features = [
 .features {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 96px;
+  grid-gap: 32px;
 
   margin-top: 64px;
 }
@@ -59,25 +62,13 @@ const features = [
 }
 
 .feature {
-  display: grid;
-  grid-template-areas:
-      "icon title"
-      "icon description";
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr;
-  grid-gap: 8px 24px;
-}
+  display: flex;
+  flex-direction: column;
 
-@media screen and (max-width: 1000px) {
-  .feature {
-    grid-template-areas:
-      "icon"
-      "title"
-      "description";
-    grid-template-columns: auto;
-    grid-template-rows: auto auto auto;
-    grid-gap: 12px 0;
-  }
+  background-color: var(--vp-c-bg);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  border-radius: 16px;
+  padding: 32px;
 }
 
 .feature img.icon {
@@ -92,7 +83,8 @@ const features = [
 .feature h3.title {
   grid-area: title;
 
-  margin: 0;
+  margin-top: 24px;
+  margin-bottom: 8px;
 }
 
 .feature p.description {

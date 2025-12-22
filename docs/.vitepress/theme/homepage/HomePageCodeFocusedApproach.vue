@@ -3,6 +3,7 @@ import createCodeHighlighter from './createCodeHighlighter'
 import {onMounted, ref, watch} from "vue";
 import {useData} from "vitepress";
 import codeOrganization from './organizationCodeExample.cs?raw';
+import HomePageCodeContainer from "./HomePageCodeContainer.vue";
 
 const { isDark } = useData()
 const highlightedCode = ref('');
@@ -33,18 +34,18 @@ onMounted(highlightCode);
 const features = [
   {
     icon: "homepage/layers.svg",
-    title: "Modular and Maintainable C# Code",
-    description: "Implement modular PDF layouts with reusable well-organized classes and methods. Refactor safely with IntelliSense - your logic stays seamlessly integrated with your domain code."
+    title: "Modular & Maintainable",
+    description: "Build PDF layouts with reusable, well-organized classes and methods. Refactor safely with full IntelliSense support."
   },
   {
     icon: "homepage/csharp.svg",
-    title: "Familiar Programming Concepts",
-    description: "Use conditions, loops, LINQ, and extension methods to effortlessly generate dynamic, data-driven PDF documents tailored to your unique business needs."
+    title: "Familiar Concepts",
+    description: "Use conditions, loops, iterables and local functions to create dynamic, data-driven documents."
   },
   {
     icon: "homepage/git.svg",
     title: "Git-Friendly Workflow",
-    description: "Enjoy straightforward C# code reviews, meaningful pull-request diffs, and cleaner version control histories."
+    description: "Enjoy clean code reviews, meaningful diffs, and straightforward version control."
   }
 ];
 
@@ -52,18 +53,22 @@ const features = [
 
 <template>
   <section class="content">
-    <h2>Code-Focused Paradigm</h2>
-
     <div class="container">
-      <div class="features">
-        <article class="feature" v-for="feature of features" :key="feature.title">
-          <img class="icon" :src="feature.icon" alt="" />
-          <h3 class="title">{{ feature.title }}</h3>
-          <p class="description">{{ feature.description }}</p>
-        </article>
+      <div>
+        <h2>Code-First Approach</h2>
+
+        <p class="sub-header">Write PDF layouts as clean, readable C# code. No XML templates, no designers — just the programming patterns you already know.</p>
+
+        <div class="features">
+          <article class="feature" v-for="feature of features" :key="feature.title">
+            <img class="icon" :src="feature.icon" alt="" />
+            <h3 class="title">{{ feature.title }}</h3>
+            <p class="description">{{ feature.description }}</p>
+          </article>
+        </div>
       </div>
 
-      <div class="code-container" v-html="highlightedCode"></div>
+      <home-page-code-container file-name="Example.cs" :highlighted-code="highlightedCode" />
     </div>
   </section>
 </template>
@@ -73,7 +78,7 @@ const features = [
 .container {
   display: grid;
   grid-template-columns: 1fr auto;
-  grid-gap: 64px;
+  grid-gap: 96px;
   align-content: stretch;
   margin-top: 64px;
 }
@@ -90,13 +95,14 @@ const features = [
 .features {
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 48px;
+  margin-top: 48px;
 }
 
 @media screen and (max-width: 700px) {
   .features {
     grid-template-columns: 1fr;
-    grid-gap: 64px;
+    grid-gap: 48px;
   }
 }
 
