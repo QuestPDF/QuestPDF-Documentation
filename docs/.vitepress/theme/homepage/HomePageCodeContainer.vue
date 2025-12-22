@@ -56,15 +56,15 @@ const props = defineProps<{
 
 .code-container:hover {
   .dot.red {
-    background-color: #F44336;
+    background-color: #F44336CC;
   }
 
   .dot.yellow {
-    background-color: #FFC107;
+    background-color: #FFC107CC;
   }
 
   .dot.green {
-    background-color: #4CAF50;
+    background-color: #4CAF50CC;
   }
 }
 

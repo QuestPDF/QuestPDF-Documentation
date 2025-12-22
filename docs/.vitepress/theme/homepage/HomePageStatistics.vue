@@ -2,7 +2,7 @@
   <section class="content">
     <div class="section-header">
       <h2>Trusted by the .NET Community</h2>
-      <p class="sub-header">Join thousands of developers and companies building PDF solutions with QuestPDF</p>
+      <p class="sub-header">Join thousands of developers and organizations worldwide building PDF solutions with QuestPDF</p>
     </div>
 
     <div class="statistics">
@@ -29,25 +29,13 @@ const statistics = [
         icon: "/homepage/github.svg",
         label: "GitHub stargazers",
         link: "https://github.com/QuestPDF/QuestPDF",
-        value: "13 575 +"
+        value: "13 650 +"
     },
     {
         icon: "/homepage/nuget.svg",
         label: "NuGet package downloads",
         link: "https://www.nuget.org/packages/QuestPDF/",
-        value: "14 800 000 +"
-    },
-    {
-      icon: "/homepage/nuget.svg",
-      label: "Updates released",
-      link: "https://www.nuget.org/packages/QuestPDF/",
-      value: "110 +"
-    },
-    {
-      icon: "/homepage/nuget.svg",
-      label: "Quality tests",
-      link: "https://www.nuget.org/packages/QuestPDF/",
-      value: "1 200 +"
+        value: "15 000 000 +"
     }
 ];
 

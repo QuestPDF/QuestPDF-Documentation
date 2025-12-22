@@ -18,7 +18,7 @@
     </div>
 
     <ClientOnly>
-      <img :src="`/companion/application-${mode}.png`" alt="Companion App" />
+      <img :src="`/companion/application-${mode}.png`" alt="Companion App" class="companion-image" />
     </ClientOnly>
   </section>
 </template>
@@ -57,9 +57,9 @@ const SummaryContent = [
   }
 }
 
-img {
+.companion-image {
   border-radius: 8px;
-  border: 1px solid #8886;
+  border: 1px solid #8884;
   filter: drop-shadow(0 16px 16px rgba(0,  0, 0, 0.1));
 }
 
