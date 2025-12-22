@@ -58,6 +58,8 @@ const SummaryContent = [
 }
 
 img {
+  border-radius: 8px;
+  border: 1px solid #8886;
   filter: drop-shadow(0 16px 16px rgba(0,  0, 0, 0.1));
 }
 
