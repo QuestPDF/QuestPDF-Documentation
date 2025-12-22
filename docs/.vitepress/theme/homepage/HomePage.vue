@@ -40,6 +40,10 @@
       <HomePageLicense />
     </div>
 
+    <div class="container reverse-background reveal-animation" style="padding: 128px;">
+      Section about data safety
+    </div>
+
     <div class="container footer-container reveal-animation">
       <HomePageGettingStarted />
     </div>

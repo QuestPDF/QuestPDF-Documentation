@@ -86,4 +86,8 @@ const contacts: ContactInformation[] = [
   margin-bottom: 20px;
 }
 
+.content {
+  min-height: calc(100vh - var(--vp-nav-height) - 110px);
+}
+
 </style>

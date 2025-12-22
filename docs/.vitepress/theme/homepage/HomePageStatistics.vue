@@ -60,9 +60,10 @@ const statistics = [
 
 @media screen and (max-width: 750px) {
   .statistics {
+    display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 64px;
+    gap: 32px;
   }
 }
 
