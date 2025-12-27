@@ -36,12 +36,8 @@
       <HomePageStandardCompliance />
     </div>
 
-    <div class="container reverse-background reveal-animation" style="padding: 128px;">
+    <div class="container reverse-background reveal-animation">
       <HomePageLicense />
-    </div>
-
-    <div class="container reverse-background reveal-animation" style="padding: 128px;">
-      Section about data safety
     </div>
 
     <div class="container footer-container reveal-animation">
@@ -68,12 +64,18 @@ import HomePageStandardCompliance from "./HomePageStandardCompliance.vue";
 /* Reveal animation */
 
 onMounted(() => {
-    const intersectionObserver = new IntersectionObserver((entries) => {
+    const observerOptions = {
+      threshold: 0.33
+    }
+
+    function onSectionVisible(entries) {
         for (let entry of entries.filter(x => x.isIntersecting)) {
             entry.target.classList.add('is-visible');
             intersectionObserver.unobserve(entry.target);
         }
-    });
+    }
+
+    const intersectionObserver = new IntersectionObserver(onSectionVisible, observerOptions);
 
     const observableElements = document.querySelectorAll('.reveal-animation > *');
     observableElements.forEach(x => intersectionObserver.observe(x));
@@ -128,26 +130,13 @@ onMounted(() => {
   opacity: 0;
   transform: translateY(16px) scale(0.95);
 
-  transition: opacity 0.75s ease-out, transform 0.75s ease-out;
-  transition-delay: 0.25s;
+  transition: opacity 250ms ease-out, transform 250ms ease-out;
   will-change: opacity, transform;
 }
 
 .reveal-animation > *.is-visible {
   opacity: 1;
   transform: translateY(0) scale(1);
-}
-
-.action.primary {
-  border-radius: 12px;
-  border-width: 1px;
-
-  background-color: transparent;
-  filter: drop-shadow(0 4px 12px rgba(14, 165, 233, 0.25));
-
-  color: #ffffff;
-  background: var(--hp-accent-gradient);
-  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.2);
 }
 
 .section-tag {

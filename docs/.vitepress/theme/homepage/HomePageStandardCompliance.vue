@@ -86,7 +86,7 @@ loc
   padding: 24px;
   background-color: var(--vp-c-bg-alt);
   border-radius: 16px;
-
+  border: 1px solid #8882;
 }
 
 .card-header {

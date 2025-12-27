@@ -65,7 +65,7 @@ const platforms = [
   gap: 12px;
 
   border: 1px solid #8882;
-  border-radius: 14px;
+  border-radius: 12px;
 
   padding: 16px;
   align-content: center;
