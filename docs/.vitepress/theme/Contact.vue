@@ -77,6 +77,10 @@ const contacts: ContactInformation[] = [
   }
 }
 
+img {
+  height: 48px;
+}
+
 .business-details p:not(:last-child) {
   margin-bottom: 8px;
 }

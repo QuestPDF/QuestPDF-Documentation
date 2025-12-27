@@ -1,5 +1,4 @@
 .custom-page > .container {
-  /*border-top: 1px solid var(--vp-c-gutter);*/
   background-color: var(--vp-c-bg);
 }
 
@@ -31,12 +30,13 @@
 
 .custom-page .card {
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  border: 1px solid #8882;
   background-color: var(--vp-c-bg);
   border-radius: 24px;
   padding: 32px;
 }
 
-.custom-page .card img {
+.custom-page .card img.icon {
   height: 48px;
 }
 
@@ -49,9 +49,10 @@
 }
 
 .custom-page .card hr {
-  margin: 32px -32px;
-  border: 0.5px solid var(--vp-c-gutter);
-  width: calc(100% + 64px);
+  margin: 32px 0;
+  border: none;
+  border-top: 1px solid var(--vp-c-gutter);
+  width: 100%
 }
 
 @media screen and (max-width: 700px) {
@@ -60,9 +61,7 @@
   }
 
   .custom-page .card hr {
-    margin: 24px -24px;
-    border: 0.5px solid var(--vp-c-gutter);
-    width: calc(100% + 48px);
+    border: 1px solid var(--vp-c-gutter);
   }
 }
 
@@ -88,7 +87,7 @@
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.5rem;
-  margin: 18px 0 4px 0;
+  margin: 24px 0 8px 0;
 }
 
 .custom-page p, .custom-page ul {
@@ -107,7 +106,7 @@
 
 .custom-page .section-header {
   text-align: center;
-  max-width: 640px;
+  max-width: 650px;
   margin: 0 auto;
 }
 
