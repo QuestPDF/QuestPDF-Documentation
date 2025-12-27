@@ -1,12 +1,9 @@
 <template>
   <article class="content license-header">
-    <div>
-      <h1><span class="highlight-foreground">QuestPDF</span> License and Pricing</h1>
+    <h1><span class="highlight-foreground">QuestPDF</span> License and Pricing</h1>
 
-      <p class="sub-header" style="max-width: 700px">By offering free access to most users and premium licenses for larger organizations, the project maintains its commitment to excellence while ensuring sustainable, long-term development for all.</p>
-    </div>
-
-    <img src="/license/header.svg" alt="" class="license-icon" />
+    <p class="sub-header">QuestPDF is free for individual developers, open-source projects, and small organizations.
+      Commercial licenses are available for teams and companies that require long-term stability, compliance, and professional support.</p>
   </article>
 </template>
 
@@ -17,10 +14,14 @@
 <style scoped>
 
 .license-header {
-  display: grid;
-  grid-template-columns: auto auto;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  grid-gap: 128px;
+}
+
+.license-header .sub-header {
+  text-align: center;
+  max-width: 720px;
 }
 
 .license-icon {
