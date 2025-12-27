@@ -1,8 +1,9 @@
 <script setup>
 const SummaryContent = [
-    "Long-term and sustainable development",
-    "Regular feature, performance, quality and security updates",
-    "Active community and enterprise support"
+  "Actively maintained with regular feature, quality, and security updates.",
+  "Full source code available on GitHub",
+  "All features included in every tier without restrictions",
+  "Predictable pricing: no per-seat, per-server, or usage fees"
 ]
 </script>
 
@@ -11,36 +12,31 @@ const SummaryContent = [
 
     <img src="/homepage/license.svg" class="license-icon" alt="Example invoice document implemented and generated with QuestPDF using C# language." />
 
-    <div class="description">
-      <h2>Fair and Sustainable License</h2>
-
-      <p class="sub-header">By offering free access to most users and premium licenses for larger organizations, the project maintains its commitment to excellence:</p>
+      <div class="section-header">
+        <h2>Fair and Sustainable License</h2>
+        <p class="sub-header">A model that benefits everyone. Commercial licensing provides businesses with legal safety and long-term stability, while funding a feature-complete, unrestricted library for the open-source community.</p>
+      </div>
 
       <div class="summary-list">
         <article v-for="summary of SummaryContent" class="summary-item">
-          <img src="/homepage/tick-license.svg" width="20" alt="" />
+          <img src="/homepage/square-check-license.svg" width="24" alt="" />
           <p>{{ summary }}</p>
         </article>
       </div>
 
       <div class="license-warning">
-        Free for individuals, non-profits, and businesses under $1M in annual revenue, as well as all FOSS projects.
+        Free for individuals, non-profits, all FOSS projects, and organizations under $1M in annual revenue.
       </div>
 
-      <a class="action license" href="/license">Check Pricing</a>
-    </div>
+      <div style="display: flex; flex-direction: row; gap: 16px; justify-content: center">
+        <a class="action pricing" href="/license">View Pricing</a>
+        <a class="action license" href="/license/guide">License terms</a>
+      </div>
 
   </section>
 </template>
 
 <style scoped>
-  .content {
-    max-width: 800px !important;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-gap: 64px;
-    justify-items: start;
-  }
 
   .description {
     place-self: center;
@@ -51,7 +47,8 @@ const SummaryContent = [
 
   .license-icon {
     place-self: center;
-    width: 128px;
+    width: 64px;
+    margin-bottom: 32px;
   }
 
   .license-warning {
@@ -60,6 +57,9 @@ const SummaryContent = [
     color: var(--vp-custom-block-warning-text);
     background-color: #67B84D33;
     margin-top: 1.25rem;
+
+    max-width: 500px;
+    place-self: center;
   }
 
   .action {
@@ -84,6 +84,8 @@ const SummaryContent = [
     display: flex;
     flex-direction: column;
     gap: 16px;
+    place-self: center;
+    margin: 32px 0;
   }
 
   .summary-item {
@@ -97,21 +99,21 @@ const SummaryContent = [
 
   /* License button */
 
-  .action.license {
+  .action.pricing {
     background-color: #66BB6A;
     color: var(--vp-button-brand-text);
     font-weight: bold;
   }
 
-  .action.license:hover {
+  .action.pricing:hover {
     background-color: #4CAF50;
   }
 
-  html.dark .action.license {
+  html.dark .action.pricing {
     background-color: #4CAF50;
   }
 
-  html.dark .action.license:hover {
+  html.dark .action.pricing:hover {
     background-color: #66BB6A;
   }
 </style>
