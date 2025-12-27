@@ -41,9 +41,9 @@ const features = [
         description: "Create multilingual documents with full RTL language support, advanced text shaping, and bi-directional layout handling."
     },
     {
-        icon: "homepage/accessibility.svg",
-        title: "Accessibility Compliance",
-        description: "Produce fully accessible, PDF/UA compliant documents with automatic tagging. Ensure your content is inclusive and readable by screen readers and assistive technologies."
+        icon: "homepage/protect-data.svg",
+        title: "Complete Data Privacy",
+        description: "QuestPDF runs entirely within your infrastructure with no external API calls, internet requirement, or background data collection. As a company, we do not access, collect, store, or process your private data.",
     },
     {
         icon: "homepage/compression.svg",
