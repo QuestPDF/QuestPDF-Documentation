@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import createCodeHighlighter from './createCodeHighlighter'
-import {onMounted, ref, watch} from "vue";
-import {useData} from "vitepress";
+import {computed, onMounted, ref, watch} from "vue";
 
 import modularCode from './codeExamples/modularCode.cs?raw';
 import familiarConcepts from './codeExamples/familiarConcepts.cs?raw';
@@ -9,7 +7,7 @@ import gitFriendlyWorkflow from './codeExamples/gitFriendlyWorkflow.cs?raw';
 import typesafeDevelopment from './codeExamples/typesafeDevelopment.cs?raw';
 
 import HomePageCodeContainer from "./HomePageCodeContainer.vue";
-import {ShikiTransformerContext} from "@shikijs/types";
+import {ShikiTransformer} from "@shikijs/types";
 
 interface Feature {
   id: string;
@@ -18,7 +16,7 @@ interface Feature {
   description: string;
   code: string;
   fileName: string;
-  lineTransformer: (context: ShikiTransformerContext, node: Element, line: number) => void;
+  codeTransformer: ShikiTransformer | null;
 }
 
 const features : Feature[] = [
@@ -29,12 +27,14 @@ const features : Feature[] = [
     description: "Extract common elements into methods. Compose complex layouts from simple, testable building blocks.",
     code: modularCode,
     fileName: 'Header.cs',
-    lineTransformer(context: ShikiTransformerContext, node: Element, line: number) {
-      if (line == 2)
-        context.addClassToHast(node, 'line-removed')
+    codeTransformer: {
+      line(node, line) {
+        if (line == 2)
+          this.addClassToHast(node, 'line-removed')
 
-      if (line == 4)
-        context.addClassToHast(node, 'line-added')
+        if (line == 4)
+          this.addClassToHast(node, 'line-added')
+      }
     }
   },
   {
@@ -44,9 +44,7 @@ const features : Feature[] = [
     description: "Use loops, conditions, and LINQ to generate data-driven documents. No templating language to learn.",
     code: familiarConcepts,
     fileName: 'Table.cs',
-    lineTransformer(context: ShikiTransformerContext, node: Element, line: number) {
-
-    }
+    codeTransformer: null
   },
   {
     id: 'vcs',
@@ -55,9 +53,7 @@ const features : Feature[] = [
     description: "Review changes with meaningful diffs. Track document evolution alongside your application code.",
     code: gitFriendlyWorkflow,
     fileName: 'Item.cs',
-    lineTransformer(context: ShikiTransformerContext, node: Element, line: number) {
-
-    }
+    codeTransformer: null
   },
   // {
   //   id: 'typesafe',
@@ -83,31 +79,14 @@ const features : Feature[] = [
   // }
 ];
 
-const { isDark } = useData()
-const highlightedCode = ref('');
-
 const currentFeatureId = ref<string>(features[0].id);
 
 const codeBlock = ref<HTMLElement>();
 const featureCards = ref<HTMLElement[]>();
 
-async function highlightCode() {
-  const currentFeature = features.find(feature => feature.id === currentFeatureId.value);
 
-  const codeHighlighter = await createCodeHighlighter();
+const currentFeature = computed(() => features.find(feature => feature.id === currentFeatureId.value));
 
-  highlightedCode.value = codeHighlighter.codeToHtml(currentFeature.code, {
-    lang: 'csharp',
-    theme: isDark.value ? 'dark-plus' :'light-plus',
-    transformers: [
-      {
-        line(node, line) {
-          currentFeature.lineTransformer(this, node, line);
-        }
-      }
-    ]
-  })
-}
 
 function updateActiveCard() {
   const codeBlockRect = codeBlock.value.getBoundingClientRect();
@@ -132,10 +111,6 @@ function updateActiveCard() {
 }
 
 document.addEventListener('scroll', () => requestAnimationFrame(updateActiveCard));
-
-watch(currentFeatureId, highlightCode);
-watch(isDark, highlightCode);
-onMounted(highlightCode);
 
 </script>
 
@@ -162,7 +137,7 @@ onMounted(highlightCode);
       </div>
 
       <div ref="codeBlock" style="position: sticky; top: 200px; height: fit-content;">
-        <home-page-code-container file-name="Example.cs" :highlighted-code="highlightedCode" />
+        <home-page-code-container v-if="currentFeature" file-name="Example.cs" :code="currentFeature.code" :code-transformer="currentFeature.codeTransformer" />
       </div>
     </div>
   </section>

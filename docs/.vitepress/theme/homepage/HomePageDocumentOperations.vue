@@ -1,24 +1,6 @@
 <script setup lang="ts">
-import {onMounted, ref, watch} from "vue";
-import {useData} from "vitepress";
 import documentOperationCode from './documentOperationCodeExample.cs?raw';
-import createCodeHighlighter from "./createCodeHighlighter";
 import HomePageCodeContainer from "./HomePageCodeContainer.vue";
-
-const { isDark } = useData()
-const highlightedCode = ref('');
-
-async function highlightCode() {
-  const codeHighlighter = await createCodeHighlighter();
-
-    highlightedCode.value =  codeHighlighter.codeToHtml(documentOperationCode, {
-        lang: 'csharp',
-        theme: isDark.value ? 'dark-plus' :'light-plus'
-    })
-}
-
-watch(isDark, highlightCode);
-onMounted(highlightCode);
 
 const SummaryContent = [
     "Merge documents",
@@ -50,7 +32,7 @@ const SummaryContent = [
       <a class="action" href="/concepts/document-operations">Read more</a>
     </div>
 
-    <home-page-code-container file-name="DocumentOperation.cs" :highlighted-code="highlightedCode" />
+    <home-page-code-container file-name="DocumentOperation.cs" :code="documentOperationCode" />
   </section>
 </template>
 

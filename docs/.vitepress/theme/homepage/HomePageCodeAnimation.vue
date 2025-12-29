@@ -1,28 +1,12 @@
 <script setup lang="ts">
-import {onMounted, onUnmounted, ref, watch} from "vue";
+import {computed, onMounted, onUnmounted, ref, watch} from "vue";
 import {useData} from "vitepress";
 import createCodeHighlighter from "./createCodeHighlighter";
 import HomePageCodeContainer from "./HomePageCodeContainer.vue";
-import helloWorldExample from './helloWorldExample.cs?raw';
 import HomePageWindowContainer from "./HomePageWindowContainer.vue";
+import {ShikiTransformer} from "@shikijs/types";
 
 const { isDark } = useData();
-
-
-const highlightedHelloWorldCode = ref('');
-
-async function highlightHelloWorldCode() {
-  const codeHighlighter = await createCodeHighlighter();
-
-  highlightedHelloWorldCode.value =  codeHighlighter.codeToHtml(helloWorldExample, {
-    lang: 'csharp',
-    theme: isDark.value ? 'dark-plus' :'light-plus'
-  })
-}
-
-watch(isDark, highlightHelloWorldCode);
-onMounted(highlightHelloWorldCode);
-
 
 const showAnimation = ref(false);
 
@@ -33,7 +17,6 @@ function playAnimation() {
 
 const code = ref('');
 const highlightedLines = ref<{start: number; end: number} | null>(null);
-const highlightedCode = ref('');
 
 const tutorialStepNumber = ref(1);
 const imageIndex = ref(1);
@@ -44,32 +27,16 @@ const title = ref("");
 
 /* Code highlighting */
 
-async function refreshHighlightedCode() {
-  const codeHighlighter = await createCodeHighlighter();
+const codeTransformer = computed<ShikiTransformer>(() => {
+  return {
+    line(node, line) {
+      node.properties['data-line'] = line
 
-    highlightedCode.value = codeHighlighter.codeToHtml(code.value, {
-        lang: 'csharp',
-        theme: isDark.value ? 'dark-plus' : 'light-plus',
-        transformers: [
-          {
-            line(node, line) {
-              node.properties['data-line'] = line
-
-              if (highlightedLines.value && line >= highlightedLines.value.start && line <= highlightedLines.value.end)
-                this.addClassToHast(node, 'line-highlighted')
-            }
-          }
-        ]
-    })
-}
-
-watch(code, refreshHighlightedCode)
-watch(isDark, refreshHighlightedCode)
-
-onMounted(() => {
-  resetAnimation();
-  refreshHighlightedCode();
-});
+      if (highlightedLines.value && line >= highlightedLines.value.start && line <= highlightedLines.value.end)
+        this.addClassToHast(node, 'line-highlighted')
+    }
+  };
+})
 
 
 /* Animation engine */
@@ -252,7 +219,6 @@ async function animate() {
   await appendTextInLine(19, "\t\t\t\t\tcolumn.Spacing(8);");
 
   await waitAndProceedToNextStep("Celebrate your completed document!  🎉");
-  await refreshHighlightedCode();
 
   await new Promise(r => setTimeout(r, waitSpeed));
   scrollToPrimaryActionButton();
@@ -301,7 +267,7 @@ onUnmounted(() => observer.value?.disconnect());
       </p>
 
       <div class="animation-container">
-        <home-page-code-container file-name="HelloWorld.cs" :highlighted-code="highlightedCode" />
+        <home-page-code-container file-name="HelloWorld.cs" :code="code" :code-transformer="codeTransformer" />
 
         <home-page-window-container file-name="Preview.pdf">
           <img :src="'/homepage/quick-start-animation/step' + imageIndex + '.webp'" />

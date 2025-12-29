@@ -1,11 +1,35 @@
 <script setup lang="ts">
 
+import {onMounted, ref, watch} from "vue";
+import {useData} from "vitepress";
+
+import {ShikiTransformer} from "@shikijs/types";
+import createCodeHighlighter from "./createCodeHighlighter";
+
 import HomePageWindowContainer from "./HomePageWindowContainer.vue";
 
+const { isDark } = useData();
+
 const props = defineProps<{
-  fileName: String,
-  highlightedCode: String
+  fileName: string,
+  code: string,
+  codeTransformer?: ShikiTransformer
 }>();
+
+const highlightedCode = ref('');
+
+async function highlightCode() {
+  const codeHighlighter = await createCodeHighlighter();
+
+  highlightedCode.value = codeHighlighter.codeToHtml(props.code, {
+    lang: 'csharp',
+    theme: isDark.value ? 'dark-plus' :'light-plus',
+    transformers: props.codeTransformer ? [ props.codeTransformer ] : undefined
+  })
+}
+
+watch(() => [isDark, props.code, props.codeTransformer], highlightCode);
+onMounted(highlightCode);
 
 </script>
 

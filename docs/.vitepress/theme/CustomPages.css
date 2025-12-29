@@ -139,7 +139,6 @@ span.highlight-background {
 
 a.action {
   display: inline-block;
-  border: 1px solid var(--vp-button-alt-border);
   text-align: center;
   font-weight: 500;
   white-space: nowrap;
@@ -150,7 +149,8 @@ a.action {
 
   background-color: var(--vp-button-alt-bg);
 
-  color: var(--vp-button-alt-text);
+
+  color: var(--vp-c-text-1);
   font-size: 1rem;
 }
 
@@ -172,11 +172,6 @@ a.action.primary:hover {
   border-color: var(--vp-button-brand-hover-border);
   color: var(--vp-button-brand-hover-text);
   background-color: var(--vp-button-brand-hover-bg);
-}
-
-a.action.disabled {
-  cursor: default !important;
-  background-color: var(--vp-button-alt-bg);
 }
 
 @media screen and (max-width: 700px) {
