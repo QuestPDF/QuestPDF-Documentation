@@ -7,7 +7,7 @@
     </div>
 
     <div class="container">
-      <home-page-statistics />
+      <license-statistics />
     </div>
 
     <div class="container reverse-background">
@@ -30,9 +30,8 @@ import LicenseHeader from "./LicenseHeader.vue";
 import LicensePageTiers from "./LicensePageTiers.vue";
 import LicenseGeneralDescription from "./LicenseTerms.vue";
 import LicenseHelp from "./LicenseHelp.vue";
-import HomePageStatistics from "../../homepage/HomePageStatistics.vue";
-import LicenseResellers from "./LicenseResellers.vue";
 import LicenseStatistics from "./LicenseStatistics.vue";
+import LicenseResellers from "./LicenseResellers.vue";
 
 </script>
 

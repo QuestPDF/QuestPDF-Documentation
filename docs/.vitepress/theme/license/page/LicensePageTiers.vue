@@ -1,13 +1,6 @@
 <template>
   <article class="content">
-    <header class="section-header">
-      <h1>Transparent Licensing, Sustainable Pricing</h1>
-
-      <p class="sub-header">
-        QuestPDF empowers innovation with a generous free tier for startups and open-source projects.
-        For established businesses, our commercial licenses ensure legal compliance, priority support, and long-term stability.
-      </p>
-    </header>
+    <license-header />
 
     <div class="licenses">
       <section class="license-tier card" :class="license.name" v-for="license of licenses">
@@ -52,6 +45,7 @@
 <script setup lang="ts">
 
 import {usePaddle} from "../../paddle";
+import LicenseHeader from "./LicenseHeader.vue";
 
 const paddle = usePaddle();
 
@@ -117,12 +111,6 @@ const licenses = [
 </script>
 
 <style scoped>
-.section-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 760px;
-}
 
 .licenses {
   margin-top: 64px;

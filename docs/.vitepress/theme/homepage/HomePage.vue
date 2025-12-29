@@ -4,24 +4,6 @@
       <HomePageHero />
     </div>
 
-<!--    <div class="container reverse-background">-->
-<!--      <HomePageCodeAnimation />-->
-<!--    </div>-->
-
-<!--    <div class="container reveal-animation">-->
-<!--      <br>-->
-<!--      <br>-->
-<!--      <br>-->
-<!--    </div>-->
-
-<!--    <div class="container reverse-background">-->
-<!--      <home-page-code-animation2 />-->
-<!--    </div>-->
-
-<!--    <div class="container reveal-animation">-->
-<!--      <HomePageStatistics />-->
-<!--    </div>-->
-
     <div class="container reverse-background reveal-animation">
       <HomePageCodeFocusedApproach />
     </div>
@@ -60,7 +42,7 @@
 
 import HomePageFeatures from "./HomePageFeatures.vue";
 import HomePageGettingStarted from "./HomePageGettingStarted.vue";
-import HomePageStatistics from "./HomePageStatistics.vue";
+import LicenseStatistics from "../license/page/LicenseStatistics.vue";
 import HomePageLicense from "./HomePageLicense.vue";
 import HomePageMultiplatform from "./HomePageMultiplatform.vue";
 import HomePageDocumentOperations from "./HomePageDocumentOperations.vue";
