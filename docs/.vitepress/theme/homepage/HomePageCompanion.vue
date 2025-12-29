@@ -17,9 +17,8 @@
       <a class="action" href="/companion/features">Read more</a>
     </div>
 
-    <ClientOnly>
-      <img :src="`/companion/application-${mode}.png`" alt="Companion App" class="companion-image" />
-    </ClientOnly>
+    <img :src="`/companion/application-light.png`" alt="Companion App" class="companion-image light" />
+    <img :src="`/companion/application-dark.png`" alt="Companion App" class="companion-image dark" />
   </section>
 </template>
 
@@ -61,6 +60,15 @@ const SummaryContent = [
   border-radius: 8px;
   border: 1px solid #8884;
   filter: drop-shadow(0 16px 16px rgba(0,  0, 0, 0.1));
+  place-self: end;
+}
+
+html:not(.dark) .companion-image.dark {
+  display: none;
+}
+
+html.dark .companion-image.light {
+  display: none;
 }
 
 .action {

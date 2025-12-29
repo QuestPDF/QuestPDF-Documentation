@@ -16,12 +16,12 @@ const standards = [
 
       <p class="sub-header">
         Generate PDF documents that meet the strictest archival and accessibility requirements.
-        Every build is automatically validated using the open-source <a href="https://verapdf.org/" target="_blank" rel="noopener">veraPDF</a> tool.
+        Every build is automatically validated using the open-source <a href="https://verapdf.org/" target="_blank" rel="noopener">veraPDF</a> and <a href="https://www.mustangproject.org/" target="_blank" rel="noopener">Mustang</a> tools.
       </p>
     </div>
 
     <div class="standard-cards">
-      <div class="standard-card light-shadow">
+      <div class="wide-card standard-card light-shadow">
         <div class="card-header">
           <span class="card-label">Archival</span>
           <span class="card-standard">PDF/A</span>
@@ -54,10 +54,26 @@ const standards = [
           <span>PDF/UA-1</span>
         </div>
       </div>
+
+      <div class="standard-card light-shadow">
+        <div class="card-header">
+          <span class="card-label">E-Invoicing</span>
+          <span class="card-standard">EN 16931</span>
+        </div>
+        <p class="card-description">
+          European standard for electronic invoicing.
+          Embed structured invoice data (XML) within PDF documents for automated processing.
+        </p>
+
+        <div class="standards-badges">
+          <span>ZUGFeRD</span>
+          <span>Factur-X</span>
+        </div>
+      </div>
     </div>
   </section>
 </template>
-loc
+
 <style scoped>
 
 .content {
@@ -71,14 +87,22 @@ loc
 
 .standard-cards {
   display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: 32px;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
   margin-top: 16px;
+}
+
+.wide-card {
+  grid-column: 1 / span 2;
 }
 
 @media screen and (max-width: 600px) {
   .standard-cards {
     grid-template-columns: 1fr;
+  }
+
+  .wide-card {
+    grid-column: 1;
   }
 }
 

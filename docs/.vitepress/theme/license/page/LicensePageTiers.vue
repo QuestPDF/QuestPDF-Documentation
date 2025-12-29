@@ -1,7 +1,7 @@
 <template>
   <article class="content">
-    <header>
-      <h1>Transparent Licensing. Enterprise Power.</h1>
+    <header class="section-header">
+      <h1>Transparent Licensing, Sustainable Pricing</h1>
 
       <p class="sub-header">
         QuestPDF empowers innovation with a generous free tier for startups and open-source projects.
@@ -15,8 +15,6 @@
         <div class="popular">
           POPULAR
         </div>
-
-
 
         <header style="display: flex; flex-direction: column; align-items: start;">
           <div class="tier-name">{{ license.name }}</div>
@@ -119,15 +117,11 @@ const licenses = [
 </script>
 
 <style scoped>
-header {
+.section-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-header .sub-header {
-  text-align: center;
-  max-width: 720px;
+  max-width: 760px;
 }
 
 .licenses {
@@ -156,8 +150,6 @@ header .sub-header {
 }
 
 .license-tier.professional .popular {
-
-
   position: absolute;
   top: 0;
   left: 0;
@@ -175,8 +167,6 @@ header .sub-header {
   font-size: 0.875rem;
   letter-spacing: 1px;
 }
-
-
 
 .license-tier header {
   display: grid;
