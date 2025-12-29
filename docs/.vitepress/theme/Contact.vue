@@ -23,6 +23,13 @@ const contacts: ContactInformation[] = [
     linkLabel: "Go to Paddle"
   },
   {
+    image: "/contact/customer-portal.svg",
+    title: "Customer Portal",
+    description: "Access your subscription details, download invoices, update payment methods, or manage your license. Our customer portal provides a convenient way to handle all your account needs in one place.",
+    link: "https://customer-portal.paddle.com/login/cpl_01gmdq0qdr8madhdchknpb52we",
+    linkLabel: "Open Portal"
+  },
+  {
     image: "/contact/email.svg",
     title: "Get in Touch",
     description: "Have a question about licensing, or just want to share feedback? Send us an email. We value your input and are always happy to help with non-technical inquiries or dedicated support.",
@@ -48,9 +55,9 @@ const contacts: ContactInformation[] = [
             </article>
           </template>
 
-          <article class="business-details card">
+          <article class="card business-details">
+            <img src="/contact/heart.svg" alt="">
             <h3>QuestPDF is owned and proudly developed by:</h3>
-
             <p>Marcin Ziąbek CodeFlint</p>
             <p>Chrzanowska 29<br>32-551 Mętków<br>Poland</p>
             <p>contact@questpdf.com<br>VAT: PL6282275649</p>
@@ -81,17 +88,8 @@ img {
   height: 48px;
 }
 
-.business-details p:not(:last-child) {
-  margin-bottom: 8px;
-}
-
-.business-details h3 {
-  margin-top: 0;
-  margin-bottom: 20px;
-}
-
-.content {
-  min-height: calc(100vh - var(--vp-nav-height) - 110px);
+.business-details p {
+  padding-top: 8px;
 }
 
 </style>
