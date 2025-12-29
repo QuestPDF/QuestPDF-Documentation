@@ -50,7 +50,6 @@ import LicenseHeader from "./LicenseHeader.vue";
 const paddle = usePaddle();
 
 interface License {
-  icon: string;
   name: string;
   description: string;
 
@@ -61,7 +60,6 @@ interface License {
 }
 
 const CommunityLicense: License = {
-  icon: "/license/community.svg",
   name: "community",
   description: "Ideal for startups, open-source, and individual developers building the next big thing",
   price: null,
@@ -75,7 +73,6 @@ const CommunityLicense: License = {
 };
 
 const ProfessionalLicense: License = {
-  icon: "/license/professional.svg",
   name: "professional",
   description: "Compliance and stability for established small businesses and agencies",
   price: 999, // Consider clarifying if this is USD in the UI
@@ -89,7 +86,6 @@ const ProfessionalLicense: License = {
 };
 
 const EnterpriseLicense: License = {
-  icon: "/license/enterprise.svg",
   name: "enterprise",
   description: "Maximum flexibility and priority support for large teams and mission-critical systems",
   price: 1999,
