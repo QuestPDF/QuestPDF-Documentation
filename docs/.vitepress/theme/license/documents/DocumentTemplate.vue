@@ -1,16 +1,16 @@
 <template>
   <section class="custom-page document-page">
-    <div class="container no-border">
+    <div class="container">
       <div class="content" style="padding-bottom: 48px;">
-        <article style="max-width: 800px;">
+        <section style="max-width: 800px;">
           <slot name="header"></slot>
-        </article>
+        </section>
       </div>
     </div>
 
     <div class="container reverse-background">
-      <div class="content" style="padding-top: 0px;">
-        <div style="max-width: 800px;">
+      <div class="content" style="padding-top: 48px;">
+        <div class="document-content">
           <slot name="content"></slot>
         </div>
       </div>
@@ -23,8 +23,20 @@
 </script>
 
 <style>
+.document-page h3:first-child {
+  margin-top: 0;
+}
+
+.document-content {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+  max-width: 800px !important;
+}
+
 .document-page h3 {
-  margin: 48px 0 8px 0 !important;
+  margin: 0 0 8px 0 !important;
 }
 
 .document-page a {
