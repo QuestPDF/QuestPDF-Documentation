@@ -17,12 +17,9 @@
         </div>
       </div>
 
-      <a class="action primary" href="getting-started.html">
+      <a class="action primary" href="/getting-started">
         Start the tutorial
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-          <polyline points="12 5 19 12 12 19"></polyline>
-        </svg>
+        <img src="/homepage/arrow-right.svg" width="20px" alt="" />
       </a>
     </div>
 
@@ -89,11 +86,11 @@ const features = [
     gap: 8px;
   }
 
-  .action.primary svg {
+  .action.primary img {
     transition: transform 0.2s ease;
   }
 
-  .action.primary:hover svg {
+  .action.primary:hover img {
     transform: translateX(4px);
   }
 
@@ -185,6 +182,7 @@ const features = [
       transform: translateX(-60px) translateY(30px) rotate(-5deg);
     }
   }
+
 
   /* Dark mode */
 
