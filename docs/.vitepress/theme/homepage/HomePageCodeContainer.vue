@@ -45,7 +45,7 @@ onMounted(highlightCode);
   line-height: 1.5;
   padding: 8px 0;
   tab-size: 4;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .code-source pre {

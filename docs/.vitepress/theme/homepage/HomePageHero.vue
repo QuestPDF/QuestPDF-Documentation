@@ -67,12 +67,6 @@ import HomePageCodeContainer from "./HomePageCodeContainer.vue";
   }
 }
 
-@media screen and (max-width: 768px) {
-  .content {
-    grid-template-columns: 1fr 120px;
-  }
-}
-
 @media screen and (max-width: 600px) {
   .content {
     grid-template-columns: 1fr;
