@@ -6,7 +6,7 @@
     <div class="description">
       <div class="section-tag">Example project</div>
 
-      <h2>See a real-world example</h2>
+      <h2>See a <span class="highlight-foreground">real-world</span> example</h2>
 
       <p class="sub-header">Follow our detailed tutorial and see how easy it is to generate a fully functional invoice with fewer than 250 lines of C# code.</p>
 
@@ -56,7 +56,7 @@ const features = [
     overflow: visible;
   }
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 750px) {
     .content {
       grid-template-columns: 1fr;
       grid-gap: 48px;
@@ -80,6 +80,7 @@ const features = [
     color: var(--vp-c-text-2);
   }
 
+
   /* Action button */
 
   .action.primary {
@@ -95,6 +96,7 @@ const features = [
   .action.primary:hover svg {
     transform: translateX(4px);
   }
+
 
   /* Invoice stack */
 
@@ -132,19 +134,25 @@ const features = [
 
   .invoice-card img {
     display: block;
-    width: 250px;
+    width: 225px;
     height: auto;
   }
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 1200px) {
     .invoice-card img {
-      width: 220px;
+      width: 200px;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .invoice-card img {
+      width: 175px;
     }
   }
 
   @media screen and (max-width: 500px) {
     .invoice-card img {
-      width: 180px;
+      width: 150px;
     }
   }
 
@@ -158,45 +166,49 @@ const features = [
     z-index: 2;
   }
 
+
   /* Hover effects */
 
-  .content:hover .invoice-back {
-    transform: translateX(60px) translateY(-30px) rotate(8deg);
-    box-shadow:
-      0 8px 12px -2px rgba(0, 0, 0, 0.12),
-      0 16px 24px -4px rgba(0, 0, 0, 0.12),
-      0 24px 32px -8px rgba(0, 0, 0, 0.12);
-  }
+  .content:hover {
+    .invoice-card {
+      box-shadow:
+          0 8px 12px -2px rgba(0, 0, 0, 0.12),
+          0 16px 24px -4px rgba(0, 0, 0, 0.12),
+          0 24px 32px -8px rgba(0, 0, 0, 0.12);
+    }
 
-  .content:hover .invoice-front {
-    transform: translateX(-60px) translateY(30px) rotate(-5deg);
-    box-shadow:
-      0 8px 12px -2px rgba(0, 0, 0, 0.12),
-      0 16px 24px -4px rgba(0, 0, 0, 0.12),
-      0 24px 32px -8px rgba(0, 0, 0, 0.12);
+    .invoice-back {
+      transform: translateX(60px) translateY(-30px) rotate(8deg);
+    }
+
+    .invoice-front {
+      transform: translateX(-60px) translateY(30px) rotate(-5deg);
+    }
   }
 
   /* Dark mode */
 
-  html.dark .invoice-card {
-    background: #1e1e1e;
-    box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.3),
-      0 10px 15px -3px rgba(0, 0, 0, 0.3),
-      0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  html.dark {
+    .invoice-card {
+      background: #1e1e1e;
+      box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.3),
+          0 10px 15px -3px rgba(0, 0, 0, 0.3),
+          0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    .invoice-card img {
+      opacity: 0.9;
+    }
+
+    .invoice-stack:hover .invoice-card {
+      box-shadow:
+          0 8px 12px -2px rgba(0, 0, 0, 0.4),
+          0 16px 24px -4px rgba(0, 0, 0, 0.4),
+          0 24px 32px -8px rgba(0, 0, 0, 0.4);
+    }
   }
 
-  html.dark .invoice-card img {
-    opacity: 0.9;
-  }
-
-  html.dark .invoice-stack:hover .invoice-back,
-  html.dark .invoice-stack:hover .invoice-front {
-    box-shadow:
-      0 8px 12px -2px rgba(0, 0, 0, 0.4),
-      0 16px 24px -4px rgba(0, 0, 0, 0.4),
-      0 24px 32px -8px rgba(0, 0, 0, 0.4);
-  }
 
   /* Background */
 
