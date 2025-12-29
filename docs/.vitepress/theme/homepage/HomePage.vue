@@ -4,13 +4,23 @@
       <HomePageHero />
     </div>
 
-    <div class="container reverse-background">
-      <HomePageCodeAnimation />
-    </div>
+<!--    <div class="container reverse-background">-->
+<!--      <HomePageCodeAnimation />-->
+<!--    </div>-->
 
-    <div class="container reveal-animation">
-      <HomePageStatistics />
-    </div>
+<!--    <div class="container reveal-animation">-->
+<!--      <br>-->
+<!--      <br>-->
+<!--      <br>-->
+<!--    </div>-->
+
+<!--    <div class="container reverse-background">-->
+<!--      <home-page-code-animation2 />-->
+<!--    </div>-->
+
+<!--    <div class="container reveal-animation">-->
+<!--      <HomePageStatistics />-->
+<!--    </div>-->
 
     <div class="container reverse-background reveal-animation">
       <HomePageCodeFocusedApproach />
@@ -36,7 +46,7 @@
       <HomePageStandardCompliance />
     </div>
 
-    <div class="container reverse-background reveal-animation">
+    <div class="container reverse-background reveal-animation" style="overflow: hidden;">
       <HomePageLicense />
     </div>
 
@@ -60,6 +70,7 @@ import HomePageCodeAnimation from "./HomePageCodeAnimation.vue";
 import HomePageHero from "./HomePageHero.vue";
 import {onMounted} from "vue";
 import HomePageStandardCompliance from "./HomePageStandardCompliance.vue";
+import HomePageCodeAnimation2 from "./HomePageCodeAnimation2.vue";
 
 /* Reveal animation */
 
@@ -144,11 +155,13 @@ onMounted(() => {
   background-color: color-mix(in srgb, var(--vp-c-brand-2), transparent 90%);
   border-radius: 32px;
   padding: 6px 18px;
+  word-spacing: 2px;
   font-size: 0.8125rem;
   font-weight: 600;
   margin-bottom: 16px;
   color: var(--vp-c-brand-1);
   width: fit-content;
+  text-transform: uppercase;
 }
 
 </style>

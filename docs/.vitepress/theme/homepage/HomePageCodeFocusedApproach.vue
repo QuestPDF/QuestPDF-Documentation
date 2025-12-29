@@ -2,73 +2,168 @@
 import createCodeHighlighter from './createCodeHighlighter'
 import {onMounted, ref, watch} from "vue";
 import {useData} from "vitepress";
-import codeOrganization from './organizationCodeExample.cs?raw';
+
+import modularCode from './codeExamples/modularCode.cs?raw';
+import familiarConcepts from './codeExamples/familiarConcepts.cs?raw';
+import gitFriendlyWorkflow from './codeExamples/gitFriendlyWorkflow.cs?raw';
+import typesafeDevelopment from './codeExamples/typesafeDevelopment.cs?raw';
+
 import HomePageCodeContainer from "./HomePageCodeContainer.vue";
+import {ShikiTransformerContext} from "@shikijs/types";
+
+interface Feature {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+  code: string;
+  fileName: string;
+  lineTransformer: (context: ShikiTransformerContext, node: Element, line: number) => void;
+}
+
+const features : Feature[] = [
+  {
+    id: 'reusable',
+    icon: "homepage/puzzle.svg",
+    title: "Reusable Components",
+    description: "Extract common elements into methods. Compose complex layouts from simple, testable building blocks.",
+    code: modularCode,
+    fileName: 'Header.cs',
+    lineTransformer(context: ShikiTransformerContext, node: Element, line: number) {
+      if (line == 2)
+        context.addClassToHast(node, 'line-removed')
+
+      if (line == 4)
+        context.addClassToHast(node, 'line-added')
+    }
+  },
+  {
+    id: 'dynamic',
+    icon: "homepage/csharp.svg",
+    title: "Dynamic Content",
+    description: "Use loops, conditions, and LINQ to generate data-driven documents. No templating language to learn.",
+    code: familiarConcepts,
+    fileName: 'Table.cs',
+    lineTransformer(context: ShikiTransformerContext, node: Element, line: number) {
+
+    }
+  },
+  {
+    id: 'vcs',
+    icon: "homepage/git.svg",
+    title: "Version Control Ready",
+    description: "Review changes with meaningful diffs. Track document evolution alongside your application code.",
+    code: gitFriendlyWorkflow,
+    fileName: 'Item.cs',
+    lineTransformer(context: ShikiTransformerContext, node: Element, line: number) {
+
+    }
+  },
+  // {
+  //   id: 'typesafe',
+  //   icon: "homepage/engine.svg",
+  //   title: "Type-Safe Development",
+  //   description: "Catch errors at compile time. Enjoy IntelliSense, refactoring support, and confident code navigation.",
+  //   code: typesafeDevelopment,
+  //   fileName: 'Invoice.cs',
+  //   lineTransformer(context: ShikiTransformerContext, node: Element, line: number) {
+  //
+  //   }
+  // },
+  // {
+  //   id: 'ai-tools',
+  //   icon: "homepage/artificial-intelligence.svg",
+  //   title: "Plays well with AI tools",
+  //   description: "Easily integrate with AI code generation tools. Generate and refine document layouts using natural language prompts.",
+  //   code: typesafeDevelopment,
+  //   fileName: 'Invoice.cs',
+  //   lineTransformer(context: ShikiTransformerContext, node: Element, line: number) {
+  //
+  //   }
+  // }
+];
 
 const { isDark } = useData()
 const highlightedCode = ref('');
 
+const currentFeatureId = ref<string>(features[0].id);
+
+const codeBlock = ref<HTMLElement>();
+const featureCards = ref<HTMLElement[]>();
+
 async function highlightCode() {
+  const currentFeature = features.find(feature => feature.id === currentFeatureId.value);
+
   const codeHighlighter = await createCodeHighlighter();
 
-  highlightedCode.value = codeHighlighter.codeToHtml(codeOrganization, {
+  highlightedCode.value = codeHighlighter.codeToHtml(currentFeature.code, {
     lang: 'csharp',
     theme: isDark.value ? 'dark-plus' :'light-plus',
     transformers: [
       {
         line(node, line) {
-          if (line == 13)
-            this.addClassToHast(node, 'line-removed')
-
-          if (line == 14)
-            this.addClassToHast(node, 'line-added')
+          currentFeature.lineTransformer(this, node, line);
         }
       }
     ]
   })
 }
 
+function updateActiveCard() {
+  const codeBlockRect = codeBlock.value.getBoundingClientRect();
+  const codeBlockCenter = codeBlockRect.top + (codeBlockRect.height / 2);
+
+  let closestCard = null;
+  let minDistance = Infinity;
+
+  featureCards.value.forEach(card => {
+    const cardRect = card.getBoundingClientRect();
+    const cardCenterY = cardRect.top + (cardRect.height / 2);
+
+    const distance = Math.abs(cardCenterY - codeBlockCenter);
+
+    if (distance < minDistance) {
+      minDistance = distance;
+      closestCard = card;
+    }
+  });
+
+  currentFeatureId.value = closestCard?.getAttribute('feature-id');
+}
+
+document.addEventListener('scroll', () => requestAnimationFrame(updateActiveCard));
+
+watch(currentFeatureId, highlightCode);
 watch(isDark, highlightCode);
 onMounted(highlightCode);
-
-const features = [
-  {
-    icon: "homepage/layers.svg",
-    title: "Modular & Maintainable",
-    description: "Build PDF layouts with reusable, well-organized classes and methods. Refactor safely with full IntelliSense support."
-  },
-  {
-    icon: "homepage/csharp.svg",
-    title: "Familiar Concepts",
-    description: "Use conditions, loops, iterables and local functions to create dynamic, data-driven documents."
-  },
-  {
-    icon: "homepage/git.svg",
-    title: "Git-Friendly Workflow",
-    description: "Enjoy clean code reviews, meaningful diffs, and straightforward version control."
-  }
-];
 
 </script>
 
 <template>
   <section class="content">
+    <div class="section-header">
+      <h2>Code-First Approach</h2>
+      <p class="sub-header">Write PDF layouts as clean, readable C# code. No XML templates, no designers — just the programming patterns you already know.</p>
+    </div>
+
     <div class="container">
-      <div>
-        <h2>Code-First Approach</h2>
-
-        <p class="sub-header">Write PDF layouts as clean, readable C# code. No XML templates, no designers — just the programming patterns you already know.</p>
-
-        <div class="features">
-          <article class="feature" v-for="feature of features" :key="feature.title">
-            <img class="icon" :src="feature.icon" alt="" />
-            <h3 class="title">{{ feature.title }}</h3>
-            <p class="description">{{ feature.description }}</p>
-          </article>
-        </div>
+      <div class="features">
+        <article
+            ref="featureCards"
+            class="feature"
+            v-for="feature of features"
+            :key="feature.title"
+            :class="{ 'active': currentFeatureId === feature.id }"
+            :feature-id="feature.id">
+<!--          <img class="icon" :src="feature.icon" alt="" />-->
+          <h3 class="title">{{ feature.title }}</h3>
+          <p class="description">{{ feature.description }}</p>
+        </article>
       </div>
 
-      <home-page-code-container file-name="Example.cs" :highlighted-code="highlightedCode" />
+      <div ref="codeBlock" style="position: sticky; top: 200px; height: fit-content;">
+        <home-page-code-container file-name="Example.cs" :highlighted-code="highlightedCode" />
+      </div>
     </div>
   </section>
 </template>
@@ -77,8 +172,8 @@ const features = [
 
 .container {
   display: grid;
-  grid-template-columns: 1fr auto;
-  grid-gap: 96px;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 32px;
   align-content: stretch;
   margin-top: 64px;
 }
@@ -95,8 +190,7 @@ const features = [
 .features {
   display: flex;
   flex-direction: column;
-  gap: 48px;
-  margin-top: 48px;
+  gap: 32px;
 }
 
 @media screen and (max-width: 700px) {
@@ -107,13 +201,25 @@ const features = [
 }
 
 .feature {
-  display: grid;
-  grid-template-areas:
-      "icon title"
-      "icon description";
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr;
-  grid-gap: 8px 24px;
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid #8882;
+  border-radius: 12px;
+  padding: 32px;
+
+  transition: all 250ms ease-in-out;
+}
+
+.feature.active {
+  background-color: var(--vp-c-bg);
+  border: 1px solid #0004;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.feature:not(.active) * {
+  opacity: 0.25;
+  filter: grayscale(1);
 }
 
 @media screen and (max-width: 1000px) {
@@ -128,24 +234,17 @@ const features = [
   }
 }
 
-.feature img.icon {
-  grid-area: icon;
+.feature h3 {
+  margin-top: 0;
+}
 
+.feature img.icon {
   justify-self: start;
   align-self: start;
-  height: 48px;
   width: 48px;
 }
 
-.feature h3.title {
-  grid-area: title;
-
-  margin: 0;
-}
-
 .feature p.description {
-  grid-area: description;
-
   justify-self: start;
   align-self: start;
 }

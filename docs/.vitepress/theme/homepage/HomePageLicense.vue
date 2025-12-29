@@ -10,6 +10,7 @@ const SummaryContent = [
 <template>
   <section class="content">
 
+    <div class="license-background" />
     <img src="/homepage/license.svg" class="license-icon" alt="Example invoice document implemented and generated with QuestPDF using C# language." />
 
       <div class="section-header">
@@ -38,6 +39,22 @@ const SummaryContent = [
 
 <style scoped>
 
+.license-background {
+  content: "";
+  position: absolute;
+  place-self: center;
+  align-self: center;
+
+  top: -30%;
+  width: 140%;
+  height: 120%;
+  border-radius: 50%;
+  z-index: -1000;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 20%, rgba(103, 184, 77, 0.15) 0%, transparent 50%);
+  filter: blur(40px);
+}
+
   .license-icon {
     place-self: center;
     width: 64px;
@@ -47,12 +64,16 @@ const SummaryContent = [
   .license-description {
     border-radius: 12px;
     padding: 12px 16px;
-    color: var(--vp-custom-block-warning-text);
+    color: #1B5E20;
     background-color: #67B84D33;
     margin-top: 1.25rem;
 
     max-width: 500px;
     place-self: center;
+  }
+
+  html.dark .license-description {
+    color: #A5D6A7;
   }
 
   .action {

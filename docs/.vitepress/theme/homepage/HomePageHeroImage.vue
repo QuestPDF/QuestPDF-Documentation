@@ -53,7 +53,6 @@
   display: flex;
   align-content: center;
   flex-direction: column;
-  margin-top: 150px;
   margin-bottom: -350px;
   position: relative;
 }

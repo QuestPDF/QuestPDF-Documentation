@@ -3,6 +3,33 @@ import {onMounted, onUnmounted, ref, watch} from "vue";
 import {useData} from "vitepress";
 import createCodeHighlighter from "./createCodeHighlighter";
 import HomePageCodeContainer from "./HomePageCodeContainer.vue";
+import helloWorldExample from './helloWorldExample.cs?raw';
+import HomePageWindowContainer from "./HomePageWindowContainer.vue";
+
+const { isDark } = useData();
+
+
+const highlightedHelloWorldCode = ref('');
+
+async function highlightHelloWorldCode() {
+  const codeHighlighter = await createCodeHighlighter();
+
+  highlightedHelloWorldCode.value =  codeHighlighter.codeToHtml(helloWorldExample, {
+    lang: 'csharp',
+    theme: isDark.value ? 'dark-plus' :'light-plus'
+  })
+}
+
+watch(isDark, highlightHelloWorldCode);
+onMounted(highlightHelloWorldCode);
+
+
+const showAnimation = ref(false);
+
+function playAnimation() {
+  showAnimation.value = true;
+  animate();
+}
 
 const code = ref('');
 const highlightedLines = ref<{start: number; end: number} | null>(null);
@@ -12,7 +39,7 @@ const tutorialStepNumber = ref(1);
 const imageIndex = ref(1);
 const title = ref("");
 
-const { isDark } = useData();
+
 
 
 /* Code highlighting */
@@ -47,8 +74,16 @@ onMounted(() => {
 
 /* Animation engine */
 
+const isAnimationRunning = ref(false);
+
 const animationSpeed = 75;
 const waitSpeed = 3500;
+
+async function waitForResume() {
+  while (!isAnimationRunning.value) {
+    await new Promise(r => setTimeout(r, 1000));
+  }
+}
 
 async function appendText(position: number, text: string) {
   for (let letter of text) {
@@ -58,6 +93,7 @@ async function appendText(position: number, text: string) {
     if (letter == '\n' && highlightedLines.value)
       highlightedLines.value = { start: highlightedLines.value.start, end: highlightedLines.value.end + 1 };
 
+    await waitForResume();
     await new Promise(r => setTimeout(r, animationSpeed));
   }
 }
@@ -85,6 +121,7 @@ async function deleteTextAfter(afterText: string, deleteText: string) {
 
   for (let i = deleteText.length; i >= 0; i--) {
     code.value = before + deleteText.slice(0, i) + after;
+    await waitForResume();
     await new Promise(r => setTimeout(r, animationSpeed));
   }
 }
@@ -98,6 +135,7 @@ function clearHighlight() {
 }
 
 async function wait() {
+  await waitForResume();
   await new Promise(r => setTimeout(r, waitSpeed));
 }
 
@@ -143,6 +181,7 @@ function scrollToPrimaryActionButton() {
 }
 
 async function animate() {
+  await waitForResume();
   await new Promise(r => setTimeout(r, waitSpeed));
   tutorialStepNumber.value++;
 
@@ -222,16 +261,11 @@ async function animate() {
 
 /* Animation control observer */
 const observer = ref<IntersectionObserver | null>(null);
-const isAnimationRunning = ref(false);
 
 onMounted(() => {
   observer.value = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (isAnimationRunning.value || !entry.isIntersecting)
-        return;
-
-      isAnimationRunning.value = true;
-      animate();
+      isAnimationRunning.value = entry.isIntersecting;
     });
   }, { threshold: 0.5 });
 
@@ -245,29 +279,56 @@ onUnmounted(() => observer.value?.disconnect());
 
 <template>
   <section class="content" id="homepage-quick-start-animation">
-    <h2 id="introduction">Quick start&nbsp;&nbsp;👋</h2>
+    <div>
+      <h2 id="introduction">Get Started in Minutes</h2>
 
-    <p class="sub-header" style="max-width: 900px;">
-      Learn how easy it is to design, implement and generate PDF documents using QuestPDF.
-      Effortlessly create documents of all types such as invoices and reports.
-    </p>
+      <p class="sub-header" style="max-width: 900px;">
+        Follow a short, step-by-step demo: create a document structure, plug in your data, and generate consistent PDF output using the C# Fluent API.
+      </p>
 
-    <p class="sub-header" style="display: flex; flex-direction: row; align-items: center; gap: 16px;">
-      <span class="highlight-background shine">{{ title }}</span>
-      <img v-if="isAnimationRunning && tutorialStepNumber == 1" src="/homepage/spinner-third-solid.svg" class="loading-icon">
-    </p>
-
-    <div class="animation-container">
-      <home-page-code-container file-name="HelloWorld.cs" :highlighted-code="highlightedCode" />
-
-      <img :src="'/homepage/quick-start-animation/step' + imageIndex + '.webp'" />
+      <a v-if="!showAnimation" class="action primary" @click="playAnimation" style="display: flex; flex-direction: row; gap: 16px; width: fit-content; padding: 4px 20px;">
+        <img src="/homepage/play.svg" width="20" alt="" />
+        Watch tutorial
+        <div style="border-left: 1px solid #FFF8; margin: 8px 0;"></div>
+        <span style="font-weight: 400;">~90 sec</span>
+      </a>
     </div>
 
-    <a ref="primaryAction" class="action primary" href="/getting-started">Read tutorial</a>
+    <template v-if="showAnimation">
+      <p class="sub-header" style="display: flex; flex-direction: row; align-items: center; gap: 16px;">
+        <span class="highlight-background shine">{{ title }}</span>
+        <img v-if="isAnimationRunning && tutorialStepNumber == 1" src="/homepage/spinner-third-solid.svg" class="loading-icon">
+      </p>
+
+      <div class="animation-container">
+        <home-page-code-container file-name="HelloWorld.cs" :highlighted-code="highlightedCode" />
+
+        <home-page-window-container file-name="Preview.pdf">
+          <img :src="'/homepage/quick-start-animation/step' + imageIndex + '.webp'" />
+        </home-page-window-container>
+      </div>
+    </template>
   </section>
 </template>
 
 <style scoped>
+
+.tutorial-section {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.tutorial-alert {
+
+  border: 1px solid #2196F3;
+  filter: drop-shadow(0 16px 16px #2196F322) !important;
+}
+
+.action.primary {
+  background-color: #2196F3;
+}
+
 
 .animation-container {
   display: grid;

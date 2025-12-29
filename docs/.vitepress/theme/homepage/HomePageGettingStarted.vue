@@ -4,50 +4,198 @@
 
   <section class="content">
     <div class="description">
-      <h2>Ready to get started?</h2>
+      <div class="section-tag">Example project</div>
 
-      <p class="sub-header">Follow our detailed tutorial, and see how easy it is to generate a fully functional invoice with fewer than 250 lines of C# code.</p>
+      <h2>See a <span class="highlight-foreground">real-world</span> example</h2>
 
-      <a class="action primary" href="getting-started.html">Read tutorial</a>
+      <p class="sub-header">Follow our detailed tutorial and see how easy it is to generate a fully functional invoice with fewer than 250 lines of C# code.</p>
+
+      <div class="features">
+        <div v-for="feature in features" class="feature-item">
+          <img src="/homepage/square-check.svg" width="24" alt="" />
+          <span>{{ feature }}</span>
+        </div>
+      </div>
+
+      <a class="action primary" href="getting-started.html">
+        Start the tutorial
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
     </div>
 
-    <img src="/invoice.png" alt="Example invoice document implemented and generated with QuestPDF using C# language." />
+    <div class="invoice-stack">
+      <div class="invoice-card invoice-back">
+        <img src="/homepage/invoice2.webp" alt="Sample invoice page 2" />
+      </div>
+      <div class="invoice-card invoice-front">
+        <img src="/homepage/invoice1.webp" alt="Sample invoice page 1" />
+      </div>
+    </div>
   </section>
 </template>
 
 <script setup>
+
+const features = [
+  "Step-by-step guidance",
+  "Production-ready code",
+  "Best practices included",
+];
 
 </script>
 
 <style scoped>
   .content {
     display: grid;
-    grid-template-columns: 3fr 2fr;
-    grid-gap: 64px 128px;
-
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 64px;
+    align-items: center;
     overflow: visible;
   }
 
-  @media screen and (max-width: 700px) {
+  @media screen and (max-width: 900px) {
     .content {
       grid-template-columns: 1fr;
+      grid-gap: 48px;
     }
   }
 
-  .description {
-    place-self: center;
+
+  /* Features list */
+
+  .features {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    gap: 16px;
+    margin: 0px 0 32px 0;
   }
 
-  img {
-    place-self: center;
-    max-width: min(350px, 75%);
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--vp-c-text-2);
   }
 
-  html.dark img {
-    opacity: 0.8;
+  /* Action button */
+
+  .action.primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .action.primary svg {
+    transition: transform 0.2s ease;
+  }
+
+  .action.primary:hover svg {
+    transform: translateX(4px);
+  }
+
+  /* Invoice stack */
+
+  .invoice-stack {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 420px;
+    perspective: 1000px;
+  }
+
+  @media screen and (max-width: 900px) {
+    .invoice-stack {
+      min-height: 350px;
+    }
+  }
+
+  .invoice-card {
+    position: absolute;
+    background: white;
+    border-radius: 8px;
+
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  }
+
+  html:not(.dark) .invoice-card {
+    border: 1px solid #0004;
+  }
+
+  .invoice-card img {
+    display: block;
+    width: 250px;
+    height: auto;
+  }
+
+  @media screen and (max-width: 900px) {
+    .invoice-card img {
+      width: 220px;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .invoice-card img {
+      width: 180px;
+    }
+  }
+
+  .invoice-back {
+    transform: translateX(40px) translateY(-20px) rotate(6deg);
+    z-index: 1;
+  }
+
+  .invoice-front {
+    transform: translateX(-40px) translateY(20px) rotate(-3deg);
+    z-index: 2;
+  }
+
+  /* Hover effects */
+
+  .content:hover .invoice-back {
+    transform: translateX(60px) translateY(-30px) rotate(8deg);
+    box-shadow:
+      0 8px 12px -2px rgba(0, 0, 0, 0.12),
+      0 16px 24px -4px rgba(0, 0, 0, 0.12),
+      0 24px 32px -8px rgba(0, 0, 0, 0.12);
+  }
+
+  .content:hover .invoice-front {
+    transform: translateX(-60px) translateY(30px) rotate(-5deg);
+    box-shadow:
+      0 8px 12px -2px rgba(0, 0, 0, 0.12),
+      0 16px 24px -4px rgba(0, 0, 0, 0.12),
+      0 24px 32px -8px rgba(0, 0, 0, 0.12);
+  }
+
+  /* Dark mode */
+
+  html.dark .invoice-card {
+    background: #1e1e1e;
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.3),
+      0 10px 15px -3px rgba(0, 0, 0, 0.3),
+      0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  html.dark .invoice-card img {
+    opacity: 0.9;
+  }
+
+  html.dark .invoice-stack:hover .invoice-back,
+  html.dark .invoice-stack:hover .invoice-front {
+    box-shadow:
+      0 8px 12px -2px rgba(0, 0, 0, 0.4),
+      0 16px 24px -4px rgba(0, 0, 0, 0.4),
+      0 24px 32px -8px rgba(0, 0, 0, 0.4);
   }
 
   /* Background */

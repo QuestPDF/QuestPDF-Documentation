@@ -1,5 +1,31 @@
 <script setup>
 import HomePageHeroImage from "./HomePageHeroImage.vue";
+
+
+import helloWorldExample from './helloWorldExample.cs?raw';
+import {onMounted, ref, watch} from "vue";
+import HomePageCodeContainer from "./HomePageCodeContainer.vue";
+import {useData} from "vitepress";
+import createCodeHighlighter from "./createCodeHighlighter.ts";
+
+const { isDark } = useData();
+
+
+const highlightedHelloWorldCode = ref('');
+
+async function highlightHelloWorldCode() {
+  const codeHighlighter = await createCodeHighlighter();
+
+  highlightedHelloWorldCode.value =  codeHighlighter.codeToHtml(helloWorldExample, {
+    lang: 'csharp',
+    theme: isDark.value ? 'dark-plus' :'light-plus'
+  })
+}
+
+watch(isDark, highlightHelloWorldCode);
+onMounted(highlightHelloWorldCode);
+
+
 </script>
 <template>
   <section class="content">
@@ -15,7 +41,17 @@ import HomePageHeroImage from "./HomePageHeroImage.vue";
         Design PDFs the way you design software - with clean code, instant preview, and predictable layouts.
       </div>
 
-      <a class="action primary" style="margin-top: 32px" href="#introduction">Show introduction</a>
+      <div style="display: flex; flex-direction: row; gap: 16px; margin-top: 32px">
+        <a v-if="!showAnimation" class="action primary" style="display: flex; flex-direction: row; gap: 16px; width: fit-content; padding: 4px 24px;">
+          <img src="/homepage/play.svg" width="20" alt="" />
+          Watch Live Demo
+          <div style="border-left: 1px solid #FFF8; margin: 8px 0;"></div>
+          <span style="font-weight: 400;">~90 sec</span>
+        </a>
+
+        <a class="action" style="padding: 4px 24px; border: 1px solid #0004;" href="/getting-started">Get Started</a>
+      </div>
+
 
       <div class="hero-trust">
         <div class="trust-item">
@@ -30,7 +66,8 @@ import HomePageHeroImage from "./HomePageHeroImage.vue";
       </div>
     </div>
 
-    <home-page-hero-image />
+    <home-page-code-container file-name="HelloWorld.cs" :highlighted-code="highlightedHelloWorldCode" />
+<!--    <home-page-hero-image />-->
   </section>
 </template>
 

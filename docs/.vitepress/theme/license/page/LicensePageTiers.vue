@@ -43,7 +43,7 @@
         <div style="flex-grow: 1"></div>
 
         <a v-if="license.price" class="action" @click="paddle.startCheckout(license.paddlePriceId)">Purchase license</a>
-        <a v-else class="action" href="/getting-started.html">Start Creating</a>
+        <a v-else class="action" href="/getting-started.html">Start creating</a>
       </section>
     </div>
   </article>

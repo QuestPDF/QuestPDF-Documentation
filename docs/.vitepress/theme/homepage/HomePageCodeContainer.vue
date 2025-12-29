@@ -1,5 +1,7 @@
 <script setup lang="ts">
 
+import HomePageWindowContainer from "./HomePageWindowContainer.vue";
+
 const props = defineProps<{
   fileName: String,
   highlightedCode: String
@@ -8,71 +10,13 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="code-container">
-    <div class="code-container-header">
-      <div class="dot red" />
-      <div class="dot yellow" />
-      <div class="dot green" />
-      <span>{{ fileName }}</span>
-    </div>
+  <home-page-window-container :file-name="fileName">
     <div class="code-source" v-html="highlightedCode" />
-  </div>
+  </home-page-window-container>
 </template>
-
-<style scoped lang="scss">
-.code-container {
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 12px;
-  filter: drop-shadow(0 16px 16px rgba(0,  0, 0, 0.1));
-  height: fit-content;
-  overflow: hidden;
-}
-
-.code-container-header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 6px;
-  padding: 12px 16px;
-
-  border-bottom: 1px solid var(--vp-c-divider);
-  background-color: var(--vp-c-bg-alt);
-}
-
-.code-container-header span {
-  padding-left: 6px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--vp-c-text-2);
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 6px;
-  background-color: #8883;
-  transition: all 100ms ease-in-out;
-}
-
-.code-container:hover {
-  .dot.red {
-    background-color: #F44336CC;
-  }
-
-  .dot.yellow {
-    background-color: #FFC107CC;
-  }
-
-  .dot.green {
-    background-color: #4CAF50CC;
-  }
-}
-
-</style>
 
 <style>
 .code-source {
-  background-color: #FFFFFF; /* from shiki light-plus */
   font-size: 14px;
   line-height: 1.5;
   padding: 8px 0;
@@ -82,12 +26,8 @@ const props = defineProps<{
 
 .code-source pre {
   overflow: hidden;
+  background-color: transparent !important;
 }
-
-html.dark .code-source {
-  background-color: #1E1E1E; /* from shiki dark-plus */
-}
-
 
 @media screen and (max-width: 1000px) {
   .code-source pre {
