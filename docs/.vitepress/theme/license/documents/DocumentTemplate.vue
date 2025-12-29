@@ -45,8 +45,6 @@
 
 .document-page .description {
   color: var(--vp-c-text-1);
-  font-size: 1.25rem;
-  line-height: 2rem;
 }
 
 .document-page p:not(:last-child) {

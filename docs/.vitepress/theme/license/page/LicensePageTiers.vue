@@ -116,7 +116,7 @@ const licenses = [
   margin-top: 64px;
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(325px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
   grid-gap: 48px;
 }
 

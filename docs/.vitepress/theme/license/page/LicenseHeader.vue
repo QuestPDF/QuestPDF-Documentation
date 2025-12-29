@@ -22,4 +22,10 @@
   max-width: 760px;
 }
 
+@media screen and (max-width: 450px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+
 </style>
