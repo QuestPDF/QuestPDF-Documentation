@@ -5,7 +5,7 @@ import llmstxt from 'vitepress-plugin-llms'
 export default defineConfig({
     lang: 'en-US',
     title: 'QuestPDF',
-    description: 'Modern .NET library for PDF document generation',
+    description: 'Modern C# library for PDF document generation',
     base: '/',
     cleanUrls: false,
 
@@ -254,8 +254,7 @@ export default defineConfig({
             }
         ],
         footer: {
-            message: 'Released under the MIT License',
-            copyright: 'Copyright © 2020-present Marcin Ziąbek CodeFlint'
+            copyright: '© 2026 QuestPDF by Marcin Ziąbek CodeFlint'
         }
     },
 
