@@ -1,8 +1,31 @@
-<script setup>
+<script setup lang="ts">
 
-const standards = [
-  "PDF/A-2b", "PDF/A-2u", "PDF/A-2a",
-  "PDF/A-3b", "PDF/A-3u", "PDF/A-3a",
+interface Standard {
+  label: string;
+  name: string;
+  description: string;
+  badges: string[];
+}
+
+const standards : Standard[] = [
+  {
+    label: "Archival",
+    name: "PDF/A",
+    description: "ISO 19005 standard for long-term document preservation, ensuring your PDFs remain readable and visually identical for decades without external dependencies.",
+    badges: ["PDF/A-2b", "PDF/A-2u", "PDF/A-2a", "PDF/A-3b", "PDF/A-3u", "PDF/A-3a"]
+  },
+  {
+    label: "Accessibility",
+    name: "PDF/UA",
+    description: "ISO 14289 standard for universal accessibility with full support for screen readers and assistive technologies, ensuring your PDFs are usable by people with disabilities.",
+    badges: ["PDF/UA-1"]
+  },
+  {
+    label: "E-Invoicing",
+    name: "EN 16931",
+    description: "European standard for electronic invoicing. Embed structured invoice data (XML) within PDF documents for automated processing.",
+    badges: ["ZUGFeRD", "Factur-X"]
+  }
 ];
 
 </script>
@@ -21,53 +44,16 @@ const standards = [
     </div>
 
     <div class="standard-cards">
-      <div class="wide-card standard-card light-shadow">
+      <div v-for="standard in standards" class="wide-card standard-card light-shadow">
         <div class="card-header">
-          <span class="card-label">Archival</span>
-          <span class="card-standard">PDF/A</span>
+          <span class="card-label">{{ standard.label }}</span>
+          <span class="card-standard">{{ standard.name }}</span>
         </div>
-        <p class="card-description">
-          ISO 19005 standard for long-term document preservation, ensuring your PDFs remain readable and visually identical for decades without external dependencies.
-        </p>
+
+        <p class="card-description">{{ standard.description }}</p>
 
         <div class="standards-badges">
-          <span>PDF/A-2b</span>
-          <span>PDF/A-2u</span>
-          <span>PDF/A-2a</span>
-          <span>PDF/A-3b</span>
-          <span>PDF/A-3u</span>
-          <span>PDF/A-3a</span>
-        </div>
-      </div>
-
-      <div class="standard-card light-shadow">
-        <div class="card-header">
-          <span class="card-label">Accessibility</span>
-          <span class="card-standard">PDF/UA</span>
-        </div>
-        <p class="card-description">
-          ISO 14289 standard for universal accessibility.
-          Full support for screen readers and assistive technologies.
-        </p>
-
-        <div class="standards-badges">
-          <span>PDF/UA-1</span>
-        </div>
-      </div>
-
-      <div class="standard-card light-shadow">
-        <div class="card-header">
-          <span class="card-label">E-Invoicing</span>
-          <span class="card-standard">EN 16931</span>
-        </div>
-        <p class="card-description">
-          European standard for electronic invoicing.
-          Embed structured invoice data (XML) within PDF documents for automated processing.
-        </p>
-
-        <div class="standards-badges">
-          <span>ZUGFeRD</span>
-          <span>Factur-X</span>
+          <span v-for="badge in standard.badges">{{ badge }}</span>
         </div>
       </div>
     </div>
@@ -92,7 +78,7 @@ const standards = [
   margin-top: 16px;
 }
 
-.wide-card {
+.standard-cards > :first-child {
   grid-column: 1 / span 2;
 }
 
@@ -101,7 +87,7 @@ const standards = [
     grid-template-columns: 1fr;
   }
 
-  .wide-card {
+  .standard-cards > :first-child {
     grid-column: 1;
   }
 }

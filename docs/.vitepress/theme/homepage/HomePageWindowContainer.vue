@@ -41,7 +41,6 @@ const props = defineProps<{
   background-color: var(--vp-c-bg-alt);
 }
 
-
 .file-container-header .file-name {
   padding-left: 6px;
   font-size: 0.875rem;

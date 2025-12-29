@@ -4,11 +4,10 @@
       <div class="section-tag">Development Tool</div>
 
       <h2>Companion App</h2>
-
       <p class="sub-header">Accelerate development with live document preview and hot-reload capability. See your changes instantly without recompiling.</p>
 
       <div class="summary-list">
-        <article v-for="summary of SummaryContent" class="summary-item">
+        <article v-for="summary of summaryContent" class="summary-item">
           <img src="/homepage/square-check.svg" width="24" alt="" />
           <p>{{ summary }}</p>
         </article>
@@ -24,14 +23,7 @@
 
 <script setup>
 
-import {computed} from "vue";
-import {useData} from "vitepress";
-
-const { isDark } = useData();
-
-const mode = computed(() => isDark.value ? "dark" : "light");
-
-const SummaryContent = [
+const summaryContent = [
     "Explore PDF document structure and hierarchy",
     "Quickly magnify and measure content",
     "Debug runtime exceptions with stack traces and code snippets",

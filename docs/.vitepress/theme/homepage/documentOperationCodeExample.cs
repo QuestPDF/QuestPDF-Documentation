@@ -1,7 +1,7 @@
 DocumentOperation
     .LoadFile("input.pdf")
     .TakePages("1-10")
-    .MergeFile("appendix.pdf", "1-z") // all pages
+    .MergeFile("appendix.pdf")
     .AddAttachment(new DocumentAttachment
     {
         FilePath = "metadata.xml"
