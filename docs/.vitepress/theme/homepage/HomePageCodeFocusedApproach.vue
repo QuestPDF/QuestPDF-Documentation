@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, onMounted, onUnmounted, ref, watch} from "vue";
 
 import modularCode from './codeExamples/modularCode.cs?raw';
 import familiarConcepts from './codeExamples/familiarConcepts.cs?raw';
@@ -110,7 +110,12 @@ function updateActiveCard() {
   currentFeatureId.value = closestCard?.getAttribute('feature-id');
 }
 
-document.addEventListener('scroll', () => requestAnimationFrame(updateActiveCard));
+function handleScroll() {
+  requestAnimationFrame(updateActiveCard);
+}
+
+onMounted(() => document.addEventListener('scroll', handleScroll));
+onUnmounted(() => document.removeEventListener('scroll', handleScroll));
 
 </script>
 
