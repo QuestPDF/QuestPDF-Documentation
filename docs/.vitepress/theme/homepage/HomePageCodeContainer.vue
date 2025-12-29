@@ -28,7 +28,7 @@ async function highlightCode() {
   })
 }
 
-watch(() => [isDark, props.code, props.codeTransformer], highlightCode);
+watch(() => [isDark.value, props.code, props.codeTransformer], highlightCode);
 onMounted(highlightCode);
 
 </script>
