@@ -2,7 +2,7 @@
   <article class="content">
     <license-header />
 
-    <div class="licenses">
+    <div class="license-tiers">
       <section class="license-tier card" :class="license.name" v-for="license of licenses">
 
         <div class="popular">
@@ -112,7 +112,7 @@ const licenses = [
 
 <style scoped>
 
-.licenses {
+.license-tiers {
   margin-top: 64px;
 
   display: grid;
@@ -127,6 +127,9 @@ const licenses = [
   align-items: flex-start;
   height: 100%;
 }
+
+
+/* Popular highlight */
 
 .license-tier.professional {
   border: 1px solid #2196F3;
@@ -156,71 +159,12 @@ const licenses = [
   letter-spacing: 1px;
 }
 
-.license-tier header {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-gap: 24px;
-}
-
-.license-tier header img {
-  width: 48px;
-}
-
-.license-tier header h3 {
-  font-size: 1.5rem;
-  margin-top: 0;
-  margin-bottom: 8px;
-}
-
-.license-tier .price-value {
-  line-height: 2rem;
-  font-size: 2rem;
-
-  color: var(--vp-c-text-1) !important;
-  font-weight: 700;
-}
-
-.license-tier .price-per {
-  margin-top: 8px;
-
-  color: var(--vp-c-text-1) !important;
-  font-weight: 400;
-  margin-left: 8px;
-}
-
-.license-tier a.action {
-  align-self: flex-end;
-  margin-top: 32px;
-}
-
-.details {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.details-item {
-  break-inside: avoid-column;
-
-  display: flex;
-  flex-direction: row;
-  gap: 12px;
-  align-items: start;
-}
-
-.details-item p {
-  color: var(--vp-c-text-1) !important;
-  line-height: 1.5rem;
-  font-size: 1rem;
-}
-
-
-
 .license-tier.professional {
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 
+/* Tier name */
 
 .license-tier .tier-name {
   border-radius: 128px;
@@ -246,20 +190,84 @@ const licenses = [
   color: white;
 }
 
-html.dark .license-tier.community .tier-name {
-  color: #F5F5F5;
+html.dark {
+  .license-tier.community .tier-name {
+    color: #F5F5F5;
+  }
+
+  .license-tier.professional .tier-name {
+    background-color: #1976D2;
+    color: white;
+  }
+
+  .license-tier.enterprise .tier-name {
+    background-color: #EEEEEE;
+    color: #212121;
+  }
 }
 
-html.dark .license-tier.professional .tier-name {
-  background-color: #1976D2;
-  color: white;
+
+/* Tier price */
+
+.license-tier header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 24px;
 }
 
-html.dark .license-tier.enterprise .tier-name {
-  background-color: #EEEEEE;
-  color: #212121;
+.license-tier header h3 {
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 8px;
 }
 
+.license-tier .price-value {
+  line-height: 2rem;
+  font-size: 2rem;
+
+  color: var(--vp-c-text-1) !important;
+  font-weight: 700;
+}
+
+.license-tier .price-per {
+  margin-top: 8px;
+
+  color: var(--vp-c-text-1) !important;
+  font-weight: 400;
+  margin-left: 8px;
+}
+
+
+/* Tier details */
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.details-item {
+  break-inside: avoid-column;
+
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: start;
+}
+
+.details-item p {
+  color: var(--vp-c-text-1) !important;
+  line-height: 1.5rem;
+  font-size: 1rem;
+}
+
+.license-tier a.action {
+  align-self: flex-end;
+  margin-top: 32px;
+}
+
+
+/* Tier action */
 
 .license-tier.professional .action {
   background-color: #2196F3;
@@ -272,11 +280,6 @@ html.dark .license-tier.enterprise .tier-name {
   border: 1px solid #212121;
 }
 
-html.dark .license-tier.enterprise .action {
-  background-color: #EEEEEE;
-  color: #212121;
-}
-
 
 .license-tier.professional .action:hover {
   background-color: #42A5F5;
@@ -287,8 +290,15 @@ html.dark .license-tier.enterprise .action {
   background-color: white;
 }
 
-html.dark .license-tier.enterprise .action:hover {
-  background-color: white;
+html.dark {
+  .license-tier.enterprise .action {
+    background-color: #EEEEEE;
+    color: #212121;
+  }
+
+  .license-tier.enterprise .action:hover {
+    background-color: white;
+  }
 }
 
 </style>

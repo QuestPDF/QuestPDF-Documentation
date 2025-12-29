@@ -42,22 +42,19 @@ const terms = [
       <p class="sub-header">Enjoy perpetual ownership, zero-configuration deployment, and strict compliance standards designed for modern business.</p>
     </div>
 
-
-    <div class="terms">
-
-      <article class="term reverse-background card" v-for="term of terms" :key="term.title">
+    <div class="license-terms">
+      <article class="license-term card" v-for="term of terms" :key="term.title">
         <img class="icon" :src="term.icon" alt="" />
         <h3 class="title">{{ term.title }}</h3>
         <p class="description" v-html="term.description" />
       </article>
-
     </div>
   </article>
 </template>
 
 <style scoped>
 
-.terms {
+.license-terms {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 32px;
@@ -66,34 +63,31 @@ const terms = [
 }
 
 @media screen and (max-width: 700px) {
-  .terms {
+  .license-terms {
     grid-template-columns: 1fr;
     grid-gap: 64px;
   }
 }
 
-.term {
+.license-term {
   display: flex;
   flex-direction: column;
 }
 
-
-
 @media screen and (max-width: 1000px) {
-  .term {
+  .license-term {
     grid-gap: 12px 0;
   }
 }
 
-.term img.icon {
+.license-term img.icon {
   justify-self: start;
   align-self: start;
   height: 48px;
   width: 48px;
 }
 
-
-.term p.description {
+.license-term p.description {
   grid-area: description;
 
   justify-self: start;

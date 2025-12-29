@@ -21,10 +21,4 @@
   align-items: center;
 }
 
-p {
-  font-size: 1.125rem;
-  line-height: 2rem;
-  margin-bottom: 12px;
-}
-
 </style>

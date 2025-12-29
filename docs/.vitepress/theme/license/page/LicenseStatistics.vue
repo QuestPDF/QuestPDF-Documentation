@@ -93,7 +93,6 @@ const statistics = [
 .statistic span.value {
   margin: 0;
 
-  font-family: var(--vp-font-family-base);
   color: var(--vp-c-text-1);
   font-size: 1.75rem;
   font-weight: 600;
@@ -108,13 +107,12 @@ const statistics = [
 }
 
 @media screen and (max-width: 700px) {
-  .statistic img.icon {
-    height: 48px;
-    width: 48px;
-  }
-
   .statistic span.value {
     font-size: 1.5rem;
+  }
+
+  .statistic span.label {
+    font-size: 1rem;
   }
 }
 
