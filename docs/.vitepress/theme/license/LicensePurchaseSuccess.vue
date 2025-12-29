@@ -1,4 +1,24 @@
 <script setup>
+import { computed } from 'vue';
+
+const shareEmailSubject = 'QuestPDF License Purchased – Configuration Guide';
+const shareEmailBody = `Hi Team,
+
+We have successfully purchased the QuestPDF license. You are now fully compliant to use the library in production.
+
+Action Required:
+Please update your application configuration. Setup is a single line of code, and no license keys are required.
+
+Implementation Guide:
+https://www.questpdf.com/license/configuration
+
+Best regards,`;
+
+const shareMailtoLink = computed(() => {
+  const subject = encodeURIComponent(shareEmailSubject);
+  const body = encodeURIComponent(shareEmailBody);
+  return `mailto:?subject=${subject}&body=${body}`;
+});
 
 const licenseDetails = [
   {
@@ -54,7 +74,7 @@ const orderDetails = [
             </li>
           </ul>
 
-          <a class="action primary" href="/license/configuration" target="_blank" style="margin-top: 16px">Share with your team</a>
+          <a class="action primary" :href="shareMailtoLink" style="margin-top: 16px">Share with your team</a>
         </section>
 
         <section class="success-card card">
