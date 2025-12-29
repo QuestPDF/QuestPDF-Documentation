@@ -263,7 +263,6 @@ onUnmounted(() => observer.value?.disconnect());
     <template v-if="showAnimation">
       <p class="sub-header" style="display: flex; flex-direction: row; align-items: center; gap: 16px;">
         <span class="highlight-background shine">{{ title }}</span>
-        <img v-if="isAnimationRunning && tutorialStepNumber == 1" src="/homepage/spinner-third-solid.svg" class="loading-icon">
       </p>
 
       <div class="animation-container">

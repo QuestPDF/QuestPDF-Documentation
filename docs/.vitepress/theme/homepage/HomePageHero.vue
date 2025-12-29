@@ -1,5 +1,5 @@
 <script setup>
-import helloWorldExample from './helloWorldExample.cs?raw';
+import helloWorldExample from './codeExamples/helloWorld.cs?raw';
 import HomePageCodeContainer from "./HomePageCodeContainer.vue";
 
 </script>

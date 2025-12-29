@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import documentOperationCode from './documentOperationCodeExample.cs?raw';
+import documentOperationCode from './codeExamples/documentOperations.cs?raw';
 import HomePageCodeContainer from "./HomePageCodeContainer.vue";
 
 const SummaryContent = [
