@@ -39,21 +39,17 @@ const SummaryContent = [
 
 <style scoped>
 
-.license-background {
-  content: "";
-  position: absolute;
-  place-self: center;
-  align-self: center;
+  .license-background {
+    content: "";
+    position: absolute;
+    place-self: center;
+    align-self: center;
 
-  top: -30%;
-  width: 140%;
-  height: 120%;
-  border-radius: 50%;
-  z-index: -1000;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 20%, rgba(103, 184, 77, 0.15) 0%, transparent 50%);
-  filter: blur(40px);
-}
+    top: -50%;
+    width: 150%;
+    height: 100%;
+    background: radial-gradient(ellipse, rgba(103, 184, 77, 0.15) 0%, transparent 50%);
+  }
 
   .license-icon {
     place-self: center;
@@ -66,7 +62,7 @@ const SummaryContent = [
     padding: 12px 16px;
     color: #1B5E20;
     background-color: #67B84D33;
-    margin-top: 1.25rem;
+    margin-top: 32px;
 
     max-width: 500px;
     place-self: center;
@@ -77,7 +73,7 @@ const SummaryContent = [
   }
 
   .action {
-    margin-top: 1.25rem;
+    margin-top: 32px;
   }
 
   @media screen and (max-width: 400px) {
@@ -109,8 +105,6 @@ const SummaryContent = [
     align-items: center;
   }
 
-
-
   /* License button */
 
   .action.pricing-button {
@@ -130,4 +124,5 @@ const SummaryContent = [
   html.dark .action.pricing-button:hover {
     background-color: #66BB6A;
   }
+
 </style>

@@ -44,8 +44,8 @@ onMounted(highlightCode);
   font-size: 14px;
   line-height: 1.5;
   padding: 8px 0;
-
   tab-size: 4;
+  overflow: hidden;
 }
 
 .code-source pre {
@@ -63,7 +63,6 @@ onMounted(highlightCode);
   .code-source {
     font-size: 12px;
     line-height: 1.25;
-    overflow: scroll;
   }
 }
 
