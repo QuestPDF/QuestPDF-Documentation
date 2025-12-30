@@ -36,12 +36,6 @@ const statistics = [
         label: "NuGet downloads",
         link: "https://www.nuget.org/packages/QuestPDF/",
         value: "15M"
-    },
-    {
-        icon: "fa-duotone fa-calendar-circle-plus",
-        label: "Years of experience",
-        link: "https://www.nuget.org/packages/QuestPDF#versions-body-tab",
-        value: "5+"
     }
 ];
 

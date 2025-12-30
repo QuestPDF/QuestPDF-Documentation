@@ -70,7 +70,7 @@ onMounted(highlightCode);
 .code-source .line {
   display: inline-block;
   padding: 0 16px;
-  width: calc(100% + 2 * 16px);
+  width: calc(100%);
 }
 
 .code-source .line-highlighted {
@@ -89,5 +89,9 @@ onMounted(highlightCode);
   background-color: #4CAF5022;
   border-left: 3px solid #4CAF50AA;
   padding-left: calc(1rem - 3px);
+}
+
+.shiki {
+  overflow-x: auto !important;
 }
 </style>
