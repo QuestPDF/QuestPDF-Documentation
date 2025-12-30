@@ -124,6 +124,12 @@ const licenses = [
   height: 100%;
 }
 
+html.dark {
+  .license-tier.professional {
+    background-color: #1c1c22;
+  }
+}
+
 
 /* Popular highlight */
 
