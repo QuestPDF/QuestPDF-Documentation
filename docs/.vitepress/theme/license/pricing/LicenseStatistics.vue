@@ -9,7 +9,7 @@
       <template v-for="statistic in statistics" :key="statistic.label">
         <a :href="statistic.link" target="_blank">
           <article class="statistic">
-            <img class="icon" :src="statistic.icon" alt="" />
+            <i class="fa-2xl" :class="[statistic.icon]"></i>
 
             <div class="title">
               <span class="value">{{ statistic.value }}</span>
@@ -26,19 +26,19 @@
 
 const statistics = [
     {
-        icon: "/license/statistics/github.svg",
+        icon: "fa-duotone fa-star",
         label: "GitHub stars",
         link: "https://github.com/QuestPDF/QuestPDF",
         value: "14K"
     },
     {
-        icon: "/license/statistics/nuget.svg",
+        icon: "fa-duotone fa-download",
         label: "NuGet downloads",
         link: "https://www.nuget.org/packages/QuestPDF/",
         value: "15M"
     },
     {
-        icon: "/license/statistics/experience.svg",
+        icon: "fa-duotone fa-calendar-circle-plus",
         label: "Years of experience",
         link: "https://www.nuget.org/packages/QuestPDF#versions-body-tab",
         value: "5+"
@@ -74,11 +74,6 @@ const statistics = [
   border: 1px solid #8882;
   border-radius: 12px;
   padding: 24px;
-}
-
-.statistic img.icon {
-  height: 48px;
-  width: 48px;
 }
 
 .statistic .title {

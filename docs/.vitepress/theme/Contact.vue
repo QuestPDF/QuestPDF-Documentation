@@ -1,40 +1,64 @@
 <script setup lang="ts">
+interface Link {
+  href: string;
+  label: string;
+}
+
 interface ContactInformation {
-    image: string;
+    icon: string;
     title: string;
     description: string;
-    link: string;
-    linkLabel: string;
+    links: Link[];
 }
 
 const contacts: ContactInformation[] = [
   {
-    image: "/contact/github.svg",
+    icon: "fa-duotone fa-user-group",
     title: "Community Support",
     description: "Encountering an issue or have a feature idea? Join our community on GitHub. It is the best place to report bugs, discuss improvements, and share your insights with other developers.",
-    link: "https://github.com/QuestPDF/QuestPDF",
-    linkLabel: "Visit GitHub"
+    links: [
+      {
+        label: "Open GitHub",
+        href: "https://github.com/QuestPDF/QuestPDF"
+      }
+    ]
   },
   {
-    image: "/contact/customer-portal.svg",
+    icon: "fa-duotone fa-id-card",
     title: "Customer Portal",
     description: "Access your subscription details, download invoices, update payment methods, or manage your license. Our customer portal provides a convenient way to handle all your account needs in one place.",
-    link: "https://customer-portal.paddle.com/login/cpl_01gmdq0qdr8madhdchknpb52we",
-    linkLabel: "Open Portal"
+    links: [
+      {
+        label: "Open Customer Portal",
+        href: "https://customer-portal.paddle.com/login/cpl_01gmdq0qdr8madhdchknpb52we"
+      }
+    ]
   },
   {
-    image: "/contact/paddle.svg",
+    icon: "fa-duotone fa-credit-card",
     title: "Payment Support",
     description: "We partner with Paddle to guarantee secure payments and global tax compliance. Please reach out to their team directly for assistance with invoices, billing inquiries, or returns.",
-    link: "https://www.paddle.com/about/procurement",
-    linkLabel: "Go to Paddle"
+    links: [
+      {
+        label: "Show Paddle details",
+        href: "https://www.paddle.com/about/procurement"
+      },
+      {
+        label: "Contact with Paddle",
+        href: "help@paddle.com"
+      }
+    ]
   },
   {
-    image: "/contact/email.svg",
+    icon: "fa-duotone fa-envelope",
     title: "Get in Touch",
     description: "Have a question about licensing, or just want to share feedback? Send us an email. We value your input and are always happy to help with non-technical inquiries or dedicated support.",
-    link: "mailto:contact@questpdf.com",
-    linkLabel: "Contact Us"
+    links: [
+      {
+        label: "Contact Us",
+        href: "mailto:contact@questpdf.com"
+      }
+    ]
   }
 ]
 </script>
@@ -47,16 +71,18 @@ const contacts: ContactInformation[] = [
         <section class="contacts">
           <template v-for="contact of contacts" :key="contact">
             <article class="card">
-              <img :src="contact.image" alt="">
+              <i class="fa-2xl" :class="[contact.icon]"></i>
               <h3>{{ contact.title }}</h3>
               <p>{{ contact.description }}</p>
 
-              <a class="action" :href="contact.link" target="_blank" style="margin-top: 16px">{{ contact.linkLabel }}</a>
+              <div class="links">
+                <a v-for="link in contact.links" class="action" :href="link.href" target="_blank">{{ link.label }}</a>
+              </div>
             </article>
           </template>
 
           <article class="card business-details">
-            <img src="/contact/heart.svg" alt="">
+            <i class="love-icon fa-duotone fa-heart fa-swap-opacity fa-2xl"></i>
             <h3>QuestPDF is owned and proudly developed by:</h3>
             <p>Marcin Ziąbek CodeFlint</p>
             <p>Chrzanowska 29<br>32-551 Mętków<br>Poland</p>
@@ -84,8 +110,17 @@ const contacts: ContactInformation[] = [
   }
 }
 
-img {
-  height: 48px;
+.links {
+  display: flex;
+  flex-direction: row;
+  place-self: end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.love-icon {
+  background-color: #F4433622 !important;
+  color: #F44336BB !important;
 }
 
 .business-details p {

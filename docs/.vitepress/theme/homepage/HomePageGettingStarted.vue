@@ -12,14 +12,14 @@
 
       <div class="features">
         <div v-for="feature in features" class="feature-item">
-          <img src="/homepage/list-check.svg" width="24" alt="" />
+          <i class="fa-duotone fa-square-check"></i>
           <span>{{ feature }}</span>
         </div>
       </div>
 
       <a class="action primary" href="/getting-started">
-        Start the tutorial
-        <img src="/homepage/getting-started/arrow-right.svg" width="20px" alt="" />
+        Start Tutorial
+        <i class="fa-solid fa-arrow-right arrow-icon"></i>
       </a>
     </div>
 
@@ -72,7 +72,6 @@ const features = [
 
   .feature-item {
     display: flex;
-    align-items: center;
     gap: 12px;
     color: var(--vp-c-text-2);
   }
@@ -86,11 +85,13 @@ const features = [
     gap: 8px;
   }
 
-  .action.primary img {
+  .arrow-icon {
+    font-size: 16px;
     transition: transform 0.2s ease;
+    color: white;
   }
 
-  .action.primary:hover img {
+  .action.primary:hover .arrow-icon {
     transform: translateX(4px);
   }
 

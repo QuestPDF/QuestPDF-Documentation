@@ -8,7 +8,7 @@
 
       <div class="summary-list">
         <article v-for="summary of summaryContent" class="summary-item">
-          <img src="/homepage/list-check.svg" width="24" alt="" />
+          <i class="fa-duotone fa-square-check"></i>
           <p>{{ summary }}</p>
         </article>
       </div>
@@ -79,7 +79,6 @@ html.dark .companion-image.light {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-gap: 12px;
-  align-items: center;
 }
 
 </style>

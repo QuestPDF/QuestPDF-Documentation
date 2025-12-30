@@ -29,6 +29,9 @@
 }
 
 .custom-page .card {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
   border: 1px solid #8882;
   background-color: var(--vp-c-bg);
@@ -129,6 +132,40 @@ span.highlight-background {
   padding: 4px 8px;
 }
 
+.custom-page {
+  .fa-duotone, .fa-solid {
+    color: #2196F3;
+  }
+
+  .fa-2xl {
+    background-color: #2196F322;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 32px;
+    height: 56px;
+    min-width: 56px;
+    text-align: center;
+    line-height: 32px;
+  }
+
+  .fa-square-check {
+    font-size: 24px;
+    --fa-secondary-opacity: 0.2;
+  }
+
+  .fa-money-bill-transfer {
+    --fa-secondary-opacity: 0.6;
+  }
+
+  .fa-star {
+    --fa-secondary-opacity: 0.9;
+  }
+
+  .fa-calendar-circle-plus {
+    --fa-secondary-opacity: 0.6;
+  }
+}
+
 .custom-page p a:not(.action) {
   color: var(--vp-c-brand-1);
 }
@@ -140,6 +177,7 @@ span.highlight-background {
 a.action {
   display: inline-block;
   text-align: center;
+  align-items: center;
   font-weight: 500;
   white-space: nowrap;
 
@@ -147,31 +185,25 @@ a.action {
   padding: 0 20px;
   line-height: 38px;
 
-  background-color: var(--vp-button-alt-bg);
-
+  background-color: #8883;
 
   color: var(--vp-c-text-1);
   font-size: 1rem;
 }
 
 a.action:hover {
-  border-color: var(--vp-button-alt-hover-border);
-  color: var(--vp-button-alt-hover-text);
-  background-color: var(--vp-button-alt-hover-bg);
+  background-color: #8885;
   cursor: pointer;
 }
 
 a.action.primary {
-  border-color: #2196F3;
-  color: var(--vp-button-brand-text);
+  color: #FFF;
   background-color: #2196F3;
   font-weight: bold;
 }
 
 a.action.primary:hover {
-  border-color: var(--vp-button-brand-hover-border);
-  color: var(--vp-button-brand-hover-text);
-  background-color: var(--vp-button-brand-hover-bg);
+  background-color: #1E88E5
 }
 
 @media screen and (max-width: 700px) {

@@ -11,7 +11,7 @@ const SummaryContent = [
   <section class="content">
 
     <div class="license-background" />
-    <img src="/homepage/license.svg" class="license-icon" alt="Example invoice document implemented and generated with QuestPDF using C# language." />
+      <i class="fa-duotone fa-file-certificate license-icon"></i>
 
       <div class="section-header">
         <h2>Fair and Sustainable License</h2>
@@ -20,7 +20,7 @@ const SummaryContent = [
 
       <div class="summary-list">
         <article v-for="summary of SummaryContent" class="summary-item">
-          <img src="/homepage/license-check.svg" width="24" alt="" />
+          <i class="fa-duotone fa-square-check license-check-icon"></i>
           <p>{{ summary }}</p>
         </article>
       </div>
@@ -39,6 +39,12 @@ const SummaryContent = [
 
 <style scoped>
 
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .license-background {
     content: "";
     position: absolute;
@@ -52,9 +58,14 @@ const SummaryContent = [
   }
 
   .license-icon {
-    place-self: center;
-    width: 64px;
+    font-size: 64px;
     margin-bottom: 32px;
+    color: #67B84D;
+  }
+
+  .license-check-icon {
+    font-size: 24px;
+    color: #4CAF50;
   }
 
   .license-description {
@@ -78,7 +89,7 @@ const SummaryContent = [
 
   @media screen and (max-width: 400px) {
     .license-icon {
-      width: 48px;
+      font-size: 48px;
     }
   }
 
@@ -102,7 +113,6 @@ const SummaryContent = [
     display: grid;
     grid-template-columns: auto 1fr;
     grid-gap: 12px;
-    align-items: center;
   }
 
   /* License button */

@@ -28,15 +28,15 @@
 
         <div class="details">
           <div v-for="detail of license.details" class="details-item">
-            <img src="/license/tier-details-check.svg" width="24" alt="" />
+            <i class="fa-duotone fa-square-check"></i>
             <p>{{ detail }}</p>
           </div>
         </div>
 
         <div style="flex-grow: 1"></div>
 
-        <a v-if="license.price" class="action" @click="paddle.startCheckout(license.paddlePriceId)">Purchase license</a>
-        <a v-else class="action" href="/getting-started.html">Start creating</a>
+        <a v-if="license.price" class="action" @click="paddle.startCheckout(license.paddlePriceId)">Purchase License</a>
+        <a v-else class="action" href="/getting-started.html">Start Creating</a>
       </section>
     </div>
   </article>
@@ -257,13 +257,14 @@ html.dark {
   font-size: 1rem;
 }
 
-.license-tier a.action {
-  align-self: flex-end;
-  margin-top: 32px;
-}
-
 
 /* Tier action */
+
+
+.license-tier a.action {
+  align-self: end;
+  margin-top: 24px;
+}
 
 .license-tier.professional .action {
   background-color: #2196F3;

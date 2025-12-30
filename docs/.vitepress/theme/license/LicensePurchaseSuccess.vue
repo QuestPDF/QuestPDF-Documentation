@@ -53,7 +53,7 @@ const orderDetails = [
     <div class="container reverse-background">
       <div class="content">
         <header class="section-header">
-          <img src="/license/purchase-success.svg" class="success-icon" alt="" />
+          <i class="fa-duotone fa-square-check success-icon"></i>
           <h1>Order completed</h1>
           <p class="sub-header">Thank you for purchasing the QuestPDF license</p>
         </header>
@@ -61,39 +61,41 @@ const orderDetails = [
         <section class="success-card card">
           <h3>License information</h3>
 
-          <ul class="next-steps">
-            <li v-for="step in licenseDetails" :key="step.title">
-              <div class="step-content">
+          <div class="description-items">
+            <div v-for="step in licenseDetails" :key="step.title" class="description-item">
+              <i class="fa-duotone fa-square-check list-check-icon"></i>
+              <div class="description-item-content">
                 <strong>{{ step.title }}</strong>
                 <span>{{ step.description }}</span>
                 <a v-if="step.link" :href="step.link" class="step-link">
                   {{ step.linkText }}
-                  <img src="/homepage/getting-started/arrow-right.svg" width="14" alt="" />
+                  <i class="fa-solid fa-arrow-right"></i>
                 </a>
               </div>
-            </li>
-          </ul>
+            </div>
+          </div>
 
-          <a class="action primary" :href="shareMailtoLink" style="margin-top: 16px">Share with your team</a>
+          <a class="action primary" :href="shareMailtoLink">Share With Your Team</a>
         </section>
 
         <section class="success-card card">
           <h3>Payment management</h3>
 
-          <ul class="next-steps">
-            <li v-for="step in orderDetails" :key="step.title">
-              <div class="step-content">
+          <div class="description-items">
+            <div v-for="step in orderDetails" :key="step.title" class="description-item">
+              <i class="fa-duotone fa-square-check list-check-icon"></i>
+              <div class="description-item-content">
                 <strong>{{ step.title }}</strong>
                 <span>{{ step.description }}</span>
                 <a v-if="step.link" :href="step.link" class="step-link">
                   {{ step.linkText }}
-                  <img src="/homepage/getting-started/arrow-right.svg" width="14" alt="" />
+                  <i class="fa-solid fa-arrow-right"></i>
                 </a>
               </div>
-            </li>
-          </ul>
+            </div>
+          </div>
 
-          <a class="action" href="https://customer-portal.paddle.com/cpl_01gmdq0qdr8madhdchknpb52we" target="_blank" style="margin-top: 16px">Open Customer Portal</a>
+          <a class="action" href="https://customer-portal.paddle.com/cpl_01gmdq0qdr8madhdchknpb52we" target="_blank">Open Customer Portal</a>
         </section>
 
         <section class="success-card card">
@@ -103,7 +105,7 @@ const orderDetails = [
             If you have any questions, please contact us. We are happy to help you with any issues you may be facing.
           </p>
 
-          <a class="action" href="mailto:contact@questpdf.com" target="_blank" style="margin-top: 16px">Contact support</a>
+          <a class="action" href="mailto:contact@questpdf.com" target="_blank">Contact Support</a>
         </section>
       </div>
     </div>
@@ -130,8 +132,9 @@ header {
   align-items: center;
 }
 
-header img {
-  width: 64px;
+.success-icon {
+  font-size: 64px;
+  color: #4CAF50;
 }
 
 header h1 {
@@ -143,7 +146,7 @@ header h1 {
   margin-top: 0;
 }
 
-.next-steps {
+.description-items {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -152,69 +155,35 @@ header h1 {
   gap: 12px;
 }
 
-.next-steps li {
+.description-item  {
   display: grid;
   grid-template-columns: 24px 1fr;
   gap: 16px;
   padding: 16px 0;
 }
 
-.next-steps li::before {
-  content: "";
-  width: 24px;
-  height: 24px;
-  background-image: url('/homepage/list-check.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.step-content {
+.description-item-content {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.step-content strong {
+.description-item-content strong {
   color: var(--vp-c-text-2);
   font-weight: 600;
   font-size: 1rem;
   line-height: 1.5;
 }
 
-.step-content span {
+.description-item-content span {
   color: var(--vp-c-text-2);
   line-height: 1.6;
   font-size: 0.9375rem;
 }
 
-.step-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 6px;
-  color: var(--vp-c-brand-1);
-  font-weight: 500;
-  font-size: 0.875rem;
-  transition: gap 0.2s ease;
-}
-
-.step-link:hover {
-  color: var(--vp-c-brand-2);
-  gap: 10px;
-}
-
-@media screen and (max-width: 500px) {
-  .header {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .success-icon {
-    width: 48px;
-    height: 48px;
-  }
+a.action {
+  margin-top: 24px;
+  place-self: end;
 }
 
 </style>
