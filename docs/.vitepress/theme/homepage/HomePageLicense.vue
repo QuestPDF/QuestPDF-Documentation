@@ -1,6 +1,6 @@
 <script setup>
 const SummaryContent = [
-  "Actively maintained with regular feature, quality, and security updates.",
+  "Actively maintained with regular feature, quality, and security updates",
   "Full source code available on GitHub",
   "All features included in every tier without restrictions",
   "Predictable pricing: no per-seat, per-server, or usage fees"
