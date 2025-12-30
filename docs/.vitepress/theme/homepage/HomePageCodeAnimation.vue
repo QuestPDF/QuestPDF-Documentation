@@ -6,15 +6,6 @@ import HomePageCodeContainer from "./HomePageCodeContainer.vue";
 import HomePageWindowContainer from "./HomePageWindowContainer.vue";
 import {ShikiTransformer} from "@shikijs/types";
 
-const { isDark } = useData();
-
-const showAnimation = ref(false);
-
-function playAnimation() {
-  showAnimation.value = true;
-  animate();
-}
-
 const code = ref('');
 const highlightedLines = ref<{start: number; end: number} | null>(null);
 
@@ -238,7 +229,6 @@ async function animate() {
 }
 
 function startAnimation() {
-  showAnimation.value = true;
   isAnimationRunning.value = true;
   resetAnimation();
   animate();
@@ -249,6 +239,10 @@ function startAnimation() {
 const observer = ref<IntersectionObserver | null>(null);
 
 onMounted(() => {
+  resetAnimation();
+  isAnimationRunning.value = true;
+  animate();
+
   observer.value = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       isAnimationRunning.value = entry.isIntersecting;
@@ -258,8 +252,6 @@ onMounted(() => {
   const target = document.querySelector('#homepage-quick-start-animation');
   observer.value.observe(target);
 });
-
-onMounted(startAnimation);
 
 onUnmounted(() => isAnimationRunning.value = false);
 
