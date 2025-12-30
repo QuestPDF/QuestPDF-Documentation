@@ -3,7 +3,7 @@
     <template #header>
       <h1><span class="highlight-foreground">QuestPDF</span> Terms of Service</h1>
 
-      <p class="description">Our goal is to offer a superior user experience.</p>
+      <p class="sub-header">Our goal is to offer a superior user experience.</p>
     </template>
 
     <template #content>

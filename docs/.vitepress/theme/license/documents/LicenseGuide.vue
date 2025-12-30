@@ -3,9 +3,9 @@
     <template #header>
       <h1><span class="highlight-foreground">QuestPDF</span> License Selection Guide</h1>
 
-      <p class="description">Welcome to QuestPDF! This guide will help you understand how to select the appropriate license for our library, based on your usage context.</p>
+      <p class="sub-header">Welcome to QuestPDF! This guide will help you understand how to select the appropriate license for our library, based on your usage context.</p>
 
-      <p class="description">The licensing options for QuestPDF include the Community MIT license (which is free), and two tiers of paid licenses: the Professional License and the Enterprise License.</p>
+      <p class="sub-header">The licensing options for QuestPDF include the Community MIT license (which is free), and two tiers of paid licenses: the Professional License and the Enterprise License.</p>
 
       <a class="action primary" href="/license/" style="margin-top: 16px;">Purchase license</a>
     </template>

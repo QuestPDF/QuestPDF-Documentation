@@ -3,7 +3,7 @@
     <template #header>
       <h1><span class="highlight-foreground">QuestPDF</span> Privacy Policy</h1>
 
-      <p class="description">We do our best to treat you and your personal information responsibly.</p>
+      <p class="sub-header">We do our best to treat you and your personal information responsibly.</p>
     </template>
 
     <template #content>

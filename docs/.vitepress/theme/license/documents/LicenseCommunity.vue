@@ -3,9 +3,9 @@
     <template #header>
       <h1><span class="highlight-foreground">QuestPDF</span> Community MIT License</h1>
 
-      <p class="description">QuestPDF hereby grants you a non-exclusive license to the QuestPDF Software Library for .NET ("the Software").</p>
+      <p class="sub-header">QuestPDF hereby grants you a non-exclusive license to the QuestPDF Software Library for .NET ("the Software").</p>
 
-      <p class="description">Please kindly check if you are eligible to use this license.</p>
+      <p class="sub-header">Please kindly check if you are eligible to use this license.</p>
 
       <a class="action primary" href="/license" style="margin-top: 16px;">Learn more</a>
     </template>

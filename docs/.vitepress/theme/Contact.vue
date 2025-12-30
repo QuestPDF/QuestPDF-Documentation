@@ -16,18 +16,18 @@ const contacts: ContactInformation[] = [
     linkLabel: "Visit GitHub"
   },
   {
-    image: "/contact/paddle.svg",
-    title: "Payment Support",
-    description: "We partner with Paddle to guarantee secure payments and global tax compliance. Please reach out to their team directly for assistance with invoices, billing inquiries, or returns.",
-    link: "https://www.paddle.com/about/procurement",
-    linkLabel: "Go to Paddle"
-  },
-  {
     image: "/contact/customer-portal.svg",
     title: "Customer Portal",
     description: "Access your subscription details, download invoices, update payment methods, or manage your license. Our customer portal provides a convenient way to handle all your account needs in one place.",
     link: "https://customer-portal.paddle.com/login/cpl_01gmdq0qdr8madhdchknpb52we",
     linkLabel: "Open Portal"
+  },
+  {
+    image: "/contact/paddle.svg",
+    title: "Payment Support",
+    description: "We partner with Paddle to guarantee secure payments and global tax compliance. Please reach out to their team directly for assistance with invoices, billing inquiries, or returns.",
+    link: "https://www.paddle.com/about/procurement",
+    linkLabel: "Go to Paddle"
   },
   {
     image: "/contact/email.svg",
