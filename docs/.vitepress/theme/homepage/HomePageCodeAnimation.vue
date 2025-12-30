@@ -259,28 +259,20 @@ onMounted(() => {
   observer.value.observe(target);
 });
 
+onMounted(startAnimation);
+
 onUnmounted(() => isAnimationRunning.value = false);
 
 </script>
 
 <template>
   <section class="content" id="homepage-quick-start-animation">
-    <div>
-      <h2 id="introduction">Get Started in Minutes</h2>
-
-      <p class="sub-header" style="max-width: 900px;">
-        Follow a short, step-by-step demo: create a document structure, plug in your data, and generate consistent PDF output using the C# Fluent API.
-      </p>
-
-      <a v-if="!showAnimation" @click="startAnimation" class="action primary">
-        <i class="fa-solid fa-play" style="color: white;" />
-        Watch Live Demo
-        <div class="divider" />
-        <span style="font-weight: 400;">~90 sec</span>
-      </a>
+    <div class="section-header">
+      <h2>Experience the Simplicity</h2>
+      <p class="sub-header">See how QuestPDF's fluent API lets you build professional documents with just a few lines of readable, intuitive C# code.</p>
     </div>
 
-    <div v-if="showAnimation" class="animation-container">
+    <div class="animation-container">
       <home-page-code-container file-name="HelloWorld.cs" :code="code" :code-transformer="codeTransformer" />
 
       <home-page-window-container file-name="Preview.pdf">

@@ -1,15 +1,11 @@
 <template>
   <div class="custom-page home-page">
     <div class="container hero-container">
-      <HomePageHero />
+      <HomePageHero @play-code-animation="startCodeAnimation" />
     </div>
 
-    <div class="container reverse-background reveal-animation">
+    <div v-if="showCodingAnimation" ref="codeAnimationContainer" class="container reverse-background">
       <HomePageCodeAnimation />
-    </div>
-
-    <div class="container reveal-animation">
-      <HomePageStatistics />
     </div>
 
     <div class="container reverse-background reveal-animation">
@@ -46,7 +42,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
 import HomePageFeatures from "./HomePageFeatures.vue";
 import HomePageGettingStarted from "./HomePageGettingStarted.vue";
@@ -57,8 +53,27 @@ import HomePageCodeFocusedApproach from "./HomePageCodeFocusedApproach.vue";
 import HomePageCompanion from "./HomePageCompanion.vue";
 import HomePageCodeAnimation from "./HomePageCodeAnimation.vue";
 import HomePageHero from "./HomePageHero.vue";
-import {onMounted} from "vue";
+import {nextTick, onMounted, ref} from "vue";
 import HomePageStandardCompliance from "./HomePageStandardCompliance.vue";
+
+const showCodingAnimation = ref(false);
+
+const codeAnimationContainer = ref<Element>();
+
+async function startCodeAnimation() {
+  if (!window)
+    return;
+
+  showCodingAnimation.value = true;
+  await nextTick();
+
+  const itemVerticalPosition = codeAnimationContainer.value.getBoundingClientRect().y;
+
+  window.scrollTo({
+    top: itemVerticalPosition,
+    behavior: "auto"
+  });
+}
 
 /* Reveal animation */
 
@@ -150,6 +165,12 @@ onMounted(() => {
   color: var(--vp-c-brand-1);
   width: fit-content;
   text-transform: uppercase;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--vp-c-divider);
+  margin: 48px 0;
 }
 
 </style>

@@ -1,6 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import helloWorldExample from './codeExamples/helloWorld.cs?raw';
 import HomePageCodeContainer from "./HomePageCodeContainer.vue";
+
+const emit = defineEmits<{
+  (e: 'playCodeAnimation'): void
+}>()
 
 </script>
 
@@ -19,7 +23,7 @@ import HomePageCodeContainer from "./HomePageCodeContainer.vue";
       </div>
 
       <div class="cta-buttons">
-        <a class="action primary" href="/getting-started">
+        <a class="action primary" @click="emit('playCodeAnimation')">
           <i class="fa-solid fa-play" style="color: white;" />
           Watch Live Demo
           <div class="divider"></div>
@@ -27,7 +31,7 @@ import HomePageCodeContainer from "./HomePageCodeContainer.vue";
         </a>
 
         <a class="action" href="/getting-started">
-          Get Started
+          Read Getting Started Tutorial
         </a>
       </div>
 
