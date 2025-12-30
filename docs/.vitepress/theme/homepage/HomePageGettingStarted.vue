@@ -6,7 +6,7 @@
     <div class="description">
       <div class="section-tag">Example project</div>
 
-      <h2>See a <span class="highlight-foreground">real-world</span> example</h2>
+      <h2>See a real-world example</h2>
 
       <p class="sub-header">Follow our detailed tutorial and see how easy it is to generate a fully functional invoice with fewer than 250 lines of C# code.</p>
 
