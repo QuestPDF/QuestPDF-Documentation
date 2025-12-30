@@ -35,7 +35,7 @@ const props = defineProps<{
   flex-direction: row;
   align-items: center;
   gap: 6px;
-  padding: 12px 16px;
+  padding: 8px 16px;
 
   border-bottom: 1px solid var(--vp-c-divider);
   background-color: var(--vp-c-bg-alt);
