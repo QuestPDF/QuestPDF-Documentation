@@ -94,4 +94,5 @@ onMounted(highlightCode);
 .shiki {
   overflow-x: auto !important;
 }
+
 </style>
