@@ -23,11 +23,11 @@ const shareMailtoLink = computed(() => {
 const licenseDetails = [
   {
     title: "Ready to use",
-    description: "No license keys, activation servers, or compliance tracking. Your team can start immediately—licensing never blocks builds or deployments."
+    description: "No license keys, activation servers, or compliance tracking. Your team can start immediately - licensing never blocks builds or deployments."
   },
   {
-    title: "Share with your development team",
-    description: "Forward the configuration guide to your developers. Setup takes minutes with a single line of code.",
+    title: "License configuration",
+    description: "Please forward the configuration guide to your software developers. Setup takes minutes with a single line of code.",
   },
 ];
 
@@ -41,8 +41,8 @@ const orderDetails = [
     description: "Your perpetual license includes one year of free feature, quality, performance and security updates and one year of dedicated support. It renews automatically each year.",
   },
   {
-    title: "Access Invoice And Billing",
-    description: "You can update your account details and payment information, manage the license auto-renewal process as well as access payment history on our customer support portal.",
+    title: "Invoice and billing",
+    description: "You can update your account details and payment information, manage the license auto-renewal process as well as access payment history on our Customer Portal.",
   }
 ];
 
