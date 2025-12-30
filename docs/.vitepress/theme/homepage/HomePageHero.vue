@@ -20,7 +20,7 @@ import HomePageCodeContainer from "./HomePageCodeContainer.vue";
 
       <div class="cta-buttons">
         <a class="action primary" href="/getting-started">
-          <img src="/homepage/play.svg" width="20" alt="">
+          <img src="/homepage/play-icon.svg" width="20" alt="">
           Watch Live Demo
           <div class="divider"></div>
           <span style="font-weight: 400;">~90 sec</span>
@@ -33,12 +33,12 @@ import HomePageCodeContainer from "./HomePageCodeContainer.vue";
 
       <div class="trust-items">
         <div class="trust-item">
-          <img src="/homepage/stargazers-small.svg" alt="" />
+          <img src="/homepage/hero/star.svg" alt="" />
           <span><strong>14K</strong> GitHub stars</span>
         </div>
 
         <div class="trust-item">
-          <img src="/homepage/downloads-small.svg" alt="" />
+          <img src="/homepage/hero/downloads.svg" alt="" />
           <span><strong>15M</strong> NuGet downloads</span>
         </div>
       </div>

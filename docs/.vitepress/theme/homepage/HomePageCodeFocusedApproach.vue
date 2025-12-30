@@ -22,7 +22,7 @@ interface Feature {
 const features : Feature[] = [
   {
     id: 'reusable',
-    icon: "homepage/puzzle.svg",
+    icon: "homepage/rich-toolkit.svg",
     title: "Reusable Components",
     description: "Extract common elements into methods. Compose complex layouts from simple, testable building blocks.",
     code: modularCode,
@@ -57,7 +57,7 @@ const features : Feature[] = [
   },
   // {
   //   id: 'typesafe',
-  //   icon: "homepage/engine.svg",
+  //   icon: "homepage/layout-engine.svg",
   //   title: "Type-Safe Development",
   //   description: "Catch errors at compile time. Enjoy IntelliSense, refactoring support, and confident code navigation.",
   //   code: typesafeDevelopment,

@@ -253,7 +253,7 @@ onUnmounted(() => observer.value?.disconnect());
       </p>
 
       <a v-if="!showAnimation" class="action primary" @click="playAnimation" style="display: flex; flex-direction: row; gap: 16px; width: fit-content; padding: 4px 20px;">
-        <img src="/homepage/play.svg" width="20" alt="" />
+        <img src="/homepage/play-icon.svg" width="20" alt="" />
         Watch tutorial
         <div style="border-left: 1px solid #FFF8; margin: 8px 0;"></div>
         <span style="font-weight: 400;">~90 sec</span>

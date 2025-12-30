@@ -12,23 +12,23 @@
 
       <div class="features">
         <div v-for="feature in features" class="feature-item">
-          <img src="/homepage/square-check.svg" width="24" alt="" />
+          <img src="/homepage/list-check.svg" width="24" alt="" />
           <span>{{ feature }}</span>
         </div>
       </div>
 
       <a class="action primary" href="/getting-started">
         Start the tutorial
-        <img src="/homepage/arrow-right.svg" width="20px" alt="" />
+        <img src="/homepage/getting-started/arrow-right.svg" width="20px" alt="" />
       </a>
     </div>
 
     <div class="invoice-stack">
       <div class="invoice-card invoice-back">
-        <img src="/homepage/invoice2.webp" alt="Sample invoice page 2" />
+        <img src="/homepage/getting-started/invoice2.webp" alt="Sample invoice page 2" />
       </div>
       <div class="invoice-card invoice-front">
-        <img src="/homepage/invoice1.webp" alt="Sample invoice page 1" />
+        <img src="/homepage/getting-started/invoice1.webp" alt="Sample invoice page 1" />
       </div>
     </div>
   </section>

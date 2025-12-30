@@ -8,7 +8,7 @@
 
       <div class="summary-list">
         <article v-for="summary of summaryContent" class="summary-item">
-          <img src="/homepage/square-check.svg" width="24" alt="" />
+          <img src="/homepage/list-check.svg" width="24" alt="" />
           <p>{{ summary }}</p>
         </article>
       </div>

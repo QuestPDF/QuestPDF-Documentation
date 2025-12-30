@@ -68,7 +68,7 @@ const orderDetails = [
                 <span>{{ step.description }}</span>
                 <a v-if="step.link" :href="step.link" class="step-link">
                   {{ step.linkText }}
-                  <img src="/homepage/arrow-right.svg" width="14" alt="" />
+                  <img src="/homepage/getting-started/arrow-right.svg" width="14" alt="" />
                 </a>
               </div>
             </li>
@@ -87,7 +87,7 @@ const orderDetails = [
                 <span>{{ step.description }}</span>
                 <a v-if="step.link" :href="step.link" class="step-link">
                   {{ step.linkText }}
-                  <img src="/homepage/arrow-right.svg" width="14" alt="" />
+                  <img src="/homepage/getting-started/arrow-right.svg" width="14" alt="" />
                 </a>
               </div>
             </li>
@@ -163,7 +163,7 @@ header h1 {
   content: "";
   width: 24px;
   height: 24px;
-  background-image: url('/homepage/square-check.svg');
+  background-image: url('/homepage/list-check.svg');
   background-size: contain;
   background-repeat: no-repeat;
   flex-shrink: 0;
