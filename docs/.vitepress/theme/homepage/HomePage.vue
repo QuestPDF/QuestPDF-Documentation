@@ -5,6 +5,14 @@
     </div>
 
     <div class="container reverse-background reveal-animation">
+      <HomePageCodeAnimation />
+    </div>
+
+    <div class="container reveal-animation">
+      <HomePageStatistics />
+    </div>
+
+    <div class="container reverse-background reveal-animation">
       <HomePageCodeFocusedApproach />
     </div>
 
@@ -51,13 +59,12 @@ import HomePageCodeAnimation from "./HomePageCodeAnimation.vue";
 import HomePageHero from "./HomePageHero.vue";
 import {onMounted} from "vue";
 import HomePageStandardCompliance from "./HomePageStandardCompliance.vue";
-import HomePageCodeAnimation2 from "./HomePageCodeAnimation2.vue";
 
 /* Reveal animation */
 
 onMounted(() => {
     const observerOptions = {
-      threshold: 0.33
+      threshold: 0.10
     }
 
     function onSectionVisible(entries) {
