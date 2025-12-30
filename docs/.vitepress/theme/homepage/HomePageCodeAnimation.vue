@@ -23,8 +23,6 @@ const imageIndex = ref(1);
 const title = ref("");
 
 
-
-
 /* Code highlighting */
 
 const codeTransformer = computed<ShikiTransformer>(() => {
@@ -44,7 +42,8 @@ const codeTransformer = computed<ShikiTransformer>(() => {
 const isAnimationRunning = ref(false);
 
 const animationSpeed = 75;
-const waitSpeed = 3500;
+const waitCodeSpeed = 1000;
+const waitStepSpeed = 2500;
 
 async function waitForResume() {
   while (!isAnimationRunning.value) {
@@ -103,7 +102,13 @@ function clearHighlight() {
 
 async function wait() {
   await waitForResume();
-  await new Promise(r => setTimeout(r, waitSpeed));
+  await new Promise(r => setTimeout(r, waitStepSpeed));
+}
+
+function setTitle(stepName: string) {
+  const lines = code.value.split('\n');
+  lines[0] = `// step ${imageIndex.value} / 14: ${stepName}`;
+  code.value = lines.join('\n');
 }
 
 async function waitAndProceedToNextStep(stepName: string) {
@@ -113,6 +118,9 @@ async function waitAndProceedToNextStep(stepName: string) {
   clearHighlight();
   title.value = stepName;
   tutorialStepNumber.value++;
+
+  setTitle(stepName);
+  await new Promise(r => setTimeout(r, waitCodeSpeed));
 }
 
 
@@ -121,7 +129,8 @@ async function waitAndProceedToNextStep(stepName: string) {
 const primaryAction = ref<HTMLAnchorElement | null>(null);
 
 function resetAnimation() {
-  const startCode = 'Document\n' +
+  const startCode = '// hello pdf\n\n' +
+    'Document\n' +
     '\t.Create(document =>\n' +
     '\t{\n' +
     '\t\tdocument.Page(page =>\n' +
@@ -149,79 +158,90 @@ function scrollToPrimaryActionButton() {
 
 async function animate() {
   await waitForResume();
-  await new Promise(r => setTimeout(r, waitSpeed));
+
   tutorialStepNumber.value++;
 
-  title.value ="Insert an element with a solid background";
-  await appendTextInLine(6, "\n\n");
-  highlightLine(8);
-  await appendTextInLine(8, "\t\t\tpage.Content()\n\t\t\t\t.Background(Colors.LightBlue.Lighten3);");
+  setTitle("Start with a blank document");
+
+  await waitAndProceedToNextStep("Insert an element with a solid background");
+  await appendTextInLine(8, "\n\n");
+  highlightLine(10);
+  await appendTextInLine(10, "\t\t\tpage.Content()\n\t\t\t\t.Background(Colors.LightBlue.Lighten3);");
 
   await waitAndProceedToNextStep("Set the page margins");
-  await appendTextInLine(6, "\n");
-  highlightLine(7);
-  await appendTextInLine(7, "\t\t\tpage.Margin(0.3f, Unit.Inch);");
+  await appendTextInLine(8, "\n");
+  highlightLine(9);
+  await appendTextInLine(9, "\t\t\tpage.Margin(0.3f, Unit.Inch);");
 
   await waitAndProceedToNextStep("Add a header with text");
-  await appendTextInLine(7, "\n\n");
-  highlightLine(9);
-  await appendTextInLine(9, "\t\t\tpage.Header()\n\t\t\t\t.Text(\"Hello PDF!\");");
+  await appendTextInLine(9, "\n\n");
+  highlightLine(11);
+  await appendTextInLine(11, "\t\t\tpage.Header()\n\t\t\t\t.Text(\"Hello PDF!\");");
 
   await waitAndProceedToNextStep("Style the header text");
-  highlightLine(11);
+  highlightLine(13);
   await deleteTextAfter(".Text(\"Hello PDF!\");", ";");
   await appendTextAfter(".Text(\"Hello PDF!\")", "\n");
-  highlightLine(11);
-  await appendTextInLine(11, "\t\t\t\t.FontSize(28)\n\t\t\t\t.Bold()\n\t\t\t\t.FontColor(Colors.Blue.Darken2);");
+  highlightLine(13);
+  await appendTextInLine(13, "\t\t\t\t.FontSize(28)\n\t\t\t\t.Bold()\n\t\t\t\t.FontColor(Colors.Blue.Darken2);");
 
   await waitAndProceedToNextStep("Insert a footer");
-  await appendTextInLine(16, "\n\n");
-  highlightLine(18);
-  await appendTextInLine(18, "\t\t\tpage.Footer()\n\t\t\t\t.Text(\"Footer!\");");
+  await appendTextInLine(18, "\n\n");
+  highlightLine(20);
+  await appendTextInLine(20, "\t\t\tpage.Footer()\n\t\t\t\t.Text(\"Footer!\");");
 
   await waitAndProceedToNextStep("Center-align the footer");
   await appendTextAfter("page.Footer()", "\n");
-  highlightLine(19);
-  await appendTextInLine(19, "\t\t\t\t.AlignCenter()");
+  highlightLine(21);
+  await appendTextInLine(21, "\t\t\t\t.AlignCenter()");
 
   await waitAndProceedToNextStep("Include a page number in the footer");
-  highlightLine(20);
+  highlightLine(22);
   await deleteText(".Text(\"Footer!\");")
   await appendTextAfter(".AlignCenter()\n", "\t\t\t\t.Text(text => \n\t\t\t\t{\n \n \n\t\t\t\t});");
-  await appendTextInLine(22, "\t\t\t\t\ttext.Span(\"Page \");");
-  await appendTextInLine(23, "\t\t\t\t\ttext.CurrentPageNumber();");
+  await appendTextInLine(24, "\t\t\t\t\ttext.Span(\"Page \");");
+  await appendTextInLine(25, "\t\t\t\t\ttext.CurrentPageNumber();");
 
   await waitAndProceedToNextStep("Adjust the spacing between content sections");
   await appendTextAfter(".Content()", "\n");
-  highlightLine(16);
-  await appendTextInLine(16, "\t\t\t\t.PaddingVertical(8)");
+  highlightLine(18);
+  await appendTextInLine(18, "\t\t\t\t.PaddingVertical(8)");
 
   await waitAndProceedToNextStep("Add placeholder text");
-  highlightLine(17);
+  highlightLine(19);
   await deleteText(".Background(Colors.LightBlue.Lighten3);");
-  await appendTextInLine(17, ".Column(column => \n\t\t\t\t{\n \n\t\t\t\t});");
-  await appendTextInLine(19, "\t\t\t\t\tcolumn.Item()\n\t\t\t\t\t\t.Text(Placeholders.LoremIpsum());");
+  await appendTextInLine(19, ".Column(column => \n\t\t\t\t{\n \n\t\t\t\t});");
+  await appendTextInLine(21, "\t\t\t\t\tcolumn.Item()\n\t\t\t\t\t\t.Text(Placeholders.LoremIpsum());");
 
   await waitAndProceedToNextStep("Justify the placeholder text");
   await deleteTextAfter(".Text(Placeholders.LoremIpsum())", ";");
-  await appendTextInLine(20, "\n");
-  highlightLine(21);
-  await appendTextInLine(21, "\t\t\t\t\t\t.Justify();");
+  await appendTextInLine(22, "\n");
+  highlightLine(23);
+  await appendTextInLine(23, "\t\t\t\t\t\t.Justify();");
 
   await waitAndProceedToNextStep("Insert a placeholder image");
-  await appendTextInLine(21, "\n\n");
-  highlightLine(23);
-  await appendTextInLine(23, "\t\t\t\t\tcolumn.Item()\n\t\t\t\t\t\t.AspectRatio(16 / 9f)\n\t\t\t\t\t\t.Image(Placeholders.Image);");
+  await appendTextInLine(23, "\n\n");
+  highlightLine(25);
+  await appendTextInLine(25, "\t\t\t\t\tcolumn.Item()\n\t\t\t\t\t\t.AspectRatio(16 / 9f)\n\t\t\t\t\t\t.Image(Placeholders.Image);");
 
   await waitAndProceedToNextStep("Adjust spacing between the text and image");
-  await appendTextInLine(18, "\n \n");
-  highlightLine(19);
-  await appendTextInLine(19, "\t\t\t\t\tcolumn.Spacing(8);");
+  await appendTextInLine(20, "\n \n");
+  highlightLine(21);
+  await appendTextInLine(21, "\t\t\t\t\tcolumn.Spacing(8);");
+  clearHighlight();
 
-  await waitAndProceedToNextStep("Celebrate your completed document!  🎉");
+  await waitAndProceedToNextStep("Celebrate your completed document!");
 
-  await new Promise(r => setTimeout(r, waitSpeed));
+  await new Promise(r => setTimeout(r, waitStepSpeed));
+
   scrollToPrimaryActionButton();
+}
+
+function startAnimation() {
+  showAnimation.value = true;
+  isAnimationRunning.value = true;
+  resetAnimation();
+  animate();
 }
 
 
@@ -239,7 +259,7 @@ onMounted(() => {
   observer.value.observe(target);
 });
 
-onUnmounted(() => observer.value?.disconnect());
+onUnmounted(() => isAnimationRunning.value = false);
 
 </script>
 
@@ -252,30 +272,71 @@ onUnmounted(() => observer.value?.disconnect());
         Follow a short, step-by-step demo: create a document structure, plug in your data, and generate consistent PDF output using the C# Fluent API.
       </p>
 
-      <a v-if="!showAnimation" class="action primary" @click="playAnimation" style="display: flex; flex-direction: row; gap: 16px; width: fit-content; padding: 4px 20px;">
-        Watch tutorial
-        <div style="border-left: 1px solid #FFF8; margin: 8px 0;"></div>
+      <a v-if="!showAnimation" @click="startAnimation" class="action primary">
+        <i class="fa-solid fa-play" style="color: white;" />
+        Watch Live Demo
+        <div class="divider" />
         <span style="font-weight: 400;">~90 sec</span>
       </a>
     </div>
 
-    <template v-if="showAnimation">
-      <p class="sub-header" style="display: flex; flex-direction: row; align-items: center; gap: 16px;">
-        <span class="highlight-background shine">{{ title }}</span>
-      </p>
+    <div v-if="showAnimation" class="animation-container">
+      <home-page-code-container file-name="HelloWorld.cs" :code="code" :code-transformer="codeTransformer" />
 
-      <div class="animation-container">
-        <home-page-code-container file-name="HelloWorld.cs" :code="code" :code-transformer="codeTransformer" />
-
-        <home-page-window-container file-name="Preview.pdf">
-          <img :src="'/homepage/quick-start-animation/step' + imageIndex + '.webp'" />
-        </home-page-window-container>
-      </div>
-    </template>
+      <home-page-window-container file-name="Preview.pdf">
+        <img :src="'/homepage/quick-start-animation/step' + imageIndex + '.webp'" />
+      </home-page-window-container>
+    </div>
   </section>
 </template>
 
 <style scoped>
+
+/* Play demo button */
+
+.action {
+  padding: 4px 24px;
+}
+
+.action.primary {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: fit-content;
+}
+
+.action.primary .divider {
+  height: 24px;
+  width: 1px;
+  background-color: #FFF8;
+  margin: 8px 0;
+}
+
+
+/* Tutorial header */
+
+.tutorial-header {
+  background-color: var(--vp-c-bg);
+  padding: 12px 24px;
+  border-radius: 12px;
+  margin-bottom: 48px;
+}
+
+.tutorial-header p {
+  margin-top: 8px;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--vp-c-text-3);
+}
+
+.tutorial-header h3 {
+  margin-top: 8px;
+}
+
+
+
+
 
 .tutorial-section {
   display: flex;
