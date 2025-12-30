@@ -53,7 +53,7 @@ const orderDetails = [
     <div class="container reverse-background">
       <div class="content">
         <header class="section-header">
-          <img src="/homepage/square-check-license.svg" class="success-icon" alt="" />
+          <img src="/license/purchase-success.svg" class="success-icon" alt="" />
           <h1>Order completed</h1>
           <p class="sub-header">Thank you for purchasing the QuestPDF license</p>
         </header>

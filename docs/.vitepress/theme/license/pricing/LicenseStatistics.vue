@@ -26,19 +26,19 @@
 
 const statistics = [
     {
-        icon: "/license/github.svg",
+        icon: "/license/statistics/github.svg",
         label: "GitHub stars",
         link: "https://github.com/QuestPDF/QuestPDF",
         value: "14K"
     },
     {
-        icon: "/license/nuget.svg",
+        icon: "/license/statistics/nuget.svg",
         label: "NuGet downloads",
         link: "https://www.nuget.org/packages/QuestPDF/",
         value: "15M"
     },
     {
-        icon: "/license/experience.svg",
+        icon: "/license/statistics/experience.svg",
         label: "Years of experience",
         link: "https://www.nuget.org/packages/QuestPDF#versions-body-tab",
         value: "5+"

@@ -28,7 +28,7 @@
 
         <div class="details">
           <div v-for="detail of license.details" class="details-item">
-            <img src="/homepage/square-check-lite.svg" width="24" alt="" />
+            <img src="/license/tier-details-check.svg" width="24" alt="" />
             <p>{{ detail }}</p>
           </div>
         </div>
