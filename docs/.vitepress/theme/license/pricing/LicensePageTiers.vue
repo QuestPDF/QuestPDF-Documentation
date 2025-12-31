@@ -80,7 +80,7 @@ const ProfessionalLicense: License = {
   details: [
     "Full commercial usage rights",
     "Covers up to 10 developers",
-    "Includes 1 year of updates & maintenance",
+    "Includes 1 year of updates and maintenance",
     "Funds ongoing development"
   ]
 };
@@ -91,10 +91,10 @@ const EnterpriseLicense: License = {
   price: 1999,
   paddlePriceId: paddle.enterpriseLicensePriceId,
   details: [
-    "Unlimited developers & server deployments",
+    "Unlimited developers and server deployments",
     "Dedicated priority e-mail support",
     "Frictionless company-wide licensing",
-    "Perpetual license with 1 year of updates & maintenance"
+    "Perpetual license with 1 year of updates and maintenance"
   ]
 };
 
