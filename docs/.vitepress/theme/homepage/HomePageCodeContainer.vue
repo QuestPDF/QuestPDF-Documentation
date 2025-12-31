@@ -70,7 +70,7 @@ onMounted(highlightCode);
 .code-source .line {
   display: inline-block;
   padding: 0 16px;
-  width: calc(100%);
+  min-width: 100%
 }
 
 .code-source .line-highlighted {

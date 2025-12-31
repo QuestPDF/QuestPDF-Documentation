@@ -1,72 +1,27 @@
 <script setup lang="ts">
-import modularCode from './codeExamples/modularCode.cs?raw';
-import familiarConcepts from './codeExamples/familiarConcepts.cs?raw';
-import gitFriendlyWorkflow from './codeExamples/gitFriendlyWorkflow.cs?raw';
-import typesafeDevelopment from './codeExamples/typesafeDevelopment.cs?raw';
-
 import HomePageCodeContainer from "./HomePageCodeContainer.vue";
-import { ShikiTransformer } from "@shikijs/types";
+import codeFocusedApproach from './codeExamples/codeFocusedApproach.cs?raw';
 
-interface Feature {
-  id: string;
-  icon: string;
-  title: string;
-  description: string;
-  code: string;
-  fileName: string;
-  codeTransformer: ShikiTransformer | null;
-}
-
-const features: Feature[] = [
+const features = [
   {
-    id: 'reusable',
-    icon: "fa-duotone fa-cubes",
-    title: "Reusable Components",
-    description: "Extract common elements into methods. Compose complex layouts from simple, testable building blocks that can be shared across documents.",
-    code: modularCode,
-    fileName: 'Header.cs',
-    codeTransformer: null
+    icon: "fa-regular fa-code",
+    title: "Familiar Programming Patterns",
+    description: "Move beyond scripting. Leverage C# control structures, strict typing, and component-based architecture to build complex, dynamic layouts that scale."
   },
   {
-    id: 'dynamic',
-    icon: "fa-duotone fa-code",
-    title: "Dynamic Content",
-    description: "Use loops, conditions, and LINQ to generate data-driven documents. No proprietary templating language — just familiar C# patterns.",
-    code: familiarConcepts,
-    fileName: 'Table.cs',
-    codeTransformer: null
+    icon: "fa-regular fa-cubes",
+    title: "Full IDE Support",
+    description: "Catch errors at compile time, not runtime. Benefit from full IntelliSense support, easier refactoring, and seamless code navigation."
   },
   {
-    id: 'vcs',
-    icon: "fa-duotone fa-code-branch",
+    icon: "fa-regular fa-code-branch",
     title: "Version Control Ready",
-    description: "Review changes with meaningful diffs. Track document evolution alongside your application code using standard Git workflows.",
-    code: gitFriendlyWorkflow,
-    fileName: 'Item.cs',
-    codeTransformer: {
-      line(node, line) {
-        if (line == 3)
-          this.addClassToHast(node, 'line-removed')
-        if (line == 4)
-          this.addClassToHast(node, 'line-added')
-      }
-    }
+    description: "Stop struggling with binary files or minified HTML. Get clean, semantic diffs in Git, making code reviews and history tracking effortless for your team."
   },
   {
-    id: 'typesafe',
-    icon: "fa-duotone fa-shield-check",
-    title: "Type-Safe Development",
-    description: "Catch errors at compile time. Enjoy full IntelliSense, refactoring support, and confident code navigation in your IDE.",
-    code: typesafeDevelopment,
-    fileName: 'Invoice.cs',
-    codeTransformer: {
-      line(node, line) {
-        if (line == 3)
-          this.addClassToHast(node, 'line-removed')
-        if (line == 4)
-          this.addClassToHast(node, 'line-added')
-      }
-    }
+    icon: "fa-regular fa-sparkles",
+    title: "Optimized for AI Assistance",
+    description: "The concise, semantic Fluent API provides perfect context for AI assistance tools to generate accurate, functional layouts instantly."
   }
 ];
 
@@ -75,100 +30,76 @@ const features: Feature[] = [
 <template>
   <section class="content">
     <div class="section-header">
-      <h2>Code-First Approach</h2>
-      <p class="sub-header">Write PDF layouts as clean, readable C# code. No XML templates, no visual designers — just the programming patterns you already know.</p>
+      <h2>A True Code-First Architecture</h2>
+      <p class="sub-header">Treat your documents as first-class application code. Replace fragile templates with strongly-typed, maintainable, and refactor-safe C#.</p>
     </div>
 
-    <div class="approaches-list">
-      <template v-for="(feature, index) in features" :key="feature.id">
+    <div class="approach-container">
+      <div class="features-list">
+        <article v-for="feature in features" :key="feature.title" class="card feature-card">
 
-        <article class="approach-item" :class="{ 'reverse': index % 2 === 1 }">
-
-          <div class="approach-info">
-            <div class="approach-info-container">
-              <i class="fa-2xl" :class="[feature.icon]"></i>
-              <h3 class="feature-title">{{ feature.title }}</h3>
-              <p class="feature-description">{{ feature.description }}</p>
-            </div>
-          </div>
-
-          <div class="approach-code">
-            <home-page-code-container
-                :file-name="feature.fileName"
-                :code="feature.code"
-                :code-transformer="feature.codeTransformer" />
-          </div>
+          <h3 class="title"><i :class="[feature.icon]"></i> {{ feature.title }}</h3>
+          <p class="description">{{ feature.description }}</p>
         </article>
+      </div>
 
-        <hr v-if="index < features.length - 1">
-      </template>
+      <div class="code-example">
+        <home-page-code-container
+            file-name="OrderDocument.cs"
+            :code="codeFocusedApproach"
+            :code-transformer="{
+              line(node, line) {
+                if (line === 25) this.addClassToHast(node, 'line-removed');
+                if (line === 26) this.addClassToHast(node, 'line-added');
+              }
+            }" />
+      </div>
     </div>
   </section>
 </template>
 
 <style scoped>
 
-
-.approaches-list {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-  margin-top: 56px;
-}
-
-.approaches-list hr {
-  width: 80%;
-  border: none;
-  height: 1px;
-  background: var(--vp-c-divider);
-}
-
-.approach-item {
+.approach-container {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  grid-template-areas: "info code";
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
   gap: 64px;
+  margin-top: 56px;
+  align-items: center;
 }
 
-.approach-info {
-  grid-area: info;
-
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
+.features-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
 }
 
-.approach-info h3 {
-  margin: 24px 0 8px;
+.title {
+  margin: 0 0 16px 0;
 }
 
-.approach-info-container {
-  max-width: 400px;
+.title i {
+  margin-right: 12px
 }
 
-.approach-code {
-  grid-area: code;
+.code-example {
+  min-width: 0;
 }
 
-@media screen and (min-width: 900px) {
-  .approach-item.reverse {
-    grid-template-areas: "code info";
+@media screen and (max-width: 1100px) {
+  .approach-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
-  .approach-item:not(.reverse) .approach-info {
-    align-items: end;
-    text-align: end;
+  .features-list {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-@media screen and (max-width: 900px) {
-  .approach-item {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto auto;
-    grid-template-areas: "info" "code";
-    gap: 24px;
+@media screen and (max-width: 600px) {
+  .features-list {
+    grid-template-columns: 1fr;
   }
 }
 
