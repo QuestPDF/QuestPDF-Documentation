@@ -15,11 +15,11 @@ const emit = defineEmits<{
 
     <div>
       <h1>
-        <span class="highlight-foreground">Code-first</span> PDF<br> generation library
+        <span class="highlight-foreground">Code-first</span> PDF generation for C#
       </h1>
 
       <div class="tagline">
-        Design PDFs the way you design software - with clean code, instant preview, and predictable layouts.
+        QuestPDF is a production-ready library that lets you design documents the way you design software with clean, maintainable C# code.
       </div>
 
       <div class="cta-buttons">
@@ -30,8 +30,8 @@ const emit = defineEmits<{
           <span style="font-weight: 400;">~90 sec</span>
         </a>
 
-        <a class="action" href="/getting-started">
-          Read Getting Started Tutorial
+        <a class="action" href="/quick-start">
+          Quick Start
         </a>
       </div>
 
