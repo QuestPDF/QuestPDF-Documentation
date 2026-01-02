@@ -150,6 +150,7 @@ h1 {
 .cta-buttons .action.primary .divider {
   border-left: 1px solid #FFF8;
   margin: 8px 0;
+  height: 20px;
 }
 
 /* Background */
