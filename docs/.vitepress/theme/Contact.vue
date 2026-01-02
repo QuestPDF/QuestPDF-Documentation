@@ -113,6 +113,7 @@ const contacts: ContactInformation[] = [
 .links {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   place-self: end;
   gap: 12px;
   margin-top: 24px;
