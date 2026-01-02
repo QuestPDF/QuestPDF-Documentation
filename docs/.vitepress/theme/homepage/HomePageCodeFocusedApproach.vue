@@ -66,6 +66,7 @@ const features = [
 .code-example {
   margin-top: 32px;
   width: fit-content;
+  max-width: 100%;
   place-self: center;
 }
 
