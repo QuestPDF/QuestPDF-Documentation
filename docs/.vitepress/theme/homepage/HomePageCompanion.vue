@@ -1,13 +1,14 @@
 <template>
   <section class="content">
     <div class="details">
-      <h2>Companion App</h2>
+      <div class="section-tag">Development Tool</div>
 
-      <p class="sub-header">Accelerate your development with live document preview powered by the hot-reload capability, eliminating the need for C# code recompilation.</p>
+      <h2>Companion App</h2>
+      <p class="sub-header">Accelerate development with live document preview and hot-reload capability. See your changes instantly without recompiling.</p>
 
       <div class="summary-list">
-        <article v-for="summary of SummaryContent" class="summary-item">
-          <img src="/homepage/tick.svg" width="20" alt="" />
+        <article v-for="summary of summaryContent" class="summary-item">
+          <i class="fa-duotone fa-square-check"></i>
           <p>{{ summary }}</p>
         </article>
       </div>
@@ -15,22 +16,14 @@
       <a class="action" href="/companion/features">Read more</a>
     </div>
 
-    <ClientOnly>
-      <img :src="`/companion/application-${mode}.png`" alt="Companion App" />
-    </ClientOnly>
+    <img :src="`/companion/application-light.png`" alt="Companion App" class="companion-image light" />
+    <img :src="`/companion/application-dark.png`" alt="Companion App" class="companion-image dark" />
   </section>
 </template>
 
 <script setup>
 
-import {computed} from "vue";
-import {useData} from "vitepress";
-
-const { isDark } = useData();
-
-const mode = computed(() => isDark.value ? "dark" : "light");
-
-const SummaryContent = [
+const summaryContent = [
     "Explore PDF document structure and hierarchy",
     "Quickly magnify and measure content",
     "Debug runtime exceptions with stack traces and code snippets",
@@ -55,8 +48,19 @@ const SummaryContent = [
   }
 }
 
-img {
+.companion-image {
+  border-radius: 8px;
+  border: 1px solid #8884;
   filter: drop-shadow(0 16px 16px rgba(0,  0, 0, 0.1));
+  place-self: end;
+}
+
+html:not(.dark) .companion-image.dark {
+  display: none;
+}
+
+html.dark .companion-image.light {
+  display: none;
 }
 
 .action {
@@ -75,7 +79,6 @@ img {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-gap: 12px;
-  align-items: center;
 }
 
 </style>

@@ -31,7 +31,7 @@ Install-Package QuestPDF
 dotnet add package QuestPDF
 
 // Package reference in .csproj file
-<PackageReference Include="QuestPDF" Version="2025.7.0" />
+<PackageReference Include="QuestPDF" Version="2025.12.0" />
 ```
 
 Check the package details [on the NuGet website](https://www.nuget.org/packages/QuestPDF/):
@@ -111,10 +111,10 @@ QuestPDF's Fluent API scales seamlessly with your document complexity. Whether y
 
 We are incredibly grateful to the YouTube Community for their positive reviews and recommendations of the QuestPDF library. Your support and feedback are invaluable and motivate us to keep improving and expanding this project. Thank you for helping us grow and reach more developers!
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_M0IgtGWnvE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="480" height="270" src="https://www.youtube.com/embed/_M0IgtGWnvE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <br>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/T89A_7dz1P8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="480" height="270" src="https://www.youtube.com/embed/T89A_7dz1P8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <br>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/-iYvZvpLX0g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="480" height="270" src="https://www.youtube.com/embed/-iYvZvpLX0g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <br>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/bhR4Cmg16gs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="480" height="270" src="https://www.youtube.com/embed/bhR4Cmg16gs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

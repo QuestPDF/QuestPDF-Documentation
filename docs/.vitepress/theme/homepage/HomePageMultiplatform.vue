@@ -1,29 +1,31 @@
 <script setup>
 
 const platforms = [
-  { src: 'windows.svg', alt: 'Windows' },
-  { src: 'linux.svg', alt: 'Linux' },
-  { src: 'apple.svg', alt: 'macOS' },
-  { src: 'docker.svg', alt: 'Docker' },
-  { src: 'azure.svg', alt: 'Azure' },
-  { src: 'aws.svg', alt: 'AWS' },
-  { src: 'rider.svg', alt: 'Rider' },
-  { src: 'vscode.svg', alt: 'VS Code' },
-  { src: 'visual-studio.svg', alt: 'Visual Studio' }
+  { src: 'windows.svg', name: 'Windows' },
+  { src: 'linux.svg', name: 'Linux' },
+  { src: 'apple.svg', name: 'macOS' },
+  { src: 'azure.svg', name: 'Azure' },
+  { src: 'aws.svg', name: 'AWS' },
+  { src: 'docker.svg', name: 'Docker' },
+  { src: 'rider.svg', name: 'Rider' },
+  { src: 'vscode.svg', name: 'VS Code' },
+  { src: 'visual-studio.svg', name: 'Visual Studio' }
 ];
 
 </script>
 
 <template>
   <section class="content">
-    <h2>Multiplatform</h2>
+    <div class="section-header">
+      <h2>Works everywhere you do</h2>
+      <p class="sub-header">Deploy on any major operating system and integrate seamlessly with your favorite IDEs, cloud platforms, and development tools.</p>
+    </div>
 
-    <p class="sub-header" style="max-width: 600px;">
-      Supports all major operating systems and works seamlessly with leading IDEs, cloud platforms, and modern development tools.
-    </p>
-
-    <div class="icons">
-      <img v-for="platform of platforms" :src="'/homepage/supported-platforms/' + platform.src" :alt="platform.alt" :title="platform.alt" />
+    <div class="platforms">
+      <div v-for="platform of platforms" class="platform-item">
+        <img :src="'/homepage/supported-platforms/' + platform.src" :alt="platform.name" :title="platform.name" />
+        <span class="platform-name">{{ platform.name }}</span>
+      </div>
     </div>
   </section>
 </template>
@@ -33,28 +35,61 @@ const platforms = [
 .content {
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
-.icons {
+.platforms {
   display: flex;
   flex-direction: row;
-  align-content: center;
   flex-wrap: wrap;
-  gap: 32px;
-  margin-top: 24px;
+  gap: 24px;
+  width: 100%;
+  max-width: 800px;
+  align-self: center;
+  justify-content: center;
 }
 
-.icons > img {
+@media screen and (max-width: 600px) {
+  .platforms {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+.platform-item {
+  width: 120px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  border: 1px solid #8882;
+  border-radius: 12px;
+
+  padding: 16px;
+  align-content: center;
+}
+
+.platform-item img {
+  width: 48px;
   height: 48px;
 }
 
-@media screen and (max-width: 700px) {
-  .icons {
-    gap: 24px;
+.platform-name {
+  font-size: 0.875rem;
+  line-height: 1rem;
+  text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+  .platform-item {
+    width: 100px;
   }
 
-  .icons > img {
-    height: 40px;
+  .platform-item img {
+    width: 36px;
+    height: 36px;
   }
 }
 

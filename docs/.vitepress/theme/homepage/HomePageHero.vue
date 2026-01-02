@@ -1,69 +1,57 @@
+<script setup lang="ts">
+import helloWorldExample from './codeExamples/helloWorld.cs?raw';
+import HomePageCodeContainer from "./HomePageCodeContainer.vue";
+
+const emit = defineEmits<{
+  (e: 'playCodeAnimation'): void
+}>()
+
+</script>
+
 <template>
-  <section class="content gradient">
-    <div class="content-text">
+  <section class="content">
+    <div class="background-gradient" />
+    <div class="background-grid" />
+
+    <div>
       <h1>
-        Modern <span class="highlight-foreground">PDF library</span><br>
-        for C# developers
+        <span class="highlight-foreground">Code-first</span> PDF generation for C#
       </h1>
 
       <div class="tagline">
-        Generate and manipulate PDF documents in your .NET applications<br>
-        using the open-source QuestPDF library and its C# Fluent API.
+        QuestPDF is a production-ready library that lets you design documents the way you design software with clean, maintainable C# code.
       </div>
 
-      <a class="action primary" style="margin-top: 32px" href="#introduction">Show introduction</a>
-    </div>
+      <div class="cta-buttons">
+        <a class="action primary" @click="emit('playCodeAnimation')">
+          <i class="fa-solid fa-play" style="color: white;" />
+          Watch Live Demo
+          <div class="divider"></div>
+          <span style="font-weight: 400;">~90 sec</span>
+        </a>
 
-    <div class="content-icon">
-      <div class="content-icon-background-static"></div>
-      <div class="content-icon-background-rays"></div>
+        <a class="action" href="/quick-start">
+          Quick Start
+        </a>
+      </div>
 
-      <div class="animation-scene">
-        <div class="animation-translate-y">
-          <div class="animation-rotate-y">
-            <div class="animation-rotation-scale">
-              <div ref="page" v-html="pdfPage" id="homepage-hero-pdf"></div>
-            </div>
-          </div>
+      <div class="trust-items">
+        <div class="trust-item">
+          <i class="fa-solid fa-star fa-lg"></i>
+          <span><strong>14K</strong> GitHub stars</span>
+        </div>
+
+        <div class="trust-item">
+          <i class="fa-solid fa-download fa-lg"></i>
+          <span><strong>15M</strong> NuGet downloads</span>
         </div>
       </div>
     </div>
+
+    <home-page-code-container file-name="HelloWorld.cs" :code="helloWorldExample" />
   </section>
 </template>
 
-<script setup lang="ts">
-
-import {onMounted, ref} from "vue";
-import pdfPage from './pdf-pages.svg?raw';
-
-const page = ref<HTMLElement | null>(null);
-
-async function randomizePdf() {
-  if (page.value == null)
-    return;
-
-  const types = page.value.querySelector("#types");
-  const children = Array.from(types?.children || []) as SVGElement[];
-  children.sort(() => Math.random() - 0.5);
-
-  let currentImageIndex = 0;
-
-  while (true) {
-    for (const child of children)
-      (child as SVGGElement).style.opacity = (child == children[currentImageIndex]) ? 1 : 0;
-
-    currentImageIndex++;
-
-    if (currentImageIndex >= children.length)
-      currentImageIndex = 0;
-
-    await new Promise(resolve => setTimeout(resolve, 3500));
-  }
-}
-
-onMounted(randomizePdf);
-
-</script>
 
 <style scoped>
 
@@ -71,33 +59,15 @@ onMounted(randomizePdf);
 
 .content {
   display: grid;
-  grid-template-columns: 1fr 180px;
+  grid-template-columns: 1fr 400px;
   grid-template-rows: auto;
-  grid-template-areas: "text icon";
+
   grid-gap: 64px;
 }
 
-.content-text {
-  grid-area: text;
-  z-index: 2;
-}
-
-.content-icon {
-  grid-area: icon;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1023px) {
   .content {
-    grid-template-columns: 1fr 150px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .content {
-    grid-template-columns: 1fr 120px;
+    grid-template-columns: 1fr auto;
   }
 }
 
@@ -105,14 +75,6 @@ onMounted(randomizePdf);
   .content {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
-    grid-template-areas:
-        "icon"
-        "text";
-  }
-
-  .content-icon {
-    max-width: 120px;
-    justify-self: center;
   }
 }
 
@@ -122,58 +84,20 @@ onMounted(randomizePdf);
   }
 }
 
-@media screen and (max-width: 900px) {
-  .tagline br {
-    display: none;
-  }
-}
-
-
-/* Background gradient */
-
-.content-icon-background-static {
-  content: "";
-  position: absolute;
-  width: 150vmax;
-  height: 150vmax;
-  border-radius: 50%;
-  background: radial-gradient(circle farthest-side, #2979ff60, #0098ff40, #00b4ff20, #00ceff10, #00e5ff08, #00e5ff00);
-}
-
-@keyframes content-icon-background-rays-animation {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.content-icon-background-rays {
-  content: "";
-  position: absolute;
-  width: 200vmax;
-  height: 200vmax;
-  border-radius: 50%;
-  opacity: 0.125;
-  background: repeating-conic-gradient(#FFF0 0deg 30deg, #FFFF 30deg 60deg);
-  animation: content-icon-background-rays-animation 120s linear infinite;
-}
-
-html.dark .content-icon-background-rays {
-  opacity: 0.015;
-}
-
-
 
 /* Content styles */
 
 h1 {
   font-size: 3.5rem !important;
   line-height: 4rem !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
 }
 
 .tagline {
+  max-width: 650px;
   font-size: 1.5rem !important;
   line-height: 2rem !important;
-  color: var(--vp-c-text-1) !important;
+  color: var(--vp-c-text-2) !important;
 }
 
 @media screen and (max-width: 1024px) {
@@ -188,7 +112,7 @@ h1 {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 821px) {
   h1 {
     font-size: 2.5rem !important;
     line-height: 3rem !important;
@@ -201,48 +125,87 @@ h1 {
 }
 
 
-/* PDF Animation */
+/* Call To Action Button */
 
-.animation-scene {
-  perspective: 800px;
+.cta-buttons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+  z-index: 10000;
 }
 
-@keyframes animated-pdf-translate-y {
-  0%   { transform: translateY(-16px); }
-  100% { transform: translateY(16px); }
+.cta-buttons .action {
+  padding: 4px 24px;
 }
 
-@keyframes animated-pdf-rotate-y {
-  0%   { transform: rotateY(-24deg); }
-  100% { transform: rotateY(-16deg);  }
+.cta-buttons .action.primary {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: fit-content;
 }
 
-@keyframes animated-pdf-scale {
-  0%   { transform: scale(1); }
-  100% { transform: scale(1.05);  }
+.cta-buttons .action.primary .divider {
+  border-left: 1px solid #FFF8;
+  margin: 8px 0;
+  height: 20px;
 }
 
-.animation-translate-y {
-  transform-style: preserve-3d;
-  animation: animated-pdf-translate-y 7s ease-in-out infinite alternate;
+/* Background */
+
+.background-gradient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(ellipse 75% 100% at 50% 0%, color-mix(in srgb, var(--vp-c-brand-2) 15%, transparent), transparent);
 }
 
-.animation-rotate-y {
-  transform-style: preserve-3d;
-  animation: animated-pdf-rotate-y 11s ease-in-out infinite alternate;
+.background-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  --grid-thickness: 2px;
+  --grid-color: var(--vp-c-brand-1);
+
+  background-image:
+      linear-gradient(var(--vp-c-brand-3) var(--grid-thickness), transparent var(--grid-thickness)),
+      linear-gradient(90deg, var(--vp-c-brand-3) var(--grid-thickness), transparent var(--grid-thickness));
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 75% 75% at 50% 0%, #0001 25%, transparent 100%);
 }
 
-.animation-rotation-scale {
-  transform-style: preserve-3d;
-  animation: animated-pdf-scale 19s ease-in-out infinite alternate;
+html.dark .background-grid {
+  --grid-thickness: 1px;
+  --grid-color: var(--vp-c-brand-3);
 }
 
-#homepage-hero-pdf {
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+
+/* Trust Indicators */
+
+.trust-items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px 64px;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid color-mix(in srgb, var(--vp-c-brand-2) 10%, transparent);
+  width: fit-content;
 }
 
-html.dark #homepage-hero-pdf {
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+.trust-item {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+}
+
+.trust-item strong {
+  color: var(--vp-c-text-1);
+  font-weight: 700;
 }
 
 </style>

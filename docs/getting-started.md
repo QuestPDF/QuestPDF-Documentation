@@ -1,3 +1,7 @@
+---
+outline: [2, 3]
+---
+
 # Getting started
 
 QuestPDF is a modern .NET library for PDF document generation that emphasizes clean architecture and developer productivity. In this tutorial, we'll build a professional invoice document while exploring the core concepts that make QuestPDF powerful and intuitive to use.

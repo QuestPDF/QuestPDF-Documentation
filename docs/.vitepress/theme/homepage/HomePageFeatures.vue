@@ -1,11 +1,14 @@
 <template>
   <section class="content">
-    <h2>Exactly what you need</h2>
+    <div class="section-header">
+      <h2>Everything you need to generate PDFs</h2>
+      <p class="sub-header">A comprehensive toolkit designed for professional PDF document generation in .NET applications</p>
+    </div>
 
     <div class="features">
 
-      <article class="feature" v-for="feature of features" :key="feature.title">
-        <img class="icon" :src="feature.icon" alt="" />
+      <article class="card" v-for="feature of features" :key="feature.title">
+        <i class="icon fa-2xl" :class="[feature.icon]"></i>
         <h3 class="title">{{ feature.title }}</h3>
         <p class="description">{{ feature.description }}</p>
       </article>
@@ -18,24 +21,34 @@
 
 const features = [
     {
-        icon: "homepage/engine.svg",
+        icon: "fa-duotone fa-gear-complex",
         title: "Comprehensive Layout Engine",
-        description: "A powerful layout engine built specifically for PDF generation. Gain full control over document structure, precise content positioning, and automatic pagination for complex reports and invoices."
+        description: "A powerful layout engine built specifically for PDF generation. Gain full control over document structure, precise content positioning, and automatic pagination."
     },
     {
-        icon: "homepage/puzzle.svg",
+        icon: "fa-duotone fa-toolbox",
         title: "Rich Toolkit",
-        description: "Accelerate your PDF development workflow with a rich set of reusable components and over 50 layout elements. Easily implement data-driven documents using a Fluent C# API."
+        description: "Accelerate development with 50+ layout elements and reusable components. Easily implement data-driven documents using a fluent C# API."
     },
     {
-        icon: "homepage/performance.svg",
+        icon: "fa-duotone fa-gauge-high",
         title: "High Performance",
-        description: "Generate PDF files at scale with up to thousands of pages per second - while maintaining minimal CPU and memory usage. Perfect for high-throughput .NET applications."
+        description: "Generate thousands of pages per second while maintaining minimal CPU and memory usage. Perfect for high-throughput enterprise applications."
     },
     {
-        icon: "homepage/multilingual.svg",
+        icon: "fa-duotone fa-language",
         title: "Advanced Language Support",
-        description: "Create multilingual PDF documents with full support for right-to-left (RTL) languages, advanced text shaping, and bi-directional layout handling."
+        description: "Create multilingual documents with full RTL language support, advanced text shaping, and bi-directional layout handling."
+    },
+    {
+        icon: "fa-duotone fa-shield-check",
+        title: "Complete Data Privacy",
+        description: "QuestPDF runs entirely within your infrastructure with no external API calls, internet requirement, or background data collection. As a company, we do not access, collect, store, or process your private data.",
+    },
+    {
+        icon: "fa-duotone fa-file-zipper",
+        title: "Optimized File Size",
+        description: "Drastically reduce file sizes without compromising quality. Benefit from automatic font subsetting, optimal image compression, and efficient file compression."
     }
 ];
 
@@ -45,61 +58,22 @@ const features = [
 
 .features {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 96px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 32px;
 
   margin-top: 64px;
+}
+
+@media screen and (max-width: 1100px) {
+  .features {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media screen and (max-width: 700px) {
   .features {
     grid-template-columns: 1fr;
-    grid-gap: 64px;
   }
-}
-
-.feature {
-  display: grid;
-  grid-template-areas:
-      "icon title"
-      "icon description";
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr;
-  grid-gap: 8px 24px;
-}
-
-@media screen and (max-width: 1000px) {
-  .feature {
-    grid-template-areas:
-      "icon"
-      "title"
-      "description";
-    grid-template-columns: auto;
-    grid-template-rows: auto auto auto;
-    grid-gap: 12px 0;
-  }
-}
-
-.feature img.icon {
-  grid-area: icon;
-
-  justify-self: start;
-  align-self: start;
-  height: 48px;
-  width: 48px;
-}
-
-.feature h3.title {
-  grid-area: title;
-
-  margin: 0;
-}
-
-.feature p.description {
-  grid-area: description;
-
-  justify-self: start;
-  align-self: start;
 }
 
 </style>

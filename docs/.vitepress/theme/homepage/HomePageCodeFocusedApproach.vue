@@ -1,50 +1,25 @@
 <script setup lang="ts">
-import createCodeHighlighter from './createCodeHighlighter'
-import {onMounted, ref, watch} from "vue";
-import {useData} from "vitepress";
-import codeOrganization from './organizationCodeExample.cs?raw';
-
-const { isDark } = useData()
-const highlightedCode = ref('');
-
-async function highlightCode() {
-  const codeHighlighter = await createCodeHighlighter();
-
-  highlightedCode.value = codeHighlighter.codeToHtml(codeOrganization, {
-    lang: 'csharp',
-    theme: isDark.value ? 'dark-plus' :'light-plus',
-    transformers: [
-      {
-        line(node, line) {
-          if (line == 13)
-            this.addClassToHast(node, 'line-removed')
-
-          if (line == 14)
-            this.addClassToHast(node, 'line-added')
-        }
-      }
-    ]
-  })
-}
-
-watch(isDark, highlightCode);
-onMounted(highlightCode);
+import HomePageCodeContainer from "./HomePageCodeContainer.vue";
+import codeFocusedApproach from './codeExamples/codeFocusedApproach.cs?raw';
 
 const features = [
   {
-    icon: "homepage/layers.svg",
-    title: "Modular and Maintainable C# Code",
-    description: "Implement modular PDF layouts with reusable well-organized classes and methods. Refactor safely with IntelliSense - your logic stays seamlessly integrated with your domain code."
+    icon: "fa-duotone fa-code",
+    title: "Familiar Programming Patterns",
+    description:
+        "Treat documents as application code: strongly-typed models, reusable components, and IDE-assisted refactoring. Catch issues early with compile-time feedback."
   },
   {
-    icon: "homepage/csharp.svg",
-    title: "Familiar Programming Concepts",
-    description: "Use conditions, loops, LINQ, and extension methods to effortlessly generate dynamic, data-driven PDF documents tailored to your unique business needs."
+    icon: "fa-duotone fa-code-branch",
+    title: "Version Control Ready",
+    description:
+        "Make changes safely and transparently. Git-friendly diffs support code reviews, approvals, and long-term maintainability—without fragile templates."
   },
   {
-    icon: "homepage/git.svg",
-    title: "Git-Friendly Workflow",
-    description: "Enjoy straightforward C# code reviews, meaningful pull-request diffs, and cleaner version control histories."
+    icon: "fa-duotone fa-sparkles",
+    title: "Optimized for AI Assistance",
+    description:
+        "A semantic Fluent API helps AI tools understand intent - accelerating layout creation while keeping output aligned with your standards and patterns."
   }
 ];
 
@@ -52,96 +27,63 @@ const features = [
 
 <template>
   <section class="content">
-    <h2>Code-Focused Paradigm</h2>
+    <div class="section-header">
+      <h2>A True Code-First Architecture</h2>
+      <p class="sub-header">Treat your documents as first-class application code. Replace fragile templates with strongly-typed, maintainable, and refactor-safe C#.</p>
+    </div>
 
-    <div class="container">
-      <div class="features">
-        <article class="feature" v-for="feature of features" :key="feature.title">
-          <img class="icon" :src="feature.icon" alt="" />
-          <h3 class="title">{{ feature.title }}</h3>
-          <p class="description">{{ feature.description }}</p>
-        </article>
-      </div>
+    <div class="features-list">
+      <article v-for="feature in features" :key="feature.title" class="card">
+        <i class="icon fa-2xl" :class="[feature.icon]"></i>
+        <h3 class="title"> {{ feature.title }}</h3>
+        <p class="description">{{ feature.description }}</p>
+      </article>
+    </div>
 
-      <div class="code-container" v-html="highlightedCode"></div>
+    <div class="code-example">
+      <home-page-code-container
+          file-name="OrderDocument.cs"
+          :code="codeFocusedApproach"
+          :code-transformer="{
+              line(node, line) {
+                if (line === 25) this.addClassToHast(node, 'line-removed');
+                if (line === 26) this.addClassToHast(node, 'line-added');
+              }
+            }" />
     </div>
   </section>
 </template>
 
 <style scoped>
 
-.container {
+.features-list {
   display: grid;
-  grid-template-columns: 1fr auto;
-  grid-gap: 64px;
-  align-content: stretch;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
   margin-top: 64px;
 }
 
-@media screen and (max-width: 800px) {
-  .container {
+.code-example {
+  margin-top: 32px;
+  width: fit-content;
+  place-self: center;
+}
+
+@media screen and (max-width: 1100px) {
+  .approach-container {
     grid-template-columns: 1fr;
-    grid-gap: 32px;
+    gap: 40px;
+  }
+
+  .features-list {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-/* Features */
-
-.features {
-  display: flex;
-  flex-direction: column;
-  gap: 64px;
-}
-
-@media screen and (max-width: 700px) {
-  .features {
+@media screen and (max-width: 600px) {
+  .features-list {
     grid-template-columns: 1fr;
-    grid-gap: 64px;
   }
-}
-
-.feature {
-  display: grid;
-  grid-template-areas:
-      "icon title"
-      "icon description";
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto 1fr;
-  grid-gap: 8px 24px;
-}
-
-@media screen and (max-width: 1000px) {
-  .feature {
-    grid-template-areas:
-      "icon"
-      "title"
-      "description";
-    grid-template-columns: auto;
-    grid-template-rows: auto auto auto;
-    grid-gap: 12px 0;
-  }
-}
-
-.feature img.icon {
-  grid-area: icon;
-
-  justify-self: start;
-  align-self: start;
-  height: 48px;
-  width: 48px;
-}
-
-.feature h3.title {
-  grid-area: title;
-
-  margin: 0;
-}
-
-.feature p.description {
-  grid-area: description;
-
-  justify-self: start;
-  align-self: start;
 }
 
 </style>
