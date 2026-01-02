@@ -93,4 +93,20 @@ const platforms = [
   }
 }
 
+@media screen and (max-width: 6380px) {
+  .platforms {
+    gap: 12px;
+  }
+
+  .platform-item {
+    width: 100px;
+    padding: 16px 8px;
+  }
+
+  .platform-item img {
+    width: 36px;
+    height: 36px;
+  }
+}
+
 </style>
