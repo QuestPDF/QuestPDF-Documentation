@@ -45,7 +45,7 @@ const contacts: ContactInformation[] = [
       },
       {
         label: "Contact with Paddle",
-        href: "help@paddle.com"
+        href: "mailto:help@paddle.com"
       }
     ]
   },
