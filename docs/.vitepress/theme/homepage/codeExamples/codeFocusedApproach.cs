@@ -1,18 +1,19 @@
-.Column(column =>
-{
-    column.Item().Text("Order Items").Bold();
-
-    // use conditionals to show content based on logic
-    if (Model.ShowSummary)
-        column.Item().Element(ComposeOrderSummary);
-
-    // use loops to iterate over collections naturally
-    foreach (var item in Model.Items)
+container
+    .Column(column =>
     {
-        column.Item()
-            .Element(container => ComposeItem(container, item));
-    }
-});
+        column.Item().Text("Order Items").Bold();
+
+        // use conditionals to show content based on logic
+        if (Model.ShowSummary)
+            column.Item().Element(ComposeOrderSummary);
+
+        // use loops to iterate over collections naturally
+        foreach (var item in Model.Items)
+        {
+            column.Item()
+                .Element(container => ComposeItem(container, item));
+        }
+    });
 
 // use functions to organize and reuse code
 void ComposeItem(IContainer container, OrderItem item)

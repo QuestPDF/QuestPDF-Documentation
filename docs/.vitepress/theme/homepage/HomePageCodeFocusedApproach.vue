@@ -4,24 +4,22 @@ import codeFocusedApproach from './codeExamples/codeFocusedApproach.cs?raw';
 
 const features = [
   {
-    icon: "fa-regular fa-code",
+    icon: "fa-duotone fa-code",
     title: "Familiar Programming Patterns",
-    description: "Move beyond scripting. Leverage C# control structures, strict typing, and component-based architecture to build complex, dynamic layouts that scale."
+    description:
+        "Treat documents as application code: strongly-typed models, reusable components, and IDE-assisted refactoring. Catch issues early with compile-time feedback."
   },
   {
-    icon: "fa-regular fa-cubes",
-    title: "Full IDE Support",
-    description: "Catch errors at compile time, not runtime. Benefit from full IntelliSense support, easier refactoring, and seamless code navigation."
-  },
-  {
-    icon: "fa-regular fa-code-branch",
+    icon: "fa-duotone fa-code-branch",
     title: "Version Control Ready",
-    description: "Stop struggling with binary files or minified HTML. Get clean, semantic diffs in Git, making code reviews and history tracking effortless for your team."
+    description:
+        "Make changes safely and transparently. Git-friendly diffs support code reviews, approvals, and long-term maintainability—without fragile templates."
   },
   {
-    icon: "fa-regular fa-sparkles",
+    icon: "fa-duotone fa-sparkles",
     title: "Optimized for AI Assistance",
-    description: "The concise, semantic Fluent API provides perfect context for AI assistance tools to generate accurate, functional layouts instantly."
+    description:
+        "A semantic Fluent API helps AI tools understand intent - accelerating layout creation while keeping output aligned with your standards and patterns."
   }
 ];
 
@@ -34,56 +32,40 @@ const features = [
       <p class="sub-header">Treat your documents as first-class application code. Replace fragile templates with strongly-typed, maintainable, and refactor-safe C#.</p>
     </div>
 
-    <div class="approach-container">
-      <div class="features-list">
-        <article v-for="feature in features" :key="feature.title" class="card feature-card">
+    <div class="features-list">
+      <article v-for="feature in features" :key="feature.title" class="card">
+        <i class="icon fa-2xl" :class="[feature.icon]"></i>
+        <h3 class="title"> {{ feature.title }}</h3>
+        <p class="description">{{ feature.description }}</p>
+      </article>
+    </div>
 
-          <h3 class="title"><i :class="[feature.icon]"></i> {{ feature.title }}</h3>
-          <p class="description">{{ feature.description }}</p>
-        </article>
-      </div>
-
-      <div class="code-example">
-        <home-page-code-container
-            file-name="OrderDocument.cs"
-            :code="codeFocusedApproach"
-            :code-transformer="{
+    <div class="code-example">
+      <home-page-code-container
+          file-name="OrderDocument.cs"
+          :code="codeFocusedApproach"
+          :code-transformer="{
               line(node, line) {
                 if (line === 25) this.addClassToHast(node, 'line-removed');
                 if (line === 26) this.addClassToHast(node, 'line-added');
               }
             }" />
-      </div>
     </div>
   </section>
 </template>
 
 <style scoped>
 
-.approach-container {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
-  gap: 64px;
-  margin-top: 56px;
-  align-items: center;
-}
-
 .features-list {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-}
-
-.title {
-  margin: 0 0 16px 0;
-}
-
-.title i {
-  margin-right: 12px
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
 }
 
 .code-example {
-  min-width: 0;
+  margin-top: 32px;
+  width: fit-content;
+  place-self: center;
 }
 
 @media screen and (max-width: 1100px) {
