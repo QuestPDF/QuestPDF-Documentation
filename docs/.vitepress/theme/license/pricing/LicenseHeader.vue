@@ -28,4 +28,10 @@
   }
 }
 
+@media screen and (max-width: 400px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+}
+
 </style>
