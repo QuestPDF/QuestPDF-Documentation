@@ -79,7 +79,7 @@ async function startCodeAnimation() {
 
 onMounted(() => {
     const observerOptions = {
-      threshold: 0.10
+      threshold: 0.20
     }
 
     function onSectionVisible(entries) {
