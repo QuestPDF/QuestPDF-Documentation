@@ -2811,7 +2811,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^10.0.3":
+"minimatch@npm:^10.1.1":
   version: 10.1.1
   resolution: "minimatch@npm:10.1.1"
   dependencies:
@@ -3090,10 +3090,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path-to-regexp@npm:^8.3.0":
-  version: 8.3.0
-  resolution: "path-to-regexp@npm:8.3.0"
-  checksum: 73e0d3db449f9899692b10be8480bbcfa294fd575be2d09bce3e63f2f708d1fccd3aaa8591709f8b82062c528df116e118ff9df8f5c52ccc4c2443a90be73e10
+"path-to-regexp@npm:^6.3.0":
+  version: 6.3.0
+  resolution: "path-to-regexp@npm:6.3.0"
+  checksum: eca78602e6434a1b6799d511d375ec044e8d7e28f5a48aa5c28d57d8152fb52f3fc62fb1cfc5dfa2198e1f041c2a82ed14043d75740a2fe60e91b5089a153250
   languageName: node
   linkType: hard
 
@@ -3158,7 +3158,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pretty-bytes@npm:^7.0.1":
+"pretty-bytes@npm:^7.1.0":
   version: 7.1.0
   resolution: "pretty-bytes@npm:7.1.0"
   checksum: ac0b349d258c72a76cdf891e7040e74b97e8556523b46db2461926c58513221358b09910afe6c90baad63709d5d6d8049198ce64b147b299a855cbe92ed9cf2b
@@ -3197,7 +3197,7 @@ __metadata:
     markdown-it-imsize: ^2.0.1
     sass: ^1.93.3
     vitepress: 1.6.4
-    vitepress-plugin-llms: ^1.9.3
+    vitepress-plugin-llms: ^1.10.0
     vue: 3.5.26
   languageName: unknown
   linkType: soft
@@ -3695,10 +3695,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tokenx@npm:^1.1.0":
-  version: 1.2.0
-  resolution: "tokenx@npm:1.2.0"
-  checksum: 4459c087065705c1ff576c9e9d36661673595c7caf820cc014aa143368315c9bad4482ff15507f182d7518ccab593f7b4eca09ef66f9cb2204dc88401f0b91cc
+"tokenx@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "tokenx@npm:1.2.1"
+  checksum: e93792fa50149b09ff4c5c6524d56ed7fb4c7d7b0a1918e626fbc7a8e84a6e24339fb7d16e33c3fcf9cb76c2eeaf6c5821599251f4d6e0fedf7356330840bee3
   languageName: node
   linkType: hard
 
@@ -3885,25 +3885,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitepress-plugin-llms@npm:^1.9.3":
-  version: 1.9.3
-  resolution: "vitepress-plugin-llms@npm:1.9.3"
+"vitepress-plugin-llms@npm:^1.10.0":
+  version: 1.10.0
+  resolution: "vitepress-plugin-llms@npm:1.10.0"
   dependencies:
     gray-matter: ^4.0.3
     markdown-it: ^14.1.0
     markdown-title: ^1.0.2
     mdast-util-from-markdown: ^2.0.2
     millify: ^6.1.0
-    minimatch: ^10.0.3
-    path-to-regexp: ^8.3.0
+    minimatch: ^10.1.1
+    path-to-regexp: ^6.3.0
     picocolors: ^1.1.1
-    pretty-bytes: ^7.0.1
+    pretty-bytes: ^7.1.0
     remark: ^15.0.1
     remark-frontmatter: ^5.0.0
-    tokenx: ^1.1.0
+    tokenx: ^1.2.1
     unist-util-remove: ^4.0.0
     unist-util-visit: ^5.0.0
-  checksum: 49a12c52cb46547e43df30664217c5b959c61b50e7e673712b512292152af07a59875062fac9cfbdb082fbb36d112ead43d74c0eae11b15f7540fb679f71d486
+  checksum: 80f815fbea03c6ae58412441dde6c4f8a45eaf278c9dea33dd653c4bbe05d9657cf61671649e9f38e760f929e68d01455c2c83ec27080b893754275698a3b1b5
   languageName: node
   linkType: hard
 
