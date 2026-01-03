@@ -64,11 +64,18 @@ const features = [
 }
 
 .code-example {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   margin-top: 32px;
+}
+
+.code-example > * {
   width: fit-content;
   max-width: 100%;
-  place-self: center;
 }
+
 
 @media screen and (max-width: 1100px) {
   .approach-container {
