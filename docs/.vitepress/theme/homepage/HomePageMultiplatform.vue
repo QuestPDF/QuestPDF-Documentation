@@ -93,7 +93,7 @@ const platforms = [
   }
 }
 
-@media screen and (max-width: 6380px) {
+@media screen and (max-width: 380px) {
   .platforms {
     gap: 12px;
   }
