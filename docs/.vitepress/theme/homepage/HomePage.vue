@@ -78,10 +78,6 @@ async function startCodeAnimation() {
 /* Reveal animation */
 
 onMounted(() => {
-    const observerOptions = {
-      threshold: 0.20
-    }
-
     function onSectionVisible(entries) {
         for (let entry of entries.filter(x => x.isIntersecting)) {
             entry.target.classList.add('is-visible');
@@ -89,7 +85,7 @@ onMounted(() => {
         }
     }
 
-    const intersectionObserver = new IntersectionObserver(onSectionVisible, observerOptions);
+    const intersectionObserver = new IntersectionObserver(onSectionVisible);
 
     const observableElements = document.querySelectorAll('.reveal-animation > *');
     observableElements.forEach(x => intersectionObserver.observe(x));
@@ -145,6 +141,7 @@ onMounted(() => {
   transform: translateY(16px) scale(0.95);
 
   transition: opacity 250ms ease-out, transform 250ms ease-out;
+  transition-delay: 250ms;
   will-change: opacity, transform;
 }
 
