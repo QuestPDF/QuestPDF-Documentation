@@ -8,35 +8,35 @@
       <HomePageCodeAnimation />
     </div>
 
-    <div class="container reverse-background reveal-animation">
+    <div class="container reverse-background">
       <HomePageCodeFocusedApproach />
     </div>
 
-    <div class="container reveal-animation">
+    <div class="container">
       <HomePageCompanion />
     </div>
 
-    <div class="container reverse-background reveal-animation">
+    <div class="container reverse-background">
       <HomePageFeatures />
     </div>
 
-    <div class="container reveal-animation">
+    <div class="container">
       <HomePageMultiplatform />
     </div>
 
-    <div class="container reverse-background reveal-animation">
+    <div class="container reverse-background">
       <HomePageDocumentOperations />
     </div>
 
-    <div class="container reveal-animation">
+    <div class="container">
       <HomePageStandardCompliance />
     </div>
 
-    <div class="container reverse-background reveal-animation" style="overflow: hidden;">
+    <div class="container reverse-background" style="overflow: hidden;">
       <HomePageLicense />
     </div>
 
-    <div class="container footer-container reveal-animation">
+    <div class="container footer-container">
       <HomePageGettingStarted />
     </div>
   </div>
@@ -75,22 +75,6 @@ async function startCodeAnimation() {
   });
 }
 
-/* Reveal animation */
-
-onMounted(() => {
-    function onSectionVisible(entries) {
-        for (let entry of entries.filter(x => x.isIntersecting)) {
-            entry.target.classList.add('is-visible');
-            intersectionObserver.unobserve(entry.target);
-        }
-    }
-
-    const intersectionObserver = new IntersectionObserver(onSectionVisible);
-
-    const observableElements = document.querySelectorAll('.reveal-animation > *');
-    observableElements.forEach(x => intersectionObserver.observe(x));
-})
-
 </script>
 
 <style>
@@ -115,40 +99,16 @@ onMounted(() => {
 
 /* Background */
 
-.home-page {
-  margin-top: -64px;
-}
-
 .hero-container {
-  padding-top: 64px;
   position: relative;
-  overflow: hidden;
-}
-
-.hero-container {
-  border-top: none !important;
 }
 
 .footer-container {
   position: relative;
-  overflow: hidden;
 }
 
-/* Reveal section animation */
 
-.reveal-animation > * {
-  opacity: 0;
-  transform: translateY(16px) scale(0.95);
-
-  transition: opacity 250ms ease-out, transform 250ms ease-out;
-  transition-delay: 250ms;
-  will-change: opacity, transform;
-}
-
-.reveal-animation > *.is-visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
+/* Common styles */
 
 .section-tag {
   border: 1px solid color-mix(in srgb, var(--vp-c-brand-2), transparent 70%);

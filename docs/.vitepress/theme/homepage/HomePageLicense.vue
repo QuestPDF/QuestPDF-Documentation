@@ -1,4 +1,4 @@
-<script setup>
+w<script setup>
 const SummaryContent = [
   "Actively maintained with regular feature, quality, and security updates",
   "Full source code available on GitHub",
@@ -40,6 +40,8 @@ const SummaryContent = [
 <style scoped>
 
   .content {
+    position: relative;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
