@@ -75,7 +75,7 @@ const CommunityLicense: License = {
 const ProfessionalLicense: License = {
   name: "professional",
   description: "Compliance and stability for established small businesses and agencies",
-  price: 999, // Consider clarifying if this is USD in the UI
+  price: 999,
   paddlePriceId: paddle.professionalLicensePriceId,
   details: [
     "Full commercial usage rights",
