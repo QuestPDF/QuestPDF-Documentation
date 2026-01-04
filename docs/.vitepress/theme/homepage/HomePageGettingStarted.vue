@@ -213,12 +213,14 @@ const features = [
 
   .background-gradient {
     position: absolute;
+    pointer-events: none;
     inset: 0;
     background-image: radial-gradient(ellipse 75% 100% at 50% 100%, color-mix(in srgb, var(--vp-c-brand-2) 15%, transparent), transparent);
   }
 
   .background-grid {
     position: absolute;
+    pointer-events: none;
     inset: 0;
     --grid-thickness: 2px;
     --grid-color: var(--vp-c-brand-1);
