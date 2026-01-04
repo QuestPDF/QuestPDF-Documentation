@@ -30,7 +30,7 @@
 
       <section>
         <h3>Non-profit Usage</h3>
-        <p>If you represent an open-source project, a charitable organization, or are using QuestPDF for educational purposes or training courses, you can also use QuestPDF for free under the <a class="license-link" href="/license/community">Community MIT License</a>.</p>
+        <p>If you represent an open-source project, a charitable organization, or are using QuestPDF for evaluation, learning or training purposes, you can also use QuestPDF for free under the <a class="license-link" href="/license/community">Community MIT License</a>.</p>
       </section>
 
       <section>
