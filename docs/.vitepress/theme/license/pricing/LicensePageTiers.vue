@@ -14,7 +14,7 @@
 
           <div v-if="license.price">
             <span class="price-value">${{ license.price }}</span>
-            <span class="price-per">per team/year</span>
+            <span class="price-per">per team/year + tax</span>
           </div>
 
           <div v-else>
