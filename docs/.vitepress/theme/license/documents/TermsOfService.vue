@@ -1,9 +1,7 @@
 <template>
   <document-template>
     <template #header>
-      <h1><span class="highlight-foreground">QuestPDF</span> Terms of Service</h1>
-
-      <p class="sub-header">Our goal is to offer a superior user experience.</p>
+      <h1>Terms of Service</h1>
     </template>
 
     <template #content>
@@ -15,15 +13,21 @@
         <p>Notwithstanding the above limitations, QuestPDF is committed to delivering high-quality software and professional support. We welcome your feedback and strive to continuously improve and collaborate to enhance our offerings.</p>
       </section>
 
+      <hr>
+
       <section>
         <h3>Licenses</h3>
         <p>When choosing a license for your usage of the QuestPDF programming library, you must adhere to the guidelines and conditions set forth in the <a href="/license/guide.html">License Selection Guide</a>, which is integral to these Terms of Service. Please review these rules carefully before choosing a license.</p>
       </section>
 
+      <hr>
+
       <section>
         <h3>Products</h3>
         <p>All products and services are delivered by QuestPDF. You can access the QuestPDF library package through the <a href="https://www.nuget.org/packages/QuestPDF/">NuGet website</a>.</p>
       </section>
+
+      <hr>
 
       <section>
         <h3>Support</h3>
@@ -40,15 +44,21 @@
         </p>
       </section>
 
+      <hr>
+
       <section>
         <h3>Payments</h3>
         <p>QuestPDF does not process any order payments through the website. Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.</p>
       </section>
 
+      <hr>
+
       <section>
         <h3>Refund policy</h3>
         <p>If you are not completely satisfied with the library after the purchase, we provide a 30-day money-back guarantee on all license purchases.</p>
       </section>
+
+      <hr>
 
       <section>
         <h3>Changes</h3>
