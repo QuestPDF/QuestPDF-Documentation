@@ -1,11 +1,8 @@
 <template>
-  <div class="custom-page api-reference-page">
-
-    <!-- Categories -->
+  <div class="custom-page">
     <div class="container reverse-background">
+      <div class="content">
 
-
-      <div class="content" style="display: flex; flex-direction: column; gap: 48px;">
         <header class="section-header">
           <h1>Features Overview</h1>
           <p class="sub-header">
@@ -13,30 +10,29 @@
           </p>
         </header>
 
-        <div v-for="(category, index) in categories" :key="category.name" class="">
-          <div class="card" style="display: flex; flex-direction: column; gap: 32px;">
-            <h3>{{ category.name }}</h3>
+        <div v-for="category in categories" :key="category.name"class="card" >
+          <h3>{{ category.name }}</h3>
 
-            <a v-for="item in category.items" :key="item.name" :href="item.link" class="card-link">
-              <div style="display: flex; flex-direction: row; gap: 24px;">
-                <i class="icon" :class="item.icon"></i>
+          <template v-for="item in category.items" :key="item.name">
+            <a :href="item.link">
+              <div class="card-item">
+                <i class="icon" :class="item.icon" />
                 <div>
                   <p><b>{{ item.name }}</b> - {{ item.description }}</p>
 
-                  <div class="tags">
-                    <a v-for="tag in item.tags || []" :key="tag.label" :href="tag.url" class="tag">
+                  <div v-if="item.tags" class="tags">
+                    <a v-for="tag in item.tags" :key="tag.label" :href="tag.url" class="tag">
                       {{ tag.label }}
                     </a>
                   </div>
                 </div>
               </div>
             </a>
-          </div>
+          </template>
         </div>
+
       </div>
-
     </div>
-
   </div>
 </template>
 
@@ -48,56 +44,56 @@ const categories = [
       {
         icon: "fa-regular fa-rocket",
         name: "Installation and Getting Started",
-        description: "Download, install, and connect the Companion App with your project using the ShowInCompanion() method.",
+        description: "Download, install, and integrate the Companion App with your project. Enjoy real-time hot-reload preview with ShowInCompanion() for rapid development.",
         link: "/companion/usage"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-magnifying-glass-plus",
         name: "Magnifier",
-        description: "",
-        link: "https://www.questpdf.com/companion/features.html#magnifier"
+        description: "Inspect document details at pixel level without zooming. Quickly examine structure, spacing, and alignment with an interactive lens overlay.",
+        link: "/companion/features#magnifier"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-crosshairs",
         name: "Coordinate Inspector",
-        description: "",
-        link: "https://www.questpdf.com/companion/features.html#coordinate-picker"
+        description: "Pick precise coordinates of any element in your document. Essential for positioning calculations and layout fine-tuning.",
+        link: "/companion/features#coordinate-picker"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-ruler-combined",
         name: "Measuring Sizes",
-        description: "",
-        link: "https://www.questpdf.com/companion/features.html#size-measurement"
+        description: "Measure vertical and horizontal distances between elements with precision. Verify margins, padding, and spacing match your design specifications.",
+        link: "/companion/features#size-measurement"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-object-ungroup",
         name: "Content Inspection",
-        description: "",
-        link: "https://www.questpdf.com/companion/features.html#element-selection"
+        description: "Select and inspect any element to review its configuration, position, and size. Navigate through multi-page occurrences with arrow keys.",
+        link: "/companion/features#element-selection"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-magnifying-glass",
         name: "Content Search and Navigation",
-        description: "",
-        link: "https://www.questpdf.com/companion/features.html#content-searching"
+        description: "Quickly locate content by searching for phrases. Results are highlighted in both the document tree and visual preview for easy navigation.",
+        link: "/companion/features#content-searching"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-code",
         name: "Go To Implementation",
-        description: "",
-        link: "https://www.questpdf.com/companion/features.html#go-to-implementation"
+        description: "Jump directly from any visual element to its source code in your IDE. Ctrl+click navigates to the exact implementation line.",
+        link: "/companion/features#go-to-implementation"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-circle-exclamation",
         name: "Runtime Exception Analysis",
-        description: "",
-        link: "https://www.questpdf.com/companion/features.html#runtime-exceptions"
+        description: "View detailed exception messages, stack traces, and source code context when errors occur during document generation.",
+        link: "/companion/features#runtime-exceptions"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-bug",
         name: "Layout Issue Debugging",
-        description: "",
-        link: "https://www.questpdf.com/companion/features.html#layout-issue-debugging"
+        description: "Diagnose layout problems with color-coded status indicators. Identify root causes, wrapped elements, and overflow issues with intelligent heuristics.",
+        link: "/companion/features#layout-issue-debugging"
       }
     ]
   },
@@ -105,52 +101,52 @@ const categories = [
     name: "Document Operations",
     items: [
       {
-        icon: "",
+        icon: "fa-regular fa-scissors",
         name: "Page Selection / Extraction",
-        description: "",
-        link: "https://www.questpdf.com/concepts/document-operations.html#page-selection"
+        description: "Select specific pages using flexible range syntax. Extract, reorder, or remove pages with patterns like '1-5', 'z-1' (reverse), or '1-20:even'.",
+        link: "/concepts/document-operations#page-selection"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-globe",
         name: "Document Linealization",
-        description: "",
-        link: "https://www.questpdf.com/concepts/document-operations.html#document-linearization"
+        description: "Optimize PDFs for web delivery. Linearized files allow viewers to display content before the entire file downloads, improving user experience.",
+        link: "/concepts/document-operations#document-linearization"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-copy",
         name: "Merging Documents",
-        description: "",
-        link: "https://www.questpdf.com/concepts/document-operations.html#merging-documents"
+        description: "Combine multiple PDF files into a single document. Merge entire documents or select specific pages from each source with full control.",
+        link: "/concepts/document-operations#merging-documents"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-clone",
         name: "Overlays / Underlays",
-        description: "",
-        link: "https://www.questpdf.com/concepts/document-operations.html#overlays-and-underlays"
+        description: "Apply watermarks, headers, footers, or letterhead by layering PDF content. Configure which pages receive overlays with precise control.",
+        link: "/concepts/document-operations#overlays-and-underlays"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-lock",
         name: "Document Encryption",
-        description: "",
-        link: "https://www.questpdf.com/concepts/document-operations.html#document-encryption"
+        description: "Secure PDFs with 40-bit, 128-bit, or 256-bit encryption. Set user/owner passwords and control permissions for printing, copying, and editing.",
+        link: "/concepts/document-operations#document-encryption"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-unlock",
         name: "Document Decryption",
-        description: "",
-        link: "https://www.questpdf.com/concepts/document-operations.html#document-decryption"
+        description: "Remove encryption and security restrictions from password-protected PDFs. Access content for further processing or distribution.",
+        link: "/concepts/document-operations#document-decryption"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-paperclip",
         name: "Files Attachments",
-        description: "",
-        link: "https://www.questpdf.com/concepts/document-operations.html#file-attachments"
+        description: "Embed files directly within PDFs with full PDF/A-3b compliance. Support for data, source, alternative, and supplementary relationships.",
+        link: "/concepts/document-operations#file-attachments"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-tags",
         name: "Extending XMP Metadata",
-        description: "",
-        link: "https://www.questpdf.com/concepts/document-operations.html#xmp-metadata-extension"
+        description: "Add custom XMP metadata to PDF/A documents. Essential for industry standards like ZUGFeRD invoices and other compliance requirements.",
+        link: "/concepts/document-operations#xmp-metadata-extension"
       }
     ]
   },
@@ -160,110 +156,110 @@ const categories = [
       {
         icon: "fa-regular fa-gear",
         name: "Global Settings",
-        description: "Library-wide configuration for caching, debugging, and font behavior. Affects all document generation.",
+        description: "Library-wide configuration for caching, debugging, font glyph validation, and font discovery paths. Fine-tune performance and development experience.",
         link: "/concepts/global-settings"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-file-export",
         name: "Output Types",
-        description: "",
-        link: "https://www.questpdf.com/concepts/generating-output.html"
+        description: "Generate PDF, XPS, SVG, or raster images (PNG, JPEG). Multiple output methods: save to file, stream, or byte array for flexible integration.",
+        link: "/concepts/generating-output"
       },
       {
-        icon: "fa-regular fa-sliders",
+        icon: "fa-regular fa-id-card",
         name: "Document Metadata",
-        description: "Configure PDF/A compliance, compression, image quality, and DPI. Set content direction for RTL languages.",
-        link: "https://www.questpdf.com/concepts/document-metadata.html"
+        description: "Set PDF properties like title, author, subject, keywords, and timestamps. Improve document organization and searchability.",
+        link: "/concepts/document-metadata"
       },
       {
         icon: "fa-regular fa-sliders",
         name: "Document Settings",
-        description: "Configure PDF/A compliance, compression, image quality, and DPI. Set content direction for RTL languages.",
+        description: "Configure PDF/A archival and PDF/UA accessibility compliance. Control compression, image quality, DPI, and content direction.",
         link: "/concepts/document-settings"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-lightbulb",
         name: "Patterns and Practices",
-        description: "",
+        description: "Best practices for clean, maintainable document code. Learn execution order, modular structure, local helpers, content styling, and extension methods.",
         link: null,
         tags: [
           {
             label: "Execution Order",
-            url: "https://www.questpdf.com/concepts/code-patterns/execution-order.html",
+            url: "/concepts/code-patterns/execution-order",
           },
           {
             label: "Document Structure",
-            url: "https://www.questpdf.com/concepts/code-patterns/document-structure.html",
+            url: "/concepts/code-patterns/document-structure",
           },
           {
             label: "Local Helpers",
-            url: "https://www.questpdf.com/concepts/code-patterns/local-helpers.html",
+            url: "/concepts/code-patterns/local-helpers",
           },
           {
             label: "Content Styling",
-            url: "https://www.questpdf.com/concepts/code-patterns/content-styling.html",
+            url: "/concepts/code-patterns/content-styling",
           },
           {
             label: "Extension Methods",
-            url: "https://www.questpdf.com/concepts/code-patterns/extension-methods.html",
+            url: "/concepts/code-patterns/extension-methods",
           },
         ]
       },
       {
         icon: "fa-regular fa-universal-access",
         name: "Accessibility",
-        description: "Generate accessible PDFs with PDF/UA compliance and tagged content. Screen reader support and semantic structure.",
+        description: "Generate inclusive PDFs with PDF/UA compliance and tagged content. Enable screen reader support with proper semantic structure for all users.",
         link: "/concepts/accessibility"
       },
       {
         icon: "fa-regular fa-puzzle-piece",
         name: "Components",
-        description: "Create reusable document building blocks. Encapsulate layout patterns and share across multiple documents.",
+        description: "Build modular, reusable document blocks for cleaner architecture. Encapsulate layout patterns and maintain consistency across your entire codebase.",
         link: "/concepts/components",
         tags: [
           {
             label: "Components",
-            url: "https://www.questpdf.com/concepts/code-patterns/components.html",
+            url: "/concepts/code-patterns/components",
           },
           {
             label: "Dynamic Components",
-            url: "https://www.questpdf.com/concepts/code-patterns/dynamic-components.html",
+            url: "/concepts/code-patterns/dynamic-components",
           },
           {
             label: "Capture Content Position",
-            url: "https://www.questpdf.com/concepts/code-patterns/capture-content-position.html",
+            url: "/concepts/code-patterns/capture-content-position",
           }
         ]
       },
       {
         icon: "fa-regular fa-ruler",
         name: "Length Units",
-        description: "Supported units: points (default), millimeters, centimeters, inches, and percentages. Conversion helpers included.",
+        description: "Flexible measurement system with points, millimeters, centimeters, inches, and percentages. Built-in conversion helpers for seamless unit mixing.",
         link: "/concepts/length-unit-types"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-palette",
         name: "Predefined Colors",
-        description: "",
-        link: "https://www.questpdf.com/concepts/colors.html"
+        description: "Full Google Material Design color palette included. HEX, alpha channel, and shorthand formats supported with convenient color helpers.",
+        link: "/concepts/colors"
       },
       {
-        icon: "",
+        icon: "fa-regular fa-wand-magic-sparkles",
         name: "Placeholders",
-        description: "",
-        link: "https://www.questpdf.com/concepts/prototyping.html",
+        description: "Generate random text, colors, and images for rapid prototyping. Includes lorem ipsum, names, emails, dates, numbers, and gradient images.",
+        link: "/concepts/prototyping",
         tags: [
           {
             label: "Text",
-            url: "https://www.questpdf.com/concepts/prototyping.html#text",
+            url: "/concepts/prototyping#text",
           },
           {
             label: "Colors",
-            url: "https://www.questpdf.com/concepts/prototyping.html#colors",
+            url: "/concepts/prototyping#colors",
           },
           {
             label: "Images",
-            url: "https://www.questpdf.com/concepts/prototyping.html#image",
+            url: "/concepts/prototyping#image",
           }
         ]
       },
@@ -274,25 +270,25 @@ const categories = [
     description: "Elements for rendering text, images, graphics, and visual styling.",
     items: [
       {
-        icon: "",
+        icon: "fa-regular fa-square",
         name: "Styled Containers",
-        description: "",
+        description: "Apply visual styling with solid or gradient backgrounds, configurable borders, rounded corners, and depth-enhancing shadows.",
         tags: [
           {
             label: "Background",
-            url: "https://www.questpdf.com/api-reference/background.html",
+            url: "/api-reference/background",
           },
           {
             label: "Border",
-            url: "https://www.questpdf.com/api-reference/border.html",
+            url: "/api-reference/border",
           },
           {
             label: "Rounded Corners",
-            url: "https://www.questpdf.com/api-reference/rounded-corners.html",
+            url: "/api-reference/rounded-corners",
           },
           {
             label: "Shadows",
-            url: "https://www.questpdf.com/api-reference/shadow.html",
+            url: "/api-reference/shadow",
           }
         ]
       },
@@ -304,27 +300,27 @@ const categories = [
         tags: [
           {
             label: "Text Style",
-            url: "https://www.questpdf.com/api-reference/text/text-style.html",
+            url: "/api-reference/text/text-style",
           },
           {
             label: "Paragraph Style",
-            url: "https://www.questpdf.com/api-reference/text/paragraph-style.html",
+            url: "/api-reference/text/paragraph-style",
           },
           {
             label: "Page Numbers",
-            url: "https://www.questpdf.com/api-reference/text/page-numbers.html",
+            url: "/api-reference/text/page-numbers",
           },
           {
             label: "Injecting Content",
-            url: "https://www.questpdf.com/api-reference/text/injecting-custom-content.html",
+            url: "/api-reference/text/injecting-custom-content",
           },
           {
             label: "Style Inheritance",
-            url: "https://www.questpdf.com/api-reference/text/style-inheritance.html",
+            url: "/api-reference/text/style-inheritance",
           },
           {
             label: "Font Management",
-            url: "https://www.questpdf.com/api-reference/text/font-management.html",
+            url: "/api-reference/text/font-management",
           }
         ]
       },
@@ -336,19 +332,19 @@ const categories = [
         tags: [
           {
             label: "Size Optimization",
-            url: "https://www.questpdf.com/api-reference/image/optimization.html",
+            url: "/api-reference/image/optimization",
           },
           {
             label: "Shared Images",
-            url: "https://www.questpdf.com/api-reference/image/shared.html",
+            url: "/api-reference/image/shared",
           },
           {
             label: "SVG",
-            url: "https://www.questpdf.com/api-reference/image/svg.html",
+            url: "/api-reference/image/svg",
           },
           {
             label: "Images Of Dynamic Size",
-            url: "https://www.questpdf.com/api-reference/image/dynamic.html",
+            url: "/api-reference/image/dynamic",
           }
         ]
       },
@@ -379,7 +375,7 @@ const categories = [
       {
         icon: "fa-regular fa-map-location-dot",
         name: "Maps",
-        description: "Static map images from mapping services. Shows locations, markers, routes, and geographic regions.",
+        description: "Embed static maps from popular mapping services. Display locations, markers, routes, and geographic regions directly in your documents.",
         link: "/api-reference/maps"
       },
       {
@@ -408,11 +404,11 @@ const categories = [
         tags: [
           {
             label: "Slots",
-            url: "https://www.questpdf.com/api-reference/page/slots.html",
+            url: "/api-reference/page/slots",
           },
           {
             label: "Properties",
-            url: "https://www.questpdf.com/api-reference/page/settings.html",
+            url: "/api-reference/page/settings",
           }
         ]
       },
@@ -424,28 +420,28 @@ const categories = [
         tags: [
           {
             label: "Cell Style Patterns",
-            url: "https://www.questpdf.com/api-reference/table/cell-style-pattern.html",
+            url: "/api-reference/table/cell-style-pattern",
           },
           {
             label: "Header and Footer",
-            url: "https://www.questpdf.com/api-reference/table/header-and-footer.html",
+            url: "/api-reference/table/header-and-footer",
           },
           {
             label: "Overlapping Cells",
-            url: "https://www.questpdf.com/api-reference/table/overlapping-cells.html",
+            url: "/api-reference/table/overlapping-cells",
           }
         ]
       },
       {
         icon: "fa-regular fa-table-columns",
         name: "Column",
-        description: "Vertical stacking of children, one below another. Configurable spacing between items.",
+        description: "Vertical stacking of children with configurable spacing. Automatic pagination ensures content flows seamlessly across pages.",
         link: "/api-reference/column"
       },
       {
         icon: "fa-regular fa-table-rows",
         name: "Row",
-        description: "Horizontal arrangement of children, side by side. Proportional widths, fixed widths, and spacing control.",
+        description: "Horizontal arrangement with flexible sizing options. Combine proportional, fixed, and auto-width items with configurable spacing.",
         link: "/api-reference/row"
       },
       {
@@ -505,7 +501,7 @@ const categories = [
       {
         icon: "fa-regular fa-border-inner",
         name: "Padding",
-        description: "Empty space around child content. Uniform or per-side values (top, right, bottom, left).",
+        description: "Add breathing room around content with uniform or per-side spacing. Supports all length units for precise layout control.",
         link: "/api-reference/padding"
       },
       {
@@ -545,7 +541,7 @@ const categories = [
         link: "/api-reference/flip"
       },
       {
-        icon: "fa-regular fa-unlock",
+        icon: "fa-regular fa-infinity",
         name: "Unconstrained",
         description: "Removes parent size limits, giving children infinite available space. Reveals natural content size.",
         link: "/api-reference/unconstrained"
@@ -637,19 +633,19 @@ const categories = [
       {
         icon: "fa-regular fa-bookmark",
         name: "Section",
-        description: "Named regions for internal linking and location-aware page numbering. Enables table of contents and cross-references.",
+        description: "Define named regions for navigation and location-aware page numbering. Build table of contents and cross-references with ease.",
         link: "/api-reference/section"
       },
       {
         icon: "fa-regular fa-link",
         name: "Hyperlink",
-        description: "Clickable areas linking to external URLs, email addresses, or phone numbers. Opens in PDF reader.",
+        description: "Create interactive clickable areas linking to URLs, email addresses, or phone numbers. Seamless integration with PDF reader capabilities.",
         link: "/api-reference/hyperlink"
       },
       {
         icon: "fa-regular fa-bolt",
         name: "Lazy",
-        description: "Deferred content generation for memory optimization. Content rendered on-demand during pagination.",
+        description: "Optimize memory for large documents with deferred content generation. Ideal for data-intensive reports and enterprise-scale document processing.",
         link: "/api-reference/lazy"
       },
       {
@@ -671,7 +667,7 @@ const categories = [
         link: "/api-reference/debug-area"
       },
       {
-        icon: "fa-regular fa-crosshairs",
+        icon: "fa-regular fa-location-dot",
         name: "Debug Pointer",
         description: "Named marker appearing in layout exception messages. Identifies problematic elements in error diagnostics.",
         link: "/api-reference/debug-pointer"
@@ -683,7 +679,12 @@ const categories = [
 
 <style scoped>
 
+/* Page styles */
+
 .content {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
   max-width: 750px;
 }
 
@@ -693,82 +694,31 @@ const categories = [
 }
 
 
+/* Card design */
 
-
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  background-color: var(--vp-c-bg) !important;
+}
 
 .card h3 {
   margin-top: 0;
+  font-weight: 700;
+  color: #2196F3;
 }
 
 
+/* Card item */
 
-
-.api-reference-page {
-  --card-columns: 4;
-}
-
-.hero {
-  text-align: center;
-  padding-top: 64px;
-  padding-bottom: 64px;
-}
-
-
-.hero .sub-header {
-  font-size: 1.25rem;
-  line-height: 1.8;
-  color: var(--vp-c-text-2);
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.hero .sub-header strong {
-  color: var(--vp-c-text-1);
-}
-
-.category-header {
-  margin-bottom: 2rem;
-}
-
-.category-header h2 {
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: var(--vp-c-text-1);
-  margin-bottom: 0.5rem;
-}
-
-.category-description {
-  color: var(--vp-c-text-2);
-  font-size: 1.1rem;
-  line-height: 1.6;
-  max-width: 800px;
-}
-
-a:has(.card) {
-  display: flex;
-  align-items: stretch;
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-  grid-template-rows: 1fr;
-  align-items: stretch;
-  justify-items: stretch;
-  gap: 24px;
-}
-
-.card-link {
+.card-item {
+  display: flex; flex-direction: row; gap: 24px;
   text-decoration: none;
   color: inherit;
 }
 
-.card {
-  background-color: var(--vp-c-bg) !important;
-  transition: all 0.2s ease-in-out;
-}
-
-.card .icon {
+.card-item .icon {
   font-size: 1.5rem;
   padding: 12px 0;
   min-width: 48px;
@@ -780,15 +730,11 @@ a:has(.card) {
   background-color: #6662;
 }
 
-.card b {
+.card-item b {
   color: var(--vp-c-text-1);
 }
 
-.reverse-background .card {
-  background-color: var(--vp-c-bg-soft);
-}
-
-.card-link:hover:not(:has(.tags:hover)) {
+.card-item:hover {
   margin: -16px;
   padding: 16px;
   background-color: #2196F311;
@@ -800,7 +746,10 @@ a:has(.card) {
   }
 }
 
-.card-link .tags {
+
+/* Card item - tags */
+
+.card-item .tags {
   margin-top: 12px;
   display: flex;
   flex-direction: row;
@@ -808,7 +757,7 @@ a:has(.card) {
   gap: 12px;
 }
 
-.card-link .tag {
+.card-item .tag {
 
   padding: 6px 12px;
   border: 1px solid #8884;
@@ -818,7 +767,8 @@ a:has(.card) {
   color: var(--vp-c-text-2);
 }
 
-.card-link .tag:hover {
+.card-item .tag:hover {
+  background-color: var(--vp-c-bg);
   border-color: var(--vp-c-text-1);
   color: var(--vp-c-text-1);
 }
