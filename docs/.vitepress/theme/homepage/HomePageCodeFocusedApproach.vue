@@ -1,53 +1,43 @@
 <script setup lang="ts">
 import HomePageCodeContainer from "./HomePageCodeContainer.vue";
-import codeFocusedApproach from './codeExamples/codeFocusedApproach.cs?raw';
-
-const features = [
-  {
-    icon: "fa-duotone fa-code",
-    title: "Familiar Programming Patterns",
-    description:
-        "Treat documents as application code: strongly-typed models, reusable components, and IDE-assisted refactoring. Catch issues early with compile-time feedback."
-  },
-  {
-    icon: "fa-duotone fa-code-branch",
-    title: "Version Control Ready",
-    description:
-        "Make changes safely and transparently. Git-friendly diffs support code reviews, approvals, and long-term maintainability—without fragile templates."
-  },
-  {
-    icon: "fa-duotone fa-sparkles",
-    title: "Optimized for AI Assistance",
-    description:
-        "A semantic Fluent API helps AI tools understand intent - accelerating layout creation while keeping output aligned with your standards and patterns."
-  }
-];
-
+import familiarProgrammingConcepts from './codeExamples/familiarProgrammingConcepts.cs?raw';
+import versionControlReady from './codeExamples/versionControlReady.cs?raw';
 </script>
 
 <template>
   <section class="content">
     <div class="section-header">
-      <h2>A True Code-First Architecture</h2>
-      <p class="sub-header">Treat your documents as first-class application code. Replace fragile templates with strongly-typed, maintainable, and refactor-safe C#.</p>
-    </div>
-
-    <div class="features-list">
-      <article v-for="feature in features" :key="feature.title" class="card">
-        <i class="icon fa-2xl" :class="[feature.icon]"></i>
-        <h3 class="title"> {{ feature.title }}</h3>
-        <p class="description">{{ feature.description }}</p>
-      </article>
+      <i class="fa-duotone fa-code fa-2xl" />
+      <h2>Familiar Programming Patterns</h2>
+      <p class="sub-header">Treat documents as application code: strongly-typed models, reusable components, and IDE-assisted refactoring. Catch issues early with compile-time feedback.</p>
     </div>
 
     <div class="code-example">
       <home-page-code-container
           file-name="OrderDocument.cs"
-          :code="codeFocusedApproach"
+          :code="familiarProgrammingConcepts"
           :code-transformer="{
               line(node, line) {
-                if (line === 25) this.addClassToHast(node, 'line-removed');
-                if (line === 26) this.addClassToHast(node, 'line-added');
+                if (line === 26) this.addClassToHast(node, 'line-removed');
+                if (line === 27) this.addClassToHast(node, 'line-added');
+              }
+            }" />
+    </div>
+
+    <div class="section-header" style="margin-top: 128px;">
+      <i class="fa-duotone fa-code-branch fa-2xl" />
+      <h2>Version Control Ready</h2>
+      <p class="sub-header">Make changes safely and transparently. Git-friendly diffs support code reviews, approvals, and long-term maintainability—without fragile templates.</p>
+    </div>
+
+    <div class="code-example">
+      <home-page-code-container
+          file-name="OrderDocument.cs"
+          :code="versionControlReady"
+          :code-transformer="{
+              line(node, line) {
+                if (line === 9) this.addClassToHast(node, 'line-removed');
+                if (line === 10) this.addClassToHast(node, 'line-added');
               }
             }" />
     </div>
@@ -55,13 +45,6 @@ const features = [
 </template>
 
 <style scoped>
-
-.features-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 32px;
-  margin-top: 64px;
-}
 
 .code-example {
   display: flex;
@@ -74,24 +57,6 @@ const features = [
 .code-example > * {
   width: fit-content;
   max-width: 100%;
-}
-
-
-@media screen and (max-width: 1100px) {
-  .approach-container {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .features-list {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .features-list {
-    grid-template-columns: 1fr;
-  }
 }
 
 </style>

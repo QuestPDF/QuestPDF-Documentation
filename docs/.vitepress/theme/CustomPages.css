@@ -110,6 +110,13 @@
 .custom-page .section-header {
   max-width: 650px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .fa-2xl {
+    margin-bottom: 16px;
+  }
 }
 
 .custom-page .section-header * {

@@ -26,19 +26,19 @@ const features = [
         description: "A powerful layout engine built specifically for PDF generation. Gain full control over document structure, precise content positioning, and automatic pagination."
     },
     {
-        icon: "fa-duotone fa-toolbox",
-        title: "Rich Toolkit",
-        description: "Accelerate development with 50+ layout elements and reusable components. Easily implement data-driven documents using a fluent C# API."
-    },
-    {
-        icon: "fa-duotone fa-gauge-high",
-        title: "High Performance",
-        description: "Generate thousands of pages per second while maintaining minimal CPU and memory usage. Perfect for high-throughput enterprise applications."
+        icon: "fa-duotone fa-sparkles",
+        title: "Optimized for AI Assistance",
+        description: "A semantic Fluent API helps AI tools understand intent - accelerating layout creation while keeping output aligned with your standards and patterns."
     },
     {
         icon: "fa-duotone fa-language",
         title: "Advanced Language Support",
         description: "Create multilingual documents with full RTL language support, advanced text shaping, and bi-directional layout handling."
+    },
+    {
+        icon: "fa-duotone fa-gauge-high",
+        title: "High Performance",
+        description: "Generate thousands of pages per second while maintaining minimal CPU and memory usage. Perfect for high-throughput enterprise applications."
     },
     {
         icon: "fa-duotone fa-shield-check",
