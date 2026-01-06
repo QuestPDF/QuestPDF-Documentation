@@ -44,44 +44,48 @@ const categories = [
       {
         icon: "fa-regular fa-rocket",
         name: "Installation and Getting Started",
-        description: "Download, install, and integrate the Companion App with your project. Enjoy real-time hot-reload preview with ShowInCompanion() for rapid development.",
+        description: "Download, install, and integrate the Companion App with your project. Enjoy real-time hot-reload preview.",
         link: "/companion/usage"
       },
       {
-        icon: "fa-regular fa-magnifying-glass-plus",
-        name: "Magnifier",
-        description: "Inspect document details at pixel level without zooming. Quickly examine structure, spacing, and alignment with an interactive lens overlay.",
-        link: "/companion/features#magnifier"
-      },
-      {
-        icon: "fa-regular fa-crosshairs",
-        name: "Coordinate Inspector",
-        description: "Pick precise coordinates of any element in your document. Essential for positioning calculations and layout fine-tuning.",
-        link: "/companion/features#coordinate-picker"
-      },
-      {
         icon: "fa-regular fa-ruler-combined",
-        name: "Measuring Sizes",
-        description: "Measure vertical and horizontal distances between elements with precision. Verify margins, padding, and spacing match your design specifications.",
-        link: "/companion/features#size-measurement"
+        name: "Precision Tools",
+        description: "Pixel-level inspection, coordinate picking, and distance measurement. Verify spacing, alignment, and positioning with precision.",
+        link: "/companion/features#magnifier",
+        tags: [
+          {
+            label: "Magnifier",
+            url: "/companion/features#magnifier",
+          },
+          {
+            label: "Coordinate Picker",
+            url: "/companion/features#coordinate-picker",
+          },
+          {
+            label: "Size measurement",
+            url: "/companion/features#size-measurement",
+          }
+        ]
       },
       {
-        icon: "fa-regular fa-object-ungroup",
-        name: "Content Inspection",
-        description: "Select and inspect any element to review its configuration, position, and size. Navigate through multi-page occurrences with arrow keys.",
-        link: "/companion/features#element-selection"
-      },
-      {
-        icon: "fa-regular fa-magnifying-glass",
-        name: "Content Search and Navigation",
-        description: "Quickly locate content by searching for phrases. Results are highlighted in both the document tree and visual preview for easy navigation.",
-        link: "/companion/features#content-searching"
-      },
-      {
-        icon: "fa-regular fa-code",
-        name: "Go To Implementation",
-        description: "Jump directly from any visual element to its source code in your IDE. Ctrl+click navigates to the exact implementation line.",
-        link: "/companion/features#go-to-implementation"
+        icon: "fa-regular fa-compass",
+        name: "Navigation Tools",
+        description: "Explore document structure, search content by phrase, and jump directly to source code in your IDE.",
+        link: "/companion/features#element-selection",
+        tags: [
+          {
+            label: "Element Inspection",
+            url: "/companion/features#element-selection",
+          },
+          {
+            label: "Content Searching",
+            url: "/companion/features#content-searching",
+          },
+          {
+            label: "Go to Implementation",
+            url: "/companion/features#go-to-implementation",
+          }
+        ]
       },
       {
         icon: "fa-regular fa-circle-exclamation",
@@ -92,7 +96,7 @@ const categories = [
       {
         icon: "fa-regular fa-bug",
         name: "Layout Issue Debugging",
-        description: "Diagnose layout problems with color-coded status indicators. Identify root causes, wrapped elements, and overflow issues with intelligent heuristics.",
+        description: "Diagnose layout problems with color-coded status indicators. Identify root causes with intelligent heuristics.",
         link: "/companion/features#layout-issue-debugging"
       }
     ]
@@ -101,22 +105,16 @@ const categories = [
     name: "Document Operations",
     items: [
       {
-        icon: "fa-regular fa-scissors",
-        name: "Page Selection / Extraction",
-        description: "Select specific pages using flexible range syntax. Extract, reorder, or remove pages with patterns like '1-5', 'z-1' (reverse), or '1-20:even'.",
-        link: "/concepts/document-operations#page-selection"
-      },
-      {
-        icon: "fa-regular fa-globe",
-        name: "Document Linealization",
-        description: "Optimize PDFs for web delivery. Linearized files allow viewers to display content before the entire file downloads, improving user experience.",
-        link: "/concepts/document-operations#document-linearization"
-      },
-      {
         icon: "fa-regular fa-copy",
         name: "Merging Documents",
         description: "Combine multiple PDF files into a single document. Merge entire documents or select specific pages from each source with full control.",
         link: "/concepts/document-operations#merging-documents"
+      },
+      {
+        icon: "fa-regular fa-scissors",
+        name: "Page Selection / Extraction",
+        description: "Select specific pages using flexible range syntax. Extract, reorder, reverse, or filter pages with powerful selection patterns.",
+        link: "/concepts/document-operations#page-selection"
       },
       {
         icon: "fa-regular fa-clone",
@@ -137,9 +135,15 @@ const categories = [
         link: "/concepts/document-operations#document-decryption"
       },
       {
+        icon: "fa-regular fa-globe",
+        name: "Document Linealization",
+        description: "Optimize PDFs for web delivery. Linearized files allow viewers to display content before the entire file downloads, improving user experience.",
+        link: "/concepts/document-operations#document-linearization"
+      },
+      {
         icon: "fa-regular fa-paperclip",
         name: "Files Attachments",
-        description: "Embed files directly within PDFs with full PDF/A-3b compliance. Support for data, source, alternative, and supplementary relationships.",
+        description: "Embed files directly within PDFs with full PDF/A compliance. Support for all embedded file relationships.",
         link: "/concepts/document-operations#file-attachments"
       },
       {
@@ -162,7 +166,7 @@ const categories = [
       {
         icon: "fa-regular fa-file-export",
         name: "Output Types",
-        description: "Generate PDF, XPS, SVG, or raster images (PNG, JPEG). Multiple output methods: save to file, stream, or byte array for flexible integration.",
+        description: "Generate PDF, XPS, SVG, or raster images (PNG, JPEG, WEBP). Save to file, stream, or byte array for flexible integration.",
         link: "/concepts/generating-output"
       },
       {
@@ -234,7 +238,7 @@ const categories = [
       {
         icon: "fa-regular fa-ruler",
         name: "Length Units",
-        description: "Flexible measurement system with points, millimeters, centimeters, inches, and percentages. Built-in conversion helpers for seamless unit mixing.",
+        description: "Use points (default), inches, centimeters, millimeters, meters, or feet. Specify units directly in API methods for intuitive sizing.",
         link: "/concepts/length-unit-types"
       },
       {
@@ -272,7 +276,7 @@ const categories = [
       {
         icon: "fa-regular fa-square",
         name: "Styled Containers",
-        description: "Apply visual styling with solid or gradient backgrounds, configurable borders, rounded corners, and depth-enhancing shadows.",
+        description: "Enhance visual appearance of your content with decorative styling options.",
         tags: [
           {
             label: "Background",
@@ -295,7 +299,7 @@ const categories = [
       {
         icon: "fa-regular fa-text",
         name: "Text",
-        description: "Rich text with mixed styles, fonts, colors, subscript, superscript, hyperlinks, and page numbers. Automatic wrapping and pagination.",
+        description: "Rich text rendering with multiple formatting options. Automatic wrapping and seamless pagination across pages.",
         link: "/api-reference/text/basics",
         tags: [
           {
@@ -369,13 +373,13 @@ const categories = [
       {
         icon: "fa-regular fa-qrcode",
         name: "Barcodes / QR Codes",
-        description: "1D barcodes (Code128, EAN, UPC) and 2D QR codes via BarcodeGen library. Configurable size and error correction.",
+        description: "Generate 1D barcodes and 2D QR codes. Integration guide with popular third-party libraries.",
         link: "/api-reference/barcodes"
       },
       {
         icon: "fa-regular fa-map-location-dot",
         name: "Maps",
-        description: "Embed static maps from popular mapping services. Display locations, markers, routes, and geographic regions directly in your documents.",
+        description: "Embed static maps in your documents. Integration tutorial using Mapbox services.",
         link: "/api-reference/maps"
       },
       {
@@ -433,13 +437,13 @@ const categories = [
         ]
       },
       {
-        icon: "fa-regular fa-table-columns",
+        icon: "fa-regular fa-table-rows",
         name: "Column",
         description: "Vertical stacking of children with configurable spacing. Automatic pagination ensures content flows seamlessly across pages.",
         link: "/api-reference/column"
       },
       {
-        icon: "fa-regular fa-table-rows",
+        icon: "fa-regular fa-table-columns",
         name: "Row",
         description: "Horizontal arrangement with flexible sizing options. Combine proportional, fixed, and auto-width items with configurable spacing.",
         link: "/api-reference/row"
@@ -577,7 +581,7 @@ const categories = [
         link: "/api-reference/page-break"
       },
       {
-        icon: "fa-regular fa-bring-front",
+        icon: "fa-regular fa-frame",
         name: "Prevent Page Break",
         description: "Keeps child content together on a single page. Moves entire block to next page if needed.",
         link: "/api-reference/prevent-page-break"
@@ -589,7 +593,7 @@ const categories = [
         link: "/api-reference/ensure-space"
       },
       {
-        icon: "fa-regular fa-rectangle-wide",
+        icon: "fa-regular fa-object-group",
         name: "Show Entire",
         description: "Displays element fully on one page or skips to next page. No partial rendering or breaking.",
         link: "/api-reference/show-entire"
@@ -661,7 +665,7 @@ const categories = [
         link: "/api-reference/content-direction"
       },
       {
-        icon: "fa-regular fa-border-top-left",
+        icon: "fa-regular fa-square-dashed",
         name: "Debug Area",
         description: "Colored border and label overlay showing element boundaries. Visual debugging during development.",
         link: "/api-reference/debug-area"
