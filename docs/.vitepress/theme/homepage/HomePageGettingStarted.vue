@@ -1,6 +1,5 @@
 <template>
   <div class="background-gradient" />
-  <div class="background-grid" />
 
   <section class="content">
     <div class="description">
@@ -215,25 +214,8 @@ const features = [
     position: absolute;
     pointer-events: none;
     inset: 0;
-    background-image: radial-gradient(ellipse 75% 100% at 50% 100%, color-mix(in srgb, var(--vp-c-brand-2) 15%, transparent), transparent);
-  }
-
-  .background-grid {
-    position: absolute;
-    pointer-events: none;
-    inset: 0;
-    --grid-thickness: 2px;
-    --grid-color: var(--vp-c-brand-1);
-
     background-image:
-        linear-gradient(var(--vp-c-brand-3) var(--grid-thickness), transparent var(--grid-thickness)),
-        linear-gradient(90deg, var(--vp-c-brand-3) var(--grid-thickness), transparent var(--grid-thickness));
-    background-size: 48px 48px;
-    mask-image: radial-gradient(ellipse 75% 75% at 50% 100%, #0001 25%, transparent 100%);
-  }
-
-  html.dark .background-grid {
-    --grid-thickness: 1px;
-    --grid-color: var(--vp-c-brand-3);
+        radial-gradient(ellipse 75% 100% at 50% 100%, color-mix(in srgb, var(--vp-c-brand-2) 15%, transparent), transparent),
+        radial-gradient(ellipse 50% 20% at 50% 100%, color-mix(in srgb, var(--vp-c-brand-2) 10%, transparent), transparent);
   }
 </style>
