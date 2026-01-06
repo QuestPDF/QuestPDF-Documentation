@@ -33,20 +33,9 @@ export default defineConfig({
             {
                 text: 'Documentation',
                 items: [
-                    {
-                      items: [
-                          { text: 'Quick start', link: '/quick-start' },
-                          { text: 'Getting started', link: '/getting-started' },
-                          { text: 'API reference', link: '/api-reference/index' },
-                          { text: 'Design patterns', link: '/design-patterns' },
-                      ]
-                    },
-                    {
-                        items: [
-                            { text: 'Document operations <span class="VPBadge tip" style="margin-left: 8px;">new</span>', link: '/concepts/document-operations' },
-                            { text: 'Companion App <span class="VPBadge tip" style="margin-left: 8px;">new</span>', link: '/companion/usage' },
-                        ]
-                    }
+                    { text: 'Quick start', link: '/quick-start' },
+                    { text: 'Invoice Tutorial', link: '/invoice-tutorial' },
+                    { text: 'Features Overview', link: '/features-overview' },
                 ]
             },
             { text: 'Pricing', link: '/license/' },
@@ -55,9 +44,14 @@ export default defineConfig({
                 items: [
                     {
                         items: [
-                            { text: 'License Selection Guide', link: '/license/guide' },
+                            { text: 'Selection Guide', link: '/license/guide' },
                             { text: 'Community MIT', link: '/license/community' },
-                            { text: 'Professional and Enterprise', link: '/license/professional-enterprise' }
+                            { text: 'Professional & Enterprise', link: '/license/professional-enterprise' }
+                        ]
+                    },
+                    {
+                        items: [
+                            { text: 'Configuration', link: '/license/configuration' },
                         ]
                     },
                     {
@@ -77,7 +71,7 @@ export default defineConfig({
                 text: 'Introduction',
                 items: [
                     { text: 'Quick start', link: '/quick-start' },
-                    { text: 'Getting started', link: '/getting-started' },
+                    { text: 'Invoice Tutorial', link: '/invoice-tutorial' },
                     { text: 'License configuration', link: '/license/configuration' },
                     { text: 'Roadmap', link: 'https://github.com/orgs/QuestPDF/projects/8' },
                     { text: 'Releases', link: 'https://github.com/QuestPDF/QuestPDF/releases' },
@@ -85,7 +79,7 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Companion App <span class="VPBadge tip" style="margin-left: 8px;">new</span>',
+                text: 'Companion App',
                 items: [
                     { text: 'Introduction and Usage', link: '/companion/usage' },
                     { text: 'Download', link: '/companion/download' },
@@ -112,7 +106,7 @@ export default defineConfig({
                     { text: 'Prototyping', link: '/concepts/prototyping' },
                     { text: 'Colors', link: '/concepts/colors' },
                     { text: 'Length unit types', link: '/concepts/length-unit-types' },
-                    { text: 'Accessibility <span class="VPBadge tip" style="margin-left: 8px;">alpha</span>', link: '/concepts/accessibility' },
+                    { text: 'Accessibility <span class="VPBadge tip" style="margin-left: 8px;">new</span>', link: '/concepts/accessibility' },
                     {
                         text: 'Code patterns',
                         items: [

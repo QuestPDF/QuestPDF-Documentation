@@ -116,7 +116,7 @@ const contacts: ContactInformation[] = [
   flex-wrap: wrap;
   justify-content: end;
   place-self: end;
-  gap: 12px;
+  gap: 16px;
   margin-top: 24px;
 }
 
