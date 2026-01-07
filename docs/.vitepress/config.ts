@@ -14,7 +14,7 @@ export default defineConfig({
     },
 
     head: [
-        ['link', { rel: 'icon', href: '/logo.webp', type: 'image/webp' }],
+        ['link', { rel: 'icon', href: '/logo.png', type: 'image/png' }],
         ['script', { src: 'https://kit.fontawesome.com/294da38298.js', crossorigin: 'anonymous' }],
         ['meta', { name: "title", content: "C# PDF Generation Library | QuestPDF for .NET" }],
         ['meta', { name: "description", content: "Generate and edit PDF documents in your C# applications using the QuestPDF library and its C# Fluent API. Build invoices, reports and data exports with ease." }],
