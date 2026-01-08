@@ -3,7 +3,7 @@
 const features = [
   {
     icon: "fa-duotone fa-graduation-cap",
-    title: "Zero Markup Learning Curve",
+    title: "Easy Learning Curve",
     description: "Skip proprietary XML/HTML template dialects. Use your existing programming language and patterns to ship faster with less training."
   },
   {
@@ -13,12 +13,12 @@ const features = [
   },
   {
     icon: "fa-duotone fa-code-pull-request",
-    title: "Version Control Native",
+    title: "Version Control Friendly",
     description: "Review document changes like any other code. Get clean diffs, PR approvals, and traceable history."
   },
   {
     icon: "fa-duotone fa-sparkles",
-    title: "AI-Accelerated Document Delivery",
+    title: "Optimized for AI Assistance",
     description: "A semantic Fluent API helps AI assistants generate layouts, refactor components, and troubleshoot issues effectively."
   }
 ];
