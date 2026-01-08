@@ -266,7 +266,7 @@ async function playAnimation() {
       <i class="fa-duotone fa-film fa-2xl" />
       <div class="section-header">
         <h2>Experience the Simplicity</h2>
-        <p class="sub-header">See how QuestPDF's fluent API lets you build professional documents with just a few lines of readable, intuitive C# code.</p>
+        <p class="sub-header">See how QuestPDF's Fluent API lets you build professional documents with just a few lines of readable, intuitive C# code.</p>
       </div>
     </div>
 

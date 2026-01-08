@@ -215,7 +215,7 @@ const features = [
   /* Background */
 
   .background-gradient {
-    border-top: 2px solid var(--vp-c-bg);
+    border-top: 4px solid var(--vp-c-bg);
 
     position: absolute;
     pointer-events: none;

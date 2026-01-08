@@ -26,6 +26,11 @@ const features = [
     description: "Keep your codebase DRY. Encapsulate complex UI patterns into reusable classes and functions to maintain visual consistency across all your documents."
   },
   // {
+  //     icon: "fa-duotone fa-sparkles",
+  //     title: "Optimized for AI Assistance",
+  //     description: "A semantic Fluent API helps AI tools understand intent - accelerating layout creation while keeping output aligned with your standards and patterns."
+  // },
+  // {
   //   icon: "fa-duotone fa-code-pull-request", // or fa-code-commit
   //   title: "Version Control Native",
   //   description: "Treat documents like software. Track layout changes with clean, semantic diffs and review PDF modifications in your Pull Requests just like backend logic."

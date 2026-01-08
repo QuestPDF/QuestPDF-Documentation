@@ -274,7 +274,7 @@ const categories = [
     description: "Elements for rendering text, images, graphics, and visual styling.",
     items: [
       {
-        icon: "fa-regular fa-square",
+        icon: "fa-regular fa-palette",
         name: "Styled Containers",
         description: "Enhance visual appearance of your content with decorative styling options.",
         tags: [

@@ -32,10 +32,6 @@
       <HomePageMultiplatform />
     </div>
 
-<!--    <div class="container reverse-background">-->
-<!--      <HomePageDocumentOperations />-->
-<!--    </div>-->
-
     <div class="container reverse-background">
       <HomePageStandardCompliance />
     </div>

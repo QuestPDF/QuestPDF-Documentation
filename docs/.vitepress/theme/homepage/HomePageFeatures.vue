@@ -1,23 +1,23 @@
 <script setup>
 
 const features = [
+    "fa-palette",
     "fa-text",
     "fa-image",
-    "fa-align-center",
-  "fa-text",
-  "fa-image",
-  "fa-align-center",
-  "fa-text",
-  "fa-image",
-  "fa-align-center",
-  "fa-text",
-  "fa-image",
-  "fa-align-center",
-  "fa-align-center",
-  "fa-align-center",
-  "fa-align-center",
-  "fa-align-center",
-  "fa-align-center",
+    "fa-bezier-curve",
+    "fa-table",
+    "fa-list",
+    "fa-layer-group",
+    "fa-newspaper",
+    "fa-objects-align-center-horizontal",
+    "fa-crop",
+    "fa-page-break",
+    "fa-object-group",
+    "fa-bookmark",
+    "fa-link",
+    "fa-scissors",
+    "fa-lock",
+    "fa-paperclip"
 ]
 
 </script>
@@ -26,14 +26,14 @@ const features = [
   <section class="content">
     <div class="section-header">
       <h2>Everything you need to generate PDFs</h2>
-      <p class="sub-header">A comprehensive toolkit designed for professional PDF document generation in .NET applications</p>
+      <p class="sub-header">From layout and styling to production features, QuestPDF gives you the flexibility to create documents of any complexity.</p>
     </div>
 
     <div class="features">
       <i v-for="feature of features" :key="feature" class="feature icon fa-regular" :class="[feature]" />
     </div>
 
-    <a class="action" href="/features-overview">
+    <a class="action" href="/features-overview" target="_blank">
       Explore all features
     </a>
   </section>

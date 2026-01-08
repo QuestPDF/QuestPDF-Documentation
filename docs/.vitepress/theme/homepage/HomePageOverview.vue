@@ -1,8 +1,8 @@
 <template>
   <section class="content">
     <div class="section-header">
-      <h2>Everything you need to generate PDFs</h2>
-      <p class="sub-header">A comprehensive toolkit designed for professional PDF document generation in .NET applications</p>
+      <h2>Enterprise-grade foundations</h2>
+      <p class="sub-header">A robust layout engine engineered for high performance, complete data privacy, and seamless integration into your infrastructure.</p>
     </div>
 
     <div class="features">
@@ -21,19 +21,19 @@
 
 const features = [
     {
+        icon: "fa-duotone fa-code",
+        title: "Source-available",
+        description: "Entire QuestPDF source code is available for review and customization, ensuring transparency and compliance with your organization's requirements."
+    },
+    {
+        icon: "fa-duotone fa-shield-check",
+        title: "Complete Data Privacy",
+        description: "QuestPDF runs entirely within your infrastructure with no external API calls, internet requirement, or background data collection. As a company, we do not access, collect, store, or process your private data.",
+    },
+    {
         icon: "fa-duotone fa-gear-complex",
         title: "Comprehensive Layout Engine",
         description: "A powerful layout engine built specifically for PDF generation. Gain full control over document structure, precise content positioning, and automatic pagination."
-    },
-    // {
-    //     icon: "fa-duotone fa-sparkles",
-    //     title: "Optimized for AI Assistance",
-    //     description: "A semantic Fluent API helps AI tools understand intent - accelerating layout creation while keeping output aligned with your standards and patterns."
-    // },
-    {
-      icon: "fa-duotone fa-code",
-      title: "Source-available",
-      description: "Entire QuestPDF source code is available for review and customization, ensuring transparency and compliance with your organization's requirements."
     },
     {
         icon: "fa-duotone fa-language",
@@ -44,11 +44,6 @@ const features = [
         icon: "fa-duotone fa-gauge-high",
         title: "High Performance",
         description: "Generate thousands of pages per second while maintaining minimal CPU and memory usage. Perfect for high-throughput enterprise applications."
-    },
-    {
-        icon: "fa-duotone fa-shield-check",
-        title: "Complete Data Privacy",
-        description: "QuestPDF runs entirely within your infrastructure with no external API calls, internet requirement, or background data collection. As a company, we do not access, collect, store, or process your private data.",
     },
     {
         icon: "fa-duotone fa-file-zipper",
