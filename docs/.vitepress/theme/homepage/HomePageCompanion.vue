@@ -12,8 +12,8 @@
     </div>
 
 
-    <div class="summary-list">
-      <article v-for="summary of summaryContent" class="summary-item">
+    <div class="unordered-list">
+      <article v-for="summary of summaryContent" class="unordered-list-item">
         <i class="fa-duotone fa-square-check"></i>
         <p>{{ summary }}</p>
       </article>
@@ -101,24 +101,6 @@ html.dark .companion-image.light {
 
 .action {
   margin-top: 32px;
-}
-
-/* Summary */
-
-.summary-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  p {
-    font-size: 1.0625rem !important;
-  }
-}
-
-.summary-item {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-gap: 12px;
 }
 
 </style>

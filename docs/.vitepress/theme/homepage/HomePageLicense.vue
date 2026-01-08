@@ -19,8 +19,8 @@ const SummaryContent = [
       <p class="sub-header">A model that benefits everyone. Commercial licensing provides businesses with legal safety and long-term stability, while funding a feature-complete, unrestricted library for the open-source community.</p>
     </div>
 
-    <div class="summary-list">
-      <article v-for="summary of SummaryContent" class="summary-item">
+    <div class="unordered-list">
+      <article v-for="summary of SummaryContent" class="unordered-list-item">
         <i class="fa-duotone fa-square-check license-check-icon"></i>
         <p>{{ summary }}</p>
       </article>
@@ -99,25 +99,12 @@ const SummaryContent = [
     }
   }
 
-  /* Summary */
+  /* Features list */
 
-  .summary-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    place-self: center;
+  .unordered-list {
     margin: 32px 0;
   }
 
-  .summary-item {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-gap: 12px;
-
-    p {
-      font-size: 1.0625rem !important;
-    }
-  }
 
   /* License button */
 

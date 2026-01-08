@@ -9,8 +9,8 @@
 
       <p class="sub-header">Follow our detailed tutorial and see how easy it is to generate a fully functional invoice with fewer than 250 lines of C# code.</p>
 
-      <div class="features">
-        <div v-for="feature in features" class="feature-item">
+      <div class="unordered-list">
+        <div v-for="feature in features" class="unordered-list-item">
           <i class="fa-duotone fa-square-check"></i>
           <p>{{ feature }}</p>
         </div>
@@ -59,25 +59,12 @@ const features = [
     }
   }
 
-
   /* Features list */
 
-  .features {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  .unordered-list {
     margin: 0 0 32px 0;
   }
 
-  .feature-item {
-    display: flex;
-    gap: 12px;
-    color: var(--vp-c-text-2);
-
-    p {
-      font-size: 1.0625rem !important;
-    }
-  }
 
 
   /* Action button */
