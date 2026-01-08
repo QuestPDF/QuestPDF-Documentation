@@ -74,7 +74,7 @@ const standards : Standard[] = [
 .standard-cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  gap: 32px;
   margin-top: 16px;
 }
 
@@ -92,12 +92,6 @@ const standards : Standard[] = [
   }
 }
 
-.standard-card {
-  padding: 24px;
-  background-color: var(--vp-c-bg-alt);
-  border-radius: 16px;
-  border: 1px solid #8882;
-}
 
 .card-header {
   display: flex;
