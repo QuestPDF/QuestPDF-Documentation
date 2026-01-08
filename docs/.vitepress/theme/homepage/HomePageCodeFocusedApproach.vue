@@ -25,21 +25,21 @@ const features = [
     title: "Composable Architecture",
     description: "Keep your codebase DRY. Encapsulate complex UI patterns into reusable classes and functions to maintain visual consistency across all your documents."
   },
-  {
-    icon: "fa-duotone fa-code-pull-request", // or fa-code-commit
-    title: "Version Control Native",
-    description: "Treat documents like software. Track layout changes with clean, semantic diffs and review PDF modifications in your Pull Requests just like backend logic."
-  },
-  {
-    icon: "fa-duotone fa-wand-magic-sparkles",
-    title: "Type-Safe Tooling",
-    description: "Your IDE is your best design tool. Catch layout errors at compile-time and rely on IntelliSense, inspection, and safe refactoring to build with confidence."
-  },
-  {
-    icon: "fa-duotone fa-microchip-ai", // or fa-robot
-    title: "AI-Ready Workflow",
-    description: "Code is the native language of AI. coding assistants can generate tables, refactor components, and troubleshoot layouts far more effectively than with visual designers."
-  }
+  // {
+  //   icon: "fa-duotone fa-code-pull-request", // or fa-code-commit
+  //   title: "Version Control Native",
+  //   description: "Treat documents like software. Track layout changes with clean, semantic diffs and review PDF modifications in your Pull Requests just like backend logic."
+  // },
+  // {
+  //   icon: "fa-duotone fa-wand-magic-sparkles",
+  //   title: "Type-Safe Tooling",
+  //   description: "Your IDE is your best design tool. Catch layout errors at compile-time and rely on IntelliSense, inspection, and safe refactoring to build with confidence."
+  // },
+  // {
+  //   icon: "fa-duotone fa-microchip-ai", // or fa-robot
+  //   title: "AI-Ready Workflow",
+  //   description: "Code is the native language of AI. coding assistants can generate tables, refactor components, and troubleshoot layouts far more effectively than with visual designers."
+  // }
 ];
 </script>
 

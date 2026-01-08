@@ -114,8 +114,6 @@ h1 {
   margin-top: 32px;
   z-index: 10000;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  word-spacing: 2px;
 }
 
 .cta-buttons .action {

@@ -230,6 +230,7 @@ async function animate() {
 
 
 /* Animation control observer */
+const showAnimation = ref(false);
 const codeAnimationContainer = ref<Element>();
 const observer = ref<IntersectionObserver | null>(null);
 
@@ -237,10 +238,13 @@ const observer = ref<IntersectionObserver | null>(null);
 onUnmounted(() => isAnimationRunning.value = false);
 
 async function playAnimation() {
-  resetAnimation();
+  showAnimation.value = true;
   isAnimationRunning.value = true;
-  await nextTick();
+
+  resetAnimation();
   animate();
+
+  await nextTick();
 
   observer.value = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -266,7 +270,7 @@ async function playAnimation() {
       </div>
     </div>
 
-    <div v-if="isAnimationRunning" ref="codeAnimationContainer" class="animation-container">
+    <div v-if="showAnimation" ref="codeAnimationContainer" class="animation-container">
       <home-page-code-container file-name="HelloWorld.cs" :code="code" :code-transformer="codeTransformer" />
 
       <home-page-window-container file-name="Preview.pdf">

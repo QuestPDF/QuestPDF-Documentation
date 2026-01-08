@@ -196,6 +196,8 @@ a.action {
 
   color: var(--vp-c-text-1);
   font-size: 1rem;
+  letter-spacing: 1px;
+  word-spacing: 2px;
 }
 
 a.action:hover {

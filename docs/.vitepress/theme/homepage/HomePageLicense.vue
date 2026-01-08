@@ -48,18 +48,6 @@ const SummaryContent = [
     align-items: center;
   }
 
-  .license-background {
-    content: "";
-    position: absolute;
-    place-self: center;
-    align-self: center;
-
-    top: -50%;
-    width: 150%;
-    height: 100%;
-    background: radial-gradient(ellipse, rgba(103, 184, 77, 0.1) 0%, transparent 50%);
-  }
-
   .background-gradient {
     position: absolute;
     pointer-events: none;
@@ -125,6 +113,10 @@ const SummaryContent = [
     display: grid;
     grid-template-columns: auto 1fr;
     grid-gap: 12px;
+
+    p {
+      font-size: 1.0625rem !important;
+    }
   }
 
   /* License button */

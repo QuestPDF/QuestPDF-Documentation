@@ -12,7 +12,7 @@
       <div class="features">
         <div v-for="feature in features" class="feature-item">
           <i class="fa-duotone fa-square-check"></i>
-          <span>{{ feature }}</span>
+          <p>{{ feature }}</p>
         </div>
       </div>
 
@@ -66,13 +66,17 @@ const features = [
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin: 0px 0 32px 0;
+    margin: 0 0 32px 0;
   }
 
   .feature-item {
     display: flex;
     gap: 12px;
     color: var(--vp-c-text-2);
+
+    p {
+      font-size: 1.0625rem !important;
+    }
   }
 
 
