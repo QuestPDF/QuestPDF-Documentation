@@ -28,6 +28,7 @@ const props = defineProps<{
   filter: drop-shadow(0 16px 16px rgba(0,  0, 0, 0.1));
   height: fit-content;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .file-container-header {

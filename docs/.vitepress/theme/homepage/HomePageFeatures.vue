@@ -1,79 +1,85 @@
+<script setup>
+
+const features = [
+    "fa-palette",
+    "fa-text",
+    "fa-image",
+    "fa-bezier-curve",
+    "fa-table",
+    "fa-list",
+    "fa-layer-group",
+    "fa-newspaper",
+    "fa-objects-align-center-horizontal",
+    "fa-crop",
+    "fa-page-break",
+    "fa-object-group",
+    "fa-bookmark",
+    "fa-link",
+    "fa-scissors",
+    "fa-lock",
+    "fa-paperclip"
+]
+
+</script>
+
 <template>
   <section class="content">
     <div class="section-header">
       <h2>Everything you need to generate PDFs</h2>
-      <p class="sub-header">A comprehensive toolkit designed for professional PDF document generation in .NET applications</p>
+      <p class="sub-header">From layout and styling to production features, QuestPDF gives you the flexibility to create documents of any complexity.</p>
     </div>
 
     <div class="features">
-
-      <article class="card" v-for="feature of features" :key="feature.title">
-        <i class="icon fa-2xl" :class="[feature.icon]"></i>
-        <h3 class="title">{{ feature.title }}</h3>
-        <p class="description">{{ feature.description }}</p>
-      </article>
-
+      <i v-for="feature of features" :key="feature" class="feature icon fa-regular" :class="[feature]" />
     </div>
+
+    <a class="action" href="/features-overview" target="_blank">
+      Explore all features
+    </a>
   </section>
 </template>
 
-<script setup>
-
-const features = [
-    {
-        icon: "fa-duotone fa-gear-complex",
-        title: "Comprehensive Layout Engine",
-        description: "A powerful layout engine built specifically for PDF generation. Gain full control over document structure, precise content positioning, and automatic pagination."
-    },
-    {
-        icon: "fa-duotone fa-sparkles",
-        title: "Optimized for AI Assistance",
-        description: "A semantic Fluent API helps AI tools understand intent - accelerating layout creation while keeping output aligned with your standards and patterns."
-    },
-    {
-        icon: "fa-duotone fa-language",
-        title: "Advanced Language Support",
-        description: "Create multilingual documents with full RTL language support, advanced text shaping, and bi-directional layout handling."
-    },
-    {
-        icon: "fa-duotone fa-gauge-high",
-        title: "High Performance",
-        description: "Generate thousands of pages per second while maintaining minimal CPU and memory usage. Perfect for high-throughput enterprise applications."
-    },
-    {
-        icon: "fa-duotone fa-shield-check",
-        title: "Complete Data Privacy",
-        description: "QuestPDF runs entirely within your infrastructure with no external API calls, internet requirement, or background data collection. As a company, we do not access, collect, store, or process your private data.",
-    },
-    {
-        icon: "fa-duotone fa-file-zipper",
-        title: "Optimized File Size",
-        description: "Drastically reduce file sizes without compromising quality. Benefit from automatic font subsetting, optimal image compression, and efficient file compression."
-    }
-];
-
-</script>
-
 <style scoped>
 
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .features {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 32px;
+  place-self: center;
+  max-width: 800px;
+  margin-top: 32px;
 
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.feature {
+  width: 64px;
+  height: 64px;
+  place-content: center;
+  text-align: center;
+
+  font-size: 1.5rem;
+
+  color: #666;
+  background-color: #0000000A;
+  border-radius: 12px;
+}
+
+html.dark .feature {
+  color: #999;
+  background-color: #FFFFFF0A;
+}
+
+a.action {
   margin-top: 64px;
-}
-
-@media screen and (max-width: 1100px) {
-  .features {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media screen and (max-width: 700px) {
-  .features {
-    grid-template-columns: 1fr;
-  }
 }
 
 </style>

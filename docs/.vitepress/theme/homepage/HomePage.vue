@@ -1,11 +1,11 @@
 <template>
   <div class="custom-page home-page">
     <div class="container hero-container">
-      <HomePageHero @play-code-animation="startCodeAnimation" />
+      <HomePageHero />
     </div>
 
-    <div v-if="showCodingAnimation" ref="codeAnimationContainer" class="container reverse-background">
-      <HomePageCodeAnimation />
+    <div class="container">
+      <HomePageAdoption />
     </div>
 
     <div class="container reverse-background">
@@ -13,11 +13,19 @@
     </div>
 
     <div class="container">
+      <HomePageFeatures />
+    </div>
+
+    <div class="container reverse-background">
+      <HomePageCodeAnimation />
+    </div>
+
+    <div class="container">
       <HomePageCompanion />
     </div>
 
     <div class="container reverse-background">
-      <HomePageFeatures />
+      <HomePageOverview />
     </div>
 
     <div class="container">
@@ -25,14 +33,10 @@
     </div>
 
     <div class="container reverse-background">
-      <HomePageDocumentOperations />
-    </div>
-
-    <div class="container">
       <HomePageStandardCompliance />
     </div>
 
-    <div class="container reverse-background" style="overflow: hidden;">
+    <div class="container footer-container">
       <HomePageLicense />
     </div>
 
@@ -44,43 +48,25 @@
 
 <script setup lang="ts">
 
-import HomePageFeatures from "./HomePageFeatures.vue";
+import HomePageOverview from "./HomePageOverview.vue";
 import HomePageGettingStarted from "./HomePageGettingStarted.vue";
 import HomePageLicense from "./HomePageLicense.vue";
 import HomePageMultiplatform from "./HomePageMultiplatform.vue";
 import HomePageDocumentOperations from "./HomePageDocumentOperations.vue";
 import HomePageCodeFocusedApproach from "./HomePageCodeFocusedApproach.vue";
 import HomePageCompanion from "./HomePageCompanion.vue";
-import HomePageCodeAnimation from "./HomePageCodeAnimation.vue";
 import HomePageHero from "./HomePageHero.vue";
-import {nextTick, onMounted, ref} from "vue";
 import HomePageStandardCompliance from "./HomePageStandardCompliance.vue";
-
-const showCodingAnimation = ref(false);
-
-const codeAnimationContainer = ref<Element>();
-
-async function startCodeAnimation() {
-  if (!window)
-    return;
-
-  showCodingAnimation.value = true;
-  await nextTick();
-
-  const itemVerticalPosition = codeAnimationContainer.value.getBoundingClientRect().y;
-
-  window.scrollTo({
-    top: itemVerticalPosition,
-    behavior: "auto"
-  });
-}
+import HomePageAdoption from "./HomePageAdoption.vue";
+import HomePageCodeAnimation from "./HomePageCodeAnimation.vue";
+import HomePageFeatures from "./HomePageFeatures.vue";
 
 </script>
 
 <style>
 
 .VPNavBar .container {
-  max-width: 1152px;;
+  max-width: 1152px;
 }
 
 .VPNavBar.top .VPNavBarAppearance {
@@ -94,6 +80,12 @@ async function startCodeAnimation() {
 
 .hero-container .action.primary {
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))
+}
+
+html:not(.dark):has(.home-page) {
+  .VPNavBarMenuLink *, .VPNavBarMenuGroup span.text {
+    color: black !important;
+  }
 }
 
 
@@ -124,10 +116,5 @@ async function startCodeAnimation() {
   text-transform: uppercase;
 }
 
-hr {
-  border: none;
-  border-top: 1px solid var(--vp-c-divider);
-  margin: 48px 0;
-}
 
 </style>

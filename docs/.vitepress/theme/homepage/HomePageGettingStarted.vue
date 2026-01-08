@@ -9,14 +9,14 @@
 
       <p class="sub-header">Follow our detailed tutorial and see how easy it is to generate a fully functional invoice with fewer than 250 lines of C# code.</p>
 
-      <div class="features">
-        <div v-for="feature in features" class="feature-item">
+      <div class="unordered-list">
+        <div v-for="feature in features" class="unordered-list-item">
           <i class="fa-duotone fa-square-check"></i>
-          <span>{{ feature }}</span>
+          <p>{{ feature }}</p>
         </div>
       </div>
 
-      <a class="action primary" href="/getting-started">
+      <a class="action primary" href="/invoice-tutorial">
         Start Tutorial
         <i class="fa-solid fa-arrow-right arrow-icon"></i>
       </a>
@@ -59,21 +59,12 @@ const features = [
     }
   }
 
-
   /* Features list */
 
-  .features {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin: 0px 0 32px 0;
+  .unordered-list {
+    margin: 0 0 32px 0;
   }
 
-  .feature-item {
-    display: flex;
-    gap: 12px;
-    color: var(--vp-c-text-2);
-  }
 
 
   /* Action button */
@@ -211,11 +202,13 @@ const features = [
   /* Background */
 
   .background-gradient {
+    border-top: 4px solid var(--vp-c-bg);
+
     position: absolute;
     pointer-events: none;
     inset: 0;
     background-image:
-        radial-gradient(ellipse 75% 100% at 50% 100%, color-mix(in srgb, var(--vp-c-brand-2) 15%, transparent), transparent),
-        radial-gradient(ellipse 50% 20% at 50% 100%, color-mix(in srgb, var(--vp-c-brand-2) 10%, transparent), transparent);
+        radial-gradient(ellipse 75% 500px at 75% 0%, color-mix(in srgb, #2196F3 15%, transparent), transparent),
+        radial-gradient(ellipse 600px 100px at 50% 0%, color-mix(in srgb, #00BCD4 5%, transparent), transparent);
   }
 </style>

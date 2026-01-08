@@ -7,7 +7,7 @@
     </div>
 
     <div class="container">
-      <license-statistics />
+      <license-adoption />
     </div>
 
     <div class="container reverse-background">
@@ -29,7 +29,7 @@
 import LicensePageTiers from "./LicensePageTiers.vue";
 import LicenseGeneralDescription from "./LicenseTerms.vue";
 import LicenseHelp from "./LicenseHelp.vue";
-import LicenseStatistics from "./LicenseStatistics.vue";
+import LicenseAdoption from "./LicenseAdoption.vue";
 import LicenseResellers from "./LicenseResellers.vue";
 
 </script>

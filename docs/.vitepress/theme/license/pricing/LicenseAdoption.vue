@@ -1,8 +1,10 @@
 <template>
   <section class="content">
-    <div class="section-header">
-      <h2>Widespread Industry Adoption</h2>
-      <p class="sub-header">Join thousands of developers and organizations worldwide building PDF solutions with QuestPDF</p>
+    <div>
+      <div class="section-header">
+        <h2>You're in a good company</h2>
+        <p class="sub-header">Thousands of teams trust QuestPDF in production</p>
+      </div>
     </div>
 
     <div class="statistics">
@@ -24,20 +26,7 @@
 
 <script setup>
 
-const statistics = [
-    {
-        icon: "fa-duotone fa-star",
-        label: "GitHub stars",
-        link: "https://github.com/QuestPDF/QuestPDF",
-        value: "14K"
-    },
-    {
-        icon: "fa-duotone fa-download",
-        label: "NuGet downloads",
-        link: "https://www.nuget.org/packages/QuestPDF/",
-        value: "15M"
-    }
-];
+import { statistics } from "../../statistics";
 
 </script>
 
@@ -50,12 +39,16 @@ const statistics = [
   gap: 32px;
 }
 
+.section-header {
+  margin: 0;
+}
+
 .statistics {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-items: center;
-  gap: 32px;
+  gap: 128px;
   justify-content: center;
 }
 
@@ -64,10 +57,10 @@ const statistics = [
   flex-direction: row;
   justify-items: center;
   gap: 24px;
+}
 
-  border: 1px solid #8882;
-  border-radius: 12px;
-  padding: 24px;
+.statistic i.fa-2xl {
+  width: 56px;
 }
 
 .statistic .title {

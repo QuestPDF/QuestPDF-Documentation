@@ -274,7 +274,7 @@ const categories = [
     description: "Elements for rendering text, images, graphics, and visual styling.",
     items: [
       {
-        icon: "fa-regular fa-square",
+        icon: "fa-regular fa-palette",
         name: "Styled Containers",
         description: "Enhance visual appearance of your content with decorative styling options.",
         tags: [
@@ -731,7 +731,11 @@ const categories = [
   border-radius: 8px;
 
   color: #666;
-  background-color: #6662;
+  background-color: #8882;
+}
+
+html.dark .card-item .icon {
+  color: #999;
 }
 
 .card-item b {
@@ -745,7 +749,7 @@ const categories = [
   border-radius: 12px;
 
   .icon {
-    color: #2196F3;
+    color: #2196F3 !important;
     background-color: #2196F322;
   }
 }
@@ -762,8 +766,7 @@ const categories = [
 }
 
 .card-item .tag {
-
-  padding: 6px 12px;
+  padding: 8px 12px;
   border: 1px solid #8884;
   border-radius: 8px;
   font-size: 0.8125rem;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, onMounted, onUnmounted, ref, watch} from "vue";
+import {computed, nextTick, onMounted, onUnmounted, ref, watch} from "vue";
 import {useData} from "vitepress";
 import createCodeHighlighter from "./createCodeHighlighter";
 import HomePageCodeContainer from "./HomePageCodeContainer.vue";
@@ -228,20 +228,23 @@ async function animate() {
   scrollToPrimaryActionButton();
 }
 
-function startAnimation() {
-  isAnimationRunning.value = true;
-  resetAnimation();
-  animate();
-}
-
 
 /* Animation control observer */
+const showAnimation = ref(false);
+const codeAnimationContainer = ref<Element>();
 const observer = ref<IntersectionObserver | null>(null);
 
-onMounted(() => {
-  resetAnimation();
+
+onUnmounted(() => isAnimationRunning.value = false);
+
+async function playAnimation() {
+  showAnimation.value = true;
   isAnimationRunning.value = true;
+
+  resetAnimation();
   animate();
+
+  await nextTick();
 
   observer.value = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -249,95 +252,50 @@ onMounted(() => {
     });
   }, { threshold: 0.5 });
 
-  const target = document.querySelector('#homepage-quick-start-animation');
-  observer.value.observe(target);
-});
+  observer.value.observe(codeAnimationContainer.value);
 
-onUnmounted(() => isAnimationRunning.value = false);
+  const itemVerticalPosition = codeAnimationContainer.value.getBoundingClientRect();
+  window.scrollBy(0, itemVerticalPosition.y - 64 - 32);
+}
 
 </script>
 
 <template>
-  <section class="content" id="homepage-quick-start-animation">
-    <div class="section-header">
-      <h2>Experience the Simplicity</h2>
-      <p class="sub-header">See how QuestPDF's fluent API lets you build professional documents with just a few lines of readable, intuitive C# code.</p>
+  <section class="content">
+    <div class="section-header" style="margin-bottom: 16px;">
+      <i class="fa-duotone fa-film fa-2xl" />
+      <div class="section-header">
+        <h2>Experience the Simplicity</h2>
+        <p class="sub-header">See how QuestPDF's Fluent API lets you build professional documents with just a few lines of readable, intuitive C# code.</p>
+      </div>
     </div>
 
-    <div class="animation-container">
+    <div v-if="showAnimation" ref="codeAnimationContainer" class="animation-container">
       <home-page-code-container file-name="HelloWorld.cs" :code="code" :code-transformer="codeTransformer" />
 
       <home-page-window-container file-name="Preview.pdf">
         <img :src="'/homepage/quick-start-animation/step' + imageIndex + '.webp'" />
       </home-page-window-container>
     </div>
+
+    <a v-else class="action primary animation" @click="playAnimation">
+      <i class="fa-solid fa-play" style="color: white;" />
+      Watch Live Demo
+      <div class="divider"></div>
+      <span style="font-weight: 400;">~90 sec</span>
+    </a>
   </section>
 </template>
 
 <style scoped>
 
-/* Play demo button */
+/* Page layout */
 
-.action {
-  padding: 4px 24px;
-}
-
-.action.primary {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-  width: fit-content;
-}
-
-.action.primary .divider {
-  height: 24px;
-  width: 1px;
-  background-color: #FFF8;
-  margin: 8px 0;
-}
-
-
-/* Tutorial header */
-
-.tutorial-header {
-  background-color: var(--vp-c-bg);
-  padding: 12px 24px;
-  border-radius: 12px;
-  margin-bottom: 48px;
-}
-
-.tutorial-header p {
-  margin-top: 8px;
-  text-transform: uppercase;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--vp-c-text-3);
-}
-
-.tutorial-header h3 {
-  margin-top: 8px;
-}
-
-
-
-
-
-.tutorial-section {
+.content {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  align-items: center;
 }
-
-.tutorial-alert {
-
-  border: 1px solid #2196F3;
-  filter: drop-shadow(0 16px 16px #2196F322) !important;
-}
-
-.action.primary {
-  background-color: #2196F3;
-}
-
 
 .animation-container {
   display: grid;
@@ -371,43 +329,24 @@ html.dark img {
 }
 
 
-/* Loading icon */
+/* Play demo button */
 
-@keyframes loading-icon-animation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.action.animation {
+  padding: 4px 24px;
 }
 
-.loading-icon {
-  height: 24px;
-  display: inline-block;
-  transform-origin: center center;
-  animation: loading-icon-animation 1s linear infinite;
+.action.animation {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: fit-content;
 }
 
-
-/* Highlight CTA button */
-
-@keyframes highlight-cta-animation {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.1); }
-  100% { transform: scale(1); }
+.action.animation .divider {
+  border-left: 1px solid #FFF8;
+  margin: 8px 0;
+  height: 20px;
 }
 
-.action.primary {
-  margin-top: 32px;
-  scroll-margin-block-end: 128px;
-}
-
-.action.primary.highlight {
-  box-shadow: var(--elevation);
-  animation: highlight-cta-animation 1s ease-in-out alternate;
-  animation-delay: 1s;
-  animation-iteration-count: 5;
-}
 
 </style>
