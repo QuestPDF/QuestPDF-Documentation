@@ -46,15 +46,19 @@ const features = [
 
 <style scoped>
 
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .features {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 32px;
-
   margin-top: 32px;
 
   max-width: 900px;
-  place-self: center;
 }
 
 @media screen and (max-width: 1100px) {
