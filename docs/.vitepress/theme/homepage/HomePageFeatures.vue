@@ -60,6 +60,12 @@ const features = [
   gap: 24px;
 }
 
+@media screen and (max-width: 450px) {
+  .features {
+    gap: 16px;
+  }
+}
+
 .feature {
   width: 64px;
   height: 64px;
