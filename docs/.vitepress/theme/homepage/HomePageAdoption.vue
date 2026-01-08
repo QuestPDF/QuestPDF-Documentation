@@ -39,7 +39,7 @@ import { statistics } from "../statistics";
   flex-direction: row;
   flex-wrap: wrap;
   justify-items: center;
-  gap: 128px;
+  gap: 64px 128px;
   justify-content: center;
 }
 
