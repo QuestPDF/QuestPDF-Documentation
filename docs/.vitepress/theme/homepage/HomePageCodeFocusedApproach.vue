@@ -27,7 +27,6 @@ const features = [
 <template>
   <section class="content">
     <div class="section-header">
-      <i class="fa-duotone fa-code fa-2xl" />
       <h2>Familiar Programming Patterns</h2>
       <p class="sub-header">Treat documents as application code: strongly-typed models, reusable components, and IDE-assisted refactoring. Catch issues early with compile-time feedback.</p>
     </div>
