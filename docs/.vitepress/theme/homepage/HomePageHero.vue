@@ -1,18 +1,14 @@
 <script setup lang="ts">
 import helloWorldExample from './codeExamples/helloWorld.cs?raw';
 import HomePageCodeContainer from "./HomePageCodeContainer.vue";
-
-const emit = defineEmits<{
-  (e: 'playCodeAnimation'): void
-}>()
-
 </script>
 
 <template>
-  <section class="content">
-    <div class="background-gradient" />
+  <div class="background-gradient" />
+  <div class="background-gradient-noise" />
 
-    <div>
+  <section class="content">
+    <div style="z-index: 10; display: flex; flex-direction: column; gap: 16px;">
       <h1>
         <span class="highlight-foreground">Code-first</span> PDF generation for C#
       </h1>
@@ -22,28 +18,8 @@ const emit = defineEmits<{
       </div>
 
       <div class="cta-buttons">
-        <a class="action primary" @click="emit('playCodeAnimation')">
-          <i class="fa-solid fa-play" style="color: white;" />
-          Watch Live Demo
-          <div class="divider"></div>
-          <span style="font-weight: 400;">~90 sec</span>
-        </a>
-
-        <a class="action" href="/quick-start">
-          Quick Start
-        </a>
-      </div>
-
-      <div class="trust-items">
-        <div class="trust-item">
-          <i class="fa-solid fa-star fa-lg"></i>
-          <span><strong>14K</strong> GitHub stars</span>
-        </div>
-
-        <div class="trust-item">
-          <i class="fa-solid fa-download fa-lg"></i>
-          <span><strong>15M</strong> NuGet downloads</span>
-        </div>
+        <a class="action primary" href="/quick-start">Quick Start</a>
+        <a class="action" href="/features-overview">Features Overview</a>
       </div>
     </div>
 
@@ -62,6 +38,9 @@ const emit = defineEmits<{
   grid-template-rows: auto;
 
   grid-gap: 64px;
+
+  margin-top: -64px;
+  padding-top: 128px;
 }
 
 @media screen and (max-width: 1023px) {
@@ -95,7 +74,8 @@ h1 {
 .tagline {
   max-width: 650px;
   font-size: 1.5rem !important;
-  line-height: 2rem !important;
+  line-height: 2.5rem !important;
+  font-weight: 400;
   color: var(--vp-c-text-2) !important;
 }
 
@@ -130,9 +110,12 @@ h1 {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 24px;
   margin-top: 32px;
   z-index: 10000;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  word-spacing: 2px;
 }
 
 .cta-buttons .action {
@@ -152,6 +135,27 @@ h1 {
   height: 20px;
 }
 
+
+html.dark .action:not(.primary) {
+  background-color: #FFF2;
+
+  &:hover {
+    background-color: #FFF3;
+  }
+}
+
+html:not(.dark) .action:not(.primary) {
+  background-color: #FFF;
+  border: 1px solid #0004;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+
+  &:hover {
+    border: 1px solid #0008;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+  }
+}
+
+
 /* Background */
 
 .background-gradient {
@@ -159,35 +163,27 @@ h1 {
   inset: 0;
   pointer-events: none;
   background-image:
-      radial-gradient(ellipse 75% 100% at 50% 0%, color-mix(in srgb, var(--vp-c-brand-2) 15%, transparent), transparent),
-      radial-gradient(ellipse 50% 150px at 50% 0%, color-mix(in srgb, var(--vp-c-brand-2) 10%, transparent), transparent);
+      radial-gradient(ellipse 75% 75% at 50% 100%, color-mix(in srgb, #2196F3 25%, transparent), transparent),
+      radial-gradient(ellipse 1500px 300px at 50% 100%, color-mix(in srgb, #00BCD4 10%, transparent), transparent),
+      radial-gradient(ellipse 1000px 200px at 40% 100%, color-mix(in srgb, #FFEB3B 15%, transparent), transparent),
+      radial-gradient(ellipse 500px 100px at 60% 100%, color-mix(in srgb, #FF9800 20%, transparent), transparent);
 }
 
-
-/* Trust Indicators */
-
-.trust-items {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 24px 64px;
-  margin-top: 32px;
-  padding-top: 32px;
-  border-top: 1px solid color-mix(in srgb, var(--vp-c-brand-2) 10%, transparent);
-  width: fit-content;
+.background-gradient-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("/homepage/noise.svg");
+  opacity: 0.25;
+  pointer-events: none;
+  mix-blend-mode: overlay;
 }
 
-.trust-item {
-  width: max-content;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 1rem;
-}
-
-.trust-item strong {
-  color: var(--vp-c-text-1);
-  font-weight: 700;
+html:not(.dark) .background-gradient {
+  background-image:
+      radial-gradient(ellipse 100% 75% at 50% 0%, color-mix(in srgb, #2196F3 25%, transparent), transparent),
+      radial-gradient(ellipse 1500px 600px at 100% 0%, color-mix(in srgb, #81D4FA 40%, transparent), transparent),
+      radial-gradient(ellipse 1000px 200px at 20% 0%, color-mix(in srgb, #64B5F6 20%, transparent), transparent),
+      radial-gradient(ellipse 800px 100px at 60% 100%, color-mix(in srgb, #FF9800 15%, transparent), transparent);
 }
 
 </style>

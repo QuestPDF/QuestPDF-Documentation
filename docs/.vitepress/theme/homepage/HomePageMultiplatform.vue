@@ -64,11 +64,14 @@ const platforms = [
   align-items: center;
   gap: 12px;
 
-  border: 1px solid #8882;
+  background-color: #0000000A;
   border-radius: 12px;
 
-  padding: 16px;
-  align-content: center;
+  padding: 24px 16px;
+}
+
+html.dark .platform-item {
+  background-color: #FFFFFF0A;
 }
 
 .platform-item img {

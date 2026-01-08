@@ -8,31 +8,32 @@ const SummaryContent = [
 </script>
 
 <template>
+  <div class="background-gradient" />
+
   <section class="content">
 
-    <div class="license-background" />
-      <i class="fa-duotone fa-file-certificate license-icon"></i>
+    <i class="fa-duotone fa-file-certificate license-icon"></i>
 
-      <div class="section-header">
-        <h2>Fair and Sustainable License</h2>
-        <p class="sub-header">A model that benefits everyone. Commercial licensing provides businesses with legal safety and long-term stability, while funding a feature-complete, unrestricted library for the open-source community.</p>
-      </div>
+    <div class="section-header">
+      <h2>Fair and Sustainable License</h2>
+      <p class="sub-header">A model that benefits everyone. Commercial licensing provides businesses with legal safety and long-term stability, while funding a feature-complete, unrestricted library for the open-source community.</p>
+    </div>
 
-      <div class="summary-list">
-        <article v-for="summary of SummaryContent" class="summary-item">
-          <i class="fa-duotone fa-square-check license-check-icon"></i>
-          <p>{{ summary }}</p>
-        </article>
-      </div>
+    <div class="summary-list">
+      <article v-for="summary of SummaryContent" class="summary-item">
+        <i class="fa-duotone fa-square-check license-check-icon"></i>
+        <p>{{ summary }}</p>
+      </article>
+    </div>
 
-      <div class="license-description">
-        Free for individuals, non-profits, all FOSS projects, and organizations under $1M in annual revenue.
-      </div>
+    <div class="license-description">
+      Free for individuals, non-profits, all FOSS projects, and organizations under $1M in annual revenue.
+    </div>
 
-      <div style="display: flex; flex-direction: row; gap: 16px; justify-content: center">
-        <a class="action pricing-button" href="/license">View Pricing</a>
-        <a class="action" href="/license/guide">License terms</a>
-      </div>
+    <div style="display: flex; flex-direction: row; gap: 16px; justify-content: center">
+      <a class="action pricing-button" href="/license">View Pricing</a>
+      <a class="action" href="/license/guide">License terms</a>
+    </div>
 
   </section>
 </template>
@@ -57,6 +58,15 @@ const SummaryContent = [
     width: 150%;
     height: 100%;
     background: radial-gradient(ellipse, rgba(103, 184, 77, 0.1) 0%, transparent 50%);
+  }
+
+  .background-gradient {
+    position: absolute;
+    pointer-events: none;
+    inset: 0;
+    background-image:
+        radial-gradient(ellipse 75% 500px at 75% 100%, color-mix(in srgb, #4CAF50 15%, transparent), transparent),
+        radial-gradient(ellipse 600px 100px at 50% 100%, color-mix(in srgb, #00BCD4 5%, transparent), transparent);
   }
 
   .license-icon {

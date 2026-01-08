@@ -10,6 +10,7 @@ container
         // use loops to iterate over collections naturally
         foreach (var item in Model.Items)
         {
+            // organize your code by splitting logic into functions
             column.Item()
                 .Element(container => ComposeItem(container, item));
         }

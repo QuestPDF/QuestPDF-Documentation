@@ -44,7 +44,7 @@ const standards : Standard[] = [
     </div>
 
     <div class="standard-cards">
-      <div v-for="standard in standards" class="wide-card standard-card light-shadow">
+      <div v-for="standard in standards" class="wide-card card">
         <div class="card-header">
           <span class="card-label">{{ standard.label }}</span>
           <span class="card-standard">{{ standard.name }}</span>
@@ -128,20 +128,21 @@ const standards : Standard[] = [
 .standards-badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   margin-top: 16px;
 }
 
 .standards-badges > span {
   display: inline-flex;
   align-items: center;
-  padding: 6px 12px;
-  border-radius: 20px;
+  padding: 8px 12px;
+  line-height: 1;
+  border-radius: 8px;
   font-size: 0.8125rem;
   font-weight: 500;
-  color: var(--vp-c-text-1);
+  color: var(--vp-c-text-2);
   transition: border-color 0.2s ease, background-color 0.2s ease;
-  background-color: var(--vp-c-bg);
+  border: 1px solid #8888;
 }
 
 </style>

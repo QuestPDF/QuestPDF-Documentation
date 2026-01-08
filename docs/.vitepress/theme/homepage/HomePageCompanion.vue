@@ -1,23 +1,24 @@
 <template>
   <section class="content">
-    <div class="details">
-      <div class="section-tag">Development Tool</div>
+    <div class="section-tag">Development Tool</div>
 
-      <h2>Companion App</h2>
-      <p class="sub-header">Accelerate development with live document preview and hot-reload capability. See your changes instantly without recompiling.</p>
+    <h2>Companion App</h2>
+    <p class="sub-header">Accelerate development with live document preview and hot-reload capability. See your changes instantly without recompiling.</p>
 
-      <div class="summary-list">
-        <article v-for="summary of summaryContent" class="summary-item">
-          <i class="fa-duotone fa-square-check"></i>
-          <p>{{ summary }}</p>
-        </article>
-      </div>
-
-      <a class="action" href="/companion/features">Read more</a>
+    <div class="image-container">
+      <img :src="`/companion/application-light.png`" alt="Companion App" class="companion-image light" />
+      <img :src="`/companion/application-dark.png`" alt="Companion App" class="companion-image dark" />
     </div>
 
-    <img :src="`/companion/application-light.png`" alt="Companion App" class="companion-image light" />
-    <img :src="`/companion/application-dark.png`" alt="Companion App" class="companion-image dark" />
+
+    <div class="summary-list">
+      <article v-for="summary of summaryContent" class="summary-item">
+        <i class="fa-duotone fa-square-check"></i>
+        <p>{{ summary }}</p>
+      </article>
+    </div>
+
+    <a class="action primary" href="/companion/features">Read more</a>
   </section>
 </template>
 
@@ -35,10 +36,10 @@ const summaryContent = [
 <style scoped>
 
 .content {
-  display: grid;
-  grid-template-columns: 1fr minmax(200px, 1fr);
-  grid-gap: 64px;
-  align-content: stretch;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
 @media screen and (max-width: 800px) {
@@ -46,6 +47,13 @@ const summaryContent = [
     grid-template-columns: 1fr;
     grid-gap: 32px;
   }
+}
+
+.image-container {
+  padding: 64px;
+  background: linear-gradient(120deg, #00E5FF22, #2979FF22);
+  border-radius: 64px;
+  margin: 32px -64px 48px;
 }
 
 .companion-image {
