@@ -82,8 +82,9 @@ import HomePageFeatures from "./HomePageFeatures.vue";
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))
 }
 
-html:not(.dark):has(.home-page) {
-  .VPNavBarMenuLink *, .VPNavBarMenuGroup span.text {
+html:not(.dark):has(.home-page) .VPNavBar.home.top {
+  .VPNavBarMenuLink *,
+  .VPNavBarMenuGroup span.text {
     color: black !important;
   }
 }
