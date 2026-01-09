@@ -9,7 +9,8 @@
     </div>
 
     <div class="container reverse-background">
-      <HomePageCodeFocusedApproach />
+      <HomePageCodeAnimation />
+
     </div>
 
     <div class="container">
@@ -17,7 +18,7 @@
     </div>
 
     <div class="container reverse-background">
-      <HomePageCodeAnimation />
+      <HomePageCodeFocusedApproach />
     </div>
 
     <div class="container">

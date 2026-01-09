@@ -1,15 +1,13 @@
 <script setup lang="ts">
 
+import codeFirstApproach from './codeExamples/codeFirstApproach.cs?raw';
+import HomePageCodeContainer from "./HomePageCodeContainer.vue";
+
 const features = [
-  {
-    icon: "fa-duotone fa-graduation-cap",
-    title: "Easy Learning Curve",
-    description: "Skip proprietary XML/HTML template dialects. Use your existing programming language and patterns to ship faster with less training."
-  },
   {
     icon: "fa-duotone fa-code",
     title: "Dynamic Content Is Just Code",
-    description: "Loops, conditionals, functions are natively supported. Leverage IntelliSense, inspections, navigation, and safe refactoring."
+    description: "Use your existing programming language and patterns to ship faster with less training. Loops, conditionals, functions are natively supported. Leverage IntelliSense, inspections, navigation, and safe refactoring."
   },
   {
     icon: "fa-duotone fa-code-pull-request",
@@ -18,7 +16,7 @@ const features = [
   },
   {
     icon: "fa-duotone fa-sparkles",
-    title: "Optimized for AI Assistance",
+    title: "Ready for AI",
     description: "A semantic Fluent API helps AI assistants generate layouts, refactor components, and troubleshoot issues effectively."
   }
 ];
@@ -31,14 +29,22 @@ const features = [
       <p class="sub-header">Treat documents as application code: strongly-typed models, reusable components, and IDE-assisted refactoring. Catch issues early with compile-time feedback.</p>
     </div>
 
-
-    <div class="features">
-
+    <div class="layout">
       <article class="card" v-for="feature of features">
         <i class="icon fa-2xl" :class="[feature.icon]"></i>
         <h3 class="title">{{ feature.title }}</h3>
         <p class="description">{{ feature.description }}</p>
       </article>
+
+      <home-page-code-container
+          file-name="InvoiceDocument.cs"
+          :code="codeFirstApproach"
+          :code-transformer="{
+              line(node, line) {
+                if (line === 17) this.addClassToHast(node, 'line-removed');
+                if (line === 18) this.addClassToHast(node, 'line-added');
+              }
+            }" />
 
     </div>
   </section>
@@ -50,26 +56,30 @@ const features = [
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 800px;
+  width: 100%;
 }
 
-.features {
+.layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 32px;
   margin-top: 32px;
-
-  max-width: 900px;
+  width: 100%;
 }
 
-@media screen and (max-width: 1100px) {
-  .features {
-    grid-template-columns: 1fr 1fr;
-  }
+.layout article:first-child {
+  grid-column: 1 / span 2;
+}
+
+.layout .file-container {
+  grid-column: 1 / span 2;
 }
 
 @media screen and (max-width: 700px) {
-  .features {
-    grid-template-columns: 1fr;
+  .layout {
+    display: flex;
+    flex-direction: column;
   }
 }
 
