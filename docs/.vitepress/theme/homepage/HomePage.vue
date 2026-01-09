@@ -53,7 +53,6 @@ import HomePageOverview from "./HomePageOverview.vue";
 import HomePageGettingStarted from "./HomePageGettingStarted.vue";
 import HomePageLicense from "./HomePageLicense.vue";
 import HomePageMultiplatform from "./HomePageMultiplatform.vue";
-import HomePageDocumentOperations from "./HomePageDocumentOperations.vue";
 import HomePageCodeFocusedApproach from "./HomePageCodeFocusedApproach.vue";
 import HomePageCompanion from "./HomePageCompanion.vue";
 import HomePageHero from "./HomePageHero.vue";
