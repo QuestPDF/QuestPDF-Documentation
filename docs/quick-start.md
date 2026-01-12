@@ -11,7 +11,7 @@ QuestPDF is available as a NuGet package. You can install it through your IDE by
 
 Or use the following command in your terminal:
 
-```c#
+```bash
 dotnet add package QuestPDF
 ```
 
