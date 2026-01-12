@@ -1,11 +1,10 @@
 # License configuration
 
-QuestPDF is an open-source library committed to long-term sustainability and continuous improvement.
+QuestPDF uses a hybrid license, which is a model that benefits everyone.
+Commercial licenses provide businesses with legal safety and long-term stability, while funding a feature-complete, unrestricted library for the open-source community.
 
-By offering free access to most users and premium licenses for larger organizations, the project maintains its commitment to excellence while ensuring sustainable, long-term development for all.
-
-::: warning
-The library is free to use for any individual or business with less than 1 million USD annual gross revenue, or operates as a non-profit organization, or is a FOSS project.
+::: tip
+The library is free for individuals, non-profits, all FOSS projects, and organizations under $1M in annual revenue.
 
 More details can be found on the [QuestPDF License and Pricing page](/license/).
 :::
