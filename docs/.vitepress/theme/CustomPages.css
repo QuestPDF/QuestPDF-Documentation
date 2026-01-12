@@ -188,17 +188,22 @@ a.action {
   font-weight: 500;
   white-space: nowrap;
 
-  border-radius: 20px;
-  padding: 0 20px;
+  border-radius: 12px;
+  padding: 4px 24px;
   line-height: 38px;
 
   background-color: #8883;
 
   color: var(--vp-c-text-1);
   font-size: 1rem;
+
+  transition: all 0.2s ease-in-out;
 }
 
 a.action:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--elevation);
+
   background-color: #8885;
   cursor: pointer;
 }
@@ -210,7 +215,7 @@ a.action.primary {
 }
 
 a.action.primary:hover {
-  background-color: #1E88E5
+  background-color: #1E88E5;
 }
 
 .custom-page {
