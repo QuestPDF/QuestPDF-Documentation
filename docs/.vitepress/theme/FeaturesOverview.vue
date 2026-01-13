@@ -14,7 +14,7 @@
           <h3>{{ category.name }}</h3>
 
           <template v-for="item in category.items" :key="item.name">
-            <a :href="item.link">
+            <component :is="item.link ? 'a' : 'div'" :href="item.link">
               <div class="card-item">
                 <i class="icon" :class="item.icon" />
                 <div>
@@ -27,7 +27,7 @@
                   </div>
                 </div>
               </div>
-            </a>
+            </component>
           </template>
         </div>
 
