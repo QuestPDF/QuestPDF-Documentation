@@ -16,7 +16,7 @@ const productionConfiguration = {
     isProduction: true,
     token: 'live_aae6e100288a0ab158a101d61e6',
     professionalLicenseId: 'pri_01jz1b9qe7mez8nrdk00wqyrpn',
-    enterpriseLicenseId: 'pri_01jv41gn76w6ygdxfqxb6dv525',
+    enterpriseLicenseId: 'pri_01kevkewbnvgh65eq457v70c99',
 };
 
 

@@ -88,7 +88,7 @@ const ProfessionalLicense: License = {
 const EnterpriseLicense: License = {
   name: "enterprise",
   description: "Maximum flexibility and priority support for large teams and mission-critical systems",
-  price: 1999,
+  price: 2999,
   paddlePriceId: paddle.enterpriseLicensePriceId,
   details: [
     "Unlimited developers and server deployments",
