@@ -78,10 +78,6 @@ import HomePageFeatures from "./HomePageFeatures.vue";
   display: none !important;
 }
 
-.hero-container .action.primary {
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1))
-}
-
 html:not(.dark):has(.home-page) .VPNavBar.home.top {
   .VPNavBarMenuLink *,
   .VPNavBarMenuGroup span.text {

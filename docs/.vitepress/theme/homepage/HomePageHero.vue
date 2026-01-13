@@ -33,10 +33,11 @@ import HomePageCodeContainer from "./HomePageCodeContainer.vue";
 /* Layout */
 
 .content {
+  position: relative;
+
   display: grid;
   grid-template-columns: 1fr 400px;
   grid-template-rows: auto;
-
   grid-gap: 64px;
 
   margin-top: -64px;
@@ -145,13 +146,20 @@ html.dark .action:not(.primary) {
 html:not(.dark) .action:not(.primary) {
   background-color: #FFF;
   border: 1px solid #0004;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 
   &:hover {
     border: 1px solid #0008;
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
   }
 }
+
+.action {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
 
 
 /* Background */

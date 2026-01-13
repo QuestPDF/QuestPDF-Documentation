@@ -45,6 +45,7 @@ const features = [
 
 <style scoped>
   .content {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 64px;

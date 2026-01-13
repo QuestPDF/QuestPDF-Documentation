@@ -319,11 +319,6 @@ async function playAnimation() {
   }
 }
 
-.animation-container > * {
-  border-radius: 12px;
-  filter: drop-shadow(0 4px 8px #0002);
-}
-
 html.dark img {
   opacity: 0.8;
 }

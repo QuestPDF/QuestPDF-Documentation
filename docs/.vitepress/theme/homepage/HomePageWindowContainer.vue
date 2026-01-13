@@ -25,7 +25,7 @@ const props = defineProps<{
 .file-container {
   border: 1px solid var(--vp-c-divider);
   border-radius: 16px;
-  filter: drop-shadow(0 16px 16px rgba(0,  0, 0, 0.1));
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   height: fit-content;
   overflow: hidden;
   max-width: 100%;

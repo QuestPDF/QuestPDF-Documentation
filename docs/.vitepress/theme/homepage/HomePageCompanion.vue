@@ -84,11 +84,11 @@ const summaryContent = [
 }
 
 .companion-image {
+  position: relative;
   display: block;
   border-radius: 8px;
   border: 1px solid #8884;
-  filter: drop-shadow(0 16px 16px rgba(0,  0, 0, 0.1));
-  place-self: end;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 html:not(.dark) .companion-image.dark {
