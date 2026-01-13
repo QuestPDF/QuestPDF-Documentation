@@ -10,7 +10,7 @@
           </p>
         </header>
 
-        <div v-for="category in categories" :key="category.name"class="card" >
+        <div v-for="category in categories" :key="category.name" class="card" >
           <h3>{{ category.name }}</h3>
 
           <template v-for="item in category.items" :key="item.name">
@@ -219,7 +219,7 @@ const categories = [
         icon: "fa-regular fa-puzzle-piece",
         name: "Components",
         description: "Build modular, reusable document blocks for cleaner architecture. Encapsulate layout patterns and maintain consistency across your entire codebase.",
-        link: "/concepts/components.html",
+        link: "/concepts/code-patterns/components.html",
         tags: [
           {
             label: "Components",
