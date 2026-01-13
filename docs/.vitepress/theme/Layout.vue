@@ -20,9 +20,4 @@ const { Layout } = DefaultTheme
 import GoogleAnalytics from "./GoogleAnalytics.vue";
 import SupportAlert from "./SupportAlert.vue";
 import PaddleIntegration from "./PaddleIntegration.vue";
-import {scrollToAnchor} from "./helpers.ts";
-
-if (typeof window !== 'undefined')
-  window.addEventListener("popstate", () => scrollToAnchor())
-
 </script>
