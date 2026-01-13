@@ -62,7 +62,7 @@
     </template>
 
     <template #footer>
-      <a class="action primary" href="/license/" style="margin-top: 16px;">Purchase license</a>
+      <a class="action primary" href="/license.html" style="margin-top: 16px;">Purchase license</a>
     </template>
   </document-template>
 </template>

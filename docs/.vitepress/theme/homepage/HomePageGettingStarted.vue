@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <a class="action primary" href="/invoice-tutorial">
+      <a class="action primary" href="/invoice-tutorial.html">
         Start Tutorial
         <i class="fa-solid fa-arrow-right arrow-icon"></i>
       </a>

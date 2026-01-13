@@ -18,8 +18,8 @@ import HomePageCodeContainer from "./HomePageCodeContainer.vue";
       </div>
 
       <div class="cta-buttons">
-        <a class="action primary" href="/quick-start">Quick Start</a>
-        <a class="action" href="/features-overview">Features Overview</a>
+        <a class="action primary" href="/quick-start.html">Quick Start</a>
+        <a class="action" href="/features-overview.html">Features Overview</a>
       </div>
     </div>
 

@@ -31,8 +31,8 @@ const SummaryContent = [
     </div>
 
     <div style="display: flex; flex-direction: row; gap: 16px; justify-content: center">
-      <a class="action pricing-button" href="/license">View Pricing</a>
-      <a class="action" href="/license/guide">License terms</a>
+      <a class="action pricing-button" href="/license.html">View Pricing</a>
+      <a class="action" href="/license/guide.html">License terms</a>
     </div>
 
   </section>

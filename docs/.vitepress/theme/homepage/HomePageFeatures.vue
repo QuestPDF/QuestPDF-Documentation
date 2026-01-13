@@ -33,7 +33,7 @@ const features = [
       <i v-for="feature of features" :key="feature" class="feature icon fa-regular" :class="[feature]" />
     </div>
 
-    <a class="action" href="/features-overview" target="_blank">
+    <a class="action" href="/features-overview.html" target="_blank">
       Explore all features
     </a>
   </section>

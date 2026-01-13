@@ -29,14 +29,14 @@
 
       <section>
         <h3>Transitive Dependency Usage</h3>
-        <p>If you're using QuestPDF as a transitive dependency, you're free to use it under the <a class="license-link" href="/license/community">Community MIT License</a> without any cost. However, you're welcomed and encouraged to support the project by purchasing a paid license if you find the library valuable.</p>
+        <p>If you're using QuestPDF as a transitive dependency, you're free to use it under the <a class="license-link" href="/license/community.html">Community MIT License</a> without any cost. However, you're welcomed and encouraged to support the project by purchasing a paid license if you find the library valuable.</p>
       </section>
 
       <hr>
 
       <section>
         <h3>Non-profit Usage</h3>
-        <p>If you represent an open-source project, a charitable organization, or are using QuestPDF for evaluation, learning or training purposes, you can also use QuestPDF for free under the <a class="license-link" href="/license/community">Community MIT License</a>.</p>
+        <p>If you represent an open-source project, a charitable organization, or are using QuestPDF for evaluation, learning or training purposes, you can also use QuestPDF for free under the <a class="license-link" href="/license/community.html">Community MIT License</a>.</p>
       </section>
 
       <hr>
@@ -44,7 +44,7 @@
       <section>
         <h3>Small Businesses</h3>
 
-        <p>For companies generating less than $1M USD in annual gross revenue, you can use QuestPDF under the <a class="license-link" href="/license/community">Community MIT License</a> for free.</p>
+        <p>For companies generating less than $1M USD in annual gross revenue, you can use QuestPDF under the <a class="license-link" href="/license/community.html">Community MIT License</a> for free.</p>
       </section>
 
       <hr>
@@ -53,9 +53,9 @@
         <h3>Larger Businesses</h3>
         <p>Companies with an annual gross revenue exceeding $1M USD are required to purchase a paid license. The type of license you need depends on the number of developers working on projects that use QuestPDF.</p>
 
-        <p><a class="license-link" href="/license/professional-enterprise">Professional License</a> - If there are up to 10 developers in your company who are using QuestPDF, you need to purchase the Professional License.</p>
+        <p><a class="license-link" href="/license/professional-enterprise.html">Professional License</a> - If there are up to 10 developers in your company who are using QuestPDF, you need to purchase the Professional License.</p>
 
-        <p><a class="license-link" href="/license/professional-enterprise">Enterprise License</a> - If your company has more than 10 developers using QuestPDF, the Enterprise License is the right choice.</p>
+        <p><a class="license-link" href="/license/professional-enterprise.html">Enterprise License</a> - If your company has more than 10 developers using QuestPDF, the Enterprise License is the right choice.</p>
       </section>
 
       <hr>
@@ -67,7 +67,7 @@
     </template>
 
     <template #footer>
-      <a class="action primary" href="/license/" style="margin-top: 16px;">Purchase license</a>
+      <a class="action primary" href="/license.html" style="margin-top: 16px;">Purchase license</a>
     </template>
   </document-template>
 </template>

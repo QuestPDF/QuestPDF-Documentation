@@ -67,10 +67,6 @@ const orderDetails = [
               <div class="description-item-content">
                 <strong>{{ step.title }}</strong>
                 <span>{{ step.description }}</span>
-                <a v-if="step.link" :href="step.link" class="step-link">
-                  {{ step.linkText }}
-                  <i class="fa-solid fa-arrow-right"></i>
-                </a>
               </div>
             </div>
           </div>
@@ -87,10 +83,6 @@ const orderDetails = [
               <div class="description-item-content">
                 <strong>{{ step.title }}</strong>
                 <span>{{ step.description }}</span>
-                <a v-if="step.link" :href="step.link" class="step-link">
-                  {{ step.linkText }}
-                  <i class="fa-solid fa-arrow-right"></i>
-                </a>
               </div>
             </div>
           </div>

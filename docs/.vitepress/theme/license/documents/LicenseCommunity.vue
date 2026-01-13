@@ -33,7 +33,7 @@
     </template>
 
     <template #footer>
-      <a class="action primary" href="/license" style="margin-top: 16px;">Learn more</a>
+      <a class="action primary" href="/license.html" style="margin-top: 16px;">Learn more</a>
     </template>
   </document-template>
 </template>

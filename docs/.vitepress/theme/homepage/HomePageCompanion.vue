@@ -19,7 +19,7 @@
       </article>
     </div>
 
-    <a class="action primary" href="/companion/features">Read more</a>
+    <a class="action primary" href="/companion/features.html">Read more</a>
   </section>
 </template>
 
