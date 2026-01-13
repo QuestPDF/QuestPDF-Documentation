@@ -170,7 +170,7 @@ html.dark {
 
 .license-tier .tier-name {
   border-radius: 128px;
-  padding: 6px 16px;
+  padding: 6px 18px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;

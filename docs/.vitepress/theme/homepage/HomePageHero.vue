@@ -76,7 +76,7 @@ h1 {
   font-size: 1.5rem !important;
   line-height: 2.5rem !important;
   font-weight: 400;
-  color: var(--vp-c-text-2) !important;
+  color: var(--vp-c-text-1) !important;
 }
 
 @media screen and (max-width: 1024px) {
@@ -116,8 +116,15 @@ h1 {
   text-transform: uppercase;
 }
 
-.cta-buttons .action {
-  padding: 4px 24px;
+@media screen and (min-width: 1024px) {
+  .cta-buttons {
+    gap: 32px;
+  }
+
+  .cta-buttons a.action {
+    padding: 16px 24px;
+  }
+
 }
 
 .cta-buttons .action.primary {
@@ -126,13 +133,6 @@ h1 {
   gap: 16px;
   width: fit-content;
 }
-
-.cta-buttons .action.primary .divider {
-  border-left: 1px solid #FFF8;
-  margin: 8px 0;
-  height: 20px;
-}
-
 
 html.dark .action:not(.primary) {
   background-color: #FFF2;

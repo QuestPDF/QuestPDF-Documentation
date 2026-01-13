@@ -189,8 +189,8 @@ a.action {
   white-space: nowrap;
 
   border-radius: 12px;
-  padding: 4px 24px;
-  line-height: 38px;
+  padding: 12px 24px;
+  line-height: 1;
 
   background-color: #8883;
 
@@ -198,6 +198,10 @@ a.action {
   font-size: 1rem;
 
   transition: all 0.2s ease-in-out;
+}
+
+.card a.action {
+  padding: 12px 20px;
 }
 
 a.action:hover {
