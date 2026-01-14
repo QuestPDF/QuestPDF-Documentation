@@ -7,7 +7,7 @@ markdownStyles: false
 ---
 
 <script setup>
-import HomePage from '../docs/.vitepress/theme/homepage/HomePage.vue';
+import HomePage from './.vitepress/theme/homepage/HomePage.vue';
 </script>
 
 
