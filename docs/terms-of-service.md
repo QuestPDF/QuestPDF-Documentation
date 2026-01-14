@@ -5,7 +5,7 @@ aside: false
 ---
 
 <script setup>
-import TermsOfService from '.vitepress/theme/license/documents/TermsOfService.vue';
+import TermsOfService from './.vitepress/theme/license/documents/TermsOfService.vue';
 </script>
 
 <TermsOfService />

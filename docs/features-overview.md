@@ -5,7 +5,7 @@ aside: false
 ---
 
 <script setup>
-import FeaturesOverview from '../docs/.vitepress/theme/FeaturesOverview.vue';
+import FeaturesOverview from './.vitepress/theme/FeaturesOverview.vue';
 </script>
 
 
