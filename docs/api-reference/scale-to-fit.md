@@ -30,7 +30,7 @@ container.Column(column =>
 });
 ```
 
-![example](/api-reference/scale-to-fit.webp =480x)
+![example](/api-reference/scale-to-fit.webp)
 
 ::: danger
 This component scales the available space, not the content directly. 

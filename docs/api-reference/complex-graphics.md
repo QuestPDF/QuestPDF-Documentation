@@ -39,7 +39,7 @@ It fills the available space, has rounded corners, and a gradient fill.
 });
 ```
 
-![example](/api-reference/complex-graphics-rounded-rectangle-with-gradient.webp =240x)
+![example](/api-reference/complex-graphics-rounded-rectangle-with-gradient.webp)
 
 
 ## Dotted Line
@@ -76,4 +76,4 @@ This example creates structure similar to a table of contents with dotted lines 
 });
 ```
 
-![example](/api-reference/complex-graphics-dotted-line.webp =500x)
+![example](/api-reference/complex-graphics-dotted-line.webp)

@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitepress'
-import imsize_plugin from 'markdown-it-imsize';
 import llmstxt from 'vitepress-plugin-llms'
+import imageSizePlugin from "./markdownit-imagesize-plugin";
 
 export default defineConfig({
     lang: 'en-US',
@@ -259,7 +259,7 @@ export default defineConfig({
             dark: 'dark-plus'
         },
         config: (md) => {
-            md.use(imsize_plugin)
+            md.use(imageSizePlugin)
         }
     },
 

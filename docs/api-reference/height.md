@@ -27,7 +27,7 @@ container
     .Background(Colors.Grey.Lighten1);
 ```
 
-![example](/api-reference/height.webp =300x)
+![example](/api-reference/height.webp)
 
 
 <br>

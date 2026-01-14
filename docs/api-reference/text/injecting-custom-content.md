@@ -24,7 +24,7 @@ The most common use-case is to inject images into the text.
 });
 ```
 
-![example](/api-reference/text-inject-image.webp =394x)
+![example](/api-reference/text-inject-image.webp)
 
 
 ## SVG
@@ -40,7 +40,7 @@ Another common use-case is to inject SVG icons into the text.
 });
 ```
 
-![example](/api-reference/text-inject-svg.webp =333x)
+![example](/api-reference/text-inject-svg.webp)
 
 
 ## Position
@@ -76,4 +76,4 @@ The injected element can be positioned in relation to the text baseline or font 
 });
 ```
 
-![example](/api-reference/text-inject-position.webp =387x)
+![example](/api-reference/text-inject-position.webp)

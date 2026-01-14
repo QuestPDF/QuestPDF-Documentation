@@ -41,7 +41,7 @@ Main slots (`Header`, `Content` and `Footer`) can be used to specify page conten
 Please be careful! When the combined heights of the header and footer elements is greater than the total page height, there is insufficient space for the content, in which case a layout exception is thrown.
 :::
 
-![example](/api-reference/page-example.png =298x)
+![example](/api-reference/page-example.png)
 
 ## Watermark slots
 
@@ -83,7 +83,7 @@ The watermark slots (background and foreground) can be used to add content behin
 });
 ```
 
-![example](/api-reference/page-background-foreground.png =300x)
+![example](/api-reference/page-background-foreground.png)
 
 Let's consider a more advanced example that adds additional visual elements on the side of actual content. This can be easily achieved with watermark slots:
 
@@ -131,7 +131,7 @@ document.Page(page =>
 
 That produces the following result:
 
-![example](/api-reference/page-slots-advanced.png =595x)
+![example](/api-reference/page-slots-advanced.png)
 
 ## Page settings
 
@@ -271,7 +271,7 @@ public class SampleReport : IDocument
 }
 ```
 
-![example](/patterns-and-practices/global-text-style.png =595x)
+![example](/patterns-and-practices/global-text-style.png)
 
 ## Global content direction (RTL)
 
@@ -347,4 +347,4 @@ document.Page(page =>
 });
 ```
 
-![example](/api-reference/page-content-direction-rtl.png =420x)
+![example](/api-reference/page-content-direction-rtl.png)

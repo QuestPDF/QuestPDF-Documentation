@@ -48,7 +48,7 @@ container
 ```
 
 Page 1:
-![example](/api-reference/decoration-0.webp =300x)
+![example](/api-reference/decoration-0.webp)
 
 Page 2:
-![example](/api-reference/decoration-1.webp =300x)
+![example](/api-reference/decoration-1.webp)

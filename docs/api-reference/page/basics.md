@@ -35,4 +35,4 @@ Document.Create(document =>
 })
 ```
 
-![example](/api-reference/page-simple.webp =396x)
+![example](/api-reference/page-simple.webp)

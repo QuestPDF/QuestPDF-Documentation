@@ -38,7 +38,7 @@ Below is a simple example that demonstrates how to create a table with a header 
 });
 ```
 
-![example](/api-reference/table-simple.webp =500x)
+![example](/api-reference/table-simple.webp)
 
 
 ## Columns Definition
@@ -78,7 +78,7 @@ QuestPDF provides two main column types:
 });
 ```
 
-![example](/api-reference/table-columns-definition.webp =500x)
+![example](/api-reference/table-columns-definition.webp)
 
 
 ## Manual cell placement
@@ -162,5 +162,5 @@ Here’s an example showcasing a confusion matrix layout where cells are placed 
 });
 ```
 
-![example](/api-reference/table-manual-cell-placement.webp =675x)
+![example](/api-reference/table-manual-cell-placement.webp)
 

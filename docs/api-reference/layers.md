@@ -51,4 +51,4 @@ A common use-case for this element is to add background content behind the main 
 });
 ```
 
-![example](/api-reference/layers.webp =450x)
+![example](/api-reference/layers.webp)

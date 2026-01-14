@@ -45,7 +45,7 @@ Opaque images are JPEG-encoded based on this setting, while images with an alpha
 });
 ```
 
-![example](/api-reference/image-compression.webp =400x)
+![example](/api-reference/image-compression.webp)
 
 
 ## Image DPI
@@ -81,7 +81,7 @@ If the input image has lower resolution that the one calculated from the DPI set
 });
 ```
 
-![example](/api-reference/image-dpi.webp =400x)
+![example](/api-reference/image-dpi.webp)
 
 
 ## Global settings

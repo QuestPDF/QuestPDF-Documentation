@@ -66,16 +66,16 @@ container
 
 #### `Without` Z-Index Element (Default Behavior)
 
-![example](/api-reference/zindex-zero.webp =650x)
+![example](/api-reference/zindex-zero.webp)
 
 <br>
 
 #### With Z-Index `1` Element (Correct Implementation)
 
-![example](/api-reference/zindex-positive.webp =650x)
+![example](/api-reference/zindex-positive.webp)
 
 <br>
 
 #### With Z-Index `-1` Element (Incorrect Implementation)
 
-![example](/api-reference/zindex-negative.webp =650x)
+![example](/api-reference/zindex-negative.webp)

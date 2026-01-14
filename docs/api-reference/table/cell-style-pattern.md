@@ -57,4 +57,4 @@ It allows for defining cell appearance, such as background color, padding, and t
 });
 ```
 
-![example](/api-reference/table-cell-style.webp =500x)
+![example](/api-reference/table-cell-style.webp)

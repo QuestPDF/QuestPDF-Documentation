@@ -18,7 +18,7 @@ container
     .Text("Important content");
 ```
 
-![example](/api-reference/shadow-simple.webp =290x)
+![example](/api-reference/shadow-simple.webp)
 
 
 ## Blur
@@ -52,7 +52,7 @@ Use with caution, especially in large documents or when rendering complex shadow
 });
 ```
 
-![example](/api-reference/shadow-blur.webp =500x)
+![example](/api-reference/shadow-blur.webp)
 
 
 ## Spread
@@ -81,7 +81,7 @@ Positive values cause the shadow to expand, negative values cause it to contract
 });
 ```
 
-![example](/api-reference/shadow-spread.webp =500x)
+![example](/api-reference/shadow-spread.webp)
 
 
 ## Offset X
@@ -110,7 +110,7 @@ Positive values move the shadow to the right, negative values move it to the lef
 });
 ```
 
-![example](/api-reference/shadow-offset-x.webp =500x)
+![example](/api-reference/shadow-offset-x.webp)
 
 
 ## Offset Y
@@ -139,7 +139,7 @@ Positive values move the shadow downward, negative values move it upward.
 });
 ```
 
-![example](/api-reference/shadow-offset-y.webp =500x)
+![example](/api-reference/shadow-offset-y.webp)
 
 
 ## Color
@@ -172,7 +172,7 @@ Gets or sets the color of the shadow.
 });
 ```
 
-![example](/api-reference/shadow-color.webp =500x)
+![example](/api-reference/shadow-color.webp)
 
 
 ## Without Blur (Fast)
@@ -213,4 +213,4 @@ This approach is faster and results in significantly smaller file sizes, making 
 });
 ```
 
-![example](/api-reference/shadow-no-blur.webp =350x)
+![example](/api-reference/shadow-no-blur.webp)

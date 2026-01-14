@@ -34,4 +34,4 @@ container.Column(column =>
 });
 ```
 
-![example](/patterns-and-practices/code-pattern-execution-order.webp =400x)
+![example](/patterns-and-practices/code-pattern-execution-order.webp)

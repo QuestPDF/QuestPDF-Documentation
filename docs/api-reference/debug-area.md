@@ -48,4 +48,4 @@ container
     });
 ```
 
-![example](/api-reference/debug-area.webp =375x)
+![example](/api-reference/debug-area.webp)

@@ -60,7 +60,7 @@ Placeholders.Percent();
 });
 ```
 
-![example](/patterns-and-practices/placeholders-text.webp =370x)
+![example](/patterns-and-practices/placeholders-text.webp)
 
 
 ## Colors
@@ -93,7 +93,7 @@ Placeholders.Color();
 });
 ```
 
-![example](/patterns-and-practices/placeholders-color-background.webp =320x)
+![example](/patterns-and-practices/placeholders-color-background.webp)
 
 
 #### Color example
@@ -112,7 +112,7 @@ Placeholders.Color();
 });
 ```
 
-![example](/patterns-and-practices/placeholders-color.webp =500x)
+![example](/patterns-and-practices/placeholders-color.webp)
 
 
 ## Image
@@ -146,4 +146,4 @@ Use these placeholders to simulate images in your layout, ensuring you can test 
 });
 ```
 
-![example](/patterns-and-practices/placeholders-image.webp =250x)
+![example](/patterns-and-practices/placeholders-image.webp)

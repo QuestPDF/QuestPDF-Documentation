@@ -17,7 +17,7 @@ container
     .Text("Sample text");
 ```
 
-![example](/api-reference/padding-simple.webp =250x)
+![example](/api-reference/padding-simple.webp)
 
 
 ## Negative padding
@@ -33,7 +33,7 @@ container
     .Text("Sample text with negative padding");
 ```
 
-![example](/api-reference/padding-negative.webp =250x)
+![example](/api-reference/padding-negative.webp)
 
 
 ## API

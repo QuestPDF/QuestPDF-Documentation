@@ -26,7 +26,7 @@ container
     .Text("Container with consistently rounded corners");
 ```
 
-![example](/api-reference/rounded-corners-consistent.webp =488x)
+![example](/api-reference/rounded-corners-consistent.webp)
 
 
 ## Various Corner Radius
@@ -45,7 +45,7 @@ container
     .Text("Container with rounded corners");
 ```
 
-![example](/api-reference/rounded-corners-various.webp =378x)
+![example](/api-reference/rounded-corners-various.webp)
 
 
 ## Image Example
@@ -58,7 +58,7 @@ container
     .Image("Resources/landscape.jpg");
 ```
 
-![example](/api-reference/rounded-corners-image.webp =450x)
+![example](/api-reference/rounded-corners-image.webp)
 
 
 ## Complex Example
@@ -112,4 +112,4 @@ container
     });
 ```
 
-![example](/api-reference/rounded-corners-complex.webp =550x)
+![example](/api-reference/rounded-corners-complex.webp)

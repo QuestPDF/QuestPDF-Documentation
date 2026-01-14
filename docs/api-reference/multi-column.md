@@ -48,7 +48,7 @@ container.MultiColumn(multiColumn =>
 });
 ```
 
-![example](/api-reference/multicolumn-example.webp =650x)
+![example](/api-reference/multicolumn-example.webp)
 
 
 ## Spacer
@@ -81,7 +81,7 @@ container.MultiColumn(multiColumn =>
 });
 ```
 
-![example](/api-reference/multicolumn-spacer.webp =450x)
+![example](/api-reference/multicolumn-spacer.webp)
 
 
 
@@ -113,11 +113,11 @@ container.MultiColumn(multiColumn =>
 
 The layout occupies the entire vertical space, often leaving the last column shorter or empty if there is less content to fill it.
 
-![example](/api-reference/multicolumn-balance-height-without.webp =396x)
+![example](/api-reference/multicolumn-balance-height-without.webp)
 
 
 #### BalanceHeight enabled
 
 The layout engine distributes elements so that each column ends up with approximately the same height.
 
-![example](/api-reference/multicolumn-balance-height-with.webp =396x)
+![example](/api-reference/multicolumn-balance-height-with.webp)

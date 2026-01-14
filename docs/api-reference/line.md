@@ -24,7 +24,7 @@ container
     });
 ```
 
-![example](/api-reference/line-vertical.webp =360x)
+![example](/api-reference/line-vertical.webp)
 
 
 ## Horizontal
@@ -46,7 +46,7 @@ container
     });
 ```
 
-![example](/api-reference/line-horizontal.webp =215x)
+![example](/api-reference/line-horizontal.webp)
 
 
 ## Thickness
@@ -68,7 +68,7 @@ container
     });
 ```
 
-![example](/api-reference/line-thickness.webp =250x)
+![example](/api-reference/line-thickness.webp)
 
 
 ## Solid Color
@@ -98,7 +98,7 @@ container
     });
 ```
 
-![example](/api-reference/line-color-solid.webp =250x)
+![example](/api-reference/line-color-solid.webp)
 
 
 ## Gradient
@@ -128,7 +128,7 @@ container
     });
 ```
 
-![example](/api-reference/line-color-gradient.webp =250x)
+![example](/api-reference/line-color-gradient.webp)
 
 
 ## Dash Pattern
@@ -164,7 +164,7 @@ container
     });
 ```
 
-![example](/api-reference/line-dash-pattern.webp =250x)
+![example](/api-reference/line-dash-pattern.webp)
 
 
 ## Complex Example
@@ -179,4 +179,4 @@ container
     .LineGradient([Colors.Red.Medium, Colors.Orange.Medium, Colors.Yellow.Medium]);
 ```
 
-![example](/api-reference/line-example.webp =350x)
+![example](/api-reference/line-example.webp)

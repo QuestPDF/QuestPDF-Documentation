@@ -41,4 +41,4 @@ container
     .Text("Test");
 ```
 
-![example](/api-reference/alignment.webp =300x)
+![example](/api-reference/alignment.webp)

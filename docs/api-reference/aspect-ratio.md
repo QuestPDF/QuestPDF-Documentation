@@ -46,4 +46,4 @@ container
     .Text("3:4 Content Area");
 ```
 
-![example](/api-reference/aspect-ratio.webp =300x)
+![example](/api-reference/aspect-ratio.webp)

@@ -56,4 +56,4 @@ It reduces repetitive code, enhances maintainability, and provides flexibility t
 });
 ```
 
-![example](/api-reference/text-style-inheritance.webp =600x)
+![example](/api-reference/text-style-inheritance.webp)

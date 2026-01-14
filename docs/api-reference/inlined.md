@@ -39,7 +39,7 @@ void RandomBlock(IContainer container)
 });
 ```
 
-![example](/api-reference/inlined.webp =450x)
+![example](/api-reference/inlined.webp)
 
 ## Spacing
 

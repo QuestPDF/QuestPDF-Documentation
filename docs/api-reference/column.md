@@ -28,7 +28,7 @@ container
     });
 ```
 
-![example](/api-reference/column-simple.webp =250x)
+![example](/api-reference/column-simple.webp)
 
 
 ## Spacing
@@ -49,7 +49,7 @@ container
     });
 ```
 
-![example](/api-reference/column-spacing.webp =250x)
+![example](/api-reference/column-spacing.webp)
 
 <br>
 
@@ -79,7 +79,7 @@ You can adjust the spacing between items individually by adding an empty item wi
 });
 ```
 
-![example](/api-reference/column-spacing-custom.webp =250x)
+![example](/api-reference/column-spacing-custom.webp)
 
 
 ## Uniform item width
@@ -117,8 +117,8 @@ To disable this behavior, use the `ShrinkHorizontal` API:
 
 #### Default behavior (consistent item width)
 
-![example](/api-reference/column-uniform-width-enabled.webp =400x)
+![example](/api-reference/column-uniform-width-enabled.webp)
 
 #### Effect with ShrinkVertical applied
 
-![example](/api-reference/column-uniform-width-disabled.webp =400x)
+![example](/api-reference/column-uniform-width-disabled.webp)

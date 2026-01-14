@@ -26,7 +26,7 @@ container.Column(column =>
 });
 ```
 
-![example](/api-reference/list-unordered.webp =350x)
+![example](/api-reference/list-unordered.webp)
 
 
 ## Ordered list
@@ -50,7 +50,7 @@ container.Column(column =>
 });
 ```
 
-![example](/api-reference/list-ordered.webp =600x)
+![example](/api-reference/list-ordered.webp)
 
 
 ## Nested lists
@@ -92,4 +92,4 @@ container.Column(column =>
 });
 ```
 
-![example](/api-reference/list-nested.webp =600x)
+![example](/api-reference/list-nested.webp)

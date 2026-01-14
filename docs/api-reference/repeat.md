@@ -47,12 +47,12 @@ container
 
 ### Without the Repeat element
 
-![example](/api-reference/repeat-without-0.webp =600x)
-![example](/api-reference/repeat-without-1.webp =600x)
+![example](/api-reference/repeat-without-0.webp)
+![example](/api-reference/repeat-without-1.webp)
 
 
 ### With the Repeat element
 
-![example](/api-reference/repeat-with-0.webp =600x)
-![example](/api-reference/repeat-with-1.webp =600x)
+![example](/api-reference/repeat-with-0.webp)
+![example](/api-reference/repeat-with-1.webp)
 

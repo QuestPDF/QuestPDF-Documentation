@@ -25,7 +25,7 @@ It's worth noting that different fonts may render text with different visual siz
 });
 ```
 
-![example](/api-reference/text-font-size.webp =409x)
+![example](/api-reference/text-font-size.webp)
 
 
 ## Font Family
@@ -49,7 +49,7 @@ Examples of font families include Arial, Times New Roman, and Calibri.
 });
 ```
 
-![example](/api-reference/text-font-family.webp =458x)
+![example](/api-reference/text-font-family.webp)
 
 
 ## Font Fallback
@@ -64,7 +64,7 @@ container
     .FontFamily("Lato", "Noto Sans Arabic");
 ```
 
-![example](/api-reference/text-font-fallback.webp =430x)
+![example](/api-reference/text-font-fallback.webp)
 
 It's also useful for displaying emojis, which are not universally supported by all fonts.
 
@@ -74,7 +74,7 @@ container
     .FontFamily("Lato", "Noto Emoji");
 ```
 
-![example](/api-reference/text-font-fallback-emoji.webp =459x)
+![example](/api-reference/text-font-fallback-emoji.webp)
 
 ## Font Color
 
@@ -95,7 +95,7 @@ It also influences the default color of text decorations, such as underlines.
 });
 ```
 
-![example](/api-reference/text-font-color.webp =563x)
+![example](/api-reference/text-font-color.webp)
 
 
 ## Background Color
@@ -113,7 +113,7 @@ This color fills the area behind the text or other elements, enhancing contrast 
 });
 ```
 
-![example](/api-reference/text-font-background.webp =490x)
+![example](/api-reference/text-font-background.webp)
 
 
 ## Font Weight
@@ -151,7 +151,7 @@ Please note that not all fonts support every weight. If the specified weight isn
 });
 ```
 
-![example](/api-reference/text-font-weight.webp =494x)
+![example](/api-reference/text-font-weight.webp)
 
 :::warning
 QuestPDF does not currently support fonts with variable weights.
@@ -173,7 +173,7 @@ Commonly used for emphasis or to distinguish specific words.
 });
 ```
 
-![example](/api-reference/text-font-italic.webp =490x)
+![example](/api-reference/text-font-italic.webp)
 
 
 ## Decorations
@@ -200,7 +200,7 @@ It is also possible to customize the decoration position:
 });
 ```
 
-![example](/api-reference/text-decoration-types.webp =468x)
+![example](/api-reference/text-decoration-types.webp)
 
 ### Styles
 
@@ -228,7 +228,7 @@ It is also possible to customize the decoration line style:
 });
 ```
 
-![example](/api-reference/text-decoration-styles.webp =455x)
+![example](/api-reference/text-decoration-styles.webp)
 
 ### Styling
 
@@ -250,7 +250,7 @@ However, these properties can be customized.
 });
 ```
 
-![example](/api-reference/text-decoration-advanced.webp =337x)
+![example](/api-reference/text-decoration-advanced.webp)
 
 
 ## Subscript
@@ -267,7 +267,7 @@ Commonly used for chemical formulas or mathematical notations
 });
 ```
 
-![example](/api-reference/text-subscript.webp =384x)
+![example](/api-reference/text-subscript.webp)
 
 
 ## Superscript
@@ -284,7 +284,7 @@ Typically used for exponents, footnotes, or ordinal indicators
 });
 ```
 
-![example](/api-reference/text-superscript.webp =504x)
+![example](/api-reference/text-superscript.webp)
 
 
 ## Line Height
@@ -313,7 +313,7 @@ The added space is proportional to the text size.
 });
 ```
 
-![example](/api-reference/text-line-height.webp =495x)
+![example](/api-reference/text-line-height.webp)
 
 
 ## Letter Spacing
@@ -343,7 +343,7 @@ The adjustment is proportional to the text size.
 });
 ```
 
-![example](/api-reference/text-letter-spacing.webp =485x)
+![example](/api-reference/text-letter-spacing.webp)
 
 
 ## Word Spacing
@@ -371,7 +371,7 @@ The adjustment is proportional to the text size.
 });
 ```
 
-![example](/api-reference/text-word-spacing.webp =491x)
+![example](/api-reference/text-word-spacing.webp)
 
 
 ## Font Features
@@ -424,4 +424,4 @@ Let's analyze the `StandardLigatures` font feature, which replaces specific pair
 });
 ```
 
-![example](/api-reference/text-font-features.webp =500x)
+![example](/api-reference/text-font-features.webp)

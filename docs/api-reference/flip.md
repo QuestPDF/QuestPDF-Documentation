@@ -32,4 +32,4 @@ container.Column(column =>
 });
 ```
 
-![example](/api-reference/flip.webp =350x)
+![example](/api-reference/flip.webp)

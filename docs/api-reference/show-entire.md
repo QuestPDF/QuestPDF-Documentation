@@ -54,12 +54,12 @@ container
 
 ### Without the ShowEntire element
 
-![example](/api-reference/show-entire-without-0.webp =500x)
-![example](/api-reference/show-entire-without-1.webp =500x)
+![example](/api-reference/show-entire-without-0.webp)
+![example](/api-reference/show-entire-without-1.webp)
 
 
 ### With the ShowEntire element
 
-![example](/api-reference/show-entire-with-0.webp =500x)
-![example](/api-reference/show-entire-with-1.webp =500x)
+![example](/api-reference/show-entire-with-0.webp)
+![example](/api-reference/show-entire-with-1.webp)
 ```

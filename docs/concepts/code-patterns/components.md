@@ -94,7 +94,7 @@ Document
     .GeneratePdf("report.pdf");
 ```
 
-![example](/patterns-and-practices/code-pattern-address-components.webp =295x)
+![example](/patterns-and-practices/code-pattern-address-components.webp)
 
 
 ## Complex example
@@ -205,4 +205,4 @@ IComponent BuildSampleSection()
 }
 ```
 
-![example](/patterns-and-practices/code-pattern-configurable-component.webp =600x)
+![example](/patterns-and-practices/code-pattern-configurable-component.webp)

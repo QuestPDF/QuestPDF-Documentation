@@ -43,7 +43,7 @@ Therefore, the resolution of an image is not used for determining its physical s
 });
 ```
 
-![example](/api-reference/image-example.webp =400x)
+![example](/api-reference/image-example.webp)
 
 
 ## Image scaling
@@ -122,7 +122,7 @@ By default, the image scales to fill the full width of its container while maint
 });
 ```
 
-![example](/api-reference/image-scaling.webp =250x)
+![example](/api-reference/image-scaling.webp)
 
 
 ## Limiting image size

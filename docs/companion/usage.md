@@ -7,8 +7,8 @@ First, it shows a preview of your document. But the real magic starts with the h
 It observes your code and updates the preview every time you change the implementation. 
 Get real-time results without the need of code recompilation. Save time and enjoy the task!
 
-![Application screenshot](/companion/application-light.png =1762x){.companion-screenshot .light-only}
-![Application screenshot](/companion/application-dark.png =1762x){.companion-screenshot .dark-only}
+![Application screenshot](/companion/application-light.png){.companion-screenshot .light-only}
+![Application screenshot](/companion/application-dark.png){.companion-screenshot .dark-only}
 
 :::info
 Read more about features availble in the Companion App in the [Features](/companion/features) section.
@@ -72,13 +72,13 @@ If you cannot update, please use the legacy [QuestPDF Previewer application](/do
 
 Start your application in the DEBUG mode with the 'Hot Reload on Save' flag enabled. On every file save, the document will be refreshed.
 
-![example](/companion/hot-reload-visual-studio.png =444x)
+![example](/companion/hot-reload-visual-studio.png)
 
 ### JetBrains Rider
 
 Start your application without debugger attached. To apply code changes, click on the `Apply changes` button displayed on the top bar, or use the `Alt+F10` shortcut.
 
-![example](/companion/hot-reload-jetbrains-rider.png =570x)
+![example](/companion/hot-reload-jetbrains-rider.png)
 
 ### Terminal
 

@@ -16,7 +16,7 @@ container
     });
 ```
 
-![example](/api-reference/border-simple.webp =450x)
+![example](/api-reference/border-simple.webp)
 
 
 ## Thickness
@@ -68,7 +68,7 @@ container.Border(1, Unit.Millimeters);
 });
 ```
 
-![example](/api-reference/border-thickness-consistent.webp =550x)
+![example](/api-reference/border-thickness-consistent.webp)
 
 
 ### Various thickness
@@ -83,7 +83,7 @@ container
     .Text("Sample text");
 ```
 
-![example](/api-reference/border-thickness-various.webp =203x)
+![example](/api-reference/border-thickness-various.webp)
 
 
 ## Solid Color
@@ -116,7 +116,7 @@ In the vast majority of cases, borders are applied with a solid color.
 });
 ```
 
-![example](/api-reference/border-color-solid.webp =450x)
+![example](/api-reference/border-color-solid.webp)
 
 
 ## Gradient
@@ -153,7 +153,7 @@ The first argument is the angle in degrees, and the second argument is an array 
 });
 ```
 
-![example](/api-reference/border-color-gradient.webp =268x)
+![example](/api-reference/border-color-gradient.webp)
 
 
 ## Alignment
@@ -200,7 +200,7 @@ However, if the border has rounded corners, the alignment is set to inside by de
 });
 ```
 
-![example](/api-reference/border-alignment.webp =725x)
+![example](/api-reference/border-alignment.webp)
 
 
 ## Examples
@@ -222,7 +222,7 @@ container
     .Text("Border with rounded corners"); 
 ```
 
-![example](/api-reference/border-rounded-corners-1.webp =352x)
+![example](/api-reference/border-rounded-corners-1.webp)
 
 
 ### Multiple borders
@@ -247,7 +247,7 @@ container
     .Text("Content");
 ```
 
-![example](/api-reference/border-multiple.webp =221x)
+![example](/api-reference/border-multiple.webp)
 
 
 ### Advanced style
@@ -272,4 +272,4 @@ container
     });
 ```
 
-![example](/api-reference/border-rounded-corners-2.webp =337x)
+![example](/api-reference/border-rounded-corners-2.webp)

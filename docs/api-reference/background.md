@@ -52,7 +52,7 @@ container
     });
 ```
 
-![example](/api-reference/background-solid.webp =470x)
+![example](/api-reference/background-solid.webp)
 
 
 ## Gradient
@@ -80,7 +80,7 @@ The first argument is the angle in degrees, and the second argument is an array 
 });
 ```
 
-![example](/api-reference/background-gradient.webp =350x)
+![example](/api-reference/background-gradient.webp)
 
 
 ## Rounded Corners
@@ -99,4 +99,4 @@ container
     .Text("Content with rounded corners");
 ```
 
-![example](/api-reference/background-rounded-corners.webp =364x)
+![example](/api-reference/background-rounded-corners.webp)

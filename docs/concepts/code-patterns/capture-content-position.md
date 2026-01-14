@@ -25,7 +25,7 @@ The following example demonstrates how to implement a demo of proofreading funct
 It highlights incorrect words in red with strikethrough formatting and adds corrected versions in green.
 Finally, it places an icon beside each correction for easy identification.
 
-![example](/patterns-and-practices/code-pattern-element-position-locator.webp =575x)
+![example](/patterns-and-practices/code-pattern-element-position-locator.webp)
 
 ### Capturing position
 

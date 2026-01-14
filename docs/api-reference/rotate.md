@@ -39,7 +39,7 @@ container.Row(row =>
 });
 ```
 
-![example](/api-reference/rotate.webp =500x)
+![example](/api-reference/rotate.webp)
 
 ## Free
 
@@ -79,4 +79,4 @@ container
     });
 ```
 
-![example](/api-reference/rotate-free.webp =525x)
+![example](/api-reference/rotate-free.webp)

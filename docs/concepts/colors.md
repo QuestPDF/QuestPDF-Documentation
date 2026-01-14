@@ -29,7 +29,7 @@ container
     .DecorationColor(0xFF0000);
 ```
 
-![example](/patterns-and-practices/colors.webp =175x)
+![example](/patterns-and-practices/colors.webp)
 
 ## Color definitions
 

@@ -46,7 +46,7 @@ The main slots are Header, Content, and Footer.
 });
 ```
 
-![example](/api-reference/page-main-slots.webp =396x)
+![example](/api-reference/page-main-slots.webp)
 
 
 ## Foreground Slot
@@ -76,7 +76,7 @@ document.Page(page =>
 });
 ```
 
-![example](/api-reference/page-foreground.webp =396x)
+![example](/api-reference/page-foreground.webp)
 
 ## Background Slot
 
@@ -117,4 +117,4 @@ document.Page(page =>
 });
 ```
 
-![example](/api-reference/page-background.webp =561x)
+![example](/api-reference/page-background.webp)

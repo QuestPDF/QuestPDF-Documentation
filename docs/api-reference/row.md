@@ -60,7 +60,7 @@ container
     });
 ```
 
-![example](/api-reference/row-simple.webp =375x)
+![example](/api-reference/row-simple.webp)
 
 
 ## Spacing
@@ -82,7 +82,7 @@ container
     });
 ```
 
-![example](/api-reference/row-spacing.webp =270x)
+![example](/api-reference/row-spacing.webp)
 
 <br>
 
@@ -112,7 +112,7 @@ You can adjust the spacing between items individually by adding an empty Constan
 });
 ```
 
-![example](/api-reference/row-spacing-custom.webp =250x)
+![example](/api-reference/row-spacing-custom.webp)
 
 
 ## Uniform item height
@@ -146,8 +146,8 @@ To disable this behavior, use the `ShrinkVertical` API:
 
 #### Default behavior (consistent item height)
 
-![example](/api-reference/row-uniform-height-disabled.webp =700x)
+![example](/api-reference/row-uniform-height-disabled.webp)
 
 #### Effect with ShrinkVertical applied
 
-![example](/api-reference/row-uniform-height-enabled.webp =700x)
+![example](/api-reference/row-uniform-height-enabled.webp)

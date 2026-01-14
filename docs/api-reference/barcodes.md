@@ -80,7 +80,7 @@ using ZXing.Rendering;
 });
 ```
 
-![example](/api-reference/barcode.webp =550x)
+![example](/api-reference/barcode.webp)
 
 
 ## QR Code
@@ -126,4 +126,4 @@ using ZXing.Rendering;
 });
 ```
 
-![example](/api-reference/qrcode.webp =550x)
+![example](/api-reference/qrcode.webp)

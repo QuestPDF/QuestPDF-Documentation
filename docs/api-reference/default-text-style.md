@@ -44,4 +44,4 @@ container
 
 Please note that this element extends existing styles with additional configuration. Those styles can be extended/overridden in later stages of the code.
 
-![example](/api-reference/default-text-style.webp =400x)
+![example](/api-reference/default-text-style.webp)

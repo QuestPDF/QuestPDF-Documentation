@@ -78,13 +78,13 @@ document.ShowInPreviewer(12345);
 
 Start your application in the DEBUG mode with the 'Hot Reload on Save' flag enabled. On every file save, the document will be refreshed.
 
-![example](/previewer/visual-studio.png =444x)
+![example](/previewer/visual-studio.png)
 
 ### JetBrains Rider
 
 Start your application without debugger attached. To apply code changes, click on the "Apply changes" button displayed on the top bar, or use the `Alt+F10` shortcut.
 
-![example](/previewer/jetbrains-rider.png =570x)
+![example](/previewer/jetbrains-rider.png)
 
 ### Terminal
 

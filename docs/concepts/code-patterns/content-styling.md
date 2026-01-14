@@ -48,4 +48,4 @@ container.Table(table =>
 });
 ```
 
-![example](/patterns-and-practices/code-pattern-content-styling.webp =650x)
+![example](/patterns-and-practices/code-pattern-content-styling.webp)

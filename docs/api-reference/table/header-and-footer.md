@@ -86,8 +86,8 @@ container
 
 #### Page 1:
 
-![example](/api-reference/table-header-and-footer-0.webp =600x)
+![example](/api-reference/table-header-and-footer-0.webp)
 
 #### Page 2:
 
-![example](/api-reference/table-header-and-footer-1.webp =600x)
+![example](/api-reference/table-header-and-footer-1.webp)

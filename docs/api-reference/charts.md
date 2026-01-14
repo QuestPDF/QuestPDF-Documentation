@@ -72,7 +72,7 @@ using Colors = QuestPDF.Helpers.Colors;
 });
 ```
 
-![example](/api-reference/chart-pie.webp =350x)
+![example](/api-reference/chart-pie.webp)
 
 
 ## Bar Chart
@@ -143,4 +143,4 @@ using Colors = QuestPDF.Helpers.Colors;
 });
 ```
 
-![example](/api-reference/chart-bars.webp =650x)
+![example](/api-reference/chart-bars.webp)

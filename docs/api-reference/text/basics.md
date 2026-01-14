@@ -9,7 +9,7 @@ container
     .Text("Hello, World!");
 ```
 
-![example](/api-reference/text-basic.webp =153x)
+![example](/api-reference/text-basic.webp)
 
 ## Customization
 
@@ -42,7 +42,7 @@ The `Text` method returns a descriptor that allows further customization of the 
 });
 ```
 
-![example](/api-reference/text-basic-descriptor.webp =289x)
+![example](/api-reference/text-basic-descriptor.webp)
 
 
 ## Rich text formatting
@@ -65,7 +65,7 @@ container
     });
 ```
 
-![example](/api-reference/text-rich.webp =455x)
+![example](/api-reference/text-rich.webp)
 
 
 ## Typography pattern

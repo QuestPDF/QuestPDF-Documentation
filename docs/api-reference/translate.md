@@ -22,4 +22,4 @@ container
     .FontSize(25);
 ```
 
-![example](/api-reference/translate.webp =367x)
+![example](/api-reference/translate.webp)

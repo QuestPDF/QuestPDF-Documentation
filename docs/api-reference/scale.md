@@ -55,4 +55,4 @@ container
     });
 ```
 
-![example](/api-reference/scale.webp =350x)
+![example](/api-reference/scale.webp)

@@ -65,4 +65,4 @@ container
     });
 ```
 
-![example](/patterns-and-practices/code-pattern-extension-methods.webp =600x)
+![example](/patterns-and-practices/code-pattern-extension-methods.webp)

@@ -32,7 +32,7 @@ Document.Create(document =>
 });
 ```
 
-![example](/api-reference/text-page-number.webp =420x)
+![example](/api-reference/text-page-number.webp)
 
 
 ## Section related

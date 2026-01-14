@@ -41,7 +41,7 @@ container.Column(column =>
 });
 ```
 
-![example](/api-reference/image-svg.webp =250x)
+![example](/api-reference/image-svg.webp)
 
 
 ## Preloading

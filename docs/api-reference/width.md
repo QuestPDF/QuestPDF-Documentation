@@ -38,7 +38,7 @@ container
     });
 ```
 
-![example](/api-reference/width.webp =300x)
+![example](/api-reference/width.webp)
 
 
 <br>

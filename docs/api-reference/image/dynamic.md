@@ -49,4 +49,4 @@ byte[]? GenerateNationalFlagOfPoland(GenerateDynamicImageDelegatePayload context
 }
 ```
 
-![example](/api-reference/image-dynamic.webp =350x)
+![example](/api-reference/image-dynamic.webp)

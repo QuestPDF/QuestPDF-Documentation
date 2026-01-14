@@ -75,7 +75,7 @@ Document
     .GeneratePdf("map.pdf");
 ```
 
-![example](/api-reference/map.webp =550x)
+![example](/api-reference/map.webp)
 
 ::: warning
 Always fetch the map before starting PDF generation. 

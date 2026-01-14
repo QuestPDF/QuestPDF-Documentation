@@ -30,4 +30,4 @@ container
     });
 ```
 
-![example](/api-reference/unconstrained.webp =400x)
+![example](/api-reference/unconstrained.webp)

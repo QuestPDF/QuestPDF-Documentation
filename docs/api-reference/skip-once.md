@@ -53,5 +53,5 @@ container
     });
 ```
 
-![example](/api-reference/skip-once-0.webp =500x)
-![example](/api-reference/skip-once-1.webp =500x)
+![example](/api-reference/skip-once-0.webp)
+![example](/api-reference/skip-once-1.webp)

@@ -60,5 +60,5 @@ container
     });
 ```
 
-![example](/api-reference/show-once-0.webp =350x)
-![example](/api-reference/show-once-1.webp =350x)
+![example](/api-reference/show-once-0.webp)
+![example](/api-reference/show-once-1.webp)

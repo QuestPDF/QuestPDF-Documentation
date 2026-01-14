@@ -62,7 +62,7 @@ Example:
 });
 ```
 
-![example](/api-reference/text-paragraph-alignment.webp =400x)
+![example](/api-reference/text-paragraph-alignment.webp)
 
 
 ## Default Text Style
@@ -80,7 +80,7 @@ Applies a consistent style for the whole content within the Text element.
 });
 ```
 
-![example](/api-reference/text-paragraph-default-style.webp =358x)
+![example](/api-reference/text-paragraph-default-style.webp)
 
 
 ## Paragraph Spacing
@@ -103,7 +103,7 @@ container
     });
 ```
 
-![example](/api-reference/text-paragraph-spacing.webp =498x)
+![example](/api-reference/text-paragraph-spacing.webp)
 
 
 ## First Line Indentation
@@ -126,7 +126,7 @@ container
     });
 ```
 
-![example](/api-reference/text-paragraph-first-line-indentation.webp =497x)
+![example](/api-reference/text-paragraph-first-line-indentation.webp)
 
 
 ## Clamp Line With Ellipsis
@@ -163,7 +163,7 @@ container
     });
 ```
 
-![example](/api-reference/text-paragraph-clamp-lines.webp =599x)
+![example](/api-reference/text-paragraph-clamp-lines.webp)
 
 It is also possible to customize the ellipsis:
 
@@ -173,4 +173,4 @@ container
     .ClampLines(3, " [...]");
 ```
 
-![example](/api-reference/text-paragraph-clamp-lines-custom-ellipsis.webp =574x)
+![example](/api-reference/text-paragraph-clamp-lines-custom-ellipsis.webp)

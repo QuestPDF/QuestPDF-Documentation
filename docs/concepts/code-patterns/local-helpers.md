@@ -29,4 +29,4 @@ container.Column(column =>
 });
 ```
 
-![example](/patterns-and-practices/code-pattern-local-helpers.webp =355x)
+![example](/patterns-and-practices/code-pattern-local-helpers.webp)

@@ -46,4 +46,4 @@ Document
     .GeneratePdf("placeholder.pdf");
 ```
 
-![example](/api-reference/placeholder-element.webp =420x)
+![example](/api-reference/placeholder-element.webp)

@@ -67,4 +67,4 @@ This example demonstrates how to create complex structures by overlapping multip
 });
 ```
 
-![example](/api-reference/table-overlapping-cells.webp =700x)
+![example](/api-reference/table-overlapping-cells.webp)

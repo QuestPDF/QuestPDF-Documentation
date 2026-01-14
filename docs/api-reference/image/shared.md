@@ -36,7 +36,7 @@ Below is an example where the image is loaded and processed for each item:
 });
 ```
 
-![example](/api-reference/image-shared.png =350x)
+![example](/api-reference/image-shared.png)
 
 #### Solution: shared image resources
 

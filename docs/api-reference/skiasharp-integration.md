@@ -162,7 +162,7 @@ Document.Create(document =>
 .GeneratePdf("clock.pdf");
 ```
 
-![example](/api-reference/skiasharp-integration-svg.webp =350x)
+![example](/api-reference/skiasharp-integration-svg.webp)
 
 
 ## Rasterization
@@ -215,4 +215,4 @@ Document.Create(document =>
 .GeneratePdf("rasterized-effect.pdf");
 ```
 
-![example](/api-reference/skiasharp-integration-rasterized.webp =500x)
+![example](/api-reference/skiasharp-integration-rasterized.webp)
