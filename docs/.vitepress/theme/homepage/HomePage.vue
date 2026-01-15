@@ -74,6 +74,10 @@ import HomePageFeatures from "./HomePageFeatures.vue";
   --vp-input-border-color: var(--vp-c-text-3);
 }
 
+.VPNavBar.top #local-search {
+  display: none !important;
+}
+
 html:not(.dark):has(.home-page) .VPNavBar.home.top {
   .VPNavBarMenuLink *,
   .VPNavBarMenuGroup span.text {

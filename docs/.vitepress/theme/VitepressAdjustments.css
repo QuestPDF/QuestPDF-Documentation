@@ -167,11 +167,3 @@ html:not(.dark) .dark-only {
     height: 16px;
     border-radius: 8px;
 }
-
-.VPNavBar.top .DocSearch-Button {
-    display: none !important;
-}
-
-.DocSearch-Button {
-    background-color: var(--vp-c-bg-alt) !important;
-}

@@ -24,14 +24,9 @@ export default defineConfig({
     themeConfig: {
         logo: '/logo.webp',
         search: {
-            provider: 'algolia',
+            provider: 'local',
             options: {
-                appId: '5E5298MYDN',
-                apiKey: 'f5935a5a2217e1314f710853d01ac857',
-                indexName: 'questpdf_documentation',
-                askAi: {
-                    assistantId: 'JqeuNyFi2uKG'
-                }
+                detailedView: true
             }
         },
         nav: [

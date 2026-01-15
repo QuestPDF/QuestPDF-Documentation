@@ -9,7 +9,7 @@
     "@types/node": "^22.19.6",
     "image-size": "^2.0.2",
     "sass": "^1.93.3",
-    "vitepress": "2.0.0-alpha.10",
+    "vitepress": "1.6.4",
     "vitepress-plugin-llms": "^1.10.0",
     "vue": "3.5.26"
   },
