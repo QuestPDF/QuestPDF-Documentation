@@ -2,6 +2,7 @@
 layout: page
 sidebar: false
 aside: false
+title: "License and Pricing"
 ---
 
 <script setup>
