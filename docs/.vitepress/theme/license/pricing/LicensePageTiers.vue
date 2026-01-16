@@ -14,7 +14,7 @@
 
           <div v-if="license.price">
             <span class="price-value">${{ license.price }}</span>
-            <span class="price-per">per team/year + tax</span>
+            <span v-if="license.pricePer" class="price-per">per {{ license.pricePer }}</span>
           </div>
 
           <div v-else>
@@ -54,6 +54,7 @@ interface License {
   description: string;
 
   price: number;
+  pricePer: string | null,
   paddlePriceId: string;
 
   details: string[];
@@ -63,6 +64,7 @@ const CommunityLicense: License = {
   name: "community",
   description: "Ideal for startups, open-source, and individual developers building the next big thing",
   price: null,
+  pricePer: null,
   paddlePriceId: null,
   details: [
     "All features available",
@@ -76,6 +78,7 @@ const ProfessionalLicense: License = {
   name: "professional",
   description: "Compliance and stability for established small businesses and agencies",
   price: 999,
+  pricePer: "team/year + tax",
   paddlePriceId: paddle.professionalLicensePriceId,
   details: [
     "Full commercial usage rights",
@@ -89,6 +92,7 @@ const EnterpriseLicense: License = {
   name: "enterprise",
   description: "Maximum flexibility and priority support for large teams and mission-critical systems",
   price: 2999,
+  pricePer: "org/year + tax",
   paddlePriceId: paddle.enterpriseLicensePriceId,
   details: [
     "Unlimited developers and server deployments",
