@@ -5,9 +5,7 @@
     <div class="license-tiers">
       <section class="license-tier card" :class="license.name" v-for="license of licenses">
 
-        <div class="popular">
-          POPULAR
-        </div>
+        <div class="popular" />
 
         <header style="display: flex; flex-direction: column; align-items: start;">
           <div class="tier-name">{{ license.name }}</div>
@@ -62,43 +60,43 @@ interface License {
 
 const CommunityLicense: License = {
   name: "community",
-  description: "Ideal for startups, open-source, and individual developers building the next big thing",
+  description: "Ideal for individuals, open-source projects and early-stage startups",
   price: null,
   pricePer: null,
   paddlePriceId: null,
   details: [
-    "All features available",
+    "Full feature set access",
     "For individuals and non-profits",
     "For open-source projects",
-    "Commercial usage allowed for businesses with less than $1M USD annual gross revenue"
+    "Commercial usage allowed for companies under $1M annual gross revenue"
   ]
 };
 
 const ProfessionalLicense: License = {
   name: "professional",
-  description: "Compliance and stability for established small businesses and agencies",
+  description: "Essential commercial license for teams up to 10 developers",
   price: 999,
   pricePer: "team/year",
   paddlePriceId: paddle.professionalLicensePriceId,
   details: [
     "Full commercial usage rights",
     "Covers up to 10 developers",
-    "Includes 1 year of updates and maintenance",
-    "Funds ongoing development"
+    "Perpetual license with 1 year of updates and maintenance",
+    "Unlimited server and cloud deployments"
   ]
 };
 
 const EnterpriseLicense: License = {
   name: "enterprise",
-  description: "Maximum flexibility and priority support for large teams and mission-critical systems",
+  description: "Audit-proof, frictionless licensing for growing organizations",
   price: 2999,
   pricePer: "org/year",
   paddlePriceId: paddle.enterpriseLicensePriceId,
   details: [
-    "Unlimited developers and server deployments",
-    "Dedicated priority e-mail support",
-    "Frictionless company-wide licensing",
-    "Perpetual license with 1 year of updates and maintenance"
+    "Perpetual license with 1 year of updates and maintenance",
+    "Single license covers your entire organization",
+    "Unlimited projects, developers and server deployments",
+    "Dedicated priority e-mail support with next business day response"
   ]
 };
 
@@ -110,7 +108,7 @@ const licenses = [
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
 .license-tiers {
   margin-top: 64px;
@@ -134,19 +132,44 @@ html.dark {
   }
 }
 
+.license-tier.community .fa-square-check {
+  --fa-primary-color: #212121;
+  --fa-secondary-color: #212121;
+}
+
+.license-tier.enterprise .fa-square-check {
+  --fa-primary-color: transparent;
+  --fa-secondary-color: #444;
+  --fa-secondary-opacity: 1.0;
+}
+
+html.dark {
+  .license-tier.community .fa-square-check {
+    --fa-primary-color: #DDD;
+    --fa-secondary-color: #888;
+  }
+
+  .license-tier.enterprise .fa-square-check {
+    --fa-primary-color: #444;
+    --fa-secondary-color: white;
+  }
+}
+
 
 /* Popular highlight */
 
-.license-tier.professional {
-  border: 1px solid #2196F3;
-  filter: drop-shadow(0 16px 16px #2196F322) !important;
+.license-tier.enterprise {
+  border: 1px solid #888;
+  filter: drop-shadow(0 16px 16px #8882) !important;
 }
 
-.license-tier:not(.professional) .popular {
+.license-tier:not(.enterprise) .popular {
   display: none;
 }
 
-.license-tier.professional .popular {
+.license-tier.enterprise .popular:before {
+  content: 'RECOMMENDED';
+
   position: absolute;
   top: 0;
   left: 0;
@@ -158,15 +181,19 @@ html.dark {
   padding: 4px 12px;
   border-radius: 128px;
   background-color: var(--vp-c-bg);
-  border: 1px solid #2196F3;
-  color: #2196F3;
+  border: 1px solid #888;
+  color: #444;
   font-weight: 500;
   font-size: 0.875rem;
   letter-spacing: 1px;
 }
 
-.license-tier.professional {
+.license-tier.enterprise {
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+html.dark .license-tier.enterprise .popular:before {
+  color: #DDD;
 }
 
 
@@ -282,19 +309,13 @@ html.dark {
 }
 
 .license-tier.enterprise .action {
-  background-color: #F5F5F5;
-  color: #212121;
-  border: 1px solid #212121;
+  background-color: #212121;
+  color: white;
 }
-
 
 .license-tier.professional .action:hover {
   background-color: #42A5F5;
   color: white;
-}
-
-.license-tier.enterprise .action:hover {
-  background-color: white;
 }
 
 html.dark {

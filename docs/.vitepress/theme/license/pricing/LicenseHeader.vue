@@ -1,10 +1,10 @@
 <template>
   <header class="section-header">
-    <h1>Transparent Licensing, Sustainable Pricing</h1>
+    <h1>Perpetual Licensing</h1>
 
     <p class="sub-header">
-      QuestPDF empowers innovation with a generous free tier for startups and open-source projects.
-      For established businesses, our commercial licenses ensure legal compliance, priority support, and long-term stability.
+      Generous free tier helping individuals, startups and open-source community.
+      Commercial licenses ensuring compliance, support, and long-term stability.
     </p>
   </header>
 </template>
@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 760px;
+  max-width: 710px;
 }
 
 @media screen and (max-width: 450px) {
