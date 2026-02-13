@@ -160,7 +160,7 @@ html.dark {
 
 .license-tier.enterprise {
   border: 1px solid #888;
-  filter: drop-shadow(0 16px 16px #8882) !important;
+  box-shadow: 0 8px 16px #8883 !important;
 }
 
 .license-tier:not(.enterprise) .popular {

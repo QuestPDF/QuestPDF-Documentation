@@ -32,7 +32,7 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   border: 1px solid #8882;
   background-color: var(--vp-c-bg);
   border-radius: 16px;
