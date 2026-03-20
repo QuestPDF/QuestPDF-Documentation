@@ -24,8 +24,8 @@ using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 
-// set your license here:
-// QuestPDF.Settings.License = LicenseType.Community;
+// TODO: set your license here:
+// QuestPDF.Settings.License = LicenseType.Evaluation;
 
 Document.Create(container =>
 {

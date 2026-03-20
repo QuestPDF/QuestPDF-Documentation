@@ -174,6 +174,27 @@ public class InvoiceDocument : IDocument
 }
 ```
 
+Then, use the following code to generate the document:
+
+```c#{10-12}
+using System.IO;
+using QuestPDF.Drawing;
+using QuestPDF.Fluent;
+using QuestPDF.Infrastructure;
+
+static void Main(string[] args)
+{
+    // TODO: set your license here:
+    // QuestPDF.Settings.License = LicenseType.Evaluation;
+
+    var model = InvoiceDocumentDataSource.GetInvoiceDetails();
+    var document = new InvoiceDocument(model);
+    document.GeneratePdfAndShow();
+    
+    // document.GeneratePdf("invoice.pdf");
+}
+```
+
 This initial scaffolding sets up basic sections. You’ll refine them in the following steps.
 
 ![example](/getting-started/step-scaffolding.png)
@@ -449,24 +470,13 @@ public class InvoiceDocument : IDocument
 ![example](/getting-started/step-final.png)
 
 
-## Generating document
+## License
 
-Use the following code to generate the document:
+For learning and evaluation, you can use the free QuestPDF Evaluation license.
+More details can be found on the [QuestPDF License and Pricing page](/license/).
 
-```c#{10-12}
-using System.IO;
-using QuestPDF.Drawing;
-using QuestPDF.Fluent;
-using QuestPDF.Infrastructure;
-
-static void Main(string[] args)
-{
-    var model = InvoiceDocumentDataSource.GetInvoiceDetails();
-    var document = new InvoiceDocument(model);
-    document.GeneratePdfAndShow();
-    
-    // document.GeneratePdf("invoice.pdf");
-}
+```c#
+QuestPDF.Settings.License = LicenseType.Evaluation;
 ```
 
 ::: warning SUSTAINABLE AND FAIR LICENSE
@@ -475,9 +485,4 @@ By offering free access to most users and premium licenses for larger organizati
 The library is free to use for any individual or business with less than 1 million USD annual gross revenue, or operates as a non-profit organization, or is a FOSS project.
 :::
 
-::: tip
-For learning and evaluation, you can use the free QuestPDF Community license.
-
-More details can be found on the [QuestPDF License and Pricing page](/license/).
-:::
 
