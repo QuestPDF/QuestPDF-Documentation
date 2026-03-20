@@ -21,10 +21,10 @@ The Companion App is available for download on Windows, MacOS, and Linux.
 
 | Operating System                   | Download link                                                                                                                  |
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|
-| Windows                            | [Download](https://github.com/QuestPDF/QuestPDF.Companion/releases/download/2026.2.1/questpdf_companion-2026.2.1-windows.msix) |
-| MacOS (64-bit Intel and Apple ARM) | [Download](https://github.com/QuestPDF/QuestPDF.Companion/releases/download/2026.2.1/QuestPDF.Companion.2026.2.1.dmg)          |
-| Linux Debian                       | [Download](https://github.com/QuestPDF/QuestPDF.Companion/releases/download/2026.2.1/questpdf_companion-2026.2.1-linux.deb)    |
-| Linux Fedora                       | [Download](https://github.com/QuestPDF/QuestPDF.Companion/releases/download/2026.2.1/questpdf_companion-2026.2.1-linux.rpm)    |
+| Windows                            | [Download](https://github.com/QuestPDF/QuestPDF.Companion/releases/download/2026.2.2/questpdf_companion-2026.2.2-windows.msix) |
+| MacOS (64-bit Intel and Apple ARM) | [Download](https://github.com/QuestPDF/QuestPDF.Companion/releases/download/2026.2.2/QuestPDF.Companion.2026.2.2.dmg)          |
+| Linux Debian                       | [Download](https://github.com/QuestPDF/QuestPDF.Companion/releases/download/2026.2.2/questpdf_companion-2026.2.2-linux.deb)    |
+| Linux Fedora                       | [Download](https://github.com/QuestPDF/QuestPDF.Companion/releases/download/2026.2.2/questpdf_companion-2026.2.2-linux.rpm)    |
 
 :::info
 To access older versions of the Companion App, visit the [Download](/companion/download) section.
