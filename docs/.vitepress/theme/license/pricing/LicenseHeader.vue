@@ -2,10 +2,10 @@
   <header class="section-header">
     <h1>Perpetual Licensing</h1>
 
-    <p class="sub-header">
-      Generous free tier helping individuals, startups and open-source community.
-      Commercial licenses ensuring compliance, support, and long-term stability.
-    </p>
+    <div class="license-description">
+      <i class="fa-duotone fa-file-certificate license-icon"></i>
+      A commercial license is required only for companies with more than 1M USD annual gross revenue
+    </div>
   </header>
 </template>
 
@@ -19,7 +19,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 710px;
 }
 
 @media screen and (max-width: 450px) {
@@ -32,6 +31,30 @@
   h1 {
     font-size: 1.75rem;
   }
+}
+
+.license-icon {
+  font-size: 48px;
+  color: #67B84D;
+}
+
+.license-description {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 24px;
+
+  border-radius: 12px;
+  padding: 24px;
+  color: #1B5E20;
+  background-color: #67B84D33;
+
+  max-width: 525px;
+  place-self: center;
+  text-align: left;
+}
+
+html.dark .license-description {
+  color: #A5D6A7;
 }
 
 </style>

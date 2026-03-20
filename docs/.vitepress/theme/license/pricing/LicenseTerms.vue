@@ -8,8 +8,8 @@ const terms = [
   },
   {
     icon: "fa-duotone fa-rotate",
-    title: "Flexible Maintenance",
-    description: "After the first year, an optional renewal provides continued access to the latest updates. You can cancel the recurring invoice at any time, for any reason, at no cost."
+    title: "Flexible Annual Renewal",
+    description: "After the first year, updates and support renew annually. You can cancel anytime for future billing, and your license remains valid forever for the last version you received."
   },
   {
     icon: "fa-duotone fa-rocket",

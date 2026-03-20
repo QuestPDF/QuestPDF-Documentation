@@ -5,21 +5,21 @@
     <div class="license-tiers">
       <section class="license-tier card" :class="license.name" v-for="license of licenses">
 
-        <div class="popular" />
+        <div class="tag" />
 
         <header style="display: flex; flex-direction: column; align-items: start;">
           <div class="tier-name">{{ license.name }}</div>
 
           <div v-if="license.price">
             <span class="price-value">${{ license.price }}</span>
-            <span v-if="license.pricePer" class="price-per">per {{ license.pricePer }} + tax</span>
+            <span v-if="license.pricePer" class="price-per">+ local tax</span>
           </div>
 
           <div v-else>
-            <p class="price-value">Free forever</p>
+            <p class="price-value price-free">Free forever</p>
           </div>
 
-          <div>{{ license.description }}</div>
+          <div v-html="license.description " />
         </header>
 
         <hr>
@@ -33,8 +33,14 @@
 
         <div style="flex-grow: 1"></div>
 
-        <a v-if="license.price" class="action" @click="paddle.startCheckout(license.paddlePriceId)">Purchase License</a>
-        <a v-else class="action" href="/quick-start.html">Start Creating</a>
+        <a v-if="license.price" class="action" @click="paddle.startCheckout(license.paddlePriceId)">
+          Purchase License
+        </a>
+        <a v-else class="action" href="/quick-start.html">Get Started</a>
+
+        <p v-if="license.price" class="renewal-info">
+          Updates renew annually<br> License never expires
+        </p>
       </section>
     </div>
   </article>
@@ -60,43 +66,47 @@ interface License {
 
 const CommunityLicense: License = {
   name: "community",
-  description: "Ideal for individuals, open-source projects and early-stage startups",
+  description: "For individuals, open-source projects, non-profits, and companies <b>under</b> 1M&nbsp;USD annual gross revenue",
   price: null,
   pricePer: null,
   paddlePriceId: null,
   details: [
-    "Full feature set access",
-    "For individuals and non-profits",
-    "For open-source projects",
-    "Commercial usage allowed for companies under $1M annual gross revenue"
+    "Full feature set",
+    "Allows for commercial usage",
+    "MIT license terms",
+    "No registration or license key",
+    "No watermarks or limits",
+    "Community support via GitHub"
   ]
 };
 
 const ProfessionalLicense: License = {
   name: "professional",
-  description: "Essential commercial license for teams up to 10 developers",
+  description: "Required commercial license for teams with up to 10 developers working on QuestPDF-dependent projects",
   price: 999,
-  pricePer: "team/year",
+  pricePer: "team",
   paddlePriceId: paddle.professionalLicensePriceId,
   details: [
-    "Full commercial usage rights",
-    "Covers up to 10 developers",
-    "Perpetual license with 1 year of updates and maintenance",
-    "Unlimited server and cloud deployments"
+    "Perpetual license for entire team",
+    "Includes 1 year of feature updates and security patches",
+    "Unlimited projects, servers, and deployments",
+    "Direct e-mail support",
+    "30-day money-back guarantee",
   ]
 };
 
 const EnterpriseLicense: License = {
   name: "enterprise",
-  description: "Audit-proof, frictionless licensing for growing organizations",
+  description: "Organization-wide commercial license with no developer counting, priority support, and full future-proof coverage",
   price: 2999,
-  pricePer: "org/year",
+  pricePer: "org",
   paddlePriceId: paddle.enterpriseLicensePriceId,
   details: [
-    "Perpetual license with 1 year of updates and maintenance",
-    "Single license covers your entire organization",
-    "Unlimited projects, developers and server deployments",
-    "Dedicated priority e-mail support with next business day response"
+    "Perpetual with 1 year of updates",
+    "Covers every developer and project in your organization",
+    "Premium e-mail support with next business day response",
+    "30-day money-back guarantee",
+    "Supports vendor onboarding and procurement workflows"
   ]
 };
 
@@ -115,7 +125,7 @@ const licenses = [
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-  grid-gap: 48px;
+  grid-gap: 36px;
 }
 
 .license-tier {
@@ -124,12 +134,6 @@ const licenses = [
   flex-direction: column;
   align-items: flex-start;
   height: 100%;
-}
-
-html.dark {
-  .license-tier.professional {
-    background-color: #1c1c22;
-  }
 }
 
 .license-tier.community .fa-square-check {
@@ -156,18 +160,18 @@ html.dark {
 }
 
 
-/* Popular highlight */
+/* Tag highlight */
 
 .license-tier.enterprise {
   border: 1px solid #888;
   box-shadow: 0 8px 16px #8883 !important;
 }
 
-.license-tier:not(.enterprise) .popular {
+.license-tier:not(.enterprise) .tag {
   display: none;
 }
 
-.license-tier.enterprise .popular:before {
+.license-tier.enterprise .tag:before {
   content: 'RECOMMENDED';
 
   position: absolute;
@@ -192,7 +196,7 @@ html.dark {
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
-html.dark .license-tier.enterprise .popular:before {
+html.dark .license-tier.enterprise .tag:before {
   color: #DDD;
 }
 
@@ -267,7 +271,10 @@ html.dark {
 
   color: var(--vp-c-text-1) !important;
   font-weight: 400;
-  margin-left: 8px;
+}
+
+.license-tier .price-free {
+  opacity: 0.9;
 }
 
 
@@ -297,10 +304,9 @@ html.dark {
 
 /* Tier action */
 
-
 .license-tier a.action {
   align-self: end;
-  margin-top: 24px;
+  margin-top: 32px;
 }
 
 .license-tier.professional .action {
@@ -327,6 +333,14 @@ html.dark {
   .license-tier.enterprise .action:hover {
     background-color: white;
   }
+}
+
+.license-tier .renewal-info {
+  font-size: 0.875em;
+  place-self: end;
+  text-align: end;
+  line-height: 1rem;
+  margin-top: 8px;
 }
 
 </style>
