@@ -69,21 +69,37 @@ import HomePageCodeContainer from "./HomePageCodeContainer.vue";
 h1 {
   font-size: 3.5rem !important;
   line-height: 4rem !important;
-  font-weight: 800 !important;
+  font-weight: 700 !important;
+  max-width: 500px;
+  word-spacing: 4px;
+}
+
+h1 .highlight-foreground {
+  color: #298dff;
+}
+
+html.dark .highlight-foreground {
+  color: #32c6ff;
 }
 
 .tagline {
-  max-width: 650px;
+  max-width: 600px;
   font-size: 1.5rem !important;
-  line-height: 2.5rem !important;
+  line-height: 2.25rem !important;
   font-weight: 400;
-  color: var(--vp-c-text-1) !important;
+  word-spacing: 2px;
+  color: #000B;
+}
+
+html.dark .tagline {
+  color: #FFFB;
 }
 
 @media screen and (max-width: 1024px) {
   h1 {
     font-size: 3rem !important;
     line-height: 3.5rem !important;
+    max-width: 100%;
   }
 
   .tagline {

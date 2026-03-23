@@ -123,13 +123,6 @@
   text-align: center;
 }
 
-.highlight-foreground {
-  background: var(--vp-home-hero-name-background);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: var(--vp-home-hero-name-color);
-}
-
 span.highlight-background {
   background: -webkit-linear-gradient(120deg, #2979FF33, #00E5FF33);
   color: var(--vp-c-text-1);
