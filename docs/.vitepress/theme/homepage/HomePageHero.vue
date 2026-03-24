@@ -134,21 +134,9 @@ html.dark .tagline {
 }
 
 @media screen and (min-width: 1024px) {
-  .cta-buttons {
-    gap: 32px;
-  }
-
   .cta-buttons a.action {
     padding: 16px 24px;
   }
-
-}
-
-.cta-buttons .action.primary {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-  width: fit-content;
 }
 
 html.dark .action:not(.primary) {
@@ -160,11 +148,13 @@ html.dark .action:not(.primary) {
 }
 
 html:not(.dark) .action:not(.primary) {
-  background-color: #FFF;
-  border: 1px solid #0004;
+  background-color: #00000014;
+  color: var(--vp-c-text-1);
+  font-weight: 600;
+  box-shadow: none;
 
   &:hover {
-    border: 1px solid #0008;
+    background-color: #00000022;
   }
 }
 
