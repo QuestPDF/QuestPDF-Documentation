@@ -184,11 +184,12 @@ html:not(.dark) .action:not(.primary) {
   position: absolute;
   inset: 0;
   pointer-events: none;
+
   background-image:
-      radial-gradient(ellipse 75% 75% at 50% 100%, color-mix(in srgb, #2196F3 25%, transparent), transparent),
-      radial-gradient(ellipse 1500px 300px at 50% 100%, color-mix(in srgb, #00BCD4 10%, transparent), transparent),
-      radial-gradient(ellipse 1000px 200px at 40% 100%, color-mix(in srgb, #FFEB3B 15%, transparent), transparent),
-      radial-gradient(ellipse 500px 100px at 60% 100%, color-mix(in srgb, #FF9800 20%, transparent), transparent);
+      radial-gradient(ellipse 100% 75% at 50% 0%, color-mix(in srgb, #2196F3 15%, transparent), transparent),
+      radial-gradient(ellipse 1500px 600px at 100% 0%, color-mix(in srgb, #81D4FA 50%, transparent), transparent),
+      radial-gradient(ellipse 1000px 200px at 20% 0%, color-mix(in srgb, #64B5F6 10%, transparent), transparent),
+      radial-gradient(ellipse 800px 100px at 60% 100%, color-mix(in srgb, #FF9800 15%, transparent), transparent);
 }
 
 .background-gradient-noise {
@@ -200,12 +201,12 @@ html:not(.dark) .action:not(.primary) {
   mix-blend-mode: overlay;
 }
 
-html:not(.dark) .background-gradient {
+html.dark .background-gradient {
   background-image:
-      radial-gradient(ellipse 100% 75% at 50% 0%, color-mix(in srgb, #2196F3 25%, transparent), transparent),
-      radial-gradient(ellipse 1500px 600px at 100% 0%, color-mix(in srgb, #81D4FA 40%, transparent), transparent),
-      radial-gradient(ellipse 1000px 200px at 20% 0%, color-mix(in srgb, #64B5F6 20%, transparent), transparent),
-      radial-gradient(ellipse 800px 100px at 60% 100%, color-mix(in srgb, #FF9800 15%, transparent), transparent);
+      radial-gradient(ellipse 75% 75% at 50% 100%, color-mix(in srgb, #2196F3 20%, transparent), transparent),
+      radial-gradient(ellipse 1500px 300px at 50% 100%, color-mix(in srgb, #00BCD4 5%, transparent), transparent),
+      radial-gradient(ellipse 1000px 200px at 40% 100%, color-mix(in srgb, #FFEB3B 10%, transparent), transparent),
+      radial-gradient(ellipse 500px 100px at 65% 100%, color-mix(in srgb, #FF9800 15%, transparent), transparent);
 }
 
 </style>
