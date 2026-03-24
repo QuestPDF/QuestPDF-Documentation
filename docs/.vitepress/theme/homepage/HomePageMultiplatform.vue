@@ -62,7 +62,7 @@ const platforms = [
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 
   background-color: #0000000A;
   border-radius: 12px;
@@ -75,8 +75,8 @@ html.dark .platform-item {
 }
 
 .platform-item img {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
 }
 
 .platform-name {
