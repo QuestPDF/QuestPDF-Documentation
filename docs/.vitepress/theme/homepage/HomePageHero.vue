@@ -132,6 +132,11 @@ html.dark .tagline {
   margin-top: 32px;
   z-index: 10000;
   text-transform: uppercase;
+
+  .action {
+    word-spacing: 2px;
+    letter-spacing: 0.5px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -151,7 +156,6 @@ html.dark .action:not(.primary) {
 html:not(.dark) .action:not(.primary) {
   background-color: #00000014;
   color: var(--vp-c-text-1);
-  font-weight: 600;
   box-shadow: none;
 
   &:hover {
