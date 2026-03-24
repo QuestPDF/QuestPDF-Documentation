@@ -136,7 +136,7 @@ const standards : Standard[] = [
   font-weight: 500;
   color: var(--vp-c-text-2);
   transition: border-color 0.2s ease, background-color 0.2s ease;
-  border: 1px solid #8888;
+  border: 1px solid #8884;
 }
 
 </style>
