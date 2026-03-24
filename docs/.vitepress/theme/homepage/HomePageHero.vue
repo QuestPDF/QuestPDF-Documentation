@@ -76,6 +76,7 @@ h1 {
 
 h1 .highlight-foreground {
   color: #298dff;
+  font-weight: 750;
 }
 
 html.dark .highlight-foreground {
@@ -179,7 +180,7 @@ html:not(.dark) .action:not(.primary) {
       radial-gradient(ellipse 100% 75% at 50% 0%, color-mix(in srgb, #2196F3 15%, transparent), transparent),
       radial-gradient(ellipse 1500px 600px at 100% 0%, color-mix(in srgb, #81D4FA 50%, transparent), transparent),
       radial-gradient(ellipse 1000px 200px at 20% 0%, color-mix(in srgb, #64B5F6 10%, transparent), transparent),
-      radial-gradient(ellipse 800px 100px at 60% 100%, color-mix(in srgb, #FF9800 15%, transparent), transparent);
+      radial-gradient(ellipse 800px 100px at 60% 100%, color-mix(in srgb, #FF9800 10%, transparent), transparent);
 }
 
 .background-gradient-noise {
