@@ -100,14 +100,13 @@ html:not(.dark):has(.home-page) .VPNavBar.home.top {
 /* Common styles */
 
 .section-tag {
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand-2), transparent 70%);
-  background-color: color-mix(in srgb, var(--vp-c-brand-2), transparent 90%);
-  border-radius: 32px;
+  background-color: color-mix(in srgb, var(--vp-c-brand-2), transparent 85%);
+  border-radius: 12px;
   padding: 6px 18px;
   word-spacing: 2px;
   font-size: 0.8125rem;
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   color: var(--vp-c-brand-1);
   width: fit-content;
   text-transform: uppercase;
