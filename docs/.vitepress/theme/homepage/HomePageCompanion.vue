@@ -76,10 +76,10 @@ const summaryContent = [
   .image-container::before {
     content: "";
     position: absolute;
-    inset: -64px;
+    inset: -48px;
 
-    background: linear-gradient(120deg, #00E5FF22, #2979FF22);
-    border-radius: 64px;
+    background: var(--vp-c-bg-alt);
+    border-radius: 48px;
   }
 }
 
