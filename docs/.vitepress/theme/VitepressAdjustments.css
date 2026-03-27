@@ -166,3 +166,7 @@ html:not(.dark) .dark-only {
     height: 16px;
     border-radius: 8px;
 }
+
+.VPNavBar.top .VPNavBarSearchButton {
+    display: none !important;
+}
