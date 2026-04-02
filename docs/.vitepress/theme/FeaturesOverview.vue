@@ -735,7 +735,7 @@ const categories = [
 }
 
 html.dark .card-item .icon {
-  color: #999;
+  color: #AAA;
 }
 
 .card-item b {
