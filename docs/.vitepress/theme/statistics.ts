@@ -9,6 +9,6 @@ export const statistics = [
         icon: "fa-duotone fa-download",
         label: "NuGet downloads",
         link: "https://www.nuget.org/packages/QuestPDF/",
-        value: "19M"
+        value: "20M"
     }
 ];
