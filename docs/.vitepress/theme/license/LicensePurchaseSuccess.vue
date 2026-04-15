@@ -70,7 +70,7 @@ const orderDetails = [
           <p class="sub-header">Thank you for choosing QuestPDF</p>
         </header>
 
-        <div v-if="false" class="email-notification">
+        <div class="email-notification">
           <i class="fa fa-solid fa-envelope"></i>
           <span>
             <b>Please check your inbox.</b> We have sent a confirmation email with your license details, license confirmation PDF, and developer setup instructions.
