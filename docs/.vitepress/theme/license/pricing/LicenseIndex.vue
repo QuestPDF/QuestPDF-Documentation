@@ -1,9 +1,7 @@
 <template>
   <div class="custom-page">
     <div class="container reverse-background">
-      <ClientOnly>
-        <license-page-tiers />
-      </ClientOnly>
+      <license-page-tiers />
     </div>
 
     <div class="container">

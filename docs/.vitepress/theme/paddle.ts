@@ -1,5 +1,4 @@
-import {initializePaddle, Paddle, Environments} from '@paddle/paddle-js';
-import {ref} from "vue";
+import type {Paddle} from '@paddle/paddle-js';
 import {useData} from "vitepress";
 
 
@@ -27,21 +26,43 @@ const configuration = productionConfiguration;
 
 /* Implementation */
 
-const paddle = ref<Paddle | null>(null);
+let paddlePromise: Promise<Paddle | undefined> | null = null;
+
+function loadPaddle(): Promise<Paddle | undefined> {
+  if (typeof window === 'undefined') return Promise.resolve(undefined);
+  if (!paddlePromise) {
+    const startedAt = performance.now();
+    console.time('paddle:total');
+    console.time('paddle:import');
+    paddlePromise = import('@paddle/paddle-js').then(({initializePaddle}) => {
+      console.timeEnd('paddle:import');
+      console.log(`[paddle] script loaded in ${(performance.now() - startedAt).toFixed(0)} ms`);
+      console.time('paddle:initialize');
+      return initializePaddle({
+        token: configuration.token,
+        environment: configuration.isProduction ? 'production' : 'sandbox',
+      });
+    }).then(paddle => {
+      console.timeEnd('paddle:initialize');
+      console.timeEnd('paddle:total');
+      console.log(`[paddle] ready in ${(performance.now() - startedAt).toFixed(0)} ms`);
+      return paddle;
+    });
+  }
+  return paddlePromise;
+}
 
 if (typeof window !== 'undefined') {
-  initializePaddle({
-    token: configuration.token,
-    environment: configuration.isProduction ? 'production' : 'sandbox',
-  })
-    .then(x => paddle.value = x)
+  void loadPaddle();
 }
 
 export const usePaddle = () => {
   const {isDark} = useData();
 
-  function startCheckout(priceId: string) {
-    paddle.value.Checkout.open({
+  async function startCheckout(priceId: string) {
+    const paddle = await loadPaddle();
+    if (!paddle) return;
+    paddle.Checkout.open({
       settings: {
         variant: 'one-page',
         theme: isDark.value ? 'dark' : 'light',
