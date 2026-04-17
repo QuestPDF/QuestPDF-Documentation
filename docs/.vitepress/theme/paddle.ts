@@ -28,28 +28,27 @@ const configuration = productionConfiguration;
 
 let paddlePromise: Promise<Paddle | undefined> | null = null;
 
-function loadPaddle(): Promise<Paddle | undefined> {
-  if (typeof window === 'undefined') return Promise.resolve(undefined);
-  if (!paddlePromise) {
-    const startedAt = performance.now();
-    console.time('paddle:total');
-    console.time('paddle:import');
-    paddlePromise = import('@paddle/paddle-js').then(({initializePaddle}) => {
-      console.timeEnd('paddle:import');
-      console.log(`[paddle] script loaded in ${(performance.now() - startedAt).toFixed(0)} ms`);
-      console.time('paddle:initialize');
-      return initializePaddle({
-        token: configuration.token,
-        environment: configuration.isProduction ? 'production' : 'sandbox',
+async function loadPaddle(): Promise<Paddle | undefined> {
+  if (typeof window === 'undefined')
+    return undefined;
+
+  if (paddlePromise)
+    return await paddlePromise;
+
+  paddlePromise = import('@paddle/paddle-js')
+      .then(({initializePaddle}) => {
+
+        return initializePaddle({
+          token: configuration.token,
+          environment: configuration.isProduction ? 'production' : 'sandbox',
+        });
+      })
+      .catch(() => {
+        paddlePromise = null;
+        return undefined;
       });
-    }).then(paddle => {
-      console.timeEnd('paddle:initialize');
-      console.timeEnd('paddle:total');
-      console.log(`[paddle] ready in ${(performance.now() - startedAt).toFixed(0)} ms`);
-      return paddle;
-    });
-  }
-  return paddlePromise;
+
+  return await paddlePromise;
 }
 
 if (typeof window !== 'undefined') {
@@ -61,7 +60,10 @@ export const usePaddle = () => {
 
   async function startCheckout(priceId: string) {
     const paddle = await loadPaddle();
-    if (!paddle) return;
+
+    if (!paddle)
+      return;
+
     paddle.Checkout.open({
       settings: {
         variant: 'one-page',
