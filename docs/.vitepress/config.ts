@@ -1,6 +1,19 @@
-import { defineConfig } from 'vitepress'
+import {defineConfig, HeadConfig} from 'vitepress'
 import llmstxt from 'vitepress-plugin-llms'
 import imageSizePlugin from "./markdownit-imagesize-plugin";
+
+const isProd = process.env.NODE_ENV === 'production';
+
+function getPlausibleScript() : HeadConfig[] {
+    if (!isProd)
+        return [];
+
+    return [
+        ['script', { src: 'https://plausible.io/js/pa-PaMEMtNHk1CpgVNx3BvS3.js', crossorigin: 'anonymous', async: "" }],
+        ['script', {}, `window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()`],
+    ]
+}
+
 
 export default defineConfig({
     lang: 'en-US',
@@ -15,7 +28,8 @@ export default defineConfig({
 
     head: [
         ['link', { rel: 'icon', href: '/logo.png', type: 'image/png' }],
-        ['script', { src: 'https://kit.fontawesome.com/294da38298.js', crossorigin: 'anonymous' }],
+        ['script', { src: 'https://kit.fontawesome.com/294da38298.js', crossorigin: 'anonymous', async: "" }],
+        ...getPlausibleScript(),
         ['meta', { name: "title", content: "C# PDF Generation Library | QuestPDF for .NET" }],
         ['meta', { name: "description", content: "Generate and edit PDF documents in your C# applications using the QuestPDF library and its C# Fluent API. Build invoices, reports and data exports with ease." }],
         ['meta', { name: "keywords", content: "PDF, C#, csharp, dotnet, .NET, ASP.NET, PDF generation, open-source, nuget, html to pdf" }],
