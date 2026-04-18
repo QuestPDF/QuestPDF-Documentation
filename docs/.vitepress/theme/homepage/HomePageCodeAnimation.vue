@@ -103,12 +103,12 @@ function setTitle(stepName: string) {
 
 async function waitAndProceedToNextStep(stepName: string) {
   imageIndex.value++;
-  trackPlausibleEvent(`Live Demo Playback: ${stepName}`);
   await wait();
 
   clearHighlight();
   title.value = stepName;
   tutorialStepNumber.value++;
+  trackPlausibleEvent(`Live Demo Playback: ${tutorialStepNumber.value.toString().padStart(2, '0')}`);
 
   setTitle(stepName);
   await new Promise(r => setTimeout(r, waitCodeSpeed));
