@@ -28,12 +28,12 @@ const configuration = productionConfiguration;
 
 let paddlePromise: Promise<Paddle | undefined> | null = null;
 
-async function loadPaddle(): Promise<Paddle | undefined> {
+function loadPaddle(): Promise<Paddle | undefined> {
   if (typeof window === 'undefined')
-    return undefined;
+    return Promise.resolve(undefined);
 
   if (paddlePromise)
-    return await paddlePromise;
+    return paddlePromise;
 
   paddlePromise = import('@paddle/paddle-js')
       .then(({initializePaddle}) => {
@@ -48,7 +48,7 @@ async function loadPaddle(): Promise<Paddle | undefined> {
         return undefined;
       });
 
-  return await paddlePromise;
+  return paddlePromise;
 }
 
 if (typeof window !== 'undefined') {
