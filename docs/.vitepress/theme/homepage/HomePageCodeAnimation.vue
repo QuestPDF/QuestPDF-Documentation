@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import {computed, nextTick, onMounted, onUnmounted, ref, watch} from "vue";
-import {useData} from "vitepress";
-import createCodeHighlighter from "./createCodeHighlighter";
 import HomePageCodeContainer from "./HomePageCodeContainer.vue";
 import HomePageWindowContainer from "./HomePageWindowContainer.vue";
 import {ShikiTransformer} from "@shikijs/types";
+import {trackPlausibleEvent} from "../plausibleEvents";
 
 const code = ref('');
 const highlightedLines = ref<{start: number; end: number} | null>(null);
@@ -104,6 +103,7 @@ function setTitle(stepName: string) {
 
 async function waitAndProceedToNextStep(stepName: string) {
   imageIndex.value++;
+  trackPlausibleEvent(`Live Demo Playback: ${stepName}`);
   await wait();
 
   clearHighlight();
@@ -152,6 +152,7 @@ async function animate() {
 
   tutorialStepNumber.value++;
 
+  trackPlausibleEvent("Live Demo Playback: Started");
   setTitle("Start with a blank document");
 
   await waitAndProceedToNextStep("Insert an element with a solid background");
@@ -226,6 +227,8 @@ async function animate() {
   await new Promise(r => setTimeout(r, waitStepSpeed));
 
   scrollToPrimaryActionButton();
+
+  trackPlausibleEvent("Live Demo Playback: Completed");
 }
 
 
