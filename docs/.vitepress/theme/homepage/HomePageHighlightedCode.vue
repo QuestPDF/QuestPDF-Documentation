@@ -79,4 +79,12 @@ const highlightedCode = computed(() =>
 .shiki {
   overflow-x: auto !important;
 }
+
+html.dark .code-source .shiki,
+html.dark .code-source .shiki span {
+  color: var(--shiki-dark) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
 </style>
