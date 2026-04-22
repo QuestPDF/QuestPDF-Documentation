@@ -283,16 +283,18 @@ html.dark {
 .details {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   gap: 16px;
 }
 
 .details-item {
-  break-inside: avoid-column;
-
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 24px 1fr;
   gap: 12px;
-  align-items: start;
+}
+
+.details-item i.fa-square-check {
+  width: 24px;
 }
 
 .details-item p {
