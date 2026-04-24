@@ -3,7 +3,7 @@
 It is possible to include additional information about the PDF document. 
 This metadata is stored in the PDF file and can be viewed in the document properties.
 
-```c#{9-19}
+```csharp{9-19}
 Document
     .Create(document =>
     {

@@ -19,7 +19,7 @@ Please consider using a less-strict alternative, [EnsureSpace](/api-reference/en
 
 The following example demonstrates how to use the ShowEntire element to create a glossary where each term and its definition remain together on the same page:
 
-```c#{21}
+```csharp{21}
 container
     .Decoration(decoration =>
     {

@@ -6,7 +6,7 @@ This hierarchical approach simplifies style management, ensuring consistency acr
 
 It reduces repetitive code, enhances maintainability, and provides flexibility to adjust styles at different levels of the document structure.
 
-```c#{1,11,34}
+```csharp{1,11,34}
 .DefaultTextStyle(style => style.FontSize(20))
 .Column(column =>
 {

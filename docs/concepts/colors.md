@@ -12,7 +12,7 @@ import MaterialColorList from '../.vitepress/theme/MaterialColorList.vue';
 
 QuestPDF supports multiple color formats.
 
-```c#{6,7,11,14}
+```csharp{6,7,11,14}
 using QuestPDF.Helpers;
 
 container

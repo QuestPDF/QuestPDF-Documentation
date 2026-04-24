@@ -6,7 +6,7 @@ To ensure the best clarity, especially when generating maps or charts, it's impo
 This dynamic image element behaves similarly to static images. 
 However, instead of accepting a preloaded image, it expects a function that receives the available space and returns the image as a binary array.
 
-```c#{15,19}
+```csharp{15,19}
 container
     .Column(column =>
     {

@@ -49,7 +49,7 @@ public class PageNumberSideComponent : IDynamicComponent
 
 This component creates a visual progress bar indicating how far the reader has advanced through the document.
 
-```c#
+```csharp
 public class PageProgressbarComponent : IDynamicComponent
 {
     public DynamicComponentComposeResult Compose(DynamicContext context)
@@ -80,7 +80,7 @@ public class PageProgressbarComponent : IDynamicComponent
 The following example demonstrates how to incorporate both dynamic components into a document structure. 
 The progress bar appears in the header, while the alternating page numbers display in the footer.
 
-```c#{22,40}
+```csharp{22,40}
 Document
     .Create(document =>
     {
@@ -148,7 +148,7 @@ QuestPDF may call the Compose method multiple times per page and may internally 
 
 First, let's define our data model and the state structure.
 
-```c#
+```csharp
 public class OrderItem
 {
     public string ItemName { get; set; } = Placeholders.Label();
@@ -173,7 +173,7 @@ The following component implements a paging algorithm that:
 5) Generates the actual footer with subtotals for the visible rows 
 6) Updates state to track progress
 
-```c#
+```csharp
 public class OrdersTableWithPageSubtotalsComponent : IDynamicComponent<OrdersTableWithPageSubtotalsComponentState>
 {
     private ICollection<OrderItem> Items { get; }
@@ -305,7 +305,7 @@ public class OrdersTableWithPageSubtotalsComponent : IDynamicComponent<OrdersTab
 
 Here is how you can integrate this component into a document that displays per-page subtotals. 
 
-```c#
+```csharp
 var items = Enumerable.Range(0, 25).Select(x => new OrderItem()).ToList();
         
 Document

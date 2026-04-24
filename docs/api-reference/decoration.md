@@ -25,7 +25,7 @@ If the main `content` spans across multiple pages, both the `before` and `after`
 
 A typical use-case for this method is to render a table that spans multiple pages, with a consistent caption or header on each page.
 
-```c#{4,7,16}
+```csharp{4,7,16}
 container
     .Background(Colors.Grey.Lighten3)
     .Padding(15)

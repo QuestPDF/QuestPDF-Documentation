@@ -9,7 +9,7 @@ You can specify the thickness of the line and optionally customize its color.
 
 Renders a vertical line with a specified thickness.
 
-```c#{8-9}
+```csharp{8-9}
 container
     .Row(row =>
     {
@@ -31,7 +31,7 @@ container
 
 Renders a horizontal line with a specified thickness.
 
-```c#{8-9}
+```csharp{8-9}
 container
     .Column(column =>
     {
@@ -53,7 +53,7 @@ container
 
 It is possible to modify how pronounced the line appears by adjusting its thickness.
 
-```c#{10}
+```csharp{10}
 container
     .Column(column =>
     {
@@ -75,7 +75,7 @@ container
 
 Specifies the color for the line.
 
-```c#{18}
+```csharp{18}
 container
     .Column(column =>
     {
@@ -105,7 +105,7 @@ container
 
 Applies a linear gradient to a line using the specified colors.
 
-```c#{9,14,19}
+```csharp{9,14,19}
 container
     .Column(column =>
     {
@@ -141,7 +141,7 @@ For example, a pattern of `[2, 3]` creates a dash of 2 units followed by a gap o
 The length of the pattern array must be even.
 :::
 
-```c#{9,14,19}
+```csharp{9,14,19}
 container
     .Column(column =>
     {
@@ -171,7 +171,7 @@ container
 
 It is possible to combine multiple options to create a more complex line style.
 
-```c#
+```csharp
 container
     .Width(300)
     .LineHorizontal(8)

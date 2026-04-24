@@ -18,7 +18,7 @@ Use this element to control the veertical size of its content.
 
 The following example demonstrates a container with a fixed height of 100 pt and a width of 200 pt.
 
-```c#{4}
+```csharp{4}
 container
     .Width(300)
     .Padding(25)

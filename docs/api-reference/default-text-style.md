@@ -13,7 +13,7 @@ Please note that this element extends and overrides existing styles with additio
 
 Depending on your use-case, you can provide a TextStyle object or use a lambda expression:
 
-```c#
+```csharp
 .DefaultTextStyle(x => x.Bold().Underline())
 .DefaultTextStyle(TextStyle.Default.Bold().Underline())
 ```
@@ -21,7 +21,7 @@ Depending on your use-case, you can provide a TextStyle object or use a lambda e
 
 ## Example
 
-```c#{4,16}
+```csharp{4,16}
 container
     .Width(400)
     .Padding(25)

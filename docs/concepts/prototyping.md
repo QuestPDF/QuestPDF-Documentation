@@ -11,7 +11,7 @@ This guide outlines how to use each type of placeholder.
 
 QuestPDF provides a range of text placeholders that cover common scenarios:
 
-```c#
+```csharp
 using QuestPDF.Helpers;
 
 Placeholders.LoremIpsum();
@@ -38,7 +38,7 @@ Placeholders.Percent();
 
 #### Example
 
-```c#
+```csharp
 .Column(column =>
 {
     column.Spacing(15);
@@ -67,7 +67,7 @@ Placeholders.Percent();
 
 QuestPDF can produce random colors based on the Material Design palette, returning them as a string in the `#RRGGBB` format.
 
-```c#
+```csharp
 // bright color (lighten-2)
 Placeholders.BackgroundColor();
 
@@ -77,7 +77,7 @@ Placeholders.Color();
 
 #### BackgroundColor example
 
-```c#{11}
+```csharp{11}
 .Grid(grid =>
 {
     grid.Columns(5);
@@ -98,7 +98,7 @@ Placeholders.Color();
 
 #### Color example
 
-```c#{7}
+```csharp{7}
 .Column(column =>
 {
     column.Spacing(10);
@@ -122,7 +122,7 @@ It returns a byte array in JPEG format and can be embedded directly in QuestPDF 
 
 Use these placeholders to simulate images in your layout, ensuring you can test image placement, sizing, and alignment before real images become available.
 
-```c#
+```csharp
 .Width(200)
 .Column(column =>
 {

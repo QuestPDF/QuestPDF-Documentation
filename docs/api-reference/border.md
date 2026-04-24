@@ -3,7 +3,7 @@
 You can use borders to create visual separation between elements in your document. 
 Borders can be applied to any element, including text, images, and containers.
 
-```c#{2}
+```csharp{2}
 container
     .Border(3, Colors.Blue.Darken4)
     .Background(Colors.Blue.Lighten5)
@@ -33,7 +33,7 @@ container
 
 Each method requires a thickness value as a parameter. Optionally, you can specify the unit value (default is `Unit.Points`).
 
-```c#
+```csharp
 container.Border(1);
 container.Border(1, Unit.Millimeters);
 ```
@@ -43,7 +43,7 @@ container.Border(1, Unit.Millimeters);
 
 ### Consistent thickness
 
-```c#{6,12,18}
+```csharp{6,12,18}
 .Row(row =>
 {
     row.Spacing(25);
@@ -73,7 +73,7 @@ container.Border(1, Unit.Millimeters);
 
 ### Various thickness
 
-```c#{2-5}
+```csharp{2-5}
 container
     .BorderLeft(4)
     .BorderTop(6)
@@ -92,7 +92,7 @@ In the vast majority of cases, borders are applied with a solid color.
 
 <!--@include: tip-color.md-->
 
-```c#{16}
+```csharp{16}
 .Row(row =>
 {
     var colors = new[]
@@ -125,7 +125,7 @@ Applies a linear gradient background to the border with the specified angle and 
 
 The first argument is the angle in degrees, and the second argument is an array of colors that define the gradient.
 
-```c#{7,14,21}
+```csharp{7,14,21}
 .Column(column =>
 {
     column.Spacing(25);
@@ -170,7 +170,7 @@ By default, the border is aligned to the middle of the container boundaries.
 
 However, if the border has rounded corners, the alignment is set to inside by default.
 
-```c#{12,18,24}
+```csharp{12,18,24}
 .Row(row =>
 {
     row.Spacing(25);
@@ -213,7 +213,7 @@ Borders support rounded corners, which can be applied using the `CornerRadius` m
 Read more about [rounded corners](/api-reference/rounded-corners.md).
 :::
 
-```c#{2-3}
+```csharp{2-3}
 container
     .CornerRadius(10)
     .Border(1, Colors.Black)
@@ -229,7 +229,7 @@ container
 
 It is possible to apply multiple borders to the same content by separating each border instance with the `Container` method.
 
-```c#{6}
+```csharp{6}
 container
     .BorderVertical(5)
     .BorderColor(Colors.Green.Darken2)
@@ -254,7 +254,7 @@ container
 
 You can create advanced styles by combining borders with other properties, such as background color, padding, and text styles.
 
-```c#{2-5}
+```csharp{2-5}
 container
     .CornerRadius(10)
     .BorderLeft(10)

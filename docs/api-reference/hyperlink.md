@@ -6,7 +6,7 @@ The Hyperlink element creates a clickable area that redirects the user to a desi
 
 Hyperlink can span any content, including text, images, or other elements.
 
-```c#{10}
+```csharp{10}
 .Column(column =>
 {
     column.Spacing(25);
@@ -30,7 +30,7 @@ Hyperlink can span any content, including text, images, or other elements.
 
 Hyperlinks can also be placed inside text elements.
 
-```c#{5}
+```csharp{5}
 container
     .Text(text =>
     {

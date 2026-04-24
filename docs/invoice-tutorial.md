@@ -35,7 +35,7 @@ QuestPDF recommends a clear three-layer architecture for both maintainability an
 
 First, let's define the data structure for our invoice. These models capture all the information we need to display:
 
-```c#
+```csharp
 public class InvoiceModel
 {
     public int InvoiceNumber { get; set; }
@@ -74,7 +74,7 @@ In a real application, this might query a database, download images from storage
 
 For this tutorial, we'll use a sample data generator:
 
-```c#
+```csharp
 using QuestPDF.Helpers;
 
 public static class InvoiceDocumentDataSource
@@ -141,7 +141,7 @@ The class below implements the `IDocument` interface and uses the `Compose` meth
 Each fluent API call creates a container with its own style, size, alignment constraints and layout behavior — making their order important. 
 While most elements are simple containers holding a single child, some advanced elements offer multiple slots to accommodate more complex layouts.
 
-```c#{18-29}
+```csharp{18-29}
 using QuestPDF.Drawing;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
@@ -176,7 +176,7 @@ public class InvoiceDocument : IDocument
 
 Then, use the following code to generate the document:
 
-```c#{10-12}
+```csharp{10-12}
 using System.IO;
 using QuestPDF.Drawing;
 using QuestPDF.Fluent;
@@ -211,7 +211,7 @@ This approach produces cleaner code and makes it easier to maintain and understa
 Please hover your cursor over the code to see the explanation of various API calls.
 :::
 
-```c#
+```csharp
 public class InvoiceDocument : IDocument
 {
     /* code omitted */
@@ -285,7 +285,7 @@ The code above generates the following output:
 Define general structure of the primary content. 
 Please note that you can freely use C# features such as conditions and loops.
 
-```c#
+```csharp
 public class InvoiceDocument : IDocument
 {
     /* code omitted */
@@ -340,7 +340,7 @@ You can even have cells span multiple columns or rows.
 
 Note the use of the CellStyle local function, which applies consistent styling to cells in a single, reusable manner.
 
-```c#
+```csharp
 public class InvoiceDocument : IDocument
 {
     /* code omitted */
@@ -403,7 +403,7 @@ By implementing IComponent, you can pass arguments and reuse this logic througho
 This approach is similar to extracting code into methods, but it goes further. 
 Components reside in their own classes and files, making it simple to provide arguments and fully encapsulate their layout logic.
 
-```c#
+```csharp
 public class AddressComponent : IComponent
 {
     private string Title { get; }
@@ -435,7 +435,7 @@ public class AddressComponent : IComponent
 
 The code below demonstrates how to integrate and use the newly created component:
 
-```c#{11-16}
+```csharp{11-16}
 public class InvoiceDocument : IDocument
 {
     /* code omitted */
@@ -475,7 +475,7 @@ public class InvoiceDocument : IDocument
 For learning and evaluation, you can use the free QuestPDF Evaluation license.
 More details can be found on the [QuestPDF License and Pricing page](/license/).
 
-```c#
+```csharp
 QuestPDF.Settings.License = LicenseType.Evaluation;
 ```
 

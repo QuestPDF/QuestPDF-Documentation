@@ -11,14 +11,14 @@ Constrains its content to maintain a given width-to-height ratio.
 
 Specify the aspect-ratio value either as a number or a division of two numbers: 
 
-```c#
+```csharp
 .AspectRatio(0.5) // use a ratio
 .AspectRatio(1f / 2f) // or division
 ```
 
 Additionally, you can specify how the content should be adjusted to meet the aspect ratio:
 
-```c#
+```csharp
 .AspectRatio(0.5, AspectRatioOption.FitArea)
 ```
 
@@ -35,7 +35,7 @@ Additionally, you can specify how the content should be adjusted to meet the asp
 
 ## Example
 
-```c#{4}
+```csharp{4}
 container
     .Width(300)
     .Height(300)

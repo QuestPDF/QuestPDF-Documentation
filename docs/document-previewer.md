@@ -18,7 +18,7 @@ The Previewer tool is available as a NuGet tool. Therefore, it is installed on y
 
 📁 To install the QuestPDF Previewer, please execute the following command on your PC:
 
-```c#
+```csharp
 dotnet tool install QuestPDF.Previewer --global
 ```
 
@@ -33,13 +33,13 @@ questpdf-previewer 12345
 
 🔁 To update the tool, please use:
 
-```c#
+```csharp
 dotnet tool update questpdf.previewer --global
 ```
 
 🗑️ And to remove:
 
-```c#
+```csharp
 dotnet tool uninstall questpdf.previewer --global
 ```
 
@@ -47,7 +47,7 @@ dotnet tool uninstall questpdf.previewer --global
 
 To preview your document, you need to slightly modify your code.
 
-```c#{17-18}
+```csharp{17-18}
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;

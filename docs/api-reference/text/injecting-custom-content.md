@@ -11,7 +11,7 @@ The element must fit within one line and cannot span multiple pages.
 
 The most common use-case is to inject images into the text.
 
-```c#{4,7}
+```csharp{4,7}
 .Text(text =>
 {
     text.Span("A unit test can either ");
@@ -31,7 +31,7 @@ The most common use-case is to inject images into the text.
 
 Another common use-case is to inject SVG icons into the text.
 
-```c#{4}
+```csharp{4}
 .Text(text =>
 {
     text.Span("To synchronize your email inbox, please click the ");
@@ -57,7 +57,7 @@ The injected element can be positioned in relation to the text baseline or font 
 
 #### Example:
 
-```c#{5,11}
+```csharp{5,11}
 .Text(text =>
 {
     text.Span("This ");

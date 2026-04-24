@@ -17,7 +17,7 @@ To merge existing files, please use the [Document Operations](/concepts/document
 Before merging, you need to create individual documents. 
 The sample code below defines a helper method that creates a report with a header, content area, and a footer displaying page numbers.
 
-```c#
+```csharp
 static Document GenerateReport(string title, int itemsCount)
 {
     return Document.Create(document =>
@@ -78,7 +78,7 @@ All documents are simply be merged together.
 
 **Example**: Merging a two-page document with a three-page document results in a sequence: 1, 2, 1, 2, 3.
 
-```c#{6}
+```csharp{6}
 Document
     .Merge(
         GenerateReport("Short Document 1", 5),
@@ -100,7 +100,7 @@ Page number APIs return a consecutive numbering for this unified document.
 
 Merging a two-page document with a three-page document results in a sequence: 1, 2, 3, 4, 5.
 
-```c#{6}
+```csharp{6}
 Document
     .Merge(
         GenerateReport("Short Document 1", 5),

@@ -28,7 +28,7 @@ However, this may lead to higher native memory usage due to caching mechanisms.
 This example uses a simple component generating a list of numbers from a specified range.
 It simulates a typical text-heavy content generation scenario.
 
-```c#{8-19}
+```csharp{8-19}
 class SimpleComponent : IComponent
 {
     public required int Start { get; init; }
@@ -57,7 +57,7 @@ class SimpleComponent : IComponent
 This approach does not use any optimization techniques and generates the entire document at once.
 It is typically used for small documents or when memory usage is not a concern.
 
-```c#{10-19}
+```csharp{10-19}
 Document
     .Create(document =>
     {
@@ -87,7 +87,7 @@ Document
 
 This approach uses the Lazy element to defer the creation of content until it is needed.
 
-```c#{17-24}
+```csharp{17-24}
 Document
     .Create(document =>
     {
@@ -123,7 +123,7 @@ Document
 
 This approach uses the LazyWithCache element to defer the creation of content and cache previously rendered sections.
 
-```c#{17-24}
+```csharp{17-24}
 Document
     .Create(document =>
     {

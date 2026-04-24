@@ -31,7 +31,7 @@ Finally, it places an icon beside each correction for easy identification.
 
 To implement this feature, we need to capture two types of positions: the position of the entire text container as a reference point, and the specific positions of each mistake that needs an icon.
 
-```c#{16,18,36,40}
+```csharp{16,18,36,40}
 Document
 .Create(document =>
 {
@@ -86,7 +86,7 @@ Document
 The dynamic component below uses the captured positions to generate and place correction icons. 
 Notice how we retrieve both the container position and the positions of each mistake marker to calculate the proper placement of each icon.
 
-```c#{5,6}
+```csharp{5,6}
 public class DynamicTextSpanPositionCapture : IDynamicComponent
 {
     public DynamicComponentComposeResult Compose(DynamicContext context)

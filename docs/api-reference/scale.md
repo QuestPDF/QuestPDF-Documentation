@@ -16,7 +16,7 @@ outline: false
 
 Values greater than one enlarge the content, while values less than one reduce it.
 
-```c#{12}
+```csharp{12}
 container
     .Scale(1.5f)
     // enlarged content by 50%
@@ -35,7 +35,7 @@ In contrast, text will not only appear smaller or bigger; but also a different n
 
 Please note that all content inside the container is scaled proportionally: including text, images, padding, etc.
 
-```c#{12}
+```csharp{12}
 container
     .Width(300)
     .Column(column =>

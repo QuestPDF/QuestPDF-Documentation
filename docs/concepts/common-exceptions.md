@@ -60,7 +60,7 @@ When the `QuestPDF.Settings.EnableDebugging` is set to `true`, or the debugger i
 
 The code below contains conflicting size constraints.
 
-```c#{2,8}
+```csharp{2,8}
 .Padding(10)
 .Width(100)
 .Background(Colors.Grey.Lighten3)

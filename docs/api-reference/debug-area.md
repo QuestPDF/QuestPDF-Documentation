@@ -15,7 +15,7 @@ This aids in understanding spacing, alignment and pinpointing specific sections 
 
 You can specify text and color to better distinguish between various debug elements:
 
-```c#{2}
+```csharp{2}
 container
     .Debug("Grid example", Colors.Blue.Medium)
     // content
@@ -23,7 +23,7 @@ container
 
 It is also possible to skip the color (it is red by default), and even the label:
 
-```c#
+```csharp
 .Debug("Grid example")
 .Debug()
 ```
@@ -32,7 +32,7 @@ It is also possible to skip the color (it is red by default), and even the label
 
 ## Example
 
-```c#{5}
+```csharp{5}
 container
     .Width(250)
     .Height(250)

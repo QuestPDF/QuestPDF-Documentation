@@ -16,7 +16,7 @@ When required, child items are split across pages, ensuring that the content is 
 The Column element uses a lambda function to define its content. 
 Inside the lambda, you can add multiple items using the `Item` method.
 
-```c#{4-9}
+```csharp{4-9}
 container
     .Width(250)
     .Padding(25)
@@ -35,7 +35,7 @@ container
 
 You can adjust the vertical spacing between items using the `Spacing` method.
 
-```c#{6}
+```csharp{6}
 container
     .Width(250)
     .Padding(25)
@@ -55,7 +55,7 @@ container
 
 Optionally, you can specify the unit value (default is `Unit.Points`).
 
-```c#
+```csharp
 column.Spacing(5, Unit.Millimeters);
 ```
 
@@ -66,7 +66,7 @@ column.Spacing(5, Unit.Millimeters);
 
 You can adjust the spacing between items individually by adding an empty item with a specific height.
 
-```c#
+```csharp
 .Column(column =>
 {
     column.Item().Background(Colors.Grey.Darken1).Height(50);
@@ -89,7 +89,7 @@ This ensures consistent visual alignment, but sometimes it can result in unwante
 
 To disable this behavior, use the `ShrinkHorizontal` API:
 
-```c#{12}
+```csharp{19}
 .Column(column =>
 {
     column.Spacing(15);

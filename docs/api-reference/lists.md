@@ -9,7 +9,7 @@ In QuestPDF, lists can be created using the `Column` and `Row` elements, allowin
 An unordered list is a list of items where the order does not matter. 
 You can create an unordered list in QuestPDF by prepending each item with an image, such as a bullet point icon.
 
-```c#
+```csharp
 container.Column(column =>
 {
     column.Spacing(10);
@@ -34,7 +34,7 @@ container.Column(column =>
 An ordered list is a list of items that follow a sequential order, typically numbered. 
 In QuestPDF, you can create an ordered list by prepending each item with a number.
 
-```c#
+```csharp
 container.Column(column =>
 {
     column.Spacing(10);
@@ -59,7 +59,7 @@ Nested lists allow structuring items hierarchically, creating sub-items under ma
 In QuestPDF, nested lists can be implemented by adjusting item indentation levels or using recursive functions for dynamic list generation.
 
 
-```c#
+```csharp
 container.Column(column =>
 {
     const float nestingSize = 25;

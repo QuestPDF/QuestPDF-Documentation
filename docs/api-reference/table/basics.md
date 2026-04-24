@@ -10,7 +10,7 @@ You start by defining a set of columns and then proceed to add content to the ce
 
 Below is a simple example that demonstrates how to create a table with a header row and a few data rows:
 
-```c#
+```csharp
 .Table(table =>
 {
     table.ColumnsDefinition(columns =>
@@ -51,7 +51,7 @@ QuestPDF provides two main column types:
 | table.**RelativeColumn()** | Adjusts its width proportionally to the available space. |
 | table.**ConstantColumn()** | Has fixed width, defined in points (or other units.      |
 
-```c#{3-8}
+```csharp{3-8}
 .Table(table =>
 {
     table.ColumnsDefinition(columns =>
@@ -88,7 +88,7 @@ QuestPDF provides an automatic cell placement mechanism that simplifies the proc
 For more advanced layout scenarios, it is possible to specify the exact position of each cell.
 This allows you to place cells at specific locations, merge multiple rows or columns, and therefore craft sophisticated table layouts. 
 
-```c#{3-6}
+```csharp{3-6}
 table
     .Cell()
     .Row(1) // optional
@@ -100,7 +100,7 @@ table
 
 Here’s an example showcasing a confusion matrix layout where cells are placed strategically:
 
-```c#
+```csharp
 .Table(table =>
 {
     table.ColumnsDefinition(columns =>

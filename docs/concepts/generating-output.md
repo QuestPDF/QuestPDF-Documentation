@@ -12,7 +12,7 @@ Please be aware that certain features may not be available on formats other than
 
 There are several overloads for generating PDF files:
 
-```c#
+```csharp
 var document = Document.Create(document =>
 {
     document.Page(page =>
@@ -37,7 +37,7 @@ document.GeneratePdf(stream);
 
 The library also supports generating XPS files:
 
-```c#
+```csharp
 // generate XPS and save it to a file
 document.GenerateXps("document.xps");
 
@@ -59,7 +59,7 @@ Please note that generating XPS files is only supported on Windows operating sys
 The library also supports generating SVG files.
 Each page is represented as a separate SVG file.
 
-```c#
+```csharp
 ICollection<string> svgFiles = document.GenerateSvgFiles();
 ```
 
@@ -69,7 +69,7 @@ ICollection<string> svgFiles = document.GenerateSvgFiles();
 The library also supports generating images.
 Each page is represented as a separate image file.
 
-```c#
+```csharp
 // generate images and return them as byte arrays
 IEnumerable<byte[]> imagesAsByteArrays = document.GenerateImages();
 
@@ -86,7 +86,7 @@ Optionally, you can provide additional generation settings:
 | **RasterDpi**               | The DPI (pixels-per-inch) at which the document will be rasterized. This controls the resolution of produced images. Higher DPI results in superior image quality but may increase the output file size. Default value is `288`. |
 
 
-```c#{3-8}
+```csharp{3-8}
 using QuestPDF.Infrastructure;
 
 var imageGenerationSettings = new ImageGenerationSettings

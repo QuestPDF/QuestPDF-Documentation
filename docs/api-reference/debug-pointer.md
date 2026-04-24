@@ -17,7 +17,7 @@ Learn more about the [DocumentLayoutException](/concepts/common-exceptions#docum
 
 ## Example
 
-```c#{2-4}
+```csharp{2-4}
 container
     .Width(100)
     .DebugPointer("Product details section")
@@ -31,7 +31,7 @@ container
 
 The code above throws an exception with the following element trace:
 
-```c#{20}
+```csharp{20}
 The provided document content contains conflicting size constraints. For example, some elements may require more space than is available. 
 
 The layout issue is likely present in the following part of the document: 

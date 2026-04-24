@@ -19,7 +19,7 @@ This method is particularly useful for structured elements like tables, where re
 By ensuring a minimum height, you can prevent undesired content fragmentation.
 
 
-```c#{7}
+```csharp{7}
 container.Column(column =>
 {
     column.Item().Height(400).Background(Colors.Grey.Lighten3);

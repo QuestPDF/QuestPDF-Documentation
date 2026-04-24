@@ -5,7 +5,7 @@ QuestPDF makes this straightforward: headers and footers are repeated on each pa
 
 Keep in mind that header and footer rows are separate from the table’s main content rows, so they do not count toward your column structure or row indices in the body of the table.
 
-```c#{43-60}
+```csharp{43-60}
 var pageSizes = new List<(string name, double width, double height)>()
 {
     ("Letter (ANSI A)", 8.5f, 11),

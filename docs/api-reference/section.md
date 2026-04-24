@@ -11,7 +11,7 @@ It is also possible to display page numbers for each section, which is particula
 
 ### Example
 
-```c#{32,38,48}
+```csharp{32,38,48}
 Document
     .Create(document =>
     {

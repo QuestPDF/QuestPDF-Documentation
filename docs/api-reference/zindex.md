@@ -15,7 +15,7 @@ Higher values are rendered above lower values.
 
 The following example shows how to use the `ZIndex` element to create visually appealing pricing tables.
 
-```c#{11}
+```csharp{11}
 container
     .PaddingVertical(15)
     .Border(2)

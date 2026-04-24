@@ -2,7 +2,7 @@
 
 This example demonstrates how to create complex structures by overlapping multiple cells, spanning them across rows and columns, and applying dynamic styling.
 
-```c#
+```csharp
 .Border(1)
 .BorderColor(Colors.Grey.Lighten1)
 .Table(table =>

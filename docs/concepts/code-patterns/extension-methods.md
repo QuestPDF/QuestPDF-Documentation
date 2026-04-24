@@ -5,7 +5,7 @@ They allow you to define your styling once and reuse it throughout your codebase
 
 #### Defining extension methods
 
-```c#
+```csharp
 public static class TableExtensions
 {
     private static IContainer TableCellStyle(this IContainer container, string backgroundColor)
@@ -35,7 +35,7 @@ public static class TableExtensions
 
 #### Using extension methods
 
-```c#
+```csharp
 container
     .Border(1)
     .Table(table =>

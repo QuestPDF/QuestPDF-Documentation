@@ -19,7 +19,7 @@ dotnet add package QuestPDF
 
 QuestPDF's minimal API makes it incredibly easy to create and prototype PDF documents. Here's a simple example that demonstrates its intuitive syntax:
 
-```c#
+```csharp
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;

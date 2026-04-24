@@ -17,7 +17,7 @@ This feature allows you to specify the radius of the corners, giving a softer lo
 
 In the vast majority of cases, you will want to apply the same corner radius to all corners of a container.
 
-```c#{4}
+```csharp{4}
 container
     .Border(1, Colors.Black)
     .Background(Colors.Grey.Lighten3)
@@ -33,7 +33,7 @@ container
 
 It is also possible to apply different corner radii to each corner of a container, allowing for more complex designs.
 
-```c#{4-7}
+```csharp{4-7}
 container
     .Border(1, Colors.Black)
     .Background(Colors.Grey.Lighten3)
@@ -52,7 +52,7 @@ container
 
 Rounded corners can also be applied to images, enhancing their appearance in documents.
 
-```c#{2}
+```csharp{2}
 container
     .CornerRadius(25)
     .Image("Resources/landscape.jpg");
@@ -65,7 +65,7 @@ container
 
 Rounded corners can be used in more complex layouts, such as tables, to create a polished look.
 
-```c#{3}
+```csharp{3}
 container
     .Border(1, Colors.Black)
     .CornerRadius(15)

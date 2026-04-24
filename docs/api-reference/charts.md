@@ -26,7 +26,7 @@ You need to install it separately via the NuGet package manager.
 Below is a sample layout showing U.S. energy consumption by source in 2021. 
 ScottPlot is responsible for creating the SVG string, which QuestPDF then embeds in the PDF.
 
-```c#
+```csharp
 using ScottPlot;
 using Colors = QuestPDF.Helpers.Colors;
 
@@ -80,7 +80,7 @@ using Colors = QuestPDF.Helpers.Colors;
 This example creates a bar chart showing the popularity of various C# versions in 2023.
 [Source](https://www.jetbrains.com/lp/devecosystem-2023/csharp/)
 
-```c#
+```csharp
 using ScottPlot;
 using Colors = QuestPDF.Helpers.Colors;
 

@@ -6,7 +6,7 @@ C# local functions offer an elegant solution to this challenge, allowing you to 
 Local functions help maintain clean, readable code by defining specialized helper methods exactly where they're needed. 
 This approach keeps related code together, improving both readability and maintainability without polluting your class with single-use methods.
 
-```c#
+```csharp
 container.Column(column =>
 {
     column.Spacing(15);

@@ -26,7 +26,7 @@ Opaque images are JPEG-encoded based on this setting, while images with an alpha
 
 #### Example:
 
-```c#{9,15}
+```csharp{9,15}
 .Column(column =>
 {
     column.Spacing(10);
@@ -62,7 +62,7 @@ If the input image has lower resolution that the one calculated from the DPI set
 
 #### Example
 
-```c#{9,15}
+```csharp{9,15}
 .Column(column =>
 {
     column.Spacing(10);
@@ -88,7 +88,7 @@ If the input image has lower resolution that the one calculated from the DPI set
 
 It is possible to globally alter the default image compression quality and raster DPI for all images in the document.
 
-```c#{9-16}
+```csharp{9-16}
 Document
     .Create(document =>
     {
@@ -113,7 +113,7 @@ Document
 
 When enabled, the library does not resize the image to achieve the target DPI, nor compress it with target image quality.
 
-```c#{3}
+```csharp{3}
 container
     .Image("photo.jpg")
     .UseOriginalImage();

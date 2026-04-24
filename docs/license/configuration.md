@@ -15,7 +15,7 @@ We trust our users and clients. Therefore, the software does not require any lic
 Instead, you can select and configure the appropriate license in your code. 
 Please put one of the following lines at the startup of your application:
 
-```c#
+```csharp
 QuestPDF.Settings.License = LicenseType.Community;
 // or
 QuestPDF.Settings.License = LicenseType.Professional;

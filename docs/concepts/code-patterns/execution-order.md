@@ -3,7 +3,7 @@
 QuestPDF uses a fluent API with method chaining to define your document's structure and appearance.
 The execution order of these chained methods is strict, meaning that rearranging them may lead to different visual outcomes. 
 
-```c#
+```csharp
 container.Column(column =>
 {
     column.Spacing(25);
