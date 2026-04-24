@@ -19,7 +19,7 @@ Document
         Subject = "Invoice for services",
         Keywords = "invoice, services, payment",
         Creator = "MyApplication",
-        Producer = "PdfRpt"
+        Producer = "PdfRpt",
         Language = "en-US",
         CreationDate = DateTimeOffset.Now,
         ModifiedDate = DateTimeOffset.Now
