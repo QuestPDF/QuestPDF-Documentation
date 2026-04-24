@@ -49,7 +49,7 @@ public class PageNumberSideComponent : IDynamicComponent
 
 This component creates a visual progress bar indicating how far the reader has advanced through the document.
 
-```c#
+```csharp
 public class PageProgressbarComponent : IDynamicComponent
 {
     public DynamicComponentComposeResult Compose(DynamicContext context)
