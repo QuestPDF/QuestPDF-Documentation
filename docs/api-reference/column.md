@@ -89,7 +89,7 @@ This ensures consistent visual alignment, but sometimes it can result in unwante
 
 To disable this behavior, use the `ShrinkHorizontal` API:
 
-```c#{12}
+```c#{19}
 .Column(column =>
 {
     column.Spacing(15);
