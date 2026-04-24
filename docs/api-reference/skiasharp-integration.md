@@ -37,7 +37,7 @@ This class provides two extension methods that bridge QuestPDF's container syste
 
 Copy the following code into your project to enable SkiaSharp integration:
 
-```c#{10,24}
+```csharp{10,24}
 using System.Text;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
@@ -86,7 +86,7 @@ This approach is ideal for most custom graphics as it preserves sharp edges and 
 
 The following example demonstrates how to create a vector-based clock graphic using SkiaSharp.
 
-```c#{11}
+```csharp{11}
 Document.Create(document =>
 {
     document.Page(page =>
@@ -172,7 +172,7 @@ While vector graphics are preferred for most cases, some visual effects and comp
 
 The following example demonstrates how to draw an image with rounded corners and apply a drop shadow effect.
 
-```c#{10}
+```csharp{10}
 Document.Create(document =>
 {
     document.Page(page =>

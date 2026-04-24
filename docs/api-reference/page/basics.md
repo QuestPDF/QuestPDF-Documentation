@@ -5,7 +5,7 @@ You can easily create pages of various sizes and orientations while controlling 
 
 Below is a minimal example showing how to create a simple document with a header, main content, and footer.
 
-```c#
+```csharp
 Document.Create(document =>
 {
     document.Page(page =>

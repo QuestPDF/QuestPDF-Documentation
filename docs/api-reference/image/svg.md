@@ -8,7 +8,7 @@ You can either load and parse an SVG image on demand or preload it to improve pe
 
 There are two ways to add an SVG image to your document:
 
-```c#{11-12}
+```csharp{11-12}
 // 1) with a text containing SVG content
 var svgContent = File.ReadAllText("pdf-icon.svg");
 container.Svg(svgContent);
@@ -21,7 +21,7 @@ container.Svg("pdf-icon.svg")
 SVG content supports the same scaling options as raster images. [Learn more](/api-reference/image/basics.html#image-scaling)
 
 For example:
-```c#{4}
+```csharp{4}
 container
   .Width(200)
   .Svg("pdf-icon.svg")
@@ -32,7 +32,7 @@ container
 
 ## Example
 
-```c#{5}
+```csharp{5}
 container.Column(column =>
 {
     column.Item().Text("The classic PDF icon looks like this:").Bold();
@@ -49,7 +49,7 @@ container.Column(column =>
 For better performance, especially when reusing the same image, you can preload the SVG image. 
 This ensures that the image is loaded and parsed only once:
 
-```c#{1-2,14-15}
+```csharp{1-2,14-15}
 // in global or static context
 var image = SvgImage.FromFile("pdf-icon.svg");
 

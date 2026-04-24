@@ -7,7 +7,7 @@ This section describes how to configure the page settings in your document.
 You can set the background color of your document pages using the PageColor method. 
 Colors can be specified using predefined constants, hexadecimal values, or named color variants:
 
-```c#
+```csharp
 document.Page(page =>
 {
     page.PageColor(Colors.White);
@@ -31,7 +31,7 @@ You can set exact sizes in various units, choose from standard presets, or allow
 
 Configures the exact dimensions of every page within the set.
 
-```c#
+```csharp
 document.Page(page =>
 {
     page.Size(595, 842); // in points
@@ -48,7 +48,7 @@ Enables the continuous page size mode, allowing the page's height to adjust acco
 
 This configuration is useful for output types like receipts, scrolls, or other cases where the length of the page can continuously expand.
 
-```c#
+```csharp
 document.Page(page =>
 {
     page.ContinuousSize(215);
@@ -65,7 +65,7 @@ It is possible to specify the minimum and maximum dimensions for the page, or bo
 
 Please note that with this setting, individual pages within the document may have different sizes.
 
-```c#
+```csharp
 document.Page(page =>
 {
     page.MinSize(400, 600);
@@ -80,7 +80,7 @@ document.Page(page =>
 
 For convenience, QuestPDF provides commonly used page size presets, including optional orientation:
 
-```c#
+```csharp
 using QuestPDF.Helpers;
 
 document.Page(page =>
@@ -112,7 +112,7 @@ You can configure each side individually or use combined methods for convenience
 | **MarginHorizontal** | Adds empty space horizontally (left and right) around the primary layer. |
 | **Margin**           | Adds empty space around the primary layer.                               |
 
-```c#
+```csharp
 document.Page(page =>
 {
     page.MarginVertical(32);
@@ -127,7 +127,7 @@ You can apply a default text style to every text element within a page.
 This is particularly helpful for setting consistent fonts, sizes, and colors across your document:
 [Learn more](/api-reference/text/style-inheritance)
 
-```c#
+```csharp
 document.Page(page =>
 {
     page.DefaultTextStyle(TextStyle.Default.FontSize(20));
@@ -143,7 +143,7 @@ QuestPDF supports both left-to-right (LTR) and right-to-left (RTL) layouts to ac
 This option applies a global content direction to the entire page set.
 [Learn more](/api-reference/content-direction)
 
-```c#
+```csharp
 document.Page(page =>
 {
     page.ContentFromLeftToRight();
@@ -158,7 +158,7 @@ document.Page(page =>
 You can apply different settings to each page set in the document. 
 This flexibility allows you to mix sizes, orientations, styles, or margins as needed:
 
-```c#
+```csharp
 Document
     .Create(document =>
     {

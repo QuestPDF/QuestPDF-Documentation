@@ -4,7 +4,7 @@
 
 Determines how text is positioned horizontally within its container.
 
-```c#{3,10}
+```csharp{3,10}
 container
     .Text("Sample text")
     .AlignCenter();
@@ -32,7 +32,7 @@ Available alignment options:
 
 Example:
 
-```c#{8,13,18,23}
+```csharp{8,13,18,23}
 .Column(column =>
 {
     column.Spacing(20);
@@ -69,7 +69,7 @@ Example:
 
 Applies a consistent style for the whole content within the Text element.
 
-```c#{3}
+```csharp{3}
 .Text(text =>
 {
     text.DefaultTextStyle(x => x.Light().LetterSpacing(-0.1f).WordSpacing(0.1f));
@@ -88,7 +88,7 @@ Applies a consistent style for the whole content within the Text element.
 Adjusts the vertical gap between successive paragraphs (separated by line breaks),
 helping to visually separate blocks of text for improved readability.
 
-```c#{3,10}
+```csharp{3,10}
 container
     .Text(Placeholders.Paragraphs())
     .ParagraphFirstLineIndentation(40);
@@ -111,7 +111,7 @@ container
 Specifies the horizontal offset of the first line in a paragraph.
 Commonly used to visually separate paragraphs in a block of text.
 
-```c#{3,10}
+```csharp{3,10}
 container
     .Text(Placeholders.Paragraphs())
     .ParagraphFirstLineIndentation(40);
@@ -133,7 +133,7 @@ container
 
 Limits the number of visible lines in a paragraph, truncating overflow text with an ellipsis or by hiding it to maintain layout consistency.
 
-```c#{17,25}
+```csharp{17,25}
 container
     .Column(column =>
     {
@@ -167,7 +167,7 @@ container
 
 It is also possible to customize the ellipsis:
 
-```c#{3}
+```csharp{3}
 container
     .Text(Placeholders.Paragraph())
     .ClampLines(3, " [...]");

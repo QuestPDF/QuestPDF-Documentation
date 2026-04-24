@@ -18,7 +18,7 @@ This service is paid but provides a generous free tier, including commercial usa
 
 The code below presents a simple helper class that fetches a map image based on the provided coordinates, zoom level, and dimensions.
 
-```c#
+```csharp
 static class MapboxStaticMapRenderer
 {
     private const string MapboxBaseUrl = "https://api.mapbox.com/styles/v1/mapbox/streets-v12/static";
@@ -47,7 +47,7 @@ static class MapboxStaticMapRenderer
 
 You can use the helper class implemented above to fetch a map image and embed it in your document.
 
-```c#{1,18-21}
+```csharp{1,18-21}
 var map = await MapboxStaticMapRenderer.FetchStaticMapAsync(19.9376052f, 50.0616087f, 10, 500, 400);
 
 Document

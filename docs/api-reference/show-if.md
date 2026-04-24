@@ -9,7 +9,7 @@ The ShowIf element provides a simple way to conditionally display or hide conten
 This is particularly useful when you need to show or hide sections of your document based on runtime conditions.
 
 
-```c#{8-11,19}
+```csharp{8-11,19}
 var condition = numberOfElements > 5;
 
 // c# if-statement approach

@@ -10,7 +10,7 @@ This allows you to draw custom shapes, gradients, and other visual elements that
 This example shows how to draw a custom rectangle behind the text. 
 It fills the available space, has rounded corners, and a gradient fill.
 
-```c#{3-17}
+```csharp{3-17}
 .Layers(layers =>
 {
     layers.Layer().Svg(size =>
@@ -46,7 +46,7 @@ It fills the available space, has rounded corners, and a gradient fill.
 
 This example creates structure similar to a table of contents with dotted lines connecting the page numbers to the titles.
 
-```c#{15-22}
+```csharp{15-22}
 .Column(column =>
 {
     column.Spacing(5);

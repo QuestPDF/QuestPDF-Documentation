@@ -5,7 +5,7 @@ A recommended approach is to encapsulate your document generation within a singl
 
 This pattern allows you to separate the overall document structure from the implementation details of individual sections, making your code more modular and easier to maintain as your documents grow in complexity.
 
-```c#{16-25}
+```csharp{16-25}
 public class MyReport
 {
     public byte[] GenerateReport()

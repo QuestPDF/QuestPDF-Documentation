@@ -6,7 +6,7 @@ Instead of repeating styling code for each element, encapsulating the styling lo
 By defining local functions, you can ensure consistency across multiple elements while reducing redundancy. 
 Below is an example demonstrating this approach:
 
-```c#
+```csharp
 container.Table(table =>
 {
     table.ColumnsDefinition(columns =>

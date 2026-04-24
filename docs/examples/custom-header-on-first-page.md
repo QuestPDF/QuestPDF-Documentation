@@ -3,7 +3,7 @@
 A common requirement in document design is to create a distinct header for the first page, with all subsequent pages sharing a standard header format. 
 This can be easily accomplished using the [ShowOnce](/api-reference/show-once) and [SkipOnce](/api-reference/skip-once) elements in QuestPDF.
 
-```c#{10-15}
+```csharp{10-15}
 Document
    .Create(document =>
    {

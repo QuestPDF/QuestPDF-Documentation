@@ -8,7 +8,7 @@ The Repeat element is designed to fulfill this requirement by rendering the spec
 
 Please note that the term "Variable" is repeated across multiple pages.
 
-```c#{24}
+```csharp{24}
 container
     .Decoration(decoration =>
     {

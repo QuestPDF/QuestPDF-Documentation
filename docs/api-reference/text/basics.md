@@ -4,7 +4,7 @@
 
 In most cases, text content can be added using the following shorthand. The text will inherit the default style.
 
-```c#
+```csharp
 container
     .Text("Hello, World!");
 ```
@@ -15,7 +15,7 @@ container
 
 The `Text` method returns a descriptor that allows further customization of the text style.
 
-```c#{7-8,12-14,18-20}
+```csharp{7-8,12-14,18-20}
 .Column(column =>
 {
     column.Spacing(10);
@@ -49,7 +49,7 @@ The `Text` method returns a descriptor that allows further customization of the 
 
 It is also possible to format specific parts of the text content using spans:
 
-```c#{5,7,9,11}
+```csharp{5,7,9,11}
 container
     .Text(text =>
     {
@@ -72,7 +72,7 @@ container
 
 The typography pattern helps maintain consistent text styling across your documents.
 
-```c#
+```csharp
 public static class Typography
 {
     public static TextStyle Title => TextStyle
@@ -101,7 +101,7 @@ public static class Typography
 
 Then, a predefined typography can be used in the following way:
 
-```c#{3}
+```csharp{3}
 container
     .Text("Report #123")
     .Style(Typography.Title);
@@ -121,7 +121,7 @@ container
 
 Hyperlink is a clickable text that redirects the user to a specific webpage.
 
-```c#{8,10,12}
+```csharp{8,10,12}
 .Text(text =>
 {
     var hyperlinkStyle = TextStyle.Default

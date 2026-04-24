@@ -18,7 +18,7 @@ Use this element to control the horizontal size of its content.
 
 The following example shows how text content adjusts to the specified width constraints.
 
-```c#{9,14}
+```csharp{9,14}
 container
     .Width(300)
     .Padding(25)

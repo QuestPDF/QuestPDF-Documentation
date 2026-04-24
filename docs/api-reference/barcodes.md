@@ -34,7 +34,7 @@ The ZXing.Net supports the following list of formats:
 Linear barcodes (like EAN-8, EAN-13, Code 128, etc.) are perfect for encoding numeric or alphanumeric data in a compact format. 
 Here's how to implement an EAN-8 barcode:
 
-```c#{34-42}
+```csharp{34-42}
 using ZXing;
 using ZXing.OneD;
 using ZXing.Rendering;
@@ -88,7 +88,7 @@ using ZXing.Rendering;
 QR codes are versatile 2D barcodes that can encode larger amounts of data, including URLs, text, and more. 
 Here's how to create a QR code:
 
-```c#{28-34}
+```csharp{28-34}
 using ZXing;
 using ZXing.QrCode;
 using ZXing.Rendering;

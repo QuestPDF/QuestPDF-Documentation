@@ -9,7 +9,7 @@ The following methods allow you to inject page numbers into any text container.
 | **CurrentPageNumber**        | Appends text showing the current page number.                                                                                                                                                    |
 | **TotalPages**               | Appends text showing the total number of pages in the document.                                                                                                                                  |
 
-```c#{13-18}
+```csharp{13-18}
 Document.Create(document =>
 {
     document.Page(page =>
@@ -56,7 +56,7 @@ The following methods allow you to display page numbers relative to a specific s
 
 First, define a section somewhere in the document:
 
-```c#{2}
+```csharp{2}
 container
     .Section("customSection")
     // content of custom section
@@ -64,7 +64,7 @@ container
 
 Then, refer to this location position in your list of contents:
 
-```c#
+```csharp
 container
     .Text(text =>
     {
@@ -87,7 +87,7 @@ container
 
 It is possible to format page numbers to a specified format, e.g. with leading zeros or as Roman numerals.
 
-```c#{4}
+```csharp{4}
 container
     .Text(text =>
     {

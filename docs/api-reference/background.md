@@ -13,12 +13,12 @@ Background can be used to enhance the visual appearance of your document by prov
 
 Sets a solid background color behind its content.
 
-```c#
+```csharp
 .Background("#00FF00")
 .Background(Colors.Green.Lighten2)
 ```
 
-```c#{30}
+```csharp{30}
 using QuestPDF.Helpers;
 
 var colors = new[]
@@ -61,7 +61,7 @@ Applies a linear gradient background to the container with the specified angle a
 
 The first argument is the angle in degrees, and the second argument is an array of colors that define the gradient.
 
-```c#{6,10,14}
+```csharp{6,10,14}
 .Column(column =>
 {
     column.Spacing(25);
@@ -91,7 +91,7 @@ Sets the corner radius for the background, creating rounded corners.
 Read more about [rounded corners](/api-reference/rounded-corners.md).
 :::
 
-```c#{2-3}
+```csharp{2-3}
 container
     .Background(Colors.Grey.Lighten2)
     .CornerRadius(25)

@@ -17,7 +17,7 @@ This example demonstrates how to create a reusable address component and integra
 
 #### Component definition
 
-```c#
+```csharp
 public class Address
 {
     public string CompanyName { get; set; }
@@ -67,7 +67,7 @@ public class AddressComponent : IComponent
 
 By simply passing an Address object to the component, all formatting and layout concerns are delegated to the component itself.
 
-```c#
+```csharp
 var address = new Address
 {
     CompanyName = "Apple",
@@ -106,7 +106,7 @@ This approach provides flexibility for various data types and layout requirement
 
 The component exposes methods for adding text, images, and custom content fields.
 
-```c#
+```csharp
 using QuestPDF.Infrastructure;
 
 public class SectionComponent : IComponent
@@ -169,7 +169,7 @@ public class SectionComponent : IComponent
 Please note how easy it is to create a new section with multiple fields.
 The layout and styling are encapsulated within the component, ensuring consistency across different sections.
 
-```c#
+```csharp
 Document
     .Create(document =>
     {

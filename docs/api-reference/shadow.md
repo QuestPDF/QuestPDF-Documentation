@@ -2,7 +2,7 @@
 
 Shadows can enhance the visual depth and separation of elements in a document.
 
-```c#{3-10}
+```csharp{3-10}
 container
     .Border(1, Colors.Black)
     .Shadow(new BoxShadowStyle
@@ -33,7 +33,7 @@ Values different from 0 may significantly impact performance and enlarge the out
 Use with caution, especially in large documents or when rendering complex shadows.
 :::
 
-```c#{12}
+```csharp{12}
 .Row(row =>
 {
     row.Spacing(50);
@@ -61,7 +61,7 @@ Gets or sets the spread radius of the shadow in pixels.
 
 Positive values cause the shadow to expand, negative values cause it to contract.
 
-```c#{13}
+```csharp{13}
 .Row(row =>
 {
     row.Spacing(50);
@@ -90,7 +90,7 @@ Gets or sets the horizontal offset of the shadow in pixels.
 
 Positive values move the shadow to the right, negative values move it to the left.
 
-```c#{13}
+```csharp{13}
 .Row(row =>
 {
     row.Spacing(50);
@@ -119,7 +119,7 @@ Gets or sets the vertical offset of the shadow in pixels.
 
 Positive values move the shadow downward, negative values move it upward.
 
-```c#{13}
+```csharp{13}
 .Row(row =>
 {
     row.Spacing(50);
@@ -146,7 +146,7 @@ Positive values move the shadow downward, negative values move it upward.
 
 Gets or sets the color of the shadow.
 
-```c#{18}
+```csharp{18}
 .Row(row =>
 {
     row.Spacing(50);
@@ -181,7 +181,7 @@ Shadows can be applied without any blur effect for a sharper appearance.
 
 This approach is faster and results in significantly smaller file sizes, making it suitable for performance-sensitive applications.
 
-```c#{10,22}
+```csharp{10,22}
 .Row(row =>
 {
     row.Spacing(50);

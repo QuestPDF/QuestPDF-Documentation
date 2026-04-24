@@ -7,7 +7,7 @@ outline: false
 
 For positive values, the Padding element adds empty space around its content. 
 
-```c#{3-5}
+```csharp{3-5}
 container
     .Width(250)
     .PaddingVertical(10)
@@ -24,7 +24,7 @@ container
 
 For negative values, it pushes content beyond the edges, increasing available space (similar to negative HTML margins).
 
-```c#{3,5}
+```csharp{3,5}
 container
     .Width(250)
     .Padding(50)

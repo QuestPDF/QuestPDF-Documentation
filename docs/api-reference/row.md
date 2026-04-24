@@ -25,7 +25,7 @@ the items will occupy sizes of 15 points, 75 points, and 10 points respectively.
 
 For ConstantItem, you can optionally specify the unit value (default is `Unit.Points`).
 
-```c#
+```csharp
 row.ConstantItem(5, Unit.Centimetre);
 ```
 
@@ -37,7 +37,7 @@ row.ConstantItem(5, Unit.Centimetre);
 The Row element uses a lambda function to define its content.
 Inside the lambda, you can add multiple items using the `Item` method.
 
-```c#{4,6,11,16}
+```csharp{4,6,11,16}
 container
     .Padding(25)
     .Width(325)
@@ -67,7 +67,7 @@ container
 
 You can adjust the horizontal spacing between items using the `Spacing` method.
 
-```c#{7}
+```csharp{7}
 container
     .Padding(25)
     .Width(220)
@@ -88,7 +88,7 @@ container
 
 Optionally, you can specify the unit value (default is `Unit.Points`).
 
-```c#
+```csharp
 row.Spacing(5, Unit.Millimeters);
 ```
 
@@ -99,7 +99,7 @@ row.Spacing(5, Unit.Millimeters);
 
 You can adjust the spacing between items individually by adding an empty ConstantItem with a specific width.
 
-```c#
+```csharp
 .Row(row =>
 {
     row.RelativeItem().Background(Colors.Grey.Darken1);
@@ -122,7 +122,7 @@ This ensures consistent visual alignment, but sometimes it can result in unwante
 
 To disable this behavior, use the `ShrinkVertical` API:
 
-```c#{15}
+```csharp{15}
 .Row(row =>
 {
     row.Spacing(15);

@@ -25,7 +25,7 @@ This setting establishes the basic structure of the grid layout.
 This setting affects the visual presentation of your column arrangement. 
 Positive values increase separation between columns, while negative values may cause overlap (though this is rarely desirable).
 
-```c#
+```csharp
 container.MultiColumn(multiColumn =>
 {
     multiColumn.Columns(3);
@@ -57,7 +57,7 @@ Use the Spacer approach to create a visual break between content sections, impro
 The container's dimensions are determined by the height of the columns and the configured spacing. 
 It supports all available layout elements.
 
-```c#{6-10}
+```csharp{6-10}
 container.MultiColumn(multiColumn =>
 {
     multiColumn.Columns(2);
@@ -90,7 +90,7 @@ container.MultiColumn(multiColumn =>
 The BalanceHeight() method controls how content is distributed across columns. 
 This feature helps create a more aesthetically pleasing and professional layout by ensuring columns have similar heights.
 
-```c#{4}
+```csharp{4}
 container.MultiColumn(multiColumn =>
 {
     multiColumn.Spacing(30);

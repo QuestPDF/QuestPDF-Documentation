@@ -30,7 +30,7 @@ It offers both horizontal and vertical options that can be used independently or
 
 ## Example
 
-```c#{4-5}
+```csharp{4-5}
 container
     .Width(300)
     .Height(300)

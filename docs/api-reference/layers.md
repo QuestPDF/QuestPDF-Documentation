@@ -25,7 +25,7 @@ The order of code execution determines the drawing order:
 
 A common use-case for this element is to add background content behind the main content.
 
-```c#{7-22}
+```csharp{7-22}
 .Column(column =>
 {
     column.Item().PaddingBottom(15).Text("Proposed Business Card Design:").Bold();

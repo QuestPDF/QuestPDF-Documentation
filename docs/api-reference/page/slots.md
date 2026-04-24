@@ -14,7 +14,7 @@ The main slots are Header, Content, and Footer.
 | page.**Footer()**  | Represents the section at the very bottom of the page, just below the main content. This container does not support paging capability. It is expected to be fully displayed on every page. |
 
 
-```c#
+```csharp
 .Page(page =>
 {
     document.Page(page =>
@@ -54,7 +54,7 @@ The main slots are Header, Content, and Footer.
 Represents a layer drawn in front of the primary layer (header + content + footer), serving as a watermark.
 It is not affected by the Margin configuration and always occupy the entire page.
 
-```c#{18}
+```csharp{18}
 document.Page(page =>
 {
     page.Size(PageSizes.A4);
@@ -83,7 +83,7 @@ document.Page(page =>
 Represents a layer drawn behind the primary layer (header + content + footer).
 It is not affected by the Margin configuration and always occupy the entire page.
 
-```c#{5}
+```csharp{5}
 document.Page(page =>
 { 
     page.Size(PageSizes.A4.Landscape());

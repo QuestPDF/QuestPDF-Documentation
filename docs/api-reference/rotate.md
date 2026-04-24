@@ -15,7 +15,7 @@ What was previously considered width may become height and vice versa.
 This affects how other properties like alignment and padding work on the rotated element.
 :::
  
-```c#{4}
+```csharp{4}
 container.Row(row =>
 {
     row.AutoItem()
@@ -45,7 +45,7 @@ container.Row(row =>
 
 Rotates its content clockwise by a given angle.
 
-```c#{24}
+```csharp{24}
 container
     .Background(Colors.Grey.Lighten2)
     .Padding(25)

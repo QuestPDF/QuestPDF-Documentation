@@ -3,7 +3,7 @@
 This code pattern provides a structured approach to styling individual table cells in a consistent and reusable manner. 
 It allows for defining cell appearance, such as background color, padding, and text styling, ensuring a cohesive visual experience across the table.
 
-```c#{16-23,39-49}
+```csharp{16-23,39-49}
 .Table(table =>
 {
     table.ColumnsDefinition(columns =>

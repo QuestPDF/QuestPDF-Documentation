@@ -20,7 +20,7 @@ Starting with the 2025.4.0 version, the library automatically detects when stati
 
 Below is an example where the image is loaded and processed for each item:
 
-```c#{9}
+```csharp{9}
 .Column(column =>
 {
     column.Spacing(15);
@@ -43,7 +43,7 @@ Below is an example where the image is loaded and processed for each item:
 To avoid redundant processing, load the image once and reuse it across all items. 
 This approach improves performance and reduces the final PDF file size:
 
-```c#{5,11}
+```csharp{5,11}
 .Column(column =>
 {
     column.Spacing(15);

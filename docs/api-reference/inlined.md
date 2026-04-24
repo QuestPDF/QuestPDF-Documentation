@@ -8,7 +8,7 @@ This layout is particularly useful when you need to display a collection of elem
 
 The following helper method generates sample blocks with random sizes and colors to demonstrate the Inlined component's capabilities:
 
-```c#
+```csharp
 void RandomBlock(IContainer container)
 {
     container
@@ -23,7 +23,7 @@ void RandomBlock(IContainer container)
 
 #### Usage
 
-```c#{5-13}
+```csharp{5-13}
 .Background(Colors.Grey.Lighten3)
 .Padding(25)
 .Border(1)

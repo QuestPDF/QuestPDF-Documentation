@@ -27,7 +27,7 @@ Most Fluent API methods accept an optional unit parameter for specifying alterna
 Unit types can be optionally specified in most of length-related API methods.
 As an example, the following code snippets are equivalent:
 
-```c#
+```csharp
 using QuestPDF.Infrastructure;
 
 .Padding(72)

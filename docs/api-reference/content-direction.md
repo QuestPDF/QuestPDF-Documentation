@@ -8,7 +8,7 @@ outline: false
 The ContentDirection element controls the flow direction of content in your document, supporting both left-to-right (LTR) and right-to-left (RTL) layouts. 
 This is essential for proper text alignment and content organization when working with different languages.
 
-```c#
+```csharp
 container
     .ContentFromRightToLeft()
     // content in right-to-left direction
@@ -28,7 +28,7 @@ container
 
 It is also possible to override the content direction for specific elements:
 
-```c#{1,10}
+```csharp{1,10}
 .ContentFromRightToLeft()
 .Column(column => 
 {
@@ -53,7 +53,7 @@ This element impacts several key aspects:
 - Default content alignment
 - Content flow direction
 
-```c#
+```csharp
 .ContentFromRightToLeft() // LTR or RTL mode
 .Row(row =>
 {

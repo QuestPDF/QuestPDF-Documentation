@@ -35,7 +35,7 @@ To access older versions of the Companion App, visit the [Download](/companion/d
 
 To preview your document, you need to slightly modify your code.
 
-```c#{19,22}
+```csharp{19,22}
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;

@@ -10,7 +10,7 @@ This container determines the optimal scale value through multiple iterations.
 For complex content, this may introduce a significant performance overhead.
 :::
 
-```c#{12-15}
+```csharp{12-15}
 container.Column(column =>
 {
     const string text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";

@@ -6,7 +6,7 @@ Font size measures the height of text characters, determining how large or small
 
 It's worth noting that different fonts may render text with different visual sizes, even when assigned the same numerical font size.
 
-```c#{7,11,15}
+```csharp{7,11,15}
 .Column(column =>
 {
     column.Spacing(10);
@@ -34,7 +34,7 @@ A font family is a collection of related fonts that share a consistent design st
 
 Examples of font families include Arial, Times New Roman, and Calibri.
 
-```c#{8,11}
+```csharp{8,11}
 .Column(column =>
 {
     column.Spacing(10);
@@ -58,7 +58,7 @@ The Font Fallback option is a list of alternative fonts that are used when speci
 
 A common example is the display of non-Latin characters, such as Arabic or Chinese, which may not be supported by all fonts.
 
-```c#{3}
+```csharp{3}
 container
     .Text("The Arabic word for programming is البرمجة.")
     .FontFamily("Lato", "Noto Sans Arabic");
@@ -68,7 +68,7 @@ container
 
 It's also useful for displaying emojis, which are not universally supported by all fonts.
 
-```c#{3}
+```csharp{3}
 container
     .Text("Popular emojis include 😊, 😂, ❤️, 👍, and 😎.")
     .FontFamily("Lato", "Noto Emoji");
@@ -82,7 +82,7 @@ The font color determines the color applied to text characters, affecting their 
 
 It also influences the default color of text decorations, such as underlines.
 
-```c#{4,6,8}
+```csharp{4,6,8}
 .Text(text =>
 {
     text.Span("Each pixels consists of three sub-pixels: ");
@@ -104,7 +104,7 @@ Sets a solid background color for the text.
 
 This color fills the area behind the text or other elements, enhancing contrast and providing visual emphasis.
 
-```c#{4}
+```csharp{4}
 .Text(text =>
 {
     text.Span("The term ");
@@ -136,7 +136,7 @@ Please note that not all fonts support every weight. If the specified weight isn
 | ExtraBlack    | 1000      | <span style="font-weight: 1000">Example</span> |
 
 
-```c#{4,6,8,10}
+```csharp{4,6,8,10}
 .Text(text =>
 {
     text.Span("This sentence demonstrates ");
@@ -164,7 +164,7 @@ Renders text with an italic effect, where letters are slightly slanted to the ri
 
 Commonly used for emphasis or to distinguish specific words.
 
-```c#{4}
+```csharp{4}
 .Text(text =>
 {
     text.Span("In this sentence, the word ");
@@ -187,7 +187,7 @@ It is also possible to customize the decoration position:
 - Strikethrough,
 - Overline.
 
-```c#{4,6,8}
+```csharp{4,6,8}
 .Text(text =>
 {
     text.Span("There are a couple of available text decorations: ");
@@ -211,7 +211,7 @@ It is also possible to customize the decoration line style:
 - DecorationDotted,
 - DecorationDashed.
 
-```c#{4,6,8,10,12}
+```csharp{4,6,8,10,12}
 .Text(text =>
 {
     text.Span("Moreover, the decoration can be ");
@@ -235,7 +235,7 @@ It is also possible to customize the decoration line style:
 By default, the decoration line color is the same as the text color, and the decoration thickness is determined by the font. 
 However, these properties can be customized.
 
-```c#{6-9}
+```csharp{6-9}
 .Text(text =>
 {
     text.Span("This text contains a ");
@@ -258,7 +258,7 @@ However, these properties can be customized.
 Subscript displays text slightly below the baseline, often in a smaller size. 
 Commonly used for chemical formulas or mathematical notations
 
-```c#{4}
+```csharp{4}
 .Text(text =>
 {
     text.Span("H");
@@ -275,7 +275,7 @@ Commonly used for chemical formulas or mathematical notations
 Superscript displays text slightly above the baseline, often in a smaller size.
 Typically used for exponents, footnotes, or ordinal indicators
 
-```c#{4}
+```csharp{4}
 .Text(text =>
 {
     text.Span("E = mc");
@@ -292,7 +292,7 @@ Typically used for exponents, footnotes, or ordinal indicators
 Adjusts the vertical spacing between lines of text, affecting readability and overall text layout.
 The added space is proportional to the text size.
 
-```c#{16}
+```csharp{16}
 .Column(column =>
 {
     column.Spacing(20);
@@ -322,7 +322,7 @@ Adjusts the horizontal spacing between characters in the text, affecting readabi
 
 The adjustment is proportional to the text size.
 
-```c#
+```csharp
 .Column(column =>
 {
     column.Spacing(20);
@@ -351,7 +351,7 @@ The adjustment is proportional to the text size.
 Adjusts the horizontal spacing between words in the text, affecting readability and overall visual style.
 The adjustment is proportional to the text size.
 
-```c#
+```csharp
 .Column(column =>
 {
     column.Spacing(20);
@@ -392,7 +392,7 @@ Moreover, some fonts have features enabled by default, and you may not see any d
 
 Let's analyze the `StandardLigatures` font feature, which replaces specific pairs of letters (such as 'fi' or 'fl') with a single, combined glyph to enhance aesthetics.
 
-```c#{15,27}
+```csharp{15,27}
 .Row(row =>
 {
     row.Spacing(25);

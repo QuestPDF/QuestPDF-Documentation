@@ -5,7 +5,7 @@ This is useful for separating sections, improving readability, and ensuring that
 
 In the example below, we generate a programming dictionary where each term appears on its own page.
 
-```c#{28}
+```csharp{28}
 Document
     .Create(document =>
     {

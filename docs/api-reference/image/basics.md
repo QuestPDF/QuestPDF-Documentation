@@ -8,7 +8,7 @@ Supported image format: JPEG, PNG, BMP, WEBP.
 
 There are several ways to add an image to your document:
 
-```c#
+```csharp
 // 1) a binary array
 byte[] imageData = File.ReadAllBytes("path/to/logo.png")
 container.Image(imageData)
@@ -28,7 +28,7 @@ Therefore, the resolution of an image is not used for determining its physical s
 
 #### Example
 
-```c#{8-11}
+```csharp{8-11}
 .Grid(grid =>
 {
     grid.Columns(2);
@@ -64,7 +64,7 @@ By default, the image scales to fill the full width of its container while maint
 
 #### Example
 
-```c#{10,21,32,43,54}
+```csharp{10,21,32,43,54}
 .Column(column =>
 {
     column.Item().PaddingBottom(5).Text("FitWidth").Bold();
@@ -131,7 +131,7 @@ The PDF standard uses points to describe size, where there are 72 points in 1 in
 
 To force an image to take a specified area, you can use any of the constraining elements. The simplest ones are `Width` and `Height`, e.g.:
 
-```c#
+```csharp
 container
     .Width(1, Unit.Inch)
     .Image(ImageElement.Image)

@@ -14,7 +14,7 @@ If it spans multiple pages, all subsequent pages are rendered as usual without r
 
 This method is useful for ensuring that content remains visually coherent and is not arbitrarily split.
 
-```c#{7}
+```csharp{7}
 container.Column(column =>
 {
     column.Item().Height(400).Background(Colors.Grey.Lighten3);

@@ -10,7 +10,7 @@ By default, Placeholder fills the designated space with an icon. If a text value
 
 You can adjust the size of the Placeholder by chaining layout-modifying elements before its invocation.
 
-```c#
+```csharp
 container
     .Width(200)
     .Height(100)
@@ -20,7 +20,7 @@ container
 
 ### Example
 
-```c#{12,16,20}
+```csharp{12,16,20}
 Document
     .Create(document =>
     {

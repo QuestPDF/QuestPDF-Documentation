@@ -21,7 +21,7 @@ This simplifies the development process, as your code can easily access all syst
 However, in most cloud deployments, few or no fonts are available, which may lead to unexpected results. 
 To avoid this, you can disable environment font loading using the following setting:
 
-```c#
+```csharp
 // true by default
 QuestPDF.Settings.UseEnvironmentFonts = false;
 ```
@@ -34,7 +34,7 @@ This allows you to include font files in your project without the need for manua
 
 If you prefer to manually specify directories for font discovery, use the following approach:
 
-```c#
+```csharp
 QuestPDF.Settings.FontDiscoveryPaths.Clear();
 
 // adjust the path based on your project structure
@@ -47,7 +47,7 @@ QuestPDF.Settings.FontDiscoveryPaths.Add("resources/fonts");
 You can manually register custom fonts using the `FontManager` class.
 Please perform this operation only once, during application startup or initialization.
 
-```c#
+```csharp
 using QuestPDF.Drawing;
 
 // register font from a file
@@ -61,7 +61,7 @@ FontManager.RegisterFontFromEmbeddedResource("YourApplication.Resources.Fonts.No
 
 You can also register fonts under custom names to simplify usage within your documents:
 
-```c#
+```csharp
 // load the font at startup
 using var fontStream = File.OpenRead("LibreBarcode39-Regular.ttf");
 FontManager.RegisterFontWithCustomName("MyBarcodeFont", fontStream);
@@ -81,7 +81,7 @@ If glyphs are missing in both the primary font and all registered fallback fonts
 
 To detect such issues, enable the following setting:
 
-```c#
+```csharp
 // enabled by default only when the debugger is attached
 QuestPDF.Settings.CheckIfAllTextGlyphsAreAvailable = true;
 ```
