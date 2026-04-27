@@ -30,7 +30,7 @@ const contacts: ContactInformation[] = [
     links: [
       {
         label: "Open Customer Portal",
-        href: "https://customer-portal.paddle.com/login/cpl_01gmdq0qdr8madhdchknpb52we"
+        href: "https://account.questpdf.com"
       }
     ]
   },
