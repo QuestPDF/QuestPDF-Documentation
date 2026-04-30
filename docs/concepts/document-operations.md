@@ -84,6 +84,17 @@ DocumentOperation
     .Save("merged.pdf");
 ```
 
+Example of merging multiple documents at once:
+
+```csharp
+DocumentOperation
+    .LoadFile("document1.pdf")
+    .MergeFile("document2.pdf")
+    .MergeFile("document3.pdf")
+    // more files...
+    .Save("merged.pdf");
+```
+
 Advanced example where two documents are merged with specific page selections:
 
 ```csharp
