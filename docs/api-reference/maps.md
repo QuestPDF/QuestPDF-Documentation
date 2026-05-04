@@ -18,11 +18,15 @@ This service is paid but provides a generous free tier, including commercial usa
 
 The code below presents a simple helper class that fetches a map image based on the provided coordinates, zoom level, and dimensions.
 
-```csharp
+::: warning
+Please generate your own access token via your Mapbox account before deploying.
+:::
+
+```csharp{4}
 static class MapboxStaticMapRenderer
 {
     private const string MapboxBaseUrl = "https://api.mapbox.com/styles/v1/mapbox/streets-v12/static";
-    private const string AccessToken = "pk.eyJ1IjoibWFyY2luLXppYWJlayIsImEiOiJjbTc5cHZkZTUwNmM4MmxxdGN2cnRxMTBpIn0.8G-_nwFqjjfNQUCmHSOqKw";
+    private const string AccessToken = "<MAPBOX_TOKEN>";
 
     public static async Task<byte[]?> FetchStaticMapAsync(double longitude, double latitude, float zoom, int width, int height)
     {
