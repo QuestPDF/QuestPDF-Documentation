@@ -26,7 +26,7 @@ Please generate your own access token via your Mapbox account before deploying.
 static class MapboxStaticMapRenderer
 {
     private const string MapboxBaseUrl = "https://api.mapbox.com/styles/v1/mapbox/streets-v12/static";
-    private const string AccessToken = <MAPBOX_TOKEN>;
+    private const string AccessToken = "<MAPBOX_TOKEN>";
 
     public static async Task<byte[]?> FetchStaticMapAsync(double longitude, double latitude, float zoom, int width, int height)
     {
