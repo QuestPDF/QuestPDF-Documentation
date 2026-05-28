@@ -2,8 +2,8 @@
 
 The companion app provides a preview of the document. The preview is interactive and allows you to navigate the document, select elements, and measure distances.
 
-![Application screenshot](/companion/application-light.png){.companion-screenshot .light-only}
-![Application screenshot](/companion/application-dark.png){.companion-screenshot .dark-only}
+![Application screenshot](/companion/application-light.webp){.companion-screenshot .light-only}
+![Application screenshot](/companion/application-dark.webp){.companion-screenshot .dark-only}
 
 
 ## Document hierarchy
@@ -16,8 +16,8 @@ The tree-structure uses a similar compact concept as C# Fluent API. Each node in
 |------------|--------------------------------|
 | ctrl + W   | Hide / show document hierarchy |
 
-![Document hierarchy hidden](/companion/hierarchy-hidden-light.png){.companion-screenshot .light-only}
-![Document hierarchy hidden](/companion/hierarchy-hidden-dark.png){.companion-screenshot .dark-only}
+![Document hierarchy hidden](/companion/hierarchy-hidden-light.webp){.companion-screenshot .light-only}
+![Document hierarchy hidden](/companion/hierarchy-hidden-dark.webp){.companion-screenshot .dark-only}
 
 
 ## Document preview
@@ -44,16 +44,16 @@ The document preview section (on the right side of the screen) displays the docu
 
 Use the magnifier feature (shortcut: `key 1`) to quickly see document's structure details without the need of zooming and adjusting the preview.
 
-![Document preview magnifier](/companion/magnifier-light.png){.companion-screenshot .light-only}
-![Document preview magnifier](/companion/magnifier-dark.png){.companion-screenshot .dark-only}
+![Document preview magnifier](/companion/magnifier-light.webp){.companion-screenshot .light-only}
+![Document preview magnifier](/companion/magnifier-dark.webp){.companion-screenshot .dark-only}
 
 
 ## Coordinate picker
 
 The coordinate picker feature (shortcut: `key 2`) allows you to pick the coordinates of the selected element. This feature is useful when you need to know the position of an element in the document.
 
-![Document content coordinate picker](/companion/measurement-point-light.png){.companion-screenshot .light-only}
-![Document content coordinate picker](/companion/measurement-point-dark.png){.companion-screenshot .dark-only}
+![Document content coordinate picker](/companion/measurement-point-light.webp){.companion-screenshot .light-only}
+![Document content coordinate picker](/companion/measurement-point-dark.webp){.companion-screenshot .dark-only}
 
 
 ## Size measurement
@@ -62,11 +62,11 @@ This feature allows you to measure the size of visual elements in the document, 
 
 You can measure the size of the content vertically (shortcut: `key 3`) or horizontally (shortcut: `key 4`).
 
-![Document content vertical measurement](/companion/measurement-vertical-light.png){.companion-screenshot .light-only}
-![Document content vertical measurement](/companion/measurement-vertical-dark.png){.companion-screenshot .dark-only}
+![Document content vertical measurement](/companion/measurement-vertical-light.webp){.companion-screenshot .light-only}
+![Document content vertical measurement](/companion/measurement-vertical-dark.webp){.companion-screenshot .dark-only}
 
-![Document content horizontal measurement](/companion/measurement-horizontal-light.png){.companion-screenshot .light-only}
-![Document content horizontal measurement](/companion/measurement-horizontal-dark.png){.companion-screenshot .dark-only}
+![Document content horizontal measurement](/companion/measurement-horizontal-light.webp){.companion-screenshot .light-only}
+![Document content horizontal measurement](/companion/measurement-horizontal-dark.webp){.companion-screenshot .dark-only}
 
 
 ## Element selection
@@ -83,8 +83,8 @@ If the element is visible on multiple pages, you can use arrows keys to navigate
 | arrow down | Next element occurrence     |
 | esc        | Clear element selection     |
 
-![Selected element](/companion/selection-light.png){.companion-screenshot .light-only}
-![Selected element](/companion/selection-dark.png){.companion-screenshot .dark-only}
+![Selected element](/companion/selection-light.webp){.companion-screenshot .light-only}
+![Selected element](/companion/selection-dark.webp){.companion-screenshot .dark-only}
 
 
 ## Content searching
@@ -100,8 +100,8 @@ The selected search result is highlighted in both structure tree view and on the
 | arrow up   | Previous found element |
 | arrow down | Next found element     |
 
-![Content searching feature](/companion/search-light.png){.companion-screenshot .light-only}
-![Content searching feature](/companion/search-dark.png){.companion-screenshot .dark-only}
+![Content searching feature](/companion/search-light.webp){.companion-screenshot .light-only}
+![Content searching feature](/companion/search-dark.webp){.companion-screenshot .dark-only}
 
 
 ## Go to implementation
@@ -128,8 +128,8 @@ The companion app provides a detailed view of runtime exceptions that occur duri
 The exception details are displayed in the error panel. 
 You can review the exception message, stack trace, and the source code that caused the exception.
 
-![Runtime exception visualization](/companion/generic-exception-light.png){.companion-screenshot .light-only}
-![Runtime exception visualization](/companion/generic-exception-dark.png){.companion-screenshot .dark-only}
+![Runtime exception visualization](/companion/generic-exception-light.webp){.companion-screenshot .light-only}
+![Runtime exception visualization](/companion/generic-exception-dark.webp){.companion-screenshot .dark-only}
 
 
 ## Layout issue debugging
@@ -154,8 +154,8 @@ When an element is selected, additional information about the layout issue is di
 You can review the reason for the layout wrap or layout overflow.
 Use that hint and your knowledge about structure elements behavior to resolve the layout issue.
 
-![Layout error visualization](/companion/layout-error-light.png){.companion-screenshot .light-only}
-![Layout error visualization](/companion/layout-error-dark.png){.companion-screenshot .dark-only}
+![Layout error visualization](/companion/layout-error-light.webp){.companion-screenshot .light-only}
+![Layout error visualization](/companion/layout-error-dark.webp){.companion-screenshot .dark-only}
 
 
 ## Settings
@@ -165,5 +165,5 @@ The companion app provides a set of customization options to adjust the appearan
 - Default IDE for code navigation,
 - Changing port number on which the application will communicate.
 
-![Settings page](/companion/settings-light.png){.companion-screenshot .light-only}
-![Settings page](/companion/settings-dark.png){.companion-screenshot .dark-only}
+![Settings page](/companion/settings-light.webp){.companion-screenshot .light-only}
+![Settings page](/companion/settings-dark.webp){.companion-screenshot .dark-only}
