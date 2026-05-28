@@ -7,8 +7,8 @@
     </div>
 
     <div class="image-container">
-      <img :src="`/companion/application-light.png`" alt="Companion App" class="companion-image light" />
-      <img :src="`/companion/application-dark.png`" alt="Companion App" class="companion-image dark" />
+      <img :src="`/companion/application-light.webp`" alt="Companion App" class="companion-image light" />
+      <img :src="`/companion/application-dark.webp`" alt="Companion App" class="companion-image dark" />
     </div>
 
 
