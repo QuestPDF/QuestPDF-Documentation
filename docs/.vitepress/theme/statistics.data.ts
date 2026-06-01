@@ -77,5 +77,5 @@ export function toMillions(n: number): number {
 }
 
 export function toThousands(n: number): number {
-    return Math.round(n / 1_000)
+    return Math.round(n / 100) / 10
 }
