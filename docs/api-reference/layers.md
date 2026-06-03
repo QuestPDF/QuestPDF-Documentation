@@ -37,7 +37,7 @@ A common use-case for this element is to add background content behind the main 
             layers.Layer().Image("Resources/card-background.jpg").FitUnproportionally();
 
             layers.PrimaryLayer()
-                .TranslateY(75)
+                .OffsetY(75)
                 .Column(innerColumn =>
                 {
                     innerColumn.Item()
