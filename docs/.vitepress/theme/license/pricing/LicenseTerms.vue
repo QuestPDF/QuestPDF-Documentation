@@ -65,7 +65,6 @@ const terms = [
 @media screen and (max-width: 700px) {
   .license-terms {
     grid-template-columns: 1fr;
-    grid-gap: 64px;
   }
 }
 
