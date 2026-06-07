@@ -6,7 +6,7 @@ title: "Pricing"
 ---
 
 <script setup>
-import PricingIndex from '.vitepress/theme/pricing/PricingIndex.vue';
+import PricingIndex from './.vitepress/theme/pricing/PricingIndex.vue';
 </script>
 
 <PricingIndex />
