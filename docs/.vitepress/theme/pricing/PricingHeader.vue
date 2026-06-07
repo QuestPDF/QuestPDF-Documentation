@@ -43,7 +43,7 @@
   grid-template-columns: auto 1fr;
   grid-gap: 24px;
 
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 24px;
   color: #1B5E20;
   background-color: #67B84D33;
