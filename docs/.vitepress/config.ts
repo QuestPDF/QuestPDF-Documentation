@@ -54,7 +54,7 @@ export default defineConfig({
                     { text: 'Features Overview', link: '/features-overview' },
                 ]
             },
-            { text: 'Pricing', link: '/license/' },
+            { text: 'Pricing', link: '/pricing' },
             {
                 text: 'License',
                 items: [

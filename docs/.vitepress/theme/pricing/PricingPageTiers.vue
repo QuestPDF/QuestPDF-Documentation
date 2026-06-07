@@ -1,6 +1,6 @@
 <template>
   <article class="content">
-    <license-header />
+    <pricing-header />
 
     <div class="license-tiers">
       <section class="license-tier card" :class="license.name" v-for="license of licenses">
@@ -48,8 +48,8 @@
 
 <script setup lang="ts">
 
-import {usePaddle} from "../../paddle";
-import LicenseHeader from "./LicenseHeader.vue";
+import {usePaddle} from "../paddle";
+import PricingHeader from "./PricingHeader.vue";
 
 const paddle = usePaddle();
 
