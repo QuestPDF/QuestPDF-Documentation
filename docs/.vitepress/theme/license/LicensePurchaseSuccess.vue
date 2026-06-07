@@ -67,7 +67,6 @@ const orderDetails = [
             <i class="fa-duotone fa-square-check"></i>
             Order completed
           </h1>
-          <p class="sub-header">Thank you for choosing QuestPDF</p>
         </header>
 
         <div class="email-notification">
@@ -82,7 +81,7 @@ const orderDetails = [
 
           <div class="description-items">
             <div v-for="step in licenseDetails" :key="step.title" class="description-item">
-              <i class="fa-regular list-check-icon" :class="step.icon" />
+              <i class="fa-regular" :class="step.icon" />
               <div class="description-item-content">
                 <strong>{{ step.title }}</strong>
                 <span v-html="step.description" />
@@ -98,7 +97,7 @@ const orderDetails = [
 
           <div class="description-items">
             <div v-for="step in orderDetails" :key="step.title" class="description-item">
-              <i class="fa-regular list-check-icon" :class="step.icon" />
+              <i class="fa-regular" :class="step.icon" />
               <div class="description-item-content">
                 <strong>{{ step.title }}</strong>
                 <span v-html="step.description" />
@@ -146,7 +145,7 @@ header h1 {
   display: flex;
   align-items: center;
   flex-direction: row;
-  gap: 20px;
+  gap: 12px;
 
   margin-bottom: 12px;
 }
@@ -160,7 +159,7 @@ header h1 i.fa-square-check {
 /* Email notification */
 
 .email-notification .fa {
-  font-size: 48px;
+  font-size: 40px;
   color: #67B84D;
 }
 
@@ -169,7 +168,7 @@ header h1 i.fa-square-check {
   grid-template-columns: auto 1fr;
   grid-gap: 24px;
 
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 24px 32px;
   color: #1B5E20;
   background-color: #67B84D33;
@@ -186,9 +185,8 @@ html.dark .email-notification {
 /* Cards with details */
 
 .success-card .fa-regular {
-  display: flex;
-  height: min-content;
-  place-content: center;
+  width: 100%;
+  aspect-ratio: 1;
 
   background-color: #8882;
   color: #666;
