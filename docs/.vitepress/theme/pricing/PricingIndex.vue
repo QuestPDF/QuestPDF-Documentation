@@ -13,7 +13,7 @@
     </div>
 
     <div class="container">
-      <pricing-help />
+      <pricing-contact />
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@
 
 import PricingPageTiers from "./PricingPageTiers.vue";
 import PricingTerms from "./PricingTerms.vue";
-import PricingHelp from "./PricingHelp.vue";
+import PricingContact from "./PricingContact.vue";
 import PricingResellers from "./PricingResellers.vue";
 
 </script>
