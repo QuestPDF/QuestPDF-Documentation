@@ -2,11 +2,12 @@
 layout: page
 sidebar: false
 aside: false
+title: "Community License"
 ---
 
 <script setup>
-import LicenseCommunity from '../.vitepress/theme/license/documents/LicenseCommunity.vue';
+import DocumentTemplate from '../.vitepress/theme/license/documents/DocumentTemplate.vue';
 </script>
 
-<LicenseCommunity />
+<DocumentTemplate id="license-community" />
 

@@ -2,6 +2,7 @@
 layout: page
 sidebar: false
 aside: false
+title: "Order completed"
 ---
 
 <script setup>

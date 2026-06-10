@@ -2,10 +2,11 @@
 layout: page
 sidebar: false
 aside: false
+title: "Terms of Service"
 ---
 
 <script setup>
-import TermsOfService from './.vitepress/theme/license/documents/TermsOfService.vue';
+import DocumentTemplate from './.vitepress/theme/license/documents/DocumentTemplate.vue';
 </script>
 
-<TermsOfService />
+<DocumentTemplate id="terms-of-service" />

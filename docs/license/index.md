@@ -2,11 +2,11 @@
 layout: page
 sidebar: false
 aside: false
-title: "License and Pricing"
+title: "License"
 ---
 
 <script setup>
-import LicenseIndex from '../.vitepress/theme/license/pricing/LicenseIndex.vue';
+import LicenseIndex from '../.vitepress/theme/license/LicenseIndex.vue';
 </script>
 
 <LicenseIndex />

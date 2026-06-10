@@ -6,7 +6,7 @@ Commercial licenses provide businesses with legal safety and long-term stability
 ::: tip
 The library is free for individuals, non-profits, all FOSS projects, and organizations under $1M in annual revenue.
 
-More details can be found on the [QuestPDF License and Pricing page](/license/).
+More details can be found on the [QuestPDF Pricing](/pricing) and [QuestPDF License](/license/) pages.
 :::
 
 ## Software Activation

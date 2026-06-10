@@ -4,26 +4,29 @@
       <div class="content">
         <section style="max-width: 800px;">
           <div class="section-header">
-            <slot name="header"></slot>
+            <h1>{{ doc.title }}</h1>
           </div>
         </section>
 
         <div class="card">
-          <slot name="content"></slot>
+          <div class="document-body vp-doc" v-html="doc.html"></div>
         </div>
-
-        <slot name="footer"></slot>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
+import { data } from "./licenseDocuments.data.ts";
 
+const props = defineProps({
+  id: { type: String, required: true }
+});
+
+const doc = data[props.id];
 </script>
 
-<style>
-
+<style lang="scss">
 
 .document-page .content {
   display: flex;
@@ -33,47 +36,25 @@
   max-width: 800px;
 }
 
-.document-page h1 {
-  margin-bottom: 0;
+.card {
+  overflow: hidden;
 }
 
-.document-page .card hr {
-  margin: 32px -32px;
+.document-body * {
+  color: var(--vp-c-text-2);
+}
+
+.document-body h2 {
+  margin: 32px -32px 16px;
+  padding: 32px 32px 0;
   width: calc(100% + 64px);
-  border-color: #8882;
-}
-
-
-.document-page a.action {
-  margin: 0;
-}
-
-.document-page h3:first-child {
-  margin-top: 0;
-}
-
-.document-content {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-
-  max-width: 800px !important;
-}
-
-.document-page h3 {
-  margin: 0 0 16px 0 !important;
-}
-
-.document-page a {
-  font-weight: 600;
-}
-
-.document-page .description {
+  border-top: 1px solid #8882;
   color: var(--vp-c-text-1);
+  font-size: 1.4rem;
 }
 
-.document-page p:not(:last-child) {
-  margin-bottom: 24px;
+.document-body strong {
+  color: var(--vp-c-text-1);
 }
 
 </style>

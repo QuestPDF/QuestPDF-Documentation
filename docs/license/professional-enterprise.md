@@ -2,10 +2,11 @@
 layout: page
 sidebar: false
 aside: false
+title: "Professional / Enterprise License"
 ---
 
 <script setup>
-import LicenseCommercial from '../.vitepress/theme/license/documents/LicenseCommercial.vue';
+import DocumentTemplate from '../.vitepress/theme/license/documents/DocumentTemplate.vue';
 </script>
 
-<LicenseCommercial />
+<DocumentTemplate id="license-professional" />

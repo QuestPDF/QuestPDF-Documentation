@@ -1,0 +1,86 @@
+[
+  {
+    "category": "Licensing & Eligibility",
+    "items": [
+      {
+        "question": "Is QuestPDF free to use?",
+        "answer": "Placeholder answer. Explain that QuestPDF is free under the Community MIT License for individuals, non-profits, FOSS projects, and organizations under the revenue threshold."
+      },
+      {
+        "question": "When do I need a paid license?",
+        "answer": "Placeholder answer. Describe the annual revenue threshold and production-use conditions that require a Professional or Enterprise license."
+      },
+      {
+        "question": "How is the revenue threshold calculated?",
+        "answer": "Placeholder answer. Clarify whether the threshold is based on gross revenue, which entity it applies to, and how it is measured."
+      },
+      {
+        "question": "Does the license cover subsidiaries and affiliates?",
+        "answer": "Placeholder answer. Explain how the license applies across parent companies, subsidiaries, and contractors."
+      }
+    ]
+  },
+  {
+    "category": "Plans & Pricing",
+    "items": [
+      {
+        "question": "Which license should I choose: Professional or Enterprise?",
+        "answer": "Placeholder answer. Compare the developer limits and entitlements of the Professional and Enterprise tiers."
+      },
+      {
+        "question": "How are developers counted toward my license?",
+        "answer": "Placeholder answer. Define who counts as a developer and how seats are measured."
+      },
+      {
+        "question": "Can I upgrade or downgrade my plan later?",
+        "answer": "Placeholder answer. Describe how plan changes work mid-term and any proration."
+      },
+      {
+        "question": "Do you offer discounts for startups or education?",
+        "answer": "Placeholder answer. Outline available discount programs and how to apply."
+      }
+    ]
+  },
+  {
+    "category": "Activation & Compliance",
+    "items": [
+      {
+        "question": "Do I need a license key to activate the library?",
+        "answer": "Placeholder answer. Explain the trust-based model with no license keys or activation servers."
+      },
+      {
+        "question": "Does QuestPDF make any network calls at runtime?",
+        "answer": "Placeholder answer. Confirm that the library performs no runtime telemetry or network calls."
+      },
+      {
+        "question": "How do I declare my license in code?",
+        "answer": "Placeholder answer. Show how the license type is set programmatically at startup."
+      },
+      {
+        "question": "What happens if I forget to set a license?",
+        "answer": "Placeholder answer. Describe the default behavior and any runtime warnings."
+      }
+    ]
+  },
+  {
+    "category": "Billing & Support",
+    "items": [
+      {
+        "question": "What payment methods do you accept?",
+        "answer": "Placeholder answer. List supported payment methods and currencies."
+      },
+      {
+        "question": "Can I get an invoice for my purchase?",
+        "answer": "Placeholder answer. Explain how invoices and receipts are issued."
+      },
+      {
+        "question": "What is your refund policy?",
+        "answer": "Placeholder answer. Summarize refund eligibility and the request process."
+      },
+      {
+        "question": "How do I contact support or request a custom agreement?",
+        "answer": "Placeholder answer. Provide the support contact channel and expected response time."
+      }
+    ]
+  }
+]

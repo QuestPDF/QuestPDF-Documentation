@@ -471,7 +471,7 @@ public class InvoiceDocument : IDocument
 ## License
 
 For learning and evaluation, you can use the free QuestPDF Evaluation license.
-More details can be found on the [QuestPDF License and Pricing page](/license/).
+More details can be found on the [QuestPDF Pricing](/pricing) and [QuestPDF License](/license/) pages.
 
 ```csharp
 QuestPDF.Settings.License = LicenseType.Evaluation;

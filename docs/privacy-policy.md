@@ -2,10 +2,11 @@
 layout: page
 sidebar: false
 aside: false
+title: "Privacy Policy"
 ---
 
 <script setup>
-import PrivacyPolicy from './.vitepress/theme/license/documents/PrivacyPolicy.vue';
+import DocumentTemplate from './.vitepress/theme/license/documents/DocumentTemplate.vue';
 </script>
 
-<PrivacyPolicy />
+<DocumentTemplate id="privacy-policy" />

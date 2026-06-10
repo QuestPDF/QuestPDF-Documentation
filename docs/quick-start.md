@@ -77,7 +77,7 @@ The library is free to use for any individual or business with less than 1 milli
 ::: tip
 For learning and evaluation, you can use the QuestPDF Evaluation license type.
 
-More details can be found on the [QuestPDF License and Pricing page](/license/).
+More details can be found on the [QuestPDF Pricing](/pricing) and [QuestPDF License](/license/) pages.
 :::
 
 
