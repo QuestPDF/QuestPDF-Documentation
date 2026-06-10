@@ -534,9 +534,9 @@ const categories = [
       },
       {
         icon: "fa-regular fa-arrows-up-down-left-right",
-        name: "Translate",
+        name: "Offset",
         description: "Shifts content position without affecting layout flow. Creates overlapping or offset effects.",
-        link: "/api-reference/translate.html"
+        link: "/api-reference/offset.html"
       },
       {
         icon: "fa-regular fa-reflect-horizontal",

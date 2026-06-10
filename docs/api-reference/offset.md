@@ -2,7 +2,7 @@
 
 This container allows you to precisely position content by moving it horizontally and vertically relative to its original position, independent of layout constraints. 
 
-When you apply translation, the element maintains its original size constraints while shifting its visual position.
+When you apply offset, the element maintains its original size constraints while shifting its visual position.
 
 | Method      | Description                                                                                                                                                      |
 |-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
