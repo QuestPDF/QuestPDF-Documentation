@@ -36,10 +36,6 @@ const doc = data[props.id];
   max-width: 800px;
 }
 
-.card {
-  overflow: hidden;
-}
-
 .document-body * {
   color: var(--vp-c-text-2);
 }
