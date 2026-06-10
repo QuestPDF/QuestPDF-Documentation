@@ -199,7 +199,7 @@ export default defineConfig({
                     { text: 'Rotate', link: '/api-reference/rotate' },
                     { text: 'Scale', link: '/api-reference/scale' },
                     { text: 'Scale to fit', link: '/api-reference/scale-to-fit' },
-                    { text: 'Translate', link: '/api-reference/translate' },
+                    { text: 'Offset', link: '/api-reference/offset' },
                     { text: 'Flip', link: '/api-reference/flip' },
                     { text: 'Unconstrained', link: '/api-reference/unconstrained' },
                     { text: 'Extend', link: '/api-reference/extend' },

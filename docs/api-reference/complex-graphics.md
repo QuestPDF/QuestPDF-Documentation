@@ -61,7 +61,7 @@ This example creates structure similar to a table of contents with dotted lines 
             row.ConstantItem(10);
             row.AutoItem().Text(Placeholders.Label());
 
-            row.RelativeItem().PaddingHorizontal(3).TranslateY(20).Height(2).Svg(size =>
+            row.RelativeItem().PaddingHorizontal(3).OffsetY(20).Height(2).Svg(size =>
             {
                 return $"""
                         <svg width="{size.Width}" height="{size.Height}" xmlns="http://www.w3.org/2000/svg">
