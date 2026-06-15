@@ -4,7 +4,7 @@
       <template v-for="statistic in statistics" :key="statistic.label">
         <a :href="statistic.link" target="_blank">
           <article class="statistic">
-            <i class="fa-2xl" :class="[statistic.icon]"></i>
+            <i class="fa-2xl fa-duotone" :class="[statistic.icon]"></i>
 
             <div class="title">
               <span class="value">{{ statistic.value }}</span>

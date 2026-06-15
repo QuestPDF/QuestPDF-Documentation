@@ -17,13 +17,13 @@ export default defineLoader({
 
         return [
             {
-                icon: "fa-duotone fa-star",
+                icon: "fa-star",
                 label: "GitHub stars",
                 link: "https://github.com/QuestPDF/QuestPDF",
                 value: `${toThousands(githubStars)}K`
             },
             {
-                icon: "fa-duotone fa-download",
+                icon: "fa-download",
                 label: "NuGet downloads",
                 link: "https://www.nuget.org/packages/QuestPDF/",
                 value: `${toMillions(nugetDownloads)}M`
