@@ -11,6 +11,16 @@
         <div class="card">
           <div class="document-body vp-doc" v-html="doc.html"></div>
         </div>
+
+        <div class="links">
+          <a class="action " href="/license">
+            View all licensing documents
+          </a>
+
+          <a class="action primary" href="/license/QuestPDF%20License%20Terms.pdf" download>
+            Download (PDF)
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -51,6 +61,13 @@ const doc = data[props.id];
 
 .document-body strong {
   color: var(--vp-c-text-1);
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  gap: 16px 16px;
+  flex-wrap: wrap;
 }
 
 </style>
