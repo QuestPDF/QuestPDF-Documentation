@@ -5,6 +5,8 @@
     </template>
 
     <template #layout-bottom>
+      <layout-footer />
+
       <ClientOnly>
         <paddle-integration />
       </ClientOnly>
@@ -18,4 +20,6 @@ const { Layout } = DefaultTheme
 
 import SupportAlert from "./SupportAlert.vue";
 import PaddleIntegration from "./PaddleIntegration.vue";
+import LayoutFooter from "./LayoutFooter.vue";
+
 </script>
