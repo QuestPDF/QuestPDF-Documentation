@@ -1,4 +1,4 @@
- import { defineLoader } from 'vitepress'
+import { defineLoader } from 'vitepress'
 
 export interface StatisticEntry {
     icon: string;
@@ -32,10 +32,27 @@ export default defineLoader({
     }
 })
 
-async function getNugetDownloads() {
+async function fetchJson(url: string, init: RequestInit = {}, attempts = 5): Promise<any> {
+    for (let attempt = 1; ; attempt++) {
+        try {
+            const response = await fetch(url, { ...init, signal: AbortSignal.timeout(5_000) });
+
+            if (!response.ok)
+                throw new Error(`HTTP ${response.status} ${response.statusText}`);
+
+            return await response.json();
+        } catch (error) {
+            if (attempt >= attempts)
+                throw error;
+
+            await new Promise(resolve => setTimeout(resolve, attempt * 1000));
+        }
+    }
+}
+
+async function getNugetDownloads(): Promise<number> {
     // discover the search endpoint from the service index
-    const indexResponse = await fetch('https://api.nuget.org/v3/index.json');
-    const index = await indexResponse.json();
+    const index = await fetchJson('https://api.nuget.org/v3/index.json');
 
     const searchResource = index.resources.find(
         r => r['@type'] === 'SearchQueryService'
@@ -46,8 +63,7 @@ async function getNugetDownloads() {
 
     // query for the package
     const queryUrl = `${searchResource['@id']}?q=packageid:questpdf&prerelease=true`;
-    const response = await fetch(queryUrl);
-    const data = await response.json();
+    const data = await fetchJson(queryUrl);
 
     const totalDownloads = data.data[0]?.totalDownloads;
 
@@ -57,12 +73,10 @@ async function getNugetDownloads() {
     return totalDownloads;
 }
 
-async function getGithubStars() {
-    const response = await fetch('https://api.github.com/repos/QuestPDF/QuestPDF', {
+async function getGithubStars(): Promise<number> {
+    const data = await fetchJson('https://api.github.com/repos/QuestPDF/QuestPDF', {
         headers: { 'Accept': 'application/vnd.github+json' }
     });
-
-    const data = await response.json();
 
     const stars = data.stargazers_count;
 
