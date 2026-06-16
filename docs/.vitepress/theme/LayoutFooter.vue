@@ -124,7 +124,7 @@ footer * {
 
 .link-category {
   h2 {
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--vp-c-text-1);
