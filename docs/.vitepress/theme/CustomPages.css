@@ -140,7 +140,7 @@ span.highlight-background {
   .fa-2xl {
     background-color: #2196F322;
     border-radius: 12px;
-    padding: 12px;
+    padding: 12px 0;
     font-size: 32px;
     height: 56px;
     min-width: 56px;
