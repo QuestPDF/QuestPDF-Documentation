@@ -56,10 +56,16 @@ const terms = [
 
 .license-terms {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 32px;
 
   margin-top: 64px;
+}
+
+@media screen and (max-width: 1100px) {
+  .license-terms {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 @media screen and (max-width: 700px) {
@@ -77,16 +83,6 @@ const terms = [
   .license-term {
     grid-gap: 12px 0;
   }
-}
-
-.license-term .icon {
-  justify-self: start;
-  align-self: start;
-  font-size: 32px;
-  background-color: #2196F322;
-  border-radius: 12px;
-  padding: 12px;
-  color: #2196F3;
 }
 
 .license-term p.description {
