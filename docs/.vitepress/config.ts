@@ -60,7 +60,7 @@ export default defineConfig({
                     { text: 'Quick start', link: '/quick-start' },
                     { text: 'Invoice Tutorial', link: '/invoice-tutorial' },
                     { text: 'License configuration', link: '/license/configuration' },
-                    { text: 'Roadmap', link: 'https://github.com/orgs/QuestPDF/projects/8' },
+                    { text: 'Roadmap', link: '/roadmap' },
                     { text: 'Releases', link: 'https://github.com/QuestPDF/QuestPDF/releases' },
                     { text: 'Acknowledgements', link: '/acknowledgements' }
                 ]
