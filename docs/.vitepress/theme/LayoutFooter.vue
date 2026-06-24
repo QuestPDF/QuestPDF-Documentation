@@ -34,7 +34,7 @@ const columns: FooterColumn[] = [
     title: "Resources",
     links: [
       { label: "Releases", href: "https://github.com/QuestPDF/QuestPDF/releases", external: true },
-      { label: "Roadmap", href: "https://github.com/orgs/QuestPDF/projects/8", external: true },
+      { label: "Roadmap", href: "/roadmap.html" },
       { label: "GitHub", href: "https://github.com/QuestPDF/QuestPDF", external: true },
       { label: "NuGet", href: "https://www.nuget.org/packages/QuestPDF", external: true },
     ]
