@@ -54,6 +54,7 @@ const columns: FooterColumn[] = [
       { label: "Contact us", href: "/contact.html" },
       { label: "Customer portal", href: "https://account.questpdf.com", external: true },
       { label: "Terms of Service", href: "/terms-of-service.html" },
+      { label: "Security Policy", href: "/security-policy.html" },
       { label: "Privacy Policy", href: "/privacy-policy.html" },
     ]
   }

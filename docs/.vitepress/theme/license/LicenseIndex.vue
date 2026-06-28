@@ -18,6 +18,10 @@ const documents = [
     link: "/license/professional-enterprise.html"
   },
   {
+    title: "Security Policy",
+    link: "/security-policy.html"
+  },
+  {
     title: "Privacy Policy",
     link: "/privacy-policy.html"
   }
