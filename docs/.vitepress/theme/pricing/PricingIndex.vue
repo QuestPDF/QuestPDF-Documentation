@@ -1,7 +1,7 @@
 <template>
   <div class="custom-page">
     <div class="container reverse-background">
-      <pricing-page-tiers />
+      <pricing-tiers />
     </div>
 
     <div class="container">
@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 
-import PricingPageTiers from "./PricingPageTiers.vue";
+import PricingTiers from "./PricingTiers.vue";
 import PricingContact from "./PricingContact.vue";
 import PricingResellers from "./PricingResellers.vue";
 import PricingFaq from "./PricingFaq.vue";
