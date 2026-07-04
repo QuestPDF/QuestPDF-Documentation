@@ -136,18 +136,13 @@ const categories = [
 
   align-self: center;
   width: 100%;
-  max-width: 1000px;
+  max-width: 850px;
   margin: 40px auto 0;
 }
 
 .faq-category-title {
   margin: 0 0 14px;
   padding-left: 32px;
-
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
   color: #2196F3;
 }
 
