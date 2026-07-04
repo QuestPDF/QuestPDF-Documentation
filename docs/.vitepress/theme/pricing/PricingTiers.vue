@@ -216,7 +216,8 @@ const licenses = [
   font-size: 0.8125rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
+  word-spacing: 3px;
 }
 
 .license-tier.professional .tag .fa-star {
@@ -398,6 +399,15 @@ html.dark {
   font-size: 0.8125em;
   line-height: 1.5;
   color: var(--vp-c-text-3);
+
+  :deep(a) {
+    color: var(--vp-c-text-3);
+    text-decoration: underline;
+  }
+
+  :deep(a):hover {
+    color: var(--vp-c-text-2);
+  }
 }
 
 
