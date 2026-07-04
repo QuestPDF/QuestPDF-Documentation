@@ -5,11 +5,11 @@
 <template>
   <article class="content">
     <div class="section-header">
-      <h2>Do you need help?</h2>
-      <p class="sub-header">Whether you need a direct invoice, a custom quote, or assistance with a purchase order, we ensure a smooth transaction process.</p>
+      <h2>Still have questions?</h2>
+      <p class="sub-header">Need further details on licensing, a custom quote, or to place a purchase order? Reach out to our team - we will respond within one business day.</p>
     </div>
 
-    <a class="action primary" href="mailto:contact@questpdf.com" style="margin-top: 24px;">Contact sales</a>
+    <a class="action primary" href="mailto:contact@questpdf.com" style="margin-top: 24px;">Contact us</a>
   </article>
 </template>
 
@@ -19,6 +19,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.section-header {
+ max-width: 750px;
 }
 
 </style>
