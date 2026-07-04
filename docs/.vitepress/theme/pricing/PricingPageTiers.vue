@@ -147,7 +147,7 @@ const licenses = [
   margin-top: 16px;
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
   // shared row tracks: tag, header, divider, details, action, renewal note
   grid-template-rows: repeat(6, auto);
@@ -263,6 +263,30 @@ html.dark .license-tier.professional .tag .fa-star {
 .license-tier.enterprise {
   border-radius: 0 24px 24px 0;
   margin: 32px 0;
+}
+
+/* Stacked layout: below the width where three cards fit comfortably,
+   cards form a single centered column and the joined-card styling
+   (flat inner corners, vertical inset margins) is reset. */
+@media screen and (max-width: 960px) {
+  .license-tiers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .license-tiers .license-tier {
+    grid-template-rows: auto; // subgrid has no parent grid here
+    width: 100%;
+    max-width: 560px;
+  }
+
+  .license-tier.community,
+  .license-tier.enterprise {
+    margin: 0;
+    border-radius: 24px;
+  }
 }
 
 
