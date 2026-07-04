@@ -397,8 +397,7 @@ html.dark {
 
   font-size: 0.8125em;
   line-height: 1.5;
-  color: var(--vp-c-text-2);
-  opacity: 0.85;
+  color: var(--vp-c-text-3);
 }
 
 
@@ -411,7 +410,7 @@ html.dark {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: 32px;
   }
 
   .license-tiers .license-tier {
