@@ -37,8 +37,8 @@ const resellers = [
 <template>
   <section class="content">
     <div class="section-header">
-      <h2>Trusted Reselling Partners</h2>
-      <p class="sub-header">QuestPDF is available through leading software distributors worldwide, ensuring local compliance and simplified billing for your organization.</p>
+      <h2>Purchase Through Your Preferred Reseller</h2>
+      <p class="sub-header">QuestPDF works with software resellers worldwide, including SoftwareOne, Insight, QBS, and SHI. If your organization buys through a different distributor, we're happy to work with them</p>
     </div>
 
     <div class="resellers-list">
@@ -63,6 +63,10 @@ const resellers = [
   justify-content: center;
   align-items: center;
   margin-top: 64px;
+}
+
+.section-header {
+  max-width: 860px;
 }
 
 </style>

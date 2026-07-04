@@ -1,17 +1,19 @@
 <template>
   <article class="content">
-    <pricing-header />
+    <header class="section-header">
+      <h1>Perpetual Licensing</h1>
+    </header>
 
     <div class="license-tiers">
       <section class="license-tier card" :class="license.name" v-for="license of licenses">
 
-        <div class="tag" />
+        <div class="tag"><i class="fa-solid fa-star"></i>Most Popular</div>
 
         <header style="display: flex; flex-direction: column; align-items: start;">
           <div class="tier-name">{{ license.name }}</div>
 
           <div v-if="license.price">
-            <span class="price-value">${{ license.price }}</span>
+            <span class="price-value">${{ license.price.toLocaleString("en-US") }}</span>
             <span v-if="license.pricePer" class="price-per">+ local tax</span>
           </div>
 
@@ -19,7 +21,7 @@
             <p class="price-value price-free">Free forever</p>
           </div>
 
-          <div v-html="license.description " />
+          <div class="tier-description" v-html="license.description" />
         </header>
 
         <hr>
@@ -31,16 +33,12 @@
           </div>
         </div>
 
-        <div style="flex-grow: 1"></div>
-
         <a v-if="license.price" class="action" @click="paddle.startCheckout(license.paddlePriceId)">
           Purchase License
         </a>
         <a v-else class="action" href="/quick-start.html">Get Started</a>
 
-        <p v-if="license.price" class="renewal-info">
-          Updates renew annually<br> License never expires
-        </p>
+        <p class="renewal-info" v-html="license.footnote" />
       </section>
     </div>
   </article>
@@ -49,7 +47,6 @@
 <script setup lang="ts">
 
 import {usePaddle} from "../paddle";
-import PricingHeader from "./PricingHeader.vue";
 
 const paddle = usePaddle();
 
@@ -62,52 +59,62 @@ interface License {
   paddlePriceId: string;
 
   details: string[];
+
+  footnote: string;
 }
 
 const CommunityLicense: License = {
   name: "community",
-  description: "For individuals, open-source projects, non-profits, and companies <b>under</b> 1M&nbsp;USD annual gross revenue",
+  description: "For individuals, FOSS-compatible projects, charities, academic institutions, and businesses <b>under</b> 1M&nbsp;USD annual gross revenue",
   price: null,
   pricePer: null,
   paddlePriceId: null,
   details: [
-    "Full feature set",
-    "Allows for commercial usage",
-    "MIT license terms",
-    "No registration or license key",
-    "No watermarks or limits",
+    "Full feature set — identical to paid tiers",
+    "Commercial use allowed",
+    "Unlimited projects, servers, and deployments",
+    "Royalty-free redistribution inside your own apps",
+    "No registration, license keys, or watermarks",
+    "Source-available with source code available on GitHub",
     "Community support via GitHub"
-  ]
+  ],
+  footnote: "From package install to first PDF in minutes"
 };
 
 const ProfessionalLicense: License = {
   name: "professional",
-  description: "Required commercial license for teams with up to 10 developers working on QuestPDF-dependent projects",
-  price: 999,
+  description: "For one legal entity shipping PDFs in production — every developer covered at one flat, predictable price, with no seat counting or usage fees",
+  price: 1999,
   pricePer: "team",
   paddlePriceId: paddle.professionalLicensePriceId,
   details: [
-    "Perpetual license for entire team",
-    "Includes 1 year of feature updates and security patches",
-    "Unlimited projects, servers, and deployments",
+    "Perpetual license for entire company",
+    "Unlimited developers, projects, servers, and deployments",
+    "Includes one year of feature updates, fixes and security patches",
     "Direct e-mail support",
     "30-day money-back guarantee",
-  ]
+    "Royalty-free redistribution including OEM and SaaS",
+    "Support for air-gapped environments",
+    "Renewal price locked while you renew continuously",
+  ],
+  footnote: "Renews annually at today's price — cancel anytime, keep your version forever"
 };
 
 const EnterpriseLicense: License = {
   name: "enterprise",
-  description: "Organization-wide commercial license with no developer counting, priority support, and full future-proof coverage",
-  price: 2999,
+  description: "For corporate groups that need affiliate-wide coverage, priority support, reduced risk, and procurement-friendly terms",
+  price: 4999,
   pricePer: "org",
   paddlePriceId: paddle.enterpriseLicensePriceId,
   details: [
-    "Perpetual with 1 year of updates",
-    "Covers every developer and project in your organization",
-    "Premium e-mail support with next business day response",
-    "30-day money-back guarantee",
-    "Supports vendor onboarding and procurement workflows"
-  ]
+    "Everything in Professional",
+    "One license covers all your affiliates enabling world-wide teams",
+    "Next-business-day dedicated, priority email support",
+    "Priority handling for business-critical issues with off-schedule releases",
+    "12-month notice before any discontinuation, with continued critical fixes and migration support",
+    "Order Forms, purchase orders, direct invoicing, and multi-year terms"
+  ],
+  footnote: `Purchase via reseller or <a href="mailto:contact@questpdf.com">request a quote</a>`
 };
 
 const licenses = [
@@ -120,25 +127,73 @@ const licenses = [
 
 <style scoped lang="scss">
 
+.content {
+  padding-top: 48px;
+}
+
+@media screen and (max-width: 450px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+}
+
 .license-tiers {
-  margin-top: 64px;
+  margin-top: 16px;
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
-  grid-gap: 36px;
+
+  // shared row tracks: tag, header, divider, details, action, renewal note
+  grid-template-rows: repeat(6, auto);
 }
 
-.license-tier {
-  padding-top: 48px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  height: 100%;
+.license-tiers .license-tier {
+  position: relative;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 6;
+  justify-items: start;
+  align-items: start;
+}
+
+.license-tier .tag {
+  grid-row: 1;
+}
+
+.license-tier header {
+  grid-row: 2;
+}
+
+.license-tier hr {
+  grid-row: 3;
+}
+
+.license-tier .details {
+  grid-row: 4;
+}
+
+.license-tier a.action {
+  grid-row: 5;
+}
+
+.license-tier .renewal-info {
+  grid-row: 6;
+}
+
+.license-tier.professional {
+  //padding-top: 64px;
+
 }
 
 .license-tier.community .fa-square-check {
-  --fa-primary-color: #212121;
-  --fa-secondary-color: #212121;
+  --fa-primary-color: #67B84D;
+  --fa-secondary-color: #67B84D;
 }
 
 .license-tier.enterprise .fa-square-check {
@@ -149,8 +204,8 @@ const licenses = [
 
 html.dark {
   .license-tier.community .fa-square-check {
-    --fa-primary-color: #DDD;
-    --fa-secondary-color: #888;
+    --fa-primary-color: #81C784;
+    --fa-secondary-color: #81C784;
   }
 
   .license-tier.enterprise .fa-square-check {
@@ -163,49 +218,62 @@ html.dark {
 /* Tag highlight */
 
 .license-tier.professional {
-  border: 1px solid #2196F3;
-  box-shadow: 0 8px 16px rgba(33, 150, 243, 0.2) !important;
+  border: 3px solid #2196F355;
+  box-shadow: 0 4px 16px rgba(33, 150, 243, 0.2) !important;
+  z-index: 1;
 }
 
 .license-tier:not(.professional) .tag {
   display: none;
 }
 
-.license-tier.professional .tag:before {
-  content: 'POPULAR';
+.license-tier.professional .tag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 32px;
+  transform: translateY(-8px);
 
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  color: #2196F3;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
 
-  transform: translateY(-50%);
-  margin: 0 auto;
-  width: fit-content;
-  padding: 4px 12px;
-  border-radius: 128px;
-  background-color: var(--vp-c-bg);
-  border: 1px solid #2196F3;
-  color: #1976D2;
-  font-weight: 500;
+.license-tier.professional .tag .fa-star {
+  color: #2196F3;
   font-size: 0.875rem;
-  letter-spacing: 1px;
+}
+
+html.dark .license-tier.professional .tag,
+html.dark .license-tier.professional .tag .fa-star {
+  color: #64B5F6;
 }
 
 .license-tier.professional {
-  filter: drop-shadow(0 1px 2px rgba(33, 150, 243, 0.15));
+  border-radius: 24px;
 }
 
-html.dark .license-tier.professional .tag:before {
-  color: #64B5F6;
+.license-tier.community {
+  border-radius: 24px 0 0 24px;
+  margin: 32px 0;
 }
+
+.license-tier.enterprise {
+  border-radius: 0 24px 24px 0;
+  margin: 32px 0;
+}
+
+
+
 
 
 /* Tier name */
 
 .license-tier .tier-name {
   border-radius: 128px;
-  padding: 6px 18px;
+  padding: 6px 24px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -213,8 +281,8 @@ html.dark .license-tier.professional .tag:before {
 }
 
 .license-tier.community .tier-name {
-  background-color: #8884;
-  color: #212121;
+  background-color: #67B84D33;
+  color: #1B5E20;
 }
 
 .license-tier.professional .tier-name {
@@ -229,7 +297,8 @@ html.dark .license-tier.professional .tag:before {
 
 html.dark {
   .license-tier.community .tier-name {
-    color: #F5F5F5;
+    background-color: #4CAF5022;
+    color: #A5D6A7;
   }
 
   .license-tier.professional .tier-name {
@@ -259,15 +328,21 @@ html.dark {
 }
 
 .license-tier .price-value {
-  line-height: 2rem;
-  font-size: 2rem;
+  line-height: 2.25rem;
+  font-size: 2.25rem;
 
   color: var(--vp-c-text-1) !important;
   font-weight: 700;
 }
 
+.license-tier .tier-description {
+  color: var(--vp-c-text-2);
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+}
+
 .license-tier .price-per {
-  margin-top: 8px;
+  margin-left: 8px;
 
   color: var(--vp-c-text-1) !important;
   font-weight: 400;
@@ -307,7 +382,8 @@ html.dark {
 /* Tier action */
 
 .license-tier a.action {
-  align-self: end;
+  justify-self: stretch;
+  text-align: center;
   margin-top: 32px;
 }
 
@@ -338,11 +414,14 @@ html.dark {
 }
 
 .license-tier .renewal-info {
-  font-size: 0.875em;
-  place-self: end;
-  text-align: end;
-  line-height: 1rem;
-  margin-top: 8px;
+  place-self: normal;
+  text-align: center;
+  margin-top: 16px;
+
+  font-size: 0.8125em;
+  line-height: 1.5;
+  color: var(--vp-c-text-2);
+  opacity: 0.85;
 }
 
 </style>

@@ -9,14 +9,10 @@
     </div>
 
     <div class="container reverse-background">
-      <pricing-terms />
-    </div>
-
-    <div class="container">
       <pricing-faq />
     </div>
 
-    <div class="container reverse-background">
+    <div class="container">
       <pricing-contact />
     </div>
   </div>
@@ -25,7 +21,6 @@
 <script setup lang="ts">
 
 import PricingPageTiers from "./PricingPageTiers.vue";
-import PricingTerms from "./PricingTerms.vue";
 import PricingContact from "./PricingContact.vue";
 import PricingResellers from "./PricingResellers.vue";
 import PricingFaq from "./PricingFaq.vue";
