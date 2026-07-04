@@ -13,7 +13,7 @@
 
           <div v-if="license.price">
             <span class="price-value">${{ license.price.toLocaleString("en-US") }}</span>
-            <span v-if="license.pricePer" class="price-per">+ local tax</span>
+            <span class="price-tax">+ local tax</span>
           </div>
 
           <div v-else>
@@ -54,7 +54,6 @@ interface License {
   description: string;
 
   price: number | null;
-  pricePer: string | null;
   paddlePriceId: string | null;
 
   details: string[];
@@ -65,15 +64,14 @@ const CommunityLicense: License = {
   name: "community",
   description: "For individuals, FOSS-compatible projects, charities, academic institutions, and businesses <b>under</b> 1M&nbsp;USD annual gross revenue",
   price: null,
-  pricePer: null,
   paddlePriceId: null,
   details: [
-    "Full feature set — identical to paid tiers",
+    "Full feature set — same core product as paid tiers",
     "Commercial use allowed",
-    "Unlimited projects, servers, and deployments",
+    "Unlimited developers, projects, servers, and deployments",
     "Royalty-free redistribution inside your own apps",
     "No registration, license keys, or watermarks",
-    "Source-available with source code available on GitHub",
+    "Source-available — full source code on GitHub",
     "Community support via GitHub"
   ],
   footnote: "From package install to first PDF in minutes"
@@ -83,17 +81,16 @@ const ProfessionalLicense: License = {
   name: "professional",
   description: "For one legal entity shipping PDFs in production — every developer covered at one flat, predictable price, with no seat counting or usage fees",
   price: 1999,
-  pricePer: "team",
   paddlePriceId: paddle.professionalLicensePriceId,
   details: [
     "Perpetual license for entire company",
     "Unlimited developers, projects, servers, and deployments",
-    "Includes one year of feature updates, fixes and security patches",
-    "Direct e-mail support",
-    "30-day money-back guarantee",
-    "Royalty-free redistribution including OEM and SaaS",
-    "Support for air-gapped environments",
-    "Renewal price locked while you renew continuously"
+    "One year of feature updates, fixes, and security patches included",
+    "Direct email support",
+    "Royalty-free redistribution — SaaS, desktop, on-prem; end users need no license",
+    "Runs fully offline and air-gapped",
+    "Price Lock — your renewal price never increases while you renew continuously",
+    "30-day money-back guarantee"
   ],
   footnote: "Renews annually at today's price — cancel anytime, keep your version forever"
 };
@@ -102,17 +99,16 @@ const EnterpriseLicense: License = {
   name: "enterprise",
   description: "For corporate groups that need affiliate-wide coverage, priority support, reduced risk, and procurement-friendly terms",
   price: 4999,
-  pricePer: "org",
   paddlePriceId: paddle.enterpriseLicensePriceId,
   details: [
     "Everything in Professional",
-    "One license covers all your affiliates enabling world-wide teams",
+    "One license covers all your affiliates",
     "Next-business-day dedicated, priority email support",
     "Priority handling for business-critical issues with off-schedule releases",
-    "12-month notice before any discontinuation, with continued critical fixes and migration support",
-    "Order Forms, purchase orders, direct invoicing, and multi-year terms"
+    "12-month notice before any general end-of-life, with critical fixes and migration assistance throughout",
+    "Order Forms, purchase orders, direct invoicing, supplier onboarding, and multi-year terms"
   ],
-  footnote: `Purchase via reseller or <a href="mailto:contact@questpdf.com">request a quote</a>`
+  footnote: `Buy online, through resellers, or <a href="mailto:contact@questpdf.com">request a quote</a>`
 };
 
 const licenses = [
@@ -288,7 +284,7 @@ html.dark {
   color: var(--vp-c-text-1) !important;
 }
 
-.license-tier .price-per {
+.license-tier .price-tax {
   margin-left: 8px;
   font-weight: 400;
   color: var(--vp-c-text-1) !important;
@@ -398,15 +394,15 @@ html.dark {
 
   font-size: 0.8125em;
   line-height: 1.5;
-  color: var(--vp-c-text-3);
+  color: var(--vp-c-text-2);
 
   :deep(a) {
-    color: var(--vp-c-text-3);
+    color: var(--vp-c-text-2);
     text-decoration: underline;
   }
 
   :deep(a):hover {
-    color: var(--vp-c-text-2);
+    color: var(--vp-c-text-1);
   }
 }
 
