@@ -14,8 +14,8 @@ const sandboxConfiguration = {
 const productionConfiguration = {
     isProduction: true,
     token: 'live_aae6e100288a0ab158a101d61e6',
-    professionalLicenseId: 'pri_01jz1b9qe7mez8nrdk00wqyrpn',
-    enterpriseLicenseId: 'pri_01kevkewbnvgh65eq457v70c99',
+    professionalLicenseId: 'pri_01kwq136d75spr88pmq7txaayw',
+    enterpriseLicenseId: 'pri_01kwq14xaqf9kz54jvya86cx6q',
 };
 
 

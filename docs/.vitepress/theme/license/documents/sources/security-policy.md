@@ -1,7 +1,7 @@
 # Security Policy
 
-**Effective Date:** 10 June 2026  
-**Version:** 2.0
+**Effective Date:** 6 July 2026  
+**Version:** 3.0
 
 ## Introduction
 
@@ -35,9 +35,18 @@ We will use commercially reasonable efforts to address security reports promptly
 
 - **Acknowledgment**: we aim to confirm receipt of your report within a few business days.
 - **Assessment**: we will evaluate the report and let you know whether the issue is accepted as a vulnerability.
-- **Resolution**: confirmed vulnerabilities are prioritized based on severity and complexity. Critical issues may be patched ahead of the next scheduled release.
+- **Resolution**: confirmed vulnerabilities are prioritised based on severity and complexity. Critical issues may be patched ahead of the next scheduled release.
 
 We will coordinate with you before any public disclosure and are happy to credit reporters in release notes (unless you prefer to remain anonymous).
+
+## Safe Harbour
+
+We will not pursue legal action against good-faith security research conducted under this policy.
+
+Research is conducted in good faith when it stays within the scope described in this policy, avoids privacy violations, data destruction, and degradation of services for others, does not exploit a finding beyond what is necessary to demonstrate it, and follows the coordinated disclosure process described below.
+
+Good-faith security research conducted under this policy is authorised notwithstanding any reverse-engineering restriction in the applicable License Agreement or Community License.
+
 
 ## Supported Versions
 
@@ -47,13 +56,15 @@ For example, if the latest release is `2026.6.2` and a vulnerability is discover
 
 This approach works well in practice because QuestPDF maintains strict backwards compatibility — we treat breaking changes as a last resort. Updating to the latest version is, in the vast majority of cases, a straightforward operation. This lets us focus our efforts on a single, well-tested release rather than maintaining parallel patch branches, resulting in faster and more reliable fixes for everyone.
 
+Access to a patched release requires an active Update and Support Term; Community License users can always use the latest release free of charge.
+
 ## Scope
 
 Reports are generally in scope when they involve:
 
 - Vulnerabilities in the QuestPDF library.
 - Vulnerabilities in bundled native dependencies (Skia, qpdf) when exploitable through QuestPDF.
-- Malformed or untrusted input — such as SVG, images, fonts, text, or document metadata — that leads to unexpected behavior.
+- Malformed or untrusted input — such as SVG, images, fonts, text, or document metadata — that leads to unexpected behaviour.
 - Denial of service scenarios, including unexpected infinite loops, thread deadlocks, or unbounded memory allocations triggered by specific layout configurations or input.
 - Arbitrary file access, information disclosure, memory corruption, or remote code execution.
 

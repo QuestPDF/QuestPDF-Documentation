@@ -1,7 +1,7 @@
 # Privacy Policy
 
-**Effective Date:** 10 June 2026  
-**Version:** 2.0
+**Effective Date:** 6 July 2026  
+**Version:** 3.0
 
 
 ## The QuestPDF Library Itself Collects No Data
@@ -65,7 +65,7 @@ QuestPDF keeps personal data only for as long as reasonably necessary for the pu
 
 As a general rule:
 
-- purchase and license records are retained for the period required by applicable tax and accounting law;
+- purchase and license records are retained for the period required by applicable tax and accounting law (under Polish tax law, generally five years counted from the end of the calendar year in which the relevant tax deadline fell);
 - support correspondence is retained for a limited period reasonably necessary for support history, product improvement, and dispute resolution; and
 - cookieless analytics data is retained in aggregate form in accordance with the settings of the analytics provider.
 
@@ -119,11 +119,11 @@ QuestPDF may update this list from time to time. The current list may be provide
 
 ## Use of AI in Support and Operations
 
-QuestPDF uses AI tools to help operate its support and internal workflows, for example to triage incoming messages, summarise support requests, and help draft responses.
+QuestPDF may use AI service providers to assist with internal support workflows, subject to appropriate contractual and security safeguards. AI tools are used only on information you provide in support correspondence and not on customer application data processed locally by the Software.
 
 Where AI is used, a human remains involved in the process. QuestPDF does not make decisions that produce legal or similarly significant effects about you based solely on automated processing.
 
-When AI is used to assist with support, it processes only information that you have provided to QuestPDF for that purpose — primarily the content of your support emails and related materials such as GitHub issues or discussions. It is not used to access data from your own systems or the application data processed within your own use of the Software.
+Please do not include sensitive, confidential, proprietary, or personal data in support requests unless it is necessary for the request or separately agreed with QuestPDF. 
 
 
 ## Security Measures
@@ -142,7 +142,7 @@ If QuestPDF becomes aware of a personal data breach affecting personal data held
 
 QuestPDF aims to minimise tracking.
 
-QuestPDF currently uses cookieless analytics configured not to identify individual visitors. If the website uses cookies, they are intended to be limited to cookies that are strictly necessary for core site functionality, unless QuestPDF later presents a different notice or consent mechanism.
+QuestPDF currently uses cookieless analytics configured not to identify individual visitors. The website does not use cookies other than those strictly necessary for core site functionality. If QuestPDF later introduces other cookies, it will first present an appropriate notice or consent mechanism.
 
 You can also control cookies through your browser settings.
 
