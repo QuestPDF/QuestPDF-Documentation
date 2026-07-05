@@ -1,7 +1,7 @@
 # Terms of Service
 
-**Effective Date:** 10 June 2026  
-**Version:** 2.0
+**Effective Date:** 6 July 2026  
+**Version:** 3.0
 
 
 ## Acceptance and Scope
@@ -22,7 +22,8 @@ If there is a conflict between the QuestPDF documents, the following order of pr
 3. the applicable License Agreement;
 4. the License Selection Guide;
 5. these Terms of Service;
-6. the Privacy Policy.
+6. the Security Policy;
+7. the Privacy Policy.
 
 For Community License users, the Community License controls over these Terms to the extent of a direct conflict.
 
@@ -49,16 +50,19 @@ Nothing in these Terms limits any mandatory statutory consumer rights.
 
 ## Purchases Through Resellers and Procurement Providers
 
-A license may be purchased by an authorised reseller, procurement provider, purchasing agent, or similar intermediary on behalf of an end customer.
+A license may be purchased by a reseller, procurement provider, purchasing agent, or similar intermediary on behalf of an end customer.
 
-Unless a signed Order Form states otherwise, the license is granted to the end customer identified in the order, quote, invoice, license confirmation document, or other purchase record, and not to the reseller or intermediary merely processing the transaction.
+Unless a signed Order Form states otherwise, the license is granted to the end customer identified in the order, quote, invoice, license confirmation document, or other purchase record, and not to the reseller or intermediary merely processing the transaction. If the purchase records are inconsistent, the license confirmation document issued by QuestPDF controls, unless a signed Order Form states otherwise.
 
 The reseller or intermediary is responsible for ensuring that the order information correctly identifies the intended licensee.
 
 
 ## License Confirmation Documents
 
-A license confirmation document is valid as evidence of a QuestPDF license only if the associated Fees have been paid and have not been refunded, reversed, charged back, cancelled, or otherwise invalidated.
+A license confirmation document is valid as evidence of a QuestPDF license if it relates to Fees that have been paid or are payable under an accepted order, invoice, reseller order, Order Form, or other purchase record, unless the applicable transaction is later refunded, reversed, charged back, cancelled for non-payment, or otherwise invalidated.
+
+For paid licenses, the timing and conditional nature of license rights for invoice-based, reseller, procurement-provider, and Order Form purchases are governed by the Professional / Enterprise License Agreement.
+
 
 
 ## Refund Policy
@@ -68,6 +72,8 @@ QuestPDF offers a 30-day satisfaction guarantee for license purchases.
 If you are not satisfied with the Software within 30 days after purchase, you may request a full refund. Refunds are processed by Paddle as Merchant of Record.
 
 After the 30-day period, fees are non-refundable except where a refund is expressly required by applicable law or expressly provided under the applicable License Agreement.
+
+A refund, reversal, or chargeback ends the corresponding license rights, as stated in the applicable License Agreement.
 
 
 ## Consumer Right of Withdrawal
@@ -98,7 +104,7 @@ Any warranty, liability, and remedy relating to the licensed Software itself are
 
 ## Pricing Changes
 
-QuestPDF may change pricing for new purchases and for future renewals of update and support terms.
+QuestPDF may change pricing for new purchases.
 
 A pricing change does not affect:
 
@@ -106,14 +112,16 @@ A pricing change does not affect:
 2. fees already paid for the current paid term; or
 3. pricing locked in under a signed Order Form, Enterprise Addendum, or other mutually executed commercial agreement for the period stated in that document.
 
-For existing paid customers, QuestPDF will use commercially reasonable efforts to provide at least 90 days' notice before a renewal price change takes effect.
+Renewals for existing paid customers are protected by the Price Lock stated in the Professional / Enterprise License Agreement: the Update and Support Term renews at the Licensee's Locked Renewal Price as defined in that agreement, and QuestPDF will not increase that price for as long as the customer renews continuously. Fees or markups added by resellers or other intermediaries are outside QuestPDF's control and are not covered by the Price Lock.
+
+QuestPDF may change its licensing model or packaging prospectively with at least 90 days' notice. If continuously renewing customers are migrated to a successor offering as part of such a change, their renewal price for the successor offering will not exceed their Locked Renewal Price.
 
 
 ## Products
 
 QuestPDF may distribute the Software through NuGet, the QuestPDF website, and other distribution channels selected by QuestPDF from time to time.
 
-QuestPDF is not responsible for the availability, uptime, or behavior of third-party distribution channels.
+QuestPDF is not responsible for the availability, uptime, or behaviour of third-party distribution channels.
 
 
 ## Security
@@ -172,7 +180,7 @@ A different governing law or dispute forum applies only if expressly stated in a
 
 ## General Provisions
 
-**Entire Agreement.** These Terms, together with the applicable License Agreement, the License Selection Guide, any signed Order Form, Enterprise Addendum, or other mutually executed commercial agreement, and any mutually executed data protection addendum, form the entire agreement between you and QuestPDF regarding their subject matter and supersede prior discussions on that subject.
+**Entire Agreement.** These Terms, together with the applicable License Agreement, the License Selection Guide, the Security Policy, the Privacy Policy, any signed Order Form, Enterprise Addendum, or other mutually executed commercial agreement, and any mutually executed data protection addendum, form the entire agreement between you and QuestPDF regarding their subject matter and supersede prior discussions on that subject.
 
 **Purchase Orders.** Any pre-printed or standard terms contained in a purchase order, vendor portal, procurement workflow, or similar customer document do not apply unless QuestPDF expressly accepts them in a signed agreement.
 

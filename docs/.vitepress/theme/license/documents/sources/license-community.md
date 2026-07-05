@@ -1,12 +1,12 @@
 # Community License
 
-**Effective Date:** 10 June 2026  
-**Version:** 2.0
+**Effective Date:** 6 July 2026  
+**Version:** 3.0
 
 
 ## QuestPDF Community License
 
-**In plain language:** QuestPDF is free for individuals, charitable organizations, academic institutions, and businesses with less than USD 1,000,000 in annual revenue. All eligible users may use QuestPDF for commercial purposes. If you outgrow the Community License, you have 90 days to purchase a paid license.
+In plain language: QuestPDF is free for individuals and businesses with annual gross revenue under USD 1,000,000, and for charitable organisations, academic institutions, and open-source projects. Public-sector entities and publicly traded companies are not eligible, regardless of revenue. All eligible users may use QuestPDF for commercial purposes. If you stop qualifying, you have a 90-day transition period to purchase a paid license.
 
 This is a source-available commercial license. It is not an OSI-approved open-source license, and the MIT License does not govern use of the Software under this Community License.
 
@@ -16,7 +16,7 @@ This is a source-available commercial license. It is not an OSI-approved open-so
 - **QuestPDF** means Marcin Ziąbek, operating as Marcin Ziąbek CodeFlint (sole-proprietorship registered in Poland), and its successors and assigns.
 - **Software** means the QuestPDF library and its documentation.
 - **You** and **your** mean the individual or legal entity using the Software under this Community License.
-- **Derivative Application** means your own software application that uses the Software, but is not itself a standalone PDF generation library or SDK.
+- **Derivative Application** means your own software application that uses the Software, but is not itself a library, SDK, or other developer component whose primary purpose is general-purpose PDF generation.
 
 
 ## Grant of License
@@ -38,39 +38,50 @@ That includes, in summary:
 
 1. individual use, including commercial projects, below the stated revenue threshold;
 2. learning and evaluation;
-3. qualifying non-profits, academic institutions, and eligible open-source projects;
-4. qualifying small businesses below the stated revenue threshold; and
-5. transitive-dependency users whose own code does not directly call QuestPDF APIs.
+3. qualifying charitable organisations;
+4. qualifying academic institutions (public or private non-profit);
+5. eligible open-source projects;
+6. qualifying small businesses below the stated revenue threshold; and
+7. transitive-dependency users whose own code does not directly call QuestPDF APIs.
 
 For detailed eligibility rules, including revenue calculation, first-year treatment, and currency conversion, the License Selection Guide controls.
 
 
 ## Threshold Transition
 
-If you stop qualifying for the Community License, you must, within 90 days after the end of the fiscal period in which the threshold was exceeded, either:
+If you stop qualifying for the Community License, you must, within the applicable transition period, either:
 
 1. purchase the appropriate paid license; or
 2. stop using the Software.
 
-Continued use after that transition period without the correct license is a breach of this Community License.
+The transition period is 90 days and begins:
+
+1. where eligibility is lost because annual gross revenue exceeded the threshold stated in the License Selection Guide, at the end of the fiscal period in which the threshold was exceeded;
+2. where eligibility is lost as a result of a merger, acquisition, or other change of control — including where the revenue threshold is exceeded on a consolidated basis as a result of that event — on the date of that event; and
+3. in all other cases, on the date eligibility is lost.
+
+Continued use after the applicable transition period without the correct license is a breach of this Community License.
 
 
 ## License Restrictions
 
 You may not:
 
-1. remove or obscure proprietary notices in the Software;
-2. sell, sublicense, rent, lease, or otherwise grant third parties rights to the Software itself except as expressly permitted by this Community License;
-3. use the Software primarily to develop, market, or distribute a standalone PDF generation library or SDK that competes with QuestPDF;
-4. reverse engineer, decompile, or disassemble the Software except to the extent such activity cannot lawfully be restricted under applicable law;
-5. use the Software or QuestPDF source code as training data for a machine learning model, except for ordinary developer use of code assistants or similar tools in connection with your own integration work.
+1. use QuestPDF names, logos, or other branding in a way that implies endorsement or affiliation without prior written permission, except for truthful factual statements such as "Built with QuestPDF";
+2. remove or obscure proprietary notices in the Software;
+3. sell, sublicense, rent, lease, or otherwise grant third parties rights to the Software itself except as expressly permitted by this Community License;
+4. use the Software primarily to develop, market, distribute, or operate a library, SDK, API, hosted service, or other developer component whose primary purpose is general-purpose PDF generation and that competes with QuestPDF;
+5. reverse engineer, decompile, or disassemble the Software except to the extent such activity cannot lawfully be restricted under applicable law or constitutes good-faith security research authorised under the QuestPDF Security Policy;
+6. use the Software or QuestPDF source code as training data for a machine learning model, except for ordinary developer use of code assistants or similar tools in connection with your own integration work.
+
+For clarity, this section does not prohibit you from building ordinary applications or services that include PDF generation as one feature among others.
 
 
 ## Copyright Notice
 
-If you redistribute source copies of the Software, you must retain the applicable copyright notice and this Community License notice.
+If you redistribute the Software as a compiled component of a Derivative Application, you must not remove or obscure QuestPDF's proprietary notices from the Software itself.
 
-If you redistribute the Software as part of a compiled Derivative Application, you must not remove QuestPDF's proprietary notices from the Software itself.
+For clarity, this Community License does not grant a right to redistribute the Software in source form.
 
 
 ## Limitation of Liability
@@ -84,6 +95,11 @@ Nothing in this Community License excludes or limits liability to the extent suc
 To the maximum extent permitted by law, QuestPDF is not liable for any indirect, consequential, special, incidental, exemplary, or punitive damages, or for loss of profits, revenue, business opportunity, or data.
 
 QuestPDF provides no indemnity under this Community License.
+
+
+## Applicable Version
+
+The version of this Community License distributed or published with a given release of the Software governs your use of that release. A later version of this Community License applies to a release only if it was distributed with that release or you expressly accept the later version.
 
 
 ## Governing Law
@@ -125,4 +141,6 @@ You may not assign or transfer this Community License without QuestPDF's prior w
 
 ## Entire Agreement
 
-This Community License, together with the License Selection Guide, constitutes the entire agreement between you and QuestPDF regarding the use of the Software under this Community License.
+This Community License, together with the License Selection Guide and the Security Policy, constitutes the entire agreement between you and QuestPDF regarding the use of the Software under this Community License.
+
+Use of the questpdf.com website and the general commercial relationship with QuestPDF are governed by the Terms of Service; in the event of a direct conflict concerning use of the Software, this Community License controls.

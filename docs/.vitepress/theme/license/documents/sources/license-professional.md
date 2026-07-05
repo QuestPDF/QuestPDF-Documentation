@@ -1,7 +1,7 @@
 # Professional / Enterprise License
 
-**Effective Date:** 10 June 2026  
-**Version:** 2.0
+**Effective Date:** 6 July 2026  
+**Version:** 3.0
 
 
 ## Definitions
@@ -10,30 +10,42 @@ For purposes of this Agreement:
 
 - **QuestPDF** means Marcin Ziąbek, operating as Marcin Ziąbek CodeFlint (sole-proprietorship registered in Poland), and its successors and assigns.
 - **Software** means the QuestPDF library, its documentation, and any Updates made available during an active Update and Support Term.
-- **Licensee, you, and your** mean the legal entity identified as the licensee or end customer in the applicable order, quote, invoice, license confirmation document, Order Form, or other purchase record. If no separate end customer is identified, the Licensee is the entity that purchased the license.
+- **Licensee, you, and your** mean the individual or legal entity identified as the licensee or end customer in the applicable order, quote, invoice, license confirmation document, Order Form, or other purchase record.
+
+  If those records identify different licensees or end customers, a signed Order Form controls; otherwise the license confirmation document issued by QuestPDF controls. If no separate end customer is identified, the Licensee is the individual or entity that purchased the license.
+
+  During Evaluation Use, **Licensee, you, and your** mean the individual or legal entity performing the evaluation.
 - **Developer** has the meaning stated in the License Selection Guide.
 - **Affiliate** means an entity that controls, is controlled by, or is under common control with a party, where control means ownership of more than 50% of the relevant voting interests or equivalent governance power.
-- **Effective Date** means the date the license is purchased.
-- **Update and Support Term** means the 12-month period starting on the Effective Date, and each renewed 12-month period for which the applicable fee is paid.
+- **Purchase Date** means the date the license is purchased.
+- **Update and Support Term** means the 12-month period starting on the Purchase Date, and each renewed 12-month period for which the applicable fee is paid.
 - **Updates** means new versions, fixes, patches, and improvements that QuestPDF generally makes available during an active Update and Support Term.
-- **Derivative Application** means your own software application that uses the Software, but is not itself a standalone PDF generation library or SDK.
+- **Derivative Application** means your own software application that uses the Software, but is not itself a library, SDK, or other developer component whose primary purpose is general-purpose PDF generation.
 - **Fees** means the amounts payable for the license and any renewal of the Update and Support Term.
+- **Locked Renewal Price** means the price at which your current Update and Support Term was purchased or renewed, disregarding any discount that QuestPDF expressly identified as a one-off, promotional, or otherwise non-recurring discount at the time it was granted. Channel, volume, or reseller discounts granted to a reseller or other intermediary, rather than to you, are likewise disregarded.
 - **Order Form** means a mutually executed commercial document that states specific commercial terms for your purchase.
+- **Enterprise Addendum** means a mutually executed addendum to this Agreement that states enterprise-specific terms for your purchase.
 
 
 ## Grant of License
 
 Subject to this Agreement and payment of applicable Fees, QuestPDF grants you a worldwide, non-exclusive, non-transferable license, except as expressly permitted in the Assignment section, to install, use, and integrate the Software as permitted by this Agreement.
 
+For accepted invoice-based, reseller, procurement-provider, or Order Form purchases, license rights begin when QuestPDF issues a license confirmation document or otherwise accepts the order, even if payment is due later. Those rights are conditional on timely payment and terminate automatically if the transaction is cancelled for non-payment, remains unpaid after any applicable cure period, refunded, reversed, charged back, or otherwise invalidated.
+
+If the Fees for a license or a renewal are refunded, reversed, charged back, or otherwise invalidated, the license rights attributable to that payment terminate automatically as of the refund, reversal, chargeback, or invalidation. A refunded or invalidated initial purchase ends the license. A refunded or invalidated renewal ends the perpetual rights only for versions first made available during the affected term; perpetual rights for versions obtained during earlier, fully paid terms remain in effect.
+
 
 ## Perpetual License
 
 The license is perpetual as to the specific versions made available to you during an active Update and Support Term. This means that, even if you do not renew, you may continue using those versions under this Agreement.
 
+To the maximum extent permitted by applicable law, QuestPDF waives any statutory or other right to terminate or revoke this perpetual license, other than for the causes expressly stated in the Term and Termination section.
+
 
 ## License Permissions
 
-During the applicable license scope and Developer limit, you may:
+Within the applicable license scope, you may:
 
 1. use the Software to develop, build, and maintain an unlimited number of Derivative Applications;
 2. deploy Derivative Applications that include the Software in any environment, including development, testing, staging, and production;
@@ -43,7 +55,11 @@ During the applicable license scope and Developer limit, you may:
 
 End users of your Derivative Applications do not need a separate QuestPDF license merely to use those applications.
 
-For Enterprise License holders, there is no maximum number of qualifying Developers. The Professional License is limited to no more than 10 qualifying Developers unless a signed Order Form states otherwise. If your qualifying Developer count grows beyond this limit during a Term, the transition described in the License Selection Guide applies.
+Your license covers all Developers engaged by or working on behalf of the Licensee, without any limit on their number.
+
+A Professional License covers a single Licensee: one individual or legal entity. If Developers of more than one individual or legal entity need to be covered, each requires its own Professional License, or one entity may hold an Enterprise License covering its Affiliates as described below.
+
+If you hold an Enterprise License, your license additionally covers all Developers engaged by or working on behalf of the Licensee's Affiliates. The Licensee is responsible for its Affiliates' compliance with this Agreement, and use of the Software by an Affiliate is treated as use by the Licensee. Affiliate coverage is part of the license scope, not an assignment of this Agreement, and it ends for an entity that ceases to be an Affiliate.
 
 
 ## License Restrictions
@@ -53,9 +69,9 @@ You may not:
 1. use QuestPDF names, logos, or other branding in a way that implies endorsement or affiliation without prior written permission, except for truthful factual statements such as "Built with QuestPDF";
 2. sell, sublicense, rent, lease, or otherwise grant third parties rights to the Software itself except as expressly permitted by this Agreement;
 3. remove or obscure proprietary notices in the Software;
-4. use the Software primarily to develop, market, or distribute a standalone PDF generation library or SDK that competes with QuestPDF;
+4. use the Software primarily to develop, market, distribute, or operate a library, SDK, API, hosted service, or other developer component whose primary purpose is general-purpose PDF generation and that competes with QuestPDF;
 5. use the Software or QuestPDF source code as training data for a machine learning model, except for ordinary developer use of code assistants or similar tools in connection with your own integration work; or
-6. reverse engineer, decompile, or disassemble the Software except to the extent such activity cannot lawfully be restricted under applicable law.
+6. reverse engineer, decompile, or disassemble the Software except to the extent such activity cannot lawfully be restricted under applicable law or constitutes good-faith security research authorised under the QuestPDF Security Policy;
 
 For clarity, this section does not prohibit you from building ordinary applications or services that include PDF generation as one feature among others.
 
@@ -73,25 +89,35 @@ If you provide QuestPDF with feedback, suggestions, or ideas relating to the Sof
 
 Each purchase includes a 12-month Update and Support Term.
 
-**Website purchases:** If you purchased a license through the QuestPDF website, your Update and Support Term renews automatically for additional 12-month periods at the then-current renewal price, unless you cancel before the end of the current Term. You can cancel through the cancellation link provided in your purchase and renewal emails, through our Customer Portal, or by contacting QuestPDF at contact@questpdf.com. Transaction and payment questions can also be directed to Paddle, our Merchant of Record, at help@paddle.com.
+**Website purchases:** If you purchased a license through the QuestPDF website, your Update and Support Term renews automatically for additional 12-month periods at the price determined under the Price Lock below, unless you cancel before the end of the current Term. You can cancel through the cancellation link provided in your purchase and renewal emails, through our Customer Portal, or by contacting QuestPDF at contact@questpdf.com. Transaction and payment questions can also be directed to Paddle, our Merchant of Record, at help@paddle.com.
 
 **Invoice-based purchases:** If you purchased a license under a signed Order Form or by direct invoice, your Update and Support Term does not renew automatically. At the end of each Term, renewal requires a new Order Form or purchase. The commercial terms in a signed Order Form control for the period stated there.
 
 Any renewal affects only future update and support rights; it does not cancel or reduce your perpetual right to continue using versions already obtained during a paid term. If the Update and Support Term is not renewed, your perpetual right to continue using versions obtained during the paid term remains in effect. You will not receive further updates or support until a new Update and Support Term is purchased.
 
-QuestPDF will use commercially reasonable efforts to provide advance notice of upcoming renewals, including at least 90 days' notice of any renewal price change.
+**Price Lock:** Your Update and Support Term renews at your Locked Renewal Price. For as long as you renew continuously, QuestPDF will not increase your Locked Renewal Price. QuestPDF may charge a lower price for a given term at its discretion. Where QuestPDF expressly identified that lower price as a one-off, promotional, or otherwise non-recurring discount at the time it was granted, the discount applies only to that term, does not change your Locked Renewal Price, and the next renewal returns to your Locked Renewal Price.
+
+The Price Lock applies to every Licensee, including where renewals are purchased or processed by a reseller, procurement provider, or other intermediary on the Licensee's behalf. In that case, the Price Lock applies to the price charged by QuestPDF for the transaction; any fees, margins, or markups added by the intermediary are outside QuestPDF's control and are not covered by the Price Lock.
+
+A renewal completed within 30 days after the end of the preceding Update and Support Term is treated as continuous. If a longer lapse occurs, the Price Lock ends, any later purchase is made at the then-current price, and that price establishes a new Locked Renewal Price.
+
+The Price Lock protects your price, not the packaging: QuestPDF may change its licensing model or packaging prospectively with at least 90 days' notice. If QuestPDF migrates continuously renewing Licensees to a successor offering as part of such a change, your renewal price for the successor offering will not exceed your Locked Renewal Price for as long as you continue to renew continuously.
+
+Prices are exclusive of applicable taxes, which are calculated and handled by Paddle as Merchant of Record. Pricing stated in a signed Order Form controls for the period stated in that Order Form.
+
+QuestPDF will use commercially reasonable efforts to provide advance notice of upcoming renewals.
 
 
 ## Post-Expiration Rights
 
-If your Update and Support Term expires or is not renewed, you may continue using the last version of the Software made available to you during your active paid term.
+If your Update and Support Term expires or is not renewed, you may continue using the versions of the Software made available to you during your active paid term.
 
 After expiration, you are no longer entitled to new Updates or ongoing support unless you renew or the parties agree otherwise in writing.
 
 
 ## Evaluation Use
 
-Before purchasing, you may evaluate the Software internally for up to 60 days for testing, review, learning, and non-production use.
+Before purchasing, QuestPDF grants you a limited, non-exclusive, non-transferable evaluation license to use the Software internally for up to 60 days for testing, review, learning, and other non-production purposes, free of charge and subject to the License Restrictions and the other terms of this Agreement.
 
 Evaluation use does not include production deployment or distribution to third parties. Continued use after the evaluation period requires qualification under the Community License or purchase of the appropriate paid license.
 
@@ -132,12 +158,12 @@ Termination does not require you to recall Derivative Applications already distr
 
 ## Limited Warranty
 
-For 90 days after the Effective Date, QuestPDF warrants that the Software will perform in all material respects in accordance with the applicable published documentation.
+For 90 days after the Purchase Date, QuestPDF warrants that the Software will perform in all material respects in accordance with the applicable published documentation.
 
 If QuestPDF breaches this warranty, QuestPDF may, at its option, either:
 
 1. use commercially reasonable efforts to correct or replace the affected Software; or
-2. if correction or replacement is not commercially reasonable, terminate the affected license and refund the unused, prepaid portion of the then-current Update and Support Term.
+2. if correction or replacement is not commercially reasonable, terminate the affected license and refund the Fees paid for the then-current Update and Support Term. Upon that refund, the license rights for versions first made available during the refunded term end; perpetual rights for versions obtained during earlier, fully paid terms remain in effect.
 
 This is your exclusive remedy for breach of this warranty.
 
@@ -150,7 +176,7 @@ Nothing in this Agreement limits any non-waivable rights that cannot be excluded
 
 ## Limitation of Liability
 
-To the maximum extent permitted by law, QuestPDF's total aggregate liability arising out of or relating to this Agreement will not exceed the Fees paid by you under this Agreement during the 12 months immediately preceding the event giving rise to the claim, and no more than USD 10,000.
+To the maximum extent permitted by law, QuestPDF's total aggregate liability arising out of or relating to this Agreement will not exceed the Fees paid or payable by you for the Update and Support Term in which the event giving rise to the claim occurred (or, if no Update and Support Term is in effect at that time, for your most recent Update and Support Term), and in any case no more than USD 10,000.
 
 To the maximum extent permitted by law, neither party is liable for any indirect, consequential, special, incidental, exemplary, or punitive damages, or for any loss of profits, revenue, goodwill, business opportunity, or data, even if advised of the possibility of those damages.
 
@@ -161,7 +187,7 @@ The limitations in this section apply regardless of the legal theory of the clai
 
 ## Intellectual Property Indemnification
 
-The Professional and Enterprise Licenses do not include intellectual property indemnification. QuestPDF does not assume an obligation to defend you against, or pay damages arising from, third-party intellectual property claims.
+Except as expressly stated in a signed Order Form or Enterprise Addendum, the Professional and Enterprise Licenses do not include intellectual property indemnification, and QuestPDF does not assume an obligation to defend you against, or pay damages arising from, third-party intellectual property claims.
 
 If a third party claims that your authorised use of the unmodified Software infringes its intellectual property rights, QuestPDF may, at its sole option:
 
@@ -169,19 +195,21 @@ If a third party claims that your authorised use of the unmodified Software infr
 2. modify or replace the affected part of the Software to avoid the alleged infringement; or
 3. terminate the affected license and refund the Fees paid for the then-current Update and Support Term.
 
+To the maximum extent permitted by applicable law, this section states QuestPDF’s sole liability, and your sole and exclusive remedy, for any third-party claim alleging that the Software infringes, misappropriates, or otherwise violates intellectual property rights.
+
 
 ## Licensee Indemnification
 
-You will defend QuestPDF against a third-party claim arising out of:
+You will defend QuestPDF against any third-party claim arising from:
 
-1. your Derivative Applications or your use of them;
-2. your data, documents, or other content;
-3. your unlawful use of the Software; or
-4. your material breach of this Agreement.
+1. your Derivative Applications, data, documents, or other content, except to the extent the claim is caused by the unmodified Software itself;
+2. your use of the Software in violation of this Agreement or applicable law;
+3. your modification, combination, or distribution of the Software outside the scope permitted by this Agreement; or
+4. your willful infringement or misappropriation of QuestPDF's intellectual property rights.
 
 You will pay damages finally awarded by a court or agreed in a settlement signed by you, provided that QuestPDF promptly notifies you of the claim, gives you reasonable control of the defence and settlement, and provides reasonable cooperation at your expense.
 
-This section is subject to the Limitation of Liability section, except to the extent the claim arises from your fraud, willful misconduct, or willful infringement of QuestPDF's intellectual property rights.
+Your obligations under this section are subject to the exclusion of indirect and consequential damages in the Limitation of Liability section. However, your total aggregate liability under this indemnification section will not exceed three times (3x) the total Fees paid or payable by you in the twelve (12) months preceding the claim, or USD 30,000, whichever is greater. This cap does not apply to claims arising from your fraud, willful misconduct, or willful infringement of QuestPDF's intellectual property rights.
 
 
 ## Export Control and Sanctions
@@ -207,7 +235,7 @@ For QuestPDF's own processing of license, support, and related business-contact 
 
 ## Compliance Verification
 
-License eligibility and Developer counts are based on good-faith self-certification under the License Selection Guide.
+License eligibility is based on good-faith self-certification under the License Selection Guide.
 
 QuestPDF may request reasonable written confirmation of compliance in the circumstances described in the License Selection Guide.
 
@@ -218,7 +246,11 @@ During an active Update and Support Term, you may contact QuestPDF at contact@qu
 
 Unless a signed Order Form states otherwise, support is provided on a reasonable-efforts basis during Central European Time business hours, Monday through Friday, excluding public holidays in Poland.
 
-Any enhanced support commitment, target response time, or enterprise-specific support term applies only if expressly stated in a signed Order Form or Enterprise Addendum.
+If you hold an Enterprise License, QuestPDF will use commercially reasonable efforts to provide a first qualified response to your support requests within one business day, measured in Central European Time, Monday through Friday, excluding public holidays in Poland. A qualified response is a substantive human response addressing the request; an automated acknowledgment is not a qualified response. A response target is not a resolution commitment. No service credit or other specific remedy applies to a missed target, and this paragraph is subject to the Limitation of Liability and Force Majeure sections.
+
+If you hold an Enterprise License, QuestPDF will additionally use commercially reasonable efforts to prioritise the investigation and remediation of business-critical issues and, where the issue is resolved by a code change, to make the fix available through an off-schedule release rather than waiting for the next scheduled release. A business-critical issue is a defect in the unmodified Software that materially impairs production use of your Derivative Application and for which no reasonable workaround is available, as reasonably determined by QuestPDF. Prioritised handling is an effort commitment, not a guaranteed resolution or release timeframe. No service credit or other specific remedy applies, and this paragraph is subject to the Limitation of Liability and Force Majeure sections.
+
+Any support commitment beyond this section, including any different target response time or other enterprise-specific support term, applies only if expressly stated in a signed Order Form or Enterprise Addendum.
 
 
 ## Force Majeure
@@ -260,7 +292,16 @@ QuestPDF may discontinue the Software or specific versions from time to time.
 
 If QuestPDF decides to discontinue the paid product generally, QuestPDF will use commercially reasonable efforts to give existing paid licensees advance notice and to preserve access, for a reasonable period, to the last version made available during their active paid term.
 
+If you hold an Enterprise License, QuestPDF will additionally use commercially reasonable efforts to: (a) provide at least 12 months' advance notice before any general discontinuation of the paid product; (b) keep the last version made available during your active paid term available for download throughout that notice period; and (c) provide reasonable transition assistance during that notice period, such as answering migration questions and continuing to address critical defects. In addition, QuestPDF will not remove, and will not request the removal of, previously published stable releases of the Software from public distribution channels such as NuGet, except where removal is required by law or is reasonably necessary to address a critical security risk. The commitments in this paragraph do not apply to the extent QuestPDF is prevented by circumstances beyond its reasonable control, and are subject to the Limitation of Liability section.
+
 This section does not require QuestPDF to place the Software into escrow or to release it under an open-source license.
+
+
+## Application of This Version
+
+This version of the Agreement applies to licenses purchased on or after the Effective Date stated above.
+
+If you purchased your license under a previous version: the coverage described in the License Permissions section, including the removal of any Developer-count limitation, applies to you from the Effective Date as a beneficial change and supersedes any Developer-count limitation stated in a previous version or in your license confirmation document; and your current renewal price becomes your Locked Renewal Price. All other changes apply to you as described in the Changes to Terms section of the Terms of Service. Pricing and terms stated in a signed Order Form continue to control for the period stated there.
 
 
 ## Governing Law
@@ -281,11 +322,11 @@ If there is a conflict between this Agreement and a mandatory third-party licens
 
 ## General Provisions
 
-**Entire Agreement.** This Agreement, together with the License Selection Guide, Terms of Service, any signed Order Form, and any mutually executed data protection addendum, is the entire agreement regarding the Software.
+**Entire Agreement.** This Agreement, together with the License Selection Guide, the Terms of Service, the Security Policy, the Privacy Policy, any signed Order Form, any mutually executed Enterprise Addendum, and any mutually executed data protection addendum, is the entire agreement regarding the Software.
 
 **Purchase Orders.** Any pre-printed or standard terms in a purchase order, procurement portal, or similar customer document do not apply unless QuestPDF expressly accepts them in a signed agreement.
 
-**Order of Precedence.** If there is a conflict, the following order applies: (1) signed Order Form or Enterprise Addendum; (2) mutually executed data protection addendum; (3) this Agreement; (4) the License Selection Guide; (5) the Terms of Service; (6) the Privacy Policy.
+**Order of Precedence.** If there is a conflict, the following order applies: (1) signed Order Form or Enterprise Addendum; (2) mutually executed data protection addendum; (3) this Agreement; (4) the License Selection Guide; (5) the Terms of Service; (6) the Security Policy; (7) the Privacy Policy.
 
 **Survival.** Any provision that by its nature should survive expiration or termination of this Agreement will survive, including Ownership and Customer Content, License Restrictions, Post-Expiration Rights, Confidentiality, payment obligations accrued before expiration or termination, Limitation of Liability, Intellectual Property Indemnification, Licensee Indemnification, Export Control and Sanctions, Injunctive Relief, Governing Law, Third-Party Components / OSS Components, and General Provisions.
 
