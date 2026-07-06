@@ -125,7 +125,7 @@ DocumentOperation
     {
         FilePath = "watermark.pdf"
     })
-    .Save("with-watermark.pdf");
+    .Save("output-with-watermark.pdf");
 ```
 
 More complex overlay example with specific page selections:
@@ -135,12 +135,12 @@ DocumentOperation
     .LoadFile("input.pdf")
     .OverlayFile(new LayerConfiguration
     {
-        FilePath = "header-footer.pdf",
+        FilePath = "watermak.pdf",
         TargetPages = "1-z",           // Apply to all pages
         SourcePages = "1",             // Use first page initially
         RepeatSourcePages = "1"        // Repeat first page throughout
     })
-    .Save("with-header-footer.pdf");
+    .Save("output-with-watermark.pdf");
 ```
 
 ## Document Encryption
