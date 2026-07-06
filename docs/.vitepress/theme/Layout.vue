@@ -1,9 +1,5 @@
 <template>
   <Layout>
-    <template #doc-before>
-      <support-alert />
-    </template>
-
     <template #layout-bottom>
       <layout-footer />
 
@@ -18,7 +14,6 @@
 import DefaultTheme from 'vitepress/theme';
 const { Layout } = DefaultTheme
 
-import SupportAlert from "./SupportAlert.vue";
 import PaddleIntegration from "./PaddleIntegration.vue";
 import LayoutFooter from "./LayoutFooter.vue";
 

@@ -9,11 +9,3 @@ onMounted(() => {
   usePaddle();
 })
 </script>
-
-<template>
-
-</template>
-
-<style scoped>
-
-</style>
