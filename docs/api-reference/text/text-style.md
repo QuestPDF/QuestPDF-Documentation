@@ -388,6 +388,10 @@ If you try to enable a feature that is not supported by the font, it will be ign
 Moreover, some fonts have features enabled by default, and you may not see any difference when enabling them.
 :::
 
+::: info
+QuestPDF disables the `StandardLigatures` feature by default. Enable it explicitly whenever you want ligatures in your document.
+:::
+
 ### Example
 
 Let's analyze the `StandardLigatures` font feature, which replaces specific pairs of letters (such as 'fi' or 'fl') with a single, combined glyph to enhance aesthetics.

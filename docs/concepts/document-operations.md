@@ -154,15 +154,17 @@ DocumentOperation
 
 ### Encryption Types and Permissions
 
-| Permission             | 40-bit | 128-bit | 256-bit | Description                                                          |
-|------------------------|--------|---------|---------|----------------------------------------------------------------------|
-| AllowAnnotation        | ✓      | ✓       | ✓       | Allows adding or modifying text annotations                          |
-| AllowContentExtraction | ✓      | ✓       | ✓       | Allows copying text and graphics                                     |
-| AllowModification      | ✓      | -       | -       | Allows document modifications                                        |
-| AllowPrinting          | ✓      | ✓       | ✓       | Allows printing the document                                         |
-| AllowAssembly          | -      | ✓       | ✓       | Allows inserting, rotating, or deleting pages and creating bookmarks |
-| AllowFillingForms      | -      | ✓       | ✓       | Allows filling in form fields                                        |
-| EncryptMetadata        | -      | ✓       | ✓       | Controls whether document metadata is encrypted                      |
+| Permission             | 40-bit | 128-bit | 256-bit | Description                                                                                                       |
+|------------------------|--------|---------|---------|-------------------------------------------------------------------------------------------------------------------|
+| AllowAnnotation        | ✓     | ✓      | ✓      | Allows adding or modifying text annotations                                                                       |
+| AllowContentExtraction | ✓     | ✓      | ✓      | Allows copying text and graphics                                                                                  |
+| AllowModification      | ✓     | ✓      | ✓      | Allows modifying the document content. Independent of the annotation, form filling, and page assembly permissions |
+| AllowPrinting          | ✓     | ✓      | ✓      | Allows printing the document                                                                                      |
+| AllowAssembly          | -      | ✓      | ✓      | Allows inserting, rotating, or deleting pages and creating bookmarks                                              |
+| AllowFillingForms      | -      | ✓      | ✓      | Allows filling in form fields                                                                                     |
+| EncryptMetadata        | -      | ✓      | ✓      | Controls whether document metadata is encrypted                                                                   |
+
+Starting with the 2026.7.2 version, the `AllowModification` permission is also supported for 128-bit and 256-bit encryption. All of the properties listed above default to `true`, so you only need to set the ones you want to change.
 
 40-bit encryption example:
 
@@ -191,6 +193,7 @@ DocumentOperation
         UserPassword = "user123",
         OwnerPassword = "owner456",
         AllowPrinting = true,
+        AllowModification = false,
         AllowContentExtraction = false,
         AllowFillingForms = true,
         AllowAssembly = false,
@@ -210,6 +213,7 @@ DocumentOperation
         UserPassword = "user123",
         OwnerPassword = "owner456",
         AllowPrinting = true,
+        AllowModification = false,
         AllowContentExtraction = false,
         AllowFillingForms = true,
         AllowAssembly = false,
