@@ -16,12 +16,11 @@ When required, child items are split across pages, ensuring that the content is 
 For a row element with a width of 100 points that has three items (a relative item of size 1, a relative item of size 5, and a constant item of size 10 points),
 the items will occupy sizes of 15 points, 75 points, and 10 points respectively.
 
-| Method           | Description                                                                                          |
-|------------------|------------------------------------------------------------------------------------------------------|
-| **ConstantItem** | Adds a new item to the row element with a specified constant size.                                   |
-| **RelativeItem** | Adds a new item to the row element. This item occupies space proportionally to other relative items. |
-| **AutoItem**     | Adds a new item to the row element. The size of this item adjusts based on its content.              |
-
+| Method           | Description                                                                                                                                                                                                                                                                                                        |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **ConstantItem** | Adds a new item to the row element with a specified constant size.                                                                                                                                                                                                                                                 |
+| **RelativeItem** | Adds a new item to the row element. This item occupies space proportionally to other relative items.                                                                                                                                                                                                               |
+| **AutoItem**     | Adds a new item to the row element. It requests as much horizontal space as its content requires. **Warning**: It doesn't adjust its size based on other items and may frequently result in layout exceptions. It is recommended to use this API in conjunction with the [MaxWidth](/api-reference/width) element. |
 
 For ConstantItem, you can optionally specify the unit value (default is `Unit.Points`).
 
