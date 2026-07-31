@@ -79,21 +79,23 @@ document.GenerateImages(imageIndex => $"image{imageIndex}.png");
 
 Optionally, you can provide additional generation settings:
 
-| Property                    | Description                                                                                                                                                                                                                      |
-|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **ImageFormat**             | The file format used to encode the images. Default is `PNG`.                                                                                                                                                                     |
-| **ImageCompressionQuality** | Encoding quality controls the trade-off between size and quality. The default value is `high`.                                                                                                                                   |
-| **RasterDpi**               | The DPI (pixels-per-inch) at which the document will be rasterized. This controls the resolution of produced images. Higher DPI results in superior image quality but may increase the output file size. Default value is `288`. |
+| Property                     | Description                                                                                                                                                                                                                      |
+|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **ImageFormat**              | The file format used to encode the images. Default is `PNG`.                                                                                                                                                                     |
+| **ImageCompressionQuality**  | Encoding quality controls the trade-off between size and quality. The default value is `high`.                                                                                                                                   |
+| **RasterDpi**                | The DPI (pixels-per-inch) at which the document will be rasterized. This controls the resolution of produced images. Higher DPI results in superior image quality but may increase the output file size. Default value is `288`. |
+| **UseTransparentBackground** | When enabled, the generated images have a transparent background instead of a white one. Applies only to image formats that support transparency (`PNG` and `WEBP`).                                                             |
 
 
-```csharp{3-8}
+```csharp{3-9}
 using QuestPDF.Infrastructure;
 
 var imageGenerationSettings = new ImageGenerationSettings
 {
     ImageFormat = ImageFormat.Png,
     ImageCompressionQuality = ImageCompressionQuality.High,
-    RasterDpi = 288
+    RasterDpi = 288,
+    UseTransparentBackground = false
 };
 
 IEnumerable<byte[]> imagesAsByteArrays = document.GenerateImages(imageGenerationSettings);
