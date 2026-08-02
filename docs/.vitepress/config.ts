@@ -106,6 +106,15 @@ export default defineConfig({
                             { text: 'Dynamic components', link: '/concepts/code-patterns/dynamic-components' },
                             { text: 'Capture content position', link: '/concepts/code-patterns/capture-content-position' },
                         ]
+                    },
+                    {
+                        text: 'Dynamic composition',
+                        items: [
+                            { text: 'Mixed content blocks', link: '/concepts/dynamic-composition/mixed-content-blocks' },
+                            { text: 'Conditional formatting', link: '/concepts/dynamic-composition/conditional-formatting' },
+                            { text: 'Configurable tables', link: '/concepts/dynamic-composition/configurable-tables' },
+                            { text: 'Nested content', link: '/concepts/dynamic-composition/nested-content' },
+                        ]
                     }
                 ]
             },
