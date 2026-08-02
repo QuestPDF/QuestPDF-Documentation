@@ -22,9 +22,11 @@ The code below presents a simple helper class that fetches a map image based on 
 Please generate your own access token via your Mapbox account before deploying.
 :::
 
-```csharp{4}
+```csharp
 static class MapboxStaticMapRenderer
 {
+    private static readonly HttpClient HttpClient = new();
+
     private const string MapboxBaseUrl = "https://api.mapbox.com/styles/v1/mapbox/streets-v12/static";
     private const string AccessToken = "<MAPBOX_TOKEN>";
 
@@ -34,11 +36,9 @@ static class MapboxStaticMapRenderer
         var latitudeString = latitude.ToString(System.Globalization.CultureInfo.InvariantCulture);
         var url = $"{MapboxBaseUrl}/{longitudeString},{latitudeString},{zoom},0,0/{width}x{height}@2x?access_token={AccessToken}";
 
-        using var client = new HttpClient();
-        
         try
         {
-            var response = await client.GetAsync(url);
+            var response = await HttpClient.GetAsync(url);
             return await response.Content.ReadAsByteArrayAsync();
         }
         catch (Exception ex)
