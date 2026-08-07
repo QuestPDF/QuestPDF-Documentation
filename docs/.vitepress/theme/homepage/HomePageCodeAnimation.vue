@@ -180,7 +180,7 @@ async function animate() {
   await waitAndProceedToNextStep("Insert a footer");
   await appendTextInLine(18, "\n\n");
   highlightLine(20);
-  await appendTextInLine(20, "\t\t\tpage.Footer()\n\t\t\t\t.Text(\"Footer!\");");
+  await appendTextInLine(20, "\t\t\tpage.Footer()\n\t\t\t\t.Text(\"Footer\");");
 
   await waitAndProceedToNextStep("Center-align the footer");
   await appendTextAfter("page.Footer()", "\n");
@@ -189,7 +189,7 @@ async function animate() {
 
   await waitAndProceedToNextStep("Include a page number in the footer");
   highlightLine(22);
-  await deleteText(".Text(\"Footer!\");")
+  await deleteText(".Text(\"Footer\");")
   await appendTextAfter(".AlignCenter()\n", "\t\t\t\t.Text(text => \n\t\t\t\t{\n \n \n\t\t\t\t});");
   await appendTextInLine(24, "\t\t\t\t\ttext.Span(\"Page \");");
   await appendTextInLine(25, "\t\t\t\t\ttext.CurrentPageNumber();");
