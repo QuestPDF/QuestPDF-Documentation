@@ -4,10 +4,10 @@
 
 Constrained rotation enables you to rotate an element by exactly 90 degrees, either clockwise or counterclockwise, while maintaining the content within the same space and size constraints.
 
-| Method          | Description                                      |
-|-----------------|--------------------------------------------------|
-| **RotateLeft**  | Rotates its content 90 degrees counterclockwise. |
-| **RotateRight** | Rotates its content 90 degrees clockwise.        |
+| Method                     | Description                                      |
+|----------------------------|--------------------------------------------------|
+| **RotateCounterclockwise** | Rotates its content 90 degrees counterclockwise. |
+| **RotateClockwise**        | Rotates its content 90 degrees clockwise.        |
 
 ::: warning
 When applying rotation, be aware that it changes the dimensional behavior of your elements. 
@@ -19,7 +19,7 @@ This affects how other properties like alignment and padding work on the rotated
 container.Row(row =>
 {
     row.AutoItem()
-        .RotateLeft()
+        .RotateCounterclockwise()
         .AlignCenter()
         .Text("Definition")
         .Bold().FontColor(Colors.Blue.Darken2);
@@ -43,7 +43,7 @@ container.Row(row =>
 
 ## Free
 
-Rotates its content clockwise by a given angle.
+Rotates its content clockwise, around its center, by a given angle.
 
 ```csharp{24}
 container
