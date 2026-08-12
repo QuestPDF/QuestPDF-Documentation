@@ -251,7 +251,7 @@ Tagging them is crucial for accessibility, as it allows screen readers to correc
 
 For example, a screen reader can announce "Position: Senior Developer" rather than just "Senior Developer."
 
-You can apply this tag using the AsSemanticHorizontalHeader method:
+You can apply this tag using the SemanticHorizontalHeader method:
 
 ```csharp{23,28,33,38}
 Document
@@ -276,22 +276,22 @@ Document
                     });
 
                     // Row 1: Name
-                    table.Cell().AsSemanticHorizontalHeader().Element(HeaderCellStyle).Text("Name");
+                    table.Cell().SemanticHorizontalHeader().Element(HeaderCellStyle).Text("Name");
                     table.Cell().Element(CellStyle).Text("John Smith");
                     table.Cell().Element(CellStyle).Text("Jane Doe");
 
                     // Row 2: Position
-                    table.Cell().AsSemanticHorizontalHeader().Element(HeaderCellStyle).Text("Position");
+                    table.Cell().SemanticHorizontalHeader().Element(HeaderCellStyle).Text("Position");
                     table.Cell().Element(CellStyle).Text("Senior Developer");
                     table.Cell().Element(CellStyle).Text("UX Designer");
 
                     // Row 3: Department
-                    table.Cell().AsSemanticHorizontalHeader().Element(HeaderCellStyle).Text("Department");
+                    table.Cell().SemanticHorizontalHeader().Element(HeaderCellStyle).Text("Department");
                     table.Cell().Element(CellStyle).Text("Engineering");
                     table.Cell().Element(CellStyle).Text("Design");
 
                     // Row 4: Experience
-                    table.Cell().AsSemanticHorizontalHeader().Element(HeaderCellStyle).Text("Experience");
+                    table.Cell().SemanticHorizontalHeader().Element(HeaderCellStyle).Text("Experience");
                     table.Cell().Element(CellStyle).Text("5 years");
                     table.Cell().Element(CellStyle).Text("3 years");
 
