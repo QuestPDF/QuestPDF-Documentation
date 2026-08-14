@@ -45,7 +45,7 @@ container.Row(row =>
 
 Rotates its content clockwise, around its center, by a given angle.
 
-```csharp{24}
+```csharp{20}
 container
     .Background(Colors.Grey.Lighten2)
     .Padding(25)
@@ -65,15 +65,7 @@ container
             row.AutoItem()
                 .Width(itemSize)
                 .AspectRatio(1)
-                
-                .OffsetX(itemSize / 2)
-                .OffsetY(itemSize / 2)
-                
                 .Rotate(angle)
-                
-                .OffsetX(-itemSize / 2)
-                .OffsetY(-itemSize / 2)
-                
                 .Svg("Resources/compass.svg");
         }
     });
