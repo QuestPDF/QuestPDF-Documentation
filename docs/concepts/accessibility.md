@@ -71,7 +71,7 @@ Document
 
             page.Header()
                 .PaddingBottom(15)
-                .SemanticHeader1()
+                .SemanticHeading1()
                 .Text("Accessibility Test Document")
                 .FontColor(Colors.Blue.Darken3)
                 .FontSize(24)
@@ -88,7 +88,7 @@ Document
                         {
                             column.Item()
                                 .PaddingBottom(10)
-                                .SemanticHeader2()
+                                .SemanticHeading2()
                                 .Text("Section with text content")
                                 .FontColor(Colors.Blue.Darken1)
                                 .FontSize(16);
@@ -106,7 +106,7 @@ Document
                         {
                             column.Item()
                                 .PaddingBottom(10)
-                                .SemanticHeader2()
+                                .SemanticHeading2()
                                 .Text("Section with image")
                                 .FontColor(Colors.Blue.Darken1)
                                 .FontSize(16);
@@ -152,7 +152,7 @@ These methods define the high-level organization of your document, which is esse
 
 | Method               | Description                                                                                                                                              |
 |----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **SemanticSection**  | Groups a set of related content. A section typically includes a heading (e.g., `SemanticHeader2`) and its corresponding content. Sections can be nested. |
+| **SemanticSection**  | Groups a set of related content. A section typically includes a heading (e.g., `SemanticHeading2`) and its corresponding content. Sections can be nested. |
 | **SemanticArticle**  | Marks a self-contained body of text that forms a single narrative, such as a blog post or news story.                                                    |
 | **SemanticDivision** | Marks a generic block-level container for grouping elements, similar to an HTML `<div>`. Use this when a more specific tag doesn't apply.                |
 
@@ -164,12 +164,12 @@ Using them correctly is crucial for accessibility and allowing a PDF reader to g
 
 | Method              | Description                                                                               |
 |---------------------|-------------------------------------------------------------------------------------------|
-| **SemanticHeader1** | Marks the content as a level 1 heading (H1), the highest level in the document hierarchy. |
-| **SemanticHeader2** | Marks the content as a level 2 heading (H2).                                              |
-| **SemanticHeader3** | Marks the content as a level 3 heading (H3).                                              |
-| **SemanticHeader4** | Marks the content as a level 4 heading (H4).                                              |
-| **SemanticHeader5** | Marks the content as a level 5 heading (H5).                                              |
-| **SemanticHeader6** | Marks the content as a level 6 heading (H6), the lowest level.                            |
+| **SemanticHeading1** | Marks the content as a level 1 heading (H1), the highest level in the document hierarchy. |
+| **SemanticHeading2** | Marks the content as a level 2 heading (H2).                                              |
+| **SemanticHeading3** | Marks the content as a level 3 heading (H3).                                              |
+| **SemanticHeading4** | Marks the content as a level 4 heading (H4).                                              |
+| **SemanticHeading5** | Marks the content as a level 5 heading (H5).                                              |
+| **SemanticHeading6** | Marks the content as a level 6 heading (H6), the lowest level.                            |
 
 ::: tip Document Outline
 QuestPDF uses these semantic headers to automatically generate the document outline (often called a Table of Contents) in PDF readers. 
@@ -352,7 +352,7 @@ Document
                     column.Item()
                         .ExtendVertical()
                         .AlignMiddle()
-                        .SemanticHeader1()
+                        .SemanticHeading1()
                         .Text("Conformance Test:\nTable of Contents")
                         .FontSize(36)
                         .Bold()
@@ -423,7 +423,7 @@ static void GeneratePlaceholderContentSection(IContainer container)
                         column.Spacing(15);
                         
                         column.Item()
-                            .SemanticHeader2()
+                            .SemanticHeading2()
                             .Text($"Section {i}")
                             .Bold()
                             .FontSize(20)
