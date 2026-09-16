@@ -301,7 +301,7 @@ document.Page(page =>
     page.Margin(20);
     page.PageColor(Colors.White);
     
-    page.DefaultTextStyle(x => x.FontFamily("Calibri").FontSize(20));
+    page.DefaultTextStyle(x => x.FontFamily("Lato", "Noto Sans Arabic").FontSize(20));
     page.ContentFromRightToLeft();
     
     page.Content().Column(column =>
@@ -347,4 +347,7 @@ document.Page(page =>
 });
 ```
 
-![example](/api-reference/page-content-direction-rtl.png)
+![example](/api-reference/page-content-direction-rtl.webp)
+
+`Noto Sans Arabic` provides the glyphs that `Lato` does not cover.
+Deploy the font file with your application and register it, as described in the [font management](/api-reference/text/font-management) section.

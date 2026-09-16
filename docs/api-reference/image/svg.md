@@ -92,9 +92,20 @@ Document
 
 ## Font Support
 
-If your SVG image contains text, please ensure that the font is available in your application:
-- when the `QuestPDF.Settings.UseEnvironmentFonts` is set to `true`, the font should be installed in the operating system,
-- when the `QuestPDF.Settings.UseEnvironmentFonts` is set to `false`, the font files should be deployed along with the application.
+Text inside an SVG image uses the same fonts as the rest of the document: the bundled `Lato` font, files found in the font discovery paths, and fonts registered via the `FontManager` class.
+Fonts installed in the operating system are available only when the `QuestPDF.Settings.UseSystemFonts` setting is enabled.
+
+The `font-family` attribute accepts quoted and unquoted names, as well as comma-separated fallback lists.
+The first available family is selected:
+
+```xml
+<text font-family="'Open Sans', Lato">Example</text>
+```
+
+When none of the requested families is available, or the attribute is not specified, the text is rendered using `Lato`.
+Text without the `font-size` attribute is rendered at 16 pixels.
+
+Learn more in the [font management](/api-reference/text/font-management) section.
 
 
 ## Limitations

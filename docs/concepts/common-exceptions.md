@@ -31,16 +31,20 @@ Common tasks in this phase include working with your input data, applying condit
 ## DocumentDrawingException
 
 This exception occurs during the document generation phase, when the rendering engine converts the layout tree into drawing commands. 
-Unlike DocumentComposeException, this type typically stems from internal issues or problems with custom components.
+
+#### Possible Causes:
+- Document content references a font family that is not available. The exception lists the missing families, the registered fonts, and suggested solutions.
+- Text contains glyphs that none of the available fonts can render. The exception identifies the missing glyphs and the fonts involved.
+- Errors thrown inside [Dynamic Components](/concepts/code-patterns/dynamic-components), which bubble up as this type of exception.
+- Internal issues within the rendering engine.
+
+#### Resolution:
+- Deploy the required font files with your application and register them, as described in the [font management](/api-reference/text/font-management) section.
+- Configure a font fallback that covers all scripts and symbols used in your document.
+- Review the implementation of your dynamic components.
 
 ::: info
-If you encounter this exception, it could indicate a bug in the QuestPDF library. 
-Please reach out to our support team with the error details, and we’ll work to resolve it promptly.
-:::
-
-::: warning
-If you are using [Dynamic Components](/concepts/code-patterns/dynamic-components), all exceptions thrown there are going to bubble up as this type of exception. 
-In such case, please review the implementation of your dynamic components.
+If none of the above applies, this exception could indicate a bug in the QuestPDF library.
 :::
 
 
@@ -53,7 +57,8 @@ For instance, attempting to draw a rectangle larger than the available page spac
 
 ### Enhanced Debugging Context
 
-When the `QuestPDF.Settings.EnableDebugging` is set to `true`, or the debugger is attached, the library provides additional information to help you diagnose and resolve layout issues.
+The library provides additional information to help you diagnose and resolve layout issues.
+This behavior is controlled by the `QuestPDF.Settings.EnableDetailedLayoutErrors` setting, which is enabled by default.
 
 
 ### Example

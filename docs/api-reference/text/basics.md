@@ -77,20 +77,20 @@ public static class Typography
 {
     public static TextStyle Title => TextStyle
         .Default
-        .FontType("Helvetica")
+        .FontFamily("Lato")
         .FontColor(Colors.Black)
         .FontSize(20)
         .Bold();
 
     public static TextStyle Headline => TextStyle
         .Default
-        .FontType("Helvetica")
+        .FontFamily("Lato")
         .FontColor(Colors.Blue.Medium)
         .FontSize(14);
 
     public static TextStyle Normal => TextStyle
         .Default
-        .FontType("Helvetica")
+        .FontFamily("Lato")
         .FontColor("#000000")
         .FontSize(10)
         .LineHeight(1.25f)
@@ -110,7 +110,7 @@ container
 
 container    
     .Text("Report #123")
-    .FontType("Helvetica")
+    .FontFamily("Lato")
     .FontColor(Colors.Black)
     .FontSize(20)
     .Bold();

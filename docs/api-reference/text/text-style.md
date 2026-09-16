@@ -51,6 +51,9 @@ Examples of font families include Arial, Times New Roman, and Calibri.
 
 ![example](/api-reference/text-font-family.webp)
 
+`Times New Roman` and `Courier New` come from the operating system and require the `QuestPDF.Settings.UseSystemFonts` setting to be enabled.
+Alternatively, deploy the font files with your application and register them, as described in the [font management](/api-reference/text/font-management) section.
+
 
 ## Font Fallback
 
@@ -75,6 +78,9 @@ container
 ```
 
 ![example](/api-reference/text-font-fallback-emoji.webp)
+
+Rather than repeating the fallback list on every text element, configure it once in the [default text style](/api-reference/default-text-style) of the page or document.
+Learn more in the [font management](/api-reference/text/font-management#covering-additional-languages) section.
 
 ## Font Color
 
