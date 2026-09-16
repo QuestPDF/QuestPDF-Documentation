@@ -65,8 +65,13 @@ import HomePageFeatures from "./HomePageFeatures.vue";
 
 <style>
 
-.VPNavBar .container {
+
+.VPNavBar:not(.has-sidebar) .container {
   max-width: 1152px;
+}
+
+.VPNavBar:not(.has-sidebar):not(.home) .container > .title {
+  min-width: 0;
 }
 
 .VPNavBar.top .VPNavBarAppearance {
