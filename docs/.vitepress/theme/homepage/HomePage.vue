@@ -65,7 +65,9 @@ import HomePageFeatures from "./HomePageFeatures.vue";
 
 <style>
 
-.VPNavBar .container {
+/* align the nav bar with the custom page content width;
+   doc pages keep the default container so the logo stays over the sidebar column */
+.VPNavBar:not(.has-sidebar) .container {
   max-width: 1152px;
 }
 
