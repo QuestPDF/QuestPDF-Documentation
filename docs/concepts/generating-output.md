@@ -83,3 +83,17 @@ IEnumerable<byte[]> imagesAsByteArrays = document.GenerateImages(imageGeneration
 
 document.GenerateImages(imageIndex => $"image{imageIndex}.png", imageGenerationSettings);
 ```
+
+
+## Layout errors
+
+When the document content contains size constraints that are impossible to meet, generation fails with the `DocumentLayoutException`.
+The library determines the element that most likely causes the problem and enriches the exception message with its location and layout measurements.
+This search is performed only when the document fails to generate, so it does not affect the performance of successfully generated documents.
+
+::: warning
+The message may include data from the document's content, such as fragments of `TextBlock` text.
+This helps with diagnosis, but may also expose private information, so take care when logging or forwarding these exceptions.
+:::
+
+<!--@include: ../api-reference/tip-debugging.md-->
