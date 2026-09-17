@@ -27,6 +27,8 @@ If you prefer to manually specify the directory for font discovery, use the foll
 QuestPDF.Settings.FontDiscoveryPath = "resources/fonts";
 ```
 
+The directory is scanned recursively, once, when fonts are needed for the first time, so configure this setting at application startup.
+Setting it to `null` disables automatic discovery.
 Files that cannot be loaded are skipped.
 
 
@@ -76,6 +78,22 @@ container
 ```
 
 
+## System font registration
+
+System fonts are installed in the operating system that hosts your application, for example in `C:\Windows\Fonts` on Windows or `/usr/share/fonts` on Linux.
+When the following setting is enabled, they are registered as well and can be referenced by family name:
+
+```csharp
+// false by default
+QuestPDF.Settings.UseSystemFonts = true;
+```
+
+::: warning
+This setting is disabled by default, and we recommend deploying the required font files with your application instead.
+Fonts installed in the operating system differ between machines, and a minimal environment such as an Alpine-based container may have none at all, so a document that renders correctly during development may lose text after deployment.
+:::
+
+
 ## Inspecting available fonts
 
 To determine which fonts are available during PDF generation, inspect them with the following methods:
@@ -93,23 +111,6 @@ foreach (var font in FontManager.GetSystemFonts())
 Both methods return `FontInfo` records describing the family name, the PostScript name, the weight, and flags indicating whether a font is italic or variable.
 
 `GetSystemFonts` inspects the operating system regardless of the `QuestPDF.Settings.UseSystemFonts` setting.
-Its result is not cached, so the call may be slow.
-
-
-## System font registration
-
-System fonts are the font files installed in the operating system that hosts your application, rather than shipped with it.
-Their availability differs between environments: a developer workstation typically offers hundreds, while a minimal container image may provide none at all.
-A document relying on them can therefore render correctly during development and lose text after deployment.
-
-For this reason, QuestPDF does not use system fonts by default, and we recommend deploying the required files with your application.
-
-If your application runs in a controlled environment where the required fonts are guaranteed to be present, you can enable them with the following setting:
-
-```csharp
-// false by default
-QuestPDF.Settings.UseSystemFonts = true;
-```
 
 
 ## Covering additional languages
@@ -139,11 +140,13 @@ It lists the missing families, the registered fonts, and suggested solutions, he
 QuestPDF.Settings.ThrowOnMissingFontFamilies = true;
 ```
 
+When this setting is disabled, document generation continues silently and text is rendered with the first available family from the fallback list, or with another registered font when none matches.
+
 
 ## Missing text glyphs
 
-A font covers only a subset of the Unicode range, so text containing non-Latin characters or special symbols such as emojis may use codepoints that the selected font cannot render.
-When neither the font nor any of its fallbacks provides the codepoint, QuestPDF throws the `DocumentDrawingException`, identifying the missing glyphs and the fonts involved.
+A font covers only a subset of the Unicode range, so text containing non-Latin characters or special symbols such as emojis may contain text glyphs that the selected font cannot render.
+When neither the font nor any of its fallbacks provides the text glyph, QuestPDF throws the `DocumentDrawingException`, identifying the missing glyphs and the fonts involved.
 
 ```csharp
 // enabled by default
@@ -171,5 +174,3 @@ To follow this approach, please add the following snippet to your `.csproj` file
 
 </Project>
 ```
-
-The item must be removed inside a target, because the library adds it after the project body is evaluated.

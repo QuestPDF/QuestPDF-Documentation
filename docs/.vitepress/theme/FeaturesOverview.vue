@@ -158,12 +158,6 @@ const categories = [
     name: "Important Concepts",
     items: [
       {
-        icon: "fa-regular fa-gear",
-        name: "Global Settings",
-        description: "Library-wide configuration for caching, debugging, font glyph validation, and font discovery paths. Fine-tune performance and development experience.",
-        link: "/concepts/global-settings.html"
-      },
-      {
         icon: "fa-regular fa-file-export",
         name: "Output Types",
         description: "Generate PDF, SVG, or raster images (PNG, JPEG, WEBP). Save to file, stream, or byte array for flexible integration.",
