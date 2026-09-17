@@ -86,7 +86,6 @@ export default defineConfig({
                             { text: 'Document metadata', link: '/concepts/document-metadata' },
                             { text: 'Document settings', link: '/concepts/document-settings' },
                             { text: 'Merged documents', link: '/concepts/merging-documents' },
-                            { text: 'Common exceptions', link: '/concepts/common-exceptions' },
                         ]
                     },
                     { text: 'Document operations', link: '/concepts/document-operations' },

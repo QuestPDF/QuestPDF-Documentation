@@ -21,6 +21,9 @@ When the provided content contains size constraints impossible to meet, the libr
 
 This search is performed only when the document fails to generate, so the setting does not affect the performance of successfully generated documents.
 
+The message may include data from the document's content, such as fragments of `TextBlock` text.
+This helps with diagnosis, but may also expose private information, so take care when logging or forwarding these exceptions.
+
 ```csharp
 // enabled by default
 QuestPDF.Settings.EnableDetailedLayoutErrors = true;
@@ -30,7 +33,7 @@ QuestPDF.Settings.EnableDetailedLayoutErrors = true;
 ## Using system fonts
 
 Decides whether the library should use the fonts installed in the operating system:
-- when this flag is **disabled**: only the bundled `Lato` family, files found in the [discovery paths](#font-discovery-paths), and fonts registered via the `FontManager` class are available. This is the default behavior.
+- when this flag is **disabled**: only the bundled `Lato` family, files found in the [discovery path](#font-discovery-path), and fonts registered via the `FontManager` class are available. This is the default behavior.
 - when this flag is **enabled**: system fonts are available as well.
 
 ```csharp
@@ -43,25 +46,27 @@ A document that looks correct during development may fall back to a different ty
 Relying only on files deployed along with the application ensures that a document renders identically everywhere.
 
 
-## Font discovery paths
+## Font discovery path
 
-Specifies the collection of paths where the library automatically searches for font files to register.
-
-By default, this collection contains the application files path.
-You can add additional paths to this collection to include more directories for automatic font registration.
+Specifies the directory that the library scans recursively to automatically register font files.
+By default, it points to the application directory.
 
 ```csharp
-QuestPDF.Settings.FontDiscoveryPaths.Add("/custom/font/directory");
+QuestPDF.Settings.FontDiscoveryPath = "/custom/font/directory";
 ```
 
+The scan is performed once, when fonts are needed for the first time, so please configure this setting at application startup.
+Setting it to `null` disables automatic discovery.
 Font files that cannot be loaded are skipped.
+
+To load fonts from additional directories, use the `FontManager.RegisterFontsFromDirectory` method.
 
 
 ## Missing font families
 
 Decides how the library reacts when document content references a font family that is not available:
 - when this flag is **enabled**: the `DocumentDrawingException` is thrown, listing the missing families, the registered fonts, and suggested solutions.
-- when this flag is **disabled**: the library silently substitutes another available font.
+- when this flag is **disabled**: document generation continues silently. Text is rendered with the first available family from the fallback list, or with another registered font when none matches. SVG text in a missing family is not rendered.
 
 ```csharp
 // enabled by default
@@ -84,8 +89,3 @@ Decides how the library reacts when text contains characters that are not presen
 // enabled by default
 QuestPDF.Settings.ThrowOnMissingTextGlyphs = true;
 ```
-
-::: info
-Enabling this flag may slightly decrease document generation performance.
-However, it provides hints that the used fonts are not sufficient to produce correct results.
-:::

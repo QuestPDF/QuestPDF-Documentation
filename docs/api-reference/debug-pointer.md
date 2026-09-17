@@ -10,10 +10,6 @@ It does not appear in the final PDF output.
 
 <!--@include: tip-debugging.md--> 
 
-::: tip
-Learn more about the [DocumentLayoutException](/concepts/common-exceptions#documentlayoutexception).
-:::
-
 
 ## Example
 

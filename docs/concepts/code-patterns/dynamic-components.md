@@ -11,6 +11,11 @@ Unlike standard components that render once for the entire document, dynamic com
 This page-specific rendering gives you access to crucial context information like the current page number, total page count, and available space. 
 With this information, you can create sophisticated layouts that adapt to their position within the document.
 
+::: warning
+All exceptions thrown inside a dynamic component bubble up as the `DocumentDrawingException`.
+If you encounter one, please review the implementation of your dynamic components.
+:::
+
 
 ## Simple examples
 

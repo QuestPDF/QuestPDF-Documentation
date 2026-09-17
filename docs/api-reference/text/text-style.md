@@ -79,8 +79,10 @@ container
 
 ![example](/api-reference/text-font-fallback-emoji.webp)
 
+::: tip
 Rather than repeating the fallback list on every text element, configure it once in the [default text style](/api-reference/default-text-style) of the page or document.
 Learn more in the [font management](/api-reference/text/font-management#covering-additional-languages) section.
+:::
 
 ## Font Color
 
