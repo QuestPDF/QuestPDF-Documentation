@@ -5,13 +5,13 @@
   "license": "MIT",
   "type": "module",
   "devDependencies": {
-    "@paddle/paddle-js": "1.6.4",
+    "@paddle/paddle-js": "1.6.5",
     "@types/node": "^22.19.21",
-    "image-size": "^2.0.2",
-    "sass": "^1.102.0",
+    "image-size": "^2.0.4",
+    "sass": "^1.103.1",
     "vitepress": "^2.0.0-alpha.20",
     "vitepress-plugin-llms": "^1.13.5",
-    "vue": "3.5.42"
+    "vue": "3.5.43"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",
