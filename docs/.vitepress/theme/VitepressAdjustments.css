@@ -29,6 +29,14 @@ html {
     scroll-behavior: smooth;
 }
 
+:root {
+    font-size: 16px;
+}
+
+body {
+    line-height: 24px;
+}
+
 .VPNavBar .title {
     font-size: 24px !important;
 }
