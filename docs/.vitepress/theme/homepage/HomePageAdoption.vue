@@ -1,5 +1,5 @@
 <template>
-  <section class="content">
+  <section class="panel adoption">
     <div class="statistics">
       <template v-for="statistic in statistics" :key="statistic.label">
         <a :href="statistic.link" target="_blank">
@@ -25,29 +25,25 @@ import { data as statistics } from "../statistics.data";
 
 <style scoped>
 
-.content {
+.adoption {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 32px;
-
-  padding: 48px 0;
+  justify-content: center;
 }
 
 .statistics {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-items: center;
-  gap: 64px 128px;
   justify-content: center;
+  gap: 24px 64px;
 }
 
 .statistic {
   display: flex;
   flex-direction: row;
-  justify-items: center;
-  gap: 24px;
+  align-items: center;
+  gap: 20px;
 }
 
 .statistic .title {
@@ -55,8 +51,7 @@ import { data as statistics } from "../statistics.data";
   flex-direction: column;
   justify-self: center;
   justify-content: center;
-  gap: 8px;
-  margin-bottom: -4px;
+  gap: 4px;
 }
 
 .statistic span.value {
@@ -64,6 +59,7 @@ import { data as statistics } from "../statistics.data";
 
   color: var(--vp-c-text-1);
   font-size: 1.75rem;
+  line-height: 2.25rem;
   font-weight: 600;
 }
 
@@ -72,7 +68,8 @@ import { data as statistics } from "../statistics.data";
   align-self: start;
 
   color: var(--vp-c-text-2);
-  font-size: 1.2rem;
+  font-size: 1rem;
+  line-height: 1.25rem;
 }
 
 @media screen and (max-width: 700px) {

@@ -2,6 +2,7 @@
 layout: page
 sidebar: false
 aside: false
+pageClass: wide-layout
 title: "Terms of Service"
 ---
 

@@ -192,22 +192,32 @@ const categories: FaqCategory[] = [
 
 <style scoped>
 
+/* Categories stack in one centred column; each is a title above a card of questions
+   divided by hairlines, the same surface as the other cards on the page. */
+
 .faq-categories {
   --faq-accent: #2196F3;
 
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 48px;
 
-  align-self: center;
   width: 100%;
-  max-width: 850px;
+  max-width: 880px;
   margin: 40px auto 0;
 }
 
+.faq-category {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* indented to line up with the question text inside the list */
 .faq-category-title {
-  margin: 0 0 14px;
+  margin: 0;
   padding-left: 32px;
+  color: var(--faq-accent);
 }
 
 .faq-list {
@@ -215,17 +225,14 @@ const categories: FaqCategory[] = [
   flex-direction: column;
   width: 100%;
 
-  border: 1px solid #8882;
-  border-radius: 16px;
-  background-color: var(--vp-c-bg);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 32px;
+  background-color: var(--home-surface);
+  box-shadow: var(--home-surface-edge);
   overflow: hidden;
 }
 
 .faq-item {
-  /* transparent shadow so the accent bar can fade in via transition */
-  box-shadow: inset 0 0 0 transparent;
-  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .faq-item:not(:last-child) {
@@ -234,11 +241,7 @@ const categories: FaqCategory[] = [
 
 .faq-item:hover,
 .faq-item[open] {
-  background-color: #2196F308;
-}
-
-.faq-item[open] {
-  box-shadow: inset 4px 0 0 var(--faq-accent);
+  background-color: color-mix(in srgb, var(--faq-accent) 5%, transparent);
 }
 
 .faq-question {
@@ -247,7 +250,7 @@ const categories: FaqCategory[] = [
   justify-content: space-between;
   gap: 16px;
 
-  padding: 24px 24px 24px 32px;
+  padding: 24px 32px;
   cursor: pointer;
   list-style: none;
 
@@ -295,7 +298,7 @@ const categories: FaqCategory[] = [
   }
 
   .faq-question {
-    padding: 20px;
+    padding: 24px 20px;
   }
 
   .faq-answer {

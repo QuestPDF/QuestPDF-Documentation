@@ -46,7 +46,7 @@ export default defineConfig({
             }
         },
         nav: [
-            { text: 'Documentation', link: '/quick-start' },
+            { text: 'Documentation', link: '/quick-start', activeMatch: '^/(quick-start|invoice-tutorial|roadmap|acknowledgements|document-previewer|license/configuration|companion/|concepts/|api-reference/|examples/)' },
             { text: 'Features', link: '/features-overview' },
             { text: 'Pricing', link: '/pricing' },
             { text: 'GitHub', link: 'https://github.com/QuestPDF/QuestPDF', noIcon: true },

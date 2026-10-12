@@ -1,3 +1,30 @@
+/* Page width (including the 32px side padding) shared by the custom page
+   content, the top navigation bar and the footer, so all three align.
+   Pages opt into the wider layout with `pageClass: wide-layout`. */
+
+:root {
+  --custom-page-width: 1216px;
+}
+
+.wide-layout {
+  --custom-page-width: 90rem;
+}
+
+
+/* Grey section container: groups a section's content on the white page. */
+
+.custom-page .panel {
+  background-color: var(--vp-c-bg-alt);
+  border-radius: 32px;
+  padding: 40px;
+}
+
+@media screen and (max-width: 700px) {
+  .custom-page .panel {
+    padding: 32px 24px;
+  }
+}
+
 .custom-page > .container {
   background-color: var(--vp-c-bg);
 }
@@ -9,7 +36,7 @@
 .custom-page .content {
   padding: 64px 32px;
   margin: 0 auto;
-  max-width: 1216px;
+  max-width: var(--custom-page-width);
 }
 
 .custom-page .content-center {
@@ -32,8 +59,6 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  border: 1px solid #8882;
   background-color: var(--vp-c-bg);
   border-radius: 16px;
   padding: 32px;
@@ -121,6 +146,198 @@
 
 .custom-page .section-header * {
   text-align: center;
+}
+
+/* Textured page
+   A page opts in with `textured-page` on its `.custom-page` root. The page itself paints the canvas
+   (grain tile plus colour washes) on <body>, see HomePage.vue and Contact.vue; this block holds what
+   every such page shares: see-through sections so the canvas shows, translucent panels and cards,
+   and the dot grid under a header that sits directly on the canvas. */
+
+.custom-page.textured-page > .container {
+  background-color: transparent;
+}
+
+/* Surfaces
+   The layering is the same in both modes: the canvas, a lifted surface on it, and an inset layer
+   (chips, badges) on the surface. Light mode lifts with white: translucent white panels on the tinted
+   canvas, a hairline ring and a soft shadow for the edge, and light-grey chips inset on them. Dark mode
+   lifts with light: translucent white panels on the dark canvas (the washes show through) and
+   translucent black chips, with no ring or shadow (neither reads on a dark canvas).
+
+   Every surface is also lit from above, like a sheet of glass: a one-pixel rim that is white at the
+   top and fades out down the sides (--home-surface-rim, drawn by a masked ::before), and a sheen
+   that fades out over the first 160px of the surface (--home-surface-sheen, the surface's
+   background-image). Both are gradients, so either can be swapped or set to `none` on its own.
+   Light mode runs them much stronger, because they only show where the tinted canvas comes through
+   the translucent surface; dark mode keeps them very faint, because there every bit of white reads.
+   Both are deliberately quiet: a first pass at twice these values was too much. */
+
+.custom-page.textured-page {
+  --home-surface: rgba(255, 255, 255, 0.64);
+  --home-surface-inner: #F0F2F6;
+  --home-surface-edge:
+      inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 7%, transparent),
+      0 1px 2px rgba(16, 24, 40, 0.04),
+      0 16px 40px -20px rgba(16, 24, 40, 0.16);
+  --home-surface-rim: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0));
+  --home-surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 160px);
+}
+
+html.dark .custom-page.textured-page {
+  --home-surface: rgba(255, 255, 255, 0.045);
+  --home-surface-inner: rgba(0, 0, 0, 0.4);
+  --home-surface-edge: none;
+  --home-surface-rim: linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.015));
+  --home-surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0) 160px);
+}
+
+.custom-page.textured-page .panel,
+.custom-page.textured-page .card {
+  background-color: var(--home-surface);
+  box-shadow: var(--home-surface-edge);
+}
+
+/* The glass lighting goes on every surface: the shared panel and card, and the component surfaces
+   that paint themselves with the tokens above (the hero statistics card, the pricing FAQ list and
+   the legal documents list). The rim is a ::before covering the surface, its gradient masked to a
+   one-pixel border so the surface itself stays see-through; it follows the surface's own corner
+   radius. */
+
+.custom-page.textured-page :is(.panel, .card, .hero-card, .faq-list, .documents) {
+  position: relative;
+  background-image: var(--home-surface-sheen);
+}
+
+.custom-page.textured-page :is(.panel, .card, .hero-card, .faq-list, .documents)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: var(--home-surface-rim);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.custom-page.textured-page a:hover .card {
+  box-shadow: var(--home-surface-edge), var(--elevation-hover);
+}
+
+html.dark .custom-page.textured-page a:hover .card {
+  box-shadow: var(--elevation-hover);
+}
+
+.custom-page.textured-page .card {
+  border-radius: 32px;
+  padding: 40px; /* same inset as .panel, so text in stacked cards and panels lines up */
+}
+
+@media screen and (max-width: 700px) {
+  .custom-page.textured-page .card {
+    padding: 32px 24px;
+  }
+}
+
+/* Dot wings: two faint dot fields flanking a section header, each fading out before it reaches
+   the 650px text column, so the texture frames the header instead of sitting under the text.
+   Put `texture-dots` on the `.container` whose header sits directly on the canvas. The wings are
+   sized in pixels so they look the same under every header. Below 960px there is no room beside
+   the column, so they are dropped. */
+
+.custom-page.textured-page .texture-dots {
+  position: relative;
+  isolation: isolate; /* keeps the wings (z-index: -1) above the canvas but below the content */
+}
+
+.custom-page.textured-page .texture-dots::before,
+.custom-page.textured-page .texture-dots::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 28%;
+  height: 420px;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 24%, transparent) 1px, transparent 1.5px);
+  background-size: 24px 24px;
+  background-position: center top;
+}
+
+.custom-page.textured-page .texture-dots::before {
+  left: 0;
+  mask-image: radial-gradient(ellipse 55% 55% at 40% 42%, #000, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 55% 55% at 40% 42%, #000, transparent 100%);
+}
+
+.custom-page.textured-page .texture-dots::after {
+  right: 0;
+  mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%);
+}
+
+/* light dots on a dark canvas stand out more than dark dots on white, so they are fainter there */
+html.dark .custom-page.textured-page .texture-dots::before,
+html.dark .custom-page.textured-page .texture-dots::after {
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 14%, transparent) 1px, transparent 1.5px);
+}
+
+@media screen and (max-width: 960px) {
+  .custom-page.textured-page .texture-dots::before,
+  .custom-page.textured-page .texture-dots::after {
+    display: none;
+  }
+}
+
+
+/* Legal pages canvas
+   The same continuous canvas as the homepage (see HomePage.vue): the grain tile over soft colour
+   washes, painted on <body> so the page, the strip under the navbar and the footer share it.
+   It lives here rather than in a component because two components share it: the legal hub
+   (LicenseIndex.vue) and the document pages (DocumentTemplate.vue), both with `legal-page` on
+   their root, so moving between them does not change the canvas (in dev mode a component's CSS
+   is only loaded on pages that import it). The documents are long, so the washes stay near the
+   top: a sky-blue glow top right and a violet glow top left behind the title, like the hero, then
+   a faint cyan wash on the left and a tall blue glow on the right along the text. None sit in the
+   last stretch, so the footer stays calm. */
+
+body:has(.custom-page.legal-page) {
+  background-color: var(--vp-c-bg);
+  background-image:
+      url("/homepage/grain.png"),
+      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 13%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 900px at 0% 36%, color-mix(in srgb, #26C6DA 8%, transparent), transparent 70%),
+      radial-gradient(ellipse 600px 1400px at 100% 60%, color-mix(in srgb, #1E88E5 10%, transparent), transparent 70%);
+  background-size: 256px 256px, auto, auto, auto, auto;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+}
+
+html.dark body:has(.custom-page.legal-page) {
+  background-image:
+      url("/homepage/grain.png"),
+      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 24%, transparent), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 12%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 900px at 0% 36%, color-mix(in srgb, #26A69A 11%, transparent), transparent 70%),
+      radial-gradient(ellipse 600px 1400px at 100% 60%, color-mix(in srgb, #1E88E5 14%, transparent), transparent 70%);
+}
+
+/* Small uppercase label above a section heading (homepage sections, live demo page). */
+
+.section-tag {
+  background-color: color-mix(in srgb, var(--vp-c-brand-2), transparent 85%);
+  border-radius: 12px;
+  padding: 6px 18px;
+  word-spacing: 2px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--vp-c-brand-1);
+  width: fit-content;
+  text-transform: uppercase;
 }
 
 span.highlight-background {

@@ -30,20 +30,21 @@ const documents = [
 </script>
 
 <template>
-  <div class="custom-page">
-    <div class="container reverse-background">
+  <!-- the canvas (body background) is shared with the document pages, see "Legal pages canvas" in CustomPages.css -->
+  <div class="custom-page legal-page textured-page">
+    <div class="container texture-dots">
       <article class="content content-center">
-        <header class="section-header" style="margin-bottom: 24px;">
+        <header class="section-header">
           <h1>QuestPDF Legal Terms</h1>
           <p class="sub-header">Review or download the official legal documents and licensing terms for QuestPDF. If you have questions or need assistance, our team is here to help.</p>
         </header>
 
-        <div class="card">
+        <nav class="documents" aria-label="Legal documents">
           <a v-for="document in documents" :key="document.title" :href="document.link" class="document-link">
             <span class="link-title">{{ document.title }}</span>
             <i class="fa-solid fa-arrow-right arrow"></i>
           </a>
-        </div>
+        </nav>
 
         <a class="action primary" href="/license/QuestPDF%20License%20Terms.pdf" download>
           Download all documents (PDF)
@@ -61,31 +62,30 @@ const documents = [
 .content {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
   align-items: center;
-  justify-self: center;
-
   width: 100%;
 }
 
-.card {
-  background-color: var(--vp-c-bg) !important;
-  padding: 0;
-
+/* same lifted list as the pricing FAQ */
+.documents {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  width: 100%;
+  max-width: 640px;
 
+  border-radius: 32px;
+  background-color: var(--home-surface);
+  box-shadow: var(--home-surface-edge);
   overflow: hidden;
 }
 
 .document-link {
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 32px;
 
-  padding: 16px 24px;
+  padding: 18px 24px 18px 32px;
   text-decoration: none;
   color: inherit;
   transition: background-color 0.2s ease;
@@ -109,11 +109,21 @@ const documents = [
 }
 
 .document-link:hover {
-  background-color: #2196F311;
+  background-color: color-mix(in srgb, #2196F3 5%, transparent);
+
+  .link-title {
+    color: #2196F3;
+  }
 
   .arrow {
     color: #2196F3;
     transform: translateX(4px);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .document-link {
+    padding: 18px 20px;
   }
 }
 </style>

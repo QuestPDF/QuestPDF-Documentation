@@ -5,28 +5,28 @@ const resellers = [
     name: "SoftwareOne",
     link: "https://www.softwareone.com/",
     src: "software-one.svg",
-    size: 40,
-    marginTop: -2
+    size: 42,
+    marginTop: -3
   },
   {
     name: "Insight",
     link: "https://www.insight.com/",
     src: "insight.svg",
-    size: 46,
-    marginTop: 2
+    size: 48,
+    marginTop: 3
   },
   {
     name: "SHI",
     link: "https://www.shi.com/",
     src: "shi.svg",
-    size: 48,
+    size: 50,
     marginTop: -14
   },
   {
     name: "QBS Software",
     link: "https://www.qbssoftware.com/",
     src: "qbs-software.svg",
-    size: 60,
+    size: 62,
     marginTop: 4
   }
 ];
@@ -34,10 +34,10 @@ const resellers = [
 </script>
 
 <template>
-  <section class="content">
+  <article class="content pricing-resellers">
     <div class="section-header">
       <h2>Purchase Through Your Preferred Reseller</h2>
-      <p class="sub-header">QuestPDF works with software resellers worldwide, including SoftwareOne, Insight, SHI, and QBS — other distributors are welcome, no partner agreement or registration needed.</p>
+      <p class="sub-header">Any software reseller can order QuestPDF for you, with no partner agreement or registration needed. Invoices, purchase orders, and multi-year terms are supported — <a href="mailto:contact@questpdf.com">request a quote</a>.</p>
     </div>
 
     <div class="resellers-list">
@@ -49,12 +49,7 @@ const resellers = [
         </a>
       </template>
     </div>
-
-    <div class="reseller-instructions">
-      <p>Payment by invoice and purchase order is supported, including multi-year terms.</p>
-      <p>Resellers and procurement teams: <a href="mailto:contact@questpdf.com">request a quote</a></p>
-    </div>
-  </section>
+  </article>
 </template>
 
 <style scoped>
@@ -63,32 +58,27 @@ const resellers = [
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 48px 64px;
+  gap: 56px;
   justify-content: center;
   align-items: center;
-  margin-top: 64px;
+  margin-top: 40px;
 }
 
-.section-header {
-  max-width: 860px;
+/* logos are monochrome grey; they rest slightly muted so the hovered one reads as the "active" choice */
+.resellers-list img {
+  display: block;
+  opacity: 0.85;
+  transition: all 0.2s ease-in-out;
 }
 
-.reseller-instructions {
-  margin-top: 64px;
+.resellers-list a:hover img {
+  opacity: 1;
+  filter: brightness(0.7);
+  transform: scale(1.08);
+}
 
-  p {
-    text-align: center;
-    color: var(--vp-c-text-3);
-  }
-
-  a {
-    color: inherit !important;
-    text-decoration: underline;
-  }
-
-  a:hover {
-    color: var(--vp-c-text-2) !important;
-  }
+html.dark .resellers-list a:hover img {
+  filter: brightness(1.4);
 }
 
 </style>

@@ -4,7 +4,7 @@ interface Standard {
   label: string;
   name: string;
   description: string;
-  badges: string[];
+  badges: string[][]; /* each inner array renders as its own row of chips */
 }
 
 const standards : Standard[] = [
@@ -12,19 +12,22 @@ const standards : Standard[] = [
     label: "Archival",
     name: "PDF/A",
     description: "ISO 19005 standard for long-term document preservation, ensuring your PDFs remain readable and visually identical for decades without external dependencies.",
-    badges: ["PDF/A-2b", "PDF/A-2u", "PDF/A-2a", "PDF/A-3b", "PDF/A-3u", "PDF/A-3a"]
+    badges: [
+      ["PDF/A-2b", "PDF/A-2u", "PDF/A-2a"],
+      ["PDF/A-3b", "PDF/A-3u", "PDF/A-3a"]
+    ]
   },
   {
     label: "Accessibility",
     name: "PDF/UA",
     description: "ISO 14289 standard for universal accessibility with full support for screen readers and assistive technologies, ensuring your PDFs are usable by people with disabilities.",
-    badges: ["PDF/UA-1"]
+    badges: [["PDF/UA-1"]]
   },
   {
     label: "E-Invoicing",
     name: "EN 16931",
     description: "European standard for electronic invoicing. Embed structured invoice data (XML) within PDF documents for automated processing.",
-    badges: ["ZUGFeRD", "Factur-X"]
+    badges: [["ZUGFeRD", "Factur-X"]]
   }
 ];
 
@@ -32,9 +35,9 @@ const standards : Standard[] = [
 
 <template>
   <section class="content">
-    <div class="section-tag">Compliance</div>
+    <div class="section-header">
+      <div class="section-tag">Compliance</div>
 
-    <div>
       <h2>Industry-standard PDF compliance</h2>
 
       <p class="sub-header">
@@ -43,17 +46,23 @@ const standards : Standard[] = [
       </p>
     </div>
 
-    <div class="standard-cards">
-      <div v-for="standard in standards" class="wide-card card">
-        <div class="card-header">
-          <span class="card-label">{{ standard.label }}</span>
-          <span class="card-standard">{{ standard.name }}</span>
-        </div>
+    <div class="panel compliance">
+      <div class="standards">
+        <div v-for="standard in standards" :key="standard.name" class="standard">
+          <div class="standard-header">
+            <span class="standard-label">{{ standard.label }}</span>
+            <span class="standard-name">{{ standard.name }}</span>
+          </div>
 
-        <p class="card-description">{{ standard.description }}</p>
+          <div class="standard-details">
+            <p class="standard-description">{{ standard.description }}</p>
 
-        <div class="standards-badges">
-          <span v-for="badge in standard.badges">{{ badge }}</span>
+            <div class="standards-badges">
+              <div v-for="(row, index) in standard.badges" :key="index" class="standards-badges-row">
+                <span v-for="badge in row" :key="badge">{{ badge }}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -62,58 +71,82 @@ const standards : Standard[] = [
 
 <style scoped>
 
-.content {
+/* The section header sits on the canvas; the card below holds the three standards as columns,
+   divided by hairlines, which become stacked rows on narrow screens. */
+
+.compliance {
+  margin-top: 32px;
+}
+
+.standards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.standard {
   display: flex;
   flex-direction: column;
-  align-items: start;
-  max-width: 800px;
+  gap: 16px;
+  padding: 0 40px;
 }
 
-/* Standard Cards */
-
-.standard-cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  margin-top: 16px;
+.standard:first-child {
+  padding-left: 0;
 }
 
-.standard-cards > :first-child {
-  grid-column: 1 / span 2;
+.standard:last-child {
+  padding-right: 0;
 }
 
-@media screen and (max-width: 600px) {
-  .standard-cards {
-    grid-template-columns: 1fr;
+.standard:not(:first-child) {
+  border-left: 1px solid var(--vp-c-divider);
+}
+
+@media screen and (max-width: 960px) {
+  .standards {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .standard-cards > :first-child {
-    grid-column: 1;
+  .standard {
+    padding: 24px 0;
+  }
+
+  .standard:first-child {
+    padding-top: 0;
+  }
+
+  .standard:last-child {
+    padding-bottom: 0;
+  }
+
+  .standard:not(:first-child) {
+    border-left: none;
+    border-top: 1px solid var(--vp-c-divider);
   }
 }
 
-
-.card-header {
+.standard-header {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  margin-bottom: 16px;
 }
 
-.card-label {
+.standard-label {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   color: var(--vp-c-text-3);
 }
 
-.card-standard {
+.standard-name {
   font-size: 1.5rem;
+  line-height: 2rem;
   font-weight: 700;
   color: var(--vp-c-text-1);
 }
 
-.card-description {
+.standard-description {
+  margin: 0;
   font-size: 1rem;
   line-height: 1.5;
   color: var(--vp-c-text-2);
@@ -121,22 +154,28 @@ const standards : Standard[] = [
 
 .standards-badges {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 16px;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
 }
 
-.standards-badges > span {
+.standards-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* same white-on-grey style as the chips in the other homepage cards */
+.standards-badges-row > span {
   display: inline-flex;
   align-items: center;
-  padding: 8px 12px;
+  padding: 8px 10px;
   line-height: 1;
   border-radius: 8px;
   font-size: 0.8125rem;
   font-weight: 500;
   color: var(--vp-c-text-2);
-  transition: border-color 0.2s ease, background-color 0.2s ease;
-  border: 1px solid #8884;
+  background-color: var(--home-surface-inner);
 }
 
 </style>

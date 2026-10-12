@@ -124,7 +124,7 @@ const licenses = [
 /* Page layout */
 
 .content {
-  padding-top: 48px;
+  max-width: var(--custom-page-width);
 }
 
 @media screen and (max-width: 450px) {
@@ -148,13 +148,16 @@ const licenses = [
    the other two. */
 
 .license-tiers {
-  margin-top: 16px;
+  margin-top: 28px;
 
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: repeat(6, auto); // tag, header, divider, details, action, footnote
+  grid-gap: 0 32px;
 }
 
+/* the cards sit on the shared translucent surface (`.textured-page .card`); only the
+   professional card tints it with the brand blue, so it reads as the highlighted one */
 .license-tiers .license-tier {
   position: relative;
   display: grid;
@@ -162,6 +165,16 @@ const licenses = [
   grid-row: span 6;
   justify-items: start;
   align-items: start;
+}
+
+/* a faint brand tint in both modes: the share is small enough that the blue stays a wash
+   over the translucent surface rather than a solid fill, on the light and the dark canvas alike */
+.license-tiers .license-tier.professional {
+  background-color: color-mix(in srgb, #2196F3 5%, var(--home-surface));
+}
+
+html.dark .license-tiers .license-tier.professional {
+  border-color: #2196F355;
 }
 
 .license-tier .tag { grid-row: 1; }
@@ -178,20 +191,24 @@ const licenses = [
    middle stays full height and elevated. */
 
 .license-tier.professional {
-  border: 3px solid #2196F355;
-  border-radius: 24px;
-  box-shadow: 0 4px 16px rgba(33, 150, 243, 0.2) !important;
+  border: 3px solid #2196F388;
+  border-radius: 32px;
   z-index: 1;
 }
 
+/* the glass rim sits inside the 3px border, so its corners are 3px tighter than the card's */
+.license-tier.professional::before {
+  border-radius: 29px;
+}
+
 .license-tier.community {
-  border-radius: 24px 0 0 24px;
-  margin: 32px 0;
+  border-radius: 32px 0 0 32px;
+  margin: 48px 0;
 }
 
 .license-tier.enterprise {
-  border-radius: 0 24px 24px 0;
-  margin: 32px 0;
+  border-radius: 0 32px 32px 0;
+  margin: 48px 0;
 }
 
 
@@ -237,7 +254,7 @@ html.dark .license-tier.professional .tag .fa-star {
 }
 
 .license-tier .tier-name {
-  border-radius: 128px;
+  border-radius: 12px; /* same corner as the homepage section tags */
   padding: 6px 24px;
   font-weight: 600;
   text-transform: uppercase;
@@ -331,6 +348,13 @@ html.dark {
   --fa-secondary-color: #67B84D;
 }
 
+/* white tick on a solid blue square, the same blue as the tier name badge */
+.license-tier.professional .fa-square-check {
+  --fa-primary-color: white;
+  --fa-secondary-color: #2196F3;
+  --fa-secondary-opacity: 1.0;
+}
+
 .license-tier.enterprise .fa-square-check {
   --fa-primary-color: transparent;
   --fa-secondary-color: #444;
@@ -341,6 +365,10 @@ html.dark {
   .license-tier.community .fa-square-check {
     --fa-primary-color: #81C784;
     --fa-secondary-color: #81C784;
+  }
+
+  .license-tier.professional .fa-square-check {
+    --fa-secondary-color: #1976D2;
   }
 
   .license-tier.enterprise .fa-square-check {
@@ -428,7 +456,7 @@ html.dark {
   .license-tier.community,
   .license-tier.enterprise {
     margin: 0;
-    border-radius: 24px;
+    border-radius: 32px;
   }
 }
 

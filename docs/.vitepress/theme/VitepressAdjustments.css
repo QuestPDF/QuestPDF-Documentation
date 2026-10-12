@@ -3,6 +3,9 @@
     --vp-c-brand-2: #039BE5;
     --vp-c-brand-3: #29B6F6;
     --vp-c-brand-soft: #0091EA24;
+
+    --vp-c-bg: #ffffff;
+    --vp-c-bg-alt: #f6f6f8;
 }
 
 
@@ -11,6 +14,9 @@
     --vp-c-brand-2: #03A9F4;
     --vp-c-brand-3: #0288D1;
     --vp-c-brand-soft: #0091EA24;
+
+    --vp-c-bg: #101010;
+    --vp-c-bg-alt: #161618;
 }
 
 :root {
@@ -175,6 +181,107 @@ html:not(.dark) .dark-only {
     border-radius: 8px;
 }
 
-.VPNavBar.top.home .VPNavBarSearchButton {
-    display: none !important;
+/* Dark navbar is lifted one step: the bg-alt token (#161618, also the sidebar and code blocks) instead
+   of the #101010 page, so the bar reads as its own surface without introducing a new colour.
+   VitePress paints the bar through this token (VPNavBar::before), so the local nav and the home bar
+   pick it up as well. Light mode keeps the page-coloured bar. */
+html.dark {
+    --vp-nav-bg-color: var(--vp-c-bg-alt);
+}
+
+/* The home navbar looks like the one on every other page: VitePress makes it transparent
+   at the top of the page (and always below 60rem), so restore the regular surface and divider. */
+.VPNavBar.home::before {
+    background-color: var(--vp-nav-bg-color) !important;
+    backdrop-filter: var(--vp-nav-backdrop-filter) !important;
+}
+
+.VPNavBar.home .divider-line {
+    background-color: var(--vp-nav-divider-color);
+}
+
+/* navbar links one step larger than the VitePress default (0.875rem) */
+.VPNavBar .VPNavMenuLink.VPNavBarMenuLink {
+    font-size: 1rem;
+}
+
+/* Navbar links are soft pills: grey on hover, inverted (text colour as fill, page colour as text) for the current section.
+   Only colours change, so nothing moves. Padding + margin add up to the VitePress 0.75rem,
+   so each item keeps its width and links collapse into the ⋯ menu at the same widths as before. */
+.VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink {
+    min-height: 36px;
+    padding: 0 0.625rem;
+    margin: 0 0.125rem;
+    border-radius: 10px;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink:hover {
+    color: var(--vp-c-text-1);
+    background-color: var(--vp-c-default-soft);
+}
+
+.VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {
+    color: #ffffff;
+    background-color: #1C1C1E;
+}
+
+html.dark .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {
+    color: #111111;
+    background-color: #F5F5F7;
+}
+
+/* the ⋯ menu button matches the links; the pill is painted behind it, because the button
+   keeps the full bar height so its dropdown still opens right below it, without a gap */
+.VPNavBar .VPNavBarExtra > .button {
+    position: relative;
+    isolation: isolate;
+}
+
+.VPNavBar .VPNavBarExtra > .button::before {
+    content: "";
+    position: absolute;
+    inset: calc(var(--vp-nav-height) / 2 - 18px) 0;
+    z-index: -1;
+    border-radius: 10px;
+    transition: background-color 0.2s;
+}
+
+.VPNavBar .VPNavBarExtra > .button:hover::before {
+    background-color: var(--vp-c-default-soft);
+}
+
+/* search reads as a field: bordered, same corner radius as the links, wider when there is room */
+@media (min-width: 48rem) {
+    .VPNavBar .VPNavBarSearchButton {
+        height: 40px;
+        padding: 0 8px 0 12px;
+        border: 1px solid var(--vp-c-divider);
+        border-radius: 10px;
+        transition: border-color 0.2s;
+    }
+
+    .VPNavBar .VPNavBarSearchButton:hover {
+        border-color: var(--vp-c-brand-1);
+    }
+
+    .VPNavBar .VPNavBarSearchButton .keys {
+        border-radius: 6px;
+        background-color: var(--vp-c-bg);
+    }
+}
+
+/* the wider field and larger text only from 80rem: below that every pixel counts towards fitting the links */
+@media (min-width: 80rem) {
+    .VPNavBar .VPNavBarSearchButton {
+        min-width: 220px;
+    }
+
+    .VPNavBar .VPNavBarSearchButton .text {
+        font-size: 0.875rem;
+    }
+
+    .VPNavBar .VPNavBarSearchButton .keys {
+        margin-left: auto;
+    }
 }

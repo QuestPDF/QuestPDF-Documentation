@@ -1,30 +1,51 @@
 <script setup>
 
-const platforms = [
-  { src: 'windows.svg', name: 'Windows' },
-  { src: 'linux.svg', name: 'Linux' },
-  { src: 'apple.svg', name: 'macOS' },
-  { src: 'azure.svg', name: 'Azure' },
-  { src: 'aws.svg', name: 'AWS' },
-  { src: 'docker.svg', name: 'Docker' },
-  { src: 'rider.svg', name: 'Rider' },
-  { src: 'vscode.svg', name: 'VS Code' },
-  { src: 'visual-studio.svg', name: 'Visual Studio' }
+const platformGroups = [
+  {
+    label: "Operating systems",
+    platforms: [
+      { src: 'windows.svg', name: 'Windows' },
+      { src: 'linux.svg', name: 'Linux' },
+      { src: 'apple.svg', name: 'macOS' }
+    ]
+  },
+  {
+    label: "Cloud & containers",
+    platforms: [
+      { src: 'azure.svg', name: 'Azure' },
+      { src: 'aws.svg', name: 'AWS' },
+      { src: 'docker.svg', name: 'Docker' }
+    ]
+  },
+  {
+    label: "IDEs",
+    platforms: [
+      { src: 'rider.svg', name: 'Rider' },
+      { src: 'vscode.svg', name: 'VS Code' },
+      { src: 'visual-studio.svg', name: 'Visual Studio' }
+    ]
+  }
 ];
 
 </script>
 
 <template>
-  <section class="content">
-    <div class="section-header">
-      <h2>Works everywhere you do</h2>
-      <p class="sub-header">Deploy on any major operating system and integrate seamlessly with your favorite IDEs, cloud platforms, and development tools.</p>
-    </div>
+  <section class="panel platforms-panel">
+    <div class="section-tag">Platforms</div>
 
-    <div class="platforms">
-      <div v-for="platform of platforms" class="platform-item">
-        <img :src="'/homepage/supported-platforms/' + platform.src" :alt="platform.name" :title="platform.name" />
-        <span class="platform-name">{{ platform.name }}</span>
+    <h2>Works everywhere you do</h2>
+    <p class="sub-header">Deploy on any major operating system and integrate seamlessly with your favorite IDEs, cloud platforms, and development tools.</p>
+
+    <div class="platform-groups">
+      <div v-for="group of platformGroups" :key="group.label" class="platform-group">
+        <div class="platform-group-label">{{ group.label }}</div>
+
+        <div class="chips">
+          <span v-for="platform of group.platforms" :key="platform.name" class="chip">
+            <img :src="'/homepage/supported-platforms/' + platform.src" alt="" />
+            {{ platform.name }}
+          </span>
+        </div>
       </div>
     </div>
   </section>
@@ -32,84 +53,31 @@ const platforms = [
 
 <style scoped>
 
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+/* Rows shared with the features card (see .home-pair in HomePage.vue) */
+.section-tag { grid-row: 1; }
+h2 { grid-row: 2; }
+.sub-header { grid-row: 3; }
+.platform-groups { grid-row: 4; }
 
-.platforms {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 24px;
-  width: 100%;
-  max-width: 800px;
-  align-self: center;
-  justify-content: center;
-}
-
-@media screen and (max-width: 600px) {
-  .platforms {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-}
-
-.platform-item {
-  width: 120px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-
-  background-color: #0000000A;
-  border-radius: 12px;
-
-  padding: 24px 16px;
-}
-
-html.dark .platform-item {
-  background-color: #FFFFFF0A;
-}
-
-.platform-item img {
-  width: 40px;
-  height: 40px;
-}
-
-.platform-name {
-  font-size: 0.875rem;
-  line-height: 1rem;
+h2, .sub-header {
   text-align: center;
 }
 
-@media screen and (max-width: 600px) {
-  .platform-item {
-    width: 100px;
-  }
-
-  .platform-item img {
-    width: 36px;
-    height: 36px;
-  }
+.platform-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-@media screen and (max-width: 380px) {
-  .platforms {
-    gap: 12px;
-  }
+.platform-group-label {
+  margin-bottom: 10px;
 
-  .platform-item {
-    width: 100px;
-    padding: 16px 8px;
-  }
-
-  .platform-item img {
-    width: 36px;
-    height: 36px;
-  }
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+  color: var(--vp-c-text-3);
 }
 
 </style>

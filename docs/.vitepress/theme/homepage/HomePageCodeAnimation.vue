@@ -233,6 +233,12 @@ async function animate() {
 
 
 /* Animation control observer */
+
+/* autoplay: the live demo page starts the animation straight away,
+   because visitors arrive there by clicking "Watch Live Demo" on the homepage */
+const props = defineProps<{ autoplay?: boolean }>();
+onMounted(() => { if (props.autoplay) playAnimation(); });
+
 const showAnimation = ref(false);
 const codeAnimationContainer = ref<Element>();
 const observer = ref<IntersectionObserver | null>(null);
@@ -264,13 +270,11 @@ async function playAnimation() {
 </script>
 
 <template>
-  <section class="content">
+  <section class="panel code-animation">
     <div class="section-header" style="margin-bottom: 16px;">
-      <i class="fa-duotone fa-film fa-2xl" />
-      <div class="section-header">
-        <h2>Experience the Simplicity</h2>
-        <p class="sub-header">See how QuestPDF's Fluent API lets you build professional documents with just a few lines of readable, intuitive C# code.</p>
-      </div>
+      <div class="section-tag">Live demo</div>
+      <h2>Experience the Simplicity</h2>
+      <p class="sub-header">See how QuestPDF's Fluent API lets you build professional documents with just a few lines of readable, intuitive C# code.</p>
     </div>
 
     <div v-if="showAnimation" ref="codeAnimationContainer" class="animation-container">
@@ -281,7 +285,7 @@ async function playAnimation() {
       </home-page-window-container>
     </div>
 
-    <a v-else class="action primary animation" @click="playAnimation">
+    <a v-else-if="!autoplay" class="action primary animation" @click="playAnimation">
       <i class="fa-solid fa-play" style="color: white;" />
       Watch Live Demo
       <div class="divider"></div>
@@ -294,7 +298,7 @@ async function playAnimation() {
 
 /* Page layout */
 
-.content {
+.code-animation {
   display: flex;
   flex-direction: column;
   align-items: center;

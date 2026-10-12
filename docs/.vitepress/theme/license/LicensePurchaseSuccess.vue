@@ -59,68 +59,105 @@ const orderDetails = [
 </script>
 
 <template>
-  <div class="custom-page">
-    <div class="container reverse-background">
+  <div class="custom-page purchase-page textured-page">
+    <div class="container texture-dots">
       <div class="content">
-        <header class="section-header">
-          <h1>
-            <i class="fa-duotone fa-square-check"></i>
+        <header class="section-header purchase-header">
+          <div class="section-tag status-tag">
+            <i class="fa-regular fa-check"></i>
             Order completed
-          </h1>
+          </div>
+
+          <h1>Thank you!</h1>
+
+          <p class="sub-header">
+            <b>Please check your inbox.</b> We have sent a confirmation email with your license details, license confirmation PDF, and developer setup instructions.
+          </p>
         </header>
 
-        <div class="email-notification">
-          <i class="fa fa-solid fa-envelope"></i>
-          <span>
-            <b>Please check your inbox.</b> We have sent a confirmation email with your license details, license confirmation PDF, and developer setup instructions.
-          </span>
+        <div class="purchase-cards">
+          <section class="panel success-card">
+            <h3>License information</h3>
+
+            <div class="description-items">
+              <div v-for="step in licenseDetails" :key="step.title" class="description-item">
+                <div class="icon-tile">
+                  <i class="fa-regular" :class="step.icon" />
+                </div>
+                <div class="description-item-content">
+                  <strong>{{ step.title }}</strong>
+                  <span v-html="step.description" />
+                </div>
+              </div>
+            </div>
+
+            <a class="action primary" :href="shareMailtoLink">Forward to Development Team</a>
+          </section>
+
+          <section class="panel success-card">
+            <h3>Billing and renewal</h3>
+
+            <div class="description-items">
+              <div v-for="step in orderDetails" :key="step.title" class="description-item">
+                <div class="icon-tile">
+                  <i class="fa-regular" :class="step.icon" />
+                </div>
+                <div class="description-item-content">
+                  <strong>{{ step.title }}</strong>
+                  <span v-html="step.description" />
+                </div>
+              </div>
+            </div>
+
+            <a class="action" href="https://customer-portal.paddle.com/cpl_01gmdq0qdr8madhdchknpb52we" target="_blank">Open Customer Portal</a>
+          </section>
+
+          <!-- full width, so the short assistance note does not sit alone in a half-empty row -->
+          <section class="panel assistance-card">
+            <div>
+              <h3>Do you need assistance?</h3>
+              <p>
+                If you have any questions about your license, setup, or billing, please reach out. We typically respond within one business day.
+              </p>
+            </div>
+
+            <a class="action" href="mailto:contact@questpdf.com" target="_blank">Contact Support</a>
+          </section>
         </div>
-
-        <section class="success-card card">
-          <h3>License information</h3>
-
-          <div class="description-items">
-            <div v-for="step in licenseDetails" :key="step.title" class="description-item">
-              <i class="fa-regular" :class="step.icon" />
-              <div class="description-item-content">
-                <strong>{{ step.title }}</strong>
-                <span v-html="step.description" />
-              </div>
-            </div>
-          </div>
-
-          <a class="action primary" :href="shareMailtoLink">Forward to Development Team</a>
-        </section>
-
-        <section class="success-card card">
-          <h3>Billing and renewal</h3>
-
-          <div class="description-items">
-            <div v-for="step in orderDetails" :key="step.title" class="description-item">
-              <i class="fa-regular" :class="step.icon" />
-              <div class="description-item-content">
-                <strong>{{ step.title }}</strong>
-                <span v-html="step.description" />
-              </div>
-            </div>
-          </div>
-
-          <a class="action" href="https://customer-portal.paddle.com/cpl_01gmdq0qdr8madhdchknpb52we" target="_blank">Open Customer Portal</a>
-        </section>
-
-        <section class="success-card card">
-          <h3>Do you need assistance?</h3>
-
-          <p>
-            If you have any questions about your license, setup, or billing, please reach out. We typically respond within one business day.
-          </p>
-
-          <a class="action" href="mailto:contact@questpdf.com" target="_blank">Contact Support</a>
-        </section>
       </div>
     </div>
   </div>
 </template>
+
+<style>
+
+/* Background
+   The same continuous canvas as the homepage (see HomePage.vue): the grain tile over soft colour
+   washes, painted on <body> so the page, the strip under the navbar and the footer share it.
+   The page is short, so there are only a few washes: a sky-blue glow top right and a violet glow
+   top left behind the header, like the hero, and a cyan wash at the foot of the cards. None sit
+   in the last stretch, so the footer stays calm. */
+
+body:has(.custom-page.purchase-page) {
+  background-color: var(--vp-c-bg);
+  background-image:
+      url("/homepage/grain.png"),
+      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 13%, transparent), transparent 70%),
+      radial-gradient(ellipse 1000px 600px at 10% 55%, color-mix(in srgb, #00BCD4 9%, transparent), transparent 70%);
+  background-size: 256px 256px, auto, auto, auto;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+}
+
+html.dark body:has(.custom-page.purchase-page) {
+  background-image:
+      url("/homepage/grain.png"),
+      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 24%, transparent), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 12%, transparent), transparent 70%),
+      radial-gradient(ellipse 1000px 600px at 10% 55%, color-mix(in srgb, #00ACC1 9%, transparent), transparent 70%);
+}
+
+</style>
 
 <style scoped>
 
@@ -130,93 +167,115 @@ const orderDetails = [
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 800px;
   gap: 32px;
 }
 
-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+/* Header: the order state as a green tag with a check, the thank-you as the title,
+   and the inbox note as the sub-header */
+
+/* wider than the shared 650px header, so the inbox note sits on two balanced lines */
+.purchase-header {
+  max-width: 820px;
 }
 
-
-header h1 {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  gap: 12px;
-
-  margin-bottom: 12px;
+.purchase-header h1 {
+  margin-bottom: 1rem;
 }
 
-header h1 i.fa-square-check {
-  font-size: 1.25em;
-  color: inherit;
+.purchase-header .sub-header {
+  margin-bottom: 8px;
+  text-wrap: balance;
 }
 
-
-/* Email notification */
-
-.email-notification .fa {
-  font-size: 40px;
-  color: #67B84D;
+.purchase-header .sub-header b {
+  color: #2E7D32;
+  font-weight: 600;
 }
 
-.email-notification {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-gap: 24px;
-
-  border-radius: 16px;
-  padding: 24px 32px;
-  color: #1B5E20;
-  background-color: #67B84D33;
-
-  place-self: center;
-  text-align: left;
-}
-
-html.dark .email-notification {
+html.dark .purchase-header .sub-header b {
   color: #A5D6A7;
 }
 
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: color-mix(in srgb, #43A047 14%, transparent);
+  color: #2E7D32;
+}
 
-/* Cards with details */
+html.dark .status-tag {
+  color: #A5D6A7;
+}
 
-.success-card .fa-regular {
+.status-tag i {
+  font-size: 16px;
+}
+
+/* same neutral icon tile as the contact page and the homepage sections */
+.icon-tile {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: var(--home-surface-inner);
+}
+
+.icon-tile i {
+  font-size: 1.25rem;
+  color: var(--vp-c-text-1);
+}
+
+/* Cards: the two detail cards side by side, the assistance note across the full width below */
+
+.purchase-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
   width: 100%;
-  aspect-ratio: 1;
-
-  background-color: #8882;
-  color: #666;
-  font-size: 24px;
-  padding: 12px;
-  border-radius: 8px;
 }
 
-html.dark .success-card .fa-regular {
-  color: #AAA;
+@media screen and (max-width: 960px) {
+  .purchase-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
-.card h3 {
-  margin-top: 0;
-}
-
-.description-items {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.success-card {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: flex-start;
 }
 
-.description-item  {
+.success-card h3,
+.assistance-card h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+/* fact list: an icon tile, a bold name and a description, rows divided by hairlines */
+.description-items {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.description-item {
   display: grid;
   grid-template-columns: 48px 1fr;
-  gap: 24px;
-  padding: 16px 0;
+  gap: 20px;
+  padding: 24px 0;
+}
+
+.description-item:not(:last-child) {
+  border-bottom: 1px solid var(--vp-c-divider);
 }
 
 .description-item-content {
@@ -226,21 +285,55 @@ html.dark .success-card .fa-regular {
 }
 
 .description-item-content strong {
-  color: var(--vp-c-text-2);
+  color: var(--vp-c-text-1);
   font-weight: 600;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.5rem;
 }
 
 .description-item-content span {
   color: var(--vp-c-text-2);
-  line-height: 1.6;
+  line-height: 1.5rem;
   font-size: 0.9375rem;
 }
 
-a.action {
-  margin-top: 24px;
-  place-self: end;
+.description-item-content :deep(a) {
+  color: var(--vp-c-brand-1);
+}
+
+/* buttons sit at the bottom, so they line up across the two cards */
+.success-card a.action {
+  margin-top: auto;
+  padding-top: 12px;
+  align-self: flex-end;
+}
+
+.success-card .description-items {
+  margin-bottom: 24px;
+}
+
+.assistance-card {
+  grid-column: 1 / -1;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px 48px;
+  align-items: center;
+}
+
+.assistance-card p {
+  margin: 8px 0 0;
+  max-width: 70ch;
+}
+
+@media screen and (max-width: 700px) {
+  .assistance-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .success-card a.action {
+    align-self: stretch;
+  }
 }
 
 </style>

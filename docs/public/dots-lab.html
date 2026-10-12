@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Section header dot pattern lab</title>
+<style>
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/@fs/Users/marcin.ziabek/WebstormProjects/QuestPDF-Documentation/node_modules/vitepress/dist/client/theme-default/fonts/inter-roman-latin.woff2") format("woff2");
+}
+
+:root {
+  --vp-c-brand-1: #0277BD;
+  --vp-c-brand-2: #039BE5;
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-alt: #f6f6f8;
+  --vp-c-text-1: #3c3c43;
+  --vp-c-text-2: #67676c;
+  --custom-page-width: 90rem;
+  --home-surface: rgba(255, 255, 255, 0.64);
+  --home-surface-edge:
+      inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 7%, transparent),
+      0 1px 2px rgba(16, 24, 40, 0.04),
+      0 16px 40px -20px rgba(16, 24, 40, 0.16);
+  --dot: color-mix(in srgb, var(--vp-c-text-1) 30%, transparent);
+  --dot-strong: color-mix(in srgb, var(--vp-c-text-1) 45%, transparent);
+  --plus-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M20 15v10M15 20h10' stroke='rgba(60,60,67,0.35)' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+html.dark {
+  --vp-c-brand-1: #4FC3F7;
+  --vp-c-brand-2: #03A9F4;
+  --vp-c-bg: #101010;
+  --vp-c-bg-alt: #161618;
+  --vp-c-text-1: #dfdfd6;
+  --vp-c-text-2: #98989f;
+  --home-surface: rgba(255, 255, 255, 0.045);
+  --home-surface-edge: none;
+  --dot: color-mix(in srgb, var(--vp-c-text-1) 16%, transparent);
+  --dot-strong: color-mix(in srgb, var(--vp-c-text-1) 28%, transparent);
+  --plus-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M20 15v10M15 20h10' stroke='rgba(223,223,214,0.22)' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  color: var(--vp-c-text-1);
+  background-color: var(--vp-c-bg);
+  background-image:
+      url("/homepage/grain.png"),
+      radial-gradient(ellipse 900px 700px at 100% 12%, color-mix(in srgb, #00BCD4 6%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 1000px at 0% 30%, color-mix(in srgb, #26C6DA 8%, transparent), transparent 70%),
+      radial-gradient(ellipse 600px 1800px at 100% 55%, color-mix(in srgb, #1E88E5 11%, transparent), transparent 70%),
+      radial-gradient(ellipse 1000px 800px at 0% 70%, color-mix(in srgb, #039BE5 7%, transparent), transparent 70%),
+      radial-gradient(ellipse 1200px 800px at 0% 90%, color-mix(in srgb, #3F51B5 9%, transparent), transparent 70%);
+  background-size: 256px 256px, auto, auto, auto, auto, auto;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+}
+
+/* --- shared, copied from CustomPages.css --- */
+
+.container { position: relative; isolation: isolate; height: 600px; overflow: hidden; }
+
+.content {
+  padding: 64px 32px;
+  margin: 0 auto;
+  max-width: var(--custom-page-width);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-header {
+  max-width: 650px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.section-header * { text-align: center; }
+
+.section-tag {
+  background-color: color-mix(in srgb, var(--vp-c-brand-2), transparent 85%);
+  border-radius: 12px;
+  padding: 6px 18px;
+  word-spacing: 2px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--vp-c-brand-1);
+  width: fit-content;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 2.5rem;
+  margin: 0 0 1rem;
+}
+
+p.sub-header {
+  color: var(--vp-c-text-2);
+  font-size: 1.25rem;
+  line-height: 2rem;
+  margin: 0 0 1.25rem;
+}
+
+.panel {
+  width: 100%;
+  height: 220px;
+  margin-top: 32px;
+  border-radius: 32px;
+  background-color: var(--home-surface);
+  box-shadow: var(--home-surface-edge);
+}
+
+.label {
+  position: absolute;
+  top: 16px;
+  left: 32px;
+  z-index: 5;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-2);
+  background: var(--vp-c-bg);
+  border: 1px solid color-mix(in srgb, var(--vp-c-text-1) 14%, transparent);
+  border-radius: 999px;
+  padding: 6px 12px;
+}
+
+.layer, .layer-l, .layer-r {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, var(--dot) 1px, transparent 1.5px);
+  background-size: 24px 24px;
+  background-position: center top;
+}
+
+/* --- 0 current --- */
+.v0 .layer {
+  inset: 0;
+  mask-image: radial-gradient(ellipse 50% 240px at 50% 180px, #000, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 50% 240px at 50% 180px, #000, transparent 80%);
+}
+
+/* --- 1 wings: dot fields left and right of the header, fading toward the text --- */
+.v1 .layer-l, .v1 .layer-r {
+  top: 0;
+  width: 28%;
+  height: 420px;
+  background-image: radial-gradient(circle, var(--dot-strong) 1px, transparent 1.5px);
+}
+.v1 .layer-l { left: 0;  mask-image: radial-gradient(ellipse 55% 55% at 40% 42%, #000, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 55% 55% at 40% 42%, #000, transparent 100%); }
+.v1 .layer-r { right: 0; mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%); }
+
+/* --- 2 halo: a dot field around the header with a soft hole punched behind the text --- */
+.v2 .layer {
+  inset: 0;
+  background-image: radial-gradient(circle, var(--dot-strong) 1px, transparent 1.5px);
+  mask-image:
+      radial-gradient(ellipse 560px 190px at 50% 165px, #000 45%, transparent 100%),
+      radial-gradient(ellipse 390px 150px at 50% 165px, transparent 72%, #000 100%);
+  -webkit-mask-image:
+      radial-gradient(ellipse 560px 190px at 50% 165px, #000 45%, transparent 100%),
+      radial-gradient(ellipse 390px 150px at 50% 165px, transparent 72%, #000 100%);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+
+/* --- 3 leaders: a single dotted rule on each side of the heading, fading outward --- */
+.v3 .heading-row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 1152px;
+}
+.v3 .heading-row h2 { white-space: nowrap; }
+.v3 .heading-row::before, .v3 .heading-row::after {
+  content: "";
+  flex: 1;
+  height: 3px;
+  background-image: radial-gradient(circle, var(--dot-strong) 1.5px, transparent 2px);
+  background-size: 12px 3px;
+  background-position: center;
+}
+.v3 .heading-row::before { mask-image: linear-gradient(90deg, transparent, #000); -webkit-mask-image: linear-gradient(90deg, transparent, #000); }
+.v3 .heading-row::after  { mask-image: linear-gradient(90deg, #000, transparent); -webkit-mask-image: linear-gradient(90deg, #000, transparent); }
+
+/* --- 4 gutters: dot columns in the outer margins, full section height, fading inward --- */
+.v4 .layer-l, .v4 .layer-r {
+  top: 0;
+  bottom: 0;
+  width: 220px;
+  background-image: radial-gradient(circle, var(--dot-strong) 1px, transparent 1.5px);
+}
+.v4 .layer-l { left: 0;  mask-image: linear-gradient(90deg, #000 30%, transparent), linear-gradient(180deg, transparent, #000 15%, #000 85%, transparent); -webkit-mask-image: linear-gradient(90deg, #000 30%, transparent), linear-gradient(180deg, transparent, #000 15%, #000 85%, transparent); mask-composite: intersect; -webkit-mask-composite: source-in; }
+.v4 .layer-r { right: 0; mask-image: linear-gradient(270deg, #000 30%, transparent), linear-gradient(180deg, transparent, #000 15%, #000 85%, transparent); -webkit-mask-image: linear-gradient(270deg, #000 30%, transparent), linear-gradient(180deg, transparent, #000 15%, #000 85%, transparent); mask-composite: intersect; -webkit-mask-composite: source-in; }
+
+/* --- 5 threshold: a dot band at the top of the section, gone before the tag --- */
+.v5 .layer {
+  top: 0; left: 0; right: 0;
+  height: 130px;
+  background-image: radial-gradient(circle, var(--dot-strong) 1px, transparent 1.5px);
+  mask-image: linear-gradient(180deg, #000 20%, transparent 85%), radial-gradient(ellipse 50% 100% at 50% 0%, #000 40%, transparent);
+  -webkit-mask-image: linear-gradient(180deg, #000 20%, transparent 85%), radial-gradient(ellipse 50% 100% at 50% 0%, #000 40%, transparent);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+
+/* --- 6 aura: dots spill out from under the panel, the header stays on clean canvas --- */
+.v6 .panel-wrap { position: relative; width: 100%; margin-top: 32px; }
+.v6 .panel-wrap .layer {
+  inset: -56px;
+  background-image: radial-gradient(circle, var(--dot-strong) 1px, transparent 1.5px);
+  mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000 55%, transparent 100%), linear-gradient(#000, #000);
+  -webkit-mask-image: radial-gradient(ellipse 60% 70% at 50% 50%, #000 55%, transparent 100%), linear-gradient(#000, #000);
+  mask-size: auto, calc(100% - 112px) calc(100% - 112px);
+  -webkit-mask-size: auto, calc(100% - 112px) calc(100% - 112px);
+  mask-position: center, center;
+  -webkit-mask-position: center, center;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-composite: subtract;
+  -webkit-mask-composite: source-out;
+}
+.v6 .panel-wrap .panel { margin-top: 0; position: relative; }
+
+/* --- 7 corners: two round dot clusters pinned to the top corners of the section --- */
+.v7 .layer-l, .v7 .layer-r {
+  top: -40px;
+  width: 440px;
+  height: 400px;
+  background-image: radial-gradient(circle, var(--dot-strong) 1px, transparent 1.5px);
+}
+.v7 .layer-l { left: -40px;  mask-image: radial-gradient(circle 200px at 45% 45%, #000, transparent); -webkit-mask-image: radial-gradient(circle 200px at 45% 45%, #000, transparent); }
+.v7 .layer-r { right: -40px; mask-image: radial-gradient(circle 200px at 55% 45%, #000, transparent); -webkit-mask-image: radial-gradient(circle 200px at 55% 45%, #000, transparent); }
+
+/* --- 8 quiet: same placement, sparser dots, a fog of canvas colour behind the text --- */
+.v8 .layer {
+  inset: 0;
+  background-size: 36px 36px;
+  mask-image: radial-gradient(ellipse 55% 260px at 50% 180px, #000, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 55% 260px at 50% 180px, #000, transparent 80%);
+}
+.v8 .section-header::before {
+  content: "";
+  position: absolute;
+  inset: -32px -120px;
+  z-index: -1;
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, var(--vp-c-bg) 20%, transparent 100%);
+  opacity: 0.75;
+}
+
+/* --- 9 planes: receding dot planes on both sides, like a floor seen in perspective --- */
+.v9 .layer-l, .v9 .layer-r {
+  top: 20px;
+  width: 30%;
+  height: 380px;
+  background-size: 28px 28px;
+  background-image: radial-gradient(circle, var(--dot-strong) 1px, transparent 1.5px);
+}
+.v9 .layer-l { left: 0;  transform: perspective(700px) rotateY(38deg);  transform-origin: right center; mask-image: linear-gradient(90deg, transparent 5%, #000 60%, transparent 92%), linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent); -webkit-mask-image: linear-gradient(90deg, transparent 5%, #000 60%, transparent 92%), linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent); mask-composite: intersect; -webkit-mask-composite: source-in; }
+.v9 .layer-r { right: 0; transform: perspective(700px) rotateY(-38deg); transform-origin: left center;  mask-image: linear-gradient(270deg, transparent 5%, #000 60%, transparent 92%), linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent); -webkit-mask-image: linear-gradient(270deg, transparent 5%, #000 60%, transparent 92%), linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent); mask-composite: intersect; -webkit-mask-composite: source-in; }
+
+/* --- 10 blueprint: plus marks instead of dots, in the wings, on a wider grid --- */
+.v10 .layer-l, .v10 .layer-r {
+  top: 0;
+  width: 28%;
+  height: 420px;
+  background-image: var(--plus-url);
+  background-size: 40px 40px;
+  background-position: center top;
+}
+.v10 .layer-l { left: 0;  mask-image: radial-gradient(ellipse 55% 55% at 40% 42%, #000, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 55% 55% at 40% 42%, #000, transparent 100%); }
+.v10 .layer-r { right: 0; mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%); }
+
+/* --- 11 contours: dashed concentric rings around the header, the middle stays clear --- */
+.v11 .layer {
+  inset: 0;
+  background-image: repeating-radial-gradient(ellipse 400px 170px at 50% 165px, var(--dot-strong) 0 1px, transparent 1px 16px);
+  background-size: auto;
+  mask-image:
+      radial-gradient(ellipse 600px 185px at 50% 165px, #000 45%, transparent 100%),
+      radial-gradient(ellipse 400px 170px at 50% 165px, transparent 84%, #000 96%),
+      repeating-conic-gradient(from 0deg at 50% 165px, #000 0 2deg, transparent 2deg 5deg);
+  -webkit-mask-image:
+      radial-gradient(ellipse 600px 185px at 50% 165px, #000 45%, transparent 100%),
+      radial-gradient(ellipse 400px 170px at 50% 165px, transparent 84%, #000 96%),
+      repeating-conic-gradient(from 0deg at 50% 165px, #000 0 2deg, transparent 2deg 5deg);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+
+</style>
+</head>
+<body>
+
+<script>
+  if (location.search.includes("dark")) document.documentElement.classList.add("dark");
+</script>
+
+<div class="container v0">
+  <span class="label">0 · Current</span>
+  <div class="layer"></div>
+  <section class="content">
+    <div class="section-header">
+      <div class="section-tag">Foundations</div>
+      <h2>Enterprise-grade foundations</h2>
+      <p class="sub-header">A robust layout engine engineered for high performance, complete data privacy, and seamless integration into your infrastructure.</p>
+    </div>
+    <div class="panel"></div>
+  </section>
+</div>
+
+<div class="container v1">
+  <span class="label">1 · Wings</span>
+  <div class="layer-l"></div><div class="layer-r"></div>
+  <section class="content">
+    <div class="section-header">
+      <div class="section-tag">Foundations</div>
+      <h2>Enterprise-grade foundations</h2>
+      <p class="sub-header">A robust layout engine engineered for high performance, complete data privacy, and seamless integration into your infrastructure.</p>
+    </div>
+    <div class="panel"></div>
+  </section>
+</div>
+
+<div class="container v2">
+  <span class="label">2 · Halo</span>
+  <div class="layer"></div>
+  <section class="content">
+    <div class="section-header">
+      <div class="section-tag">Foundations</div>
+      <h2>Enterprise-grade foundations</h2>
+      <p class="sub-header">A robust layout engine engineered for high performance, complete data privacy, and seamless integration into your infrastructure.</p>
+    </div>
+    <div class="panel"></div>
+  </section>
+</div>
+
+<div class="container v3">
+  <span class="label">3 · Leaders</span>
+  <section class="content">
+    <div class="section-header" style="max-width: none; width: 100%;">
+      <div class="section-tag">Foundations</div>
+      <div class="heading-row"><h2>Enterprise-grade foundations</h2></div>
+      <p class="sub-header" style="max-width: 650px;">A robust layout engine engineered for high performance, complete data privacy, and seamless integration into your infrastructure.</p>
+    </div>
+    <div class="panel"></div>
+  </section>
+</div>
+
+<div class="container v4">
+  <span class="label">4 · Gutters</span>
+  <div class="layer-l"></div><div class="layer-r"></div>
+  <section class="content">
+    <div class="section-header">
+      <div class="section-tag">Foundations</div>
+      <h2>Enterprise-grade foundations</h2>
+      <p class="sub-header">A robust layout engine engineered for high performance, complete data privacy, and seamless integration into your infrastructure.</p>
+    </div>
+    <div class="panel"></div>
+  </section>
+</div>
+
+<div class="container v5">
+  <span class="label">5 · Threshold</span>
+  <div class="layer"></div>
+  <section class="content">
+    <div class="section-header">
+      <div class="section-tag">Foundations</div>
+      <h2>Enterprise-grade foundations</h2>
+      <p class="sub-header">A robust layout engine engineered for high performance, complete data privacy, and seamless integration into your infrastructure.</p>
+    </div>
+    <div class="panel"></div>
+  </section>
+</div>
+
+<div class="container v6">
+  <span class="label">6 · Aura</span>
+  <section class="content">
+    <div class="section-header">
+      <div class="section-tag">Foundations</div>
+      <h2>Enterprise-grade foundations</h2>
+      <p class="sub-header">A robust layout engine engineered for high performance, complete data privacy, and seamless integration into your infrastructure.</p>
+    </div>
+    <div class="panel-wrap"><div class="layer"></div><div class="panel"></div></div>
+  </section>
+</div>
+
+<div class="container v7">
+  <span class="label">7 · Corners</span>
+  <div class="layer-l"></div><div class="layer-r"></div>
+  <section class="content">
+    <div class="section-header">
+      <div class="section-tag">Foundations</div>
+      <h2>Enterprise-grade foundations</h2>
+      <p class="sub-header">A robust layout engine engineered for high performance, complete data privacy, and seamless integration into your infrastructure.</p>
+    </div>
+    <div class="panel"></div>
+  </section>
+</div>
+
+<div class="container v8">
+  <span class="label">8 · Quiet</span>
+  <div class="layer"></div>
+  <section class="content">
+    <div class="section-header">
+      <div class="section-tag">Foundations</div>
+      <h2>Enterprise-grade foundations</h2>
+      <p class="sub-header">A robust layout engine engineered for high performance, complete data privacy, and seamless integration into your infrastructure.</p>
+    </div>
+    <div class="panel"></div>
+  </section>
+</div>
+
+<div class="container v9">
+  <span class="label">9 · Planes</span>
+  <div class="layer-l"></div><div class="layer-r"></div>
+  <section class="content">
+    <div class="section-header">
+      <div class="section-tag">Foundations</div>
+      <h2>Enterprise-grade foundations</h2>
+      <p class="sub-header">A robust layout engine engineered for high performance, complete data privacy, and seamless integration into your infrastructure.</p>
+    </div>
+    <div class="panel"></div>
+  </section>
+</div>
+
+<div class="container v10">
+  <span class="label">10 · Blueprint</span>
+  <div class="layer-l"></div><div class="layer-r"></div>
+  <section class="content">
+    <div class="section-header">
+      <div class="section-tag">Foundations</div>
+      <h2>Enterprise-grade foundations</h2>
+      <p class="sub-header">A robust layout engine engineered for high performance, complete data privacy, and seamless integration into your infrastructure.</p>
+    </div>
+    <div class="panel"></div>
+  </section>
+</div>
+
+<div class="container v11">
+  <span class="label">11 · Contours</span>
+  <div class="layer"></div>
+  <section class="content">
+    <div class="section-header">
+      <div class="section-tag">Foundations</div>
+      <h2>Enterprise-grade foundations</h2>
+      <p class="sub-header">A robust layout engine engineered for high performance, complete data privacy, and seamless integration into your infrastructure.</p>
+    </div>
+    <div class="panel"></div>
+  </section>
+</div>
+
+</body>
+</html>

@@ -92,7 +92,8 @@ const year = 2026;
 <style scoped lang="scss">
 
 footer {
-  background-color: var(--vp-c-bg-alt);
+  /* opaque, like the navbar: the homepage canvas (washes and grain) stops at the footer's top border */
+  background-color: var(--vp-c-bg);
 }
 
 footer * {
@@ -108,14 +109,14 @@ footer * {
 
   & > * {
     margin: 0 auto;
-    max-width: 1216px;
+    max-width: var(--custom-page-width);
     padding: 48px 32px 48px;
   }
 }
 
 .link-categories {
   margin: 0 auto;
-  max-width: 1216px;
+  max-width: var(--custom-page-width);
   padding: 48px 32px 48px;
 
   display: grid;
