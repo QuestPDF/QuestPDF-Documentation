@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HomePageShowcaseCard from "./HomePageShowcaseCard.vue";
+import HomePageCtaCard from "./HomePageCtaCard.vue";
 
 const pages = [
   "/homepage/getting-started/invoice1.webp",
@@ -8,14 +8,15 @@ const pages = [
 </script>
 
 <template>
-  <!-- the getting-started card of the bento; the sample gallery card next to it is HomePageSampleGallery.vue.
-       The href is a placeholder until the video is published. -->
-  <home-page-showcase-card
-      title="Get started in 10 minutes"
-      description="Watch a short video that introduces the library, explains its core concepts, and builds a production-ready invoice in fewer than 200 lines of C# code."
-      action-label="Watch the Video"
-      href="/getting-started-video.html"
+  <!-- the left call to action under the hero; the sample gallery card next to it is HomePageSampleGallery.vue.
+       Links to the Quick Start page, where the intro video lives. -->
+  <home-page-cta-card
+      title="Watch the 10-minute intro"
+      description="A short video introduces the library and its core concepts, then builds a production-ready invoice in fewer than 200 lines of C#."
+      label="Watch the intro"
+      detail="10 min"
+      badge="10 min"
+      href="/quick-start.html"
       :images="pages"
-      :shuffle="false"
-      image-alt="Sample invoice" />
+      variant="video" />
 </template>

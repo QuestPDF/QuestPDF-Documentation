@@ -98,8 +98,13 @@ const capabilities = [
   },
   {
     icon: "fa-bug",
-    title: "Exception and layout debugging",
-    description: "Find the code that threw or the element that overflowed."
+    title: "Exception debugging",
+    description: "Jump straight to the code that threw."
+  },
+  {
+    icon: "fa-triangle-exclamation",
+    title: "Layout debugging",
+    description: "Find the element that overflowed its container."
   }
 ];
 

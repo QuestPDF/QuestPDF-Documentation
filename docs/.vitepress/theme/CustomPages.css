@@ -218,7 +218,7 @@ html.dark {
 
 /* Surfaces
    The layering is the same in both modes: the canvas, a lifted surface on it, and an inset layer
-   (chips, badges) on the surface. Light mode lifts with white: translucent white panels on the tinted
+   (chips, badges) on the surface. Light mode lifts with white: solid white panels on the tinted
    canvas, a hairline ring and a soft shadow for the edge, and light-grey chips inset on them. Dark mode
    lifts with light: translucent white panels on the dark canvas (the washes show through) and
    translucent black chips, with no ring or shadow (neither reads on a dark canvas).
@@ -227,12 +227,12 @@ html.dark {
    top and fades out down the sides (--home-surface-rim, drawn by a masked ::before), and a sheen
    that fades out over the first 160px of the surface (--home-surface-sheen, the surface's
    background-image). Both are gradients, so either can be swapped or set to `none` on its own.
-   Light mode runs them much stronger, because they only show where the tinted canvas comes through
-   the translucent surface; dark mode keeps them very faint, because there every bit of white reads.
+   On the solid white light-mode surface they are invisible and kept only so the two modes share one
+   structure; dark mode keeps them very faint, because there every bit of white reads.
    Both are deliberately quiet: a first pass at twice these values was too much. */
 
 .custom-page.textured-page {
-  --home-surface: rgba(255, 255, 255, 0.64);
+  --home-surface: #FFFFFF;
   --home-surface-inner: #F0F2F6;
   --home-surface-edge:
       inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 7%, transparent),

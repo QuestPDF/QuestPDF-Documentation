@@ -1,22 +1,9 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import quickStartExample from './codeExamples/quickStart.cs?raw';
 import HomePageCodeContainer from "./HomePageCodeContainer.vue";
+import HomePageInstallCommand from "./HomePageInstallCommand.vue";
 
 /* the complete Quick Start example and the page it produces, next to the reasons documents as code pay off */
-
-const installCommand = "dotnet add package QuestPDF";
-const copied = ref(false);
-
-async function copyInstallCommand() {
-  try {
-    await navigator.clipboard.writeText(installCommand);
-    copied.value = true;
-    setTimeout(() => copied.value = false, 2000);
-  } catch {
-    /* clipboard access denied: the command is plain text, so it can still be selected and copied */
-  }
-}
 
 const points = [
   {
@@ -57,11 +44,7 @@ const points = [
          the artifacts on the right: the code window with the generated page overlapping its corner -->
     <div class="panel quick-start-panel">
       <div class="pitch">
-        <button type="button" class="install" :class="{ copied }" :title="copied ? 'Copied' : 'Copy to clipboard'" @click="copyInstallCommand">
-          <span class="install-label">Install</span>
-          <code class="install-command"><span class="prompt">$</span> {{ installCommand }}</code>
-          <i class="fa-regular" :class="copied ? 'fa-check' : 'fa-copy'"></i>
-        </button>
+        <home-page-install-command />
 
         <div class="divider" aria-hidden="true"></div>
 
@@ -118,61 +101,6 @@ const points = [
   flex-direction: column;
   align-items: flex-start;
   gap: 28px;
-}
-
-/* the install command as a chip that copies itself */
-.install {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  max-width: 100%;
-  padding: 12px 20px 12px 12px;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 12px;
-  background-color: var(--home-surface-inner);
-  cursor: pointer;
-  transition: border-color 0.2s ease;
-}
-
-.install:hover {
-  border-color: var(--vp-c-brand-2);
-}
-
-.install-label {
-  flex: 0 0 auto;
-  padding: 4px 10px;
-  border-radius: 8px;
-  background-color: color-mix(in srgb, var(--vp-c-brand-2), transparent 85%);
-  color: var(--vp-c-brand-1);
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1rem;
-  text-transform: uppercase;
-}
-
-.install-command {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-family: var(--vp-font-family-mono);
-  font-size: 14px;
-  color: var(--vp-c-text-1);
-}
-
-.install-command .prompt {
-  color: var(--vp-c-text-3);
-}
-
-.install i {
-  flex: 0 0 auto;
-  width: 20px;
-  font-size: 20px;
-  color: var(--vp-c-text-3);
-}
-
-.install.copied i {
-  color: #4CAF50;
 }
 
 /* a hairline between the install command and the points */
@@ -286,10 +214,6 @@ html.dark .document img {
 @media screen and (max-width: 700px) {
   .quick-start-panel {
     padding: 32px 24px;
-  }
-
-  .install-label {
-    display: none;
   }
 }
 

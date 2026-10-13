@@ -1,51 +1,71 @@
 <script setup lang="ts">
+import HomePageAgentDemo from "./HomePageAgentDemo.vue";
 
-/* Two cards side by side, replacing the former "Enterprise-grade foundations" and "Industry-standard
+/* Three cards in two columns, replacing the former "Enterprise-grade foundations" and "Industry-standard
    PDF compliance" sections. Each card carries its own heading, like the Companion App and license cards.
-   Left: the supported conformance levels as one set of chips, with the validation tools as the evidence
-   line at the bottom. Right: the foundations as five smaller points, one per thing a manager, product owner or
-   programmer checks before buying. */
+   Left column, two cards stacked: the compliance story (the promise and the independent validators, then
+   the supported conformance levels as chips grouped by purpose) above the foundations as a two-by-two grid
+   of short labels and concrete facts, one per thing a manager, product owner or programmer checks before
+   buying; a cell with a supporting page is a link to it. Right column,
+   one card the full height of the pair: how AI agents develop documents with the library, shown as a looped
+   simulation of one round (prompt, status, diff). */
 
-/* every conformance level the library can produce, as one flat set: PDF/A (archival), PDF/UA
-   (accessibility), then the EN 16931 e-invoicing profiles */
-const conformanceLevels = [
-  "PDF/A-2b", "PDF/A-2u", "PDF/A-2a",
-  "PDF/A-3b", "PDF/A-3u", "PDF/A-3a",
-  "PDF/UA-1",
-  "ZUGFeRD", "Factur-X"
-];
-
-interface Point {
-  icon: string;
+interface StandardsCategory {
   title: string;
-  description: string;
+  levels: string[];
 }
 
-const points : Point[] = [
+/* every conformance level the library can produce, grouped by what the buyer needs it for; the
+   description names no standards, so both the purposes and the standard names live here.
+   Each inner array is one row: archiving alone (six chips), the two short groups side by side */
+const standardsRows : StandardsCategory[][] = [
+  [
+    {
+      title: "Archiving",
+      levels: ["PDF/A-2b", "PDF/A-2u", "PDF/A-2a", "PDF/A-3b", "PDF/A-3u", "PDF/A-3a"]
+    }
+  ],
+  [
+    {
+      title: "Accessibility",
+      levels: ["PDF/UA-1"]
+    },
+    {
+      title: "E-invoicing",
+      levels: ["EN 16931", "ZUGFeRD", "Factur-X"]
+    }
+  ]
+];
+
+interface Fact {
+  label: string;
+  text: string;
+  /* the page that backs the claim; a fact without one renders as plain text */
+  href?: string;
+}
+
+/* the four strongest enterprise arguments, a short label and concrete facts each; the frameworks and
+   operating systems repeat the support matrix of the NuGet package README (.NET 6+ and .NET Framework
+   4.6.2+; the package ships net6.0, net8.0 and net10.0 builds, Windows, Linux and macOS natives). No
+   measured benchmark is published, so the performance line stays qualitative and unlinked */
+const facts : Fact[] = [
   {
-    icon: "fa-shield-check",
-    title: "Complete data privacy",
-    description: "No network calls, no telemetry, no license server. Works offline and air-gapped."
+    label: "Data privacy",
+    text: "No network calls, no telemetry, no license server. Works air-gapped.",
+    href: "/security-policy"
   },
   {
-    icon: "fa-gauge-high",
-    title: "High performance",
-    description: "Thousands of pages per second with low CPU and memory usage."
+    label: "Platforms and runtimes",
+    text: "Windows, Linux and macOS. .NET 6 to .NET 10 and .NET Framework 4.6.2+. Docker, AWS Lambda, Azure Functions."
   },
   {
-    icon: "fa-gear-complex",
-    title: "Comprehensive layout engine",
-    description: "Full control over structure, precise positioning and automatic pagination."
+    label: "Performance",
+    text: "Thousands of pages per second with low CPU and memory usage."
   },
   {
-    icon: "fa-language",
-    title: "Advanced language support",
-    description: "Full RTL support, advanced text shaping and bi-directional layout."
-  },
-  {
-    icon: "fa-file-zipper",
-    title: "Optimized file size",
-    description: "Font subsetting and image compression keep documents small without losing quality."
+    label: "Languages and scripts",
+    text: "Arabic, Hebrew, CJK, emoji and 100+ scripts. Bi-directional layout and advanced text shaping.",
+    href: "/api-reference/text/font-management#covering-additional-languages"
   }
 ];
 
@@ -54,49 +74,64 @@ const points : Point[] = [
 <template>
   <section class="content">
     <div class="layout">
-      <!-- left: the compliance story; the conformance levels as one set of chips, the validators as the footer -->
-      <div class="panel compliance">
-        <h2 class="card-title">Industry-standard output</h2>
-        <p class="card-description">
-          Generate PDFs that meet industry standards out of the box: PDF/A for long-term archiving,
-          PDF/UA for accessibility, and EN 16931 (ZUGFeRD and Factur-X) for electronic invoicing.
-        </p>
+      <div class="column">
+        <!-- the compliance story; the promise and validators in the description, the conformance levels as grouped chips -->
+        <div class="panel compliance">
+          <h2 class="card-title">Industry-standard output</h2>
+          <!-- the promise and the evidence in one breath: standards out of the box, validated independently on every build -->
+          <p class="card-description">
+            Generate PDFs that meet industry standards out of the box.
+            Every build is automatically validated with the independent, open-source
+            <a href="https://verapdf.org/" target="_blank" rel="noopener">veraPDF</a> and
+            <a href="https://www.mustangproject.org/" target="_blank" rel="noopener">Mustang</a> validators.
+          </p>
 
-        <div class="standards-badges">
-          <span v-for="level in conformanceLevels" :key="level">{{ level }}</span>
+          <div class="standards">
+            <div v-for="(row, index) of standardsRows" :key="index" class="standards-row">
+              <section v-for="category of row" :key="category.title" class="standards-category">
+                <h3 class="standards-category-title">{{ category.title }}</h3>
+                <div class="standards-badges">
+                  <span v-for="level in category.levels" :key="level">{{ level }}</span>
+                </div>
+              </section>
+            </div>
+          </div>
         </div>
 
-        <!-- the evidence: independent, third-party validators run on every build -->
-        <p class="validation">
-          <i class="fa-regular fa-badge-check"></i>
-          <span>
-            Every build is automatically validated with the independent, open-source
-            <a href="https://verapdf.org/" target="_blank" rel="noopener">veraPDF</a> (PDF/A and PDF/UA) and
-            <a href="https://www.mustangproject.org/" target="_blank" rel="noopener">Mustang</a> (ZUGFeRD and Factur-X) validators.
-          </span>
-        </p>
+        <!-- the foundations as a two-by-two grid of short labels and concrete facts, no icons; a cell
+             backed by a page is one link, the label underlines and grows an arrow on hover -->
+        <div class="panel foundations">
+          <h2 class="card-title">Enterprise-grade foundations</h2>
+
+          <div class="facts">
+            <component
+                v-for="fact of facts"
+                :key="fact.label"
+                :is="fact.href ? 'a' : 'div'"
+                :href="fact.href"
+                class="fact"
+                :class="{ linked: fact.href }">
+              <span class="fact-label">
+                <span class="fact-label-text">{{ fact.label }}</span>
+                <i v-if="fact.href" class="fa-regular fa-arrow-right fact-arrow" aria-hidden="true"></i>
+              </span>
+              <span class="fact-text">{{ fact.text }}</span>
+            </component>
+          </div>
+        </div>
       </div>
 
-      <!-- right: the foundations as smaller points -->
-      <div class="panel foundations">
-        <h2 class="card-title">Enterprise-grade foundations</h2>
+      <!-- the AI story: one simulated round with an agent -->
+      <div class="panel agents">
+        <div class="background-gradient" />
+
+        <h2 class="card-title">Develop with AI agents</h2>
         <p class="card-description">
-          A robust layout engine engineered for high performance, complete data privacy
-          and seamless integration into your infrastructure.
+          Describe the document you need and let your AI agent write, refine and fix the layout code,
+          while you review the result. QuestPDF gives agents what they need to get it right.
         </p>
 
-        <div class="points">
-          <article v-for="point of points" :key="point.title" class="point">
-            <div class="point-icon">
-              <i class="fa-regular" :class="[point.icon]"></i>
-            </div>
-
-            <div class="point-body">
-              <h3 class="row-title">{{ point.title }}</h3>
-              <p class="row-description">{{ point.description }}</p>
-            </div>
-          </article>
-        </div>
+        <home-page-agent-demo />
       </div>
     </div>
   </section>
@@ -110,7 +145,8 @@ const points : Point[] = [
   align-items: center;
 }
 
-/* Two cards of equal height, stacked on narrow screens */
+/* Two equal columns: a stack of two cards on the left, one card the full height of the stack on the
+   right; everything in one column on narrow screens */
 
 .layout {
   display: grid;
@@ -119,7 +155,13 @@ const points : Point[] = [
   width: 100%;
 }
 
-.layout > .panel {
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.layout .panel {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -132,16 +174,38 @@ const points : Point[] = [
 }
 
 
-/* Conformance levels: one wrapped set of chips, no grouping. The block takes the card's spare height,
-   so the validation line sits at the bottom of the card, level with the end of the foundations list. */
+/* Conformance levels: one group per purpose, each a wrapped set of chips under a quiet one-word
+   label; the label is small uppercase secondary text, so the chips stay the thing the eye lands on.
+   Groups in the same row sit side by side and wrap under each other when the card gets narrow */
+
+.standards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.standards-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 40px;
+}
+
+.standards-category-title {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-2);
+}
 
 .standards-badges {
   display: flex;
   flex-wrap: wrap;
-  align-content: flex-start;
   gap: 8px;
-  flex-grow: 1;
-  margin-top: 32px;
+  margin-top: 8px;
 }
 
 /* same white-on-grey style as the chips in the other homepage cards */
@@ -158,26 +222,9 @@ const points : Point[] = [
 }
 
 
-/* Validation line: the badge icon in brand colour, the tools linked */
+/* The validator names in the description are linked to the tools' sites */
 
-.validation {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin: 32px 0 0;
-  font-size: 0.9375rem;
-  line-height: 1.375rem;
-  color: var(--vp-c-text-2);
-}
-
-.validation i {
-  flex-shrink: 0;
-  margin-top: 2px;
-  font-size: 1.125rem;
-  color: var(--vp-c-brand-1);
-}
-
-.validation a {
+.compliance .card-description a {
   color: var(--vp-c-text-1);
   font-weight: 600;
   text-decoration: underline;
@@ -186,41 +233,148 @@ const points : Point[] = [
   transition: text-decoration-color 0.2s;
 }
 
-.validation a:hover {
+.compliance .card-description a:hover {
   text-decoration-color: var(--vp-c-text-1);
 }
 
 
-/* Points: a single column of icon tile plus a labelled row, the same rhythm as the
-   Companion App capabilities */
+/* Facts: two columns of label-plus-text cells. The column gap alone separates the columns; one
+   hairline in the panel's divider colour separates the rows. The cells carry the row spacing as
+   padding, so the line runs the full width of the grid; the outer edges stay open.
+   The label is the scanning anchor: the same small uppercase style as the chip categories above,
+   in the primary text colour, over a smaller, quieter line of facts */
 
-.points {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  margin-top: 32px;
-}
-
-.point {
+.facts {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 16px;
-  align-items: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 32px;
+  margin: 32px 0 0; /* the same distance the chips keep from the description in the card above */
 }
 
-.point-icon {
+.fact {
+  min-width: 0;
+  padding: 12px 0;
+}
+
+.fact:nth-child(-n + 2) {
+  padding-top: 0;
+}
+
+.fact:nth-last-child(-n + 2) {
+  padding-bottom: 0;
+}
+
+.fact:nth-child(n + 3) {
+  border-top: 1px solid var(--vp-c-divider);
+}
+
+/* one column: every cell after the first gets a line above */
+@media screen and (max-width: 500px) {
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fact:nth-child(2) {
+    padding-top: 12px;
+  }
+
+  .fact:nth-last-child(2) {
+    padding-bottom: 12px;
+  }
+
+  .fact:nth-child(n + 2) {
+    border-top: 1px solid var(--vp-c-divider);
+  }
+}
+
+.fact-label {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background-color: var(--home-surface-inner);
+  gap: 6px;
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-1);
 }
 
-.point-icon i {
-  font-size: 1.125rem;
-  color: var(--vp-c-text-1);
+.fact-text {
+  display: block;
+  margin: 4px 0 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--vp-c-text-2);
+}
+
+
+/* A linked cell reads like the plain ones until pointed at: then the label underlines and a small
+   arrow slides in beside it, the same arrow as the links in the Companion card; the text below does
+   not change. The focus ring is the one the CTA cards use */
+
+.fact.linked {
+  color: inherit;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.fact.linked:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 4px;
+}
+
+.fact-label-text {
+  text-decoration: underline transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+
+.fact.linked:is(:hover, :focus-visible) .fact-label-text {
+  text-decoration-color: currentColor;
+}
+
+.fact-arrow {
+  font-size: 0.6875rem;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s, transform 0.25s ease;
+}
+
+.fact.linked:is(:hover, :focus-visible) .fact-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* The foundations card takes the column's spare height, so the stack ends level with the AI card */
+
+.column .foundations {
+  flex-grow: 1;
+}
+
+
+/* AI card: a faint purple glow from the top-left corner behind the heading, the same device as the
+   license card's green, in the accent the simulation inside uses; no rays, to keep it quiet */
+
+.agents {
+  --accent: #7E57C2;
+  --accent-secondary: #AB47BC;
+  position: relative;
+  isolation: isolate; /* keeps the glow (z-index: -1) above the panel background but below the content */
+}
+
+.agents .background-gradient {
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  overflow: hidden;
+  background-image:
+      radial-gradient(ellipse 90% 55% at 0% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent),
+      radial-gradient(ellipse 50% 30% at 0% 0%, color-mix(in srgb, var(--accent-secondary) 4%, transparent), transparent);
 }
 
 </style>

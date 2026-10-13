@@ -14,11 +14,6 @@ import { data as statistics } from "../statistics.data";
       <div class="tagline">
         Design documents the way you design software, in readable C# code that renders to precise, standards-compliant PDFs on every platform. Effortlessly collaborate with your AI agent to create perfect designs.
       </div>
-
-      <div class="cta-buttons">
-        <a class="action primary" href="/quick-start.html">Quick Start</a>
-        <a class="action" href="/features-overview.html">Features Overview</a>
-      </div>
     </div>
 
     <!-- the adoption numbers -->
@@ -161,50 +156,6 @@ html.dark .tagline {
 }
 
 
-/* Call To Action Button */
-
-.cta-buttons {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 24px;
-  margin-top: 32px;
-  z-index: 10000;
-}
-
-@media screen and (min-width: 1024px) {
-  .cta-buttons a.action {
-    padding: 16px 24px;
-  }
-}
-
-html.dark .action:not(.primary) {
-  background-color: #FFF2;
-
-  &:hover {
-    background-color: #FFF3;
-  }
-}
-
-html:not(.dark) .action:not(.primary) {
-  background-color: #00000014;
-  color: var(--vp-c-text-1);
-  box-shadow: none;
-
-  &:hover {
-    background-color: #00000022;
-  }
-}
-
-.action {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-  &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-}
-
-
 /* Hero statistics
    The adoption numbers sit directly on the page, with no surface of their own. The list is only
    as wide as its stats need and sits flush with the right edge of the page content. */
@@ -212,7 +163,6 @@ html:not(.dark) .action:not(.primary) {
 .hero-cards {
   position: relative;
   display: flex;
-  padding: 24px 0;
 
   width: fit-content;
   max-width: 100%;
@@ -222,7 +172,6 @@ html:not(.dark) .action:not(.primary) {
 @media screen and (max-width: 820px) {
   .hero-cards {
     width: 100%; /* stacked under the text: full width */
-    padding: 8px 0;
   }
 }
 
@@ -269,9 +218,20 @@ html:not(.dark) .statistic-icon i {
   color: var(--vp-c-text-1);
 }
 
+/* on the light theme the tile is solid white; a hairline ring keeps its shape on the pale page */
+html:not(.dark) .statistic-icon {
+  background-color: #FFFFFF;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 8%, transparent);
+}
+
 .statistic:hover .statistic-icon {
   transform: translateY(-2px) scale(1.05);
   background-color: color-mix(in srgb, var(--vp-c-text-1) 13%, transparent);
+}
+
+html:not(.dark) .statistic:hover .statistic-icon {
+  background-color: #FFFFFF;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 14%, transparent);
 }
 
 .statistic .title {

@@ -27,12 +27,12 @@ const includes = [
 
 <template>
   <section class="content">
-    <!-- two cards side by side: the section heading, what every tier includes and the calls to action
-         on the left; the tiers stacked on the right -->
-    <div class="layout">
-      <div class="card includes">
-        <div class="background-gradient" />
+    <!-- one panel split by a vertical hairline: the section heading, what every tier includes and the
+         calls to action on the left; the tiers stacked on the right -->
+    <div class="panel license-panel">
+      <div class="background-gradient" />
 
+      <div class="includes">
         <h2 class="card-title">Fair and Sustainable License</h2>
         <p class="card-description">A model that benefits everyone. Commercial licensing provides businesses with legal safety and long-term stability, while funding a feature-complete, unrestricted library for the community.</p>
 
@@ -49,7 +49,9 @@ const includes = [
         </div>
       </div>
 
-      <div class="card tiers">
+      <div class="divider" aria-hidden="true"></div>
+
+      <div class="tiers">
         <article v-for="tier of tiers" :key="tier.name" class="tier" :class="tier.name.toLowerCase()">
           <div class="tier-head">
             <h3 class="tier-name">{{ tier.name }}</h3>
@@ -70,48 +72,49 @@ const includes = [
     align-items: center;
   }
 
-  /* Two cards of equal height */
+  /* One panel, two halves of equal width with a hairline between them; the halves stack on
+     narrow screens and the hairline turns horizontal */
 
-  .layout {
+  .license-panel {
+    position: relative;
+    isolation: isolate; /* keeps the glow (z-index: -1) above the panel background but below the content */
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 32px;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 48px;
     width: 100%;
   }
 
+  .divider {
+    align-self: stretch;
+    width: 1px;
+    background-color: var(--vp-c-divider);
+  }
+
   @media screen and (max-width: 960px) {
-    .layout {
+    .license-panel {
       grid-template-columns: minmax(0, 1fr);
+      gap: 40px;
     }
-  }
 
-  /* the same inset as the homepage panels (HomePage.vue), not the 40px of the shared card, so the
-     text lines up with the panels above; the selector outweighs the shared card rule */
-  .content .layout > .card {
-    padding: 48px;
-  }
-
-  @media screen and (max-width: 700px) {
-    .content .layout > .card {
-      padding: 32px 24px;
+    .divider {
+      width: auto;
+      height: 1px;
     }
   }
 
 
-  /* Left card: the section heading and its lead, left-aligned like the Companion App card, then
+  /* Left half: the section heading and its lead, left-aligned like the Companion App panel, then
      the points every tier includes, and the calls to action pinned to the bottom */
 
   .includes {
-    position: relative;
-    isolation: isolate; /* keeps the glow (z-index: -1) above the card background but below the content */
     display: flex;
     flex-direction: column;
     align-items: stretch;
   }
 
-  /* the same glow and faint rays as the showcase cards (HomePageShowcaseCard.vue), in the Community
-     tier's green, but from the top-left corner, behind the heading, rather than from the top centre */
-  .includes {
+  /* the same glow and faint rays as the showcase cards (HomePageCtaCard.vue), in the Community
+     tier's green, but from the panel's top-left corner, behind the heading, rather than from the top centre */
+  .license-panel {
     --accent: #67B84D;
     --accent-secondary: #4CAF50;
     --rays-x: 0%;
@@ -191,7 +194,7 @@ const includes = [
   }
 
 
-  /* Tiers: stacked blocks spread to fill the card's height. Each block opens
+  /* Tiers: stacked blocks spread to fill the panel's height. Each block opens
      with the tier's name badge followed by the price, then the description below.
      The badge carries its tier's colour from the pricing page: green for Community, solid blue for
      Professional, black for Enterprise (inverted to light grey in dark mode) */

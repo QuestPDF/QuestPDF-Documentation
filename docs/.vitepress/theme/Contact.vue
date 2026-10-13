@@ -85,6 +85,10 @@ const contacts: ContactInformation[] = [
             </div>
           </article>
 
+          <!-- the same dotted seam as between the homepage sections: the four ways to reach us above
+               it, the company behind the project below -->
+          <div class="divider" aria-hidden="true"></div>
+
           <!-- full width, so the company details do not sit alone in a half-empty row -->
           <article class="panel business-details">
             <div class="business-owner">
@@ -205,6 +209,24 @@ html.dark body:has(.custom-page.contact-page) {
   gap: 12px;
   margin-top: auto;
   padding-top: 24px;
+}
+
+/* the seam spans the grid; the grid gap on either side plus this margin puts it 48px from the
+   panels, the same distance as the seams between the homepage sections */
+.divider {
+  grid-column: 1 / -1;
+  height: 4px;
+  margin: 16px 0;
+  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 40%, transparent) 1px, transparent 1.5px);
+  background-size: 12px 4px;
+  background-position: center;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* light dots on the dark canvas stand out more than dark dots on white, so they are fainter there */
+html.dark .divider {
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 16%, transparent) 1px, transparent 1.5px);
 }
 
 .business-details {

@@ -1068,7 +1068,7 @@ html.dark body:has(.custom-page.features-page) {
 
 .feature-name {
   flex-shrink: 0;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 600;
   transition: color 0.2s ease;
@@ -1083,7 +1083,7 @@ html.dark body:has(.custom-page.features-page) {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.5rem;
   color: var(--vp-c-text-2);
 }
@@ -1110,13 +1110,9 @@ html.dark body:has(.custom-page.features-page) {
   padding-left: 52px;
 }
 
+/* child rows keep the row text size; the indent, tree line and lighter weight mark them as sub-pages */
 .feature-row.child .feature-name {
-  font-size: 0.875rem;
   font-weight: 500;
-}
-
-.feature-row.child .feature-summary {
-  font-size: 0.8125rem;
 }
 
 .feature-row.child::before,

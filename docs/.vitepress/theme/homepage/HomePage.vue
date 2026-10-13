@@ -4,23 +4,18 @@
       <HomePageHero />
     </div>
 
-    <div class="container">
-      <HomePageQuickStart />
-    </div>
-
-    <div class="container">
-      <section class="content bento-section">
-<!--        <div class="section-header">-->
-<!--          <div class="section-tag">Resources</div>-->
-<!--          <h2>Ship your first PDF today</h2>-->
-<!--          <p class="sub-header">Learn the essentials in a ten-minute video, start from a finished sample instead of a blank page, and see how far the library goes once your requirements grow.</p>-->
-<!--        </div>-->
-
-        <div class="home-bento">
+    <!-- the two calls to action, right under the hero -->
+    <div class="container cta-container">
+      <section class="content cta-section">
+        <div class="cta-row">
           <HomePageGettingStarted />
           <HomePageSampleGallery />
         </div>
       </section>
+    </div>
+
+    <div class="container">
+      <HomePageQuickStart />
     </div>
 
     <div class="container">
@@ -113,7 +108,7 @@ html.dark body:has(.custom-page.home-page) {
    sit 48px apart instead of 64px, and each seam carries a faint dotted line across the content width,
    fading out at both ends, so the eye reads a break without a heading. The dots are the same 1px dots
    as the hero's dot grid, which is the only other dot texture on the page, and share its blue tint in light mode. The hero keeps its own
-   64px padding and has no seam after it; the first seam sits below the quick start. */
+   64px padding and has no seam after it; the first seam sits between the CTA cards and the quick start. */
 
 .custom-page.home-page > .container .content {
   position: relative;
@@ -144,11 +139,7 @@ html.dark .custom-page.home-page > .container + .container .content::before {
   background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 16%, transparent) 1px, transparent 1.5px);
 }
 
-/* no seam after the hero: the quick start follows it at the full 64px + 64px distance instead */
-.custom-page.home-page .hero-container + .container .content {
-  padding-top: 64px;
-}
-
+/* no seam after the hero: the CTA cards sit right under it (see below) */
 .custom-page.home-page .hero-container + .container .content::before {
   content: none;
 }
@@ -179,26 +170,28 @@ html.dark .custom-page.home-page > .container + .container .content::before {
 }
 
 
-/* Bento: the getting-started video and the sample gallery side by side. */
+/* CTA row: the intro video and the sample gallery cards side by side, right under the hero.
+   The cards stretch to the same height. */
 
-.custom-page.home-page .bento-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* the selector outweighs the 48px section padding above: no padding on top, since the hero's own
+   bottom padding spaces the cards; the usual 48px below, so the seam before the quick start sits
+   midway between the cards and the code sample */
+.custom-page.home-page > .container.cta-container .content.cta-section {
+  padding-top: 0;
+  padding-bottom: 48px;
 }
 
-.custom-page.home-page .home-bento {
-  width: 100%;
+.custom-page.home-page .cta-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
   gap: 32px;
 }
 
-/* same stacking point as the Quick Start steps; below it the showcase cards are too narrow
-   for their two-column page-stack layout */
-@media screen and (max-width: 1280px) {
-  .custom-page.home-page .home-bento {
+@media screen and (max-width: 900px) {
+  .custom-page.home-page .cta-row {
     grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
   }
 }
 

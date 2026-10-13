@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import HomePageShowcaseCard from "./HomePageShowcaseCard.vue";
+import HomePageCtaCard from "./HomePageCtaCard.vue";
 
 /* pages rendered from the Component Variants gallery document, shown as a coverflow row with the
-   first one in the centre, then slid through on hover. Fifteen pages, so that a page which has left on the
-   left does not come back from the right for several seconds */
+   first one in the centre, then slid through while the card is hovered. Fifteen pages, so that a page
+   which has left on the left does not come back from the right for a long while */
 const pages = [
   "/homepage/sample-gallery/page-25.webp", // product cards with photos
   "/homepage/sample-gallery/page-21.webp", // charts
@@ -24,16 +24,17 @@ const pages = [
 </script>
 
 <template>
-  <!-- the sample gallery card of the bento, next to the getting-started card (HomePageGettingStarted.vue).
-       The href is a placeholder until the gallery page exists. -->
-  <home-page-showcase-card
+  <!-- the right call to action under the hero, next to the intro video card (HomePageGettingStarted.vue).
+       The href is a placeholder until the gallery page exists (see roadmap.md); the indigo accent is the
+       one the page background uses next to the brand blue. -->
+  <home-page-cta-card
       title="Browse the sample gallery"
-      description="Explore complete documents such as invoices, reports and certificates, plus reusable components and layout ideas, each with source code you can copy and adapt."
-      action-label="Open Sample Gallery"
+      description="Explore complete documents such as invoices, reports and certificates, plus reusable components and layout ideas. Each comes with source code you can copy and adapt."
+      label="Open the gallery"
+      detail="40+ samples"
       href="/sample-gallery.html"
       :images="pages"
-      layout="row"
-      image-alt="Page from the Component Variants sample document"
-      accent="#00B0FF"
-      accent-secondary="#0094F9" />
+      variant="gallery"
+      accent="#5C6BC0"
+      accent-secondary="#3F51B5" />
 </template>
