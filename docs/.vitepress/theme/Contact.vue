@@ -77,8 +77,8 @@ const contacts: ContactInformation[] = [
               <i class="fa-regular" :class="[contact.icon]"></i>
             </div>
 
-            <h3>{{ contact.title }}</h3>
-            <p>{{ contact.description }}</p>
+            <h3 class="card-title">{{ contact.title }}</h3>
+            <p class="card-description">{{ contact.description }}</p>
 
             <div class="links">
               <a v-for="link in contact.links" :key="link.href" class="action" :href="link.href" target="_blank">{{ link.label }}</a>
@@ -131,7 +131,7 @@ const contacts: ContactInformation[] = [
    in the last stretch, so the footer stays calm. */
 
 body:has(.custom-page.contact-page) {
-  background-color: var(--vp-c-bg);
+  background-color: var(--custom-page-bg);
   background-image:
       url("/homepage/grain.png"),
       radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
@@ -175,7 +175,7 @@ html.dark body:has(.custom-page.contact-page) {
   align-items: flex-start;
 }
 
-/* the same icon tile as the homepage sections (see HomePageOverview.vue): a neutral inset square
+/* the same icon tile as the homepage sections (see HomePageTrust.vue): a neutral inset square
    holding a regular-weight icon in the text colour */
 .icon-tile {
   display: flex;
@@ -193,13 +193,9 @@ html.dark body:has(.custom-page.contact-page) {
   color: var(--vp-c-text-1);
 }
 
-/* the shared h3 rule adds a 24px top margin; the tile-to-title gap matches the homepage tiles instead */
+/* the tile-to-title gap matches the homepage foundations cells */
 .contact-card .icon-tile {
   margin-bottom: 16px;
-}
-
-.contact-card h3 {
-  margin-top: 0;
 }
 
 /* buttons sit at the bottom, so they line up across the cards of a row */

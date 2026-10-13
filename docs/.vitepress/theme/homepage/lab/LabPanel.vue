@@ -11,14 +11,14 @@
       <h2>All you need to generate and modify PDFs</h2>
       <p class="sub-header">From layout and styling to production features, QuestPDF gives you the flexibility to create documents of any complexity. Merge, split, overlay, attach and encrypt the PDF documents you already have, with the same fluent C# API.</p>
 
-      <div class="actions">
-        <a class="action primary" href="/features-overview.html" target="_blank">
-          Explore all features
-        </a>
-        <a class="action" href="/concepts/document-operations.html" target="_blank">
-          Explore document operations
-        </a>
-      </div>
+<!--      <div class="actions">-->
+<!--        <a class="action primary" href="/features-overview.html" target="_blank">-->
+<!--          Explore all features-->
+<!--        </a>-->
+<!--        <a class="action" href="/concepts/document-operations.html" target="_blank">-->
+<!--          Explore document operations-->
+<!--        </a>-->
+<!--      </div>-->
     </div>
 
     <div class="features-stage">

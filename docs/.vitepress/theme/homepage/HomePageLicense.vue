@@ -27,16 +27,14 @@ const includes = [
 
 <template>
   <section class="content">
-    <div class="section-header">
-      <div class="section-tag license-tag">Licensing</div>
-      <h2>Fair and Sustainable License</h2>
-      <p class="sub-header">A model that benefits everyone. Commercial licensing provides businesses with legal safety and long-term stability, while funding a feature-complete, unrestricted library for the open-source community.</p>
-    </div>
-
-    <!-- two cards side by side: what every tier includes with the calls to action, and the tiers stacked -->
+    <!-- two cards side by side: the section heading, what every tier includes and the calls to action
+         on the left; the tiers stacked on the right -->
     <div class="layout">
       <div class="card includes">
-        <h3 class="includes-title">Every tier includes</h3>
+        <div class="background-gradient" />
+
+        <h2 class="card-title">Fair and Sustainable License</h2>
+        <p class="card-description">A model that benefits everyone. Commercial licensing provides businesses with legal safety and long-term stability, while funding a feature-complete, unrestricted library for the community.</p>
 
         <ul class="includes-list">
           <li v-for="item of includes" :key="item">
@@ -53,8 +51,11 @@ const includes = [
 
       <div class="card tiers">
         <article v-for="tier of tiers" :key="tier.name" class="tier" :class="tier.name.toLowerCase()">
-          <h3 class="tier-name">{{ tier.name }}</h3>
-          <p class="tier-description">{{ tier.description }} <span class="tier-price">{{ tier.price }}.</span></p>
+          <div class="tier-head">
+            <h3 class="tier-name">{{ tier.name }}</h3>
+            <span class="tier-price">{{ tier.price }}</span>
+          </div>
+          <p class="tier-description">{{ tier.description }}</p>
         </article>
       </div>
     </div>
@@ -69,16 +70,6 @@ const includes = [
     align-items: center;
   }
 
-  .license-tag {
-    color: #2E7D32;
-    background-color: #67B84D33;
-  }
-
-  html.dark .license-tag {
-    color: #A5D6A7;
-  }
-
-
   /* Two cards of equal height */
 
   .layout {
@@ -86,7 +77,6 @@ const includes = [
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 32px;
     width: 100%;
-    margin-top: 32px;
   }
 
   @media screen and (max-width: 960px) {
@@ -95,27 +85,78 @@ const includes = [
     }
   }
 
+  /* the same inset as the homepage panels (HomePage.vue), not the 40px of the shared card, so the
+     text lines up with the panels above; the selector outweighs the shared card rule */
+  .content .layout > .card {
+    padding: 48px;
+  }
 
-  /* "Every tier includes": title, the points, and the calls to action pinned to the bottom */
+  @media screen and (max-width: 700px) {
+    .content .layout > .card {
+      padding: 32px 24px;
+    }
+  }
+
+
+  /* Left card: the section heading and its lead, left-aligned like the Companion App card, then
+     the points every tier includes, and the calls to action pinned to the bottom */
 
   .includes {
+    position: relative;
+    isolation: isolate; /* keeps the glow (z-index: -1) above the card background but below the content */
     display: flex;
     flex-direction: column;
     align-items: stretch;
   }
 
-  .includes-title {
-    margin: 0;
-    font-size: 1.5rem;
-    line-height: 2rem;
+  /* the same glow and faint rays as the showcase cards (HomePageShowcaseCard.vue), in the Community
+     tier's green, but from the top-left corner, behind the heading, rather than from the top centre */
+  .includes {
+    --accent: #67B84D;
+    --accent-secondary: #4CAF50;
+    --rays-x: 0%;
+    --rays-centre: -90px;
+  }
+
+  .background-gradient {
+    position: absolute;
+    pointer-events: none;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    overflow: hidden;
+    background-image:
+        radial-gradient(ellipse 90% 55% at 0% 0%, color-mix(in srgb, var(--accent) 11%, transparent), transparent),
+        radial-gradient(ellipse 50% 30% at 0% 0%, color-mix(in srgb, var(--accent-secondary) 5%, transparent), transparent);
+  }
+
+  .background-gradient::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: repeating-conic-gradient(
+        from 0deg at var(--rays-x) var(--rays-centre),
+        transparent 0deg,
+        color-mix(in srgb, var(--accent) 2.5%, transparent) 9deg,
+        transparent 18deg);
+    mask-image: radial-gradient(circle 480px at var(--rays-x) var(--rays-centre), #000, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle 480px at var(--rays-x) var(--rays-centre), #000, transparent 100%);
+  }
+
+  html.dark .background-gradient::before {
+    background-image: repeating-conic-gradient(
+        from 0deg at var(--rays-x) var(--rays-centre),
+        transparent 0deg,
+        color-mix(in srgb, var(--accent) 2%, transparent) 9deg,
+        transparent 18deg);
   }
 
   .includes-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
     flex-grow: 1;
-    margin: 24px 0 0;
+    margin: 32px 0 0;
     padding: 0;
     list-style: none;
   }
@@ -150,10 +191,10 @@ const includes = [
   }
 
 
-  /* Tiers: stacked rows. Each row is a coloured name badge in a fixed left column
-     and the description to its right, with the price closing the sentence. The badge carries its
-     tier's colour from the pricing page: green for Community, solid blue for Professional, black
-     for Enterprise (inverted to light grey in dark mode) */
+  /* Tiers: stacked blocks spread to fill the card's height. Each block opens
+     with the tier's name badge followed by the price, then the description below.
+     The badge carries its tier's colour from the pricing page: green for Community, solid blue for
+     Professional, black for Enterprise (inverted to light grey in dark mode) */
 
   .tiers {
     display: flex;
@@ -163,11 +204,10 @@ const includes = [
   }
 
   .tier {
-    display: grid;
-    grid-template-columns: 124px minmax(0, 1fr);
-    gap: 16px;
-    align-items: start;
-    padding: 14px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 0;
   }
 
   .tier:first-child {
@@ -178,12 +218,18 @@ const includes = [
     padding-bottom: 0;
   }
 
+  /* the price sits right after the badge, in the primary text colour, so badge and price read as one strong row */
+  .tier-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
   .tier-name {
     margin: 0;
-    padding: 7px 12px;
+    padding: 7px 14px;
     border-radius: 10px;
     background-color: var(--home-surface-inner);
-    text-align: center;
 
     font-size: 0.9375rem;
     line-height: 1.25rem;
@@ -219,28 +265,19 @@ const includes = [
     background-color: #EEEEEE;
   }
 
-  .tier-description {
-    margin: 0;
-    font-size: 0.9375rem;
-    line-height: 1.375rem;
-    color: var(--vp-c-text-2);
-  }
-
   .tier-price {
+    font-size: 1rem;
+    line-height: 1.5rem;
     font-weight: 600;
     color: var(--vp-c-text-1);
     white-space: nowrap;
   }
 
-  @media screen and (max-width: 560px) {
-    .tier {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 8px;
-    }
-
-    .tier-name {
-      justify-self: start;
-    }
+  .tier-description {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: var(--vp-c-text-2);
   }
 
 

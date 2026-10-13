@@ -44,7 +44,7 @@ const props = defineProps<{
 
 .file-container-header .file-name {
   padding-left: 6px;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--vp-c-text-2);
 }

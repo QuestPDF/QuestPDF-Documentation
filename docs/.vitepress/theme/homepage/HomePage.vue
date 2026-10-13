@@ -4,39 +4,34 @@
       <HomePageHero />
     </div>
 
-    <div class="container texture-dots">
+    <div class="container">
       <HomePageQuickStart />
     </div>
 
-    <div class="container texture-dots">
+    <div class="container">
       <section class="content bento-section">
-        <div class="section-header">
-          <div class="section-tag">Resources</div>
-          <h2>Ship your first PDF today</h2>
-          <p class="sub-header">Learn the essentials in a ten-minute video, start from a finished sample instead of a blank page, and see how far the library goes once your requirements grow.</p>
-        </div>
+<!--        <div class="section-header">-->
+<!--          <div class="section-tag">Resources</div>-->
+<!--          <h2>Ship your first PDF today</h2>-->
+<!--          <p class="sub-header">Learn the essentials in a ten-minute video, start from a finished sample instead of a blank page, and see how far the library goes once your requirements grow.</p>-->
+<!--        </div>-->
 
         <div class="home-bento">
           <HomePageGettingStarted />
           <HomePageSampleGallery />
-          <HomePageFeatures />
         </div>
       </section>
     </div>
 
-    <div class="container texture-dots">
+    <div class="container">
       <HomePageCompanion />
     </div>
 
-    <div class="container texture-dots">
-      <HomePageOverview />
+    <div class="container">
+      <HomePageTrust />
     </div>
 
-    <div class="container texture-dots">
-      <HomePageStandardCompliance />
-    </div>
-
-    <div class="container texture-dots">
+    <div class="container">
       <HomePageLicense />
     </div>
   </div>
@@ -44,14 +39,12 @@
 
 <script setup lang="ts">
 
-import HomePageOverview from "./HomePageOverview.vue";
 import HomePageGettingStarted from "./HomePageGettingStarted.vue";
 import HomePageSampleGallery from "./HomePageSampleGallery.vue";
 import HomePageLicense from "./HomePageLicense.vue";
 import HomePageCompanion from "./HomePageCompanion.vue";
 import HomePageHero from "./HomePageHero.vue";
-import HomePageStandardCompliance from "./HomePageStandardCompliance.vue";
-import HomePageFeatures from "./HomePageFeatures.vue";
+import HomePageTrust from "./HomePageTrust.vue";
 import HomePageQuickStart from "./HomePageQuickStart.vue";
 
 </script>
@@ -80,7 +73,7 @@ import HomePageQuickStart from "./HomePageQuickStart.vue";
    and rejected). None sit in the last stretch, so the footer stays calm. */
 
 body:has(.custom-page.home-page) {
-  background-color: var(--vp-c-bg);
+  background-color: var(--custom-page-bg);
   background-image:
       url("/homepage/grain.png"),
       radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
@@ -110,30 +103,73 @@ html.dark body:has(.custom-page.home-page) {
       radial-gradient(ellipse 1200px 800px at 0% 80%, color-mix(in srgb, #3F51B5 14%, transparent), transparent 70%);
 }
 
+/* the hero's dot grid (HomePageHero.vue, position: absolute) is sized against this container */
 .hero-container {
   position: relative;
 }
 
-/* a hairline across the content width marks where the hero ends and the first section begins */
-.hero-container::after {
+/* Section seams
+   Most sections no longer open with a header, so the gaps between them are plain canvas. The sections
+   sit 48px apart instead of 64px, and each seam carries a faint dotted line across the content width,
+   fading out at both ends, so the eye reads a break without a heading. The dots are the same 1px dots
+   as the hero's dot grid, which is the only other dot texture on the page, and share its blue tint in light mode. The hero keeps its own
+   64px padding and has no seam after it; the first seam sits below the quick start. */
+
+.custom-page.home-page > .container .content {
+  position: relative;
+}
+
+.custom-page.home-page > .container:not(.hero-container) .content {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.custom-page.home-page > .container + .container .content::before {
   content: "";
   position: absolute;
-  left: 50%;
-  bottom: 0;
-  transform: translateX(-50%);
-  width: min(100% - 64px, var(--custom-page-width) - 64px);
-  height: 1px;
+  top: -2px;
+  left: 32px;
+  right: 32px;
+  height: 4px;
   pointer-events: none;
-  background-image: linear-gradient(90deg,
-      transparent,
-      color-mix(in srgb, var(--vp-c-text-1) 14%, transparent) 12%,
-      color-mix(in srgb, var(--vp-c-text-1) 14%, transparent) 88%,
-      transparent);
+  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 40%, transparent) 1px, transparent 1.5px);
+  background-size: 12px 4px;
+  background-position: center;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* light dots on the dark canvas stand out more than dark dots on white, so they are fainter there */
+html.dark .custom-page.home-page > .container + .container .content::before {
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 16%, transparent) 1px, transparent 1.5px);
+}
+
+/* no seam after the hero: the quick start follows it at the full 64px + 64px distance instead */
+.custom-page.home-page .hero-container + .container .content {
+  padding-top: 64px;
+}
+
+.custom-page.home-page .hero-container + .container .content::before {
+  content: none;
+}
+
+/* the content side padding drops to 24px on phones, the line follows it */
+@media screen and (max-width: 768px) {
+  .custom-page.home-page > .container + .container .content::before {
+    left: 24px;
+    right: 24px;
+  }
 }
 
 /* grey section panels get more breathing room on the homepage */
 .custom-page.home-page .panel {
-  padding: 64px;
+  padding: 48px;
+}
+
+/* no running text below 1rem on the homepage; the shared row lead is 0.9375rem elsewhere */
+.custom-page.home-page .row-description {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 @media screen and (max-width: 700px) {
@@ -142,21 +178,8 @@ html.dark body:has(.custom-page.home-page) {
   }
 }
 
-/* headings inside grey panels are one step smaller than section headings */
-.custom-page.home-page .panel h2 {
-  font-size: 1.75rem;
-  line-height: 2.25rem;
-}
 
-/* bento cards sit three to a section, so their headings are one step smaller again */
-.custom-page.home-page .home-bento .panel h2 {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-
-
-/* Bento: a section header, then the getting-started video and the sample gallery side by side,
-   with the PDF generation and operations card spanning the full width below them. */
+/* Bento: the getting-started video and the sample gallery side by side. */
 
 .custom-page.home-page .bento-section {
   display: flex;
@@ -166,14 +189,9 @@ html.dark body:has(.custom-page.home-page) {
 
 .custom-page.home-page .home-bento {
   width: 100%;
-  margin-top: 48px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 32px;
-}
-
-.custom-page.home-page .home-bento > .features-panel {
-  grid-column: 1 / -1;
 }
 
 /* same stacking point as the Quick Start steps; below it the showcase cards are too narrow

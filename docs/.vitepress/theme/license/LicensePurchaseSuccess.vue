@@ -77,7 +77,7 @@ const orderDetails = [
 
         <div class="purchase-cards">
           <section class="panel success-card">
-            <h3>License information</h3>
+            <h3 class="card-title">License information</h3>
 
             <div class="description-items">
               <div v-for="step in licenseDetails" :key="step.title" class="description-item">
@@ -85,8 +85,8 @@ const orderDetails = [
                   <i class="fa-regular" :class="step.icon" />
                 </div>
                 <div class="description-item-content">
-                  <strong>{{ step.title }}</strong>
-                  <span v-html="step.description" />
+                  <strong class="row-title">{{ step.title }}</strong>
+                  <span class="row-description" v-html="step.description" />
                 </div>
               </div>
             </div>
@@ -95,7 +95,7 @@ const orderDetails = [
           </section>
 
           <section class="panel success-card">
-            <h3>Billing and renewal</h3>
+            <h3 class="card-title">Billing and renewal</h3>
 
             <div class="description-items">
               <div v-for="step in orderDetails" :key="step.title" class="description-item">
@@ -103,8 +103,8 @@ const orderDetails = [
                   <i class="fa-regular" :class="step.icon" />
                 </div>
                 <div class="description-item-content">
-                  <strong>{{ step.title }}</strong>
-                  <span v-html="step.description" />
+                  <strong class="row-title">{{ step.title }}</strong>
+                  <span class="row-description" v-html="step.description" />
                 </div>
               </div>
             </div>
@@ -115,8 +115,8 @@ const orderDetails = [
           <!-- full width, so the short assistance note does not sit alone in a half-empty row -->
           <section class="panel assistance-card">
             <div>
-              <h3>Do you need assistance?</h3>
-              <p>
+              <h3 class="card-title">Do you need assistance?</h3>
+              <p class="card-description">
                 If you have any questions about your license, setup, or billing, please reach out. We typically respond within one business day.
               </p>
             </div>
@@ -139,7 +139,7 @@ const orderDetails = [
    in the last stretch, so the footer stays calm. */
 
 body:has(.custom-page.purchase-page) {
-  background-color: var(--vp-c-bg);
+  background-color: var(--custom-page-bg);
   background-image:
       url("/homepage/grain.png"),
       radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
@@ -251,14 +251,6 @@ html.dark .status-tag {
   align-items: flex-start;
 }
 
-.success-card h3,
-.assistance-card h3 {
-  margin: 0;
-  font-size: 1.5rem;
-  line-height: 2rem;
-  font-weight: 700;
-}
-
 /* fact list: an icon tile, a bold name and a description, rows divided by hairlines */
 .description-items {
   display: flex;
@@ -281,20 +273,6 @@ html.dark .status-tag {
 .description-item-content {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-}
-
-.description-item-content strong {
-  color: var(--vp-c-text-1);
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-
-.description-item-content span {
-  color: var(--vp-c-text-2);
-  line-height: 1.5rem;
-  font-size: 0.9375rem;
 }
 
 .description-item-content :deep(a) {
@@ -322,7 +300,6 @@ html.dark .status-tag {
 }
 
 .assistance-card p {
-  margin: 8px 0 0;
   max-width: 70ch;
 }
 

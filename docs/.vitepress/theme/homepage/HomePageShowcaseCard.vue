@@ -7,9 +7,9 @@ import { computed, onBeforeUnmount, ref } from "vue";
    - "fan": a stack fanned out from the front page, like papers dropped on a desk. While the pointer
      rests on the card, the front page fades out where it lies, the pages behind it step forward,
      and the next one appears at the back of the fan.
-   - "row": a coverflow row of five pages, the centre one largest and the others receding to both
-     sides. While the pointer rests on the card, the row slides one page to the left on every tick:
-     the leftmost page fades out, and the next one slides in from the right. Needs at least six pages
+   - "row": a coverflow row of three pages, the centre one largest and the two beside it receding.
+     While the pointer rests on the card, the row slides one page to the left on every tick:
+     the leftmost page fades out, and the next one slides in from the right. Needs at least four pages
      so that the page re-entering on the right starts hidden, and the more pages it gets, the longer
      a page stays away before it comes back from the right.
 
@@ -59,9 +59,9 @@ let timer: ReturnType<typeof setTimeout> | undefined;
    fanned page; the page that just left the front fades out in place before it joins them */
 const FAN_VISIBLE_PAGES = 4;
 
-/* row: the centre page and two to each side; the page that just left on the left fades out, then
+/* row: the centre page and one to each side; the page that just left on the left fades out, then
    jumps (invisible) to the right end, where it waits to slide in again */
-const ROW_REACH = 2;
+const ROW_REACH = 1;
 
 const slotClass = computed(() => props.images.map((_, index) => {
   const count = props.images.length;
@@ -125,15 +125,15 @@ onBeforeUnmount(stopShuffle);
     </div>
 
     <div class="showcase-text">
-      <h2>{{ title }}</h2>
-      <p class="sub-header">{{ description }}</p>
+      <h2 class="card-title">{{ title }}</h2>
+      <p class="card-description">{{ description }}</p>
 
-      <div class="actions">
-        <a class="action primary" :href="href">
-          {{ actionLabel }}
-          <i class="fa-solid fa-arrow-right arrow-icon"></i>
-        </a>
-      </div>
+<!--      <div class="actions">-->
+<!--        <a class="action primary" :href="href">-->
+<!--          {{ actionLabel }}-->
+<!--          <i class="fa-solid fa-arrow-right arrow-icon"></i>-->
+<!--        </a>-->
+<!--      </div>-->
     </div>
   </section>
 </template>
@@ -148,11 +148,12 @@ onBeforeUnmount(stopShuffle);
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 56px;
+    gap: 64px;
   }
 
-  /* the pitch is centred under the page stack; the paragraph is capped so that its lines stay
-     comparable in length and balanced across the two cards */
+  /* the pitch is centred under the page stack; the paragraph fills the card up to its padding and
+     is justified, so its block edges line up with the card on phones, and it is capped so that
+     it does not run across the whole width once the cards stack below 1280px */
   .showcase-text {
     display: flex;
     flex-direction: column;
@@ -160,14 +161,11 @@ onBeforeUnmount(stopShuffle);
     text-align: center;
   }
 
-  .showcase-text .sub-header {
+  .showcase-text .card-description {
+    width: 100%;
     max-width: 34rem;
-    text-wrap: balance;
-  }
-
-  .showcase-text h2 {
-    font-size: 1.5rem;
-    line-height: 2rem;
+    text-align: justify;
+    text-wrap: pretty;
   }
 
   .actions {
@@ -227,7 +225,7 @@ onBeforeUnmount(stopShuffle);
 
   .page-card img {
     display: block;
-    width: 112px;
+    width: 118px;
     height: auto;
   }
 
@@ -244,34 +242,34 @@ onBeforeUnmount(stopShuffle);
      nothing shows */
 
   .fan-slot-0 {
-    transform: translateX(-32px) translateY(16px) rotate(-4deg);
+    transform: translateX(-34px) translateY(17px) rotate(-4deg);
     z-index: 5;
   }
 
   .fan-slot-1 {
-    transform: translateX(-6px) translateY(3px) rotate(1deg);
+    transform: translateX(-7px) translateY(3px) rotate(1deg);
     z-index: 4;
   }
 
   .fan-slot-2 {
-    transform: translateX(19px) translateY(-10px) rotate(6deg);
+    transform: translateX(20px) translateY(-10px) rotate(6deg);
     z-index: 3;
   }
 
   .fan-slot-3 {
-    transform: translateX(43px) translateY(-22px) rotate(11deg);
+    transform: translateX(45px) translateY(-23px) rotate(11deg);
     z-index: 2;
   }
 
   .fan-leaving {
-    transform: translateX(-32px) translateY(16px) rotate(-4deg);
+    transform: translateX(-34px) translateY(17px) rotate(-4deg);
     opacity: 0;
     z-index: 6;
     pointer-events: none;
   }
 
   .fan-hidden {
-    transform: translateX(43px) translateY(-22px) rotate(11deg);
+    transform: translateX(45px) translateY(-23px) rotate(11deg);
     opacity: 0;
     z-index: 0;
     pointer-events: none;
@@ -279,47 +277,46 @@ onBeforeUnmount(stopShuffle);
 
   /* with only two pages there is no fan to hide behind, so the second page peeks out properly */
   .two-pages .fan-slot-1 {
-    transform: translateX(24px) translateY(-12px) rotate(6deg);
+    transform: translateX(25px) translateY(-12px) rotate(6deg);
   }
 
   /* on hover the fan opens a little further */
   .showcase-panel:hover {
     .fan-slot-0 {
-      transform: translateX(-43px) translateY(21px) rotate(-6deg);
+      transform: translateX(-45px) translateY(22px) rotate(-6deg);
     }
 
     .fan-slot-1 {
-      transform: translateX(-10px) translateY(5px) rotate(1deg);
+      transform: translateX(-11px) translateY(6px) rotate(1deg);
     }
 
     .fan-slot-2 {
-      transform: translateX(26px) translateY(-13px) rotate(8deg);
+      transform: translateX(27px) translateY(-14px) rotate(8deg);
     }
 
     .fan-slot-3,
     .fan-hidden {
-      transform: translateX(56px) translateY(-29px) rotate(14deg);
+      transform: translateX(59px) translateY(-30px) rotate(14deg);
     }
 
     .fan-leaving {
-      transform: translateX(-43px) translateY(21px) rotate(-6deg);
+      transform: translateX(-45px) translateY(22px) rotate(-6deg);
     }
 
     .two-pages .fan-slot-1 {
-      transform: translateX(36px) translateY(-18px) rotate(8deg);
+      transform: translateX(38px) translateY(-19px) rotate(8deg);
     }
   }
 
 
-  /* Row layout: a coverflow of five pages. The centre page stands upright and largest; the pages to
-     each side are smaller, turned towards the centre and pushed back. Positions are driven by three
+  /* Row layout: a coverflow of three pages. The centre page stands upright and largest; the pages to
+     each side are smaller, turned towards the centre and pushed back. Positions are driven by two
      custom properties so that the hover spread only has to change the numbers. The pages are not in
      a shared 3D context (no preserve-3d), so z-index, not depth, decides what is in front. Every step
      is one quick slide that eases in and out, so the row seems to settle after each move. */
 
   .layout-row {
-    --row-step-1: 104px;
-    --row-step-2: 186px;
+    --row-step-1: 92px;
     --row-lift: 0px;
     --row-ease: cubic-bezier(0.65, 0, 0.35, 1);
   }
@@ -352,18 +349,6 @@ onBeforeUnmount(stopShuffle);
     z-index: 4;
   }
 
-  .row-slot-m2 {
-    transform: translateX(calc(-1 * var(--row-step-2))) translateY(14px) scale(0.66) rotateY(34deg);
-    z-index: 3;
-    opacity: 0.9;
-  }
-
-  .row-slot-2 {
-    transform: translateX(var(--row-step-2)) translateY(14px) scale(0.66) rotateY(-34deg);
-    z-index: 3;
-    opacity: 0.9;
-  }
-
   /* a page past the left end keeps sliding left while it shrinks and fades (the keyframes below,
      which override the transition while they run), then jumps, now invisible, to the mirror position
      past the right end, from where it slides and fades back in the next time it is due. The exit is
@@ -372,7 +357,7 @@ onBeforeUnmount(stopShuffle);
      finished. The selector carries .layout-row so that it beats the shared .layout-row .page-card
      transition. */
   .layout-row .row-hidden {
-    transform: translateX(calc(var(--row-step-2) + 70px)) translateY(18px) scale(0.5) rotateY(-40deg);
+    transform: translateX(calc(var(--row-step-1) + 70px)) translateY(14px) scale(0.6) rotateY(-36deg);
     opacity: 0;
     z-index: 0;
     pointer-events: none;
@@ -387,20 +372,19 @@ onBeforeUnmount(stopShuffle);
 
   @keyframes row-leave {
     from {
-      transform: translateX(calc(-1 * var(--row-step-2))) translateY(14px) scale(0.66) rotateY(34deg);
-      opacity: 0.9;
+      transform: translateX(calc(-1 * var(--row-step-1))) translateY(8px) scale(0.82) rotateY(24deg);
+      opacity: 1;
     }
 
     to {
-      transform: translateX(calc(-1 * var(--row-step-2) - 70px)) translateY(18px) scale(0.5) rotateY(40deg);
+      transform: translateX(calc(-1 * var(--row-step-1) - 70px)) translateY(14px) scale(0.6) rotateY(36deg);
       opacity: 0;
     }
   }
 
   /* on hover the row spreads, the centre page lifts and comes forward */
   .layout-row:hover {
-    --row-step-1: 122px;
-    --row-step-2: 216px;
+    --row-step-1: 106px;
     --row-lift: -8px;
   }
 

@@ -12,8 +12,8 @@
 
         <section v-for="category in categories" :key="category.name" class="panel category">
           <header class="category-header">
-            <h2>{{ category.name }}</h2>
-            <p v-if="category.description" class="category-description">{{ category.description }}</p>
+            <h2 class="card-title">{{ category.name }}</h2>
+            <p v-if="category.description" class="card-description">{{ category.description }}</p>
           </header>
 
           <!-- One row per feature: icon, name, short line. The row links to the documentation page;
@@ -927,7 +927,7 @@ const categories = [
    stretch, so the footer stays calm. */
 
 body:has(.custom-page.features-page) {
-  background-color: var(--vp-c-bg);
+  background-color: var(--custom-page-bg);
   background-image:
       url("/homepage/grain.png"),
       radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
@@ -994,17 +994,9 @@ html.dark body:has(.custom-page.features-page) {
   }
 }
 
-.category-header h2 {
-  margin: 0;
-  font-size: 1.75rem;
-  line-height: 2.25rem;
+/* the category name keeps its brand colour */
+.category-header .card-title {
   color: #2196F3;
-}
-
-.category-description {
-  margin: 8px 0 0;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
 }
 
 .feature-list {

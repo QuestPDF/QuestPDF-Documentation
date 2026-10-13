@@ -44,14 +44,14 @@ const points = [
 
 <template>
   <section class="content">
-    <div class="section-header">
-      <div class="section-tag">Quick start</div>
-      <h2>From a few lines of code to a finished PDF</h2>
-      <p class="sub-header">
-        This is the complete example from the Quick Start guide, together with the page it produces.
-        Documents are plain C#, so everything you know about writing software applies.
-      </p>
-    </div>
+<!--    <div class="section-header">-->
+<!--      <div class="section-tag">Quick start</div>-->
+<!--      <h2>From a few lines of code to a finished PDF</h2>-->
+<!--      <p class="sub-header">-->
+<!--        This is the complete example from the Quick Start guide, together with the page it produces.-->
+<!--        Documents are plain C#, so everything you know about writing software applies.-->
+<!--      </p>-->
+<!--    </div>-->
 
     <!-- the pitch on the left: the install command, a hairline, then why documents as code pay off;
          the artifacts on the right: the code window with the generated page overlapping its corner -->
@@ -71,8 +71,8 @@ const points = [
           </div>
 
           <div class="point-body">
-            <h3 class="point-title">{{ point.title }}</h3>
-            <p class="point-description">{{ point.description }}</p>
+            <h3 class="row-title">{{ point.title }}</h3>
+            <p class="row-description">{{ point.description }}</p>
           </div>
         </article>
       </div>
@@ -95,6 +95,7 @@ const points = [
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 0px;
 }
 
 
@@ -106,7 +107,6 @@ const points = [
   column-gap: 56px;
   align-items: start;
   width: 100%;
-  margin-top: 48px;
   padding: 56px;
 }
 
@@ -205,21 +205,6 @@ const points = [
   color: var(--vp-c-text-1);
 }
 
-.point-title {
-  margin: 0;
-  font-size: 1.125rem;
-  line-height: 1.5rem;
-  font-weight: 600;
-  color: var(--vp-c-text-1);
-}
-
-.point-description {
-  margin: 6px 0 0;
-  font-size: 0.9375rem;
-  line-height: 1.375rem;
-  color: var(--vp-c-text-2);
-}
-
 
 /* Stage: the code window, with room on the right and below for the page to overlap its corner */
 
@@ -268,7 +253,7 @@ html.dark .document img {
 }
 
 .document figcaption {
-  font-size: 0.8125rem;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--vp-c-text-2);
 }
@@ -295,7 +280,6 @@ html.dark .document img {
 
   .document {
     position: static;
-    margin-top: 24px;
   }
 }
 

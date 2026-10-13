@@ -12,7 +12,7 @@ import { data as statistics } from "../statistics.data";
       </h1>
 
       <div class="tagline">
-        Design documents the way you design software, in readable C# code that renders to precise, standards-compliant PDFs on every platform.
+        Design documents the way you design software, in readable C# code that renders to precise, standards-compliant PDFs on every platform. Effortlessly collaborate with your AI agent to create perfect designs.
       </div>
 
       <div class="cta-buttons">
@@ -21,9 +21,9 @@ import { data as statistics } from "../statistics.data";
       </div>
     </div>
 
-    <!-- the adoption numbers card -->
+    <!-- the adoption numbers -->
     <aside class="hero-cards">
-      <div class="hero-card statistics">
+      <div class="statistics">
         <a v-for="statistic in statistics" :key="statistic.label" :href="statistic.link" :target="statistic.link.startsWith('http') ? '_blank' : undefined" rel="noopener" class="statistic">
           <span class="statistic-icon">
             <i class="fa-solid" :class="[statistic.icon]"></i>
@@ -126,7 +126,7 @@ html.dark h1 .highlight-foreground {
 }
 
 .tagline {
-  max-width: 675px;
+  max-width: 770px;
   font-size: 1.5rem !important;
   line-height: 2.25rem !important;
   font-weight: 400;
@@ -205,13 +205,14 @@ html:not(.dark) .action:not(.primary) {
 }
 
 
-/* Hero card
-   The adoption numbers on the same translucent surface as the homepage panels. The card is only
+/* Hero statistics
+   The adoption numbers sit directly on the page, with no surface of their own. The list is only
    as wide as its stats need and sits flush with the right edge of the page content. */
 
 .hero-cards {
   position: relative;
   display: flex;
+  padding: 24px 0;
 
   width: fit-content;
   max-width: 100%;
@@ -221,28 +222,12 @@ html:not(.dark) .action:not(.primary) {
 @media screen and (max-width: 820px) {
   .hero-cards {
     width: 100%; /* stacked under the text: full width */
-  }
-
-  .hero-card {
-    flex: 1 1 auto;
-  }
-}
-
-.hero-card {
-  padding: 40px;
-  border-radius: 32px;
-  background-color: var(--home-surface);
-  box-shadow: var(--home-surface-edge);
-}
-
-@media screen and (max-width: 700px) {
-  .hero-card {
-    padding: 32px 24px;
+    padding: 8px 0;
   }
 }
 
 /* a vertical list: three stats in a row would need ~750px and squeeze the headline, and a two-and-one
-   wrap looks broken. Stacked, the card keeps one shape at every width and sits level with the text. */
+   wrap looks broken. Stacked, the list keeps one shape at every width and sits level with the text. */
 .statistics {
   display: flex;
   flex-direction: column;
@@ -257,7 +242,7 @@ html:not(.dark) .action:not(.primary) {
 }
 
 /* the icon sits on a quiet tile: a faint wash of the text colour with an ink glyph, so the numbers
-   stay the loudest thing in the card; the tile brightens and lifts a little on hover */
+   stay the loudest thing in the list; the tile brightens and lifts a little on hover */
 .statistic-icon {
   display: inline-flex;
   flex: 0 0 auto;
@@ -276,9 +261,12 @@ html:not(.dark) .action:not(.primary) {
   color: var(--vp-c-text-1);
 }
 
-/* a solid near-black glyph is too heavy on the light theme, so it sits at a mid grey there */
+/* a solid near-black glyph is too heavy on the light theme, so the light theme draws the same
+   glyph in the outlined (regular) style instead: weight 400 of the Font Awesome Pro family that
+   fa-solid sets to 900. The glyph keeps the full ink colour; the thin stroke carries the weight. */
 html:not(.dark) .statistic-icon i {
-  color: color-mix(in srgb, var(--vp-c-text-1) 58%, transparent);
+  font-weight: 400;
+  color: var(--vp-c-text-1);
 }
 
 .statistic:hover .statistic-icon {
@@ -306,14 +294,15 @@ html:not(.dark) .statistic-icon i {
 
 /* Background
    The colour washes and grain belong to the whole page (see HomePage.vue). The hero only adds a
-   faint dot grid under the card, fading out towards the headline and the page edges. */
+   faint dot grid under the statistics, fading out towards the headline and the page edges. */
 
 .hero-pattern {
   position: absolute;
   inset: 0;
   pointer-events: none;
 
-  background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 22%, transparent) 1px, transparent 1.5px);
+  /* the dots lean towards the brand blue, so the grid reads as part of the blue washes rather than grey noise */
+  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 36%, transparent) 1px, transparent 1.5px);
   background-size: 24px 24px;
   background-position: 12px 12px;
 

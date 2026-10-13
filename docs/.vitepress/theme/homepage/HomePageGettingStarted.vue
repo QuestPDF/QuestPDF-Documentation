@@ -12,7 +12,7 @@ const pages = [
        The href is a placeholder until the video is published. -->
   <home-page-showcase-card
       title="Get started in 10 minutes"
-      description="Watch a short video that introduces the library, explains its core concepts, walks through the most useful features, and builds a complete, production-ready invoice in fewer than 200 lines of C# code."
+      description="Watch a short video that introduces the library, explains its core concepts, and builds a production-ready invoice in fewer than 200 lines of C# code."
       action-label="Watch the Video"
       href="/getting-started-video.html"
       :images="pages"

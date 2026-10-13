@@ -1,0 +1,145 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>seam lab</title>
+<style>
+html,body{margin:0;background:#fff;height:100%}
+iframe{border:0;display:block}
+body.browse{display:flex;flex-direction:column;overflow:hidden}
+body.browse iframe{flex:1;width:100%!important;height:auto!important;margin:0!important}
+body.capture{overflow:hidden}
+.bar{display:flex;gap:6px;align-items:center;padding:6px 10px;font:13px system-ui;background:#1b1b1f;color:#ddd;flex:none}
+.bar a{color:#ddd;text-decoration:none;padding:4px 10px;border-radius:6px;background:#2a2a30}
+.bar a.on{background:#2979FF;color:#fff}
+.bar span{margin-left:auto;opacity:.6}
+</style>
+</head><body>
+<script>
+const q = new URLSearchParams(location.search);
+const v = q.get('v') || '0';
+const theme = q.get('theme') || 'light';
+const offset = parseInt(q.get('top') || '0', 10);
+const h = parseInt(q.get('h') || '9000', 10);
+localStorage.setItem('vitepress-theme-appearance', theme);
+
+const base = `
+  .custom-page.home-page > .container .content { position: relative; }
+  .custom-page.home-page > .container:not(.hero-container) .content { padding-top: var(--seam-pad, 48px); padding-bottom: var(--seam-pad, 48px); }
+  .custom-page.home-page .hero-container .content { padding-bottom: var(--seam-pad, 48px); }
+`;
+
+const line = `
+  .custom-page.home-page > .container + .container .content::before { mask-image: none; -webkit-mask-image: none; height: 1px; top: 0; background-size: auto; }
+  @media screen and (max-width: 768px) {
+    .custom-page.home-page > .container + .container .content::before { left: 24px; right: 24px; }
+  }
+  .custom-page.home-page > .container + .container .content::before {
+    content: ""; position: absolute; left: 32px; right: 32px; top: 0; height: 1px; pointer-events: none;
+    background-image: linear-gradient(90deg, transparent,
+      color-mix(in srgb, var(--vp-c-text-1) 22%, transparent) 10%,
+      color-mix(in srgb, var(--vp-c-text-1) 22%, transparent) 90%, transparent);
+  }
+  html.dark .custom-page.home-page > .container + .container .content::before {
+    background-image: linear-gradient(90deg, transparent,
+      color-mix(in srgb, var(--vp-c-text-1) 18%, transparent) 10%,
+      color-mix(in srgb, var(--vp-c-text-1) 18%, transparent) 90%, transparent);
+  }
+`;
+
+const variants = {
+  '0': `
+    .custom-page.home-page > .container::before, .custom-page.home-page > .container::after { content: none; }
+    .custom-page.home-page > .container:not(.hero-container) .content { padding-top: 64px; padding-bottom: 64px; }
+    .custom-page.home-page .hero-container .content { padding-bottom: 64px; }
+    .custom-page.home-page > .container + .container .content::before { content: none; }
+  `,
+  // 1. plain faded hairline, 48px padding
+  '1': base + line,
+  // 2. hairline with a short brand gradient bar centred on it
+  '2': base + line + `
+    .custom-page.home-page > .container + .container .content::after {
+      content: ""; position: absolute; left: 50%; top: -1px; transform: translateX(-50%); width: 56px; height: 3px; border-radius: 3px;
+      background: linear-gradient(90deg, #2979FF, #00E5FF); pointer-events: none;
+    }
+  `,
+  // 3. a single row of the dot texture, fading at both ends
+  '3': base + `
+    .custom-page.home-page > .container + .container .content::before {
+      content: ""; position: absolute; left: 32px; right: 32px; top: -3px; height: 6px; pointer-events: none;
+      background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 32%, transparent) 1px, transparent 1.5px);
+      background-size: 12px 6px; background-position: center;
+      mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+    }
+    html.dark .custom-page.home-page > .container + .container .content::before {
+      background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 20%, transparent) 1px, transparent 1.5px);
+    }
+  `,
+  // 4. no line, just a short centred brand bar; slightly tighter padding
+  '4': base + `
+    .custom-page.home-page { --seam-pad: 40px; }
+    .custom-page.home-page > .container + .container .content::before {
+      content: ""; position: absolute; left: 50%; top: -2px; transform: translateX(-50%); width: 96px; height: 4px; border-radius: 4px;
+      background: linear-gradient(90deg, #2979FF, #00E5FF); opacity: 0.8; pointer-events: none;
+    }
+  `,
+  // 5. hairline with blueprint-style plus marks at both ends
+  '5': base + line + `
+    .custom-page.home-page > .container + .container .content::before { left: 44px; right: 44px; }
+    .custom-page.home-page > .container + .container .content::after {
+      content: ""; position: absolute; left: 24px; right: 24px; top: -8px; height: 17px; pointer-events: none;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='17'%3E%3Cpath d='M8.5 0v17M0 8.5h17' stroke='rgba(60,60,67,0.45)' stroke-width='1'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='17'%3E%3Cpath d='M8.5 0v17M0 8.5h17' stroke='rgba(60,60,67,0.45)' stroke-width='1'/%3E%3C/svg%3E");
+      background-repeat: no-repeat, no-repeat; background-position: left center, right center;
+    }
+    html.dark .custom-page.home-page > .container + .container .content::after {
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='17'%3E%3Cpath d='M8.5 0v17M0 8.5h17' stroke='rgba(223,223,214,0.35)' stroke-width='1'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='17'%3E%3Cpath d='M8.5 0v17M0 8.5h17' stroke='rgba(223,223,214,0.35)' stroke-width='1'/%3E%3C/svg%3E");
+    }
+  `,
+  // 6. hairline with a tiny uppercase chapter tag sitting on it (text injected by JS)
+  '6': base + line + `
+    .custom-page.home-page .seam-tag {
+      position: absolute; left: 50%; top: 0; transform: translate(-50%, -50%);
+      padding: 4px 14px; border-radius: 999px;
+      background-color: var(--vp-c-bg); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 14%, transparent);
+      color: var(--vp-c-text-2); font-size: 0.6875rem; line-height: 1rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap;
+    }
+    html.dark .custom-page.home-page .seam-tag { background-color: #1b1b1f; }
+  `,
+};
+
+const tags = ['', 'Quick start', 'Resources', 'Companion app', 'Foundations', 'Compliance', 'Licensing'];
+
+const capture = q.get('capture') === '1';
+document.body.className = capture ? 'capture' : 'browse';
+if (!capture) {
+  const names = ['0 before', '1 hairline', '2 hairline + bar', '3 dotted (strong)', '4 bar only', '5 hairline + marks', '6 hairline + tag'];
+  const bar = document.createElement('div'); bar.className = 'bar';
+  names.forEach((n, i) => { const a = document.createElement('a'); a.href = `?v=${i}&theme=${theme}`; a.textContent = n; if (String(i) === v) a.className = 'on'; bar.appendChild(a); });
+  const t = document.createElement('a'); t.href = `?v=${v}&theme=${theme === 'dark' ? 'light' : 'dark'}`; t.textContent = theme === 'dark' ? 'light' : 'dark'; t.style.marginLeft = '16px'; bar.appendChild(t);
+  const note = document.createElement('span'); note.textContent = 'seam lab: section spacing 64 → 48px (40px in 4) plus a separator at each seam'; bar.appendChild(note);
+  document.body.appendChild(bar);
+}
+const f = document.createElement('iframe');
+f.width = 1440; f.height = h;
+f.style.marginTop = (-offset) + 'px';
+setTimeout(() => { f.src = '/'; document.body.appendChild(f); }, 200);
+
+const poll = setInterval(() => {
+  const d = f.contentDocument;
+  if (!d || !d.querySelector('.custom-page.home-page')) return;
+  clearInterval(poll);
+  const s = d.createElement('style');
+  s.textContent = variants[v] || '';
+  d.head.appendChild(s);
+  if (v === '6') {
+    d.querySelectorAll('.custom-page.home-page > .container').forEach((c, i) => {
+      if (i === 0) return;
+      const content = c.querySelector('.content');
+      const t = d.createElement('span'); t.className = 'seam-tag'; t.textContent = tags[i] || ''; content.appendChild(t);
+    });
+  }
+}, 100);
+</script>
+</body></html>

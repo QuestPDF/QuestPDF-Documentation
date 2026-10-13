@@ -14,6 +14,7 @@
         </p>
         <p class="lab-jump">
           Jump to
+          <a href="#vr">R</a>
           <a v-for="n of 5" :key="n" :href="`#v${n}`">{{ n }}</a>
         </p>
 
@@ -68,6 +69,12 @@
       </section>
     </div>
 
+    <lab-direction letter="R" id="vr" name="Recommended: the cut applied">
+      <template #why>Only the facts a buyer would email about if they were missing. Left: the three families as the headline, ISO and EN numbers as row labels so a questionnaire term can be found with Ctrl-F, levels as chips, validation as the footer. Right: one claim, then three checkable facts in the words the emails use: network calls, telemetry, license server, air-gapped. No lead paragraphs, no definitions.</template>
+      <template #tradeoffs>About 60 words where the two sections today have 280. The throughput row is the one optional item: it is a sizing fact, not a trust fact, and deleting it is one line. Layout engine, language support and file size now live only in the features section above.</template>
+      <TrustPairR />
+    </lab-direction>
+
     <lab-direction letter="1" id="v1" name="Spec sheet">
       <template #why>A reviewer with a questionnaire finds the row they need and copies the one-word answer. The standards rows mirror the spec rows, so both cards scan the same way: label left, answer right.</template>
       <template #tradeoffs>The least emotional of the five; it does not sell, it answers. The 170px label column needs the card to stay above 560px wide, below that rows stack.</template>
@@ -102,6 +109,7 @@
 
 <script setup lang="ts">
 import LabDirection from "./LabDirection.vue";
+import TrustPairR from "./TrustPairR.vue";
 import TrustPair1 from "./TrustPair1.vue";
 import TrustPair2 from "./TrustPair2.vue";
 import TrustPair3 from "./TrustPair3.vue";

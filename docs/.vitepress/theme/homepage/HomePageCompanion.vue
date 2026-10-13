@@ -1,25 +1,24 @@
 <template>
   <section class="content">
-    <div class="section-header">
-      <div class="section-tag">Development Tool</div>
-      <h2>Companion App</h2>
-      <p class="sub-header">Accelerate development with live document preview and hot-reload capability. See your changes instantly without recompiling.</p>
-    </div>
-
-    <!-- capabilities on the left, the app on the right; a divider and the calls to action along the bottom -->
+    <!-- heading and capabilities on the left, the app on the right; a divider and the calls to action along the bottom -->
     <div class="panel companion-panel">
       <div class="companion-main">
-        <div class="capabilities">
-          <article v-for="capability of capabilities" :key="capability.title" class="capability">
-            <div class="capability-icon">
-              <i class="fa-regular" :class="[capability.icon]"></i>
-            </div>
+        <div class="companion-text">
+          <h2 class="card-title">Companion App</h2>
+          <p class="card-description">Shorten the loop between writing code and seeing the result. Spend your time designing documents, not waiting on them.</p>
 
-            <div class="capability-body">
-              <h3 class="capability-title">{{ capability.title }}</h3>
-              <p class="capability-description">{{ capability.description }}</p>
-            </div>
-          </article>
+          <div class="capabilities">
+            <article v-for="capability of capabilities" :key="capability.title" class="capability">
+              <div class="capability-icon">
+                <i class="fa-regular" :class="[capability.icon]"></i>
+              </div>
+
+              <div class="capability-body">
+                <h3 class="row-title">{{ capability.title }}</h3>
+                <p class="row-description">{{ capability.description }}</p>
+              </div>
+            </article>
+          </div>
         </div>
 
         <div class="image-container">
@@ -85,27 +84,22 @@ const capabilities = [
   {
     icon: "fa-bolt",
     title: "Hot reload",
-    description: "Save your code and the preview refreshes in place. No rebuild, no restart, no lost scroll position."
+    description: "Save your code and the preview refreshes in place."
   },
   {
     icon: "fa-folder-tree",
     title: "Document hierarchy",
-    description: "Explore the element tree, select any node, and jump straight to its implementation in your IDE."
+    description: "Select any element and jump to its code in your IDE."
   },
   {
     icon: "fa-magnifying-glass",
     title: "Magnify and measure",
-    description: "Zoom into details, pick coordinates, and measure sizes and distances between elements."
+    description: "Zoom into details and measure sizes and distances."
   },
   {
     icon: "fa-bug",
-    title: "Runtime exceptions",
-    description: "Review the message, the stack trace, and the exact code snippet that threw."
-  },
-  {
-    icon: "fa-layer-group",
-    title: "Layout issue debugging",
-    description: "Color-coded hints point to the element that overflowed and explain why it did."
+    title: "Exception and layout debugging",
+    description: "Find the code that threw or the element that overflowed."
   }
 ];
 
@@ -163,7 +157,6 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: 32px;
 }
 
 .companion-main {
@@ -180,6 +173,18 @@ onBeforeUnmount(() => {
   }
 }
 
+
+/* Heading and capabilities: the section heading sits inside the card, left-aligned, with the list below it */
+
+.companion-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.companion-text .card-description {
+  margin-bottom: 32px;
+}
 
 /* Capabilities: icon tile beside a title and a short description */
 
@@ -209,21 +214,6 @@ onBeforeUnmount(() => {
 .capability-icon i {
   font-size: 1.25rem;
   color: var(--vp-c-text-1);
-}
-
-.capability-title {
-  margin: 0;
-  font-size: 1.0625rem;
-  line-height: 1.5rem;
-  font-weight: 600;
-  color: var(--vp-c-text-1);
-}
-
-.capability-description {
-  margin: 2px 0 0;
-  font-size: 0.9375rem;
-  line-height: 1.375rem;
-  color: var(--vp-c-text-2);
 }
 
 
@@ -308,8 +298,8 @@ onBeforeUnmount(() => {
   gap: 12px;
   padding: 10px 12px;
   border-radius: 8px;
-  font-size: 0.9375rem;
-  line-height: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
   color: var(--vp-c-text-1);
   text-decoration: none;
   white-space: nowrap;
@@ -333,7 +323,7 @@ onBeforeUnmount(() => {
 }
 
 .download-format {
-  font-size: 0.8125rem;
+  font-size: 1rem;
   color: var(--vp-c-text-3);
 }
 
@@ -344,7 +334,7 @@ onBeforeUnmount(() => {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   justify-content: space-between;
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--vp-c-text-2);
 }
 

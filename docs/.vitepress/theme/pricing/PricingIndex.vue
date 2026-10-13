@@ -38,7 +38,7 @@ import PricingFaq from "./PricingFaq.vue";
    the reseller and contact cards and the footer stay calm. */
 
 body:has(.custom-page.pricing-page) {
-  background-color: var(--vp-c-bg);
+  background-color: var(--custom-page-bg);
   background-image:
       url("/homepage/grain.png"),
       radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),

@@ -6,6 +6,18 @@
   --custom-page-width: 1216px;
 }
 
+/* Page canvas of the custom pages (home, pricing, contact, legal and so on). A touch off-white on
+   the light theme so the white cards and panels lift from the page; the dark theme keeps the
+   regular page colour. The navbar and footer stay on --vp-c-bg. */
+
+:root {
+  --custom-page-bg: #FAFAFC;
+}
+
+html.dark {
+  --custom-page-bg: var(--vp-c-bg);
+}
+
 .wide-layout {
   --custom-page-width: 90rem;
 }
@@ -26,7 +38,7 @@
 }
 
 .custom-page > .container {
-  background-color: var(--vp-c-bg);
+  background-color: var(--custom-page-bg);
 }
 
 .container.no-border {
@@ -148,6 +160,52 @@
   text-align: center;
 }
 
+/* Card typography
+   Text inside a panel or card sits one step below the section headings on the canvas, and every
+   card uses the same two pairs. `card-title` + `card-description`: the heading of a card or of a
+   cell inside it (the Companion App card, a foundations cell, a contact card) and its lead.
+   `row-title` + `row-description`: a labelled row inside a card (an icon tile beside a name and
+   a short line, as in the quick start points or the purchase facts). The classes carry their own
+   margins, so the element (h2, h3, p, strong) does not matter. */
+
+.custom-page .card-title {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+}
+
+.custom-page .card-description {
+  margin: 12px 0 0;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: var(--vp-c-text-2);
+}
+
+.custom-page .row-title {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+.custom-page .row-description {
+  margin: 4px 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.375rem;
+  color: var(--vp-c-text-2);
+}
+
+@media screen and (max-width: 768px) {
+  .custom-page .card-description {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+
+
 /* Textured page
    A page opts in with `textured-page` on its `.custom-page` root. The page itself paints the canvas
    (grain tile plus colour washes) on <body>, see HomePage.vue and Contact.vue; this block holds what
@@ -204,12 +262,12 @@ html.dark .custom-page.textured-page {
    one-pixel border so the surface itself stays see-through; it follows the surface's own corner
    radius. */
 
-.custom-page.textured-page :is(.panel, .card, .hero-card, .faq-list, .documents) {
+.custom-page.textured-page :is(.panel, .card, .faq-list, .documents) {
   position: relative;
   background-image: var(--home-surface-sheen);
 }
 
-.custom-page.textured-page :is(.panel, .card, .hero-card, .faq-list, .documents)::before {
+.custom-page.textured-page :is(.panel, .card, .faq-list, .documents)::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -305,7 +363,7 @@ html.dark .custom-page.textured-page .texture-dots::after {
    last stretch, so the footer stays calm. */
 
 body:has(.custom-page.legal-page) {
-  background-color: var(--vp-c-bg);
+  background-color: var(--custom-page-bg);
   background-image:
       url("/homepage/grain.png"),
       radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),

@@ -165,6 +165,7 @@ const licenses = [
   grid-row: span 6;
   justify-items: start;
   align-items: start;
+  padding: 48px; /* wider than the shared 32px card inset */
 }
 
 /* a faint brand tint in both modes: the share is small enough that the blue stays a wash
@@ -451,6 +452,7 @@ html.dark {
     grid-template-rows: auto; // subgrid has no parent grid here
     width: 100%;
     max-width: 560px;
+    padding: 40px;
   }
 
   .license-tier.community,
