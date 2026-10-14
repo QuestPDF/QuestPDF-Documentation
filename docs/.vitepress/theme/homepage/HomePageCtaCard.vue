@@ -688,13 +688,8 @@ html.dark {
 }
 
 
-/* Background: a glow in the accent colour from the top-left corner, behind the pages, and faint rays
-   radiating from a point just above the card, so they fan down behind the pages and fade out before
-   the text. The glow brightens a little on hover. */
-
-.cta-card {
-  --rays-centre: -90px;
-}
+/* Background: a glow in the accent colour from the top-left corner, behind the pages. The glow
+   brightens a little on hover. */
 
 .background-gradient {
   position: absolute;
@@ -722,27 +717,6 @@ html:not(.dark) .background-gradient {
   background-image:
       radial-gradient(ellipse 28% 60% at calc(19% + 20px) 50%, color-mix(in srgb, var(--accent) 16%, transparent), transparent),
       radial-gradient(ellipse 18% 36% at calc(19% + 20px) 50%, color-mix(in srgb, var(--accent-secondary) 7%, transparent), transparent);
-}
-
-.background-gradient::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: repeating-conic-gradient(
-      from 0deg at 20% var(--rays-centre),
-      transparent 0deg,
-      color-mix(in srgb, var(--accent) 2.5%, transparent) 9deg,
-      transparent 18deg);
-  mask-image: radial-gradient(circle 420px at 20% var(--rays-centre), #000, transparent 100%);
-  -webkit-mask-image: radial-gradient(circle 420px at 20% var(--rays-centre), #000, transparent 100%);
-}
-
-html.dark .background-gradient::before {
-  background-image: repeating-conic-gradient(
-      from 0deg at 20% var(--rays-centre),
-      transparent 0deg,
-      color-mix(in srgb, var(--accent) 2%, transparent) 9deg,
-      transparent 18deg);
 }
 
 
@@ -867,10 +841,6 @@ html.dark .background-gradient::before {
   html:not(.dark) .background-gradient {
     background-image:
         radial-gradient(ellipse 80px 80px at 56px 50%, color-mix(in srgb, var(--accent) 16%, transparent), transparent);
-  }
-
-  .background-gradient::before {
-    content: none;
   }
 }
 

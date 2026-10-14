@@ -13,6 +13,11 @@ const props = defineProps<{
       <div class="dot yellow" />
       <div class="dot green" />
       <span class="file-name">{{ fileName }}</span>
+
+      <!-- optional: a status at the right end of the title bar (the quick start window shows the agent's) -->
+      <div v-if="$slots.header" class="file-container-header-end">
+        <slot name="header" />
+      </div>
     </div>
 
     <div class="file-content">
@@ -47,6 +52,13 @@ const props = defineProps<{
   font-size: 1rem;
   font-weight: 500;
   color: var(--vp-c-text-2);
+}
+
+.file-container-header-end {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  margin-left: auto;
 }
 
 .file-container-header .dot {

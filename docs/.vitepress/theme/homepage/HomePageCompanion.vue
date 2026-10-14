@@ -7,18 +7,16 @@
           <h2 class="card-title">Companion App</h2>
           <p class="card-description">Shorten the loop between writing code and seeing the result. Spend your time designing documents, not waiting on them.</p>
 
-          <div class="capabilities">
-            <article v-for="capability of capabilities" :key="capability.title" class="capability">
-              <div class="capability-icon">
-                <i class="fa-regular" :class="[capability.icon]"></i>
+          <!-- the same list as the quick start cards: an icon tile, a bold title and its explanation at one size -->
+          <ul class="notes" aria-label="What the Companion App does">
+            <li v-for="capability of capabilities" :key="capability.title" class="note">
+              <i class="fa-regular" :class="[capability.icon]" aria-hidden="true"></i>
+              <div>
+                <strong>{{ capability.title }}</strong>
+                <p>{{ capability.description }}</p>
               </div>
-
-              <div class="capability-body">
-                <h3 class="row-title">{{ capability.title }}</h3>
-                <p class="row-description">{{ capability.description }}</p>
-              </div>
-            </article>
-          </div>
+            </li>
+          </ul>
         </div>
 
         <div class="image-container">
@@ -98,13 +96,8 @@ const capabilities = [
   },
   {
     icon: "fa-bug",
-    title: "Exception debugging",
-    description: "Jump straight to the code that threw."
-  },
-  {
-    icon: "fa-triangle-exclamation",
-    title: "Layout debugging",
-    description: "Find the element that overflowed its container."
+    title: "Exception and layout debugging",
+    description: "Jump to the code that threw or the element that overflowed."
   }
 ];
 
@@ -191,33 +184,47 @@ onBeforeUnmount(() => {
   margin-bottom: 32px;
 }
 
-/* Capabilities: icon tile beside a title and a short description */
+/* Capabilities: the list style of the quick start cards, bold titles in the text colour on their own
+   line, explanations under them at the same size, an icon on an inset tile level with the title */
 
-.capabilities {
+.notes {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: var(--vp-c-text-2);
 }
 
-.capability {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+.notes strong {
+  display: block;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+.notes p {
+  margin: 2px 0 0;
+}
+
+.note {
+  display: flex;
+  align-items: flex-start;
   gap: 16px;
-  align-items: start;
 }
 
-.capability-icon {
+.note i {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 auto;
   width: 44px;
   height: 44px;
   border-radius: 12px;
   background-color: var(--home-surface-inner);
-}
-
-.capability-icon i {
-  font-size: 1.25rem;
+  font-size: 20px;
   color: var(--vp-c-text-1);
 }
 

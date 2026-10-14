@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import HomePageAgentDemo from "./HomePageAgentDemo.vue";
-
-/* Three cards in two columns, replacing the former "Enterprise-grade foundations" and "Industry-standard
+/* Two cards side by side, replacing the former "Enterprise-grade foundations" and "Industry-standard
    PDF compliance" sections. Each card carries its own heading, like the Companion App and license cards.
-   Left column, two cards stacked: the compliance story (the promise and the independent validators, then
-   the supported conformance levels as chips grouped by purpose) above the foundations as a two-by-two grid
-   of short labels and concrete facts, one per thing a manager, product owner or programmer checks before
-   buying; a cell with a supporting page is a link to it. Right column,
-   one card the full height of the pair: how AI agents develop documents with the library, shown as a looped
-   simulation of one round (prompt, status, diff). */
+   Left, the compliance story: the promise and the independent validators, then the supported conformance
+   levels as chips grouped by purpose. Right, no heading: the foundations fill the card as a two-by-two
+   grid of short labels and concrete facts divided by hairlines, one cell per thing a manager, product
+   owner or programmer checks before buying; a cell with a supporting page is a link to it. */
 
 interface StandardsCategory {
   title: string;
@@ -74,65 +70,48 @@ const facts : Fact[] = [
 <template>
   <section class="content">
     <div class="layout">
-      <div class="column">
-        <!-- the compliance story; the promise and validators in the description, the conformance levels as grouped chips -->
-        <div class="panel compliance">
-          <h2 class="card-title">Industry-standard output</h2>
-          <!-- the promise and the evidence in one breath: standards out of the box, validated independently on every build -->
-          <p class="card-description">
-            Generate PDFs that meet industry standards out of the box.
-            Every build is automatically validated with the independent, open-source
-            <a href="https://verapdf.org/" target="_blank" rel="noopener">veraPDF</a> and
-            <a href="https://www.mustangproject.org/" target="_blank" rel="noopener">Mustang</a> validators.
-          </p>
-
-          <div class="standards">
-            <div v-for="(row, index) of standardsRows" :key="index" class="standards-row">
-              <section v-for="category of row" :key="category.title" class="standards-category">
-                <h3 class="standards-category-title">{{ category.title }}</h3>
-                <div class="standards-badges">
-                  <span v-for="level in category.levels" :key="level">{{ level }}</span>
-                </div>
-              </section>
-            </div>
-          </div>
-        </div>
-
-        <!-- the foundations as a two-by-two grid of short labels and concrete facts, no icons; a cell
-             backed by a page is one link, the label underlines and grows an arrow on hover -->
-        <div class="panel foundations">
-          <h2 class="card-title">Enterprise-grade foundations</h2>
-
-          <div class="facts">
-            <component
-                v-for="fact of facts"
-                :key="fact.label"
-                :is="fact.href ? 'a' : 'div'"
-                :href="fact.href"
-                class="fact"
-                :class="{ linked: fact.href }">
-              <span class="fact-label">
-                <span class="fact-label-text">{{ fact.label }}</span>
-                <i v-if="fact.href" class="fa-regular fa-arrow-right fact-arrow" aria-hidden="true"></i>
-              </span>
-              <span class="fact-text">{{ fact.text }}</span>
-            </component>
-          </div>
-        </div>
-      </div>
-
-      <!-- the AI story: one simulated round with an agent -->
-      <div class="panel agents">
-        <div class="background-gradient" />
-
-        <h2 class="card-title">Develop with AI agents</h2>
+      <!-- the compliance story; the promise and validators in the description, the conformance levels as grouped chips -->
+      <div class="panel compliance">
+        <h2 class="card-title">Industry-standard output</h2>
+        <!-- the promise and the evidence in one breath: standards out of the box, validated independently on every build -->
         <p class="card-description">
-          Describe the document you need and let your AI agent write, refine and fix the layout code,
-          while you review the result. QuestPDF gives agents what they need to get it right.
+          Generate PDFs that meet industry standards out of the box.
+          Every build is automatically validated with the independent, open-source
+          <a href="https://verapdf.org/" target="_blank" rel="noopener">veraPDF</a> and
+          <a href="https://www.mustangproject.org/" target="_blank" rel="noopener">Mustang</a> validators.
         </p>
 
-        <home-page-agent-demo />
+        <div class="standards">
+          <div v-for="(row, index) of standardsRows" :key="index" class="standards-row">
+            <section v-for="category of row" :key="category.title" class="standards-category">
+              <h3 class="standards-category-title">{{ category.title }}</h3>
+              <div class="standards-badges">
+                <span v-for="level in category.levels" :key="level">{{ level }}</span>
+              </div>
+            </section>
+          </div>
+        </div>
       </div>
+
+      <!-- the foundations as a two-by-two grid of short labels and concrete facts, no heading and no
+           icons; a cell backed by a page is one link, the label underlines and grows an arrow on hover -->
+      <section class="panel foundations" aria-label="Enterprise-grade foundations">
+        <div class="facts">
+          <component
+              v-for="fact of facts"
+              :key="fact.label"
+              :is="fact.href ? 'a' : 'div'"
+              :href="fact.href"
+              class="fact"
+              :class="{ linked: fact.href }">
+            <span class="fact-label">
+              <span class="fact-label-text">{{ fact.label }}</span>
+              <i v-if="fact.href" class="fa-regular fa-arrow-right fact-arrow" aria-hidden="true"></i>
+            </span>
+            <span class="fact-text">{{ fact.text }}</span>
+          </component>
+        </div>
+      </section>
     </div>
   </section>
 </template>
@@ -145,20 +124,13 @@ const facts : Fact[] = [
   align-items: center;
 }
 
-/* Two equal columns: a stack of two cards on the left, one card the full height of the stack on the
-   right; everything in one column on narrow screens */
+/* Two equal columns, one card each, the same height; everything in one column on narrow screens */
 
 .layout {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 32px;
   width: 100%;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
 }
 
 .layout .panel {
@@ -238,48 +210,65 @@ const facts : Fact[] = [
 }
 
 
-/* Facts: two columns of label-plus-text cells. The column gap alone separates the columns; one
-   hairline in the panel's divider colour separates the rows. The cells carry the row spacing as
-   padding, so the line runs the full width of the grid; the outer edges stay open.
-   The label is the scanning anchor: the same small uppercase style as the chip categories above,
-   in the primary text colour, over a smaller, quieter line of facts */
+/* Facts: four cells in a two-by-two grid that fills the card, divided by a cross of hairlines in
+   the panel's divider colour: one vertical line between the columns, one horizontal line between
+   the rows. The cells carry the spacing as padding, so both lines run edge to edge of the grid
+   while the outer edges stay open; the content sits in the middle of each quadrant.
+   The label is the scanning anchor: the same small uppercase style as the chip categories in the
+   card beside it, in the primary text colour, over a quieter line of facts */
 
 .facts {
+  flex: 1;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 32px;
-  margin: 32px 0 0; /* the same distance the chips keep from the description in the card above */
+  grid-auto-rows: minmax(0, 1fr);
 }
 
 .fact {
   min-width: 0;
-  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px 32px;
 }
 
+/* left column: open on the left; right column: open on the right, the vertical line on its left */
+.fact:nth-child(odd) {
+  padding-left: 0;
+}
+
+.fact:nth-child(even) {
+  padding-right: 0;
+  border-left: 1px solid var(--vp-c-divider);
+}
+
+/* first row: open on top; second row: open at the bottom, the horizontal line on its top */
 .fact:nth-child(-n + 2) {
   padding-top: 0;
 }
 
-.fact:nth-last-child(-n + 2) {
-  padding-bottom: 0;
-}
-
 .fact:nth-child(n + 3) {
+  padding-bottom: 0;
   border-top: 1px solid var(--vp-c-divider);
 }
 
-/* one column: every cell after the first gets a line above */
+/* one column: no vertical line, every cell after the first gets a line above */
 @media screen and (max-width: 500px) {
   .facts {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .fact:nth-child(2) {
-    padding-top: 12px;
+  .fact {
+    padding: 20px 0;
+    border-left: none;
   }
 
-  .fact:nth-last-child(2) {
-    padding-bottom: 12px;
+  .fact:first-child {
+    padding-top: 0;
+  }
+
+  .fact:last-child {
+    padding-bottom: 0;
   }
 
   .fact:nth-child(n + 2) {
@@ -302,9 +291,9 @@ const facts : Fact[] = [
 
 .fact-text {
   display: block;
-  margin: 4px 0 0;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  margin: 6px 0 0;
+  font-size: 1rem;
+  line-height: 1.5rem;
   color: var(--vp-c-text-2);
 }
 
@@ -345,38 +334,6 @@ const facts : Fact[] = [
 .fact.linked:is(:hover, :focus-visible) .fact-arrow {
   opacity: 1;
   transform: translateX(0);
-}
-
-
-/* The foundations card takes the column's spare height, so the stack ends level with the AI card */
-
-.column .foundations {
-  flex-grow: 1;
-}
-
-
-/* AI card: a faint purple glow from the left edge, centred behind the heading (64px down, not the
-   corner), the same device as the license card's green, in the accent the simulation inside uses; no
-   rays, to keep it quiet */
-
-.agents {
-  --accent: #7E57C2;
-  --accent-secondary: #AB47BC;
-  --glow-y: 64px;
-  position: relative;
-  isolation: isolate; /* keeps the glow (z-index: -1) above the panel background but below the content */
-}
-
-.agents .background-gradient {
-  position: absolute;
-  pointer-events: none;
-  inset: 0;
-  z-index: -1;
-  border-radius: inherit;
-  overflow: hidden;
-  background-image:
-      radial-gradient(ellipse 90% 55% at 0% var(--glow-y), color-mix(in srgb, var(--accent) 10%, transparent), transparent),
-      radial-gradient(ellipse 50% 30% at 0% var(--glow-y), color-mix(in srgb, var(--accent-secondary) 4%, transparent), transparent);
 }
 
 </style>

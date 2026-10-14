@@ -112,14 +112,12 @@ const includes = [
     align-items: stretch;
   }
 
-  /* the same glow and faint rays as the showcase cards (HomePageCtaCard.vue), in the Community
-     tier's green, but from the panel's left edge, centred behind the heading (64px down, not the corner),
-     rather than from the top centre */
+  /* the same glow as the showcase cards (HomePageCtaCard.vue), in the Community tier's green, but
+     from the panel's left edge, centred behind the heading (64px down, not the corner), rather than
+     from the top centre */
   .license-panel {
     --accent: #67B84D;
     --accent-secondary: #4CAF50;
-    --rays-x: 0%;
-    --rays-centre: -40px;
     --glow-y: 64px;
   }
 
@@ -133,27 +131,6 @@ const includes = [
     background-image:
         radial-gradient(ellipse 90% 55% at 0% var(--glow-y), color-mix(in srgb, var(--accent) 11%, transparent), transparent),
         radial-gradient(ellipse 50% 30% at 0% var(--glow-y), color-mix(in srgb, var(--accent-secondary) 5%, transparent), transparent);
-  }
-
-  .background-gradient::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: repeating-conic-gradient(
-        from 0deg at var(--rays-x) var(--rays-centre),
-        transparent 0deg,
-        color-mix(in srgb, var(--accent) 2.5%, transparent) 9deg,
-        transparent 18deg);
-    mask-image: radial-gradient(circle 480px at var(--rays-x) var(--rays-centre), #000, transparent 100%);
-    -webkit-mask-image: radial-gradient(circle 480px at var(--rays-x) var(--rays-centre), #000, transparent 100%);
-  }
-
-  html.dark .background-gradient::before {
-    background-image: repeating-conic-gradient(
-        from 0deg at var(--rays-x) var(--rays-centre),
-        transparent 0deg,
-        color-mix(in srgb, var(--accent) 2%, transparent) 9deg,
-        transparent 18deg);
   }
 
   .includes-list {
