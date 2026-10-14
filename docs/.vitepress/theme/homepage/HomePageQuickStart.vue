@@ -291,7 +291,7 @@ html:not(.dark) .stage :deep(.file-container-header) {
 .notes {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 40px;
   margin: 28px 0 0;
   padding: 0;
   list-style: none;
