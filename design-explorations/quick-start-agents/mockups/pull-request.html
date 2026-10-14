@@ -1,0 +1,143 @@
+<!doctype html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup 1: Pull Request</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Concept 1: the request is handled as a pull request. Left: a fixed-height review card above the code
+   window; right: the rendered page with the four reasons under it. */
+
+.pr-body {
+  display: grid;
+  grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+  gap: 40px;
+  margin-top: 28px;
+  align-items: start;
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 80px;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  background: var(--home-surface-inner);
+}
+
+.review-row { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.review-row .icon { width: 16px; height: 16px; color: var(--vp-c-text-3); flex: 0 0 auto; }
+.review-title { font-size: 1rem; line-height: 1.5rem; font-weight: 600; color: var(--vp-c-text-1); }
+.review-hint { font-size: 0.9375rem; line-height: 1.375rem; color: var(--vp-c-text-2); }
+.review-checks { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 8px; font-size: 0.875rem; line-height: 1.25rem; color: var(--vp-c-text-2); }
+.review-checks span { display: inline-flex; gap: 6px; align-items: center; }
+.review-checks .icon { width: 15px; height: 15px; }
+.spacer { flex: 1 1 auto; }
+.chip.merged { color: #fff; background: var(--green); }
+html.light .chip.merged { background: #43A047; }
+
+.side { display: flex; flex-direction: column; align-items: center; }
+.side .page { --page-w: 250px; }
+
+.side-reasons {
+  width: 100%;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--vp-c-divider);
+}
+
+@media screen and (max-width: 1000px) {
+  .pr-body { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+}
+
+@media screen and (max-width: 700px) {
+  .review-row { flex-wrap: wrap; }
+  .review-checks { gap: 6px 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="mock-note">Concept 1 · Pull Request. Resting: readable code and the rendered page. After 4 s in view (or on click) the card above the code fills with the request, the diff lands in the file, the checks turn green one by one, the page re-renders, and the card settles as "merged". Plays once; Replay stays.</div>
+
+<div class="content">
+  <section class="panel" data-demo data-state="rest" aria-label="Documents as code">
+
+    <div class="panel-head">
+      <div class="lead">
+        <h2 class="card-title">Documents as code, changes as pull requests</h2>
+        <p class="card-description">A C# file that renders to a PDF, lives in version control and changes by small reviewed diffs.</p>
+      </div>
+      <div data-install></div>
+    </div>
+
+    <div class="pr-body">
+      <div>
+        <div class="review" aria-live="polite">
+          <!-- resting: a quiet line and the explicit trigger -->
+          <div class="only-rest review-row">
+            <span data-icon="branch"></span>
+            <span class="review-hint">A request from the product owner, handled as a pull request.</span>
+            <span class="spacer"></span>
+            <button type="button" class="action small"><span data-icon="play"></span> Play the request <span class="meta">15 s</span></button>
+          </div>
+
+          <!-- mid-demo: the request is the PR title; the agent has proposed, the human has not reviewed yet -->
+          <div class="only-mid">
+            <div class="review-row">
+              <span class="review-title">Show negative amounts in red.</span>
+              <span class="spacer"></span>
+              <span class="chip"><span class="num minus">−1</span> <span class="num plus">+2</span></span>
+              <span class="chip">1 file</span>
+            </div>
+            <div class="review-checks">
+              <span class="ok"><span data-icon="checkCircle"></span> Proposed by your agent</span>
+              <span class="ok"><span data-icon="checkCircle"></span> Compiles</span>
+              <span class="pending"><span data-icon="circle"></span> Reviewed by you</span>
+              <span class="pending"><span data-icon="circle"></span> Rendered</span>
+            </div>
+          </div>
+
+          <!-- done: merged, every check green, replay -->
+          <div class="only-done">
+            <div class="review-row">
+              <span class="chip merged"><span data-icon="check"></span> Merged</span>
+              <span class="review-title">Show negative amounts in red.</span>
+              <span class="spacer"></span>
+              <span class="chip"><span class="num minus">−1</span> <span class="num plus">+2</span></span>
+              <span class="chip">1 file</span>
+              <button type="button" class="action small"><span data-icon="replay"></span> Replay</button>
+            </div>
+            <div class="review-checks">
+              <span class="ok"><span data-icon="checkCircle"></span> Proposed by your agent</span>
+              <span class="ok"><span data-icon="checkCircle"></span> Compiles</span>
+              <span class="ok"><span data-icon="checkCircle"></span> Reviewed by you</span>
+              <span class="ok"><span data-icon="checkCircle"></span> Rendered</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="only-rest" data-window="InvoiceDocument.cs"><div data-code="plain"></div></div>
+        <div class="only-mid" data-window="InvoiceDocument.cs" data-meta="proposed change"><div data-code="diff"></div></div>
+        <div class="only-done" data-window="InvoiceDocument.cs" data-meta="main"><div data-code="accepted"></div></div>
+      </div>
+
+      <div class="side">
+        <div class="not-done" data-page="before"></div>
+        <div class="only-done" data-page="after"></div>
+        <div class="page-caption">invoice.pdf</div>
+
+        <div class="side-reasons" data-reasons="vertical compact short"></div>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<script src="shared.js"></script>
+</body>
+</html>

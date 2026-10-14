@@ -1,0 +1,191 @@
+<!doctype html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup 3: Scrub</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Concept 3: nothing plays by itself. The four reasons sit in a left column, the code in the middle,
+   the page on the right, and a scrubber with five labelled positions runs under all three. The
+   reader drags (or presses the arrow keys) through Code, Request, Change, Review and Document.
+   In this mockup the slider is live: drag it. */
+
+.sc-body {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 300px;
+  gap: 32px;
+  margin-top: 32px;
+  align-items: start;
+}
+
+.side { display: flex; flex-direction: column; align-items: center; }
+.side .page { --page-w: 300px; }
+
+.scrubber {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px 32px;
+  align-items: center;
+  margin-top: 20px;
+  padding: 14px 20px 12px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  background: var(--home-surface-inner);
+}
+
+.track { position: relative; margin: 6px 6px 0; }
+
+.track input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  margin: 0;
+  background: var(--vp-c-divider);
+  outline: none;
+  cursor: pointer;
+}
+
+.track input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--vp-c-brand-2);
+  border: 3px solid var(--vp-c-bg);
+  box-shadow: 0 0 0 1px var(--vp-c-brand-2);
+}
+
+.track input[type="range"]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 3px color-mix(in srgb, var(--vp-c-brand-2) 40%, transparent); }
+
+.ticks { position: absolute; left: 0; right: 0; top: 0; height: 2px; pointer-events: none; }
+.tick { position: absolute; top: -3px; width: 8px; height: 8px; border-radius: 50%; background: var(--vp-c-divider); transform: translateX(-50%); }
+.tick.passed { background: var(--vp-c-brand-2); }
+
+.tick-labels { display: flex; justify-content: space-between; margin-top: 12px; }
+.tick-labels .label { width: 20%; text-align: center; }
+.tick-labels .label:first-child { text-align: left; }
+.tick-labels .label:last-child { text-align: right; }
+.tick-labels .label.current { color: var(--vp-c-brand-1); }
+
+.scrub-caption { grid-column: 2; font-size: 0.9375rem; line-height: 1.375rem; color: var(--vp-c-text-2); }
+.scrub-caption strong { color: var(--vp-c-text-1); font-weight: 600; }
+.scrub-caption .num { font-weight: 500; }
+
+.scrub-hint { font-size: 0.8125rem; line-height: 1.25rem; color: var(--vp-c-text-3); white-space: nowrap; grid-column: 1; }
+
+@media screen and (max-width: 1100px) {
+  .sc-body { grid-template-columns: minmax(0, 1fr) 280px; }
+  .sc-body .left-reasons { grid-column: 1 / -1; }
+  .sc-body .left-reasons .reasons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+}
+
+@media screen and (max-width: 560px) {
+  /* one label at a time on phones: the current step, centred under the thumb row */
+  .tick-labels { justify-content: center; }
+  .tick-labels .label { display: none; }
+  .tick-labels .label.current { display: block; width: auto; text-align: center; }
+}
+
+@media screen and (max-width: 760px) {
+  .sc-body { grid-template-columns: minmax(0, 1fr); }
+  .sc-body .left-reasons .reasons { grid-template-columns: minmax(0, 1fr); }
+  .scrubber { grid-template-columns: minmax(0, 1fr); }
+  .scrub-caption { grid-column: 1; }
+}
+</style>
+</head>
+<body>
+
+<div class="mock-note">Concept 3 · Scrub. No autoplay anywhere. The slider under the code and the page has five positions; every position is a still, so reduced motion is the default behaviour. The slider in this mockup is live: drag it or use the arrow keys. The toolbar's three states map to positions 0, 2 and 4.</div>
+
+<div class="content">
+  <section class="panel" data-demo data-state="rest" aria-label="Documents as code">
+
+    <div class="panel-head">
+      <div class="lead">
+        <h2 class="card-title">Documents as code, changes as diffs</h2>
+        <p class="card-description">A C# file that renders to a PDF, lives in version control and changes by small reviewed diffs.</p>
+      </div>
+      <div data-install></div>
+    </div>
+
+    <div class="sc-body">
+      <div class="left-reasons" data-reasons="vertical compact"></div>
+
+      <div>
+        <div class="only-rest" data-window="InvoiceDocument.cs"><div data-code="plain"></div></div>
+        <div class="only-mid" data-window="InvoiceDocument.cs" data-meta="proposed change"><div data-code="diff"></div></div>
+        <div class="only-done" data-window="InvoiceDocument.cs" data-meta="main"><div data-code="accepted"></div></div>
+      </div>
+
+      <div class="side">
+        <div class="not-done" data-page="before"></div>
+        <div class="only-done" data-page="after"></div>
+        <div class="page-caption">invoice.pdf</div>
+      </div>
+    </div>
+
+    <div class="scrubber">
+      <div class="track">
+        <div class="ticks">
+          <span class="tick passed" style="left: 0%"></span>
+          <span class="tick" style="left: 25%"></span>
+          <span class="tick" style="left: 50%"></span>
+          <span class="tick" style="left: 75%"></span>
+          <span class="tick" style="left: 100%"></span>
+        </div>
+        <input id="scrub" type="range" min="0" max="4" step="1" value="0" aria-label="Step through one request: code, request, change, review, document" aria-valuetext="Code" title="Drag, or use the arrow keys">
+        <div class="tick-labels" aria-hidden="true">
+          <span class="label current">Code</span>
+          <span class="label">Request</span>
+          <span class="label">Change</span>
+          <span class="label">Review</span>
+          <span class="label">Document</span>
+        </div>
+      </div>
+      <div class="scrub-caption" id="scrub-caption" aria-live="polite"></div>
+    </div>
+
+  </section>
+</div>
+
+<script src="shared.js"></script>
+<script>
+  /* the five stills, each a caption plus which code/page to show */
+  const positions = [
+    { state: 'rest', caption: '<strong>Code.</strong> The table from the invoice tutorial: three columns, a header and a loop over the items. Drag the slider, or press →, to follow one request.' },
+    { state: 'rest', caption: '<strong>Request.</strong> The product owner writes: <strong>“Show negative amounts in red.”</strong> No ticket for a designer, no template editor.' },
+    { state: 'mid',  caption: '<strong>Change.</strong> Your agent proposes <span class="num minus">−1</span> <span class="num plus">+2</span> lines in <code>InvoiceDocument.cs</code>. The API is typed, so the compiler checks the proposal before anyone reads it.' },
+    { state: 'mid',  caption: '<strong>Review.</strong> You read three lines in a pull request and approve. That is the whole review.' },
+    { state: 'done', caption: '<strong>Document.</strong> <code>invoice.pdf</code> is rendered again: the credit line is red. One request, three lines, reviewed by you.' }
+  ];
+  const slider = document.getElementById('scrub');
+  const caption = document.getElementById('scrub-caption');
+  const labels = document.querySelectorAll('.tick-labels .label');
+  const ticks = document.querySelectorAll('.tick');
+  let syncing = false;
+
+  function apply(index) {
+    const p = positions[index];
+    syncing = true;
+    QP.setState(p.state);
+    syncing = false;
+    caption.innerHTML = p.caption;
+    slider.setAttribute('aria-valuetext', labels[index].textContent);
+    labels.forEach((l, i) => l.classList.toggle('current', i === index));
+    ticks.forEach((t, i) => t.classList.toggle('passed', i <= index));
+  }
+
+  slider.addEventListener('input', () => apply(Number(slider.value)));
+  document.addEventListener('mockstate', e => {
+    if (syncing) return;
+    const index = { rest: 0, mid: 2, done: 4 }[e.detail];
+    slider.value = index;
+    apply(index);
+  });
+  /* the initial state arrives through the mockstate event that shared.js fires on load */
+</script>
+</body>
+</html>

@@ -355,12 +355,14 @@ const facts : Fact[] = [
 }
 
 
-/* AI card: a faint purple glow from the top-left corner behind the heading, the same device as the
-   license card's green, in the accent the simulation inside uses; no rays, to keep it quiet */
+/* AI card: a faint purple glow from the left edge, centred behind the heading (64px down, not the
+   corner), the same device as the license card's green, in the accent the simulation inside uses; no
+   rays, to keep it quiet */
 
 .agents {
   --accent: #7E57C2;
   --accent-secondary: #AB47BC;
+  --glow-y: 64px;
   position: relative;
   isolation: isolate; /* keeps the glow (z-index: -1) above the panel background but below the content */
 }
@@ -373,8 +375,8 @@ const facts : Fact[] = [
   border-radius: inherit;
   overflow: hidden;
   background-image:
-      radial-gradient(ellipse 90% 55% at 0% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent),
-      radial-gradient(ellipse 50% 30% at 0% 0%, color-mix(in srgb, var(--accent-secondary) 4%, transparent), transparent);
+      radial-gradient(ellipse 90% 55% at 0% var(--glow-y), color-mix(in srgb, var(--accent) 10%, transparent), transparent),
+      radial-gradient(ellipse 50% 30% at 0% var(--glow-y), color-mix(in srgb, var(--accent-secondary) 4%, transparent), transparent);
 }
 
 </style>

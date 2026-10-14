@@ -1,0 +1,478 @@
+/* Shared mockup styles. Every value here is copied from the site's tokens:
+   docs/.vitepress/theme/CustomPages.css, VitepressAdjustments.css, HomePage.vue, the VitePress default
+   vars and the homepage window/code components. Dark is the default (html.dark), light is html.light. */
+
+:root {
+  --vp-font-family-base: -apple-system, BlinkMacSystemFont, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --vp-font-family-mono: ui-monospace, 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+  --custom-page-width: 90rem;
+  --brand-blue: #2196F3;
+  --green: #4CAF50;
+  --red: #F44336;
+}
+
+html.dark {
+  --vp-c-bg: #101010;
+  --vp-c-bg-alt: #161618;
+  --vp-c-text-1: #dfdfd6;
+  --vp-c-text-2: #98989f;
+  --vp-c-text-3: #6a6a71;
+  --vp-c-divider: #2e2e32;
+  --vp-c-brand-1: #4FC3F7;
+  --vp-c-brand-2: #03A9F4;
+  --vp-c-brand-3: #0288D1;
+  --custom-page-bg: var(--vp-c-bg);
+  --home-surface: rgba(255, 255, 255, 0.045);
+  --home-surface-inner: rgba(0, 0, 0, 0.4);
+  --home-surface-edge: none;
+  --home-surface-rim: linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.015));
+  --home-surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0) 160px);
+  /* shiki dark-plus */
+  --tok-k: #569CD6; --tok-t: #4EC9B0; --tok-m: #DCDCAA; --tok-s: #CE9178; --tok-n: #B5CEA8; --tok-v: #9CDCFE; --tok-c: #6A9955; --tok-p: #D4D4D4;
+  --page-opacity: 0.85;
+}
+
+html.light {
+  --vp-c-bg: #ffffff;
+  --vp-c-bg-alt: #f6f6f8;
+  --vp-c-text-1: #3c3c43;
+  --vp-c-text-2: #67676c;
+  --vp-c-text-3: #929295;
+  --vp-c-divider: #e2e2e3;
+  --vp-c-brand-1: #0277BD;
+  --vp-c-brand-2: #039BE5;
+  --vp-c-brand-3: #29B6F6;
+  --custom-page-bg: #FAFAFC;
+  --home-surface: #FFFFFF;
+  --home-surface-inner: #F0F2F6;
+  --home-surface-edge: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 7%, transparent), 0 1px 2px rgba(16, 24, 40, 0.04), 0 16px 40px -20px rgba(16, 24, 40, 0.16);
+  --home-surface-rim: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0));
+  --home-surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 160px);
+  /* shiki light-plus */
+  --tok-k: #0000FF; --tok-t: #267F99; --tok-m: #795E26; --tok-s: #A31515; --tok-n: #098658; --tok-v: #001080; --tok-c: #008000; --tok-p: #000000;
+  --page-opacity: 1;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; }
+
+body {
+  font-family: var(--vp-font-family-base);
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--vp-c-text-1);
+  background-color: var(--custom-page-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* a faint echo of the homepage canvas washes, so the panel sits on something like the real page */
+body {
+  background-image:
+      radial-gradient(ellipse 900px 700px at 100% 22%, color-mix(in srgb, #00BCD4 7%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 1000px at 0% 42%, color-mix(in srgb, #26A69A 8%, transparent), transparent 70%);
+  background-repeat: no-repeat;
+}
+
+h1, h2, h3, p { margin: 0; }
+
+a { color: var(--vp-c-brand-1); text-decoration: none; }
+
+
+/* Mockup chrome: a fixed toolbar outside the panel, never part of the design */
+
+.mock-bar {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 100;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--vp-c-text-2);
+  background: color-mix(in srgb, var(--vp-c-bg) 85%, transparent);
+  border: 1px solid var(--vp-c-divider);
+  backdrop-filter: blur(6px);
+}
+
+.mock-bar span { margin: 0 4px 0 6px; }
+
+.mock-bar button {
+  font: inherit;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--vp-c-text-2);
+  cursor: pointer;
+}
+
+.mock-bar button[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--vp-c-brand-2) 18%, transparent);
+  color: var(--vp-c-brand-1);
+}
+
+.mock-note {
+  max-width: var(--custom-page-width);
+  margin: 0 auto;
+  padding: 24px 32px 0;
+  font-size: 13px;
+  color: var(--vp-c-text-3);
+}
+
+
+/* Page frame: the homepage content column at 1440px (90rem wide layout, 32px side padding) */
+
+.content {
+  max-width: var(--custom-page-width);
+  margin: 0 auto;
+  padding: 48px 32px;
+}
+
+@media screen and (max-width: 768px) {
+  .content { padding: 48px 24px; }
+}
+
+
+/* Panel: the grey/glass section container */
+
+.panel {
+  position: relative;
+  background-color: var(--home-surface);
+  background-image: var(--home-surface-sheen);
+  box-shadow: var(--home-surface-edge);
+  border-radius: 32px;
+  padding: 48px;
+}
+
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: var(--home-surface-rim);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+@media screen and (max-width: 700px) {
+  .panel { padding: 32px 24px; border-radius: 24px; }
+}
+
+
+/* Typography pairs from CustomPages.css */
+
+.card-title { font-size: 1.5rem; line-height: 2rem; font-weight: 700; color: var(--vp-c-text-1); }
+.card-description { margin-top: 12px; font-size: 1.125rem; line-height: 1.75rem; color: var(--vp-c-text-2); }
+.row-title { font-size: 1.125rem; line-height: 1.5rem; font-weight: 600; color: var(--vp-c-text-1); }
+.row-description { margin-top: 4px; font-size: 1rem; line-height: 1.5rem; color: var(--vp-c-text-2); }
+
+@media screen and (max-width: 768px) {
+  .card-description { font-size: 1rem; line-height: 1.5rem; }
+}
+
+/* small uppercase label (HomePageTrust.vue fact-label / standards-category-title) */
+.label {
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-2);
+}
+
+/* chip (standards-badges) */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  line-height: 1rem;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+  background-color: var(--home-surface-inner);
+  white-space: nowrap;
+}
+
+.chip.ok { color: var(--green); }
+.chip .plus { color: var(--green); }
+.chip .minus { color: var(--red); }
+.chip .num { font-variant-numeric: tabular-nums; }
+
+
+/* Panel header: title and lead on the left, the install chip on the right */
+
+.panel-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px;
+  align-items: start;
+}
+
+.panel-head .lead { max-width: 880px; }
+
+@media screen and (max-width: 900px) {
+  .panel-head { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+}
+
+
+/* Install chip (HomePageInstallCommand.vue) */
+
+.install {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 100%;
+  padding: 12px 20px 12px 12px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  background-color: var(--home-surface-inner);
+  color: var(--vp-c-text-1);
+  cursor: pointer;
+  font: inherit;
+}
+
+.install:hover { border-color: var(--vp-c-brand-2); }
+.install:focus-visible { outline: 2px solid var(--vp-c-brand-1); outline-offset: 3px; }
+
+.install-label {
+  padding: 4px 10px;
+  border-radius: 8px;
+  background-color: color-mix(in srgb, var(--vp-c-brand-2), transparent 85%);
+  color: var(--vp-c-brand-1);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1rem;
+  text-transform: uppercase;
+}
+
+.install-command { font-family: var(--vp-font-family-mono); font-size: 14px; white-space: nowrap; }
+.install-command .prompt { color: var(--vp-c-text-3); }
+.install svg { width: 18px; height: 18px; color: var(--vp-c-text-3); }
+
+@media screen and (max-width: 700px) {
+  .install-label { display: none; }
+}
+
+
+/* Buttons: the a.action styles from CustomPages.css, on a real <button> (the router captures <a> clicks) */
+
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--vp-c-text-1);
+  background-color: #8883;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.action:hover { transform: translateY(-2px); background-color: #8885; }
+.action:focus-visible { outline: 2px solid var(--vp-c-brand-1); outline-offset: 3px; }
+.action.primary { color: #FFF; background-color: #2196F3; font-weight: 700; }
+.action.primary:hover { background-color: #1E88E5; }
+.action.small { padding: 8px 14px; font-size: 0.875rem; border-radius: 10px; }
+.action .meta { font-weight: 400; opacity: 0.8; }
+.action svg { width: 14px; height: 14px; }
+
+
+/* Window (HomePageWindowContainer.vue) */
+
+.window {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 100%;
+  background-color: var(--vp-c-bg);
+}
+
+.window-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  background-color: var(--vp-c-bg-alt);
+}
+
+.window-head .dot { width: 12px; height: 12px; border-radius: 6px; background-color: #8883; }
+.window-head .file-name { padding-left: 6px; font-size: 1rem; font-weight: 500; color: var(--vp-c-text-2); }
+.window-head .window-meta { margin-left: auto; display: flex; gap: 8px; align-items: center; font-size: 0.8125rem; color: var(--vp-c-text-3); white-space: nowrap; }
+
+
+/* Code (HomePageHighlightedCode.vue) */
+
+.code {
+  font-family: var(--vp-font-family-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 8px 0;
+  overflow-x: auto;
+  color: var(--tok-p);
+  tab-size: 4;
+}
+
+.code .line {
+  display: block;
+  padding: 0 16px;
+  white-space: pre;
+  min-width: 100%;
+}
+
+/* the window keeps the height of its tallest state (the diff, 28 lines), so nothing below moves during the demo */
+.code { min-height: calc(28 * 19.5px + 16px); }
+
+.code .k { color: var(--tok-k); }
+.code .t { color: var(--tok-t); }
+.code .m { color: var(--tok-m); }
+.code .s { color: var(--tok-s); }
+.code .n { color: var(--tok-n); }
+.code .v { color: var(--tok-v); }
+.code .c { color: var(--tok-c); }
+
+.code .line.removed { background-color: #F4433622; border-left: 3px solid #F44336AA; padding-left: 13px; }
+.code .line.added { background-color: #4CAF5022; border-left: 3px solid #4CAF50AA; padding-left: 13px; }
+.code .line.highlighted { background-color: #2196F322; border-left: 3px solid #2196F3AA; padding-left: 13px; }
+
+@media screen and (max-width: 700px) {
+  .code { font-size: 12px; line-height: 1.25; tab-size: 2; min-height: calc(28 * 15px + 16px); }
+}
+
+
+/* Rendered page: the invoice drawn in HTML so the before/after shows without a build. In production
+   this is two real renders. The page is white in both themes and toned down on the dark canvas like
+   the quick-start image (opacity 0.85). */
+
+.page {
+  --page-w: 300px;
+  width: var(--page-w);
+  aspect-ratio: 1 / 1.4142;
+  background: #fff;
+  color: #222;
+  border-radius: 4px;
+  border: 1px solid var(--vp-c-divider);
+  box-shadow: 0 8px 12px -2px rgba(0, 0, 0, 0.12), 0 16px 24px -4px rgba(0, 0, 0, 0.12), 0 24px 32px -8px rgba(0, 0, 0, 0.12);
+  opacity: var(--page-opacity);
+  font-size: calc(var(--page-w) * 0.027);
+  line-height: 1.45;
+  padding: calc(var(--page-w) * 0.09);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--vp-font-family-base);
+  position: relative;
+  transition: opacity 0.4s ease;
+}
+
+html.dark .page {
+  box-shadow: 0 8px 12px -2px rgba(0, 0, 0, 0.4), 0 16px 24px -4px rgba(0, 0, 0, 0.4), 0 24px 32px -8px rgba(0, 0, 0, 0.4);
+}
+
+.page .p-title { font-size: 2.4em; line-height: 1.1; font-weight: 500; }
+.page .p-meta { color: #555; margin-top: 0.4em; }
+.page .p-head { display: flex; justify-content: space-between; align-items: flex-start; }
+.page .p-logo { width: 5.5em; height: 3.2em; background: #c9c9c9; border-radius: 2px; }
+.page .p-addr { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5em; margin-top: 2.4em; }
+.page .p-addr strong { display: block; border-bottom: 1px solid #333; padding-bottom: 0.3em; margin-bottom: 0.4em; font-weight: 500; }
+.page .p-addr div { color: #333; }
+.page table { width: 100%; border-collapse: collapse; margin-top: 2.4em; }
+.page th { text-align: left; font-weight: 600; border-bottom: 1px solid #222; padding: 0.4em 0; }
+.page td { border-bottom: 1px solid #ddd; padding: 0.45em 0; }
+.page th.r, .page td.r { text-align: right; }
+.page .p-total { text-align: right; margin-top: 1.2em; font-size: 1.25em; }
+.page .p-foot { margin-top: auto; text-align: center; color: #555; }
+.page .neg { transition: color 0.3s ease; }
+.page.after .neg { color: #D32F2F; }
+
+.page-caption { margin-top: 10px; font-size: 1rem; font-weight: 500; color: var(--vp-c-text-2); text-align: center; }
+
+/* the page's "rendering" moment: a brief dim */
+.page.rendering { opacity: 0.45; }
+
+
+/* Reasons: the four code-first points as a strip (icon tile + title + description) */
+
+.reasons {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.reason { display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 14px; align-items: start; }
+
+.reason-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background-color: var(--home-surface-inner);
+  color: var(--vp-c-text-1);
+}
+
+.reason-icon svg { width: 18px; height: 18px; }
+.reason .row-title { font-size: 1rem; line-height: 1.375rem; }
+.reason .row-description { font-size: 0.9375rem; line-height: 1.375rem; }
+
+@media screen and (max-width: 1100px) {
+  .reasons { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+}
+
+@media screen and (max-width: 560px) {
+  .reasons { grid-template-columns: minmax(0, 1fr); }
+}
+
+.hairline { height: 1px; background-color: var(--vp-c-divider); }
+
+
+/* State switching: a mockup root carries data-state="rest|mid|done"; elements opt in per state */
+
+[data-state="rest"] .not-rest, [data-state="rest"] .only-mid, [data-state="rest"] .only-done { display: none !important; }
+[data-state="mid"] .only-rest, [data-state="mid"] .only-done { display: none !important; }
+[data-state="done"] .only-rest, [data-state="done"] .only-mid { display: none !important; }
+[data-state="mid"] .not-mid, [data-state="done"] .not-done { display: none !important; }
+[data-state="mid"] .dim-mid, [data-state="done"] .dim-done { opacity: 0.4; }
+
+/* the reasons as a vertical list (side columns) */
+.reasons.vertical { display: flex; flex-direction: column; gap: 16px; }
+.reasons.compact .reason { grid-template-columns: 32px minmax(0, 1fr); column-gap: 12px; }
+.reasons.compact .reason-icon { width: 32px; height: 32px; border-radius: 10px; }
+.reasons.compact .reason-icon svg { width: 15px; height: 15px; }
+.reasons.compact .row-title { font-size: 0.9375rem; line-height: 1.25rem; }
+.reasons.compact .row-description { font-size: 0.875rem; line-height: 1.25rem; margin-top: 2px; }
+
+/* a caret like the agent demo's */
+.caret { display: inline-block; width: 2px; height: 1em; margin-left: 1px; vertical-align: -0.15em; background: currentColor; animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .caret { animation: none; }
+  .page, .page .neg, .action { transition: none; }
+}
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* icons: tiny inline svg set (production uses the Font Awesome kit) */
+.icon { width: 1em; height: 1em; display: inline-block; vertical-align: -0.15em; }
+.ok { color: var(--green); }
+.pending { color: var(--vp-c-text-3); }
+.spin { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }

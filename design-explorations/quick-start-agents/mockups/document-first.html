@@ -1,0 +1,117 @@
+<!doctype html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup 5: Document First</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Concept 5: the rendered page is the biggest thing in the panel, with the request bar directly
+   above it. The code sits beside it with the four reasons in a compact two-by-two grid under it.
+   The demo changes the page the reader is looking at; the diff is the evidence next to it. */
+
+.df-body {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 40px;
+  margin-top: 28px;
+  align-items: start;
+}
+
+.request {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 10px 12px 10px 16px;
+  margin-bottom: 20px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  background: var(--home-surface-inner);
+}
+
+.request .icon { width: 16px; height: 16px; color: var(--vp-c-text-3); flex: 0 0 auto; }
+.request .text { font-size: 1rem; line-height: 1.5rem; color: var(--vp-c-text-1); min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.request .text.quiet { color: var(--vp-c-text-2); }
+.request .text code { font-size: 0.9375rem; }
+.spacer { flex: 1 1 auto; }
+
+.page-wrap { display: flex; flex-direction: column; align-items: center; }
+.page-wrap .page { --page-w: 340px; }
+
+.bottom-reasons { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--vp-c-divider); }
+
+@media screen and (max-width: 1100px) {
+  .df-body { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .page-wrap .page { --page-w: 340px; }
+}
+
+@media screen and (max-width: 700px) {
+  .request { flex-wrap: wrap; }
+  .request .text { white-space: normal; }
+}
+</style>
+</head>
+<body>
+
+<div class="mock-note">Concept 5 · Document First. The page is the subject: large, with the request directly above it. The request text is visible at rest because it is the product owner's daily request; nothing moves until 4 s in view or a click. The code beside it is the evidence that the change was small.</div>
+
+<div class="content">
+  <section class="panel" data-demo data-state="rest" aria-label="Documents as code">
+
+    <div class="panel-head">
+      <div class="lead">
+        <h2 class="card-title">The document is code. Ask for a change and watch it land.</h2>
+        <p class="card-description">A request becomes a small diff. You review it, and the PDF follows.</p>
+      </div>
+      <div data-install></div>
+    </div>
+
+    <div class="df-body">
+      <div>
+        <div class="request" aria-live="polite">
+          <div class="only-rest" style="display: contents">
+            <span data-icon="person"></span>
+            <span class="text">“Show negative amounts in red.”</span>
+            <span class="spacer"></span>
+            <button type="button" class="action small primary"><span data-icon="play"></span> Play <span class="meta">15 s</span></button>
+          </div>
+          <div class="only-mid" style="display: contents">
+            <span data-icon="spinner"></span>
+            <span class="text">Agent editing <code>InvoiceDocument.cs</code></span>
+            <span class="spacer"></span>
+            <span class="chip"><span class="num minus">−1</span> <span class="num plus">+2</span></span>
+            <span class="chip">review next</span>
+          </div>
+          <div class="only-done" style="display: contents">
+            <span class="ok" data-icon="checkCircle"></span>
+            <span class="text">Reviewed by you, rendered again</span>
+            <span class="spacer"></span>
+            <span class="chip"><span class="num minus">−1</span> <span class="num plus">+2</span></span>
+            <button type="button" class="action small"><span data-icon="replay"></span> Replay</button>
+          </div>
+        </div>
+
+        <div class="page-wrap">
+          <div class="not-done" data-page="before"></div>
+          <div class="only-done" data-page="after"></div>
+          <div class="page-caption">invoice.pdf</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="only-rest" data-window="InvoiceDocument.cs"><div data-code="plain"></div></div>
+        <div class="only-mid" data-window="InvoiceDocument.cs" data-meta="proposed change"><div data-code="diff"></div></div>
+        <div class="only-done" data-window="InvoiceDocument.cs" data-meta="main"><div data-code="accepted"></div></div>
+
+      </div>
+    </div>
+
+    <div class="bottom-reasons" data-reasons="compact short"></div>
+
+  </section>
+</div>
+
+<script src="shared.js"></script>
+</body>
+</html>

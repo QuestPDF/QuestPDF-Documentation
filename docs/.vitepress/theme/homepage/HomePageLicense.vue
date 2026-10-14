@@ -113,12 +113,14 @@ const includes = [
   }
 
   /* the same glow and faint rays as the showcase cards (HomePageCtaCard.vue), in the Community
-     tier's green, but from the panel's top-left corner, behind the heading, rather than from the top centre */
+     tier's green, but from the panel's left edge, centred behind the heading (64px down, not the corner),
+     rather than from the top centre */
   .license-panel {
     --accent: #67B84D;
     --accent-secondary: #4CAF50;
     --rays-x: 0%;
-    --rays-centre: -90px;
+    --rays-centre: -40px;
+    --glow-y: 64px;
   }
 
   .background-gradient {
@@ -129,8 +131,8 @@ const includes = [
     border-radius: inherit;
     overflow: hidden;
     background-image:
-        radial-gradient(ellipse 90% 55% at 0% 0%, color-mix(in srgb, var(--accent) 11%, transparent), transparent),
-        radial-gradient(ellipse 50% 30% at 0% 0%, color-mix(in srgb, var(--accent-secondary) 5%, transparent), transparent);
+        radial-gradient(ellipse 90% 55% at 0% var(--glow-y), color-mix(in srgb, var(--accent) 11%, transparent), transparent),
+        radial-gradient(ellipse 50% 30% at 0% var(--glow-y), color-mix(in srgb, var(--accent-secondary) 5%, transparent), transparent);
   }
 
   .background-gradient::before {

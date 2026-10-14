@@ -1,34 +1,38 @@
-void StockList(IContainer container, IEnumerable<Stock> stocks)
+IContainer DrawTask(TodoTask task)
 {
-    container.Column(column =>
+    return Container.Create().Column(column =>
     {
-        column.Spacing(8);
+        column.Spacing(5);
 
-        foreach (var stock in stocks)
-            column.Item().Element(x => StockRow(x, stock));
+        column.Item().Row(row =>
+        {
+            row.ConstantItem(20).Svg(task.IsDone ? "check.svg" : "uncheck.svg");
+
+            row.RelativeItem()
+                .PaddingLeft(5)
+                .Text(task.Title)
+                .FontColor(task.IsImportant ? Colors.Orange.Darken2 : Colors.Black)
+                .Strikethrough(task.IsDone);
+
+            row.ConstantItem(50).Text(task.DueDate?.ToShortDateString() ?? "No due date");
+
+            row.ConstantItem(50).Inlined(inlined =>
+            {
+                foreach (var tag in task.Tags)
+                    inlined.Item().Element(DrawTag(tag));
+            });
+        });
+
+        foreach (var subtask in task.Subtasks)
+            column.Item().PaddingLeft(25).Element(DrawTask(subtask));
     });
 }
 
-void StockRow(IContainer container, Stock stock)
+IContainer DrawTag(string tag)
 {
-    var (background, text, icon) = stock.Change switch
-    {
-        > 0 => (Colors.Green.Lighten4, Colors.Green.Darken3, Icons.ArrowUp),
-        < 0 => (Colors.Red.Lighten4, Colors.Red.Darken3, Icons.ArrowDown),
-        _ => (Colors.Grey.Lighten3, Colors.Grey.Darken3, Icons.Dot)
-    };
-
-    container
-        .Background(background)
-        .CornerRadius(8)
-        .Padding(12)
-        .DefaultTextStyle(x => x.FontColor(text))
-        .Row(row =>
-        {
-            row.Spacing(12);
-            row.ConstantItem(14).AlignMiddle().Svg(icon);
-            row.RelativeItem().Text(stock.Name).SemiBold();
-            row.ConstantItem(80).AlignRight().Text($"{stock.Price:F2}");
-            row.ConstantItem(70).AlignRight().Text($"{stock.Change:+0.00;-0.00;0.00}%");
-        });
+    return Container.Create()
+        .CornerRadius(4).Border(1, Colors.Gray.Lighten2)
+        .PaddingVertical(2).PaddingHorizontal(4)
+        .Text(tag.ToUpper())
+        .FontColor(Colors.Gray.Darken1).FontSize(10);
 }

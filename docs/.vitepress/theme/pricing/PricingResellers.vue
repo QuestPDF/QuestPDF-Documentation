@@ -34,25 +34,45 @@ const resellers = [
 </script>
 
 <template>
-  <article class="content pricing-resellers">
-    <div class="section-header">
-      <h2>Purchase Through Your Preferred Reseller</h2>
-      <p class="sub-header">Any software reseller can order QuestPDF for you, with no partner agreement or registration needed. Invoices, purchase orders, and multi-year terms are supported — <a href="mailto:contact@questpdf.com">request a quote</a>.</p>
-    </div>
+  <article class="content">
+    <section class="card pricing-resellers">
+      <div class="section-header">
+        <h3 class="card-title">Purchase Through Your Preferred Reseller</h3>
+        <p class="card-description">Any software reseller can order QuestPDF for you, with no partner agreement or registration needed. Invoices, purchase orders, and multi-year terms are supported — <a href="mailto:contact@questpdf.com">request a quote</a>.</p>
+      </div>
 
-    <div class="resellers-list">
-      <template v-for="reseller of resellers" :key="reseller.name">
-        <a :href="reseller.link" target="_blank">
-          <img :src="'/license/resellers/' + reseller.src"
-              :alt="reseller.name"
-              :style="{ height: reseller.size + 'px', marginTop: reseller.marginTop + 'px' }" />
-        </a>
-      </template>
-    </div>
+      <div class="resellers-list">
+        <template v-for="reseller of resellers" :key="reseller.name">
+          <a :href="reseller.link" target="_blank">
+            <img :src="'/license/resellers/' + reseller.src"
+                :alt="reseller.name"
+                :style="{ height: reseller.size + 'px', marginTop: reseller.marginTop + 'px' }" />
+          </a>
+        </template>
+      </div>
+    </section>
   </article>
 </template>
 
 <style scoped>
+
+/* surface, radius and padding come from the shared `.textured-page .card` style; the same centred
+   card as the contact card below it, with the logo row under the header */
+.card.pricing-resellers {
+  align-items: center;
+  justify-content: center;
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section-header {
+  max-width: 750px;
+}
+
+.card-description a {
+  color: var(--vp-c-brand-1);
+}
 
 .resellers-list {
   display: flex;

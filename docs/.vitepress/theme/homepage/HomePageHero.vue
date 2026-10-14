@@ -183,6 +183,8 @@ html.dark .tagline {
   gap: 28px;
 }
 
+/* each stat is a link, but it reads as plain content: no frame, no lift, and the text keeps its
+   colour under the pointer so the global link hover colour does not kick in. */
 .statistic {
   display: flex;
   align-items: center;
@@ -190,8 +192,17 @@ html.dark .tagline {
   color: var(--vp-c-text-1);
 }
 
+.statistic:hover,
+.statistic:hover .value {
+  color: var(--vp-c-text-1);
+}
+
+.statistic:hover .label {
+  color: var(--vp-c-text-2);
+}
+
 /* the icon sits on a quiet tile: a faint wash of the text colour with an ink glyph, so the numbers
-   stay the loudest thing in the list; the tile brightens and lifts a little on hover */
+   stay the loudest thing in the list */
 .statistic-icon {
   display: inline-flex;
   flex: 0 0 auto;
@@ -202,7 +213,6 @@ html.dark .tagline {
   border-radius: 16px;
 
   background-color: color-mix(in srgb, var(--vp-c-text-1) 8%, transparent);
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease;
 }
 
 .statistic-icon i {
@@ -222,16 +232,6 @@ html:not(.dark) .statistic-icon i {
 html:not(.dark) .statistic-icon {
   background-color: #FFFFFF;
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 8%, transparent);
-}
-
-.statistic:hover .statistic-icon {
-  transform: translateY(-2px) scale(1.05);
-  background-color: color-mix(in srgb, var(--vp-c-text-1) 13%, transparent);
-}
-
-html:not(.dark) .statistic:hover .statistic-icon {
-  background-color: #FFFFFF;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 14%, transparent);
 }
 
 .statistic .title {

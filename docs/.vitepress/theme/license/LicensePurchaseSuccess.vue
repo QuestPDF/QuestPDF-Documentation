@@ -112,6 +112,10 @@ const orderDetails = [
             <a class="action" href="https://customer-portal.paddle.com/cpl_01gmdq0qdr8madhdchknpb52we" target="_blank">Open Customer Portal</a>
           </section>
 
+          <!-- the same dotted seam as on the contact page: the license and billing facts above it,
+               the assistance note below -->
+          <div class="divider dotted-divider" aria-hidden="true"></div>
+
           <!-- full width, so the short assistance note does not sit alone in a half-empty row -->
           <section class="panel assistance-card">
             <div>
@@ -288,6 +292,13 @@ html.dark .status-tag {
 
 .success-card .description-items {
   margin-bottom: 24px;
+}
+
+/* the seam (the shared dotted divider, CustomPages.css) spans the grid; the grid gap on either
+   side plus this margin puts it 48px from the panels, as on the contact page */
+.divider {
+  grid-column: 1 / -1;
+  margin: 16px 0;
 }
 
 .assistance-card {

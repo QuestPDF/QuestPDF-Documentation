@@ -1,0 +1,35 @@
+<!doctype html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick start + agents: mockups</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+  .list { display: grid; gap: 16px; margin-top: 24px; }
+  .item { display: grid; grid-template-columns: 2.5rem minmax(0, 1fr); gap: 16px; padding: 20px 24px; border-radius: 16px; background: var(--home-surface); box-shadow: var(--home-surface-edge); color: inherit; }
+  .item .n { font-size: 1.5rem; font-weight: 700; color: var(--vp-c-text-3); }
+  .item .links { margin-top: 8px; display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.875rem; }
+</style>
+</head>
+<body>
+<div class="content">
+  <h2 class="card-title">Merged quick-start and agent panel: five mockups</h2>
+  <p class="card-description">Every page opens from the file system. The toolbar at the top right switches Resting / Mid-demo / Done and dark / light; the same can be set with <code>?state=</code> and <code>?theme=</code>. See <code>../proposals.md</code>.</p>
+  <div class="list" id="list"></div>
+</div>
+<script>
+  const concepts = [
+    ['pull-request', 'Pull Request', 'The request as a pull request: review card above the code, checks go green, the card settles as merged.'],
+    ['four-steps', 'Four Steps', 'A Request → Change → Review → Document strip above the code and page; lights up step by step.'],
+    ['scrub', 'Scrub', 'No autoplay: a five-position slider the reader drags through code, request, change, review, document.'],
+    ['margin-notes', 'Margin Notes', 'Static annotated code with the four reasons pinned to lines; one Run button; the Total-line note goes live.'],
+    ['document-first', 'Document First', 'The page is the subject, the request bar sits above it, the code beside it is the evidence.']
+  ];
+  document.getElementById('list').innerHTML = concepts.map(([f, name, text], i) =>
+    `<div class="item"><div class="n">${i + 1}</div><div><div class="row-title"><a href="${f}.html">${name}</a></div><p class="row-description">${text}</p>
+     <div class="links"><a href="${f}.html?state=rest">resting</a><a href="${f}.html?state=mid">mid-demo</a><a href="${f}.html?state=done">done</a><a href="${f}.html?state=done&theme=light">light</a></div></div></div>`
+  ).join('');
+</script>
+</body>
+</html>

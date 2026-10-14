@@ -1,0 +1,161 @@
+<!doctype html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup 4: Margin Notes</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* Concept 4: a static, annotated layout. The code on the left; a notes gutter in the middle with the
+   four reasons pinned to the lines they are about; the page on the right with the one explicit
+   trigger under it. During the demo the note at the Total line becomes the live note (request,
+   proposal, review) and the other notes dim. */
+
+.mn-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px 260px;
+  gap: 28px;
+  margin-top: 32px;
+  align-items: start;
+}
+
+.notes { position: relative; min-height: 560px; }
+
+/* one note per line; `top` is the line's offset in the code window: 41px header + 8px padding + 19.5px per line */
+.note {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 2px 0 2px 16px;
+  border-left: 2px solid var(--vp-c-divider);
+  transition: opacity 0.3s ease;
+}
+
+.note::before {
+  content: "";
+  position: absolute;
+  left: -29px;
+  top: 10px;
+  width: 24px;
+  height: 2px;
+  background: var(--vp-c-divider);
+}
+
+.note .row-title { font-size: 0.9375rem; line-height: 1.25rem; }
+.note .row-description { font-size: 0.875rem; line-height: 1.25rem; margin-top: 2px; }
+
+.note.live { border-left-color: var(--vp-c-brand-2); }
+.note.live::before { background: var(--vp-c-brand-2); }
+.note.live .row-title { color: var(--vp-c-text-1); }
+.note.live .label { color: var(--vp-c-brand-1); }
+.note.live .chip { margin-top: 6px; }
+.note.live .ok { color: var(--green); }
+.note.live .status { display: flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 0.875rem; color: var(--vp-c-text-2); }
+.note.live .status .icon { width: 14px; height: 14px; }
+
+.side { display: flex; flex-direction: column; align-items: center; }
+.side .page { --page-w: 260px; }
+.side .trigger { margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.side .trigger .hint { font-size: 0.8125rem; line-height: 1.25rem; color: var(--vp-c-text-3); }
+
+@media screen and (max-width: 1100px) {
+  .mn-body { grid-template-columns: minmax(0, 1fr) 280px; }
+  .notes { grid-column: 1 / -1; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 32px; }
+  .note { position: static; }
+  .note::before { display: none; }
+}
+
+@media screen and (max-width: 760px) {
+  .mn-body { grid-template-columns: minmax(0, 1fr); }
+  .notes { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<div class="mock-note">Concept 4 · Margin Notes. Entirely static at rest: the four reasons are pinned to the lines they describe. Nothing autoplays; the one button under the page runs the request once. During the demo the note at the Total line becomes the live note and the other three dim.</div>
+
+<div class="content">
+  <section class="panel" data-demo data-state="rest" aria-label="Documents as code">
+
+    <div class="panel-head">
+      <div class="lead">
+        <h2 class="card-title">Read the document in C#</h2>
+        <p class="card-description">The table from the invoice tutorial and the page it renders. Documents are code, so everything you know about software applies.</p>
+      </div>
+      <div data-install></div>
+    </div>
+
+    <div class="mn-body">
+      <div>
+        <div class="only-rest" data-window="InvoiceDocument.cs"><div data-code="plain"></div></div>
+        <div class="only-mid" data-window="InvoiceDocument.cs" data-meta="proposed change"><div data-code="diff"></div></div>
+        <div class="only-done" data-window="InvoiceDocument.cs" data-meta="main"><div data-code="accepted"></div></div>
+      </div>
+
+      <div class="notes" aria-label="Why documents as code">
+        <!-- pinned to the window header: the file itself -->
+        <article class="note dim-mid dim-done" style="top: 6px">
+          <h3 class="row-title">Reviewable in version control</h3>
+          <p class="row-description">A document change is a diff, reviewed in a pull request like the rest of your code.</p>
+        </article>
+
+        <!-- line 3: container.Table(table => -->
+        <article class="note dim-mid dim-done" style="top: 98px">
+          <h3 class="row-title">Reusable components</h3>
+          <p class="row-description">A method or an IComponent class, shared across documents and projects.</p>
+        </article>
+
+        <!-- line 19: foreach -->
+        <article class="note dim-mid dim-done" style="top: 400px">
+          <h3 class="row-title">Dynamic content is just code</h3>
+          <p class="row-description">Loops, conditions and functions build the page. Your IDE's tools work on it.</p>
+        </article>
+
+        <!-- line 23: the Total cell; at rest the agent reason, during the demo the live note -->
+        <article class="note only-rest" style="top: 478px">
+          <h3 class="row-title">Works with your coding agent</h3>
+          <p class="row-description">A typed API the compiler checks, layout errors that name the element at fault, docs as llms.txt.</p>
+        </article>
+
+        <article class="note live only-mid" style="top: 478px" aria-live="polite">
+          <div class="label">Request</div>
+          <h3 class="row-title">“Show negative amounts in red.”</h3>
+          <div class="status"><span data-icon="spinner"></span> Your agent proposes <span class="num minus">−1</span> <span class="num plus">+2</span> lines</div>
+          <div class="status"><span class="ok" data-icon="checkCircle"></span> Compiles</div>
+          <div class="status"><span class="pending" data-icon="circle"></span> Waiting for your review</div>
+        </article>
+
+        <article class="note live only-done" style="top: 478px" aria-live="polite">
+          <div class="label">Merged</div>
+          <h3 class="row-title">“Show negative amounts in red.”</h3>
+          <div class="status"><span class="ok" data-icon="checkCircle"></span> <span class="num minus">−1</span> <span class="num plus">+2</span> lines, compiles</div>
+          <div class="status"><span class="ok" data-icon="checkCircle"></span> Reviewed by you</div>
+          <div class="status"><span class="ok" data-icon="checkCircle"></span> invoice.pdf rendered again</div>
+        </article>
+      </div>
+
+      <div class="side">
+        <div class="not-done" data-page="before"></div>
+        <div class="only-done" data-page="after"></div>
+        <div class="page-caption">invoice.pdf</div>
+
+        <div class="trigger only-rest">
+          <button type="button" class="action"><span data-icon="play"></span> Run a request <span class="meta">15 s</span></button>
+          <span class="hint">One request from a product owner, handled by your agent and reviewed by you.</span>
+        </div>
+        <div class="trigger only-mid">
+          <span class="hint">The page updates after your review.</span>
+        </div>
+        <div class="trigger only-done">
+          <button type="button" class="action"><span data-icon="replay"></span> Replay</button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<script src="shared.js"></script>
+</body>
+</html>

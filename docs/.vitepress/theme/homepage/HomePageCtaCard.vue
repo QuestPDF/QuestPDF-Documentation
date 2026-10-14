@@ -13,7 +13,10 @@ import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
    Both visuals rest closed (pages stacked on top of each other) until the card scrolls into view, then
    open once, through the same transitions as the hover spread. Under prefers-reduced-motion nothing
-   moves: the pages sit open from the start and hover only changes colours and shadows. */
+   moves: the pages sit open from the start and hover only changes colours and shadows.
+
+   A "visual" slot replaces the pages altogether: the intro-video card fills it with the 3D invoice build
+   (HomePageCtaBuildVisual.vue), which runs its own entrance and hover and listens for them on this card. */
 
 const props = withDefaults(defineProps<{
   title: string;
@@ -25,8 +28,9 @@ const props = withDefaults(defineProps<{
   href: string;
   external?: boolean;
 
-  /* pages shown, first one in front (video) or in the centre (gallery); at least two */
-  images: string[];
+  /* pages shown, first one in front (video) or in the centre (gallery); at least two, unless the
+     visual slot is filled */
+  images?: string[];
   variant?: "video" | "gallery";
 
   /* the badge on the video thumbnail, e.g. "10 min" */
@@ -36,6 +40,7 @@ const props = withDefaults(defineProps<{
   accent?: string;
   accentSecondary?: string;
 }>(), {
+  images: () => [],
   variant: "video",
   external: false,
   accent: "#0094F9",
@@ -152,6 +157,7 @@ onBeforeUnmount(() => {
 
     <!-- the pages are decoration: the link is named by its text -->
     <div class="visual" aria-hidden="true">
+      <slot name="visual">
       <div class="page-stack">
         <div
             v-for="(image, index) of images"
@@ -169,6 +175,7 @@ onBeforeUnmount(() => {
           <span v-if="badge" class="badge">{{ badge }}</span>
         </template>
       </div>
+      </slot>
     </div>
 
     <div class="cta-text">
@@ -213,18 +220,101 @@ onBeforeUnmount(() => {
 .custom-page.home-page .panel.cta-card:hover {
   color: var(--vp-c-text-1);
   transform: translateY(-3px);
-  box-shadow: var(--home-surface-edge), var(--elevation-hover);
+  box-shadow: var(--accent-halo);
   background-color: color-mix(in srgb, var(--home-surface), #FFF 20%);
 }
 
 html.dark .custom-page.home-page .panel.cta-card:hover {
-  box-shadow: var(--elevation-hover);
+  box-shadow: var(--elevation-hover), var(--accent-halo);
   background-color: rgba(255, 255, 255, 0.07);
 }
 
 .cta-card:focus-visible {
   outline: 2px solid var(--vp-c-brand-1);
   outline-offset: 4px;
+}
+
+
+/* Hover ring: the card's edge lights up in the accent colours while the pointer rests on it, with three
+   brighter highlights travelling around the edge, and a soft halo in the same colour spreads under the
+   card. The ring is an ::after covering the card, its conic gradient masked to the outer 2px (the same
+   technique as the glass rim in CustomPages.css); it sits above the pages, which the gallery row runs
+   under at the card's edge. The gradient's start angle is a registered property, so it can be animated;
+   a browser without @property shows the ring without the motion. */
+
+@property --cta-ring-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.cta-card {
+  /* light theme: the lift shadow itself is tinted with the accent and replaces the resting edge; the grey
+     lift shadow and a blue glow stacked on the pale page turned into a muddy smear under the card, and the
+     1px grey inset line showed through the ring. The upward part of --elevation-hover is left out. */
+  --accent-halo:
+      0 1px 2px rgba(16, 24, 40, 0.04),
+      0 13px 27px -5px color-mix(in srgb, var(--accent) 18%, transparent),
+      0 8px 16px -8px color-mix(in srgb, var(--accent) 24%, transparent);
+}
+
+html.dark .cta-card {
+  /* dark theme: a soft glow of the accent, over the usual lift shadow */
+  --accent-halo: 0 0 48px -16px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+.cta-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  border-radius: inherit;
+  padding: 2px;
+  pointer-events: none;
+
+  /* a faint tint all the way round, and three arcs of the accent colours spaced evenly (every 120deg);
+     the peak of each arc is lightened a little on the dark theme, where a tint of white reads as light */
+  --ring-base: color-mix(in srgb, var(--accent) 22%, transparent);
+  --ring-peak: var(--accent);
+  background: conic-gradient(
+      from var(--cta-ring-angle),
+      var(--ring-base) 0deg,
+      var(--accent-secondary) 24deg,
+      var(--ring-peak) 40deg,
+      var(--ring-base) 72deg,
+      var(--ring-base) 120deg,
+      var(--accent-secondary) 144deg,
+      var(--ring-peak) 160deg,
+      var(--ring-base) 192deg,
+      var(--ring-base) 240deg,
+      var(--accent-secondary) 264deg,
+      var(--ring-peak) 280deg,
+      var(--ring-base) 312deg,
+      var(--ring-base) 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+html.dark .cta-card::after {
+  --ring-peak: color-mix(in srgb, var(--accent) 80%, #FFF);
+}
+
+/* the ring never reaches full strength: it should invite, not shout */
+.cta-card:hover::after,
+.cta-card:focus-visible::after {
+  opacity: 0.75;
+  animation: cta-ring-spin 12s linear infinite;
+}
+
+@keyframes cta-ring-spin {
+  to {
+    --cta-ring-angle: 360deg;
+  }
 }
 
 
@@ -280,8 +370,11 @@ html.dark .cta-card {
   font-weight: 400;
 }
 
-.arrow-icon {
+/* .custom-page .fa-solid paints every icon brand blue (CustomPages.css); the arrow must follow the
+   card's own accent, like the label next to it */
+.cta-card .arrow-icon {
   font-size: 14px;
+  color: var(--accent-text);
   transition: transform 0.25s ease;
 }
 
@@ -622,6 +715,15 @@ html.dark {
   opacity: 1;
 }
 
+/* light theme: the glow is centred behind the pages rather than in the card's top-left corner.
+   The pages column is 38% of the content width after the 32px padding, so its centre sits at
+   32px + 19% of (width - 64px) = 19% + 20px */
+html:not(.dark) .background-gradient {
+  background-image:
+      radial-gradient(ellipse 28% 60% at calc(19% + 20px) 50%, color-mix(in srgb, var(--accent) 16%, transparent), transparent),
+      radial-gradient(ellipse 18% 36% at calc(19% + 20px) 50%, color-mix(in srgb, var(--accent-secondary) 7%, transparent), transparent);
+}
+
 .background-gradient::before {
   content: "";
   position: absolute;
@@ -761,6 +863,12 @@ html.dark .background-gradient::before {
         radial-gradient(ellipse 70% 90% at 0% 0%, color-mix(in srgb, var(--accent) 13%, transparent), transparent);
   }
 
+  /* the thumbnail is 72px wide after 20px of padding */
+  html:not(.dark) .background-gradient {
+    background-image:
+        radial-gradient(ellipse 80px 80px at 56px 50%, color-mix(in srgb, var(--accent) 16%, transparent), transparent);
+  }
+
   .background-gradient::before {
     content: none;
   }
@@ -774,6 +882,12 @@ html.dark .background-gradient::before {
   .custom-page.home-page .panel.cta-card:hover {
     transform: none;
     transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+
+  /* the ring still lights up, but its highlights stay where they are */
+  .cta-card:hover::after,
+  .cta-card:focus-visible::after {
+    animation: none;
   }
 
   .page-card,
