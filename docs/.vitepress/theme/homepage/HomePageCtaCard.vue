@@ -6,8 +6,9 @@ import { computed, ref } from "vue";
 
    The visual comes from the "visual" slot: the intro-video card fills it with the 3D invoice build
    (HomePageCtaBuildVisual.vue), the sample-gallery card with the 3D pile of sample pages
-   (HomePageCtaDeckVisual.vue). The slot gets `active` while the card is hovered or has keyboard focus
-   (a click's focus does not count: the click navigates anyway), and the visual plays its hover on it. */
+   (HomePageCtaDeckVisual.vue). The card is `active` while it is hovered or has keyboard focus (a click's
+   focus does not count: the click navigates anyway): the card lifts and lights its ring, and the slot
+   gets `active` so the visual plays its hover. */
 
 withDefaults(defineProps<{
   title: string;
@@ -37,6 +38,7 @@ function onFocus(event: FocusEvent) {
 <template>
   <a
       class="panel cta-card"
+      :class="{ active }"
       :style="{ '--accent': accent, '--accent-secondary': accentSecondary }"
       :href="href"
       @mouseenter="hovered = true"
@@ -67,7 +69,6 @@ function onFocus(event: FocusEvent) {
 /* Card: a link styled as a panel; the visual takes the left 38%, the text the rest */
 
 .custom-page.home-page .panel.cta-card {
-  position: relative;
   isolation: isolate; /* keeps the gradient (z-index: -1) above the panel background but below the content */
   overflow: hidden; /* a visual that runs past its column is clipped at the card's rounded edge */
 
@@ -78,21 +79,18 @@ function onFocus(event: FocusEvent) {
   min-height: 256px;
   padding: 32px;
 
-  color: var(--vp-c-text-1);
-  text-decoration: none;
+  color: var(--vp-c-text-1); /* outranks the generic link hover (.custom-page a:not(.action):hover) */
 
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
-/* the generic link hover (.custom-page a:not(.action):hover) would recolour the whole card */
-.custom-page.home-page .panel.cta-card:hover {
-  color: var(--vp-c-text-1);
+.custom-page.home-page .panel.cta-card.active {
   transform: translateY(-3px);
   box-shadow: var(--accent-halo);
   background-color: color-mix(in srgb, var(--surface), #FFF 20%);
 }
 
-html.dark .custom-page.home-page .panel.cta-card:hover {
+html.dark .custom-page.home-page .panel.cta-card.active {
   box-shadow: var(--elevation-hover), var(--accent-halo);
   background-color: rgba(255, 255, 255, 0.07);
 }
@@ -103,7 +101,7 @@ html.dark .custom-page.home-page .panel.cta-card:hover {
 }
 
 
-/* Hover ring: the card's edge lights up in the accent colours while the pointer rests on it, with three
+/* Hover ring: the card's edge lights up in the accent colours while the card is active, with three
    brighter highlights travelling around the edge, and a soft halo in the same colour spreads under the
    card. The ring is an ::after covering the card, its conic gradient masked to the outer 2px (the same
    technique as the glass rim in CustomPages.css); it sits above the visual, so a visual reaching the
@@ -178,8 +176,7 @@ html.dark .cta-card::after {
 }
 
 /* the ring never reaches full strength: it should invite, not shout */
-.cta-card:hover::after,
-.cta-card:focus-visible::after {
+.cta-card.active::after {
   opacity: 0.75;
   animation: cta-ring-spin 12s linear infinite;
 }
@@ -222,8 +219,7 @@ html.dark .cta-card::after {
   transition: transform 0.25s ease;
 }
 
-.cta-card:hover .arrow-icon,
-.cta-card:focus-visible .arrow-icon {
+.cta-card.active .arrow-icon {
   transform: translateX(4px);
 }
 
@@ -248,8 +244,6 @@ html.dark .cta-card::after {
   pointer-events: none;
   inset: 0;
   z-index: -1;
-  border-radius: inherit;
-  overflow: hidden;
   background-image:
       radial-gradient(ellipse 70% 90% at 18% 0%, color-mix(in srgb, var(--accent) 13%, transparent), transparent),
       radial-gradient(ellipse 40% 50% at 18% 0%, color-mix(in srgb, var(--accent-secondary) 6%, transparent), transparent);
@@ -257,8 +251,7 @@ html.dark .cta-card::after {
   transition: opacity 0.3s ease;
 }
 
-.cta-card:hover .background-gradient,
-.cta-card:focus-visible .background-gradient {
+.cta-card.active .background-gradient {
   opacity: 1;
 }
 
@@ -346,19 +339,17 @@ html:not(.dark) .background-gradient {
 
 @media (prefers-reduced-motion: reduce) {
   .custom-page.home-page .panel.cta-card,
-  .custom-page.home-page .panel.cta-card:hover {
+  .custom-page.home-page .panel.cta-card.active {
     transform: none;
     transition: box-shadow 0.3s ease, background-color 0.3s ease;
   }
 
   /* the ring still lights up, but its highlights stay where they are */
-  .cta-card:hover::after,
-  .cta-card:focus-visible::after {
+  .cta-card.active::after {
     animation: none;
   }
 
-  .cta-card:hover .arrow-icon,
-  .cta-card:focus-visible .arrow-icon {
+  .cta-card.active .arrow-icon {
     transform: none;
   }
 }

@@ -5,8 +5,8 @@
     </header>
 
     <div class="license-tiers">
-      <section v-for="license of licenses" :key="license.name" class="license-tier card" :class="license.name">
-        <div class="tag"><i class="fa-solid fa-star"></i>Most Popular</div>
+      <section v-for="license of licenses" :key="license.name" class="license-tier panel" :class="license.name">
+        <div v-if="license.name === 'professional'" class="tag"><i class="fa-solid fa-star"></i>Most Popular</div>
 
         <header>
           <div class="tier-name">{{ license.name }}</div>
@@ -153,7 +153,7 @@ const licenses = [
   grid-gap: 0 32px;
 }
 
-/* the cards sit on the shared surface (`.card`, CustomPages.css); only the
+/* the cards sit on the shared surface (`.panel`, CustomPages.css); only the
    professional card tints it with the brand blue, so it reads as the highlighted one */
 .license-tiers .license-tier {
   position: relative;
@@ -162,7 +162,7 @@ const licenses = [
   grid-row: span 6;
   justify-items: start;
   align-items: start;
-  padding: 48px; /* wider than the shared 32px card inset */
+  padding: 48px; /* wider than the shared 40px panel inset */
 }
 
 /* a faint brand tint in both modes: the share is small enough that the blue stays a wash
@@ -178,6 +178,19 @@ html.dark .license-tiers .license-tier.professional {
 .license-tier .tag { grid-row: 1; }
 .license-tier header { grid-row: 2; }
 .license-tier hr { grid-row: 3; }
+
+.license-tier hr {
+  margin: 32px 0;
+  border: none;
+  border-top: 1px solid var(--vp-c-gutter);
+  width: 100%
+}
+
+@media screen and (max-width: 700px) {
+  .license-tier hr {
+    border: 1px solid var(--vp-c-gutter);
+  }
+}
 .license-tier .details { grid-row: 4; }
 .license-tier .action { grid-row: 5; }
 .license-tier .footnote { grid-row: 6; }
@@ -210,13 +223,9 @@ html.dark .license-tiers .license-tier.professional {
 }
 
 
-/* "Most Popular" tag */
+/* "Most Popular" tag, on the professional card */
 
-.license-tier:not(.professional) .tag {
-  display: none;
-}
-
-.license-tier.professional .tag {
+.license-tier .tag {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -231,13 +240,11 @@ html.dark .license-tiers .license-tier.professional {
   word-spacing: 3px;
 }
 
-.license-tier.professional .tag .fa-star {
-  color: #2196F3;
+.license-tier .tag .fa-star {
   font-size: 1rem;
 }
 
-html.dark .license-tier.professional .tag,
-html.dark .license-tier.professional .tag .fa-star {
+html.dark .license-tier .tag {
   color: #64B5F6;
 }
 
@@ -296,13 +303,13 @@ html.dark {
   font-size: 2.25rem;
   line-height: 2.25rem;
   font-weight: 700;
-  color: var(--vp-c-text-1) !important;
+  color: var(--vp-c-text-1);
 }
 
 .license-tier .price-tax {
   margin-left: 8px;
   font-weight: 400;
-  color: var(--vp-c-text-1) !important;
+  color: var(--vp-c-text-1);
 }
 
 .license-tier .price-free {
@@ -343,7 +350,7 @@ html.dark {
 }
 
 .details-item p {
-  color: var(--vp-c-text-1) !important;
+  color: var(--vp-c-text-1);
   line-height: 1.5rem;
   font-size: 1rem;
 }

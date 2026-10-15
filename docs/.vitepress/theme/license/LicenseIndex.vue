@@ -30,7 +30,7 @@ const documents = [
 </script>
 
 <template>
-  <!-- the canvas (body background) is shared with the document pages, see "Legal pages canvas" in CustomPages.css -->
+  <!-- the canvas (body background) is shared with the document pages, see "Page canvas" in CustomPages.css -->
   <div class="custom-page legal-page">
     <div class="container texture-dots">
       <article class="content">
@@ -83,8 +83,6 @@ const documents = [
   gap: 32px;
 
   padding: 18px 24px 18px 32px;
-  text-decoration: none;
-  color: inherit;
   transition: background-color 0.2s ease;
 
   .link-title {

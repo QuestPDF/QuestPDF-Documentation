@@ -5,10 +5,10 @@ interface Link {
 }
 
 interface ContactInformation {
-    icon: string;
-    title: string;
-    description: string;
-    links: Link[];
+  icon: string;
+  title: string;
+  description: string;
+  links: Link[];
 }
 
 const contacts: ContactInformation[] = [
@@ -179,7 +179,6 @@ const contacts: ContactInformation[] = [
 }
 
 .business-intro {
-  margin: 0;
   font-size: 0.9375rem;
 }
 
@@ -194,7 +193,6 @@ const contacts: ContactInformation[] = [
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
-  margin: 0;
 }
 
 .business-facts dt {
@@ -208,7 +206,6 @@ const contacts: ContactInformation[] = [
 }
 
 .business-facts dd {
-  margin: 0;
   font-size: 0.9375rem;
   line-height: 1.5rem;
   color: var(--vp-c-text-1);

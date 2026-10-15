@@ -164,9 +164,18 @@ const { code, codeTransformer, promptText, typing, sent, working } = useAgentSes
    as the cards, and the window stretches to them (or, if the code is taller, the cards stretch to the
    window). */
 
+/* the AI card's purple: in light mode its icon tiles take a purple tint, and the composer is a light
+   purple field with a quiet border and dark text with a purple cast, so it reads as part of the same
+   tinted surface */
 .custom-page.home-page .panel.quick-start {
   --agent-accent: #7E57C2;
   --tile-purple: #5E35B1;
+  --tile-purple-bg: #F0E6FF;
+  --composer-bg: color-mix(in srgb, var(--agent-accent) 8%, var(--vp-c-bg));
+  --composer-border: color-mix(in srgb, var(--agent-accent) 18%, var(--vp-c-divider));
+  --composer-border-sent: color-mix(in srgb, var(--agent-accent) 35%, var(--vp-c-divider));
+  --composer-text: color-mix(in srgb, var(--agent-accent) 30%, var(--vp-c-text-1));
+
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
   grid-template-areas:
@@ -179,6 +188,11 @@ const { code, codeTransformer, promptText, typing, sent, working } = useAgentSes
 html.dark .custom-page.home-page .panel.quick-start {
   --agent-accent: #9575CD;
   --tile-purple: #B388FF;
+  --tile-purple-bg: var(--surface-inner);
+  --composer-bg: color-mix(in srgb, var(--agent-accent) 12%, var(--surface-inner));
+  --composer-border: color-mix(in srgb, var(--agent-accent) 22%, var(--vp-c-divider));
+  --composer-border-sent: color-mix(in srgb, var(--agent-accent) 50%, transparent);
+  --composer-text: color-mix(in srgb, var(--agent-accent) 35%, var(--vp-c-text-1));
 }
 
 /* a region of the panel: the card's inset, the notes spanning its width */
@@ -213,8 +227,6 @@ html.dark .custom-page.home-page .panel.quick-start {
   flex-direction: column;
   gap: 40px;
   margin: 28px 0 0;
-  padding: 0;
-  list-style: none;
   font-size: 1rem;
   line-height: 1.5rem;
   color: var(--vp-c-text-2);
@@ -252,12 +264,7 @@ html.dark .custom-page.home-page .panel.quick-start {
 
 .agent-card .note i {
   color: var(--tile-purple);
-}
-
-/* in light mode the AI card's icon tiles carry a purple tint, so the icons sit on their own
-   coloured surface rather than the plain grey of the C# card's tiles */
-html:not(.dark) .agent-card .note i {
-  background-color: #F0E6FF;
+  background-color: var(--tile-purple-bg);
 }
 
 
@@ -317,7 +324,6 @@ html.dark .window-header {
 .window :deep(.code-source) {
   flex-grow: 1;
   padding: 12px 8px; /* with the 16px of each line, the code starts at 24px, in line with the header and the composer */
-  font-size: 0.875rem;
 }
 
 .composer-dock {
@@ -325,8 +331,8 @@ html.dark .window-header {
 }
 
 
-/* Composer: a chat input on the inner surface with a faint purple tint, a sparkle at the start,
-   the send button a purple circle once the request is sent */
+/* Composer: a chat input on a faint purple tint, a sparkle at the start, the send button a purple
+   circle once the request is sent */
 
 .composer {
   position: relative;
@@ -334,30 +340,15 @@ html.dark .window-header {
   align-items: center;
   gap: 12px;
   padding: 10px 10px 10px 16px;
-  border: 1px solid color-mix(in srgb, var(--agent-accent) 22%, var(--vp-c-divider));
+  border: 1px solid var(--composer-border);
   border-radius: 14px;
-  background-color: color-mix(in srgb, var(--agent-accent) 12%, var(--surface-inner));
+  background-color: var(--composer-bg);
   overflow: hidden;
   transition: border-color 0.3s ease;
 }
 
 .composer.sent {
-  border-color: color-mix(in srgb, var(--agent-accent) 50%, transparent);
-}
-
-/* in light mode the composer is a light purple field with a quiet border; the text is dark with a
-   purple cast so it reads as part of the same tinted surface */
-html:not(.dark) .composer {
-  border-color: color-mix(in srgb, var(--agent-accent) 18%, var(--vp-c-divider));
-  background-color: color-mix(in srgb, var(--agent-accent) 8%, var(--vp-c-bg));
-}
-
-html:not(.dark) .composer.sent {
-  border-color: color-mix(in srgb, var(--agent-accent) 35%, var(--vp-c-divider));
-}
-
-html:not(.dark) .composer-text {
-  color: color-mix(in srgb, var(--agent-accent) 30%, var(--vp-c-text-1));
+  border-color: var(--composer-border-sent);
 }
 
 .composer > * {
@@ -414,7 +405,7 @@ html:not(.dark) .composer-text {
   min-height: 1.375rem;
   font-size: 0.9375rem;
   line-height: 1.375rem;
-  color: color-mix(in srgb, var(--agent-accent) 35%, var(--vp-c-text-1)); /* a trace of purple */
+  color: var(--composer-text);
 }
 
 .caret {

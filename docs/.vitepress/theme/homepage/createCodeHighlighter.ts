@@ -1,6 +1,6 @@
 import { createHighlighterCore } from 'shiki';
 import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
-import {HighlighterCore} from "@shikijs/types";
+import type {HighlighterCore} from "@shikijs/types";
 
 let codeHighlighterInstanceCache: Promise<HighlighterCore> | null = null;
 

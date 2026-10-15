@@ -111,15 +111,11 @@ footer * {
   & > * {
     margin: 0 auto;
     max-width: var(--custom-page-width);
-    padding: 48px 32px 48px;
+    padding: 48px 32px;
   }
 }
 
 .link-categories {
-  margin: 0 auto;
-  max-width: var(--custom-page-width);
-  padding: 48px 32px 48px;
-
   display: grid;
   grid-template-columns: repeat(4, auto);
   gap: 48px 32px;
@@ -135,9 +131,6 @@ footer * {
   }
 
   ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
     gap: 8px;

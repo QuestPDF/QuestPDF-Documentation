@@ -116,8 +116,6 @@ const includes = [
   gap: 3px;
   flex-grow: 1;
   margin: 32px 0 0;
-  padding: 0;
-  list-style: none;
 }
 
 /* the same rows as the Companion App views list (HomePageCompanion.vue): an 18px icon and a
@@ -244,7 +242,6 @@ html.dark .tier.enterprise .tier-name {
 }
 
 .tier-description {
-  margin: 0;
   font-size: 1rem;
   line-height: 1.5rem;
   color: var(--vp-c-text-2);

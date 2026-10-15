@@ -8,14 +8,11 @@
        1040px the card sits under the app. -->
   <div class="panel">
     <div ref="root" class="companion-tour" @mouseenter="hovered = true" @mouseleave="hovered = false" @focusin="focused = true" @focusout="focused = false">
-      <div
-        class="companion-stage"
-        :class="{ overview: !current.focus }"
-        :style="{ '--companion-fx': `${focusX * 100}%`, '--companion-fy': `${focusY * 100}%` }">
+      <div class="companion-stage" :class="{ overview: !current.focus }" :style="marker">
 
         <!-- the screens, stacked and cross-fading, in the reader's theme, all cropped from the top left
              to one proportion (the layout error screenshot is squarer, so it shows larger) -->
-        <div class="companion-frames" :style="{ aspectRatio: String(aspect) }">
+        <div class="companion-frames">
           <template v-for="frame of frames" :key="frame">
             <img :src="`/companion/${frame}-light.webp`" :alt="frame === current.frame ? 'QuestPDF Companion App' : ''" class="companion-frame light" :class="{ shown: frame === current.frame }" loading="lazy" />
             <img :src="`/companion/${frame}-dark.webp`" :alt="frame === current.frame ? 'QuestPDF Companion App' : ''" class="companion-frame dark" :class="{ shown: frame === current.frame }" loading="lazy" />
@@ -27,14 +24,14 @@
         </div>
 
         <Transition name="companion-card" mode="out-in">
-          <div :key="step" class="companion-card" :style="{ left: `min(${current.card[0] * 100}%, 100% - 12px - var(--companion-card-width))`, top: `${current.card[1] * 100}%` }" aria-live="polite">
+          <div :key="step" class="companion-card" :style="{ '--card-x': `${current.card[0] * 100}%`, '--card-y': `${current.card[1] * 100}%` }" aria-live="polite">
             <strong><i class="fa-regular" :class="view.icon" aria-hidden="true"></i>{{ view.title }}</strong>
             <p>{{ view.description }}</p>
-            <div v-if="shortcut.keys.length" class="companion-shortcut">
+            <div v-if="current.keys" class="companion-shortcut">
               <span class="companion-shortcut-label">Shortcut</span>
               <span class="companion-caps">
-                <template v-for="(key, index) of shortcut.keys" :key="key">
-                  <span v-if="index > 0 && shortcut.combo" class="companion-plus" aria-hidden="true">+</span>
+                <template v-for="(key, index) of current.keys" :key="key">
+                  <span v-if="index > 0" class="companion-plus" aria-hidden="true">+</span>
                   <kbd class="companion-cap">{{ key }}</kbd>
                 </template>
               </span>
@@ -113,83 +110,68 @@ interface View {
   label: string;
   /* the label on phones, one word */
   short: string;
-  /* the card: the feature's name, one line about it, and its keyboard shortcut as documented (only key
-     presses: a mouse gesture goes in the description, the layout issue arrows are buttons in the app) */
+  /* the card: the feature's name and one line about it */
   title: string;
   description: string;
-  keys: string[];
-  /* keys pressed together (Ctrl + W) */
-  combo?: boolean;
 }
 
-/* wording from docs/companion/features.md, shortcuts as documented there */
+/* wording from docs/companion/features.md */
 const views: View[] = [
-  { label: "See changes live", short: "Preview", icon: "fa-window-maximize", title: "Application", description: "The document's structure on the left, its live preview on the right. Save your code and the preview refreshes in place.", keys: [] },
-  { label: "Browse the structure", short: "Structure", icon: "fa-folder-tree", title: "Document hierarchy", description: "Every element of the document as a tree, in the same shape as your fluent API code.", keys: ["Ctrl", "W"], combo: true },
-  { label: "Inspect any element", short: "Inspect", icon: "fa-arrow-pointer", title: "Selected element", description: "Double-click any element to see its configuration, position and size, on every page it appears.", keys: [] },
-  { label: "Zoom into details", short: "Zoom", icon: "fa-magnifying-glass-plus", title: "Magnify", description: "See small details up close without zooming the preview.", keys: ["1"] },
-  { label: "Read coordinates", short: "Coordinates", icon: "fa-location-crosshairs", title: "Check position", description: "Point at anything to read its page and its X and Y coordinates.", keys: ["2"] },
-  { label: "Measure distances", short: "Measure", icon: "fa-ruler-combined", title: "Measure", description: "Measure sizes and distances, vertically or horizontally. Check margins, padding and spacing instead of guessing.", keys: [] },
-  { label: "Find any phrase", short: "Search", icon: "fa-magnifying-glass", title: "Search", description: "Find any phrase; matches are highlighted in both the tree and the preview.", keys: ["Ctrl", "F"], combo: true },
-  { label: "Debug layout issues", short: "Layout", icon: "fa-bug", title: "Layout debugging", description: "When content does not fit, find the likely root cause, with every element color-coded by how it was laid out.", keys: [] }
+  { label: "See changes live", short: "Preview", icon: "fa-window-maximize", title: "Application", description: "The document's structure on the left, its live preview on the right. Save your code and the preview refreshes in place." },
+  { label: "Browse the structure", short: "Structure", icon: "fa-folder-tree", title: "Document hierarchy", description: "Every element of the document as a tree, in the same shape as your fluent API code." },
+  { label: "Inspect any element", short: "Inspect", icon: "fa-arrow-pointer", title: "Selected element", description: "Double-click any element to see its configuration, position and size, on every page it appears." },
+  { label: "Zoom into details", short: "Zoom", icon: "fa-magnifying-glass-plus", title: "Magnify", description: "See small details up close without zooming the preview." },
+  { label: "Read coordinates", short: "Coordinates", icon: "fa-location-crosshairs", title: "Check position", description: "Point at anything to read its page and its X and Y coordinates." },
+  { label: "Measure distances", short: "Measure", icon: "fa-ruler-combined", title: "Measure", description: "Measure sizes and distances, vertically or horizontally. Check margins, padding and spacing instead of guessing." },
+  { label: "Find any phrase", short: "Search", icon: "fa-magnifying-glass", title: "Search", description: "Find any phrase; matches are highlighted in both the tree and the preview." },
+  { label: "Debug layout issues", short: "Layout", icon: "fa-bug", title: "Layout debugging", description: "When content does not fit, find the likely root cause, with every element color-coded by how it was laid out." }
 ];
 
+/* Places are fractions of the frame: the screenshot cropped at the bottom to 1.62:1 from the top left
+   (see .companion-frames). Check them whenever a screenshot changes. */
 interface Step {
   view: number;
   /* the screenshot in public/companion */
   frame: string;
-  /* the shortcut of this screen, when the view has one per screen (Measure: 3 vertically, 4 horizontally) */
+  /* the keyboard shortcut of this screen, as documented (only key presses: a mouse gesture goes in the
+     description, the layout issue arrows are buttons in the app); several keys are pressed together */
   keys?: string[];
-  /* the marker's place as fractions of the screenshot (null: the whole app, no marker) */
+  /* the marker's place (null: the whole app, no marker) */
   focus: [number, number] | null;
-  /* the card's top-left corner as fractions of the frame, set per screen so it covers nothing the view
-     is about (kept clear of the right edge); check these whenever a screenshot changes */
+  /* the card's top-left corner, set per screen so it covers nothing the view is about (kept clear of
+     the right edge) */
   card: [number, number];
 }
 
 const steps: Step[] = [
   { view: 0, frame: "application", focus: null, card: [0.035, 0.48] },
-  { view: 1, frame: "application", focus: [0.12, 0.42], card: [0.36, 0.44] },
-  { view: 2, frame: "selection", focus: [0.62, 0.3], card: [0.03, 0.12] },
-  { view: 3, frame: "magnifier", focus: [0.5, 0.4], card: [0.665, 0.16] },
-  { view: 4, frame: "measurement-point", focus: [0.6, 0.6], card: [0.03, 0.33] },
-  { view: 5, frame: "measurement-vertical", keys: ["3"], focus: [0.497, 0.21], card: [0.02, 0.31] },
-  { view: 5, frame: "measurement-horizontal", keys: ["4"], focus: [0.66, 0.6], card: [0.015, 0.085] },
-  { view: 6, frame: "search", focus: [0.655, 0.53], card: [0.035, 0.2] },
-  { view: 7, frame: "layout-error", focus: [0.1, 0.285], card: [0.2, 0.42] }
+  { view: 1, frame: "application", keys: ["Ctrl", "W"], focus: [0.12, 0.4713], card: [0.36, 0.44] },
+  { view: 2, frame: "selection", focus: [0.62, 0.3367], card: [0.03, 0.12] },
+  { view: 3, frame: "magnifier", keys: ["1"], focus: [0.5, 0.4489], card: [0.665, 0.16] },
+  { view: 4, frame: "measurement-point", keys: ["2"], focus: [0.6, 0.6734], card: [0.03, 0.33] },
+  { view: 5, frame: "measurement-vertical", keys: ["3"], focus: [0.497, 0.2357], card: [0.02, 0.31] },
+  { view: 5, frame: "measurement-horizontal", keys: ["4"], focus: [0.66, 0.6734], card: [0.015, 0.085] },
+  { view: 6, frame: "search", keys: ["Ctrl", "F"], focus: [0.655, 0.5948], card: [0.035, 0.2] },
+  { view: 7, frame: "layout-error", focus: [0.1, 0.3889], card: [0.2, 0.42] }
 ];
 
 const frames = [...new Set(steps.map(s => s.frame))];
-
-/* the frame is cropped at the bottom to 1.62:1 from the top left; focus heights are fractions of each
-   screenshot, so they stretch by the frame's proportion over the screenshot's */
-const aspect = 1.62;
-const imageRatios: Record<string, number> = {
-  "layout-error": 1592 / 1341
-};
 
 const root = ref<HTMLElement | null>(null);
 const { step, current, hovered, focused, selectView } = useCompanionTour(root, steps, 3800);
 
 const view = computed(() => views[current.value.view]);
 
-/* the card shows only the shortcut of the screen being shown */
-const shortcut = computed(() => ({
-  keys: current.value.keys ?? view.value.keys,
-  combo: view.value.combo
-}));
-
 /* the overview keeps the last focus, so the marker fades out where it was instead of jumping */
-const lastFocus = ref<[number, number]>([0.5, 0.4]);
+const lastFocus = ref<[number, number]>([0.5, 0.4489]);
 watch(current, s => {
   if (s.focus)
     lastFocus.value = s.focus;
-}, { immediate: true });
+});
 
-const focusX = computed(() => (current.value.focus ?? lastFocus.value)[0]);
-const focusY = computed(() => {
-  const [, y] = current.value.focus ?? lastFocus.value;
-  return y * aspect / (imageRatios[current.value.frame] ?? 1917 / 1328);
+const marker = computed(() => {
+  const [x, y] = current.value.focus ?? lastFocus.value;
+  return { "--companion-fx": `${x * 100}%`, "--companion-fy": `${y * 100}%` };
 });
 
 
@@ -272,8 +254,10 @@ onBeforeUnmount(() => {
   transition: --companion-fx 0.7s cubic-bezier(0.3, 0.7, 0.2, 1), --companion-fy 0.7s cubic-bezier(0.3, 0.7, 0.2, 1);
 }
 
+/* the screenshots are cropped at the bottom to one proportion, from the top left */
 .companion-frames {
   position: relative;
+  aspect-ratio: 1.62;
   overflow: hidden;
   border-radius: 14px;
   background-color: var(--vp-c-bg);
@@ -368,6 +352,8 @@ html.dark .companion-frame.light {
 .companion-card {
   --companion-card-width: clamp(210px, 30%, 240px);
   position: absolute;
+  left: min(var(--card-x), 100% - 12px - var(--companion-card-width));
+  top: var(--card-y);
   width: var(--companion-card-width);
   padding: 12px 14px 14px;
   border-radius: 12px;
@@ -495,11 +481,6 @@ html.dark .companion-cap {
   align-items: center;
   gap: 10px;
   min-height: 36px;
-  padding: 0;
-  margin: 0;
-  border: 0;
-  background: none;
-  font: inherit;
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 500;
@@ -682,8 +663,8 @@ html.dark .companion-cap {
 @media screen and (max-width: 1040px) {
   .companion-card {
     position: relative;
-    left: auto !important;
-    top: auto !important;
+    left: auto;
+    top: auto;
     width: auto;
     margin-top: 16px;
   }

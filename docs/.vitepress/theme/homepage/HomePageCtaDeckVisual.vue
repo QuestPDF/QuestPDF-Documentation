@@ -36,12 +36,12 @@ const props = defineProps<{ active: boolean }>();
 
 /* hover: the pile is in its hover pose (set on enter, cleared on leave, or at the end of the step in
    progress if one is running then). front: the page in front. leaving: the page that has just left the
-   front and is on its way to the back. stepping: a browse step is in progress, so the pile waits a moment
-   before it advances. The card shows the pile from the start: no entrance. */
+   front and is on its way to the back (-1: none), so a browse step is in progress and the pile waits a
+   moment before it advances. The card shows the pile from the start: no entrance. */
 const hover = ref(false);
 const front = ref(0);
 const leaving = ref(-1);
-const stepping = ref(false);
+const stepping = computed(() => leaving.value >= 0);
 
 /* the shapes on a page, in page coordinates (the page is 148 x 200). No kind: a placeholder line or block.
    block: a photo. frame: an outline. ring / disc: a circle (the donut, a seal, an emblem). band: a faint
@@ -231,7 +231,6 @@ function step() {
 
   leaving.value = front.value;
   front.value = (front.value + 1) % pages.length;
-  stepping.value = true;
 
   stepTimer = setTimeout(settle, STEP + 50);
 }
@@ -239,7 +238,6 @@ function step() {
 /* the hover pose was held while the step finished; it goes now if the pointer has left */
 function settle() {
   leaving.value = -1;
-  stepping.value = false;
   hover.value = props.active;
 }
 

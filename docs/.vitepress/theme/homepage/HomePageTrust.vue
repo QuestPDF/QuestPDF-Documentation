@@ -311,15 +311,12 @@ const platformGroups : PlatformGroup[] = [
   flex-direction: column;
   gap: 4px;
   margin: 6px 0 0;
-  padding: 0;
-  list-style: none;
 }
 
 .platform {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 0;
   font-size: 1rem;
   line-height: 1.5rem;
   color: var(--vp-c-text-2);
@@ -344,8 +341,6 @@ const platformGroups : PlatformGroup[] = [
    use */
 
 .fact {
-  color: inherit;
-  text-decoration: none;
   border-radius: 4px;
 }
 

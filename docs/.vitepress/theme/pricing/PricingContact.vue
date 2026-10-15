@@ -36,7 +36,7 @@ const resellers = [
 <template>
   <!-- the closing pair: buying through a reseller, then the contact card; no seam between them -->
   <article class="content closing">
-    <section class="card">
+    <section class="panel">
       <div class="section-header">
         <h3 class="card-title">Purchase Through Your Preferred Reseller</h3>
         <p class="card-description">Any software reseller can order QuestPDF for you, with no partner agreement or registration needed. Invoices, purchase orders, and multi-year terms are supported — <a href="mailto:contact@questpdf.com">request a quote</a>.</p>
@@ -51,7 +51,7 @@ const resellers = [
       </div>
     </section>
 
-    <section class="card">
+    <section class="panel">
       <div class="section-header">
         <h3 class="card-title">Still have questions?</h3>
         <p class="card-description">Need further details on licensing, a custom quote, or to place a purchase order? Reach out to our team - we will respond within one business day.</p>
@@ -70,9 +70,11 @@ const resellers = [
   gap: 32px;
 }
 
-/* surface, radius and padding come from the shared `.card` style (CustomPages.css): two centred cards of
+/* surface, radius and padding come from the shared `.panel` style (CustomPages.css): two centred cards of
    the same width, each with a centred header */
-.closing > .card {
+.closing > .panel {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -114,6 +116,7 @@ html.dark .resellers-list a:hover img {
 
 .action {
   margin-top: 24px;
+  padding: 12px 20px;
 }
 
 </style>

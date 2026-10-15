@@ -137,7 +137,6 @@ import { faqCategories as categories } from "./faq";
 
 .faq-answer {
   padding: 0 32px 24px 32px;
-  margin: 0;
   max-width: 85ch;
   color: var(--vp-c-text-1);
 }

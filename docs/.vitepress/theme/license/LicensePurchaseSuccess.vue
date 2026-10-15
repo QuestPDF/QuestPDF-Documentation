@@ -220,7 +220,7 @@ html.dark .status-tag {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: 8px;
+  margin: 8px 0 24px;
 }
 
 .description-item {
@@ -247,10 +247,6 @@ html.dark .status-tag {
 .success-card a.action {
   margin-top: auto;
   align-self: flex-end;
-}
-
-.success-card .description-items {
-  margin-bottom: 24px;
 }
 
 .assistance-card {

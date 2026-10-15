@@ -142,7 +142,7 @@ html.dark .tagline {
 }
 
 /* stacked, the column is the full width, where 11.5cqi would give the full 4.5rem */
-@media screen and (max-width: 821px) {
+@media screen and (max-width: 820px) {
   .text h1 {
     font-size: 2.75rem;
   }
@@ -229,8 +229,8 @@ html:not(.dark) .statistic-icon {
 }
 
 /* Background
-   The colour washes and grain belong to the whole page (see HomePage.vue). The hero only adds a
-   faint dot grid under the statistics, fading out towards the headline and the page edges. */
+   The colour washes and grain belong to the whole page (see "Page canvas" in CustomPages.css). The hero
+   only adds a faint dot grid under the statistics, fading out towards the headline and the page edges. */
 
 .hero-pattern {
   position: absolute;

@@ -175,21 +175,21 @@ html.dark .custom-page {
   --surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0) 160px);
 }
 
-/* The two surfaces: a panel groups a section's content, a card is a panel that stacks its content in
-   a column. Both carry the glass lighting: the sheen is the background image, and the rim a ::before
-   covering the surface, its gradient masked to a one-pixel border so the surface itself stays
-   see-through; it follows the surface's own corner radius. */
+/* The surface: a panel groups a section's content (each page lays out its own panels). It carries the
+   glass lighting: the sheen is the background image, and the rim a ::before covering the surface, its
+   gradient masked to a one-pixel border so the surface itself stays see-through; it follows the
+   surface's own corner radius. */
 
-.custom-page :is(.panel, .card) {
+.custom-page .panel {
   position: relative;
   border-radius: 32px;
-  padding: 40px; /* the same inset for both, so text in stacked cards and panels lines up */
+  padding: 40px;
   background-color: var(--surface);
   background-image: var(--surface-sheen);
   box-shadow: var(--surface-edge);
 }
 
-.custom-page :is(.panel, .card)::before {
+.custom-page .panel::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -203,26 +203,9 @@ html.dark .custom-page {
   mask-composite: exclude;
 }
 
-.custom-page .card {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-}
-
-.custom-page .card hr {
-  margin: 32px 0;
-  border: none;
-  border-top: 1px solid var(--vp-c-gutter);
-  width: 100%
-}
-
 @media screen and (max-width: 700px) {
-  .custom-page :is(.panel, .card) {
+  .custom-page .panel {
     padding: 32px 24px;
-  }
-
-  .custom-page .card hr {
-    border: 1px solid var(--vp-c-gutter);
   }
 }
 
@@ -481,10 +464,6 @@ body:has(.custom-page:is(.contact-page, .purchase-page)) {
   cursor: pointer;
 
   transition: all 0.2s ease-in-out;
-}
-
-.card :is(a, button).action {
-  padding: 12px 20px;
 }
 
 :is(a, button).action:hover {

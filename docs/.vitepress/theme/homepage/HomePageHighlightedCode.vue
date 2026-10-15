@@ -28,14 +28,14 @@ const highlightedCode = computed(() =>
 .code-source {
   font-size: 0.875rem;
   line-height: 1.5;
-  padding: 8px 0;
   tab-size: 4;
   overflow: hidden;
-  box-sizing: content-box;
 }
 
+/* long lines scroll sideways; shiki paints its own background, the window's shows instead */
 .code-source pre {
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   background-color: transparent !important;
 }
 
@@ -47,7 +47,6 @@ const highlightedCode = computed(() =>
 
 @media screen and (max-width: 700px) {
   .code-source {
-    font-size: 0.75rem;
     line-height: 1.25;
   }
 }
@@ -68,10 +67,6 @@ const highlightedCode = computed(() =>
   background-color: #4CAF5022;
   border-left: 3px solid #4CAF50AA;
   padding-left: calc(1rem - 3px);
-}
-
-.shiki {
-  overflow-x: auto !important;
 }
 
 html.dark .code-source .shiki,
