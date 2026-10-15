@@ -125,36 +125,6 @@ const contacts: ContactInformation[] = [
   </div>
 </template>
 
-<style>
-
-/* Background
-   The same continuous canvas as the homepage (see HomePage.vue): the grain tile over soft colour
-   washes, painted on <body> so the page, the strip under the navbar and the footer share it.
-   The page is short, so there are only a few washes: a sky-blue glow top right and a violet glow
-   top left behind the header, like the hero, and a cyan wash at the foot of the cards. None sit
-   in the last stretch, so the footer stays calm. */
-
-body:has(.custom-page.contact-page) {
-  background-color: var(--custom-page-bg);
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 13%, transparent), transparent 70%),
-      radial-gradient(ellipse 1000px 600px at 10% 55%, color-mix(in srgb, #00BCD4 9%, transparent), transparent 70%);
-  background-size: 256px 256px, auto, auto, auto;
-  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
-}
-
-html.dark body:has(.custom-page.contact-page) {
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 24%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 12%, transparent), transparent 70%),
-      radial-gradient(ellipse 1000px 600px at 10% 55%, color-mix(in srgb, #00ACC1 9%, transparent), transparent 70%);
-}
-
-</style>
-
 <style scoped>
 
 .contact-header {
@@ -179,25 +149,7 @@ html.dark body:has(.custom-page.contact-page) {
   align-items: flex-start;
 }
 
-/* the same icon tile as the homepage sections (see HomePageTrust.vue): a neutral inset square
-   holding a regular-weight icon in the text colour */
-.icon-tile {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background-color: var(--home-surface-inner);
-}
-
-.icon-tile i {
-  font-size: 1.25rem;
-  color: var(--vp-c-text-1);
-}
-
-/* the tile-to-title gap matches the homepage foundations cells */
+/* the icon tile (CustomPages.css) to title gap matches the homepage foundations cells */
 .contact-card .icon-tile {
   margin-bottom: 16px;
 }

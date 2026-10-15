@@ -29,61 +29,48 @@ const includes = [
 </script>
 
 <template>
-  <section class="content">
-    <!-- one panel split by a vertical hairline: the section heading, what every tier includes and the
-         calls to action on the left; the tiers stacked on the right -->
-    <div class="panel license-panel">
-      <div class="background-gradient" />
+  <!-- one panel split by a vertical hairline: the section heading, what every tier includes and the
+       calls to action on the left; the tiers stacked on the right -->
+  <div class="panel license-panel">
+    <div class="includes">
+      <h2 class="card-title">Fair and Sustainable License</h2>
 
-      <div class="includes">
-        <h2 class="card-title">Fair and Sustainable License</h2>
+      <ul class="includes-list">
+        <li v-for="item of includes" :key="item.text">
+          <i class="fa-regular" :class="item.icon" aria-hidden="true"></i>
+          <span>{{ item.text }}</span>
+        </li>
+      </ul>
 
-        <ul class="includes-list">
-          <li v-for="item of includes" :key="item.text">
-            <i class="fa-regular" :class="item.icon" aria-hidden="true"></i>
-            <span>{{ item.text }}</span>
-          </li>
-        </ul>
-
-        <div class="actions">
-          <a class="action pricing-button" href="/pricing.html">View Pricing</a>
-          <a class="action" href="/license/guide.html">License Selection Guide</a>
-        </div>
-      </div>
-
-      <div class="divider" aria-hidden="true"></div>
-
-      <div class="tiers">
-        <article v-for="tier of tiers" :key="tier.name" class="tier" :class="tier.name.toLowerCase()">
-          <div class="tier-head">
-            <h3 class="tier-name">{{ tier.name }}</h3>
-            <span class="tier-price">{{ tier.price }}</span>
-          </div>
-          <p class="tier-description">{{ tier.description }}</p>
-        </article>
+      <div class="actions">
+        <a class="action pricing-button" href="/pricing.html">View Pricing</a>
+        <a class="action" href="/license/guide.html">License Selection Guide</a>
       </div>
     </div>
-  </section>
+
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="tiers">
+      <article v-for="tier of tiers" :key="tier.name" class="tier" :class="tier.name.toLowerCase()">
+        <div class="tier-head">
+          <h3 class="tier-name">{{ tier.name }}</h3>
+          <span class="tier-price">{{ tier.price }}</span>
+        </div>
+        <p class="tier-description">{{ tier.description }}</p>
+      </article>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 
   /* One panel, two halves of equal width with a hairline between them; the halves stack on
      narrow screens and the hairline turns horizontal */
 
   .license-panel {
-    position: relative;
-    isolation: isolate; /* keeps the glow (z-index: -1) above the panel background but below the content */
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     gap: 48px;
-    width: 100%;
   }
 
   .divider {
@@ -114,25 +101,13 @@ const includes = [
     align-items: stretch;
   }
 
-  /* the same glow as the showcase cards (HomePageCtaCard.vue), in the Community tier's green, but
-     from the panel's left edge, centred behind the heading (64px down, not the corner), rather than
-     from the top centre */
-  .license-panel {
-    --accent: #67B84D;
-    --accent-secondary: #4CAF50;
-    --glow-y: 64px;
-  }
-
-  .background-gradient {
-    position: absolute;
-    pointer-events: none;
-    inset: 0;
-    z-index: -1;
-    border-radius: inherit;
-    overflow: hidden;
+  /* a glow in the Community tier's green from the panel's left edge, centred behind the heading, over
+     the panel's own sheen (CustomPages.css) */
+  .custom-page .panel.license-panel {
     background-image:
-        radial-gradient(ellipse 90% 55% at 0% var(--glow-y), color-mix(in srgb, var(--accent) 11%, transparent), transparent),
-        radial-gradient(ellipse 50% 30% at 0% var(--glow-y), color-mix(in srgb, var(--accent-secondary) 5%, transparent), transparent);
+        radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, #67B84D 11%, transparent), transparent),
+        radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #4CAF50 5%, transparent), transparent),
+        var(--home-surface-sheen);
   }
 
   .includes-list {

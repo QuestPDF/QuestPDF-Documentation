@@ -17,7 +17,7 @@ import { faqCategories as categories } from "./faq";
           <p class="faq-category-description">{{ category.description }}</p>
         </div>
 
-        <div class="faq-list">
+        <div class="panel faq-list">
           <details v-for="item of category.items" :key="item.question" class="faq-item">
             <summary class="faq-question">
               <span>{{ item.question }}</span>
@@ -35,9 +35,8 @@ import { faqCategories as categories } from "./faq";
 
 /* Each category is a row: its header (the title and a line naming what it covers) in
    a column on the left, level with the first question, and a card of questions divided by hairlines
-   on the right, the same surface as the other cards on the page. The header stays where it is while
-   the questions scroll past. The cards keep about the width of a single centred column; the header
-   column takes the room the wide layout has beside them. */
+   on the right, the same surface as the other cards on the page. The cards keep about the width of a
+   single centred column; the header column takes the room the wide layout has beside them. */
 
 .faq-categories {
   --faq-accent: #2196F3;
@@ -80,16 +79,14 @@ import { faqCategories as categories } from "./faq";
   color: var(--vp-c-text-2);
 }
 
-/* the card keeps its own height when the header is the taller of the two (Client Work) */
-.faq-list {
+/* the shared panel surface, its rows reaching the edges; the card keeps its own height when the
+   header is the taller of the two (Client Work) */
+.panel.faq-list {
   align-self: start;
   display: flex;
   flex-direction: column;
   width: 100%;
-
-  border-radius: 32px;
-  background-color: var(--home-surface);
-  box-shadow: var(--home-surface-edge);
+  padding: 0;
   overflow: hidden;
 }
 

@@ -93,97 +93,104 @@ const platformGroups : PlatformGroup[] = [
 </script>
 
 <template>
-  <section class="content">
-    <div class="layout">
-      <!-- the compliance story; the promise and validators in the description, the conformance levels as grouped chips -->
-      <div class="panel compliance">
-        <h2 class="card-title">Industry-standard output</h2>
-        <!-- the evidence: validated independently on every build -->
-        <p class="card-description">
-          Every build is automatically validated with the independent, trusted and open-source
-          <a href="https://verapdf.org/" target="_blank" rel="noopener">veraPDF</a> and
-          <a href="https://www.mustangproject.org/" target="_blank" rel="noopener">Mustang</a> validators.
-        </p>
+  <div class="trust">
+    <!-- the compliance story; the promise and validators in the description, the conformance levels as grouped chips -->
+    <div class="panel compliance">
+      <h2 class="card-title">Industry-standard output</h2>
+      <!-- the evidence: validated independently on every build -->
+      <p class="card-description">
+        Every build is automatically validated with the independent, trusted and open-source
+        <a href="https://verapdf.org/" target="_blank" rel="noopener">veraPDF</a> and
+        <a href="https://www.mustangproject.org/" target="_blank" rel="noopener">Mustang</a> validators.
+      </p>
 
-        <div class="standards">
-          <div v-for="(row, index) of standardsRows" :key="index" class="standards-row">
-            <section v-for="category of row" :key="category.title" class="standards-category">
-              <h3 class="standards-category-title">{{ category.title }}</h3>
-              <div class="standards-badges">
-                <span v-for="level in category.levels" :key="level">{{ level }}</span>
-              </div>
-            </section>
-          </div>
-        </div>
-      </div>
-
-      <!-- the foundations as a two-by-two grid of cells, no heading and no icons: the privacy fact
-           (one link, the label underlines and grows an arrow on hover) and the three platform groups -->
-      <section class="panel foundations" aria-label="Enterprise-grade foundations">
-        <div class="cells">
-          <a :href="privacy.href" class="cell fact">
-            <span class="cell-label">
-              <span class="cell-label-text">{{ privacy.label }}</span>
-              <i class="fa-regular fa-arrow-right fact-arrow" aria-hidden="true"></i>
-            </span>
-            <span class="fact-text">{{ privacy.text }}</span>
-          </a>
-
-          <section v-for="group of platformGroups" :key="group.label" class="cell group">
-            <h3 class="cell-label">{{ group.label }}</h3>
-
-            <ul class="platforms">
-              <li v-for="platform of group.platforms" :key="platform.name" class="platform">
-                <span
-                    v-if="platform.src"
-                    class="platform-logo"
-                    aria-hidden="true"
-                    :style="{
-                      '--logo': `url(/homepage/supported-platforms/${platform.src})`,
-                      height: `${platform.height}px`
-                    }"></span>
-                <span>{{ platform.name }}</span>
-              </li>
-            </ul>
+      <div class="standards">
+        <div v-for="(row, index) of standardsRows" :key="index" class="standards-row">
+          <section v-for="category of row" :key="category.title" class="standards-category">
+            <h3 class="label">{{ category.title }}</h3>
+            <div class="standards-badges">
+              <span v-for="level in category.levels" :key="level">{{ level }}</span>
+            </div>
           </section>
         </div>
-      </section>
+      </div>
     </div>
-  </section>
+
+    <!-- the foundations as a two-by-two grid of cells, no heading and no icons: the privacy fact
+         (one link, the label underlines and grows an arrow on hover) and the three platform groups -->
+    <section class="panel foundations" aria-label="Enterprise-grade foundations">
+      <div class="cells">
+        <a :href="privacy.href" class="cell fact">
+          <span class="label">
+            <span class="label-text">{{ privacy.label }}</span>
+            <i class="fa-regular fa-arrow-right fact-arrow" aria-hidden="true"></i>
+          </span>
+          <span class="fact-text">{{ privacy.text }}</span>
+        </a>
+
+        <section v-for="group of platformGroups" :key="group.label" class="cell group">
+          <h3 class="label">{{ group.label }}</h3>
+
+          <ul class="platforms">
+            <li v-for="platform of group.platforms" :key="platform.name" class="platform">
+              <span
+                  v-if="platform.src"
+                  class="platform-logo"
+                  aria-hidden="true"
+                  :style="{
+                    '--logo': `url(/homepage/supported-platforms/${platform.src})`,
+                    height: `${platform.height}px`
+                  }"></span>
+              <span>{{ platform.name }}</span>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </section>
+  </div>
 </template>
 
 <style scoped>
 
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 /* Two equal columns, one card each, the same height; everything in one column on narrow screens */
 
-.layout {
+.trust {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 32px;
-  width: 100%;
 }
 
-.layout > .panel {
+.trust > .panel {
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
 
 @media screen and (max-width: 960px) {
-  .layout {
+  .trust {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 
 
-/* Conformance levels: one group per purpose, each a wrapped set of chips under a one-word label in
-   the same small uppercase style as the cell labels in the card beside it.
+/* The label is the scanning anchor of both cards, over the conformance groups and in the cells: small
+   uppercase, in the primary text colour, over quieter secondary text */
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--vp-c-text-1);
+}
+
+
+/* Conformance levels: one group per purpose, each a wrapped set of chips under a one-word label.
    Groups in the same row sit side by side and wrap under each other when the card gets narrow */
 
 .standards {
@@ -197,17 +204,6 @@ const platformGroups : PlatformGroup[] = [
   display: flex;
   flex-wrap: wrap;
   gap: 20px 40px;
-}
-
-/* the same label style as the cells in the card beside it */
-.standards-category-title {
-  margin: 0;
-  font-size: 0.75rem;
-  line-height: 1.25rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--vp-c-text-1);
 }
 
 .standards-badges {
@@ -250,9 +246,7 @@ const platformGroups : PlatformGroup[] = [
 /* Cells: four in a two-by-two grid that fills the card, divided by a cross of hairlines in the
    panel's divider colour: one vertical line between the columns, one horizontal line between the
    rows. The cells carry the spacing as padding, so both lines run edge to edge of the grid while
-   the outer edges stay open; the content sits in the middle of each quadrant.
-   The label is the scanning anchor: the same small uppercase style as the chip categories in the
-   card beside it, in the primary text colour, over quieter secondary text */
+   the outer edges stay open; the content sits in the middle of each quadrant. */
 
 .cells {
   flex: 1;
@@ -314,19 +308,6 @@ const platformGroups : PlatformGroup[] = [
   }
 }
 
-.cell-label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0;
-  font-size: 0.75rem;
-  line-height: 1.25rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--vp-c-text-1);
-}
-
 .fact-text {
   display: block;
   margin: 6px 0 0;
@@ -386,14 +367,14 @@ const platformGroups : PlatformGroup[] = [
   outline-offset: 4px;
 }
 
-.cell-label-text {
+.label-text {
   text-decoration: underline transparent;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   transition: text-decoration-color 0.2s;
 }
 
-.fact:is(:hover, :focus-visible) .cell-label-text {
+.fact:is(:hover, :focus-visible) .label-text {
   text-decoration-color: currentColor;
 }
 

@@ -39,7 +39,7 @@ const documents = [
           <p class="sub-header">Review or download the official legal documents and licensing terms for QuestPDF. If you have questions or need assistance, our team is here to help.</p>
         </header>
 
-        <nav class="documents" aria-label="Legal documents">
+        <nav class="panel documents" aria-label="Legal documents">
           <a v-for="document in documents" :key="document.title" :href="document.link" class="document-link">
             <span class="link-title">{{ document.title }}</span>
             <i class="fa-solid fa-arrow-right arrow"></i>
@@ -67,16 +67,13 @@ const documents = [
   width: 100%;
 }
 
-/* same lifted list as the pricing FAQ */
-.documents {
+/* the shared panel surface, its rows reaching the edges, like the pricing FAQ */
+.panel.documents {
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 640px;
-
-  border-radius: 32px;
-  background-color: var(--home-surface);
-  box-shadow: var(--home-surface-edge);
+  padding: 0;
   overflow: hidden;
 }
 

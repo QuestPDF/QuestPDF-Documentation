@@ -1,16 +1,13 @@
-/* Page width (including the 32px side padding) shared by the custom page
-   content, the top navigation bar and the footer, so all three align.
-   Pages opt into the wider layout with `pageClass: wide-layout`. */
+/* --custom-page-width: page width (including the 32px side padding) shared by the custom page
+   content, the top navigation bar and the footer, so all three align. Pages opt into the wider
+   layout with `pageClass: wide-layout`.
+
+   --custom-page-bg: page canvas of the custom pages (home, pricing, contact, legal and so on). A
+   touch off-white on the light theme so the white cards and panels lift from the page; the dark
+   theme keeps the regular page colour. The navbar and footer stay on --vp-c-bg. */
 
 :root {
   --custom-page-width: 1216px;
-}
-
-/* Page canvas of the custom pages (home, pricing, contact, legal and so on). A touch off-white on
-   the light theme so the white cards and panels lift from the page; the dark theme keeps the
-   regular page colour. The navbar and footer stay on --vp-c-bg. */
-
-:root {
   --custom-page-bg: #FAFAFC;
 }
 
@@ -20,6 +17,15 @@ html.dark {
 
 .wide-layout {
   --custom-page-width: 90rem;
+}
+
+/* the navbar of pages without a sidebar spans the same width as the page content */
+.VPNavBar:not(.has-sidebar) .container {
+  max-width: calc(var(--custom-page-width) - 64px);
+}
+
+.VPNavBar:not(.has-sidebar):not(.home) .container > .title {
+  min-width: 0;
 }
 
 
@@ -66,10 +72,6 @@ html.dark {
   background-color: var(--vp-c-bg);
   border-radius: 16px;
   padding: 32px;
-}
-
-.custom-page h3 {
-  margin-bottom: 8px;
 }
 
 .custom-page a:hover .card {
@@ -191,10 +193,10 @@ html.dark {
 
 
 /* Textured page
-   A page opts in with `textured-page` on its `.custom-page` root. The page itself paints the canvas
-   (grain tile plus colour washes) on <body>, see HomePage.vue and Contact.vue; this block holds what
-   every such page shares: see-through sections so the canvas shows, translucent panels and cards,
-   and the dot grid under a header that sits directly on the canvas. */
+   A page opts in with `textured-page` on its `.custom-page` root. Its canvas (grain tile plus colour
+   washes) is painted on <body>, see "Page canvas" below; this block holds what every such page
+   shares: see-through sections so the canvas shows, translucent panels and cards, and the dot grid
+   under a header that sits directly on the canvas. */
 
 .custom-page.textured-page > .container {
   background-color: transparent;
@@ -240,18 +242,16 @@ html.dark .custom-page.textured-page {
   box-shadow: var(--home-surface-edge);
 }
 
-/* The glass lighting goes on every surface: the shared panel and card, and the component surfaces
-   that paint themselves with the tokens above (the hero statistics card, the pricing FAQ list and
-   the legal documents list). The rim is a ::before covering the surface, its gradient masked to a
-   one-pixel border so the surface itself stays see-through; it follows the surface's own corner
-   radius. */
+/* The glass lighting goes on every surface, the shared panel and card. The rim is a ::before covering
+   the surface, its gradient masked to a one-pixel border so the surface itself stays see-through; it
+   follows the surface's own corner radius. */
 
-.custom-page.textured-page :is(.panel, .card, .faq-list, .documents) {
+.custom-page.textured-page :is(.panel, .card) {
   position: relative;
   background-image: var(--home-surface-sheen);
 }
 
-.custom-page.textured-page :is(.panel, .card, .faq-list, .documents)::before {
+.custom-page.textured-page :is(.panel, .card)::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -282,6 +282,25 @@ html.dark .custom-page.textured-page a:hover .card {
   .custom-page.textured-page .card {
     padding: 32px 24px;
   }
+}
+
+/* A neutral inset square holding a regular-weight icon in the text colour, beside or above a title
+   (contact cards, purchase facts). */
+
+.custom-page .icon-tile {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: var(--home-surface-inner);
+}
+
+.custom-page .icon-tile i {
+  font-size: 1.25rem;
+  color: var(--vp-c-text-1);
 }
 
 /* Dot wings: two faint dot fields flanking a section header, each fading out before it reaches
@@ -338,10 +357,9 @@ html.dark .custom-page.textured-page .texture-dots::after {
 /* Dotted divider
    The seam between sections of a textured page: a faint dotted line across the content width,
    fading out at both ends, so the eye reads a break without a heading. The dots are the same 1px
-   dots as the homepage hero's dot grid and share its blue tint in light mode. The homepage draws
-   the same seam as a pseudo-element between its containers (HomePage.vue); the contact, pricing
-   and purchase pages place this element where their seams go. It fills its parent's width, so
-   put it in the content column or a grid row and set its margins there. */
+   dots as the homepage hero's dot grid and share its blue tint in light mode. Pages place this
+   element where their seams go. It fills its parent's width, so put it in the content column or a
+   grid row and set its margins there. */
 
 .custom-page.textured-page .dotted-divider {
   height: 4px;
@@ -359,27 +377,114 @@ html.dark .custom-page.textured-page .dotted-divider {
 }
 
 
-/* Legal pages canvas
-   The same continuous canvas as the homepage (see HomePage.vue): the grain tile over soft colour
-   washes, painted on <body> so the page, the strip under the navbar and the footer share it.
-   It lives here rather than in a component because two components share it: the legal hub
-   (LicenseIndex.vue) and the document pages (DocumentTemplate.vue), both with `legal-page` on
-   their root, so moving between them does not change the canvas (in dev mode a component's CSS
-   is only loaded on pages that import it). The documents are long, so the washes stay near the
-   top: a sky-blue glow top right and a violet glow top left behind the title, like the hero, then
-   a faint cyan wash on the left and a tall blue glow on the right along the text. None sit in the
-   last stretch, so the footer stays calm. */
+/* Page canvas
+   Every textured page paints one continuous canvas on <body>, so the page, the strip under the navbar
+   and the footer all share it with no seams: a fine grain tile (256px, its native size) over soft
+   colour washes. The washes sit at page-height percentages, so each page has its own set (below); all
+   of them stay near the brand blue (yellows and greens were tried and rejected) and none sit in the
+   last stretch, so the footer stays calm. The rules live here rather than in the page components
+   because in dev mode a component's CSS is only loaded on pages that import it.
+   The shared rule lists one repeat value per layer: the grain tiles, the washes do not. Values beyond
+   a page's layer count are ignored, so the list covers up to nine washes. */
+
+body:has(.custom-page.textured-page) {
+  background-color: var(--custom-page-bg);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+}
+
+/* Homepage: a sky-blue glow behind the statistics, a violet glow behind the headline and a cyan wash at
+   the foot of the hero (the hero is the most colourful part of the page), a faint cyan wash on the
+   right by the quick start, a teal wash by the Companion App, a tall blue glow along the right edge by
+   the trust panels, a light-blue wash on the left and an indigo wash behind the license panel. */
+
+body:has(.custom-page.home-page) {
+  background-image:
+      url("/homepage/grain.png"),
+      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
+      radial-gradient(ellipse 1000px 500px at 30% 0%, color-mix(in srgb, #2196F3 9%, transparent), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 13%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 400px at 55% 9%, color-mix(in srgb, #00BCD4 9%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 700px at 100% 22%, color-mix(in srgb, #00BCD4 6%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 1000px at 0% 42%, color-mix(in srgb, #26C6DA 8%, transparent), transparent 70%),
+      radial-gradient(ellipse 600px 1800px at 100% 60%, color-mix(in srgb, #1E88E5 11%, transparent), transparent 70%),
+      radial-gradient(ellipse 1000px 800px at 0% 64%, color-mix(in srgb, #039BE5 7%, transparent), transparent 70%),
+      radial-gradient(ellipse 1200px 800px at 0% 80%, color-mix(in srgb, #3F51B5 9%, transparent), transparent 70%);
+}
+
+html.dark body:has(.custom-page.home-page) {
+  background-image:
+      url("/homepage/grain.png"),
+      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 24%, transparent), transparent 70%),
+      radial-gradient(ellipse 1000px 500px at 30% 0%, color-mix(in srgb, #00BCD4 7%, transparent), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 12%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 400px at 55% 9%, color-mix(in srgb, #00ACC1 9%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 700px at 100% 22%, color-mix(in srgb, #00BCD4 7%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 1000px at 0% 42%, color-mix(in srgb, #26A69A 12%, transparent), transparent 70%),
+      radial-gradient(ellipse 600px 1800px at 100% 60%, color-mix(in srgb, #1E88E5 16%, transparent), transparent 70%),
+      radial-gradient(ellipse 1000px 800px at 0% 64%, color-mix(in srgb, #039BE5 8%, transparent), transparent 70%),
+      radial-gradient(ellipse 1200px 800px at 0% 80%, color-mix(in srgb, #3F51B5 14%, transparent), transparent 70%);
+}
+
+/* Pricing: a sky-blue glow top right and a violet glow top left behind the title, like the hero; a cyan
+   wash at the foot of the tier cards; a teal wash on the left and a tall blue glow on the right along
+   the questions. The reseller and contact cards stay calm. */
+
+body:has(.custom-page.pricing-page) {
+  background-image:
+      url("/homepage/grain.png"),
+      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 13%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 500px at 100% 24%, color-mix(in srgb, #00BCD4 9%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 900px at 0% 48%, color-mix(in srgb, #26C6DA 8%, transparent), transparent 70%),
+      radial-gradient(ellipse 600px 1400px at 100% 66%, color-mix(in srgb, #1E88E5 11%, transparent), transparent 70%);
+}
+
+html.dark body:has(.custom-page.pricing-page) {
+  background-image:
+      url("/homepage/grain.png"),
+      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 24%, transparent), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 12%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 500px at 100% 24%, color-mix(in srgb, #00ACC1 9%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 900px at 0% 48%, color-mix(in srgb, #26A69A 11%, transparent), transparent 70%),
+      radial-gradient(ellipse 600px 1400px at 100% 66%, color-mix(in srgb, #1E88E5 15%, transparent), transparent 70%);
+}
+
+/* Features overview: the page is long, so the washes are spread along it: the two hero glows behind
+   the header, then a cyan wash on the left and a tall blue glow on the right along the chapters, and
+   an indigo wash on the left further down. */
+
+body:has(.custom-page.features-page) {
+  background-image:
+      url("/homepage/grain.png"),
+      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 13%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 900px at 0% 30%, color-mix(in srgb, #26C6DA 8%, transparent), transparent 70%),
+      radial-gradient(ellipse 600px 1600px at 100% 50%, color-mix(in srgb, #1E88E5 10%, transparent), transparent 70%),
+      radial-gradient(ellipse 1200px 800px at 0% 72%, color-mix(in srgb, #3F51B5 8%, transparent), transparent 70%);
+}
+
+html.dark body:has(.custom-page.features-page) {
+  background-image:
+      url("/homepage/grain.png"),
+      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 24%, transparent), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 12%, transparent), transparent 70%),
+      radial-gradient(ellipse 900px 900px at 0% 30%, color-mix(in srgb, #26A69A 11%, transparent), transparent 70%),
+      radial-gradient(ellipse 600px 1600px at 100% 50%, color-mix(in srgb, #1E88E5 14%, transparent), transparent 70%),
+      radial-gradient(ellipse 1200px 800px at 0% 72%, color-mix(in srgb, #3F51B5 12%, transparent), transparent 70%);
+}
+
+/* Legal hub and documents (`legal-page`, LicenseIndex.vue and DocumentTemplate.vue share it, so moving
+   between them keeps the canvas): the documents are long, so the washes stay near the top: the two
+   hero glows behind the title, then a faint cyan wash on the left and a tall blue glow on the right
+   along the text. */
 
 body:has(.custom-page.legal-page) {
-  background-color: var(--custom-page-bg);
   background-image:
       url("/homepage/grain.png"),
       radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
       radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 13%, transparent), transparent 70%),
       radial-gradient(ellipse 900px 900px at 0% 36%, color-mix(in srgb, #26C6DA 8%, transparent), transparent 70%),
       radial-gradient(ellipse 600px 1400px at 100% 60%, color-mix(in srgb, #1E88E5 10%, transparent), transparent 70%);
-  background-size: 256px 256px, auto, auto, auto, auto;
-  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
 }
 
 html.dark body:has(.custom-page.legal-page) {
@@ -389,6 +494,25 @@ html.dark body:has(.custom-page.legal-page) {
       radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 12%, transparent), transparent 70%),
       radial-gradient(ellipse 900px 900px at 0% 36%, color-mix(in srgb, #26A69A 11%, transparent), transparent 70%),
       radial-gradient(ellipse 600px 1400px at 100% 60%, color-mix(in srgb, #1E88E5 14%, transparent), transparent 70%);
+}
+
+/* Contact and purchase confirmation: short pages, so only a few washes: the two hero glows behind the
+   header and a cyan wash at the foot of the cards. */
+
+body:has(.custom-page:is(.contact-page, .purchase-page)) {
+  background-image:
+      url("/homepage/grain.png"),
+      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 13%, transparent), transparent 70%),
+      radial-gradient(ellipse 1000px 600px at 10% 55%, color-mix(in srgb, #00BCD4 9%, transparent), transparent 70%);
+}
+
+html.dark body:has(.custom-page:is(.contact-page, .purchase-page)) {
+  background-image:
+      url("/homepage/grain.png"),
+      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 24%, transparent), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 12%, transparent), transparent 70%),
+      radial-gradient(ellipse 1000px 600px at 10% 55%, color-mix(in srgb, #00ACC1 9%, transparent), transparent 70%);
 }
 
 /* Small uppercase label above a section heading (purchase confirmation, legal documents). */
@@ -429,7 +553,10 @@ html.dark body:has(.custom-page.legal-page) {
   color: var(--vp-c-brand-2);
 }
 
-a.action {
+/* a.action is a button-styled link; a <button> takes the class as well, for a control that only runs
+   script (the VitePress router intercepts clicks on links) */
+
+:is(a, button).action {
   display: inline-block;
   text-align: center;
   align-items: center;
@@ -440,33 +567,35 @@ a.action {
   padding: 12px 24px;
   line-height: 1;
 
+  border: 0;
   background-color: #8883;
 
   color: var(--vp-c-text-1);
+  font-family: inherit;
   font-size: 1rem;
+  cursor: pointer;
 
   transition: all 0.2s ease-in-out;
 }
 
-.card a.action {
+.card :is(a, button).action {
   padding: 12px 20px;
 }
 
-a.action:hover {
+:is(a, button).action:hover {
   transform: translateY(-4px);
   box-shadow: var(--elevation);
 
   background-color: #8885;
-  cursor: pointer;
 }
 
-a.action.primary {
+:is(a, button).action.primary {
   color: #FFF;
   background-color: #2196F3;
   font-weight: bold;
 }
 
-a.action.primary:hover {
+:is(a, button).action.primary:hover {
   background-color: #1E88E5;
 }
 

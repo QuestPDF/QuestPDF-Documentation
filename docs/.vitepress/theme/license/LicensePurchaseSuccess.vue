@@ -1,6 +1,4 @@
 <script setup>
-import { computed } from 'vue';
-
 const shareEmailSubject = 'QuestPDF License Purchased – Setup Instructions';
 const shareEmailBody = `Hi Team,
 
@@ -14,13 +12,9 @@ https://www.questpdf.com/license/configuration
 
 Best`;
 
-const shareMailtoLink = computed(() => {
-  const subject = encodeURIComponent(shareEmailSubject);
-  const body = encodeURIComponent(shareEmailBody);
-  return `mailto:?subject=${subject}&body=${body}`;
-});
+const shareMailtoLink = `mailto:?subject=${encodeURIComponent(shareEmailSubject)}&body=${encodeURIComponent(shareEmailBody)}`;
 
-const licenseDetails = [
+const licenseItems = [
   {
     icon: 'fa-award-simple',
     title: "Perpetual license",
@@ -38,7 +32,7 @@ const licenseDetails = [
   },
 ];
 
-const orderDetails = [
+const billingItems = [
   {
     icon: 'fa-receipt',
     title: "Purchase confirmation",
@@ -53,6 +47,20 @@ const orderDetails = [
     icon: 'fa-credit-card',
     title: "Invoice and billing",
     description: "You can update your account details and payment information, manage or cancel the license auto-renewal process as well as access payment history on the Paddle Customer Portal.",
+  }
+];
+
+/* the two detail cards, each a fact list with its button at the foot */
+const cards = [
+  {
+    title: "License information",
+    items: licenseItems,
+    action: { label: "Forward to Development Team", href: shareMailtoLink, primary: true }
+  },
+  {
+    title: "Billing and renewal",
+    items: billingItems,
+    action: { label: "Open Customer Portal", href: "https://customer-portal.paddle.com/cpl_01gmdq0qdr8madhdchknpb52we", target: "_blank" }
   }
 ];
 
@@ -72,40 +80,22 @@ const orderDetails = [
         </header>
 
         <div class="purchase-cards">
-          <section class="panel success-card">
-            <h3 class="card-title">License information</h3>
+          <section v-for="card in cards" :key="card.title" class="panel success-card">
+            <h3 class="card-title">{{ card.title }}</h3>
 
             <div class="description-items">
-              <div v-for="step in licenseDetails" :key="step.title" class="description-item">
+              <div v-for="item in card.items" :key="item.title" class="description-item">
                 <div class="icon-tile">
-                  <i class="fa-regular" :class="step.icon" />
+                  <i class="fa-regular" :class="item.icon" />
                 </div>
                 <div class="description-item-content">
-                  <strong class="row-title">{{ step.title }}</strong>
-                  <span class="row-description" v-html="step.description" />
+                  <strong class="row-title">{{ item.title }}</strong>
+                  <span class="row-description" v-html="item.description" />
                 </div>
               </div>
             </div>
 
-            <a class="action primary" :href="shareMailtoLink">Forward to Development Team</a>
-          </section>
-
-          <section class="panel success-card">
-            <h3 class="card-title">Billing and renewal</h3>
-
-            <div class="description-items">
-              <div v-for="step in orderDetails" :key="step.title" class="description-item">
-                <div class="icon-tile">
-                  <i class="fa-regular" :class="step.icon" />
-                </div>
-                <div class="description-item-content">
-                  <strong class="row-title">{{ step.title }}</strong>
-                  <span class="row-description" v-html="step.description" />
-                </div>
-              </div>
-            </div>
-
-            <a class="action" href="https://customer-portal.paddle.com/cpl_01gmdq0qdr8madhdchknpb52we" target="_blank">Open Customer Portal</a>
+            <a class="action" :class="{ primary: card.action.primary }" :href="card.action.href" :target="card.action.target">{{ card.action.label }}</a>
           </section>
 
           <!-- the same dotted seam as on the contact page: the license and billing facts above it,
@@ -129,36 +119,6 @@ const orderDetails = [
   </div>
 </template>
 
-<style>
-
-/* Background
-   The same continuous canvas as the homepage (see HomePage.vue): the grain tile over soft colour
-   washes, painted on <body> so the page, the strip under the navbar and the footer share it.
-   The page is short, so there are only a few washes: a sky-blue glow top right and a violet glow
-   top left behind the header, like the hero, and a cyan wash at the foot of the cards. None sit
-   in the last stretch, so the footer stays calm. */
-
-body:has(.custom-page.purchase-page) {
-  background-color: var(--custom-page-bg);
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 13%, transparent), transparent 70%),
-      radial-gradient(ellipse 1000px 600px at 10% 55%, color-mix(in srgb, #00BCD4 9%, transparent), transparent 70%);
-  background-size: 256px 256px, auto, auto, auto;
-  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
-}
-
-html.dark body:has(.custom-page.purchase-page) {
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 24%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 12%, transparent), transparent 70%),
-      radial-gradient(ellipse 1000px 600px at 10% 55%, color-mix(in srgb, #00ACC1 9%, transparent), transparent 70%);
-}
-
-</style>
-
 <style scoped>
 
 /* Page */
@@ -177,21 +137,6 @@ html.dark body:has(.custom-page.purchase-page) {
 
 .purchase-header {
   padding-bottom: 16px; /* a little more air above the cards than the page's 32px gap */
-}
-
-/* a step up from the shared section tag: here it is the page's status, not a section label */
-.purchase-header .status-tag {
-  margin-bottom: 20px;
-  padding: 9px 24px;
-  gap: 10px;
-  border-radius: 14px;
-  font-size: 1rem;
-}
-
-/* the solid check; custom pages paint .fa-solid icons brand blue, so it takes the tag's colour */
-.purchase-header .status-tag i {
-  font-size: 18px;
-  color: inherit;
 }
 
 /* still the page's h1, set at the size of a lead */
@@ -225,12 +170,17 @@ html.dark .purchase-title b {
   }
 }
 
-/* solid, tuned per mode: deep green with white text (5.1:1) in light mode; in dark mode the inbox
-   phrase's own light green with near-black green text (7.7:1), so the fill stays bright on the dark page */
+/* a step up from the shared section tag: here it is the page's status, not a section label. Solid,
+   tuned per mode: deep green with white text (5.1:1) in light mode; in dark mode the inbox phrase's own
+   light green with near-black green text (7.7:1), so the fill stays bright on the dark page */
 .status-tag {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 9px 24px;
+  border-radius: 14px;
+  font-size: 1rem;
   background-color: #2E7D32;
   color: #FFFFFF;
 }
@@ -240,25 +190,10 @@ html.dark .status-tag {
   color: #0D3B12;
 }
 
+/* the solid check; custom pages paint .fa-solid icons brand blue, so it takes the tag's colour */
 .status-tag i {
-  font-size: 16px;
-}
-
-/* same neutral icon tile as the contact page and the homepage sections */
-.icon-tile {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background-color: var(--home-surface-inner);
-}
-
-.icon-tile i {
-  font-size: 1.25rem;
-  color: var(--vp-c-text-1);
+  font-size: 18px;
+  color: inherit;
 }
 
 /* Cards: the two detail cards side by side, the assistance note across the full width below */

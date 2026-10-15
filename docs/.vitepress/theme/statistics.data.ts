@@ -12,9 +12,13 @@ export { data }
 
 export default defineLoader({
     async load(): Promise<StatisticEntry[]> {
-        const nugetDownloads = await getNugetDownloads();
-        const githubStars = await getGithubStars();
-        const firstRelease = await getNugetFirstRelease();
+        const nugetIndex = await fetchJson('https://api.nuget.org/v3/index.json');
+
+        const [nugetDownloads, firstRelease, githubStars] = await Promise.all([
+            getNugetDownloads(nugetIndex),
+            getNugetFirstRelease(nugetIndex),
+            getGithubStars()
+        ]);
 
         return [
             {
@@ -63,19 +67,18 @@ async function fetchJson(url: string, init: RequestInit = {}, attempts = 5): Pro
     }
 }
 
-async function getNugetDownloads(): Promise<number> {
-    // discover the search endpoint from the service index
-    const index = await fetchJson('https://api.nuget.org/v3/index.json');
+/* the NuGet endpoints are discovered from the service index */
+function findNugetResource(index: any, type: string): string {
+    const resource = index.resources.find(r => r['@type'] === type);
 
-    const searchResource = index.resources.find(
-        r => r['@type'] === 'SearchQueryService'
-    );
+    if (!resource)
+        throw new Error(`${type} not found in service index`);
 
-    if (!searchResource)
-        throw new Error('SearchQueryService not found in service index');
+    return resource['@id'];
+}
 
-    // query for the package
-    const queryUrl = `${searchResource['@id']}?q=packageid:questpdf&prerelease=true`;
+async function getNugetDownloads(index: any): Promise<number> {
+    const queryUrl = `${findNugetResource(index, 'SearchQueryService')}?q=packageid:questpdf&prerelease=true`;
     const data = await fetchJson(queryUrl);
 
     const totalDownloads = data.data[0]?.totalDownloads;
@@ -88,17 +91,8 @@ async function getNugetDownloads(): Promise<number> {
 
 /* the publish date of the first listed, stable version on NuGet; the registration index splits
    the versions into pages, which the API inlines only for small packages */
-async function getNugetFirstRelease(): Promise<Date> {
-    const index = await fetchJson('https://api.nuget.org/v3/index.json');
-
-    const registrationResource = index.resources.find(
-        r => r['@type'] === 'RegistrationsBaseUrl/3.6.0'
-    );
-
-    if (!registrationResource)
-        throw new Error('RegistrationsBaseUrl/3.6.0 not found in service index');
-
-    const registration = await fetchJson(`${registrationResource['@id']}questpdf/index.json`);
+async function getNugetFirstRelease(index: any): Promise<Date> {
+    const registration = await fetchJson(`${findNugetResource(index, 'RegistrationsBaseUrl/3.6.0')}questpdf/index.json`);
     const published: Date[] = [];
 
     for (const page of registration.items) {
@@ -135,16 +129,16 @@ async function getGithubStars(): Promise<number> {
     return stars;
 }
 
-export function toMillions(n: number): number {
+function toMillions(n: number): number {
     return Math.round(n / 1_000_000)
 }
 
-export function toThousands(n: number): number {
+function toThousands(n: number): number {
     return Math.round(n / 100) / 10
 }
 
 /* elapsed years, rounded to the nearest whole year */
-export function toYears(since: Date, now: Date = new Date()): number {
+function toYears(since: Date, now: Date = new Date()): number {
     const millisecondsPerYear = 365.25 * 24 * 60 * 60 * 1000;
     return Math.round((now.getTime() - since.getTime()) / millisecondsPerYear);
 }

@@ -6,102 +6,100 @@
        (companionTour.ts); the list picks a view, the current one in the brand colour.
        Below 1320px everything stacks (title, app, views as two rows of one-word names, actions); below
        1040px the card sits under the app. -->
-  <section class="content">
-    <div class="panel companion-panel">
-      <div ref="root" class="companion-tour" @mouseenter="hovered = true" @mouseleave="hovered = false" @focusin="focused = true" @focusout="focused = false">
-        <div
-          class="companion-stage"
-          :class="{ overview: !current.focus }"
-          :style="{ '--companion-fx': `${focusX * 100}%`, '--companion-fy': `${focusY * 100}%` }">
+  <div class="panel">
+    <div ref="root" class="companion-tour" @mouseenter="hovered = true" @mouseleave="hovered = false" @focusin="focused = true" @focusout="focused = false">
+      <div
+        class="companion-stage"
+        :class="{ overview: !current.focus }"
+        :style="{ '--companion-fx': `${focusX * 100}%`, '--companion-fy': `${focusY * 100}%` }">
 
-          <!-- the screens, stacked and cross-fading, in the reader's theme, all cropped from the top left
-               to one proportion (the layout error screenshot is squarer, so it shows larger) -->
-          <div class="companion-frames" :style="{ aspectRatio: String(aspect) }">
-            <template v-for="frame of frames" :key="frame">
-              <img :src="`/companion/${frame}-light.webp`" :alt="frame === current.frame ? 'QuestPDF Companion App' : ''" class="companion-frame light" :class="{ shown: frame === current.frame }" loading="lazy" />
-              <img :src="`/companion/${frame}-dark.webp`" :alt="frame === current.frame ? 'QuestPDF Companion App' : ''" class="companion-frame dark" :class="{ shown: frame === current.frame }" loading="lazy" />
-            </template>
+        <!-- the screens, stacked and cross-fading, in the reader's theme, all cropped from the top left
+             to one proportion (the layout error screenshot is squarer, so it shows larger) -->
+        <div class="companion-frames" :style="{ aspectRatio: String(aspect) }">
+          <template v-for="frame of frames" :key="frame">
+            <img :src="`/companion/${frame}-light.webp`" :alt="frame === current.frame ? 'QuestPDF Companion App' : ''" class="companion-frame light" :class="{ shown: frame === current.frame }" loading="lazy" />
+            <img :src="`/companion/${frame}-dark.webp`" :alt="frame === current.frame ? 'QuestPDF Companion App' : ''" class="companion-frame dark" :class="{ shown: frame === current.frame }" loading="lazy" />
+          </template>
 
-            <!-- hot reload: a faint band passes down the page each time the overview comes round -->
-            <span v-if="current.view === 0" :key="step" class="companion-refresh" aria-hidden="true"></span>
-            <span class="companion-marker" aria-hidden="true"></span>
-          </div>
-
-          <Transition name="companion-card" mode="out-in">
-            <div :key="step" class="companion-card" :style="{ left: `min(${current.card[0] * 100}%, 100% - 12px - var(--companion-card-width))`, top: `${current.card[1] * 100}%` }" aria-live="polite">
-              <strong><i class="fa-regular" :class="view.icon" aria-hidden="true"></i>{{ view.title }}</strong>
-              <p>{{ view.description }}</p>
-              <div v-if="shortcut.keys.length" class="companion-shortcut">
-                <span class="companion-shortcut-label">Shortcut</span>
-                <span class="companion-caps">
-                  <template v-for="(key, index) of shortcut.keys" :key="key">
-                    <span v-if="index > 0 && shortcut.combo" class="companion-plus" aria-hidden="true">+</span>
-                    <kbd class="companion-cap">{{ key }}</kbd>
-                  </template>
-                </span>
-              </div>
-            </div>
-          </Transition>
+          <!-- hot reload: a faint band passes down the page each time the overview comes round -->
+          <span v-if="current.view === 0" :key="step" class="companion-refresh" aria-hidden="true"></span>
+          <span class="companion-marker" aria-hidden="true"></span>
         </div>
 
-        <div class="companion-side">
-          <h2 class="card-title companion-title">Preview, inspect and debug</h2>
-          <p class="card-description companion-description">The Companion App refreshes your document the moment you save: no recompiling, no restarting. Inspect any element, measure the layout and trace issues to their cause.</p>
+        <Transition name="companion-card" mode="out-in">
+          <div :key="step" class="companion-card" :style="{ left: `min(${current.card[0] * 100}%, 100% - 12px - var(--companion-card-width))`, top: `${current.card[1] * 100}%` }" aria-live="polite">
+            <strong><i class="fa-regular" :class="view.icon" aria-hidden="true"></i>{{ view.title }}</strong>
+            <p>{{ view.description }}</p>
+            <div v-if="shortcut.keys.length" class="companion-shortcut">
+              <span class="companion-shortcut-label">Shortcut</span>
+              <span class="companion-caps">
+                <template v-for="(key, index) of shortcut.keys" :key="key">
+                  <span v-if="index > 0 && shortcut.combo" class="companion-plus" aria-hidden="true">+</span>
+                  <kbd class="companion-cap">{{ key }}</kbd>
+                </template>
+              </span>
+            </div>
+          </div>
+        </Transition>
+      </div>
 
-          <nav class="companion-views" aria-label="Companion App views">
+      <div class="companion-side">
+        <h2 class="card-title companion-title">Preview, inspect and debug</h2>
+        <p class="card-description companion-description">The Companion App refreshes your document the moment you save: no recompiling, no restarting. Inspect any element, measure the layout and trace issues to their cause.</p>
+
+        <nav class="companion-views" aria-label="Companion App views">
+          <button
+            v-for="(item, index) of views"
+            :key="item.title"
+            type="button"
+            class="companion-view"
+            :class="{ active: current.view === index }"
+            :aria-pressed="current.view === index"
+            @click="selectView(index)">
+            <i class="fa-regular" :class="item.icon" aria-hidden="true"></i>
+            <span class="full">{{ item.label }}</span>
+            <span class="short">{{ item.short }}</span>
+          </button>
+        </nav>
+
+        <div class="actions">
+          <a class="action primary" href="/companion/features.html">Explore features</a>
+
+          <!-- a real button: the VitePress router ignores clicks inside buttons, so it will not try to navigate -->
+          <div ref="downloadRef" class="download">
             <button
-              v-for="(item, index) of views"
-              :key="item.title"
               type="button"
-              class="companion-view"
-              :class="{ active: current.view === index }"
-              :aria-pressed="current.view === index"
-              @click="selectView(index)">
-              <i class="fa-regular" :class="item.icon" aria-hidden="true"></i>
-              <span class="full">{{ item.label }}</span>
-              <span class="short">{{ item.short }}</span>
+              class="action download-toggle"
+              aria-haspopup="menu"
+              :aria-expanded="isDownloadOpen"
+              @click="isDownloadOpen = !isDownloadOpen">
+              Download
+              <i class="fa-regular fa-chevron-down download-chevron" :class="{ open: isDownloadOpen }"></i>
             </button>
-          </nav>
 
-          <div class="actions">
-            <a class="action primary" href="/companion/features.html">Explore features</a>
+            <div v-if="isDownloadOpen" class="download-menu" role="menu">
+              <a
+                v-for="download of downloads"
+                :key="download.url"
+                class="download-item"
+                role="menuitem"
+                :href="download.url"
+                @click="isDownloadOpen = false">
+                <img :src="`/homepage/supported-platforms/${download.src}`" alt="" />
+                <span class="download-name">{{ download.name }}</span>
+                <span class="download-format">{{ download.format }}</span>
+              </a>
 
-            <!-- a real button: the VitePress router ignores clicks inside buttons, so it will not try to navigate -->
-            <div ref="downloadRef" class="download">
-              <button
-                type="button"
-                class="download-toggle"
-                aria-haspopup="menu"
-                :aria-expanded="isDownloadOpen"
-                @click="isDownloadOpen = !isDownloadOpen">
-                Download
-                <i class="fa-regular fa-chevron-down download-chevron" :class="{ open: isDownloadOpen }"></i>
-              </button>
-
-              <div v-if="isDownloadOpen" class="download-menu" role="menu">
-                <a
-                  v-for="download of downloads"
-                  :key="download.url"
-                  class="download-item"
-                  role="menuitem"
-                  :href="download.url"
-                  @click="isDownloadOpen = false">
-                  <img :src="`/homepage/supported-platforms/${download.src}`" alt="" />
-                  <span class="download-name">{{ download.name }}</span>
-                  <span class="download-format">{{ download.format }}</span>
-                </a>
-
-                <a class="download-all" role="menuitem" href="/companion/download.html" @click="isDownloadOpen = false">
-                  All versions
-                  <i class="fa-regular fa-arrow-right"></i>
-                </a>
-              </div>
+              <a class="download-all" role="menuitem" href="/companion/download.html" @click="isDownloadOpen = false">
+                All versions
+                <i class="fa-regular fa-arrow-right"></i>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -251,10 +249,6 @@ onBeforeUnmount(() => {
 </style>
 
 <style scoped>
-
-.companion-panel {
-  width: 100%;
-}
 
 /* One row: the app, and a column with the words, the list of views and the calls to action */
 
@@ -555,29 +549,10 @@ html.dark .companion-cap {
   position: relative;
 }
 
-/* mirrors a.action from CustomPages.css, which only targets anchors */
+/* the shared .action button (CustomPages.css), with room for the chevron */
 .download-toggle {
   display: inline-flex;
-  align-items: center;
   gap: 10px;
-  padding: 12px 24px;
-  border: 0;
-  border-radius: 12px;
-  background-color: #8883;
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1;
-  color: var(--vp-c-text-1);
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
-.download-toggle:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--elevation);
-  background-color: #8885;
 }
 
 .download-chevron {

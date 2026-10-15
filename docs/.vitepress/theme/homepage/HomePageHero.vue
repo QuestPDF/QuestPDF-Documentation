@@ -6,7 +6,7 @@ import { data as statistics } from "../statistics.data";
   <div class="hero-pattern" />
 
   <section class="content">
-    <div class="text" style="z-index: 10; display: flex; flex-direction: column; gap: 16px;">
+    <div class="text">
       <h1>
         <span class="highlight-foreground">Code-first</span> PDF <br>generation <span class="keep-together">for C#</span>
       </h1>
@@ -17,19 +17,17 @@ import { data as statistics } from "../statistics.data";
     </div>
 
     <!-- the adoption numbers -->
-    <aside class="hero-cards">
-      <div class="statistics">
-        <a v-for="statistic in statistics" :key="statistic.label" :href="statistic.link" :target="statistic.link.startsWith('http') ? '_blank' : undefined" rel="noopener" class="statistic">
-          <span class="statistic-icon">
-            <i class="fa-solid" :class="[statistic.icon]"></i>
-          </span>
+    <aside class="statistics">
+      <a v-for="statistic in statistics" :key="statistic.label" :href="statistic.link" :target="statistic.link.startsWith('http') ? '_blank' : undefined" rel="noopener" class="statistic">
+        <span class="statistic-icon">
+          <i class="fa-solid" :class="[statistic.icon]"></i>
+        </span>
 
-          <span class="title">
-            <span class="value">{{ statistic.value }}</span>
-            <span class="label">{{ statistic.label }}</span>
-          </span>
-        </a>
-      </div>
+        <span class="title">
+          <span class="value">{{ statistic.value }}</span>
+          <span class="label">{{ statistic.label }}</span>
+        </span>
+      </a>
     </aside>
   </section>
 </template>
@@ -81,6 +79,10 @@ import { data as statistics } from "../statistics.data";
    clamp holds it between the phone size and the full 4.5rem */
 .text {
   container-type: inline-size;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 h1 {
@@ -157,30 +159,23 @@ html.dark .tagline {
 
 
 /* Hero statistics
-   The adoption numbers sit directly on the page, with no surface of their own. The list is only
-   as wide as its stats need and sits flush with the right edge of the page content. */
+   The adoption numbers sit directly on the page, with no surface of their own, as a vertical list:
+   four stats in a row would squeeze the headline, and a wrapped row looks broken. Stacked, the list
+   keeps one shape at every width. It is only as wide as its stats need and sits flush with the right
+   edge of the page content; stacked under the text, it starts at the left edge. */
 
-.hero-cards {
+.statistics {
   position: relative;
   display: flex;
-
-  width: fit-content;
-  max-width: 100%;
+  flex-direction: column;
+  gap: 28px;
   justify-self: end;
 }
 
 @media screen and (max-width: 820px) {
-  .hero-cards {
-    width: 100%; /* stacked under the text: full width */
+  .statistics {
+    justify-self: start;
   }
-}
-
-/* a vertical list: three stats in a row would need ~750px and squeeze the headline, and a two-and-one
-   wrap looks broken. Stacked, the list keeps one shape at every width and sits level with the text. */
-.statistics {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
 }
 
 /* each stat is a link, but it reads as plain content: no frame, no lift, and the text keeps its
@@ -225,7 +220,6 @@ html.dark .tagline {
    fa-solid sets to 900. The glyph keeps the full ink colour; the thin stroke carries the weight. */
 html:not(.dark) .statistic-icon i {
   font-weight: 400;
-  color: var(--vp-c-text-1);
 }
 
 /* on the light theme the tile is solid white; a hairline ring keeps its shape on the pale page */

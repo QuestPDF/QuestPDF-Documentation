@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, ref, watch } from "vue";
 
 /* The visual of the sample-gallery card: a pile of sample documents, in 3D. Six pages stand on the card in
    three-quarter view, the same pose as the invoice of the intro-video card next to it but turned the other
@@ -10,35 +10,36 @@ import { computed, onBeforeUnmount, onMounted, ref } from "vue";
    touch of colour.
 
    The card shows the pile from the start: no entrance.
-   Hover, "pick one up": the pile turns towards the reader and the front page lifts off it, 64px towards
-   the camera, turned to face the camera square on (its own rotations undo the pile's pose), with a deep
-   shadow; the camera comes closer (a shorter perspective) so the lift reads as depth, and the pages left
-   behind shrink a touch, sink and dim. Centred in the column. Meanwhile colour arrives on the pages, one
-   after another from the front: headings darken, the accent element brightens, photos take a tint, the
-   seal fills in (the samples are rendered documents, not placeholders). Once settled, the pile browses:
-   the held page fades away where it is while the pile advances beneath it and the next front page rises
-   into the hand; the faded page reappears at the back. The exchange is slow, a cross-fade rather than a
-   swap, so the hand is never seen empty; and a blank sheet stands still at the back place, a hair behind
-   the back page, so the place is never seen empty either while the pile advances and the faded page
-   returns: the page fades in on a sheet that is already there. One page every 1.3s while the pointer rests, the first one once
-   the page in hand has had the same moment of rest as the later ones. When the pointer leaves, the step
-   in progress finishes in the hover pose (the pile would otherwise fall back under a page mid-fade and
-   the page would pop), then the pile returns and the colour drains back from the rear.
-   Reduced motion: the pile in its pose, nothing moves. Below 700px the card shows a flat miniature of the
-   front page instead (see the compact rules in HomePageCtaCard.vue).
+   Hover (`active`, from HomePageCtaCard.vue), "pick one up": the pile turns towards the reader and the
+   front page lifts off it, 64px towards the camera, turned to face the camera square on (its own
+   rotations undo the pile's pose), with a deep shadow; the camera comes closer (a shorter perspective) so
+   the lift reads as depth, and the pages left behind shrink a touch, sink and dim. Centred in the column.
+   Meanwhile colour arrives on the pages, one after another from the front: headings darken, the accent
+   element brightens, photos take a tint, the seal fills in (the samples are rendered documents, not
+   placeholders). Once settled, the pile browses: the held page fades away where it is while the pile
+   advances beneath it and the next front page rises into the hand; the faded page reappears at the back.
+   The exchange is slow, a cross-fade rather than a swap, so the hand is never seen empty; and a blank
+   sheet stands still at the back place, a hair behind the back page, so the place is never seen empty
+   either while the pile advances and the faded page returns: the page fades in on a sheet that is already
+   there. One page every 1.3s while the pointer rests, the first one once the page in hand has had the
+   same moment of rest as the later ones. When the pointer leaves, the step in progress finishes in the
+   hover pose (the pile would otherwise fall back under a page mid-fade and the page would pop), then the
+   pile returns and the colour drains back from the rear.
+   Reduced motion: the pile in its pose, nothing moves (the script sets neither the hover class nor a
+   step). Below 700px the card shows a flat miniature of the front page instead (see the compact rules
+   in HomePageCtaCard.vue).
 
-   Everything is CSS: no image assets. The component listens for hover and keyboard focus on the
-   surrounding .cta-card link, which HomePageCtaCard.vue renders around its visual slot, and sets the
-   hover class itself, so it can hold the pose while a step finishes. */
+   Everything is CSS: no image assets. The hover class is the component's own, not the card's hover, so
+   it can hold the pose while a step finishes. */
 
-const root = ref<HTMLElement>();
+const props = defineProps<{ active: boolean }>();
 
 /* hover: the pile is in its hover pose (set on enter, cleared on leave, or at the end of the step in
-   progress if one is running then). active: the page in front. leaving: the page that has just left the
+   progress if one is running then). front: the page in front. leaving: the page that has just left the
    front and is on its way to the back. stepping: a browse step is in progress, so the pile waits a moment
    before it advances. The card shows the pile from the start: no entrance. */
 const hover = ref(false);
-const active = ref(0);
+const front = ref(0);
 const leaving = ref(-1);
 const stepping = ref(false);
 
@@ -195,7 +196,7 @@ const pages: Page[] = [
 const LAST = pages.length - 1;
 const TILTS = [0, 1.2, -1, 0.8, -1.4, 0.6];
 
-const slots = computed(() => pages.map((_, index) => (index - active.value + pages.length) % pages.length));
+const slots = computed(() => pages.map((_, index) => (index - front.value + pages.length) % pages.length));
 
 function shapeStyle(shape: Shape) {
   return {
@@ -217,99 +218,58 @@ const STEP = 1200;
 const FIRST_STEP_DELAY = 1200;
 const STEP_INTERVAL = 1300;
 
-let hovering = false;
-let timer: ReturnType<typeof setTimeout> | undefined;
+let browseTimer: ReturnType<typeof setTimeout> | undefined;
 let stepTimer: ReturnType<typeof setTimeout> | undefined;
-let card: Element | null = null;
-
-function reducedMotion() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
-function clear() {
-  if (timer) clearTimeout(timer);
-  timer = undefined;
-}
 
 /* one browse step: the front page leaves (its animation fades it out and brings it back at the rear),
-   the pile advances, and once the step is over the page that left is just the back page */
+   the pile advances, and once the step is over the page that left is just the back page. The step ends
+   on a timer, not on animationend (Chrome sends no animation events to a hidden tab); the animation holds
+   its end state, the back place, so the class can go a little late but never early (removing it mid-step
+   would snap the page into place) */
 function step() {
-  if (stepTimer) clearTimeout(stepTimer);
+  clearTimeout(stepTimer);
 
-  leaving.value = active.value;
-  active.value = (active.value + 1) % pages.length;
+  leaving.value = front.value;
+  front.value = (front.value + 1) % pages.length;
   stepping.value = true;
 
-  /* the animation's own end event clears the class (see onFlightEnd); this is the fallback should it not
-     arrive, well after the step: the animation holds its end state, which is the back place, so the class
-     can go late but not early (removing it mid-step would snap the page into place) */
-  stepTimer = setTimeout(settle, STEP + 400);
+  stepTimer = setTimeout(settle, STEP + 50);
 }
 
+/* the hover pose was held while the step finished; it goes now if the pointer has left */
 function settle() {
-  if (stepTimer) clearTimeout(stepTimer);
-  stepTimer = undefined;
   leaving.value = -1;
   stepping.value = false;
-  if (!hovering) hover.value = false;
+  hover.value = props.active;
 }
 
-/* a step is two animations of the same length (place and fade), so this arrives twice; the second call
-   finds the page no longer leaving and does nothing */
-function onFlightEnd(event: AnimationEvent, index: number) {
-  if (event.target === event.currentTarget && leaving.value === index)
-    settle();
-}
-
-function schedule(delay: number) {
-  clear();
-  timer = setTimeout(() => {
-    if (!hovering) return;
+function browse(delay: number) {
+  browseTimer = setTimeout(() => {
     step();
-    schedule(STEP_INTERVAL);
+    browse(STEP_INTERVAL);
   }, delay);
 }
 
-function onEnter() {
-  hovering = true;
-  if (reducedMotion()) return;
+watch(() => props.active, isActive => {
+  clearTimeout(browseTimer);
 
-  hover.value = true;
-  schedule(FIRST_STEP_DELAY);
-}
-
-/* the pose stays while a step is in progress; settle lets it go */
-function onLeave() {
-  hovering = false;
-  clear();
-  if (!stepping.value) hover.value = false;
-}
-
-/* keyboard focus counts as hover, a click's focus does not (the click navigates anyway) */
-function onFocus() {
-  if (card?.matches(":focus-visible")) onEnter();
-}
-
-onMounted(() => {
-  card = root.value?.closest(".cta-card") ?? null;
-  card?.addEventListener("mouseenter", onEnter);
-  card?.addEventListener("mouseleave", onLeave);
-  card?.addEventListener("focus", onFocus);
-  card?.addEventListener("blur", onLeave);
+  if (isActive && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    hover.value = true;
+    browse(FIRST_STEP_DELAY);
+  }
+  else if (!stepping.value) {
+    hover.value = false;
+  }
 });
 
 onBeforeUnmount(() => {
-  clear();
-  if (stepTimer) clearTimeout(stepTimer);
-  card?.removeEventListener("mouseenter", onEnter);
-  card?.removeEventListener("mouseleave", onLeave);
-  card?.removeEventListener("focus", onFocus);
-  card?.removeEventListener("blur", onLeave);
+  clearTimeout(browseTimer);
+  clearTimeout(stepTimer);
 });
 </script>
 
 <template>
-  <div ref="root" class="deck" :class="{ hover, stepping }" :style="{ '--last': LAST }">
+  <div class="deck" :class="{ hover, stepping }" :style="{ '--last': LAST }">
     <div class="stage">
       <div class="deck-3d">
         <div class="deck-shadow" />
@@ -324,8 +284,7 @@ onBeforeUnmount(() => {
             :key="page.name"
             class="page-3d"
             :class="{ leaving: leaving === index, front: slots[index] === 0 }"
-            :style="{ '--i': slots[index], '--r': `${TILTS[slots[index]]}deg` }"
-            @animationend="onFlightEnd($event, index)">
+            :style="{ '--i': slots[index], '--r': `${TILTS[slots[index]]}deg` }">
           <div class="paper page">
             <span
                 v-for="(shape, shapeIndex) of page.shapes"
@@ -731,28 +690,5 @@ html.dark .deck-shadow {
   }
 }
 
-
-/* Reduced motion: the pile in its pose, nothing moves (the script sets neither the hover class nor a
-   step, so the hover and step rules above never apply) */
-@media (prefers-reduced-motion: reduce) {
-  .deck .deck-3d {
-    transition: none;
-    transform: translateX(var(--deck-shift)) translateY(var(--deck-rise)) scale(var(--deck-scale)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(var(--tilt-z));
-  }
-
-  .deck .page-3d {
-    transition: none;
-    animation: none;
-    opacity: 1;
-    transform: translate3d(calc(var(--i) * var(--dx)), calc(var(--i) * var(--dy)), calc(var(--i) * -1 * var(--dz))) rotateZ(var(--r));
-  }
-
-  .deck-shadow,
-  .stage,
-  .page,
-  .shape {
-    transition: none;
-  }
-}
 
 </style>

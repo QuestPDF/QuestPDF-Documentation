@@ -2,57 +2,46 @@ import {computed, onMounted, onUnmounted, ref, type Ref} from "vue";
 import type {ShikiTransformer} from "@shikijs/types";
 
 /* A looped simulation of a session with a coding agent: a prompt types itself into a composer and is
-   sent, a status line reports what the agent is doing, and the code window shows the edit as a diff,
-   the removed line in red and the replacement typed in green. When the next prompt starts, the previous
-   diff is accepted into the code. After the last round the session resets. The loop plays while the
-   root is in view and pauses off-screen; under prefers-reduced-motion the finished session is shown
-   still. The quick start section drives it with the Program.cs sample. */
+   sent, the agent works for a moment, and the code window shows the edit as a diff, the replaced line
+   in red and the new lines typed in green. When the next prompt starts, the previous diff is accepted
+   into the code. After the last round the session resets. The loop plays while the root is in view and
+   pauses off-screen; under prefers-reduced-motion the finished session is shown still. The quick start
+   section drives it with the Program.cs sample. */
 
 export interface Round {
   prompt: string;
-  status: string;
-  remove?: string;      /* the line the edit replaces, marked red and kept in place */
-  insertAfter: string;  /* the line the added block goes under (the removed line, when there is one) */
+  /* the line the new lines go under, matched by text */
+  after: string;
+  /* the edit replaces that line: it is marked red and kept in place above the new lines */
+  replace?: boolean;
   add: string[];
 }
 
-export type LineKind = "normal" | "removed" | "added";
+type LineKind = "normal" | "removed" | "added";
 
-export interface Line {
+interface Line {
   text: string;
   kind: LineKind;
 }
 
-export type Phase = "idle" | "typing" | "working" | "editing" | "done";
+type Phase = "idle" | "typing" | "working" | "editing" | "done";
 
-export interface SessionOptions {
-  root: Ref<HTMLElement | null>;
-  fileName: string;
-  initialCode: string[];
-  rounds: Round[];
-  /* how much of the root has to be in view for the loop to run */
-  threshold?: number;
-}
+const promptSpeed = 28;
+const codeSpeed = 16;
 
-export const promptSpeed = 28;
-export const codeSpeed = 16;
-
-function count(n: number, noun: string) {
-  return `${n} ${noun}${n === 1 ? "" : "s"}`;
-}
-
-export function useAgentSession(options: SessionOptions) {
-  const { fileName, initialCode, rounds } = options;
-
-  const lines = ref<Line[]>(initialCode.map(text => ({ text, kind: "normal" })));
+export function useAgentSession(root: Ref<HTMLElement | null>, initialCode: string[], rounds: Round[]) {
+  const lines = ref<Line[]>([]);
   const phase = ref<Phase>("idle");
   const roundIndex = ref(0);
   const promptTyped = ref(0);
 
   const round = computed(() => rounds[roundIndex.value]);
   const promptText = computed(() => round.value.prompt.slice(0, promptTyped.value));
-  const promptComplete = computed(() => promptTyped.value >= round.value.prompt.length);
+
+  /* the caret stays lit while characters arrive, like a real editor */
+  const typing = computed(() => phase.value === "typing" && promptTyped.value < round.value.prompt.length);
   const sent = computed(() => phase.value !== "idle" && phase.value !== "typing");
+  const working = computed(() => phase.value === "working" || phase.value === "editing");
 
   const code = computed(() => lines.value.map(line => line.text).join("\n"));
 
@@ -64,54 +53,50 @@ export function useAgentSession(options: SessionOptions) {
       line(node, line) {
         const kind = kinds[line - 1];
 
-        if (kind === "removed")
-          this.addClassToHast(node, "line-removed");
-        else if (kind === "added")
-          this.addClassToHast(node, "line-added");
+        if (kind !== "normal")
+          this.addClassToHast(node, `line-${kind}`);
       }
     };
-  });
-
-  const status = computed(() => {
-    switch (phase.value) {
-      case "working":
-        return { icon: "fa-circle-notch fa-spin", text: round.value.status };
-      case "editing":
-        return { icon: "fa-circle-notch fa-spin", text: "Editing " + fileName };
-      case "done": {
-        const removed = round.value.remove ? 1 : 0;
-        const added = round.value.add.length;
-        const parts = [removed ? count(removed, "line") + " removed" : "", count(added, "line") + " added"].filter(Boolean);
-        return { icon: "fa-circle-check", text: "Done: " + parts.join(", ") };
-      }
-      default:
-        return null;
-    }
   });
 
 
   /* Edits on the lines */
 
+  function resetSession() {
+    lines.value = initialCode.map(text => ({ text, kind: "normal" }));
+    roundIndex.value = 0;
+    promptTyped.value = 0;
+    phase.value = "idle";
+  }
+
   function acceptDiff() {
     lines.value = lines.value
         .filter(line => line.kind !== "removed")
-        .map(line => ({ text: line.text, kind: "normal" as LineKind }));
+        .map(line => ({ text: line.text, kind: "normal" }));
   }
 
-  function markRemoved(text: string) {
-    const line = lines.value.find(line => line.text === text && line.kind === "normal");
+  function markReplaced(r: Round) {
+    const line = lines.value.find(line => line.text === r.after && line.kind === "normal");
     if (line) line.kind = "removed";
   }
 
-  function insertionIndex(after: string) {
-    const index = lines.value.findIndex(line => line.text === after);
+  function insertionIndex(r: Round) {
+    const index = lines.value.findIndex(line => line.text === r.after);
     return index < 0 ? lines.value.length : index + 1;
   }
 
-  function applyRound(r: Round) {
-    if (r.remove) markRemoved(r.remove);
-    const at = insertionIndex(r.insertAfter);
-    lines.value.splice(at, 0, ...r.add.map(text => ({ text, kind: "added" as LineKind })));
+  function showFinishedSession() {
+    resetSession();
+
+    for (const r of rounds) {
+      if (r.replace) markReplaced(r);
+      lines.value.splice(insertionIndex(r), 0, ...r.add.map(text => ({ text, kind: "added" as LineKind })));
+      acceptDiff();
+    }
+
+    roundIndex.value = rounds.length - 1;
+    promptTyped.value = round.value.prompt.length;
+    phase.value = "done";
   }
 
 
@@ -126,37 +111,16 @@ export function useAgentSession(options: SessionOptions) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  async function waitWhileHidden() {
+  async function pause(ms: number) {
     while (alive && !visible)
       await sleep(250);
-  }
 
-  async function pause(ms: number) {
-    await waitWhileHidden();
     await sleep(ms);
-  }
-
-  function resetSession() {
-    lines.value = initialCode.map(text => ({ text, kind: "normal" }));
-    roundIndex.value = 0;
-    promptTyped.value = 0;
-    phase.value = "idle";
-  }
-
-  function showFinishedSession() {
-    resetSession();
-    for (const r of rounds) {
-      applyRound(r);
-      acceptDiff();
-    }
-    roundIndex.value = rounds.length - 1;
-    promptTyped.value = round.value.prompt.length;
-    phase.value = "done";
   }
 
   /* types the added block line by line, character by character, under the insertion line */
   async function typeAddedLines(r: Round) {
-    let at = insertionIndex(r.insertAfter);
+    let at = insertionIndex(r);
 
     for (const text of r.add) {
       lines.value.splice(at, 0, { text: "", kind: "added" });
@@ -188,22 +152,20 @@ export function useAgentSession(options: SessionOptions) {
     await pause(1400);
 
     phase.value = "editing";
-    if (round.value.remove) {
-      markRemoved(round.value.remove);
-      await pause(900);
-    }
-    else {
-      await pause(500);
-    }
+    if (round.value.replace)
+      markReplaced(round.value);
+    await pause(round.value.replace ? 900 : 500);
 
     await typeAddedLines(round.value);
 
     await pause(400);
     phase.value = "done";
-    await pause(index === rounds.length - 1 ? 6000 : 3500);
+
+    const last = index === rounds.length - 1;
+    await pause(last ? 6000 : 3500);
 
     /* the next prompt starts on accepted code; after the last round the session starts over */
-    if (index === rounds.length - 1)
+    if (last)
       resetSession();
     else
       acceptDiff();
@@ -218,12 +180,10 @@ export function useAgentSession(options: SessionOptions) {
     }
   }
 
-  function reducedMotion() {
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  }
+  resetSession();
 
   onMounted(() => {
-    if (reducedMotion() || !("IntersectionObserver" in window) || !options.root.value) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window) || !root.value) {
       showFinishedSession();
       return;
     }
@@ -233,9 +193,9 @@ export function useAgentSession(options: SessionOptions) {
 
       if (visible && !running)
         loop();
-    }, { threshold: options.threshold ?? 0.4 });
+    }, { threshold: 0.25 });
 
-    observer.observe(options.root.value);
+    observer.observe(root.value);
   });
 
   onUnmounted(() => {
@@ -243,10 +203,5 @@ export function useAgentSession(options: SessionOptions) {
     observer?.disconnect();
   });
 
-  return {
-    lines, code, codeTransformer,
-    phase, status,
-    roundIndex, roundCount: rounds.length,
-    promptText, promptComplete, sent
-  };
+  return { code, codeTransformer, promptText, typing, sent, working };
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import {computed} from "vue";
-import {ShikiTransformer} from "@shikijs/types";
+import type {ShikiTransformer} from "@shikijs/types";
 import createCodeHighlighter from "./createCodeHighlighter";
 
 const props = defineProps<{

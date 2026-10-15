@@ -10,7 +10,7 @@
           </p>
         </header>
 
-        <section v-for="category in categories" :key="category.name" class="panel category">
+        <section v-for="(category, c) in categories" :key="category.name" class="panel category">
           <header class="category-header">
             <h2 class="card-title">{{ category.name }}</h2>
             <p v-if="category.description" class="card-description">{{ category.description }}</p>
@@ -22,33 +22,33 @@
                paragraph that the row is described by. Sub-pages follow their parent as child rows,
                always visible. -->
           <ul class="feature-list">
-            <li v-for="item in category.items" :key="item.name" class="feature">
+            <li v-for="(item, i) in category.items" :key="item.name" class="feature">
               <component
                 :is="item.link ? 'a' : 'div'"
                 :href="item.link || undefined"
                 class="feature-row"
                 :class="{ linked: item.link }"
-                :aria-describedby="descriptionId(category, item)"
+                :aria-describedby="`feature-${c}-${i}`"
               >
                 <i class="feature-icon" :class="item.icon" aria-hidden="true" />
                 <span class="feature-name">{{ item.name }}</span>
                 <span class="feature-summary">{{ item.summary }}</span>
                 <i v-if="item.link" class="feature-arrow fa-regular fa-arrow-right" aria-hidden="true" />
               </component>
-              <p :id="descriptionId(category, item)" class="visually-hidden">{{ item.description }}</p>
+              <p :id="`feature-${c}-${i}`" class="visually-hidden">{{ item.description }}</p>
 
               <ul v-if="item.tags" class="feature-children">
-                <li v-for="tag in item.tags" :key="tag.label" class="feature-child">
+                <li v-for="(tag, t) in item.tags" :key="tag.label" class="feature-child">
                   <a
                     :href="tag.url"
                     class="feature-row child linked"
-                    :aria-describedby="descriptionId(category, item, tag)"
+                    :aria-describedby="`feature-${c}-${i}-${t}`"
                   >
                     <span class="feature-name">{{ tag.label }}</span>
                     <span class="feature-summary">{{ tag.summary }}</span>
                     <i class="feature-arrow fa-regular fa-arrow-right" aria-hidden="true" />
                   </a>
-                  <p :id="descriptionId(category, item, tag)" class="visually-hidden">{{ tag.description }}</p>
+                  <p :id="`feature-${c}-${i}-${t}`" class="visually-hidden">{{ tag.description }}</p>
                 </li>
               </ul>
             </li>
@@ -61,12 +61,6 @@
 </template>
 
 <script setup>
-/* id of the visually hidden paragraph with the full description, which the row is described by */
-function descriptionId(category, item, tag) {
-  const slug = (text) => text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-  return ["feature", slug(category.name), slug(item.name), tag ? slug(tag.label) : null].filter(Boolean).join("-");
-}
-
 const categories = [
   {
     name: "Companion App",
@@ -850,41 +844,6 @@ const categories = [
   }
 ];
 </script>
-
-<style>
-
-/* Background
-   The same continuous canvas as the homepage (see HomePage.vue): the grain tile over soft colour
-   washes, painted on <body> so the page, the strip under the navbar and the footer share it.
-   The page is long, so the washes are spread along it: a sky-blue glow top right and a violet glow
-   top left behind the header, like the hero, then a cyan wash on the left and a tall blue glow on
-   the right along the chapters, and an indigo wash on the left further down. None sit in the last
-   stretch, so the footer stays calm. */
-
-body:has(.custom-page.features-page) {
-  background-color: var(--custom-page-bg);
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 13%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 900px at 0% 30%, color-mix(in srgb, #26C6DA 8%, transparent), transparent 70%),
-      radial-gradient(ellipse 600px 1600px at 100% 50%, color-mix(in srgb, #1E88E5 10%, transparent), transparent 70%),
-      radial-gradient(ellipse 1200px 800px at 0% 72%, color-mix(in srgb, #3F51B5 8%, transparent), transparent 70%);
-  background-size: 256px 256px, auto, auto, auto, auto, auto;
-  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
-}
-
-html.dark body:has(.custom-page.features-page) {
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 24%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 12%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 900px at 0% 30%, color-mix(in srgb, #26A69A 11%, transparent), transparent 70%),
-      radial-gradient(ellipse 600px 1600px at 100% 50%, color-mix(in srgb, #1E88E5 14%, transparent), transparent 70%),
-      radial-gradient(ellipse 1200px 800px at 0% 72%, color-mix(in srgb, #3F51B5 12%, transparent), transparent 70%);
-}
-
-</style>
 
 <style scoped>
 

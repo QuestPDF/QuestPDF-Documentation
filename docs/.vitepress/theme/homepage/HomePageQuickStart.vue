@@ -1,57 +1,72 @@
 <script setup lang="ts">
 import {ref} from "vue";
 import quickStartExample from './codeExamples/quickStart.cs?raw';
-import HomePageWindowContainer from "./HomePageWindowContainer.vue";
 import HomePageHighlightedCode from "./HomePageHighlightedCode.vue";
 import {type Round, useAgentSession} from "./agentSession";
 
 /* One surface in three regions, divided by hairlines: two cards stacked on the left and one code
    window on the right, embedded edge to edge and as tall as both cards together. The first card makes
-   the case for writing the document in C#. The second card shows how
-   an AI assistant fits in. A composer sits at the foot of the window, where a request types itself in; the
-   window then shows the assistant's edit as a diff on the same Program.cs. Three rounds, then the session starts
-   over (agentSession.ts). While the assistant works, the send button turns into a spinner. */
+   the case for writing the document in C#. The second card shows how an AI assistant fits in. A
+   composer sits at the foot of the window, where a request types itself in; the window then shows the
+   assistant's edit as a diff on the same Program.cs. Three rounds, then the session starts over
+   (agentSession.ts). While the assistant works, the send button turns into a spinner. */
 
-interface Note {
-  icon: string;
+interface Card {
+  kind: "code-card" | "agent-card";
   title: string;
-  description: string;
+  label: string;
+  notes: {
+    icon: string;
+    title: string;
+    description: string;
+  }[];
 }
 
 /* the points as a list: the title bold on its own line, the explanation under it in the quieter colour */
-const codeNotes: Note[] = [
+const cards: Card[] = [
   {
-    icon: "fa-code",
-    title: "Use existing programming knowledge",
-    description: "Build dynamic documents with loops, conditions and reusable components, with no template language to learn."
+    kind: "code-card",
+    title: "Create and review in C#",
+    label: "Why write documents in C#",
+    notes: [
+      {
+        icon: "fa-code",
+        title: "Use existing programming knowledge",
+        description: "Build dynamic documents with loops, conditions and reusable components, with no template language to learn."
+      },
+      {
+        icon: "fa-lightbulb-on",
+        title: "Let your IDE do more",
+        description: "Use IntelliSense, type checking, code navigation and refactoring while building your documents."
+      },
+      {
+        icon: "fa-code-pull-request",
+        title: "Review every change",
+        description: "Keep document layouts alongside your application in Git, with readable diffs, pull requests and version history."
+      }
+    ]
   },
   {
-    icon: "fa-lightbulb-on",
-    title: "Let your IDE do more",
-    description: "Use IntelliSense, type checking, code navigation and refactoring while building your documents."
-  },
-  {
-    icon: "fa-code-pull-request",
-    title: "Review every change",
-    description: "Keep document layouts alongside your application in Git, with readable diffs, pull requests and version history."
-  }
-];
-
-const agentNotes: Note[] = [
-  {
-    icon: "fa-sparkles",
-    title: "Describe what you need",
-    description: "Ask your coding assistant to build a document from your requirements, data models and reusable components."
-  },
-  {
-    icon: "fa-arrow-right-arrow-left",
-    title: "Confidently migrate your existing layouts",
-    description: "Use AI to help translate HTML layouts and templates from other systems into editable QuestPDF code."
-  },
-  {
-    icon: "fa-arrows-rotate",
-    title: "Improve and extend with AI assistance",
-    description: "Adjust layouts, add business rules or extract reusable components through conversation, then review the changes."
+    kind: "agent-card",
+    title: "Develop with AI agents",
+    label: "How an AI assistant helps",
+    notes: [
+      {
+        icon: "fa-sparkles",
+        title: "Describe what you need",
+        description: "Ask your coding assistant to build a document from your requirements, data models and reusable components."
+      },
+      {
+        icon: "fa-arrow-right-arrow-left",
+        title: "Confidently migrate your existing layouts",
+        description: "Use AI to help translate HTML layouts and templates from other systems into editable QuestPDF code."
+      },
+      {
+        icon: "fa-arrows-rotate",
+        title: "Improve and extend with AI assistance",
+        description: "Adjust layouts, add business rules or extract reusable components through conversation, then review the changes."
+      }
+    ]
   }
 ];
 
@@ -59,22 +74,18 @@ const agentNotes: Note[] = [
 /* The session: the quick start sample, refined by three requests. The anchors are lines of
    codeExamples/quickStart.cs, matched by text. */
 
-const fileName = "Program.cs";
-
 const rounds: Round[] = [
   {
     prompt: "Highlight important tasks in orange.",
-    status: "Reading the documentation at llms.txt",
-    insertAfter: "                .Text(task.Title)",
+    after: "                .Text(task.Title)",
     add: [
       "                .FontColor(task.IsImportant ? Colors.Orange.Darken2 : Colors.Black)"
     ]
   },
   {
     prompt: "Show overdue due dates in red.",
-    status: "Editing " + fileName,
-    remove: "            row.ConstantItem(50).Text(task.DueDate?.ToString(\"d\") ?? \"No due date\");",
-    insertAfter: "            row.ConstantItem(50).Text(task.DueDate?.ToString(\"d\") ?? \"No due date\");",
+    after: "            row.ConstantItem(50).Text(task.DueDate?.ToString(\"d\") ?? \"No due date\");",
+    replace: true,
     add: [
       "            row.ConstantItem(50)",
       "                .Text(task.DueDate?.ToString(\"d\") ?? \"No due date\")",
@@ -83,9 +94,8 @@ const rounds: Round[] = [
   },
   {
     prompt: "Hide completed subtasks.",
-    status: "Checking the rendered page",
-    remove: "        foreach (var subtask in task.Subtasks)",
-    insertAfter: "        foreach (var subtask in task.Subtasks)",
+    after: "        foreach (var subtask in task.Subtasks)",
+    replace: true,
     add: [
       "        foreach (var subtask in task.Subtasks.Where(x => !x.IsDone))"
     ]
@@ -93,102 +103,75 @@ const rounds: Round[] = [
 ];
 
 const root = ref<HTMLElement | null>(null);
-
-const { code, codeTransformer, phase, promptText, promptComplete, sent } = useAgentSession({
-  root,
-  fileName,
-  initialCode: quickStartExample.trimEnd().split("\n"),
-  rounds,
-  threshold: 0.25
-});
+const { code, codeTransformer, promptText, typing, sent, working } = useAgentSession(root, quickStartExample.trimEnd().split("\n"), rounds);
 </script>
 
 <template>
-  <section class="content">
-    <div ref="root" class="panel quick-start">
-      <!-- the case for code -->
-      <article class="quick-start-card code-card">
-        <h2 class="card-title">Create and review in C#</h2>
+  <div ref="root" class="panel quick-start">
+    <!-- the case for code, then the AI story -->
+    <article v-for="card of cards" :key="card.kind" class="quick-start-card" :class="card.kind">
+      <h2 class="card-title">{{ card.title }}</h2>
 
-        <ul class="notes" aria-label="Why write documents in C#">
-          <li v-for="note of codeNotes" :key="note.title" class="note">
-            <i class="fa-regular" :class="note.icon" aria-hidden="true"></i>
-            <div>
-              <strong>{{ note.title }}</strong>
-              <p>{{ note.description }}</p>
-            </div>
-          </li>
-        </ul>
-
-      </article>
-
-      <!-- the AI story -->
-      <article class="quick-start-card agent-card">
-        <div class="background-gradient" aria-hidden="true"></div>
-        <h2 class="card-title">Develop with AI agents</h2>
-
-        <ul class="notes" aria-label="How an AI assistant helps">
-          <li v-for="note of agentNotes" :key="note.title" class="note">
-            <i class="fa-regular" :class="note.icon" aria-hidden="true"></i>
-            <div>
-              <strong>{{ note.title }}</strong>
-              <p>{{ note.description }}</p>
-            </div>
-          </li>
-        </ul>
-      </article>
-
-      <!-- the one code window, embedded edge to edge in the right region, as tall as the two cards together -->
-      <div class="stage">
-        <home-page-window-container :file-name="fileName">
-          <suspense>
-            <home-page-highlighted-code :code="code" :code-transformer="codeTransformer" />
-          </suspense>
-
-          <!-- the composer at the foot of the window: the request types itself, the send button lights
-               up once it is sent and spins while the assistant works -->
-          <div class="composer-dock">
-            <div class="composer" :class="{ sent, working: phase === 'working' || phase === 'editing' }" aria-live="polite">
-              <i class="fa-regular fa-sparkles composer-icon" aria-hidden="true"></i>
-
-              <div class="composer-text">
-                <span>{{ promptText }}</span>
-                <span v-if="!sent" class="caret" :class="{ steady: !promptComplete && phase === 'typing' }"></span>
-              </div>
-
-              <div class="composer-send" aria-hidden="true">
-                <i v-if="phase === 'working' || phase === 'editing'" class="spinner"></i>
-                <i v-else class="fa-regular fa-arrow-up"></i>
-              </div>
-            </div>
+      <ul class="notes" :aria-label="card.label">
+        <li v-for="note of card.notes" :key="note.title" class="note">
+          <i class="fa-regular" :class="note.icon" aria-hidden="true"></i>
+          <div>
+            <strong>{{ note.title }}</strong>
+            <p>{{ note.description }}</p>
           </div>
-        </home-page-window-container>
+        </li>
+      </ul>
+    </article>
+
+    <!-- the one code window, embedded edge to edge in the right region, as tall as the two cards together -->
+    <div class="window">
+      <div class="window-header">
+        <span class="dot red" />
+        <span class="dot yellow" />
+        <span class="dot green" />
+        <span class="file-name">Program.cs</span>
+      </div>
+
+      <suspense>
+        <home-page-highlighted-code :code="code" :code-transformer="codeTransformer" />
+      </suspense>
+
+      <!-- the composer at the foot of the window: the request types itself, the send button lights
+           up once it is sent and spins while the assistant works -->
+      <div class="composer-dock">
+        <div class="composer" :class="{ sent, working }" aria-live="polite">
+          <i class="fa-regular fa-sparkles composer-icon" aria-hidden="true"></i>
+
+          <div class="composer-text">
+            <span>{{ promptText }}</span>
+            <span v-if="!sent" class="caret" :class="{ steady: typing }"></span>
+          </div>
+
+          <div class="composer-send" aria-hidden="true">
+            <i v-if="working" class="spinner"></i>
+            <i v-else class="fa-regular fa-arrow-up"></i>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <style scoped>
 
-/* Layout: one panel, two rows, the cards in the first column, the window spanning both rows in the
-   second, all divided by hairlines. The window takes 7/12 of the width so the code has room; the rows
-   are as tall as the cards, and the window stretches to them (or, if the code is taller, the cards
-   stretch to the window and pin their foot to the bottom). */
-
-.content {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 0;
-}
+/* Layout: one panel, the cards in the first column, the window spanning both rows in the second, all
+   divided by hairlines. The window takes 6/11 of the width so the code has room; the rows are as tall
+   as the cards, and the window stretches to them (or, if the code is taller, the cards stretch to the
+   window). */
 
 .custom-page.home-page .panel.quick-start {
   --agent-accent: #7E57C2;
   --tile-purple: #5E35B1;
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  grid-template-rows: auto auto;
-  gap: 0;
-  width: 100%;
+  grid-template-areas:
+      "code window"
+      "agent window";
   padding: 0;
   overflow: hidden; /* the embedded window follows the panel's corners */
 }
@@ -198,7 +181,7 @@ html.dark .custom-page.home-page .panel.quick-start {
   --tile-purple: #B388FF;
 }
 
-/* a region of the panel: the card's inset, the notes and the foot spanning its width */
+/* a region of the panel: the card's inset, the notes spanning its width */
 .quick-start-card {
   display: flex;
   flex-direction: column;
@@ -208,78 +191,17 @@ html.dark .custom-page.home-page .panel.quick-start {
 }
 
 .code-card {
-  grid-column: 1;
-  grid-row: 1;
+  grid-area: code;
 }
 
+/* the AI card's halo: a faint purple glow from the left edge, centred behind the heading; no rays, to
+   keep it quiet */
 .agent-card {
-  grid-column: 1;
-  grid-row: 2;
-  position: relative;
-  isolation: isolate; /* keeps the glow (z-index: -1) above the panel background but below the content */
+  grid-area: agent;
   border-top: 1px solid var(--vp-c-divider);
-}
-
-/* the AI card's halo: a faint purple glow from the left edge, centred behind the heading, the same
-   device as the agents card in the trust section; no rays, to keep it quiet */
-.agent-card .background-gradient {
-  --accent-secondary: #AB47BC;
-  --glow-y: 64px;
-  position: absolute;
-  pointer-events: none;
-  inset: 0;
-  z-index: -1;
-  overflow: hidden;
   background-image:
-      radial-gradient(ellipse 90% 55% at 0% var(--glow-y), color-mix(in srgb, var(--agent-accent) 10%, transparent), transparent),
-      radial-gradient(ellipse 50% 30% at 0% var(--glow-y), color-mix(in srgb, var(--accent-secondary) 4%, transparent), transparent);
-}
-
-.stage {
-  grid-column: 2;
-  grid-row: 1 / 3;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  border-left: 1px solid var(--vp-c-divider);
-}
-
-/* the window loses its own frame: the panel's hairlines and corners are its edges, and it fills
-   the stage, the code growing into the room above the composer */
-.stage :deep(.file-container) {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  height: auto;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.stage :deep(.file-container-header) {
-  padding: 10px 24px;
-}
-
-/* in light mode the header bar is white like the code below it, so the window reads as one plain
-   surface; dark mode keeps the slightly raised bar */
-html:not(.dark) .stage :deep(.file-container-header) {
-  background-color: var(--vp-c-bg);
-}
-
-.stage :deep(.file-content) {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.stage :deep(.code-source) {
-  flex-grow: 1;
-  padding: 12px 8px; /* with the 16px of each line, the code starts at 24px, in line with the header and the composer */
-  font-size: 0.875rem;
-}
-
-.composer-dock {
-  padding: 16px 24px 24px;
+      radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, var(--agent-accent) 10%, transparent), transparent),
+      radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #AB47BC 4%, transparent), transparent);
 }
 
 
@@ -308,8 +230,7 @@ html:not(.dark) .stage :deep(.file-container-header) {
   margin: 2px 0 0;
 }
 
-/* an icon in front of each item on an inset tile, the same plain inner surface as the companion
-   card's tiles, level with the top of the item's title */
+/* an icon in front of each item on an inset tile, level with the top of the item's title */
 .note {
   display: flex;
   align-items: flex-start;
@@ -337,6 +258,70 @@ html:not(.dark) .stage :deep(.file-container-header) {
    coloured surface rather than the plain grey of the C# card's tiles */
 html:not(.dark) .agent-card .note i {
   background-color: #F0E6FF;
+}
+
+
+/* The window: no frame of its own, the panel's hairlines and corners are its edges. The code grows
+   into the room above the composer. In light mode the header bar is white like the code below it, so
+   the window reads as one plain surface; dark mode keeps the slightly raised bar. */
+
+.window {
+  grid-area: window;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-left: 1px solid var(--vp-c-divider);
+  background-color: var(--vp-c-bg);
+}
+
+.window-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 24px;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+html.dark .window-header {
+  background-color: var(--vp-c-bg-alt);
+}
+
+.file-name {
+  padding-left: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
+}
+
+/* the three window buttons are grey until the window is pointed at */
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  background-color: #8883;
+  transition: all 100ms ease-in-out;
+}
+
+.window:hover .dot.red {
+  background-color: #F44336CC;
+}
+
+.window:hover .dot.yellow {
+  background-color: #FFC107CC;
+}
+
+.window:hover .dot.green {
+  background-color: #4CAF50CC;
+}
+
+.window :deep(.code-source) {
+  flex-grow: 1;
+  padding: 12px 8px; /* with the 16px of each line, the code starts at 24px, in line with the header and the composer */
+  font-size: 0.875rem;
+}
+
+.composer-dock {
+  padding: 16px 24px 24px;
 }
 
 
@@ -498,67 +483,42 @@ html:not(.dark) .composer-text {
 @media screen and (max-width: 1180px) {
   .custom-page.home-page .panel.quick-start {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: auto auto;
-  }
-
-  .code-card {
-    grid-column: 1;
-    grid-row: 1;
+    grid-template-areas:
+        "code agent"
+        "window window";
   }
 
   .agent-card {
-    grid-column: 2;
-    grid-row: 1;
     border-top: none;
     border-left: 1px solid var(--vp-c-divider);
   }
 
-  .stage {
-    grid-column: 1 / -1;
-    grid-row: 2;
+  .window {
     border-left: none;
     border-top: 1px solid var(--vp-c-divider);
   }
-
-  .stage :deep(.file-container) {
-    flex-grow: 0;
-  }
-
-  .stage :deep(.file-content) {
-    flex-grow: 0;
-  }
-
 }
 
 /* phones: everything in one column, the window last */
 @media screen and (max-width: 760px) {
   .custom-page.home-page .panel.quick-start {
     grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto auto auto;
+    grid-template-areas:
+        "code"
+        "agent"
+        "window";
   }
 
   .quick-start-card {
     padding: 32px 24px;
   }
 
-  .code-card {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
   .agent-card {
-    grid-column: 1;
-    grid-row: 2;
     border-left: none;
     border-top: 1px solid var(--vp-c-divider);
   }
 
-  .stage {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
-  .stage :deep(.file-container-header) {
+  .window-header {
     padding: 10px 16px;
   }
 

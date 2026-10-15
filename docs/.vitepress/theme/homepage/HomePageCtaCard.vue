@@ -1,29 +1,37 @@
 <script setup lang="ts">
+import { computed, ref } from "vue";
+
 /* One of the two calls to action right under the hero: a card that is a single link, with an animated
    visual on the left and the pitch on the right, ending in a text link row in the card's accent colour.
 
    The visual comes from the "visual" slot: the intro-video card fills it with the 3D invoice build
    (HomePageCtaBuildVisual.vue), the sample-gallery card with the 3D pile of sample pages
-   (HomePageCtaDeckVisual.vue). Each runs its own entrance and hover and listens for them on this card. */
+   (HomePageCtaDeckVisual.vue). The slot gets `active` while the card is hovered or has keyboard focus
+   (a click's focus does not count: the click navigates anyway), and the visual plays its hover on it. */
 
 withDefaults(defineProps<{
   title: string;
   description: string;
 
-  /* the link row at the bottom: "label · detail →"; the detail (duration, sample count) is optional */
+  /* the link row at the bottom: "label →" */
   label: string;
-  detail?: string;
   href: string;
-  external?: boolean;
 
   /* the glow behind the visual and the colour of the link row */
   accent?: string;
   accentSecondary?: string;
 }>(), {
-  external: false,
   accent: "#0094F9",
   accentSecondary: "#2979FF"
 });
+
+const hovered = ref(false);
+const focused = ref(false);
+const active = computed(() => hovered.value || focused.value);
+
+function onFocus(event: FocusEvent) {
+  focused.value = (event.target as Element).matches(":focus-visible");
+}
 </script>
 
 <template>
@@ -31,13 +39,15 @@ withDefaults(defineProps<{
       class="panel cta-card"
       :style="{ '--accent': accent, '--accent-secondary': accentSecondary }"
       :href="href"
-      :target="external ? '_blank' : undefined"
-      :rel="external ? 'noopener' : undefined">
+      @mouseenter="hovered = true"
+      @mouseleave="hovered = false"
+      @focus="onFocus"
+      @blur="focused = false">
     <div class="background-gradient" />
 
     <!-- the visual is decoration: the link is named by its text -->
     <div class="visual" aria-hidden="true">
-      <slot name="visual" />
+      <slot name="visual" :active="active" />
     </div>
 
     <div class="cta-text">
@@ -45,12 +55,8 @@ withDefaults(defineProps<{
       <p class="card-description">{{ description }}</p>
 
       <span class="cta-link">
-        <span class="link-label">{{ label }}</span>
-        <span v-if="detail" class="separator">·</span>
-        <span class="link-detail">
-          <template v-if="detail">{{ detail }}</template>
-          <i class="fa-solid fa-arrow-right arrow-icon"></i>
-        </span>
+        {{ label }}
+        <i class="fa-solid fa-arrow-right arrow-icon"></i>
       </span>
     </div>
   </a>
@@ -195,26 +201,15 @@ html.dark .cta-card::after {
 
 .cta-link {
   display: flex;
-  flex-wrap: wrap; /* on a narrow card the detail moves to its own line; the arrow stays with it */
   align-items: center;
-  column-gap: 8px;
+  gap: 8px;
+  white-space: nowrap;
   margin-top: 20px;
 
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 600;
   color: var(--accent-text);
-}
-
-.link-label,
-.link-detail {
-  white-space: nowrap;
-}
-
-.link-detail {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
 }
 
 /* the accent is a glow colour; as text it is darkened on the light theme and lightened on the dark
@@ -225,11 +220,6 @@ html.dark .cta-card::after {
 
 html.dark .cta-card {
   --accent-text: color-mix(in srgb, var(--accent) 75%, #FFF);
-}
-
-.cta-link .separator {
-  color: var(--vp-c-text-3);
-  font-weight: 400;
 }
 
 /* .custom-page .fa-solid paints every icon brand blue (CustomPages.css); the arrow must follow the
