@@ -81,7 +81,7 @@ const contacts: ContactInformation[] = [
             <p class="card-description">{{ contact.description }}</p>
 
             <div class="links">
-              <a v-for="link in contact.links" :key="link.href" class="action" :href="link.href" target="_blank">{{ link.label }}</a>
+              <a v-for="link in contact.links" :key="link.href" class="action" :href="link.href" :target="link.href.startsWith('http') ? '_blank' : undefined">{{ link.label }}</a>
             </div>
           </article>
 

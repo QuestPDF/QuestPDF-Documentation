@@ -81,7 +81,7 @@ import { faqCategories as categories } from "./faq";
 
 /* the shared panel surface, its rows reaching the edges; the card keeps its own height when the
    header is the taller of the two (Client Work) */
-.panel.faq-list {
+.faq-list {
   align-self: start;
   display: flex;
   flex-direction: column;
@@ -135,10 +135,12 @@ import { faqCategories as categories } from "./faq";
   transform: rotate(180deg);
 }
 
+/* the answers in faq.ts separate their paragraphs with a blank line, which is kept */
 .faq-answer {
   padding: 0 32px 24px 32px;
   max-width: 85ch;
   color: var(--vp-c-text-1);
+  white-space: pre-line;
 }
 
 .faq-answer :deep(a) {

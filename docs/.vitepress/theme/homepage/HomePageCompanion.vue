@@ -62,24 +62,23 @@
         <div class="actions">
           <a class="action primary" href="/companion/features.html">Explore features</a>
 
-          <!-- a real button: the VitePress router ignores clicks inside buttons, so it will not try to navigate -->
+          <!-- a disclosure: a real button (the VitePress router ignores clicks inside buttons, so it will not
+               try to navigate) that shows a list of plain links -->
           <div ref="downloadRef" class="download">
             <button
               type="button"
               class="action download-toggle"
-              aria-haspopup="menu"
               :aria-expanded="isDownloadOpen"
               @click="isDownloadOpen = !isDownloadOpen">
               Download
               <i class="fa-regular fa-chevron-down download-chevron" :class="{ open: isDownloadOpen }"></i>
             </button>
 
-            <div v-if="isDownloadOpen" class="download-menu" role="menu">
+            <div v-if="isDownloadOpen" class="download-menu">
               <a
                 v-for="download of downloads"
                 :key="download.url"
                 class="download-item"
-                role="menuitem"
                 :href="download.url"
                 @click="isDownloadOpen = false">
                 <img :src="`/homepage/supported-platforms/${download.src}`" alt="" />
@@ -87,7 +86,7 @@
                 <span class="download-format">{{ download.format }}</span>
               </a>
 
-              <a class="download-all" role="menuitem" href="/companion/download.html" @click="isDownloadOpen = false">
+              <a class="download-all" href="/companion/download.html" @click="isDownloadOpen = false">
                 All versions
                 <i class="fa-regular fa-arrow-right"></i>
               </a>

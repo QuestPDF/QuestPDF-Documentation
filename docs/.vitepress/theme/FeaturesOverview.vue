@@ -73,7 +73,7 @@ import { featureCategories as categories } from "./features";
 
 /* Category: the shared panel surface (CustomPages.css) with a heading and a list of feature rows */
 
-.panel.category {
+.category {
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -83,8 +83,14 @@ import { featureCategories as categories } from "./features";
   padding: 48px;
 }
 
+/* the list is pulled out by the rows' own 8px inset, so at rest the icons line up with the category
+   title above and only the hover background reaches into the panel's margin */
+.feature-list {
+  margin: 0 -8px;
+}
+
 @media screen and (max-width: 700px) {
-  .panel.category {
+  .category {
     padding: 32px 16px;
     gap: 24px;
   }
@@ -93,18 +99,10 @@ import { featureCategories as categories } from "./features";
     padding: 0 8px;
   }
 
-  /* the panel's 16px inset leaves room for only 4px of overhang: the icons still meet the title at 24px
-     (qualified, because the base rule comes later in the file) */
-  .panel.category .feature-list {
+  /* the panel's 16px inset leaves room for only 4px of overhang: the icons still meet the title at 24px */
+  .feature-list {
     margin: 0 -4px;
   }
-}
-
-
-/* the list is pulled out by the rows' own 8px inset, so at rest the icons line up with the category
-   title above and only the hover background reaches into the panel's margin */
-.feature-list {
-  margin: 0 -8px;
 }
 
 

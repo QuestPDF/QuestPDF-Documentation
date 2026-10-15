@@ -167,7 +167,7 @@ const { code, codeTransformer, promptText, typing, sent, working } = useAgentSes
 /* the AI card's purple: in light mode its icon tiles take a purple tint, and the composer is a light
    purple field with a quiet border and dark text with a purple cast, so it reads as part of the same
    tinted surface */
-.custom-page.home-page .panel.quick-start {
+.quick-start {
   --agent-accent: #7E57C2;
   --tile-purple: #5E35B1;
   --tile-purple-bg: #F0E6FF;
@@ -185,7 +185,7 @@ const { code, codeTransformer, promptText, typing, sent, working } = useAgentSes
   overflow: hidden; /* the embedded window follows the panel's corners */
 }
 
-html.dark .custom-page.home-page .panel.quick-start {
+html.dark .quick-start {
   --agent-accent: #9575CD;
   --tile-purple: #B388FF;
   --tile-purple-bg: var(--surface-inner);
@@ -199,7 +199,6 @@ html.dark .custom-page.home-page .panel.quick-start {
 .quick-start-card {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   min-width: 0;
   padding: 40px;
 }
@@ -472,7 +471,7 @@ html.dark .window-header {
 /* Below this width the window no longer fits beside the cards: the two cards sit side by side
    and the window goes under them, full width */
 @media screen and (max-width: 1180px) {
-  .custom-page.home-page .panel.quick-start {
+  .quick-start {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-areas:
         "code agent"
@@ -492,7 +491,7 @@ html.dark .window-header {
 
 /* phones: everything in one column, the window last */
 @media screen and (max-width: 760px) {
-  .custom-page.home-page .panel.quick-start {
+  .quick-start {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
         "code"

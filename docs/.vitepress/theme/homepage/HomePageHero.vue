@@ -105,7 +105,7 @@ h1 .highlight-foreground {
   padding-right: 0.05em; /* keeps the gradient clip from shaving the last letter's edge */
   font-weight: 800;
 
-  background: linear-gradient(100deg, #00c6ff 0%, #0094f9 55%, #2979ff 100%);
+  background-image: linear-gradient(100deg, #00c6ff 0%, #0094f9 55%, #2979ff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -115,9 +115,7 @@ h1 .highlight-foreground {
 }
 
 html.dark h1 .highlight-foreground {
-  background: linear-gradient(100deg, #5ef0ff 0%, #32c6ff 50%, #4d8dff 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
+  background-image: linear-gradient(100deg, #5ef0ff 0%, #32c6ff 50%, #4d8dff 100%);
   filter: drop-shadow(0 6px 20px rgba(50, 198, 255, 0.18));
 }
 

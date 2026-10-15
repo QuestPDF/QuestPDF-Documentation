@@ -405,10 +405,9 @@ onBeforeUnmount(() => {
 
   .links {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 16px 16px;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
   }
 }
 

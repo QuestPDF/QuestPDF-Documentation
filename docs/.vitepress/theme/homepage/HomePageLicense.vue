@@ -65,12 +65,17 @@ const includes = [
 <style scoped>
 
 /* One panel, two halves of equal width with a hairline between them; the halves stack on
-   narrow screens and the hairline turns horizontal */
+   narrow screens and the hairline turns horizontal. A glow in the Community tier's green comes from
+   the panel's left edge, centred behind the heading, over the panel's own sheen (CustomPages.css). */
 
 .license-panel {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   gap: 48px;
+  background-image:
+      radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, #67B84D 11%, transparent), transparent),
+      radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #4CAF50 5%, transparent), transparent),
+      var(--surface-sheen);
 }
 
 .divider {
@@ -98,16 +103,6 @@ const includes = [
 .includes {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-}
-
-/* a glow in the Community tier's green from the panel's left edge, centred behind the heading, over
-   the panel's own sheen (CustomPages.css) */
-.custom-page .panel.license-panel {
-  background-image:
-      radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, #67B84D 11%, transparent), transparent),
-      radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #4CAF50 5%, transparent), transparent),
-      var(--surface-sheen);
 }
 
 .includes-list {
@@ -159,7 +154,7 @@ const includes = [
 }
 
 
-/* Tiers: stacked blocks spread to fill the panel's height. Each block opens
+/* Tiers: stacked blocks spread to fill the panel's height, at least 40px apart. Each block opens
    with the tier's name badge followed by the price, then the description below.
    The badge carries its tier's colour from the pricing page: green for Community, solid blue for
    Professional, black for Enterprise (inverted to light grey in dark mode) */
@@ -167,23 +162,14 @@ const includes = [
 .tiers {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   justify-content: space-between;
+  gap: 40px;
 }
 
 .tier {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 20px 0;
-}
-
-.tier:first-child {
-  padding-top: 0;
-}
-
-.tier:last-child {
-  padding-bottom: 0;
 }
 
 /* the price sits right after the badge, in the primary text colour, so badge and price read as one strong row */

@@ -14,24 +14,20 @@ interface StandardsCategory {
 
 /* every conformance level the library can produce, grouped by what the buyer needs it for; the
    description names no standards, so both the purposes and the standard names live here.
-   Each inner array is one row: archiving alone (six chips), the two short groups side by side */
-const standardsRows : StandardsCategory[][] = [
-  [
-    {
-      title: "Archiving",
-      levels: ["PDF/A-2b", "PDF/A-2u", "PDF/A-2a", "PDF/A-3b", "PDF/A-3u", "PDF/A-3a"]
-    }
-  ],
-  [
-    {
-      title: "Accessibility",
-      levels: ["PDF/UA-1"]
-    },
-    {
-      title: "E-invoicing",
-      levels: ["EN 16931", "ZUGFeRD", "Factur-X"]
-    }
-  ]
+   Archiving (six chips) takes a row of its own, the two short groups share the next one */
+const standards : StandardsCategory[] = [
+  {
+    title: "Archiving",
+    levels: ["PDF/A-2b", "PDF/A-2u", "PDF/A-2a", "PDF/A-3b", "PDF/A-3u", "PDF/A-3a"]
+  },
+  {
+    title: "Accessibility",
+    levels: ["PDF/UA-1"]
+  },
+  {
+    title: "E-invoicing",
+    levels: ["EN 16931", "ZUGFeRD", "Factur-X"]
+  }
 ];
 
 interface Platform {
@@ -91,14 +87,12 @@ const platformGroups : PlatformGroup[] = [
       </p>
 
       <div class="standards">
-        <div v-for="(row, index) of standardsRows" :key="index" class="standards-row">
-          <section v-for="category of row" :key="category.title" class="standards-category">
-            <h3 class="label">{{ category.title }}</h3>
-            <div class="standards-badges">
-              <span v-for="level in category.levels" :key="level">{{ level }}</span>
-            </div>
-          </section>
-        </div>
+        <section v-for="category of standards" :key="category.title" class="standards-category">
+          <h3 class="label">{{ category.title }}</h3>
+          <div class="standards-badges">
+            <span v-for="level in category.levels" :key="level">{{ level }}</span>
+          </div>
+        </section>
       </div>
     </div>
 
@@ -150,7 +144,6 @@ const platformGroups : PlatformGroup[] = [
 .trust > .panel {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
 }
 
 @media screen and (max-width: 960px) {
@@ -178,19 +171,18 @@ const platformGroups : PlatformGroup[] = [
 
 
 /* Conformance levels: one group per purpose, each a wrapped set of chips under a one-word label.
-   Groups in the same row sit side by side and wrap under each other when the card gets narrow */
+   The first group (archiving) fills a row; the others sit side by side and wrap under each other
+   when the card gets narrow */
 
 .standards {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 20px 40px;
   margin-top: 32px;
 }
 
-.standards-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px 40px;
+.standards-category:first-child {
+  flex-basis: 100%;
 }
 
 .standards-badges {

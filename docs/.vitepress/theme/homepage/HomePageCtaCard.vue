@@ -68,7 +68,7 @@ function onFocus(event: FocusEvent) {
 
 /* Card: a link styled as a panel; the visual takes the left 38%, the text the rest */
 
-.custom-page.home-page .panel.cta-card {
+.cta-card {
   isolation: isolate; /* keeps the gradient (z-index: -1) above the panel background but below the content */
   overflow: hidden; /* a visual that runs past its column is clipped at the card's rounded edge */
 
@@ -79,18 +79,16 @@ function onFocus(event: FocusEvent) {
   min-height: 256px;
   padding: 32px;
 
-  color: var(--vp-c-text-1); /* outranks the generic link hover (.custom-page a:not(.action):hover) */
-
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
-.custom-page.home-page .panel.cta-card.active {
+.cta-card.active {
   transform: translateY(-3px);
   box-shadow: var(--accent-halo);
   background-color: color-mix(in srgb, var(--surface), #FFF 20%);
 }
 
-html.dark .custom-page.home-page .panel.cta-card.active {
+html.dark .cta-card.active {
   box-shadow: var(--elevation-hover), var(--accent-halo);
   background-color: rgba(255, 255, 255, 0.07);
 }
@@ -268,7 +266,7 @@ html:not(.dark) .background-gradient {
 /* Between the stacking point and the full width the cards are narrow, so the visual gives the text
    a little more room */
 @media screen and (max-width: 1280px) and (min-width: 901px) {
-  .custom-page.home-page .panel.cta-card {
+  .cta-card {
     grid-template-columns: 34% minmax(0, 1fr);
     column-gap: 24px;
     padding: 28px;
@@ -280,7 +278,7 @@ html:not(.dark) .background-gradient {
    stays short and the code panel is not pushed too far down */
 
 @media screen and (max-width: 700px) {
-  .custom-page.home-page .panel.cta-card {
+  .cta-card {
     grid-template-columns: 72px minmax(0, 1fr);
     grid-template-areas:
         "visual title"
@@ -338,8 +336,8 @@ html:not(.dark) .background-gradient {
 /* Reduced motion: nothing moves; hover and entrance change colour, opacity and shadow only */
 
 @media (prefers-reduced-motion: reduce) {
-  .custom-page.home-page .panel.cta-card,
-  .custom-page.home-page .panel.cta-card.active {
+  .cta-card,
+  .cta-card.active {
     transform: none;
     transition: box-shadow 0.3s ease, background-color 0.3s ease;
   }

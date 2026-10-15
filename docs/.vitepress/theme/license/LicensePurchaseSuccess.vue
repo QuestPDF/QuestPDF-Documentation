@@ -111,7 +111,7 @@ const cards = [
               </p>
             </div>
 
-            <a class="action" href="mailto:contact@questpdf.com" target="_blank">Contact Support</a>
+            <a class="action" href="mailto:contact@questpdf.com">Contact Support</a>
           </section>
         </div>
       </div>

@@ -10,13 +10,13 @@ export interface StatisticEntry {
 declare const data: StatisticEntry[]
 export { data }
 
+/* the publish date of QuestPDF 2020.11.0, the first stable version on NuGet */
+const firstRelease = new Date('2020-11-01');
+
 export default defineLoader({
     async load(): Promise<StatisticEntry[]> {
-        const nugetIndex = await fetchJson('https://api.nuget.org/v3/index.json');
-
-        const [nugetDownloads, firstRelease, githubStars] = await Promise.all([
-            getNugetDownloads(nugetIndex),
-            getNugetFirstRelease(nugetIndex),
+        const [nugetDownloads, githubStars] = await Promise.all([
+            getNugetDownloads(),
             getGithubStars()
         ]);
 
@@ -67,18 +67,19 @@ async function fetchJson(url: string, init: RequestInit = {}, attempts = 5): Pro
     }
 }
 
-/* the NuGet endpoints are discovered from the service index */
-function findNugetResource(index: any, type: string): string {
-    const resource = index.resources.find(r => r['@type'] === type);
+async function getNugetDownloads(): Promise<number> {
+    // discover the search endpoint from the service index
+    const index = await fetchJson('https://api.nuget.org/v3/index.json');
 
-    if (!resource)
-        throw new Error(`${type} not found in service index`);
+    const searchResource = index.resources.find(
+        r => r['@type'] === 'SearchQueryService'
+    );
 
-    return resource['@id'];
-}
+    if (!searchResource)
+        throw new Error('SearchQueryService not found in service index');
 
-async function getNugetDownloads(index: any): Promise<number> {
-    const queryUrl = `${findNugetResource(index, 'SearchQueryService')}?q=packageid:questpdf&prerelease=true`;
+    // query for the package
+    const queryUrl = `${searchResource['@id']}?q=packageid:questpdf&prerelease=true`;
     const data = await fetchJson(queryUrl);
 
     const totalDownloads = data.data[0]?.totalDownloads;
@@ -87,33 +88,6 @@ async function getNugetDownloads(index: any): Promise<number> {
         throw new Error('totalDownloads not found in NuGet search response for packageid:questpdf');
 
     return totalDownloads;
-}
-
-/* the publish date of the first listed, stable version on NuGet; the registration index splits
-   the versions into pages, which the API inlines only for small packages */
-async function getNugetFirstRelease(index: any): Promise<Date> {
-    const registration = await fetchJson(`${findNugetResource(index, 'RegistrationsBaseUrl/3.6.0')}questpdf/index.json`);
-    const published: Date[] = [];
-
-    for (const page of registration.items) {
-        const items = page.items ?? (await fetchJson(page['@id'])).items;
-
-        for (const item of items) {
-            const entry = item.catalogEntry;
-            const isStable = !entry.version.includes('-');
-            const isListed = entry.listed !== false;
-            const publishedAt = new Date(entry.published);
-
-            // unlisted versions carry a placeholder date of 1900-01-01
-            if (isStable && isListed && publishedAt.getFullYear() > 1900)
-                published.push(publishedAt);
-        }
-    }
-
-    if (published.length === 0)
-        throw new Error('No listed stable versions found in NuGet registration for questpdf');
-
-    return new Date(Math.min(...published.map(date => date.getTime())));
 }
 
 async function getGithubStars(): Promise<number> {
@@ -138,7 +112,7 @@ function toThousands(n: number): number {
 }
 
 /* elapsed years, rounded to the nearest whole year */
-function toYears(since: Date, now: Date = new Date()): number {
+function toYears(since: Date): number {
     const millisecondsPerYear = 365.25 * 24 * 60 * 60 * 1000;
-    return Math.round((now.getTime() - since.getTime()) / millisecondsPerYear);
+    return Math.round((Date.now() - since.getTime()) / millisecondsPerYear);
 }

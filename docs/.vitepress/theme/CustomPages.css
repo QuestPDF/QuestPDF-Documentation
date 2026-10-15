@@ -30,20 +30,23 @@ html.dark {
 }
 
 
-.custom-page .content {
+/* The shared building blocks that pages restyle (the content column, the section header, the panel)
+   are wrapped in :where(), so they weigh no more than a single class: any page or component rule naming
+   the element's own class outranks them, whatever order the stylesheets load in. */
+
+.custom-page :where(.content) {
   padding: 64px 32px;
   margin: 0 auto;
   max-width: var(--custom-page-width);
 }
 
 @media screen and (max-width: 768px) {
-  .custom-page .content {
+  .custom-page :where(.content) {
     padding: 48px 24px;
   }
 }
 
 .custom-page h1 {
-  font-family: var(--vp-font-family-base);
   font-size: 2.75rem;
   font-weight: 700;
   line-height: 3.25rem;
@@ -51,7 +54,6 @@ html.dark {
 }
 
 .custom-page h2 {
-  font-family: var(--vp-font-family-base);
   font-size: 2rem;
   font-weight: 700;
   line-height: 2.5rem;
@@ -59,7 +61,6 @@ html.dark {
 }
 
 .custom-page h3 {
-  font-family: var(--vp-font-family-base);
   color: var(--vp-c-text-1);
   font-size: 1.25rem;
   font-weight: 600;
@@ -75,21 +76,35 @@ html.dark {
 }
 
 .custom-page p.sub-header {
-  color: var(--vp-c-text-2);
   font-size: 1.25rem;
   line-height: 2rem;
   margin-bottom: 1.25rem;
 }
 
-.custom-page .section-header {
+@media screen and (max-width: 700px) {
+  .custom-page h1 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .custom-page h2 {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+  }
+
+  .custom-page p.sub-header {
+    color: var(--vp-c-text-1);
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+
+.custom-page :where(.section-header) {
   max-width: 650px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.custom-page .section-header * {
   text-align: center;
 }
 
@@ -157,6 +172,7 @@ html.dark {
    Both are deliberately quiet: a first pass at twice these values was too much. */
 
 .custom-page {
+  --panel-padding: 40px;
   --surface: #FFFFFF;
   --surface-inner: #F0F2F6;
   --surface-edge:
@@ -178,18 +194,19 @@ html.dark .custom-page {
 /* The surface: a panel groups a section's content (each page lays out its own panels). It carries the
    glass lighting: the sheen is the background image, and the rim a ::before covering the surface, its
    gradient masked to a one-pixel border so the surface itself stays see-through; it follows the
-   surface's own corner radius. */
+   surface's own corner radius. The inset is --panel-padding (the homepage's panels take 48px); on
+   phones every panel takes the same narrower inset. */
 
-.custom-page .panel {
+.custom-page :where(.panel) {
   position: relative;
   border-radius: 32px;
-  padding: 40px;
+  padding: var(--panel-padding);
   background-color: var(--surface);
   background-image: var(--surface-sheen);
   box-shadow: var(--surface-edge);
 }
 
-.custom-page .panel::before {
+.custom-page :where(.panel)::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -204,7 +221,7 @@ html.dark .custom-page {
 }
 
 @media screen and (max-width: 700px) {
-  .custom-page .panel {
+  .custom-page :where(.panel) {
     padding: 32px 24px;
   }
 }
@@ -481,23 +498,4 @@ body:has(.custom-page:is(.contact-page, .purchase-page)) {
 
 :is(a, button).action.primary:hover {
   background-color: #1E88E5;
-}
-
-
-@media screen and (max-width: 700px) {
-  .custom-page h1 {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-  }
-
-  .custom-page h2 {
-    font-size: 1.75rem;
-    line-height: 2.25rem;
-  }
-
-  .custom-page p.sub-header {
-    color: var(--vp-c-text-1);
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
 }

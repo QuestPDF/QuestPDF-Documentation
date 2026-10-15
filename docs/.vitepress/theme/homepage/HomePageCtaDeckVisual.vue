@@ -27,7 +27,7 @@ import { computed, onBeforeUnmount, ref, watch } from "vue";
    pile returns and the colour drains back from the rear.
    Reduced motion: the pile in its pose, nothing moves (the script sets neither the hover class nor a
    step). Below 700px the card shows a flat miniature of the front page instead (see the compact rules
-   in HomePageCtaCard.vue).
+   in ctaVisual.css).
 
    Everything is CSS: no image assets. The hover class is the component's own, not the card's hover, so
    it can hold the pose while a step finishes. */

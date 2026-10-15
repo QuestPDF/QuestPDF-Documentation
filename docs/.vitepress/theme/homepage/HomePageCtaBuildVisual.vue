@@ -13,7 +13,7 @@ import { onBeforeUnmount, ref, watch } from "vue";
    with a ring spreading out of it. The pointer leaving lets a pass in progress finish; the next hover
    plays another.
    Reduced motion: the finished page, the play button in place, nothing moves. Below 700px the card shows
-   a flat miniature of the finished page instead (see the compact rules in HomePageCtaCard.vue).
+   a flat miniature of the finished page instead (see the compact rules in ctaVisual.css).
 
    Everything is CSS: no image assets. */
 

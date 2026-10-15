@@ -83,15 +83,9 @@ import HomePageLicense from "./HomePageLicense.vue";
   padding-bottom: 48px;
 }
 
-/* grey section panels get more breathing room on the homepage */
-.custom-page.home-page .panel {
-  padding: 48px;
-}
-
-@media screen and (max-width: 700px) {
-  .custom-page.home-page .panel {
-    padding: 32px 24px;
-  }
+/* the section panels get more breathing room on the homepage (phones keep the shared inset) */
+.custom-page.home-page {
+  --panel-padding: 48px;
 }
 
 
@@ -100,7 +94,6 @@ import HomePageLicense from "./HomePageLicense.vue";
 .custom-page.home-page .cta-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: stretch;
   gap: 32px;
 }
 

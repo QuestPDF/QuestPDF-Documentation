@@ -1,15 +1,32 @@
+<script lang="ts">
+import { createHighlighterCore } from "shiki";
+import { createOnigurumaEngine } from "shiki/engine/oniguruma";
+
+/* one highlighter per page load, created on first use: the grammar, the two themes and the wasm
+   engine are loaded once, not again each time the homepage is visited */
+let highlighter: ReturnType<typeof createHighlighterCore> | undefined;
+</script>
+
 <script setup lang="ts">
 
 import {computed} from "vue";
 import type {ShikiTransformer} from "@shikijs/types";
-import createCodeHighlighter from "./createCodeHighlighter";
 
 const props = defineProps<{
   code: string,
   codeTransformer?: ShikiTransformer
 }>();
 
-const codeHighlighter = await createCodeHighlighter();
+const codeHighlighter = await (highlighter ??= createHighlighterCore({
+  themes: [
+    import("shiki/themes/dark-plus.mjs"),
+    import("shiki/themes/light-plus.mjs")
+  ],
+  langs: [
+    import("shiki/langs/csharp.mjs")
+  ],
+  engine: createOnigurumaEngine(import("shiki/wasm"))
+}));
 
 const highlightedCode = computed(() =>
     codeHighlighter.codeToHtml(props.code, {
@@ -57,16 +74,15 @@ const highlightedCode = computed(() =>
   min-width: 100%
 }
 
+/* a diff line: a tint and a bar along its left edge, inside the line's padding */
 .code-source .line-removed {
   background-color: #F4433622;
-  border-left: 3px solid #F44336AA;
-  padding-left: calc(1rem - 3px);
+  box-shadow: inset 3px 0 0 #F44336AA;
 }
 
 .code-source .line-added {
   background-color: #4CAF5022;
-  border-left: 3px solid #4CAF50AA;
-  padding-left: calc(1rem - 3px);
+  box-shadow: inset 3px 0 0 #4CAF50AA;
 }
 
 html.dark .code-source .shiki,

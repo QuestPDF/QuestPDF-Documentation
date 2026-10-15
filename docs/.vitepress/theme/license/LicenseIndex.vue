@@ -68,7 +68,7 @@ const documents = [
 }
 
 /* the shared panel surface, its rows reaching the edges, like the pricing FAQ */
-.panel.documents {
+.documents {
   display: flex;
   flex-direction: column;
   width: 100%;

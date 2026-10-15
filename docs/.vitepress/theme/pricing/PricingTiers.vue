@@ -153,10 +153,8 @@ const licenses = [
   grid-gap: 0 32px;
 }
 
-/* the cards sit on the shared surface (`.panel`, CustomPages.css); only the
-   professional card tints it with the brand blue, so it reads as the highlighted one */
-.license-tiers .license-tier {
-  position: relative;
+/* the cards sit on the shared surface (`.panel`, CustomPages.css) */
+.license-tier {
   display: grid;
   grid-template-rows: subgrid;
   grid-row: span 6;
@@ -165,19 +163,12 @@ const licenses = [
   padding: 48px; /* wider than the shared 40px panel inset */
 }
 
-/* a faint brand tint in both modes: the share is small enough that the blue stays a wash
-   over the translucent surface rather than a solid fill, on the light and the dark canvas alike */
-.license-tiers .license-tier.professional {
-  background-color: color-mix(in srgb, #2196F3 5%, var(--surface));
-}
-
-html.dark .license-tiers .license-tier.professional {
-  border-color: #2196F355;
-}
-
 .license-tier .tag { grid-row: 1; }
 .license-tier header { grid-row: 2; }
 .license-tier hr { grid-row: 3; }
+.license-tier .details { grid-row: 4; }
+.license-tier .action { grid-row: 5; }
+.license-tier .footnote { grid-row: 6; }
 
 .license-tier hr {
   margin: 32px 0;
@@ -191,20 +182,24 @@ html.dark .license-tiers .license-tier.professional {
     border: 1px solid var(--vp-c-gutter);
   }
 }
-.license-tier .details { grid-row: 4; }
-.license-tier .action { grid-row: 5; }
-.license-tier .footnote { grid-row: 6; }
 
 
 /* Card frames
    The three cards read as one joined unit: the outer cards drop their inner
    corner radii and are inset vertically, while the professional card in the
-   middle stays full height and elevated. */
+   middle stays full height and elevated. Only the professional card tints the surface with the brand
+   blue, so it reads as the highlighted one: a faint wash in both modes, small enough that the blue
+   stays a tint over the translucent surface rather than a solid fill. */
 
 .license-tier.professional {
   border: 3px solid #2196F388;
   border-radius: 32px;
   z-index: 1;
+  background-color: color-mix(in srgb, #2196F3 5%, var(--surface));
+}
+
+html.dark .license-tier.professional {
+  border-color: #2196F355;
 }
 
 /* the glass rim sits inside the 3px border, so its corners are 3px tighter than the card's */
@@ -328,7 +323,6 @@ html.dark {
 .details {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   gap: 16px;
 }
 
@@ -341,12 +335,9 @@ html.dark {
 /* a duotone tick on a faint square, in the tier's colour; the professional and enterprise ticks sit on
    a solid square instead */
 .fa-square-check {
+  width: 24px;
   font-size: 24px;
   --fa-secondary-opacity: 0.2;
-}
-
-.details-item i.fa-square-check {
-  width: 24px;
 }
 
 .details-item p {
@@ -459,7 +450,7 @@ html.dark {
     gap: 32px;
   }
 
-  .license-tiers .license-tier {
+  .license-tier {
     grid-template-rows: auto; // subgrid has no parent grid here
     width: 100%;
     max-width: 560px;
