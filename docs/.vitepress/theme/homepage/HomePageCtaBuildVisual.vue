@@ -148,14 +148,14 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
 </script>
 
 <template>
-  <div class="build" :class="[`phase-${phase}`, { play, active }]">
+  <div class="scene build" :class="[`phase-${phase}`, { play, active }]">
     <div class="stage">
-      <div class="sheet-3d">
-        <div class="sheet-shadow" />
+      <div class="model">
+        <div class="shadow" />
         <div class="paper page" />
 
         <div v-for="(section, index) of sections" :key="index" class="section" :style="{ ...box(section), '--d': `${section.delay}s` }">
-          <span v-for="(bar, barIndex) of section.bars" :key="barIndex" class="bar" :class="bar.tone" :style="box(bar)" />
+          <span v-for="(bar, barIndex) of section.bars" :key="barIndex" class="shape" :class="bar.tone" :style="box(bar)" />
         </div>
       </div>
     </div>
@@ -165,93 +165,31 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
     <!-- compact: a flat miniature of the finished page -->
     <div class="thumb">
       <div class="paper mini">
-        <span class="bar strong" style="left: 8px; top: 8px; width: 10px; height: 10px" />
-        <span class="bar strong" style="left: 22px; top: 9px; width: 28px; height: 6px" />
-        <span class="bar" style="left: 8px; top: 26px; width: 24px; height: 4px" />
-        <span class="bar" style="left: 40px; top: 26px; width: 24px; height: 4px" />
-        <span class="bar strong" style="left: 8px; top: 38px; width: 56px; height: 7px" />
-        <span class="bar" style="left: 8px; top: 50px; width: 56px; height: 4px" />
-        <span class="bar" style="left: 8px; top: 58px; width: 56px; height: 4px" />
-        <span class="bar" style="left: 8px; top: 66px; width: 56px; height: 4px" />
+        <span class="shape strong" style="left: 8px; top: 8px; width: 10px; height: 10px" />
+        <span class="shape strong" style="left: 22px; top: 9px; width: 28px; height: 6px" />
+        <span class="shape" style="left: 8px; top: 26px; width: 24px; height: 4px" />
+        <span class="shape" style="left: 40px; top: 26px; width: 24px; height: 4px" />
+        <span class="shape strong" style="left: 8px; top: 38px; width: 56px; height: 7px" />
+        <span class="shape" style="left: 8px; top: 50px; width: 56px; height: 4px" />
+        <span class="shape" style="left: 8px; top: 58px; width: 56px; height: 4px" />
+        <span class="shape" style="left: 8px; top: 66px; width: 56px; height: 4px" />
       </div>
       <span class="play-button"><i class="fa-solid fa-play"></i></span>
     </div>
   </div>
 </template>
 
+<style scoped src="./ctaVisual.css"></style>
+
 <style scoped>
 
-/* The pose of the sheet: a page standing in three-quarter view, its left edge nearer, leaning back a
-   little, so the sections that come forward (translateZ) grow towards the reader. Hover turns it towards
-   the reader. The numbers are variables so the two poses only differ in values; the page keeps a 148 x 200
-   coordinate system for the sections and is scaled to fit the column. */
+/* The pose of the sheet (the scene, the paper, its shadow, the shapes and the miniature are shared, see
+   ctaVisual.css): a page standing in three-quarter view, its left edge nearer, leaning back a little, so
+   the sections that come forward (translateZ) grow towards the reader. Hover turns it towards the reader. */
 .build {
-  --tilt-x: 8deg;
   --tilt-y: 26deg;
   --tilt-z: -2deg;
-  --sheet-scale: 0.86;
-  --sheet-rise: 0px;
   --lift: 56px; /* how far in front of the page a section starts */
-
-  --ink: #A7AEBB;
-
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 196px;
-}
-
-.stage {
-  position: absolute;
-  inset: 0;
-  perspective: 640px;
-  perspective-origin: 50% 45%;
-}
-
-.sheet-3d {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 148px;
-  height: 200px;
-  margin: -100px 0 0 -74px;
-  transform-style: preserve-3d;
-  transform: translateY(var(--sheet-rise)) scale(var(--sheet-scale)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(var(--tilt-z));
-  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.4s ease;
-}
-
-/* a sheet of paper: white, a hairline, dimmed a little on the dark theme so it is not the brightest
-   thing on the page */
-.paper {
-  background: #FFF;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.10);
-}
-
-html.dark .paper {
-  background: #F4F4F6;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
-}
-
-/* the page: a faint light from the top-left */
-.page {
-  position: absolute;
-  inset: 0;
-  border-radius: 3px;
-  background-image: linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.025));
-}
-
-/* the shadow the page throws, just behind it in its own plane, offset down and to the right */
-.sheet-shadow {
-  position: absolute;
-  inset: 8px -6px -10px 10px;
-  border-radius: 8px;
-  background: rgba(20, 24, 40, 0.16);
-  filter: blur(10px);
-  transform: translateZ(-1px);
-}
-
-html.dark .sheet-shadow {
-  background: rgba(0, 0, 0, 0.45);
 }
 
 
@@ -261,22 +199,6 @@ html.dark .sheet-shadow {
 .section {
   position: absolute;
   color: var(--ink);
-}
-
-.bar {
-  position: absolute;
-  display: block;
-  border-radius: 2px;
-  background-color: currentColor;
-  opacity: 0.7;
-}
-
-.bar.strong {
-  opacity: 1;
-}
-
-.bar.soft {
-  opacity: 0.5;
 }
 
 .build.phase-fading .section {
@@ -369,7 +291,7 @@ html.dark .sheet-shadow {
     --tilt-x: 4deg;
     --tilt-y: 14deg;
     --tilt-z: -1deg;
-    --sheet-rise: -4px;
+    --rise: -4px;
   }
 
   .build.active.play > .play-button {
@@ -405,37 +327,10 @@ html.dark .sheet-shadow {
 }
 
 
-/* Compact: below 700px the column is a 72px tile beside the title; only the flat miniature shows, with a
-   small play button that never moves */
-.thumb {
-  display: none;
-}
-
-.mini {
-  position: absolute;
-  inset: 0;
-  color: var(--ink);
-}
-
+/* Compact: the shared flat miniature, with a small play button of its own that never moves */
 @media screen and (max-width: 700px) {
-  .build {
-    width: 72px;
-    height: 72px;
-    min-height: 0;
-  }
-
-  .stage,
   .build > .play-button {
     display: none;
-  }
-
-  .thumb {
-    display: block;
-    position: relative;
-    width: 72px;
-    height: 72px;
-    border-radius: 12px;
-    overflow: hidden;
   }
 
   .thumb .play-button {

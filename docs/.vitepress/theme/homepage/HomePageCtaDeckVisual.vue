@@ -43,11 +43,11 @@ const front = ref(0);
 const leaving = ref(-1);
 const stepping = ref(false);
 
-/* the shapes on a page, in page coordinates (the page is 148 x 200). bar: a placeholder line or block.
+/* the shapes on a page, in page coordinates (the page is 148 x 200). No kind: a placeholder line or block.
    block: a photo. frame: an outline. ring / disc: a circle (the donut, a seal, an emblem). band: a faint
    stripe behind a table row. One per page is "accent": the card's colour. */
 interface Shape {
-  kind?: "bar" | "block" | "frame" | "ring" | "disc" | "band";
+  kind?: "block" | "frame" | "ring" | "disc" | "band";
   x: number;
   y: number;
   w: number;
@@ -269,10 +269,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="deck" :class="{ hover, stepping }" :style="{ '--last': LAST }">
+  <div class="scene deck" :class="{ hover, stepping }" :style="{ '--last': LAST }">
     <div class="stage">
-      <div class="deck-3d">
-        <div class="deck-shadow" />
+      <div class="model">
+        <div class="shadow" />
 
         <!-- the stationary blank sheet at the back place -->
         <div class="page-3d blank" :style="{ '--i': LAST, '--r': `${TILTS[LAST]}deg` }">
@@ -290,7 +290,7 @@ onBeforeUnmount(() => {
                 v-for="(shape, shapeIndex) of page.shapes"
                 :key="shapeIndex"
                 class="shape"
-                :class="[shape.kind ?? 'bar', shape.tone]"
+                :class="[shape.kind, shape.tone]"
                 :style="shapeStyle(shape)" />
           </div>
         </div>
@@ -301,80 +301,45 @@ onBeforeUnmount(() => {
     <!-- compact: a flat miniature of the front page, the report -->
     <div class="thumb">
       <div class="paper mini">
-        <span class="shape bar strong" style="left: 8px; top: 8px; width: 30px; height: 6px" />
-        <span class="shape bar soft" style="left: 8px; top: 17px; width: 20px; height: 3px" />
-        <span class="shape bar" style="left: 8px; top: 40px; width: 7px; height: 12px" />
-        <span class="shape bar" style="left: 18px; top: 32px; width: 7px; height: 20px" />
-        <span class="shape bar" style="left: 28px; top: 44px; width: 7px; height: 8px" />
-        <span class="shape bar" style="left: 38px; top: 28px; width: 7px; height: 24px" />
-        <span class="shape bar" style="left: 48px; top: 36px; width: 7px; height: 16px" />
-        <span class="shape bar accent" style="left: 58px; top: 24px; width: 7px; height: 28px" />
-        <span class="shape bar soft" style="left: 8px; top: 52px; width: 57px; height: 1px" />
-        <span class="shape bar" style="left: 8px; top: 60px; width: 56px; height: 3px" />
-        <span class="shape bar soft" style="left: 8px; top: 66px; width: 44px; height: 3px" />
+        <span class="shape strong" style="left: 8px; top: 8px; width: 30px; height: 6px" />
+        <span class="shape soft" style="left: 8px; top: 17px; width: 20px; height: 3px" />
+        <span class="shape" style="left: 8px; top: 40px; width: 7px; height: 12px" />
+        <span class="shape" style="left: 18px; top: 32px; width: 7px; height: 20px" />
+        <span class="shape" style="left: 28px; top: 44px; width: 7px; height: 8px" />
+        <span class="shape" style="left: 38px; top: 28px; width: 7px; height: 24px" />
+        <span class="shape" style="left: 48px; top: 36px; width: 7px; height: 16px" />
+        <span class="shape accent" style="left: 58px; top: 24px; width: 7px; height: 28px" />
+        <span class="shape soft" style="left: 8px; top: 52px; width: 57px; height: 1px" />
+        <span class="shape" style="left: 8px; top: 60px; width: 56px; height: 3px" />
+        <span class="shape soft" style="left: 8px; top: 66px; width: 44px; height: 3px" />
       </div>
     </div>
   </div>
 </template>
 
+<style scoped src="./ctaVisual.css"></style>
+
 <style scoped>
 
-/* The pose of the pile: pages standing in three-quarter view, the right edge nearer (the mirror of the
-   invoice next door), leaning back a little. Each page behind the front one is set back by --dz and
-   shifted by --dx / --dy, so the pile shows its depth to the right. Hover turns the pile towards the
-   reader and opens the offsets. The pages keep a 148 x 200 coordinate system for the shapes and are
-   scaled to fit the column; the pile is nudged left so its depth stays inside the column.
-   --ink is the grey of the placeholders, --ink-strong the darker grey the headings take on hover. */
+/* The pose of the pile (the scene, the paper, its shadow, the shapes and the miniature are shared, see
+   ctaVisual.css): pages standing in three-quarter view, the right edge nearer (the mirror of the invoice
+   next door), leaning back a little. Each page behind the front one is set back by --dz and shifted by
+   --dx / --dy, so the pile shows its depth to the right. Hover turns the pile towards the reader and
+   opens the offsets. The pile is nudged left so its depth stays inside the column. --ink-strong is the
+   darker grey the headings take on hover. */
 .deck {
-  --tilt-x: 8deg;
   --tilt-y: -26deg;
   --tilt-z: 2deg;
-  --deck-scale: 0.86;
-  --deck-rise: 0px;
-  --deck-shift: -12px;
+  --shift: -12px;
   --dx: 4px;
   --dy: -4px;
   --dz: 14px;
-
-  --ink: #A7AEBB;
   --ink-strong: #5A6472;
-
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 196px;
 }
 
+/* the camera comes closer on hover */
 .stage {
-  position: absolute;
-  inset: 0;
-  perspective: 640px;
-  perspective-origin: 50% 45%;
   transition: perspective 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.deck-3d {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 148px;
-  height: 200px;
-  margin: -100px 0 0 -74px;
-  transform-style: preserve-3d;
-  transform: translateX(var(--deck-shift)) translateY(var(--deck-rise)) scale(var(--deck-scale)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(var(--tilt-z));
-  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-/* a sheet of paper: white, a hairline, dimmed a little on the dark theme so it is not the brightest
-   thing on the page */
-.paper {
-  background: #FFF;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.10);
-}
-
-html.dark .paper {
-  background: #F4F4F6;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 /* a page in the pile: its place is --i (0 in front), its lean --r; the transition carries it to a new
@@ -411,12 +376,9 @@ html.dark .paper {
    which has one shadow under the sheet); the pages behind the front one are dimmed a touch more for each
    place back, so the pile reads as depth even where the pages overlap */
 .page {
-  position: absolute;
-  inset: 0;
-  border-radius: 3px;
+  --page-shade: calc(0.025 + var(--i) * 0.012);
   overflow: hidden;
   color: var(--ink);
-  background-image: linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, calc(0.025 + var(--i) * 0.012)));
   box-shadow:
       0 0 0 1px rgba(0, 0, 0, 0.10),
       0 1px 2px rgba(16, 24, 40, 0.08);
@@ -429,21 +391,11 @@ html.dark .page {
       0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* the shadow the pile throws: the same shadow as under the invoice next door (same inset, colour and
-   blur), one for the whole pile, just behind the blank sheet at the back and centred on the pile's
-   depth, offset down and to the right */
-.deck-shadow {
-  position: absolute;
-  inset: 8px -6px -10px 10px;
-  border-radius: 8px;
-  background: rgba(20, 24, 40, 0.16);
-  filter: blur(10px);
+/* the shadow the pile throws: the shared one, the same as under the invoice next door, one for the
+   whole pile, just behind the blank sheet at the back and centred on the pile's depth */
+.shadow {
   transform: translate3d(calc(var(--last) * var(--dx) / 2), calc(var(--last) * var(--dy) / 2), calc(var(--last) * -1 * var(--dz) - 16px));
   transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-html.dark .deck-shadow {
-  background: rgba(0, 0, 0, 0.45);
 }
 
 /* the blank sheet: the back place, 2px behind the back page, so the back page covers it while it is
@@ -458,24 +410,7 @@ html.dark .deck-shadow {
 }
 
 
-/* Shapes: grey placeholders, one accent element per page */
-.shape {
-  position: absolute;
-  display: block;
-  box-sizing: border-box;
-  border-radius: 2px;
-  background-color: currentColor;
-  opacity: 0.7;
-}
-
-.shape.strong {
-  opacity: 1;
-}
-
-.shape.soft {
-  opacity: 0.5;
-}
-
+/* Shapes: the shared grey placeholders in more kinds, and one accent element per page */
 .shape.accent {
   color: var(--accent-secondary);
   opacity: 0.55;
@@ -596,7 +531,7 @@ html.dark .deck-shadow {
   --tilt-x: 6deg;
   --tilt-y: -16deg;
   --tilt-z: 1deg;
-  --deck-rise: -4px;
+  --rise: -4px;
   --dx: 7px;
   --dy: -6px;
   --dz: 20px;
@@ -655,40 +590,5 @@ html.dark .deck-shadow {
   .shape.band { background-color: var(--accent-secondary); opacity: 0.09; }
   .shape.ring.strong { color: var(--accent-secondary); }
 }
-
-
-
-/* Compact: below 700px the column is a 72px tile beside the title; only the flat miniature shows */
-.thumb {
-  display: none;
-}
-
-.mini {
-  position: absolute;
-  inset: 0;
-  color: var(--ink);
-}
-
-@media screen and (max-width: 700px) {
-  .deck {
-    width: 72px;
-    height: 72px;
-    min-height: 0;
-  }
-
-  .stage {
-    display: none;
-  }
-
-  .thumb {
-    display: block;
-    position: relative;
-    width: 72px;
-    height: 72px;
-    border-radius: 12px;
-    overflow: hidden;
-  }
-}
-
 
 </style>
