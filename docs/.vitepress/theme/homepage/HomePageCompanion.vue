@@ -1,21 +1,21 @@
 <template>
-  <!-- One row: the app on the left, and beside it the title, the description, the nine views as a list
-       and the calls to action. The app is a tour: the whole app first, evenly lit, then one view at a
-       time with a soft spotlight on its part of the app (each with its own size) and a card placed so
-       it covers nothing the view is about, naming the feature and showing its shortcut. The tour moves
-       on by itself (companionTour.ts); the list picks a view, the current one in the brand colour.
-       Below 1200px everything stacks (title, app, views as a 3x3 grid, actions); below 1040px the card
-       sits under the app. -->
+  <!-- One row: the app on the left, and beside it the title, the description, the eight views as a
+       two-column list and the calls to action. The app is a tour: the whole app first, then one view at
+       a time with a marker on its part of the app and a card placed so it covers nothing the view is
+       about, naming the feature and showing its shortcut. The tour moves on by itself
+       (companionTour.ts); the list picks a view, the current one in the brand colour.
+       Below 1320px everything stacks (title, app, views as two rows of one-word names, actions); below
+       1040px the card sits under the app. -->
   <section class="content">
     <div class="panel companion-panel">
       <div ref="root" class="companion-tour" @mouseenter="hovered = true" @mouseleave="hovered = false" @focusin="focused = true" @focusout="focused = false">
         <div
           class="companion-stage"
           :class="{ overview: !current.focus }"
-          :style="{ '--companion-fx': `${focusX * 100}%`, '--companion-fy': `${focusY * 100}%`, '--companion-r': `${current.radius}px` }">
+          :style="{ '--companion-fx': `${focusX * 100}%`, '--companion-fy': `${focusY * 100}%` }">
 
           <!-- the screens, stacked and cross-fading, in the reader's theme, all cropped from the top left
-               to one proportion (the two error screenshots are squarer) -->
+               to one proportion (the layout error screenshot is squarer, so it shows larger) -->
           <div class="companion-frames" :style="{ aspectRatio: String(aspect) }">
             <template v-for="frame of frames" :key="frame">
               <img :src="`/companion/${frame}-light.webp`" :alt="frame === current.frame ? 'QuestPDF Companion App' : ''" class="companion-frame light" :class="{ shown: frame === current.frame }" loading="lazy" />
@@ -24,12 +24,11 @@
 
             <!-- hot reload: a faint band passes down the page each time the overview comes round -->
             <span v-if="current.view === 0" :key="step" class="companion-refresh" aria-hidden="true"></span>
-            <span class="companion-scrim" aria-hidden="true"></span>
             <span class="companion-marker" aria-hidden="true"></span>
           </div>
 
           <Transition name="companion-card" mode="out-in">
-            <div :key="step" class="companion-card" :style="{ left: `${current.card[0] * 100}%`, top: `${current.card[1] * 100}%` }" aria-live="polite">
+            <div :key="step" class="companion-card" :style="{ left: `min(${current.card[0] * 100}%, 100% - 12px - var(--companion-card-width))`, top: `${current.card[1] * 100}%` }" aria-live="polite">
               <strong><i class="fa-regular" :class="view.icon" aria-hidden="true"></i>{{ view.title }}</strong>
               <p>{{ view.description }}</p>
               <div v-if="shortcut.keys.length" class="companion-shortcut">
@@ -46,8 +45,8 @@
         </div>
 
         <div class="companion-side">
-          <h2 class="card-title companion-title">Companion App</h2>
-          <p class="card-description companion-description">Shorten the loop between writing code and seeing the result. Spend your time designing documents, not waiting on them.</p>
+          <h2 class="card-title companion-title">Preview, inspect and debug</h2>
+          <p class="card-description companion-description">The Companion App refreshes your document the moment you save: no recompiling, no restarting. Inspect any element, measure the layout and trace issues to their cause.</p>
 
           <nav class="companion-views" aria-label="Companion App views">
             <button
@@ -129,13 +128,12 @@ interface View {
 const views: View[] = [
   { label: "See changes live", short: "Preview", icon: "fa-window-maximize", title: "Application", description: "The document's structure on the left, its live preview on the right. Save your code and the preview refreshes in place.", keys: [], keysLabel: "" },
   { label: "Browse the structure", short: "Structure", icon: "fa-folder-tree", title: "Document hierarchy", description: "Every element of the document as a tree, in the same shape as your fluent API code.", keys: ["Ctrl", "W"], combo: true, keysLabel: "show or hide the tree" },
-  { label: "Inspect any element", short: "Inspect", icon: "fa-arrow-pointer", title: "Selected element", description: "Select any element to see its page, position and size, and jump to its code in your IDE.", keys: ["Ctrl", "Click"], combo: true, keysLabel: "open its code" },
+  { label: "Inspect any element", short: "Inspect", icon: "fa-arrow-pointer", title: "Selected element", description: "Select any element to see its configuration, position and size, on every page it appears.", keys: ["Double-click"], keysLabel: "select" },
   { label: "Zoom into details", short: "Zoom", icon: "fa-magnifying-glass-plus", title: "Magnify", description: "See small details up close without zooming the preview.", keys: ["1"], keysLabel: "magnifier" },
   { label: "Read coordinates", short: "Coordinates", icon: "fa-location-crosshairs", title: "Check position", description: "Point at anything to read its page and its X and Y coordinates.", keys: ["2"], keysLabel: "coordinates" },
   { label: "Measure distances", short: "Measure", icon: "fa-ruler-combined", title: "Measure", description: "Measure sizes and distances, vertically or horizontally.", keys: [], keysLabel: "" },
   { label: "Find any phrase", short: "Search", icon: "fa-magnifying-glass", title: "Search", description: "Find any phrase; matches are highlighted in both the tree and the preview.", keys: ["Ctrl", "F"], combo: true, keysLabel: "find" },
-  { label: "Debug layout issues", short: "Layout", icon: "fa-triangle-exclamation", title: "Layout debugging", description: "When content does not fit, find the likely root cause, with every element color-coded by how it was laid out.", keys: ["↑", "↓"], keysLabel: "previous, next issue" },
-  { label: "Trace exceptions", short: "Exceptions", icon: "fa-bug", title: "Exception debugging", description: "See the exception, its message and the stack trace down to the code that threw.", keys: [], keysLabel: "" }
+  { label: "Debug layout issues", short: "Layout", icon: "fa-bug", title: "Layout debugging", description: "When content does not fit, find the likely root cause, with every element color-coded by how it was laid out.", keys: ["↑", "↓"], keysLabel: "previous, next issue" }
 ];
 
 interface Step {
@@ -145,26 +143,23 @@ interface Step {
   /* the shortcut of this screen, when the view has one per screen (Measure: 3 vertical, 4 horizontal) */
   keys?: string[];
   keysLabel?: string;
-  /* the spotlight's centre as fractions of the screenshot (null: the whole app, evenly lit), and the
-     radius of its clear part */
+  /* the marker's place as fractions of the screenshot (null: the whole app, no marker) */
   focus: [number, number] | null;
-  radius: number;
   /* the card's top-left corner as fractions of the frame, set per screen so it covers nothing the view
-     is about; check these whenever a screenshot changes */
+     is about (kept clear of the right edge); check these whenever a screenshot changes */
   card: [number, number];
 }
 
 const steps: Step[] = [
-  { view: 0, frame: "application", focus: null, radius: 0, card: [0.035, 0.6] },
-  { view: 1, frame: "application", focus: [0.12, 0.42], radius: 170, card: [0.36, 0.5] },
-  { view: 2, frame: "selection", focus: [0.62, 0.3], radius: 170, card: [0.03, 0.12] },
-  { view: 3, frame: "magnifier", focus: [0.5, 0.4], radius: 160, card: [0.665, 0.16] },
-  { view: 4, frame: "measurement-point", focus: [0.6, 0.6], radius: 110, card: [0.17, 0.33] },
-  { view: 5, frame: "measurement-vertical", keys: ["3"], keysLabel: "vertical", focus: [0.497, 0.21], radius: 110, card: [0.035, 0.1] },
-  { view: 5, frame: "measurement-horizontal", keys: ["4"], keysLabel: "horizontal", focus: [0.66, 0.6], radius: 130, card: [0.43, 0.18] },
-  { view: 6, frame: "search", focus: [0.655, 0.53], radius: 120, card: [0.035, 0.2] },
-  { view: 7, frame: "layout-error", focus: [0.1, 0.285], radius: 140, card: [0.2, 0.42] },
-  { view: 8, frame: "generic-exception", focus: [0.47, 0.21], radius: 150, card: [0.55, 0.45] }
+  { view: 0, frame: "application", focus: null, card: [0.035, 0.6] },
+  { view: 1, frame: "application", focus: [0.12, 0.42], card: [0.36, 0.5] },
+  { view: 2, frame: "selection", focus: [0.62, 0.3], card: [0.03, 0.12] },
+  { view: 3, frame: "magnifier", focus: [0.5, 0.4], card: [0.665, 0.16] },
+  { view: 4, frame: "measurement-point", focus: [0.6, 0.6], card: [0.03, 0.33] },
+  { view: 5, frame: "measurement-vertical", keys: ["3"], keysLabel: "vertical", focus: [0.497, 0.21], card: [0.035, 0.45] },
+  { view: 5, frame: "measurement-horizontal", keys: ["4"], keysLabel: "horizontal", focus: [0.66, 0.6], card: [0.43, 0.18] },
+  { view: 6, frame: "search", focus: [0.655, 0.53], card: [0.035, 0.2] },
+  { view: 7, frame: "layout-error", focus: [0.1, 0.285], card: [0.2, 0.42] }
 ];
 
 const frames = [...new Set(steps.map(s => s.frame))];
@@ -172,7 +167,9 @@ const frames = [...new Set(steps.map(s => s.frame))];
 /* the frame is cropped at the bottom to 1.62:1 from the top left; focus heights are fractions of each
    screenshot, so they stretch by the frame's proportion over the screenshot's */
 const aspect = 1.62;
-const squarer = new Set(["layout-error", "generic-exception"]);
+const imageRatios: Record<string, number> = {
+  "layout-error": 1592 / 1341
+};
 
 const root = ref<HTMLElement | null>(null);
 const { step, current, hovered, focused, selectView } = useCompanionTour(root, steps, 3800);
@@ -186,7 +183,7 @@ const shortcut = computed(() => ({
   combo: view.value.combo
 }));
 
-/* the overview keeps the last focus, so the spotlight fades out where it was instead of jumping */
+/* the overview keeps the last focus, so the marker fades out where it was instead of jumping */
 const lastFocus = ref<[number, number]>([0.5, 0.4]);
 watch(current, s => {
   if (s.focus)
@@ -196,8 +193,7 @@ watch(current, s => {
 const focusX = computed(() => (current.value.focus ?? lastFocus.value)[0]);
 const focusY = computed(() => {
   const [, y] = current.value.focus ?? lastFocus.value;
-  const image = squarer.has(current.value.frame) ? 1592 / 1341 : 1917 / 1328;
-  return y * aspect / image;
+  return y * aspect / (imageRatios[current.value.frame] ?? 1917 / 1328);
 });
 
 
@@ -241,7 +237,7 @@ onBeforeUnmount(() => {
 
 <style>
 
-/* registered so the spotlight glides between places and sizes; @property is global, hence the prefix */
+/* registered so the marker glides between places; @property is global, hence the prefix */
 @property --companion-fx {
   syntax: "<percentage>";
   inherits: true;
@@ -252,12 +248,6 @@ onBeforeUnmount(() => {
   syntax: "<percentage>";
   inherits: true;
   initial-value: 40%;
-}
-
-@property --companion-r {
-  syntax: "<length>";
-  inherits: true;
-  initial-value: 140px;
 }
 
 </style>
@@ -272,8 +262,8 @@ onBeforeUnmount(() => {
 
 .companion-tour {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 44px;
+  grid-template-columns: minmax(0, 1fr) 480px;
+  gap: 48px;
   align-items: center;
 }
 
@@ -283,11 +273,11 @@ onBeforeUnmount(() => {
 }
 
 
-/* The stage: the app with its spotlight; the card is placed in the stage's coordinates */
+/* The stage: the app with its marker; the card is placed in the stage's coordinates */
 
 .companion-stage {
   position: relative;
-  transition: --companion-fx 0.7s cubic-bezier(0.3, 0.7, 0.2, 1), --companion-fy 0.7s cubic-bezier(0.3, 0.7, 0.2, 1), --companion-r 0.7s cubic-bezier(0.3, 0.7, 0.2, 1);
+  transition: --companion-fx 0.7s cubic-bezier(0.3, 0.7, 0.2, 1), --companion-fy 0.7s cubic-bezier(0.3, 0.7, 0.2, 1);
 }
 
 .companion-frames {
@@ -343,31 +333,19 @@ html.dark .companion-frame.light {
   100% { opacity: 0; background-position: 0 -10%; }
 }
 
-/* everything but a soft circle around the focus is dimmed; the overview has no spotlight */
-.companion-scrim {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(circle at var(--companion-fx) var(--companion-fy), transparent 0, transparent var(--companion-r), rgba(16, 24, 40, 0.26) calc(var(--companion-r) + 120px));
-  transition: opacity 0.5s ease;
-}
-
-/* dark mode dims less and fades out over a longer distance: the document page stays white in the dark
-   screenshots, so a strong dim turned the clear circle into a bright halo */
-html.dark .companion-scrim {
-  background: radial-gradient(circle at var(--companion-fx) var(--companion-fy), transparent 0, transparent var(--companion-r), rgba(0, 0, 0, 0.22) calc(var(--companion-r) + 220px));
-}
-
+/* the marker: a brand dot in a white ring with a shadow, so it stands out on any screen in either
+   theme, and a ring that keeps pulsing out of it; the overview has none */
 .companion-marker {
   position: absolute;
   left: var(--companion-fx);
   top: var(--companion-fy);
-  width: 14px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #FFF;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--vp-c-brand-1);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--vp-c-brand-1) 25%, transparent), 0 0 0 1px #FFF;
+  box-shadow: 0 0 0 1px rgba(16, 24, 40, 0.16), 0 2px 8px rgba(16, 24, 40, 0.4);
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
@@ -375,18 +353,17 @@ html.dark .companion-scrim {
 .companion-marker::after {
   content: "";
   position: absolute;
-  inset: -4px;
+  inset: -3px;
   border-radius: 50%;
-  border: 2px solid var(--vp-c-brand-1);
-  animation: companion-ping 1.8s ease-out infinite;
+  border: 3px solid var(--vp-c-brand-1);
+  animation: companion-ping 1.6s ease-out infinite;
 }
 
 @keyframes companion-ping {
-  0% { transform: scale(1); opacity: 0.7; }
-  100% { transform: scale(3.2); opacity: 0; }
+  0% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(2.6); opacity: 0; }
 }
 
-.overview .companion-scrim,
 .overview .companion-marker {
   opacity: 0;
 }
@@ -394,9 +371,11 @@ html.dark .companion-scrim {
 
 /* The card */
 
+/* narrower on a smaller app, so it still leaves the view's subject in sight */
 .companion-card {
+  --companion-card-width: clamp(250px, 37%, 290px);
   position: absolute;
-  width: 290px;
+  width: var(--companion-card-width);
   padding: 18px 20px 20px;
   border-radius: 16px;
   background-color: var(--vp-c-bg);
@@ -496,13 +475,15 @@ html.dark .companion-cap {
 }
 
 
-/* The list of views: icons and words at 1rem in the text colour, the current view in the brand colour
-   and semibold; phones use the one-word names */
+/* The list of views: two columns filled top to bottom, icons and words at 1rem in the text colour, the
+   current view in the brand colour and semibold; phones use the one-word names */
 
 .companion-views {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(4, auto);
+  grid-auto-flow: column;
+  gap: 3px 24px;
   margin-top: 24px;
 }
 
@@ -662,7 +643,6 @@ html.dark .companion-cap {
 
 @media (prefers-reduced-motion: reduce) {
   .companion-stage,
-  .companion-scrim,
   .companion-frame {
     transition: none;
   }
@@ -673,9 +653,10 @@ html.dark .companion-cap {
   }
 }
 
-/* below 1200px everything stacks: title and description, the app, the views as a 3x3 grid, the
-   calls to action */
-@media screen and (max-width: 1200px) {
+/* below 1320px everything stacks: title and description, the app, the views as two rows of four
+   one-word names, the calls to action; beside the words a narrower app would leave the card too
+   little room */
+@media screen and (max-width: 1320px) {
   .companion-tour {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
@@ -694,13 +675,22 @@ html.dark .companion-cap {
   .actions { order: 5; }
 
   .companion-views {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-auto-flow: row;
     gap: 12px 10px;
   }
 
   .companion-view {
     min-height: 32px;
+  }
+
+  .companion-view .full {
+    display: none;
+  }
+
+  .companion-view .short {
+    display: inline;
   }
 }
 
@@ -716,13 +706,10 @@ html.dark .companion-cap {
 }
 
 @media screen and (max-width: 760px) {
-  .companion-view .full,
-  .companion-view i {
-    display: none;
-  }
-
-  .companion-view .short {
-    display: inline;
+  .companion-views {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(4, auto);
+    grid-auto-flow: column;
   }
 }
 

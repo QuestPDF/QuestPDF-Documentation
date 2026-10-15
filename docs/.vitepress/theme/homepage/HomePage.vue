@@ -18,11 +18,12 @@
       <HomePageQuickStart />
     </div>
 
-    <div class="container">
+    <!-- the quick start, the Companion App and the trust sections read as one run, with no seams between them -->
+    <div class="container no-seam">
       <HomePageCompanion />
     </div>
 
-    <div class="container">
+    <div class="container no-seam">
       <HomePageTrust />
     </div>
 
@@ -142,6 +143,22 @@ html.dark .custom-page.home-page > .container + .container .content::before {
 /* no seam after the hero: the CTA cards sit right under it (see below) */
 .custom-page.home-page .hero-container + .container .content::before {
   content: none;
+}
+
+/* no seams inside the run from the quick start to the trust sections either: the code, the Companion App
+   and the platforms and standards panels follow one another on plain canvas, 32px apart, the same gap
+   as between the two trust panels. The section before each one drops its bottom padding (the :has()
+   selector outweighs the 48px section padding above), and the section itself opens with 32px. */
+.custom-page.home-page > .container.no-seam .content::before {
+  content: none;
+}
+
+.custom-page.home-page > .container:has(+ .container.no-seam) .content {
+  padding-bottom: 0;
+}
+
+.custom-page.home-page > .container.no-seam .content {
+  padding-top: 32px;
 }
 
 /* the content side padding drops to 24px on phones, the line follows it */

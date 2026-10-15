@@ -17,11 +17,12 @@ const tiers = [
   }
 ]
 
+/* each point carries its own regular-weight icon, listed like the Companion App views */
 const includes = [
-  "Perpetual license, not a subscription: keep your version forever",
-  "All features included in every tier without restrictions",
-  "Royalty-free redistribution in SaaS, desktop, and on-premises apps",
-  "Full source code available on GitHub"
+  { icon: "fa-infinity", text: "Perpetual license, not a subscription: keep your version forever" },
+  { icon: "fa-layer-group", text: "All features included in every tier without restrictions" },
+  { icon: "fa-box-open", text: "Royalty-free redistribution in SaaS, desktop, and on-premises apps" },
+  { icon: "fa-code", text: "Full source code available on GitHub" }
 ]
 </script>
 
@@ -37,9 +38,9 @@ const includes = [
         <p class="card-description">A model that benefits everyone. Commercial licensing provides businesses with legal safety and long-term stability, while funding a feature-complete, unrestricted library for the community.</p>
 
         <ul class="includes-list">
-          <li v-for="item of includes" :key="item">
-            <i class="fa-duotone fa-square-check"></i>
-            <span>{{ item }}</span>
+          <li v-for="item of includes" :key="item.text">
+            <i class="fa-regular" :class="item.icon" aria-hidden="true"></i>
+            <span>{{ item.text }}</span>
           </li>
         </ul>
 
@@ -136,33 +137,44 @@ const includes = [
   .includes-list {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 3px;
     flex-grow: 1;
     margin: 32px 0 0;
     padding: 0;
     list-style: none;
   }
 
-  /* the same row shape as the pricing page details: a 24px icon column, then the text */
+  /* the same rows as the Companion App views list (HomePageCompanion.vue): an 18px icon and a
+     medium-weight label, both in the text colour, 36px tall */
   .includes-list li {
-    display: grid;
-    grid-template-columns: 24px 1fr;
-    gap: 12px;
-    color: var(--vp-c-text-2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 36px;
     font-size: 1rem;
     line-height: 1.5rem;
+    font-weight: 500;
+    color: var(--vp-c-text-1);
   }
 
-  /* the same duotone square tick as the pricing page, at its size, in the Community tier's green */
   .includes-list i {
-    width: 24px;
-    --fa-primary-color: #67B84D;
-    --fa-secondary-color: #67B84D;
+    flex-shrink: 0;
+    width: 18px;
+    text-align: center;
+    font-size: 1rem;
   }
 
-  html.dark .includes-list i {
-    --fa-primary-color: #81C784;
-    --fa-secondary-color: #81C784;
+  /* on phones the labels wrap, so the icon sits on the first line instead of the middle of the label */
+  @media screen and (max-width: 700px) {
+    .includes-list li {
+      align-items: flex-start;
+      min-height: 0;
+      padding: 6px 0;
+    }
+
+    .includes-list i {
+      line-height: 1.5rem;
+    }
   }
 
   .actions {
