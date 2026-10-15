@@ -227,7 +227,7 @@ html.dark .license-tiers .license-tier.professional {
   transform: translateY(-8px);
 
   color: #2196F3;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -236,7 +236,7 @@ html.dark .license-tiers .license-tier.professional {
 
 .license-tier.professional .tag .fa-star {
   color: #2196F3;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 html.dark .license-tier.professional .tag,
