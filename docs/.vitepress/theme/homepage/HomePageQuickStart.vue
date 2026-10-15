@@ -183,7 +183,6 @@ const { code, codeTransformer, phase, promptText, promptComplete, sent } = useAg
 
 .custom-page.home-page .panel.quick-start {
   --agent-accent: #7E57C2;
-  --tile-blue: #01579B;
   --tile-purple: #5E35B1;
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
@@ -196,7 +195,6 @@ const { code, codeTransformer, phase, promptText, promptComplete, sent } = useAg
 
 html.dark .custom-page.home-page .panel.quick-start {
   --agent-accent: #9575CD;
-  --tile-blue: #29B6F6;
   --tile-purple: #B388FF;
 }
 

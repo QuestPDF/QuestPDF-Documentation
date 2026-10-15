@@ -10,8 +10,7 @@ import HomePageCtaBuildVisual from "./HomePageCtaBuildVisual.vue";
       title="Build an invoice in 10 minutes"
       description="Learn the core concepts of QuestPDF, then build a complete invoice step by step. Go from a blank page to a finished PDF in fewer than 200 lines of C#."
       label="Watch the tutorial"
-      href="/quick-start.html"
-      variant="video">
+      href="/quick-start.html">
     <template #visual>
       <home-page-cta-build-visual />
     </template>

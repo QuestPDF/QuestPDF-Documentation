@@ -217,7 +217,7 @@ const platformGroups : PlatformGroup[] = [
   margin-top: 8px;
 }
 
-/* same white-on-grey style as the chips in the other homepage cards */
+/* small labels on the inset layer of the surface (--home-surface-inner, see CustomPages.css) */
 .standards-badges > span {
   display: inline-flex;
   align-items: center;

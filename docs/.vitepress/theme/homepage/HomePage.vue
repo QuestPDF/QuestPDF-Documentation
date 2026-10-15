@@ -63,7 +63,7 @@ import HomePageQuickStart from "./HomePageQuickStart.vue";
    all share it with no seams. Washes are placed in page-height percentages and vary in shape and hue:
    a sky-blue glow behind the hero card, a violet glow behind the headline and a cyan wash at the foot
    of the hero (the hero is the most colourful part of the page), a faint cyan wash on the right by
-   the quick start and bento, a teal wash by the Companion App, a tall blue glow along the right edge
+   the quick start, a teal wash by the Companion App, a tall blue glow along the right edge
    by the foundations and compliance, a light-blue wash on the left by the foundations, and an indigo
    wash behind the licensing pair. All hues stay next to the brand blue (yellows and greens were tried
    and rejected). None sit in the last stretch, so the footer stays calm. */
@@ -174,12 +174,6 @@ html.dark .custom-page.home-page > .container + .container .content::before {
   padding: 48px;
 }
 
-/* no running text below 1rem on the homepage; the shared row lead is 0.9375rem elsewhere */
-.custom-page.home-page .row-description {
-  font-size: 1rem;
-  line-height: 1.5rem;
-}
-
 @media screen and (max-width: 700px) {
   .custom-page.home-page .panel {
     padding: 32px 24px;
@@ -211,39 +205,5 @@ html.dark .custom-page.home-page > .container + .container .content::before {
     gap: 24px;
   }
 }
-
-/* Chips: small labelled items (features, platforms) on a grey panel */
-
-.custom-page.home-page .chips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-
-.custom-page.home-page .chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-
-  border-radius: 12px;
-  background-color: var(--home-surface-inner);
-
-  color: var(--vp-c-text-1);
-  font-size: 0.9375rem;
-  line-height: 1.25rem;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-/* icons match the chip text: same colour, 16px */
-.custom-page.home-page .chip i {
-  width: 18px;
-  text-align: center;
-  font-size: 16px;
-  color: inherit;
-}
-
 
 </style>

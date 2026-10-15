@@ -58,12 +58,6 @@ const highlightedCode = computed(() =>
   min-width: 100%
 }
 
-.code-source .line-highlighted {
-  background-color: #2196F322;
-  border-left: 3px solid #2196F3AA;
-  padding-left: calc(1rem - 3px);
-}
-
 .code-source .line-removed {
   background-color: #F4433622;
   border-left: 3px solid #F44336AA;

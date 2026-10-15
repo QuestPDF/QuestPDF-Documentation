@@ -41,10 +41,6 @@ html.dark {
   background-color: var(--custom-page-bg);
 }
 
-.container.no-border {
-  border-top: none;
-}
-
 .custom-page .content {
   padding: 64px 32px;
   margin: 0 auto;
@@ -63,10 +59,6 @@ html.dark {
   }
 }
 
-.custom-page .reverse-background {
-  background-color: var(--vp-c-bg-alt);
-}
-
 .custom-page .card {
   display: flex;
   flex-direction: column;
@@ -74,10 +66,6 @@ html.dark {
   background-color: var(--vp-c-bg);
   border-radius: 16px;
   padding: 32px;
-}
-
-.custom-page .card img.icon {
-  height: 48px;
 }
 
 .custom-page h3 {
@@ -150,10 +138,6 @@ html.dark {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  .fa-2xl {
-    margin-bottom: 16px;
-  }
 }
 
 .custom-page .section-header * {
@@ -407,7 +391,7 @@ html.dark body:has(.custom-page.legal-page) {
       radial-gradient(ellipse 600px 1400px at 100% 60%, color-mix(in srgb, #1E88E5 14%, transparent), transparent 70%);
 }
 
-/* Small uppercase label above a section heading (homepage sections, live demo page). */
+/* Small uppercase label above a section heading (purchase confirmation, legal documents). */
 
 .section-tag {
   background-color: color-mix(in srgb, var(--vp-c-brand-2), transparent 85%);
@@ -422,29 +406,9 @@ html.dark body:has(.custom-page.legal-page) {
   text-transform: uppercase;
 }
 
-span.highlight-background {
-  background: -webkit-linear-gradient(120deg, #2979FF33, #00E5FF33);
-  color: var(--vp-c-text-1);
-  font-weight: 500;
-
-  border-radius: 8px;
-  padding: 4px 8px;
-}
-
 .custom-page {
   .fa-duotone, .fa-solid {
     color: #2196F3;
-  }
-
-  .fa-2xl {
-    background-color: #2196F322;
-    border-radius: 12px;
-    padding: 12px 0;
-    font-size: 32px;
-    height: 56px;
-    min-width: 56px;
-    text-align: center;
-    line-height: 32px;
   }
 
   .fa-square-check {
@@ -452,16 +416,8 @@ span.highlight-background {
     --fa-secondary-opacity: 0.2;
   }
 
-  .fa-money-bill-transfer {
-    --fa-secondary-opacity: 0.6;
-  }
-
   .fa-star {
     --fa-secondary-opacity: 0.9;
-  }
-
-  .fa-calendar-circle-plus {
-    --fa-secondary-opacity: 0.6;
   }
 }
 
@@ -514,24 +470,6 @@ a.action.primary:hover {
   background-color: #1E88E5;
 }
 
-.custom-page {
-  .unordered-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    p {
-      font-size: 1.0625rem;
-    }
-
-    .unordered-list-item {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      grid-gap: 12px;
-    }
-  }
-}
-
 
 @media screen and (max-width: 700px) {
   .custom-page h1 {
@@ -548,9 +486,5 @@ a.action.primary:hover {
     color: var(--vp-c-text-1);
     font-size: 1rem;
     line-height: 1.5rem;
-  }
-
-  .custom-page .unordered-list p {
-    font-size: 1rem !important;
   }
 }

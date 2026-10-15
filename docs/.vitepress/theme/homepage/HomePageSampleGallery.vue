@@ -12,7 +12,6 @@ import HomePageCtaDeckVisual from "./HomePageCtaDeckVisual.vue";
       description="Explore complete document examples, reusable components and layout ideas. Each includes C# source code you can copy and adapt to your own projects."
       label="Browse the examples"
       href="/sample-gallery.html"
-      variant="gallery"
       accent="#5C6BC0"
       accent-secondary="#3F51B5">
     <template #visual>

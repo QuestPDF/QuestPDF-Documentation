@@ -369,7 +369,8 @@ html.dark .companion-frame.light {
 
 /* The card */
 
-/* narrower on a smaller app, so it still leaves the view's subject in sight */
+/* narrower on a smaller app, so it still leaves the view's subject in sight; a faint brand tint, kept
+   opaque, sets it apart from the app behind it */
 .companion-card {
   --companion-card-width: clamp(210px, 30%, 240px);
   position: absolute;
@@ -378,13 +379,13 @@ html.dark .companion-frame.light {
   border-radius: 12px;
   font-size: 0.8125rem;
   line-height: 1.25rem;
-  background-color: var(--vp-c-bg);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 9%, transparent), 0 20px 48px -12px rgba(16, 24, 40, 0.3);
+  background-color: color-mix(in srgb, var(--vp-c-brand-1) 5%, var(--vp-c-bg));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent), 0 20px 48px -12px rgba(16, 24, 40, 0.3);
 }
 
 html.dark .companion-card {
-  background-color: var(--vp-c-bg-elv);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 20px 48px -12px rgba(0, 0, 0, 0.7);
+  background-color: color-mix(in srgb, var(--vp-c-brand-1) 7%, var(--vp-c-bg-elv));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent), 0 20px 48px -12px rgba(0, 0, 0, 0.7);
 }
 
 .companion-card strong {
@@ -430,14 +431,9 @@ html.dark .companion-card {
   gap: 10px;
   margin: 10px -14px -14px;
   padding: 7px 14px;
-  border-top: 1px solid color-mix(in srgb, var(--vp-c-text-1) 8%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent);
   border-radius: 0 0 12px 12px;
-  background-color: color-mix(in srgb, var(--vp-c-text-1) 3%, transparent);
-}
-
-html.dark .companion-shortcut {
-  border-top-color: rgba(255, 255, 255, 0.08);
-  background-color: rgba(255, 255, 255, 0.03);
+  background-color: color-mix(in srgb, var(--vp-c-brand-1) 4%, transparent);
 }
 
 .companion-caps {
