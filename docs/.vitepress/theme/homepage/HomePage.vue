@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-page home-page textured-page">
+  <div class="custom-page home-page">
     <div class="container hero-container">
       <HomePageHero />
     </div>
@@ -70,10 +70,10 @@ import HomePageLicense from "./HomePageLicense.vue";
 }
 
 /* Sections
-   Everything under the hero is one column of panels, 32px apart. Most sections no longer open with a
-   header, so the two breaks (after the calls to action, before the license) are marked by the shared
-   dotted seam (CustomPages.css), 48px from the panels on either side, so the eye reads a break without
-   a heading. The hero's own bottom padding spaces the CTA cards, so the column has none on top. */
+   Everything under the hero is one column of panels, 32px apart. The sections open without a header,
+   so the two breaks (after the calls to action, before the license) are marked by the shared dotted
+   seam (CustomPages.css), 48px from the panels on either side, so the eye reads a break without a
+   heading. The hero's own bottom padding spaces the CTA cards, so the column has none on top. */
 
 .custom-page.home-page .sections {
   display: flex;
@@ -81,11 +81,6 @@ import HomePageLicense from "./HomePageLicense.vue";
   gap: 32px;
   padding-top: 0;
   padding-bottom: 48px;
-}
-
-/* with the 32px gaps, 48px from the panels to the middle of the 4px dot row */
-.custom-page.home-page .sections > .dotted-divider {
-  margin: 14px 0;
 }
 
 /* grey section panels get more breathing room on the homepage */

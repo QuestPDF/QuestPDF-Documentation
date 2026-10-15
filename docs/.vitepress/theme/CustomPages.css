@@ -1,6 +1,6 @@
 /* --custom-page-width: page width (including the 32px side padding) shared by the custom page
-   content, the top navigation bar and the footer, so all three align. Pages opt into the wider
-   layout with `pageClass: wide-layout`.
+   content, the top navigation bar and the footer, so all three align. Every custom page (a page whose
+   content is a `.custom-page`) takes the wider 90rem layout; the rest of the site keeps 1216px.
 
    --custom-page-bg: page canvas of the custom pages (home, pricing, contact, legal and so on). A
    touch off-white on the light theme so the white cards and panels lift from the page; the dark
@@ -15,7 +15,8 @@ html.dark {
   --custom-page-bg: var(--vp-c-bg);
 }
 
-.wide-layout {
+/* set on the layout root, so the navbar and the footer around the page widen with it */
+.Layout:has(.custom-page) {
   --custom-page-width: 90rem;
 }
 
@@ -29,69 +30,15 @@ html.dark {
 }
 
 
-/* Grey section container: groups a section's content on the white page. */
-
-.custom-page .panel {
-  background-color: var(--vp-c-bg-alt);
-  border-radius: 32px;
-  padding: 40px;
-}
-
-@media screen and (max-width: 700px) {
-  .custom-page .panel {
-    padding: 32px 24px;
-  }
-}
-
-.custom-page > .container {
-  background-color: var(--custom-page-bg);
-}
-
 .custom-page .content {
   padding: 64px 32px;
   margin: 0 auto;
   max-width: var(--custom-page-width);
 }
 
-.custom-page .content-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 @media screen and (max-width: 768px) {
   .custom-page .content {
     padding: 48px 24px;
-  }
-}
-
-.custom-page .card {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  background-color: var(--vp-c-bg);
-  border-radius: 16px;
-  padding: 32px;
-}
-
-.custom-page a:hover .card {
-  box-shadow: var(--elevation-hover);
-}
-
-.custom-page .card hr {
-  margin: 32px 0;
-  border: none;
-  border-top: 1px solid var(--vp-c-gutter);
-  width: 100%
-}
-
-@media screen and (max-width: 700px) {
-  .custom-page .card {
-    padding: 24px;
-  }
-
-  .custom-page .card hr {
-    border: 1px solid var(--vp-c-gutter);
   }
 }
 
@@ -148,11 +95,11 @@ html.dark {
 
 /* Card typography
    Text inside a panel or card sits one step below the section headings on the canvas, and every
-   card uses the same two pairs. `card-title` + `card-description`: the heading of a card or of a
-   cell inside it (the Companion App card, a foundations cell, a contact card) and its lead.
+   card uses the same two pairs. `card-title` + `card-description`: the heading of a panel or card
+   and its lead (the homepage panels, a contact card, a features category).
    `row-title` + `row-description`: a labelled row inside a card (an icon tile beside a name and
-   a short line, as in the quick start points or the purchase facts). The classes carry their own
-   margins, so the element (h2, h3, p, strong) does not matter. */
+   a short line, as in the purchase facts). The classes carry their own margins, so the element
+   (h2, h3, p, strong) does not matter. */
 
 .custom-page .card-title {
   margin: 0;
@@ -192,95 +139,90 @@ html.dark {
 }
 
 
-/* Textured page
-   A page opts in with `textured-page` on its `.custom-page` root. Its canvas (grain tile plus colour
-   washes) is painted on <body>, see "Page canvas" below; this block holds what every such page
-   shares: see-through sections so the canvas shows, translucent panels and cards, and the dot grid
-   under a header that sits directly on the canvas. */
-
-.custom-page.textured-page > .container {
-  background-color: transparent;
-}
-
 /* Surfaces
-   The layering is the same in both modes: the canvas, a lifted surface on it, and an inset layer
-   (chips, badges) on the surface. Light mode lifts with white: solid white panels on the tinted
+   A custom page paints its canvas (grain tile plus colour washes) on <body>, see "Page canvas" below,
+   and its sections are see-through, so the canvas shows between the surfaces. The layering is the
+   same in both modes: the canvas, a lifted surface on it, and an inset layer (chips, badges) on the
+   surface. Light mode lifts with white: solid white panels on the tinted
    canvas, a hairline ring and a soft shadow for the edge, and light-grey chips inset on them. Dark mode
    lifts with light: translucent white panels on the dark canvas (the washes show through) and
    translucent black chips, with no ring or shadow (neither reads on a dark canvas).
 
    Every surface is also lit from above, like a sheet of glass: a one-pixel rim that is white at the
-   top and fades out down the sides (--home-surface-rim, drawn by a masked ::before), and a sheen
-   that fades out over the first 160px of the surface (--home-surface-sheen, the surface's
+   top and fades out down the sides (--surface-rim, drawn by a masked ::before), and a sheen
+   that fades out over the first 160px of the surface (--surface-sheen, the surface's
    background-image). Both are gradients, so either can be swapped or set to `none` on its own.
    On the solid white light-mode surface they are invisible and kept only so the two modes share one
    structure; dark mode keeps them very faint, because there every bit of white reads.
    Both are deliberately quiet: a first pass at twice these values was too much. */
 
-.custom-page.textured-page {
-  --home-surface: #FFFFFF;
-  --home-surface-inner: #F0F2F6;
-  --home-surface-edge:
+.custom-page {
+  --surface: #FFFFFF;
+  --surface-inner: #F0F2F6;
+  --surface-edge:
       inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 7%, transparent),
       0 1px 2px rgba(16, 24, 40, 0.04),
       0 16px 40px -20px rgba(16, 24, 40, 0.16);
-  --home-surface-rim: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0));
-  --home-surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 160px);
+  --surface-rim: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0));
+  --surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 160px);
 }
 
-html.dark .custom-page.textured-page {
-  --home-surface: rgba(255, 255, 255, 0.045);
-  --home-surface-inner: rgba(0, 0, 0, 0.4);
-  --home-surface-edge: none;
-  --home-surface-rim: linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.015));
-  --home-surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0) 160px);
+html.dark .custom-page {
+  --surface: rgba(255, 255, 255, 0.045);
+  --surface-inner: rgba(0, 0, 0, 0.4);
+  --surface-edge: none;
+  --surface-rim: linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.015));
+  --surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0) 160px);
 }
 
-.custom-page.textured-page .panel,
-.custom-page.textured-page .card {
-  background-color: var(--home-surface);
-  box-shadow: var(--home-surface-edge);
-}
+/* The two surfaces: a panel groups a section's content, a card is a panel that stacks its content in
+   a column. Both carry the glass lighting: the sheen is the background image, and the rim a ::before
+   covering the surface, its gradient masked to a one-pixel border so the surface itself stays
+   see-through; it follows the surface's own corner radius. */
 
-/* The glass lighting goes on every surface, the shared panel and card. The rim is a ::before covering
-   the surface, its gradient masked to a one-pixel border so the surface itself stays see-through; it
-   follows the surface's own corner radius. */
-
-.custom-page.textured-page :is(.panel, .card) {
+.custom-page :is(.panel, .card) {
   position: relative;
-  background-image: var(--home-surface-sheen);
+  border-radius: 32px;
+  padding: 40px; /* the same inset for both, so text in stacked cards and panels lines up */
+  background-color: var(--surface);
+  background-image: var(--surface-sheen);
+  box-shadow: var(--surface-edge);
 }
 
-.custom-page.textured-page :is(.panel, .card)::before {
+.custom-page :is(.panel, .card)::before {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
   padding: 1px;
   pointer-events: none;
-  background: var(--home-surface-rim);
+  background: var(--surface-rim);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   mask-composite: exclude;
 }
 
-.custom-page.textured-page a:hover .card {
-  box-shadow: var(--home-surface-edge), var(--elevation-hover);
+.custom-page .card {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
-html.dark .custom-page.textured-page a:hover .card {
-  box-shadow: var(--elevation-hover);
-}
-
-.custom-page.textured-page .card {
-  border-radius: 32px;
-  padding: 40px; /* same inset as .panel, so text in stacked cards and panels lines up */
+.custom-page .card hr {
+  margin: 32px 0;
+  border: none;
+  border-top: 1px solid var(--vp-c-gutter);
+  width: 100%
 }
 
 @media screen and (max-width: 700px) {
-  .custom-page.textured-page .card {
+  .custom-page :is(.panel, .card) {
     padding: 32px 24px;
+  }
+
+  .custom-page .card hr {
+    border: 1px solid var(--vp-c-gutter);
   }
 }
 
@@ -295,7 +237,7 @@ html.dark .custom-page.textured-page a:hover .card {
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background-color: var(--home-surface-inner);
+  background-color: var(--surface-inner);
 }
 
 .custom-page .icon-tile i {
@@ -309,13 +251,13 @@ html.dark .custom-page.textured-page a:hover .card {
    sized in pixels so they look the same under every header. Below 960px there is no room beside
    the column, so they are dropped. */
 
-.custom-page.textured-page .texture-dots {
+.custom-page .texture-dots {
   position: relative;
   isolation: isolate; /* keeps the wings (z-index: -1) above the canvas but below the content */
 }
 
-.custom-page.textured-page .texture-dots::before,
-.custom-page.textured-page .texture-dots::after {
+.custom-page .texture-dots::before,
+.custom-page .texture-dots::after {
   content: "";
   position: absolute;
   top: 0;
@@ -328,41 +270,44 @@ html.dark .custom-page.textured-page a:hover .card {
   background-position: center top;
 }
 
-.custom-page.textured-page .texture-dots::before {
+.custom-page .texture-dots::before {
   left: 0;
   mask-image: radial-gradient(ellipse 55% 55% at 40% 42%, #000, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 55% 55% at 40% 42%, #000, transparent 100%);
 }
 
-.custom-page.textured-page .texture-dots::after {
+.custom-page .texture-dots::after {
   right: 0;
   mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%);
 }
 
 /* light dots on a dark canvas stand out more than dark dots on white, so they are fainter there */
-html.dark .custom-page.textured-page .texture-dots::before,
-html.dark .custom-page.textured-page .texture-dots::after {
+html.dark .custom-page .texture-dots::before,
+html.dark .custom-page .texture-dots::after {
   background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 14%, transparent) 1px, transparent 1.5px);
 }
 
 @media screen and (max-width: 960px) {
-  .custom-page.textured-page .texture-dots::before,
-  .custom-page.textured-page .texture-dots::after {
+  .custom-page .texture-dots::before,
+  .custom-page .texture-dots::after {
     display: none;
   }
 }
 
 
 /* Dotted divider
-   The seam between sections of a textured page: a faint dotted line across the content width,
+   The seam between sections of a custom page: a faint dotted line across the content width,
    fading out at both ends, so the eye reads a break without a heading. The dots are the same 1px
    dots as the homepage hero's dot grid and share its blue tint in light mode. Pages place this
-   element where their seams go. It fills its parent's width, so put it in the content column or a
-   grid row and set its margins there. */
+   element where their seams go: in a column or a grid of panels 32px apart (the usual gap), its
+   margin puts the middle of the dot row 48px from the panels on either side, and in a grid it spans
+   every column. */
 
-.custom-page.textured-page .dotted-divider {
+.custom-page .dotted-divider {
+  grid-column: 1 / -1;
   height: 4px;
+  margin: 14px 0;
   pointer-events: none;
   background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 40%, transparent) 1px, transparent 1.5px);
   background-size: 12px 4px;
@@ -372,13 +317,13 @@ html.dark .custom-page.textured-page .texture-dots::after {
 }
 
 /* light dots on the dark canvas stand out more than dark dots on white, so they are fainter there */
-html.dark .custom-page.textured-page .dotted-divider {
+html.dark .custom-page .dotted-divider {
   background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 16%, transparent) 1px, transparent 1.5px);
 }
 
 
 /* Page canvas
-   Every textured page paints one continuous canvas on <body>, so the page, the strip under the navbar
+   Every custom page paints one continuous canvas on <body>, so the page, the strip under the navbar
    and the footer all share it with no seams: a fine grain tile (256px, its native size) over soft
    colour washes. The washes sit at page-height percentages, so each page has its own set (below); all
    of them stay near the brand blue (yellows and greens were tried and rejected) and none sit in the
@@ -387,7 +332,7 @@ html.dark .custom-page.textured-page .dotted-divider {
    The shared rule lists one repeat value per layer: the grain tiles, the washes do not. Values beyond
    a page's layer count are ignored, so the list covers up to nine washes. */
 
-body:has(.custom-page.textured-page) {
+body:has(.custom-page) {
   background-color: var(--custom-page-bg);
   background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
 }
@@ -528,21 +473,6 @@ html.dark body:has(.custom-page:is(.contact-page, .purchase-page)) {
   color: var(--vp-c-brand-1);
   width: fit-content;
   text-transform: uppercase;
-}
-
-.custom-page {
-  .fa-duotone, .fa-solid {
-    color: #2196F3;
-  }
-
-  .fa-square-check {
-    font-size: 24px;
-    --fa-secondary-opacity: 0.2;
-  }
-
-  .fa-star {
-    --fa-secondary-opacity: 0.9;
-  }
 }
 
 .custom-page p a:not(.action) {

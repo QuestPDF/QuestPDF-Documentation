@@ -55,7 +55,7 @@ export function useCompanionTour<T extends TourStep>(root: Ref<HTMLElement | nul
 
   /* picking the view that is already shown steps through its screens */
   function selectView(view: number) {
-    const indexes = steps.map((s, index) => ({ s, index })).filter(entry => entry.s.view === view).map(entry => entry.index);
+    const indexes = steps.flatMap((s, index) => s.view === view ? [index] : []);
     const position = indexes.indexOf(step.value);
     step.value = position >= 0 ? indexes[(position + 1) % indexes.length] : indexes[0];
     restart();

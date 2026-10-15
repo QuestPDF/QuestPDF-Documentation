@@ -1,9 +1,8 @@
 <script setup lang="ts">
-/* Two cards side by side, replacing the former "Enterprise-grade foundations", "Industry-standard
-   PDF compliance" and platform sections. Left, with a heading like the Companion App and license cards,
-   the compliance story: the promise and the independent validators, then the supported conformance
-   levels as chips grouped by purpose. Right, no heading: a two-by-two grid of cells divided by a cross
-   of hairlines, one per thing a manager, product owner or programmer checks before buying. The first
+/* Two panels side by side. Left, with a heading like the Companion App and license panels, the
+   compliance story: the promise and the independent validators, then the supported conformance levels
+   as chips grouped by purpose. Right, no heading: a two-by-two grid of cells divided by a cross of
+   hairlines, one per thing a manager, product owner or programmer checks before buying. The first
    cell is the data privacy fact, linked to its page; the other three answer whether the library runs
    in the buyer's environment: the runtimes as text, the operating systems and the deployment
    environments as small monochrome logos with labels. Everything is visible at once. */
@@ -34,19 +33,6 @@ const standardsRows : StandardsCategory[][] = [
     }
   ]
 ];
-
-interface Fact {
-  label: string;
-  text: string;
-  /* the page that backs the claim */
-  href: string;
-}
-
-const privacy : Fact = {
-  label: "Data privacy",
-  text: "No network calls, no telemetry, no license server. Works air-gapped.",
-  href: "/security-policy"
-};
 
 interface Platform {
   name: string;
@@ -120,12 +106,13 @@ const platformGroups : PlatformGroup[] = [
          (one link, the label underlines and grows an arrow on hover) and the three platform groups -->
     <section class="panel foundations" aria-label="Enterprise-grade foundations">
       <div class="cells">
-        <a :href="privacy.href" class="cell fact">
+        <!-- the security policy backs the claim -->
+        <a href="/security-policy" class="cell fact">
           <span class="label">
-            <span class="label-text">{{ privacy.label }}</span>
+            <span class="label-text">Data privacy</span>
             <i class="fa-regular fa-arrow-right fact-arrow" aria-hidden="true"></i>
           </span>
-          <span class="fact-text">{{ privacy.text }}</span>
+          <span class="fact-text">No network calls, no telemetry, no license server. Works air-gapped.</span>
         </a>
 
         <section v-for="group of platformGroups" :key="group.label" class="cell group">
@@ -213,7 +200,7 @@ const platformGroups : PlatformGroup[] = [
   margin-top: 8px;
 }
 
-/* small labels on the inset layer of the surface (--home-surface-inner, see CustomPages.css) */
+/* small labels on the inset layer of the surface (--surface-inner, see CustomPages.css) */
 .standards-badges > span {
   display: inline-flex;
   align-items: center;
@@ -223,7 +210,7 @@ const platformGroups : PlatformGroup[] = [
   font-size: 0.8125rem;
   font-weight: 500;
   color: var(--vp-c-text-2);
-  background-color: var(--home-surface-inner);
+  background-color: var(--surface-inner);
 }
 
 
@@ -353,8 +340,8 @@ const platformGroups : PlatformGroup[] = [
 
 
 /* The linked cell reads like the plain ones until pointed at: then the label underlines and a small
-   arrow slides in beside it, the same arrow as the links in the Companion card; the text below does
-   not change. The focus ring is the one the CTA cards use */
+   arrow slides in beside it; the text below does not change. The focus ring is the one the CTA cards
+   use */
 
 .fact {
   color: inherit;

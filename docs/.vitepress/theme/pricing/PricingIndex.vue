@@ -1,16 +1,16 @@
 <template>
-  <div class="custom-page pricing-page textured-page">
+  <div class="custom-page pricing-page">
     <div class="container texture-dots">
       <pricing-tiers />
     </div>
 
-    <div class="section-divider dotted-divider" aria-hidden="true"></div>
+    <div class="dotted-divider" aria-hidden="true"></div>
 
     <div class="container texture-dots">
       <pricing-faq />
     </div>
 
-    <div class="section-divider dotted-divider" aria-hidden="true"></div>
+    <div class="dotted-divider" aria-hidden="true"></div>
 
     <div class="container texture-dots">
       <pricing-contact />
@@ -29,12 +29,12 @@ import PricingContact from "./PricingContact.vue";
 <style>
 
 /* Section seams
-   The shared dotted divider (CustomPages.css) between the sections, as wide as the content
-   column (the page width minus the content's side padding). The sections sit 48px from the seam
-   on either side, as on the homepage; the title keeps the usual 64px under the navbar and the
-   contact card keeps 64px above the footer. */
+   The shared dotted divider (CustomPages.css) between the sections, outside the content column, so
+   it takes the column's width itself (the page width minus the content's side padding) and the
+   sections' own padding spaces it: they sit 48px from the seam on either side, as on the homepage;
+   the title keeps the usual 64px under the navbar and the contact card keeps 64px above the footer. */
 
-.pricing-page .section-divider {
+.custom-page.pricing-page > .dotted-divider {
   width: calc(100% - 64px);
   max-width: calc(var(--custom-page-width) - 64px);
   margin: 0 auto;
@@ -54,7 +54,7 @@ import PricingContact from "./PricingContact.vue";
 }
 
 @media screen and (max-width: 768px) {
-  .pricing-page .section-divider {
+  .custom-page.pricing-page > .dotted-divider {
     width: calc(100% - 48px);
   }
 }

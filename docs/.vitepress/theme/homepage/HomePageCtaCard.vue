@@ -89,7 +89,7 @@ function onFocus(event: FocusEvent) {
   color: var(--vp-c-text-1);
   transform: translateY(-3px);
   box-shadow: var(--accent-halo);
-  background-color: color-mix(in srgb, var(--home-surface), #FFF 20%);
+  background-color: color-mix(in srgb, var(--surface), #FFF 20%);
 }
 
 html.dark .custom-page.home-page .panel.cta-card:hover {
@@ -124,11 +124,16 @@ html.dark .custom-page.home-page .panel.cta-card:hover {
       0 1px 2px rgba(16, 24, 40, 0.04),
       0 13px 27px -5px color-mix(in srgb, var(--accent) 18%, transparent),
       0 8px 16px -8px color-mix(in srgb, var(--accent) 24%, transparent);
+
+  /* the accent is a glow colour; as text (the link row) it is darkened on the light theme and lightened
+     on the dark one, so it stays readable on both */
+  --accent-text: color-mix(in srgb, var(--accent-secondary) 85%, #000);
 }
 
 html.dark .cta-card {
   /* dark theme: a soft glow of the accent, over the usual lift shadow */
   --accent-halo: 0 0 48px -16px color-mix(in srgb, var(--accent) 50%, transparent);
+  --accent-text: color-mix(in srgb, var(--accent) 75%, #FFF);
 }
 
 .cta-card::after {
@@ -212,21 +217,8 @@ html.dark .cta-card::after {
   color: var(--accent-text);
 }
 
-/* the accent is a glow colour; as text it is darkened on the light theme and lightened on the dark
-   one, so the link row stays readable on both */
-.cta-card {
-  --accent-text: color-mix(in srgb, var(--accent-secondary) 85%, #000);
-}
-
-html.dark .cta-card {
-  --accent-text: color-mix(in srgb, var(--accent) 75%, #FFF);
-}
-
-/* .custom-page .fa-solid paints every icon brand blue (CustomPages.css); the arrow must follow the
-   card's own accent, like the label next to it */
-.cta-card .arrow-icon {
+.arrow-icon {
   font-size: 14px;
-  color: var(--accent-text);
   transition: transform 0.25s ease;
 }
 
@@ -320,29 +312,20 @@ html:not(.dark) .background-gradient {
 
   .cta-text .card-title {
     grid-area: title;
-  }
-
-  .cta-text .card-description {
-    grid-area: text;
-    margin-top: 0;
-  }
-
-  .cta-link {
-    grid-area: link;
-    margin-top: 0;
-  }
-
-  .cta-text .card-title {
     font-size: 1.25rem;
     line-height: 1.625rem;
   }
 
   .cta-text .card-description {
+    grid-area: text;
+    margin-top: 0;
     font-size: 1rem;
     line-height: 1.5rem;
   }
 
   .cta-link {
+    grid-area: link;
+    margin-top: 0;
     font-size: 0.9375rem;
   }
 
@@ -372,10 +355,6 @@ html:not(.dark) .background-gradient {
   .cta-card:hover::after,
   .cta-card:focus-visible::after {
     animation: none;
-  }
-
-  .arrow-icon {
-    transition: opacity 0.3s ease, box-shadow 0.3s ease;
   }
 
   .cta-card:hover .arrow-icon,

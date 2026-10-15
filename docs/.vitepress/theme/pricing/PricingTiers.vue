@@ -32,9 +32,10 @@
           </div>
         </div>
 
-        <a v-if="license.price" class="action" @click="paddle.startCheckout(license.paddlePriceId)">
+        <!-- a button: it opens the checkout overlay, it does not go anywhere -->
+        <button v-if="license.price" type="button" class="action" @click="paddle.startCheckout(license.paddlePriceId)">
           Purchase License
-        </a>
+        </button>
         <a v-else class="action" href="/quick-start.html">Get Started</a>
 
         <p class="footnote" v-html="license.footnote" />
@@ -123,10 +124,6 @@ const licenses = [
 
 /* Page layout */
 
-.content {
-  max-width: var(--custom-page-width);
-}
-
 @media screen and (max-width: 450px) {
   h1 {
     font-size: 2rem;
@@ -156,7 +153,7 @@ const licenses = [
   grid-gap: 0 32px;
 }
 
-/* the cards sit on the shared translucent surface (`.textured-page .card`); only the
+/* the cards sit on the shared surface (`.card`, CustomPages.css); only the
    professional card tints it with the brand blue, so it reads as the highlighted one */
 .license-tiers .license-tier {
   position: relative;
@@ -171,7 +168,7 @@ const licenses = [
 /* a faint brand tint in both modes: the share is small enough that the blue stays a wash
    over the translucent surface rather than a solid fill, on the light and the dark canvas alike */
 .license-tiers .license-tier.professional {
-  background-color: color-mix(in srgb, #2196F3 5%, var(--home-surface));
+  background-color: color-mix(in srgb, #2196F3 5%, var(--surface));
 }
 
 html.dark .license-tiers .license-tier.professional {
@@ -182,7 +179,7 @@ html.dark .license-tiers .license-tier.professional {
 .license-tier header { grid-row: 2; }
 .license-tier hr { grid-row: 3; }
 .license-tier .details { grid-row: 4; }
-.license-tier a.action { grid-row: 5; }
+.license-tier .action { grid-row: 5; }
 .license-tier .footnote { grid-row: 6; }
 
 
@@ -334,6 +331,13 @@ html.dark {
   gap: 12px;
 }
 
+/* a duotone tick on a faint square, in the tier's colour; the professional and enterprise ticks sit on
+   a solid square instead */
+.fa-square-check {
+  font-size: 24px;
+  --fa-secondary-opacity: 0.2;
+}
+
 .details-item i.fa-square-check {
   width: 24px;
 }
@@ -381,7 +385,7 @@ html.dark {
 
 /* Action button */
 
-.license-tier a.action {
+.license-tier .action {
   justify-self: stretch;
   text-align: center;
   margin-top: 32px;

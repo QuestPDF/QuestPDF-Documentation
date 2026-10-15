@@ -338,12 +338,9 @@ html.dark .sheet-shadow {
   transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
 }
 
-/* the colour is set on the glyph itself: the page-wide rule that paints every solid icon brand blue
-   (.custom-page .fa-solid in CustomPages.css) would otherwise hide the triangle on the blue disc */
 .play-button i {
   font-size: 18px;
   margin-left: 3px; /* optical centring of the triangle */
-  color: #FFF;
 }
 
 .build:not(.play) > .play-button {

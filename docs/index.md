@@ -4,7 +4,6 @@ title: QuestPDF
 titleTemplate: C# PDF Generation Library
 
 markdownStyles: false
-pageClass: wide-layout
 ---
 
 <script setup>

@@ -31,9 +31,9 @@ const documents = [
 
 <template>
   <!-- the canvas (body background) is shared with the document pages, see "Legal pages canvas" in CustomPages.css -->
-  <div class="custom-page legal-page textured-page">
+  <div class="custom-page legal-page">
     <div class="container texture-dots">
-      <article class="content content-center">
+      <article class="content">
         <header class="section-header">
           <h1>QuestPDF Legal Terms</h1>
           <p class="sub-header">Review or download the official legal documents and licensing terms for QuestPDF. If you have questions or need assistance, our team is here to help.</p>

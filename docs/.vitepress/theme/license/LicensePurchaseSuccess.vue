@@ -67,7 +67,7 @@ const cards = [
 </script>
 
 <template>
-  <div class="custom-page purchase-page textured-page">
+  <div class="custom-page purchase-page">
     <div class="container texture-dots">
       <div class="content">
         <header class="section-header purchase-header">
@@ -100,7 +100,7 @@ const cards = [
 
           <!-- the same dotted seam as on the contact page: the license and billing facts above it,
                the assistance note below -->
-          <div class="divider dotted-divider" aria-hidden="true"></div>
+          <div class="dotted-divider" aria-hidden="true"></div>
 
           <!-- full width, so the short assistance note does not sit alone in a half-empty row -->
           <section class="panel assistance-card">
@@ -190,10 +190,8 @@ html.dark .status-tag {
   color: #0D3B12;
 }
 
-/* the solid check; custom pages paint .fa-solid icons brand blue, so it takes the tag's colour */
 .status-tag i {
   font-size: 18px;
-  color: inherit;
 }
 
 /* Cards: the two detail cards side by side, the assistance note across the full width below */
@@ -248,19 +246,11 @@ html.dark .status-tag {
 /* buttons sit at the bottom, so they line up across the two cards */
 .success-card a.action {
   margin-top: auto;
-  padding-top: 12px;
   align-self: flex-end;
 }
 
 .success-card .description-items {
   margin-bottom: 24px;
-}
-
-/* the seam (the shared dotted divider, CustomPages.css) spans the grid; the grid gap on either
-   side plus this margin puts it 48px from the panels, as on the contact page */
-.divider {
-  grid-column: 1 / -1;
-  margin: 16px 0;
 }
 
 .assistance-card {

@@ -64,7 +64,7 @@ const contacts: ContactInformation[] = [
 </script>
 
 <template>
-  <div class="custom-page contact-page textured-page">
+  <div class="custom-page contact-page">
     <div class="container texture-dots">
       <div class="content">
         <header class="section-header contact-header">
@@ -87,7 +87,7 @@ const contacts: ContactInformation[] = [
 
           <!-- the same dotted seam as between the homepage sections: the four ways to reach us above
                it, the company behind the project below -->
-          <div class="divider dotted-divider" aria-hidden="true"></div>
+          <div class="dotted-divider" aria-hidden="true"></div>
 
           <!-- full width, so the company details do not sit alone in a half-empty row -->
           <article class="panel business-details">
@@ -149,7 +149,7 @@ const contacts: ContactInformation[] = [
   align-items: flex-start;
 }
 
-/* the icon tile (CustomPages.css) to title gap matches the homepage foundations cells */
+/* the icon tile is the shared one (CustomPages.css), above the title */
 .contact-card .icon-tile {
   margin-bottom: 16px;
 }
@@ -161,13 +161,6 @@ const contacts: ContactInformation[] = [
   gap: 12px;
   margin-top: auto;
   padding-top: 24px;
-}
-
-/* the seam (the shared dotted divider, CustomPages.css) spans the grid; the grid gap on either
-   side plus this margin puts it 48px from the panels, the same distance as on the homepage */
-.divider {
-  grid-column: 1 / -1;
-  margin: 16px 0;
 }
 
 .business-details {

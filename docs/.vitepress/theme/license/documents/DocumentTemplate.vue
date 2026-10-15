@@ -1,5 +1,5 @@
 <template>
-  <section class="custom-page document-page legal-page textured-page">
+  <section class="custom-page document-page legal-page">
     <div class="container texture-dots">
       <div class="content">
         <header class="section-header document-header">
@@ -310,8 +310,8 @@ onBeforeUnmount(() => {
   display: none;
   width: 100%;
   border-radius: 20px;
-  background-color: var(--home-surface);
-  box-shadow: var(--home-surface-edge);
+  background-color: var(--surface);
+  box-shadow: var(--surface-edge);
 }
 
 .document-page .document-contents-compact summary {
@@ -402,8 +402,11 @@ onBeforeUnmount(() => {
   color: var(--vp-c-text-2);
 }
 
-/* sections are divided by a hairline; the first one starts at the top of the surface */
-.document-body h2 {
+/* Sections are divided by a hairline; the first one starts at the top of the surface. A jump to a
+   section (from the contents or a link) lands its hairline 16px under the navbar, so the heading text
+   sits 57px under it; the first heading, which has no hairline, lands its text at the same height.
+   Scoped to the page to outrank VitePress's own `.vp-doc h2` style and its offset for `.vp-doc [id]`. */
+.document-page .document-body h2 {
   margin: 40px 0 16px;
   padding-top: 40px;
   border-top: 1px solid var(--vp-c-divider);
@@ -411,22 +414,13 @@ onBeforeUnmount(() => {
   font-size: 1.4rem;
   line-height: 2rem;
   letter-spacing: 0;
-}
-
-.document-body > h2:first-child {
-  margin-top: 0;
-  padding-top: 0;
-  border-top: none;
-}
-
-/* A jump to a section (from the contents or a link) lands its hairline 16px under the navbar, so the
-   heading text sits 57px under it; the first heading, which has no hairline, lands its text at the
-   same height. Scoped to the page to outrank VitePress's own offset for `.vp-doc [id]`. */
-.document-page .document-body h2 {
   scroll-margin-top: calc(var(--vp-nav-height) + 16px);
 }
 
 .document-page .document-body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
   scroll-margin-top: calc(var(--vp-nav-height) + 57px);
 }
 

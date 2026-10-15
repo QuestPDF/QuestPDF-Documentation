@@ -70,7 +70,7 @@ const resellers = [
   gap: 32px;
 }
 
-/* surface, radius and padding come from the shared `.textured-page .card` style: two centred cards of
+/* surface, radius and padding come from the shared `.card` style (CustomPages.css): two centred cards of
    the same width, each with a centred header */
 .closing > .card {
   align-items: center;

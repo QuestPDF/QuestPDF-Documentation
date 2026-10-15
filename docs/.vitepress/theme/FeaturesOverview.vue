@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-page features-page textured-page">
+  <div class="custom-page features-page">
     <div class="container texture-dots">
       <div class="content">
 
@@ -865,7 +865,7 @@ const categories = [
 }
 
 
-/* Category: translucent panel (see .textured-page in CustomPages.css) with a heading and a list of feature rows */
+/* Category: the shared panel surface (CustomPages.css) with a heading and a list of feature rows */
 
 .panel.category {
   display: flex;
@@ -936,7 +936,7 @@ const categories = [
 
 .feature-row.linked:hover,
 .feature-row.linked:focus-visible {
-  background-color: var(--home-surface-inner);
+  background-color: var(--surface-inner);
 }
 
 .feature-row:focus-visible {
@@ -954,7 +954,7 @@ const categories = [
   border-radius: 8px;
 
   color: var(--vp-c-text-1);
-  background-color: var(--home-surface-inner);
+  background-color: var(--surface-inner);
 }
 
 .feature-row.linked:hover .feature-icon {
@@ -1077,21 +1077,6 @@ const categories = [
   .feature-arrow {
     display: none;
   }
-}
-
-
-/* Full descriptions stay in the document for assistive technology, find-in-page and search engines */
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
 }
 
 </style>

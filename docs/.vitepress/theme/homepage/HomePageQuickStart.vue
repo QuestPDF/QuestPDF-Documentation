@@ -245,7 +245,7 @@ html.dark .custom-page.home-page .panel.quick-start {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background-color: var(--home-surface-inner);
+  background-color: var(--surface-inner);
   font-size: 20px;
   color: var(--vp-c-text-1);
 }
@@ -336,7 +336,7 @@ html.dark .window-header {
   padding: 10px 10px 10px 16px;
   border: 1px solid color-mix(in srgb, var(--agent-accent) 22%, var(--vp-c-divider));
   border-radius: 14px;
-  background-color: color-mix(in srgb, var(--agent-accent) 12%, var(--home-surface-inner));
+  background-color: color-mix(in srgb, var(--agent-accent) 12%, var(--surface-inner));
   overflow: hidden;
   transition: border-color 0.3s ease;
 }

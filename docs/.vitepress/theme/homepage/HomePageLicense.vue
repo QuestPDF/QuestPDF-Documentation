@@ -64,211 +64,211 @@ const includes = [
 
 <style scoped>
 
-  /* One panel, two halves of equal width with a hairline between them; the halves stack on
-     narrow screens and the hairline turns horizontal */
+/* One panel, two halves of equal width with a hairline between them; the halves stack on
+   narrow screens and the hairline turns horizontal */
 
+.license-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 48px;
+}
+
+.divider {
+  align-self: stretch;
+  width: 1px;
+  background-color: var(--vp-c-divider);
+}
+
+@media screen and (max-width: 960px) {
   .license-panel {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    gap: 48px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
   }
 
   .divider {
-    align-self: stretch;
-    width: 1px;
-    background-color: var(--vp-c-divider);
+    width: auto;
+    height: 1px;
   }
-
-  @media screen and (max-width: 960px) {
-    .license-panel {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 40px;
-    }
-
-    .divider {
-      width: auto;
-      height: 1px;
-    }
-  }
+}
 
 
-  /* Left half: the section heading, left-aligned like the Companion App panel, then the points
-     every tier includes, and the calls to action pinned to the bottom */
+/* Left half: the section heading, left-aligned like the Companion App panel, then the points
+   every tier includes, and the calls to action pinned to the bottom */
 
-  .includes {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
+.includes {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
 
-  /* a glow in the Community tier's green from the panel's left edge, centred behind the heading, over
-     the panel's own sheen (CustomPages.css) */
-  .custom-page .panel.license-panel {
-    background-image:
-        radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, #67B84D 11%, transparent), transparent),
-        radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #4CAF50 5%, transparent), transparent),
-        var(--home-surface-sheen);
-  }
+/* a glow in the Community tier's green from the panel's left edge, centred behind the heading, over
+   the panel's own sheen (CustomPages.css) */
+.custom-page .panel.license-panel {
+  background-image:
+      radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, #67B84D 11%, transparent), transparent),
+      radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #4CAF50 5%, transparent), transparent),
+      var(--surface-sheen);
+}
 
-  .includes-list {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    flex-grow: 1;
-    margin: 32px 0 0;
-    padding: 0;
-    list-style: none;
-  }
+.includes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex-grow: 1;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
 
-  /* the same rows as the Companion App views list (HomePageCompanion.vue): an 18px icon and a
-     medium-weight label, both in the text colour, 36px tall */
+/* the same rows as the Companion App views list (HomePageCompanion.vue): an 18px icon and a
+   medium-weight label, both in the text colour, 36px tall */
+.includes-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 36px;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  color: var(--vp-c-text-1);
+}
+
+.includes-list i {
+  flex-shrink: 0;
+  width: 18px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* on phones the labels wrap, so the icon sits on the first line instead of the middle of the label */
+@media screen and (max-width: 700px) {
   .includes-list li {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    min-height: 36px;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    font-weight: 500;
-    color: var(--vp-c-text-1);
+    align-items: flex-start;
+    min-height: 0;
+    padding: 6px 0;
   }
 
   .includes-list i {
-    flex-shrink: 0;
-    width: 18px;
-    text-align: center;
-    font-size: 1rem;
-  }
-
-  /* on phones the labels wrap, so the icon sits on the first line instead of the middle of the label */
-  @media screen and (max-width: 700px) {
-    .includes-list li {
-      align-items: flex-start;
-      min-height: 0;
-      padding: 6px 0;
-    }
-
-    .includes-list i {
-      line-height: 1.5rem;
-    }
-  }
-
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 32px;
-  }
-
-
-  /* Tiers: stacked blocks spread to fill the panel's height. Each block opens
-     with the tier's name badge followed by the price, then the description below.
-     The badge carries its tier's colour from the pricing page: green for Community, solid blue for
-     Professional, black for Enterprise (inverted to light grey in dark mode) */
-
-  .tiers {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-between;
-  }
-
-  .tier {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 20px 0;
-  }
-
-  .tier:first-child {
-    padding-top: 0;
-  }
-
-  .tier:last-child {
-    padding-bottom: 0;
-  }
-
-  /* the price sits right after the badge, in the primary text colour, so badge and price read as one strong row */
-  .tier-head {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .tier-name {
-    margin: 0;
-    padding: 7px 14px;
-    border-radius: 10px;
-    background-color: var(--home-surface-inner);
-
-    font-size: 0.9375rem;
-    line-height: 1.25rem;
-    font-weight: 600;
-    color: var(--vp-c-text-2);
-  }
-
-  .tier.community .tier-name {
-    color: #2E7D32;
-    background-color: #67B84D33;
-  }
-
-  .tier.professional .tier-name {
-    color: white;
-    background-color: #2196F3;
-  }
-
-  .tier.enterprise .tier-name {
-    color: white;
-    background-color: #212121;
-  }
-
-  html.dark .tier.community .tier-name {
-    color: #A5D6A7;
-  }
-
-  html.dark .tier.professional .tier-name {
-    background-color: #1976D2;
-  }
-
-  html.dark .tier.enterprise .tier-name {
-    color: #212121;
-    background-color: #EEEEEE;
-  }
-
-  .tier-price {
-    font-size: 1rem;
     line-height: 1.5rem;
-    font-weight: 600;
-    color: var(--vp-c-text-1);
-    white-space: nowrap;
   }
+}
 
-  .tier-description {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    color: var(--vp-c-text-2);
-  }
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
 
 
-  /* Pricing button */
+/* Tiers: stacked blocks spread to fill the panel's height. Each block opens
+   with the tier's name badge followed by the price, then the description below.
+   The badge carries its tier's colour from the pricing page: green for Community, solid blue for
+   Professional, black for Enterprise (inverted to light grey in dark mode) */
 
-  .action.pricing-button {
-    background-color: #66BB6A;
-    color: var(--vp-button-brand-text);
-    font-weight: bold;
-  }
+.tiers {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+}
 
-  .action.pricing-button:hover {
-    background-color: #4CAF50;
-  }
+.tier {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 0;
+}
 
-  html.dark .action.pricing-button {
-    background-color: #4CAF50;
-  }
+.tier:first-child {
+  padding-top: 0;
+}
 
-  html.dark .action.pricing-button:hover {
-    background-color: #66BB6A;
-  }
+.tier:last-child {
+  padding-bottom: 0;
+}
+
+/* the price sits right after the badge, in the primary text colour, so badge and price read as one strong row */
+.tier-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.tier-name {
+  margin: 0;
+  padding: 7px 14px;
+  border-radius: 10px;
+  background-color: var(--surface-inner);
+
+  font-size: 0.9375rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  color: var(--vp-c-text-2);
+}
+
+.tier.community .tier-name {
+  color: #2E7D32;
+  background-color: #67B84D33;
+}
+
+.tier.professional .tier-name {
+  color: white;
+  background-color: #2196F3;
+}
+
+.tier.enterprise .tier-name {
+  color: white;
+  background-color: #212121;
+}
+
+html.dark .tier.community .tier-name {
+  color: #A5D6A7;
+}
+
+html.dark .tier.professional .tier-name {
+  background-color: #1976D2;
+}
+
+html.dark .tier.enterprise .tier-name {
+  color: #212121;
+  background-color: #EEEEEE;
+}
+
+.tier-price {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  white-space: nowrap;
+}
+
+.tier-description {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: var(--vp-c-text-2);
+}
+
+
+/* Pricing button */
+
+.action.pricing-button {
+  background-color: #66BB6A;
+  color: var(--vp-button-brand-text);
+  font-weight: bold;
+}
+
+.action.pricing-button:hover {
+  background-color: #4CAF50;
+}
+
+html.dark .action.pricing-button {
+  background-color: #4CAF50;
+}
+
+html.dark .action.pricing-button:hover {
+  background-color: #66BB6A;
+}
 
 </style>

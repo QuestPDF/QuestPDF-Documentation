@@ -41,8 +41,7 @@ import { data as statistics } from "../statistics.data";
   position: relative;
 
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto; /* the text caps its own width, the card takes what its stats need */
-  grid-template-rows: auto;
+  grid-template-columns: minmax(0, 1fr) auto; /* the text caps its own width, the statistics take what they need */
   grid-gap: 64px;
   align-items: center;
 
@@ -61,7 +60,6 @@ import { data as statistics } from "../statistics.data";
 @media screen and (max-width: 820px) {
   .content {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
   }
 }
 
@@ -74,9 +72,10 @@ import { data as statistics } from "../statistics.data";
 
 /* Content styles */
 
-/* the text column is a size container so the headline can scale with the room the cards leave it:
-   "generation for C#" is about 8x the font size wide, so 11.5cqi keeps it on one line and the
-   clamp holds it between the phone size and the full 4.5rem */
+/* the text column is a size container so the headline can scale with the room the statistics leave
+   it: "generation for C#" is about 8x the font size wide, so 11.5cqi keeps it on one line and the
+   clamp holds it between the phone size and the full 4.5rem. The headline rules name the column, so
+   they outrank the shared `.custom-page h1` sizes. */
 .text {
   container-type: inline-size;
   z-index: 10;
@@ -85,10 +84,10 @@ import { data as statistics } from "../statistics.data";
   gap: 16px;
 }
 
-h1 {
-  font-size: clamp(2.75rem, 11.5cqi, 4.5rem) !important;
-  line-height: 1.05 !important;
-  font-weight: 700 !important;
+.text h1 {
+  font-size: clamp(2.75rem, 11.5cqi, 4.5rem);
+  line-height: 1.05;
+  font-weight: 700;
   letter-spacing: -0.02em;
   max-width: 760px;
   word-spacing: 4px;
@@ -124,8 +123,8 @@ html.dark h1 .highlight-foreground {
 
 .tagline {
   max-width: 770px;
-  font-size: 1.5rem !important;
-  line-height: 2.25rem !important;
+  font-size: 1.5rem;
+  line-height: 2.25rem;
   font-weight: 400;
   word-spacing: 2px;
   color: #000B;
@@ -136,24 +135,16 @@ html.dark .tagline {
 }
 
 @media screen and (max-width: 1024px) {
-  h1 {
-    max-width: 100%;
-  }
-
   .tagline {
-    font-size: 1.25rem !important;
-    line-height: 1.5rem !important;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
   }
 }
 
+/* stacked, the column is the full width, where 11.5cqi would give the full 4.5rem */
 @media screen and (max-width: 821px) {
-  h1 {
-    font-size: 2.75rem !important;
-  }
-
-  .tagline {
-    font-size: 1.25rem !important;
-    line-height: 1.5rem !important;
+  .text h1 {
+    font-size: 2.75rem;
   }
 }
 
@@ -178,22 +169,12 @@ html.dark .tagline {
   }
 }
 
-/* each stat is a link, but it reads as plain content: no frame, no lift, and the text keeps its
-   colour under the pointer so the global link hover colour does not kick in. */
+/* each stat is a link, but it reads as plain content: no frame, no lift, and the icon, the value and
+   the label set their own colours, so the global link hover colour never reaches them */
 .statistic {
   display: flex;
   align-items: center;
   gap: 20px;
-  color: var(--vp-c-text-1);
-}
-
-.statistic:hover,
-.statistic:hover .value {
-  color: var(--vp-c-text-1);
-}
-
-.statistic:hover .label {
-  color: var(--vp-c-text-2);
 }
 
 /* the icon sits on a quiet tile: a faint wash of the text colour with an ink glyph, so the numbers
@@ -238,6 +219,7 @@ html:not(.dark) .statistic-icon {
   font-size: 1.75rem;
   line-height: 2.25rem;
   font-weight: 600;
+  color: var(--vp-c-text-1);
 }
 
 .statistic .label {
