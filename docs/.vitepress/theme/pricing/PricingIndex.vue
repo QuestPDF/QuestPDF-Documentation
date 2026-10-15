@@ -12,13 +12,12 @@
 
     <div class="section-divider dotted-divider" aria-hidden="true"></div>
 
-    <div class="container texture-dots">
+    <!-- the reseller and contact cards are one closing pair: no seam between them, 32px apart -->
+    <div class="container texture-dots resellers-container">
       <pricing-resellers />
     </div>
 
-    <div class="section-divider dotted-divider" aria-hidden="true"></div>
-
-    <div class="container">
+    <div class="container contact-container">
       <pricing-contact />
     </div>
   </div>
@@ -36,7 +35,7 @@ import PricingFaq from "./PricingFaq.vue";
 <style>
 
 /* Section seams
-   The shared dotted divider (CustomPages.css) between the four sections, as wide as the content
+   The shared dotted divider (CustomPages.css) between the sections, as wide as the content
    column (the page width minus the content's side padding). The sections sit 48px from the seam
    on either side, as on the homepage; the title keeps the usual 64px under the navbar and the
    contact card keeps 64px above the footer. */
@@ -58,6 +57,15 @@ import PricingFaq from "./PricingFaq.vue";
 
 .pricing-page > .container:last-child .content {
   padding-bottom: 64px;
+}
+
+/* no seam between the reseller and contact cards: the usual 32px gap between consecutive cards */
+.pricing-page > .resellers-container .content {
+  padding-bottom: 16px;
+}
+
+.pricing-page > .contact-container .content {
+  padding-top: 16px;
 }
 
 @media screen and (max-width: 768px) {

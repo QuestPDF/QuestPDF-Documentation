@@ -21,7 +21,9 @@ const tiers = [
 const includes = [
   { icon: "fa-infinity", text: "Perpetual license, not a subscription: keep your version forever" },
   { icon: "fa-layer-group", text: "All features included in every tier without restrictions" },
+  { icon: "fa-users", text: "Unlimited developers, projects, servers, and deployments" },
   { icon: "fa-box-open", text: "Royalty-free redistribution in SaaS, desktop, and on-premises apps" },
+  { icon: "fa-lock-open", text: "No registration, watermarks, or time limits" },
   { icon: "fa-code", text: "Full source code available on GitHub" }
 ]
 </script>
@@ -35,7 +37,6 @@ const includes = [
 
       <div class="includes">
         <h2 class="card-title">Fair and Sustainable License</h2>
-        <p class="card-description">A model that benefits everyone. Commercial licensing provides businesses with legal safety and long-term stability, while funding a feature-complete, unrestricted library for the community.</p>
 
         <ul class="includes-list">
           <li v-for="item of includes" :key="item.text">
@@ -104,8 +105,8 @@ const includes = [
   }
 
 
-  /* Left half: the section heading and its lead, left-aligned like the Companion App panel, then
-     the points every tier includes, and the calls to action pinned to the bottom */
+  /* Left half: the section heading, left-aligned like the Companion App panel, then the points
+     every tier includes, and the calls to action pinned to the bottom */
 
   .includes {
     display: flex;
@@ -149,7 +150,7 @@ const includes = [
   .includes-list li {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 14px;
     min-height: 36px;
     font-size: 1rem;
     line-height: 1.5rem;

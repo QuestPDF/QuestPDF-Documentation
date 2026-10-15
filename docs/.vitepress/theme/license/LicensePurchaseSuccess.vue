@@ -64,15 +64,11 @@ const orderDetails = [
       <div class="content">
         <header class="section-header purchase-header">
           <div class="section-tag status-tag">
-            <i class="fa-regular fa-check"></i>
+            <i class="fa-solid fa-check"></i>
             Order completed
           </div>
 
-          <h1>Thank you!</h1>
-
-          <p class="sub-header">
-            <b>Please check your inbox.</b> We have sent a confirmation email with your license details, license confirmation PDF, and developer setup instructions.
-          </p>
+          <h1 class="purchase-title">Thank you! <b>Please check your inbox</b> <span>for your license confirmation and setup instructions.</span></h1>
         </header>
 
         <div class="purchase-cards">
@@ -175,42 +171,73 @@ html.dark body:has(.custom-page.purchase-page) {
 }
 
 
-/* Header: the order state as a green tag with a check, the thank-you as the title,
-   and the inbox note as the sub-header */
+/* Header: the order state as a solid green tag with a check, then one line at lead size instead of a
+   display title: the thanks, the inbox note in green and what the email holds, so the cards carry
+   the page. The shared 650px header width breaks the line into two balanced lines, after "for your". */
 
-/* wider than the shared 650px header, so the inbox note sits on two balanced lines */
 .purchase-header {
-  max-width: 820px;
+  padding-bottom: 16px; /* a little more air above the cards than the page's 32px gap */
 }
 
-.purchase-header h1 {
-  margin-bottom: 1rem;
+/* a step up from the shared section tag: here it is the page's status, not a section label */
+.purchase-header .status-tag {
+  margin-bottom: 20px;
+  padding: 9px 24px;
+  gap: 10px;
+  border-radius: 14px;
+  font-size: 1rem;
 }
 
-.purchase-header .sub-header {
-  margin-bottom: 8px;
+/* the solid check; custom pages paint .fa-solid icons brand blue, so it takes the tag's colour */
+.purchase-header .status-tag i {
+  font-size: 18px;
+  color: inherit;
+}
+
+/* still the page's h1, set at the size of a lead */
+.purchase-title {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+  line-height: 2.125rem;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
   text-wrap: balance;
 }
 
-.purchase-header .sub-header b {
-  color: #2E7D32;
+.purchase-title b {
   font-weight: 600;
+  color: #2E7D32;
 }
 
-html.dark .purchase-header .sub-header b {
+html.dark .purchase-title b {
   color: #A5D6A7;
 }
 
+.purchase-title span {
+  font-weight: 400;
+  color: var(--vp-c-text-2);
+}
+
+@media screen and (max-width: 700px) {
+  .purchase-title {
+    font-size: 1.25rem;
+    line-height: 1.875rem;
+  }
+}
+
+/* solid, tuned per mode: deep green with white text (5.1:1) in light mode; in dark mode the inbox
+   phrase's own light green with near-black green text (7.7:1), so the fill stays bright on the dark page */
 .status-tag {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: color-mix(in srgb, #43A047 14%, transparent);
-  color: #2E7D32;
+  background-color: #2E7D32;
+  color: #FFFFFF;
 }
 
 html.dark .status-tag {
-  color: #A5D6A7;
+  background-color: #A5D6A7;
+  color: #0D3B12;
 }
 
 .status-tag i {

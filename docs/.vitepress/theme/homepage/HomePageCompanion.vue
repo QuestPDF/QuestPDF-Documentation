@@ -32,13 +32,13 @@
               <strong><i class="fa-regular" :class="view.icon" aria-hidden="true"></i>{{ view.title }}</strong>
               <p>{{ view.description }}</p>
               <div v-if="shortcut.keys.length" class="companion-shortcut">
+                <span class="companion-shortcut-label">Shortcut</span>
                 <span class="companion-caps">
                   <template v-for="(key, index) of shortcut.keys" :key="key">
                     <span v-if="index > 0 && shortcut.combo" class="companion-plus" aria-hidden="true">+</span>
                     <kbd class="companion-cap">{{ key }}</kbd>
                   </template>
                 </span>
-                <span class="companion-shortcut-label">{{ shortcut.label }}</span>
               </div>
             </div>
           </Transition>
@@ -115,34 +115,33 @@ interface View {
   label: string;
   /* the label on phones, one word */
   short: string;
-  /* the card: the feature's name, one line about it, and its shortcut as documented */
+  /* the card: the feature's name, one line about it, and its keyboard shortcut as documented (only key
+     presses: a mouse gesture goes in the description, the layout issue arrows are buttons in the app) */
   title: string;
   description: string;
   keys: string[];
-  /* keys pressed together (Ctrl + W) rather than alternatives (↑, ↓) */
+  /* keys pressed together (Ctrl + W) */
   combo?: boolean;
-  keysLabel: string;
 }
 
 /* wording from docs/companion/features.md, shortcuts as documented there */
 const views: View[] = [
-  { label: "See changes live", short: "Preview", icon: "fa-window-maximize", title: "Application", description: "The document's structure on the left, its live preview on the right. Save your code and the preview refreshes in place.", keys: [], keysLabel: "" },
-  { label: "Browse the structure", short: "Structure", icon: "fa-folder-tree", title: "Document hierarchy", description: "Every element of the document as a tree, in the same shape as your fluent API code.", keys: ["Ctrl", "W"], combo: true, keysLabel: "show or hide the tree" },
-  { label: "Inspect any element", short: "Inspect", icon: "fa-arrow-pointer", title: "Selected element", description: "Select any element to see its configuration, position and size, on every page it appears.", keys: ["Double-click"], keysLabel: "select" },
-  { label: "Zoom into details", short: "Zoom", icon: "fa-magnifying-glass-plus", title: "Magnify", description: "See small details up close without zooming the preview.", keys: ["1"], keysLabel: "magnifier" },
-  { label: "Read coordinates", short: "Coordinates", icon: "fa-location-crosshairs", title: "Check position", description: "Point at anything to read its page and its X and Y coordinates.", keys: ["2"], keysLabel: "coordinates" },
-  { label: "Measure distances", short: "Measure", icon: "fa-ruler-combined", title: "Measure", description: "Measure sizes and distances, vertically or horizontally.", keys: [], keysLabel: "" },
-  { label: "Find any phrase", short: "Search", icon: "fa-magnifying-glass", title: "Search", description: "Find any phrase; matches are highlighted in both the tree and the preview.", keys: ["Ctrl", "F"], combo: true, keysLabel: "find" },
-  { label: "Debug layout issues", short: "Layout", icon: "fa-bug", title: "Layout debugging", description: "When content does not fit, find the likely root cause, with every element color-coded by how it was laid out.", keys: ["↑", "↓"], keysLabel: "previous, next issue" }
+  { label: "See changes live", short: "Preview", icon: "fa-window-maximize", title: "Application", description: "The document's structure on the left, its live preview on the right. Save your code and the preview refreshes in place.", keys: [] },
+  { label: "Browse the structure", short: "Structure", icon: "fa-folder-tree", title: "Document hierarchy", description: "Every element of the document as a tree, in the same shape as your fluent API code.", keys: ["Ctrl", "W"], combo: true },
+  { label: "Inspect any element", short: "Inspect", icon: "fa-arrow-pointer", title: "Selected element", description: "Double-click any element to see its configuration, position and size, on every page it appears.", keys: [] },
+  { label: "Zoom into details", short: "Zoom", icon: "fa-magnifying-glass-plus", title: "Magnify", description: "See small details up close without zooming the preview.", keys: ["1"] },
+  { label: "Read coordinates", short: "Coordinates", icon: "fa-location-crosshairs", title: "Check position", description: "Point at anything to read its page and its X and Y coordinates.", keys: ["2"] },
+  { label: "Measure distances", short: "Measure", icon: "fa-ruler-combined", title: "Measure", description: "Measure sizes and distances, vertically or horizontally. Check margins, padding and spacing instead of guessing.", keys: [] },
+  { label: "Find any phrase", short: "Search", icon: "fa-magnifying-glass", title: "Search", description: "Find any phrase; matches are highlighted in both the tree and the preview.", keys: ["Ctrl", "F"], combo: true },
+  { label: "Debug layout issues", short: "Layout", icon: "fa-bug", title: "Layout debugging", description: "When content does not fit, find the likely root cause, with every element color-coded by how it was laid out.", keys: [] }
 ];
 
 interface Step {
   view: number;
   /* the screenshot in public/companion */
   frame: string;
-  /* the shortcut of this screen, when the view has one per screen (Measure: 3 vertical, 4 horizontal) */
+  /* the shortcut of this screen, when the view has one per screen (Measure: 3 vertically, 4 horizontally) */
   keys?: string[];
-  keysLabel?: string;
   /* the marker's place as fractions of the screenshot (null: the whole app, no marker) */
   focus: [number, number] | null;
   /* the card's top-left corner as fractions of the frame, set per screen so it covers nothing the view
@@ -151,13 +150,13 @@ interface Step {
 }
 
 const steps: Step[] = [
-  { view: 0, frame: "application", focus: null, card: [0.035, 0.6] },
-  { view: 1, frame: "application", focus: [0.12, 0.42], card: [0.36, 0.5] },
+  { view: 0, frame: "application", focus: null, card: [0.035, 0.48] },
+  { view: 1, frame: "application", focus: [0.12, 0.42], card: [0.36, 0.44] },
   { view: 2, frame: "selection", focus: [0.62, 0.3], card: [0.03, 0.12] },
   { view: 3, frame: "magnifier", focus: [0.5, 0.4], card: [0.665, 0.16] },
   { view: 4, frame: "measurement-point", focus: [0.6, 0.6], card: [0.03, 0.33] },
-  { view: 5, frame: "measurement-vertical", keys: ["3"], keysLabel: "vertical", focus: [0.497, 0.21], card: [0.035, 0.45] },
-  { view: 5, frame: "measurement-horizontal", keys: ["4"], keysLabel: "horizontal", focus: [0.66, 0.6], card: [0.43, 0.18] },
+  { view: 5, frame: "measurement-vertical", keys: ["3"], focus: [0.497, 0.21], card: [0.02, 0.31] },
+  { view: 5, frame: "measurement-horizontal", keys: ["4"], focus: [0.66, 0.6], card: [0.015, 0.085] },
   { view: 6, frame: "search", focus: [0.655, 0.53], card: [0.035, 0.2] },
   { view: 7, frame: "layout-error", focus: [0.1, 0.285], card: [0.2, 0.42] }
 ];
@@ -179,7 +178,6 @@ const view = computed(() => views[current.value.view]);
 /* the card shows only the shortcut of the screen being shown */
 const shortcut = computed(() => ({
   keys: current.value.keys ?? view.value.keys,
-  label: current.value.keysLabel ?? view.value.keysLabel,
   combo: view.value.combo
 }));
 
@@ -373,11 +371,13 @@ html.dark .companion-frame.light {
 
 /* narrower on a smaller app, so it still leaves the view's subject in sight */
 .companion-card {
-  --companion-card-width: clamp(250px, 37%, 290px);
+  --companion-card-width: clamp(210px, 30%, 240px);
   position: absolute;
   width: var(--companion-card-width);
-  padding: 18px 20px 20px;
-  border-radius: 16px;
+  padding: 12px 14px 14px;
+  border-radius: 12px;
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
   background-color: var(--vp-c-bg);
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 9%, transparent), 0 20px 48px -12px rgba(16, 24, 40, 0.3);
 }
@@ -390,9 +390,9 @@ html.dark .companion-card {
 .companion-card strong {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.125rem;
-  line-height: 1.5rem;
+  gap: 8px;
+  font-size: 0.9375rem;
+  line-height: 1.25rem;
   font-weight: 600;
   color: var(--vp-c-text-1);
 }
@@ -402,7 +402,9 @@ html.dark .companion-card {
 }
 
 .companion-card p {
-  margin: 6px 0 0;
+  margin: 4px 0 0;
+  font-size: inherit;
+  line-height: inherit;
 }
 
 .companion-card-enter-active,
@@ -416,38 +418,49 @@ html.dark .companion-card {
   transform: translateY(6px);
 }
 
-/* Shortcuts: only the one for the screen being shown, as light-grey key caps with a thicker bottom
-   edge, no glow; keys pressed together are joined by a small plus, a quiet caption says what they do */
+/* Shortcuts: a footer strip across the card (a hairline and a faint tint, in place of the card's bottom
+   padding, so the card keeps its height), a quiet "Shortcut" on the left and the keys of the screen being
+   shown on the right, as light-grey key caps with a thicker bottom edge, no glow; keys pressed together are
+   joined by a small plus */
 
 .companion-shortcut {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 8px 12px;
-  margin-top: 16px;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 10px -14px -14px;
+  padding: 7px 14px;
+  border-top: 1px solid color-mix(in srgb, var(--vp-c-text-1) 8%, transparent);
+  border-radius: 0 0 12px 12px;
+  background-color: color-mix(in srgb, var(--vp-c-text-1) 3%, transparent);
+}
+
+html.dark .companion-shortcut {
+  border-top-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(255, 255, 255, 0.03);
 }
 
 .companion-caps {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
 }
 
 .companion-cap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 28px;
-  height: 26px;
-  padding: 0 8px;
+  min-width: 22px;
+  height: 20px;
+  padding: 0 6px;
   border: 1px solid #D5D9E0;
-  border-bottom-width: 3px;
+  border-bottom-width: 2px;
   border-bottom-color: #BFC4CD;
-  border-radius: 7px;
+  border-radius: 5px;
   background: linear-gradient(180deg, #F7F8FA, #ECEEF2);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
   font-family: var(--vp-font-family-mono);
-  font-size: 0.8125rem;
+  font-size: 0.6875rem;
   font-weight: 600;
   line-height: 1;
   color: #3B414D;
@@ -464,12 +477,12 @@ html.dark .companion-cap {
 
 .companion-plus {
   font-family: var(--vp-font-family-mono);
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   color: var(--vp-c-text-3);
 }
 
 .companion-shortcut-label {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   line-height: 1.25rem;
   color: var(--vp-c-text-3);
 }

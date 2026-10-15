@@ -9,10 +9,16 @@ export interface LegalDocumentMeta {
     value: string;
 }
 
+export interface LegalDocumentSection {
+    id: string;
+    title: string;
+}
+
 export interface LegalDocument {
     id: string;
     title: string;
     meta: LegalDocumentMeta[];
+    sections: LegalDocumentSection[];
     html: string;
 }
 
@@ -29,6 +35,44 @@ const markdown = new MarkdownIt({
     breaks: true
 });
 
+// Every "## Section" gets an id, so it can be linked to (/license/guide#community-license-eligibility),
+// and is listed in the document's `sections`, which the page shows as its contents rail.
+markdown.renderer.rules.heading_open = (tokens, index, options, env, self) => {
+    const token = tokens[index];
+
+    if (token.tag === 'h2') {
+        const title = tokens[index + 1].children
+            .filter(child => child.type === 'text' || child.type === 'code_inline')
+            .map(child => child.content)
+            .join('')
+            .trim();
+
+        // a repeated title gets -1, -2, … as VitePress does
+        const slug = slugify(title);
+        const repeats = env.slugCounts[slug] ?? 0;
+        const id = repeats === 0 ? slug : `${slug}-${repeats}`;
+        env.slugCounts[slug] = repeats + 1;
+
+        token.attrSet('id', id);
+        env.sections.push({ id, title });
+    }
+
+    return self.renderToken(tokens, index, options);
+};
+
+// The same slugs VitePress gives the headings of the other pages
+function slugify(text: string): string {
+    return text
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036F]/g, '')
+        .replace(/[\u0000-\u001f]/g, '')
+        .replace(/[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'“”‘’<>,.?/]+/g, '-')
+        .replace(/-{2,}/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .replace(/^(\d)/, '_$1')
+        .toLowerCase();
+}
+
 export default defineLoader({
     watch: ['./sources/*.md'],
     load(): LegalDocuments {
@@ -44,11 +88,15 @@ export default defineLoader({
             const { title, body: bodyWithMeta } = extractTitle(source);
             const { meta, body } = extractMeta(bodyWithMeta);
 
+            const env = { sections: [] as LegalDocumentSection[], slugCounts: {} as Record<string, number> };
+            const html = markdown.render(body, env);
+
             documents[id] = {
                 id,
                 title,
                 meta,
-                html: markdown.render(body)
+                sections: env.sections,
+                html
             };
         }
 
