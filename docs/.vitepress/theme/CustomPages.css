@@ -325,120 +325,103 @@ html.dark .custom-page .dotted-divider {
 /* Page canvas
    Every custom page paints one continuous canvas on <body>, so the page, the strip under the navbar
    and the footer all share it with no seams: a fine grain tile (256px, its native size) over soft
-   colour washes. The washes sit at page-height percentages, so each page has its own set (below); all
-   of them stay near the brand blue (yellows and greens were tried and rejected) and none sit in the
-   last stretch, so the footer stays calm. The rules live here rather than in the page components
-   because in dev mode a component's CSS is only loaded on pages that import it.
-   The shared rule lists one repeat value per layer: the grain tiles, the washes do not. Values beyond
-   a page's layer count are ignored, so the list covers up to nine washes. */
+   colour washes. The rules live here rather than in the page components because in dev mode a
+   component's CSS is only loaded on pages that import it.
+
+   The washes share one palette, each colour defined once per theme (below), all near the brand blue
+   (yellows and greens were tried and rejected); the strengths are the homepage's, the most colourful
+   page. Each page places its own washes at page-height percentages, none in the last stretch, so the
+   footer stays calm. The shared rule lists one repeat value per layer: the grain tiles, the washes do
+   not. Values beyond a page's layer count are ignored, so the list covers up to nine washes. */
 
 body:has(.custom-page) {
+  --wash-sky: color-mix(in srgb, #2196F3 22%, transparent);
+  --wash-sky-soft: color-mix(in srgb, #2196F3 9%, transparent);
+  --wash-violet: color-mix(in srgb, #5C6BC0 13%, transparent);
+  --wash-cyan: color-mix(in srgb, #00BCD4 9%, transparent);
+  --wash-cyan-faint: color-mix(in srgb, #00BCD4 6%, transparent);
+  --wash-teal: color-mix(in srgb, #26C6DA 8%, transparent);
+  --wash-blue: color-mix(in srgb, #1E88E5 11%, transparent);
+  --wash-light-blue: color-mix(in srgb, #039BE5 7%, transparent);
+  --wash-indigo: color-mix(in srgb, #3F51B5 9%, transparent);
+
   background-color: var(--custom-page-bg);
   background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
 }
 
-/* Homepage: a sky-blue glow behind the statistics, a violet glow behind the headline and a cyan wash at
-   the foot of the hero (the hero is the most colourful part of the page), a faint cyan wash on the
-   right by the quick start, a teal wash by the Companion App, a tall blue glow along the right edge by
-   the trust panels, a light-blue wash on the left and an indigo wash behind the license panel. */
+/* the dark canvas takes most washes a little stronger, and the soft top wash and the teal lean greener */
+html.dark body:has(.custom-page) {
+  --wash-sky: color-mix(in srgb, #2196F3 24%, transparent);
+  --wash-sky-soft: color-mix(in srgb, #00BCD4 7%, transparent);
+  --wash-violet: color-mix(in srgb, #5C6BC0 12%, transparent);
+  --wash-cyan: color-mix(in srgb, #00ACC1 9%, transparent);
+  --wash-cyan-faint: color-mix(in srgb, #00BCD4 7%, transparent);
+  --wash-teal: color-mix(in srgb, #26A69A 12%, transparent);
+  --wash-blue: color-mix(in srgb, #1E88E5 16%, transparent);
+  --wash-light-blue: color-mix(in srgb, #039BE5 8%, transparent);
+  --wash-indigo: color-mix(in srgb, #3F51B5 14%, transparent);
+}
+
+/* Homepage: a sky-blue glow behind the statistics and a softer one across the top, a violet glow behind
+   the headline and a cyan wash at the foot of the hero (the hero is the most colourful part of the
+   page), a faint cyan wash on the right by the quick start, a teal wash by the Companion App, a tall
+   blue glow along the right edge by the trust panels, a light-blue wash on the left and an indigo wash
+   behind the license panel. */
 
 body:has(.custom-page.home-page) {
   background-image:
       url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
-      radial-gradient(ellipse 1000px 500px at 30% 0%, color-mix(in srgb, #2196F3 9%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 13%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 400px at 55% 9%, color-mix(in srgb, #00BCD4 9%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 700px at 100% 22%, color-mix(in srgb, #00BCD4 6%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 1000px at 0% 42%, color-mix(in srgb, #26C6DA 8%, transparent), transparent 70%),
-      radial-gradient(ellipse 600px 1800px at 100% 60%, color-mix(in srgb, #1E88E5 11%, transparent), transparent 70%),
-      radial-gradient(ellipse 1000px 800px at 0% 64%, color-mix(in srgb, #039BE5 7%, transparent), transparent 70%),
-      radial-gradient(ellipse 1200px 800px at 0% 80%, color-mix(in srgb, #3F51B5 9%, transparent), transparent 70%);
+      radial-gradient(ellipse 1400px 700px at 92% 0%, var(--wash-sky), transparent 70%),
+      radial-gradient(ellipse 1000px 500px at 30% 0%, var(--wash-sky-soft), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, var(--wash-violet), transparent 70%),
+      radial-gradient(ellipse 900px 400px at 55% 9%, var(--wash-cyan), transparent 70%),
+      radial-gradient(ellipse 900px 700px at 100% 22%, var(--wash-cyan-faint), transparent 70%),
+      radial-gradient(ellipse 900px 1000px at 0% 42%, var(--wash-teal), transparent 70%),
+      radial-gradient(ellipse 600px 1800px at 100% 60%, var(--wash-blue), transparent 70%),
+      radial-gradient(ellipse 1000px 800px at 0% 64%, var(--wash-light-blue), transparent 70%),
+      radial-gradient(ellipse 1200px 800px at 0% 80%, var(--wash-indigo), transparent 70%);
 }
 
-html.dark body:has(.custom-page.home-page) {
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 24%, transparent), transparent 70%),
-      radial-gradient(ellipse 1000px 500px at 30% 0%, color-mix(in srgb, #00BCD4 7%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 12%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 400px at 55% 9%, color-mix(in srgb, #00ACC1 9%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 700px at 100% 22%, color-mix(in srgb, #00BCD4 7%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 1000px at 0% 42%, color-mix(in srgb, #26A69A 12%, transparent), transparent 70%),
-      radial-gradient(ellipse 600px 1800px at 100% 60%, color-mix(in srgb, #1E88E5 16%, transparent), transparent 70%),
-      radial-gradient(ellipse 1000px 800px at 0% 64%, color-mix(in srgb, #039BE5 8%, transparent), transparent 70%),
-      radial-gradient(ellipse 1200px 800px at 0% 80%, color-mix(in srgb, #3F51B5 14%, transparent), transparent 70%);
-}
-
-/* Pricing: a sky-blue glow top right and a violet glow top left behind the title, like the hero; a cyan
-   wash at the foot of the tier cards; a teal wash on the left and a tall blue glow on the right along
-   the questions. The reseller and contact cards stay calm. */
+/* Pricing: the sky-blue and violet glows behind the title, like the hero; a cyan wash at the foot of
+   the tier cards; a teal wash on the left and a tall blue glow on the right along the questions. The
+   reseller and contact cards stay calm. */
 
 body:has(.custom-page.pricing-page) {
   background-image:
       url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 13%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 500px at 100% 24%, color-mix(in srgb, #00BCD4 9%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 900px at 0% 48%, color-mix(in srgb, #26C6DA 8%, transparent), transparent 70%),
-      radial-gradient(ellipse 600px 1400px at 100% 66%, color-mix(in srgb, #1E88E5 11%, transparent), transparent 70%);
-}
-
-html.dark body:has(.custom-page.pricing-page) {
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 24%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 12%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 500px at 100% 24%, color-mix(in srgb, #00ACC1 9%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 900px at 0% 48%, color-mix(in srgb, #26A69A 11%, transparent), transparent 70%),
-      radial-gradient(ellipse 600px 1400px at 100% 66%, color-mix(in srgb, #1E88E5 15%, transparent), transparent 70%);
+      radial-gradient(ellipse 1400px 700px at 92% 0%, var(--wash-sky), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, var(--wash-violet), transparent 70%),
+      radial-gradient(ellipse 900px 500px at 100% 24%, var(--wash-cyan), transparent 70%),
+      radial-gradient(ellipse 900px 900px at 0% 48%, var(--wash-teal), transparent 70%),
+      radial-gradient(ellipse 600px 1400px at 100% 66%, var(--wash-blue), transparent 70%);
 }
 
 /* Features overview: the page is long, so the washes are spread along it: the two hero glows behind
-   the header, then a cyan wash on the left and a tall blue glow on the right along the chapters, and
+   the header, then a teal wash on the left and a tall blue glow on the right along the chapters, and
    an indigo wash on the left further down. */
 
 body:has(.custom-page.features-page) {
   background-image:
       url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 13%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 900px at 0% 30%, color-mix(in srgb, #26C6DA 8%, transparent), transparent 70%),
-      radial-gradient(ellipse 600px 1600px at 100% 50%, color-mix(in srgb, #1E88E5 10%, transparent), transparent 70%),
-      radial-gradient(ellipse 1200px 800px at 0% 72%, color-mix(in srgb, #3F51B5 8%, transparent), transparent 70%);
-}
-
-html.dark body:has(.custom-page.features-page) {
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 24%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 12%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 900px at 0% 30%, color-mix(in srgb, #26A69A 11%, transparent), transparent 70%),
-      radial-gradient(ellipse 600px 1600px at 100% 50%, color-mix(in srgb, #1E88E5 14%, transparent), transparent 70%),
-      radial-gradient(ellipse 1200px 800px at 0% 72%, color-mix(in srgb, #3F51B5 12%, transparent), transparent 70%);
+      radial-gradient(ellipse 1400px 700px at 92% 0%, var(--wash-sky), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, var(--wash-violet), transparent 70%),
+      radial-gradient(ellipse 900px 900px at 0% 30%, var(--wash-teal), transparent 70%),
+      radial-gradient(ellipse 600px 1600px at 100% 50%, var(--wash-blue), transparent 70%),
+      radial-gradient(ellipse 1200px 800px at 0% 72%, var(--wash-indigo), transparent 70%);
 }
 
 /* Legal hub and documents (`legal-page`, LicenseIndex.vue and DocumentTemplate.vue share it, so moving
    between them keeps the canvas): the documents are long, so the washes stay near the top: the two
-   hero glows behind the title, then a faint cyan wash on the left and a tall blue glow on the right
-   along the text. */
+   hero glows behind the title, then a teal wash on the left and a tall blue glow on the right along
+   the text. */
 
 body:has(.custom-page.legal-page) {
   background-image:
       url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 13%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 900px at 0% 36%, color-mix(in srgb, #26C6DA 8%, transparent), transparent 70%),
-      radial-gradient(ellipse 600px 1400px at 100% 60%, color-mix(in srgb, #1E88E5 10%, transparent), transparent 70%);
-}
-
-html.dark body:has(.custom-page.legal-page) {
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 24%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 12%, transparent), transparent 70%),
-      radial-gradient(ellipse 900px 900px at 0% 36%, color-mix(in srgb, #26A69A 11%, transparent), transparent 70%),
-      radial-gradient(ellipse 600px 1400px at 100% 60%, color-mix(in srgb, #1E88E5 14%, transparent), transparent 70%);
+      radial-gradient(ellipse 1400px 700px at 92% 0%, var(--wash-sky), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, var(--wash-violet), transparent 70%),
+      radial-gradient(ellipse 900px 900px at 0% 36%, var(--wash-teal), transparent 70%),
+      radial-gradient(ellipse 600px 1400px at 100% 60%, var(--wash-blue), transparent 70%);
 }
 
 /* Contact and purchase confirmation: short pages, so only a few washes: the two hero glows behind the
@@ -447,17 +430,9 @@ html.dark body:has(.custom-page.legal-page) {
 body:has(.custom-page:is(.contact-page, .purchase-page)) {
   background-image:
       url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 22%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 13%, transparent), transparent 70%),
-      radial-gradient(ellipse 1000px 600px at 10% 55%, color-mix(in srgb, #00BCD4 9%, transparent), transparent 70%);
-}
-
-html.dark body:has(.custom-page:is(.contact-page, .purchase-page)) {
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, color-mix(in srgb, #2196F3 24%, transparent), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, color-mix(in srgb, #5C6BC0 12%, transparent), transparent 70%),
-      radial-gradient(ellipse 1000px 600px at 10% 55%, color-mix(in srgb, #00ACC1 9%, transparent), transparent 70%);
+      radial-gradient(ellipse 1400px 700px at 92% 0%, var(--wash-sky), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, var(--wash-violet), transparent 70%),
+      radial-gradient(ellipse 1000px 600px at 10% 55%, var(--wash-cyan), transparent 70%);
 }
 
 /* Small uppercase label above a section heading (purchase confirmation, legal documents). */
