@@ -26,7 +26,7 @@ const highlightedCode = computed(() =>
 
 <style>
 .code-source {
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1.5;
   padding: 8px 0;
   tab-size: 4;
@@ -47,7 +47,7 @@ const highlightedCode = computed(() =>
 
 @media screen and (max-width: 700px) {
   .code-source {
-    font-size: 12px;
+    font-size: 0.75rem;
     line-height: 1.25;
   }
 }

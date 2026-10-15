@@ -1,111 +1,207 @@
 <template>
+  <!-- One row: the app on the left, and beside it the title, the description, the nine views as a list
+       and the calls to action. The app is a tour: the whole app first, evenly lit, then one view at a
+       time with a soft spotlight on its part of the app (each with its own size) and a card placed so
+       it covers nothing the view is about, naming the feature and showing its shortcut. The tour moves
+       on by itself (companionTour.ts); the list picks a view, the current one in the brand colour.
+       Below 1200px everything stacks (title, app, views as a 3x3 grid, actions); below 1040px the card
+       sits under the app. -->
   <section class="content">
-    <!-- heading and capabilities on the left, the app on the right; a divider and the calls to action along the bottom -->
     <div class="panel companion-panel">
-      <div class="companion-main">
-        <div class="companion-text">
-          <h2 class="card-title">Companion App</h2>
-          <p class="card-description">Shorten the loop between writing code and seeing the result. Spend your time designing documents, not waiting on them.</p>
+      <div ref="root" class="companion-tour" @mouseenter="hovered = true" @mouseleave="hovered = false" @focusin="focused = true" @focusout="focused = false">
+        <div
+          class="companion-stage"
+          :class="{ overview: !current.focus }"
+          :style="{ '--companion-fx': `${focusX * 100}%`, '--companion-fy': `${focusY * 100}%`, '--companion-r': `${current.radius}px` }">
 
-          <!-- the same list as the quick start cards: an icon tile, a bold title and its explanation at one size -->
-          <ul class="notes" aria-label="What the Companion App does">
-            <li v-for="capability of capabilities" :key="capability.title" class="note">
-              <i class="fa-regular" :class="[capability.icon]" aria-hidden="true"></i>
-              <div>
-                <strong>{{ capability.title }}</strong>
-                <p>{{ capability.description }}</p>
+          <!-- the screens, stacked and cross-fading, in the reader's theme, all cropped from the top left
+               to one proportion (the two error screenshots are squarer) -->
+          <div class="companion-frames" :style="{ aspectRatio: String(aspect) }">
+            <template v-for="frame of frames" :key="frame">
+              <img :src="`/companion/${frame}-light.webp`" :alt="frame === current.frame ? 'QuestPDF Companion App' : ''" class="companion-frame light" :class="{ shown: frame === current.frame }" loading="lazy" />
+              <img :src="`/companion/${frame}-dark.webp`" :alt="frame === current.frame ? 'QuestPDF Companion App' : ''" class="companion-frame dark" :class="{ shown: frame === current.frame }" loading="lazy" />
+            </template>
+
+            <!-- hot reload: a faint band passes down the page each time the overview comes round -->
+            <span v-if="current.view === 0" :key="step" class="companion-refresh" aria-hidden="true"></span>
+            <span class="companion-scrim" aria-hidden="true"></span>
+            <span class="companion-marker" aria-hidden="true"></span>
+          </div>
+
+          <Transition name="companion-card" mode="out-in">
+            <div :key="step" class="companion-card" :style="{ left: `${current.card[0] * 100}%`, top: `${current.card[1] * 100}%` }" aria-live="polite">
+              <strong><i class="fa-regular" :class="view.icon" aria-hidden="true"></i>{{ view.title }}</strong>
+              <p>{{ view.description }}</p>
+              <div v-if="shortcut.keys.length" class="companion-shortcut">
+                <span class="companion-caps">
+                  <template v-for="(key, index) of shortcut.keys" :key="key">
+                    <span v-if="index > 0 && shortcut.combo" class="companion-plus" aria-hidden="true">+</span>
+                    <kbd class="companion-cap">{{ key }}</kbd>
+                  </template>
+                </span>
+                <span class="companion-shortcut-label">{{ shortcut.label }}</span>
               </div>
-            </li>
-          </ul>
+            </div>
+          </Transition>
         </div>
 
-        <div class="image-container">
-          <img :src="`/companion/application-light.webp`" alt="Companion App" class="companion-image light" />
-          <img :src="`/companion/application-dark.webp`" alt="Companion App" class="companion-image dark" />
-        </div>
-      </div>
+        <div class="companion-side">
+          <h2 class="card-title companion-title">Companion App</h2>
+          <p class="card-description companion-description">Shorten the loop between writing code and seeing the result. Spend your time designing documents, not waiting on them.</p>
 
-      <div class="companion-footer">
-        <div class="actions">
-          <a class="action primary" href="/companion/features.html">Explore features</a>
-
-          <!-- a real button: the VitePress router ignores clicks inside buttons, so it will not try to navigate -->
-          <div ref="downloadRef" class="download">
+          <nav class="companion-views" aria-label="Companion App views">
             <button
+              v-for="(item, index) of views"
+              :key="item.title"
               type="button"
-              class="download-toggle"
-              aria-haspopup="menu"
-              :aria-expanded="isDownloadOpen"
-              @click="isDownloadOpen = !isDownloadOpen">
-              Download
-              <i class="fa-regular fa-chevron-down download-chevron" :class="{ open: isDownloadOpen }"></i>
+              class="companion-view"
+              :class="{ active: current.view === index }"
+              :aria-pressed="current.view === index"
+              @click="selectView(index)">
+              <i class="fa-regular" :class="item.icon" aria-hidden="true"></i>
+              <span class="full">{{ item.label }}</span>
+              <span class="short">{{ item.short }}</span>
             </button>
+          </nav>
 
-            <div v-if="isDownloadOpen" class="download-menu" role="menu">
-              <a
-                v-for="download of downloads"
-                :key="download.url"
-                class="download-item"
-                role="menuitem"
-                :href="download.url"
-                @click="isDownloadOpen = false">
-                <img :src="`/homepage/supported-platforms/${download.src}`" alt="" />
-                <span class="download-name">{{ download.name }}</span>
-                <span class="download-format">{{ download.format }}</span>
-              </a>
+          <div class="actions">
+            <a class="action primary" href="/companion/features.html">Explore features</a>
 
-              <a class="download-all" role="menuitem" href="/companion/download.html" @click="isDownloadOpen = false">
-                All versions
-                <i class="fa-regular fa-arrow-right"></i>
-              </a>
+            <!-- a real button: the VitePress router ignores clicks inside buttons, so it will not try to navigate -->
+            <div ref="downloadRef" class="download">
+              <button
+                type="button"
+                class="download-toggle"
+                aria-haspopup="menu"
+                :aria-expanded="isDownloadOpen"
+                @click="isDownloadOpen = !isDownloadOpen">
+                Download
+                <i class="fa-regular fa-chevron-down download-chevron" :class="{ open: isDownloadOpen }"></i>
+              </button>
+
+              <div v-if="isDownloadOpen" class="download-menu" role="menu">
+                <a
+                  v-for="download of downloads"
+                  :key="download.url"
+                  class="download-item"
+                  role="menuitem"
+                  :href="download.url"
+                  @click="isDownloadOpen = false">
+                  <img :src="`/homepage/supported-platforms/${download.src}`" alt="" />
+                  <span class="download-name">{{ download.name }}</span>
+                  <span class="download-format">{{ download.format }}</span>
+                </a>
+
+                <a class="download-all" role="menuitem" href="/companion/download.html" @click="isDownloadOpen = false">
+                  All versions
+                  <i class="fa-regular fa-arrow-right"></i>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="platforms">
-          <span class="platforms-label">Free on</span>
-          <span v-for="platform of platforms" :key="platform.name" class="platform">
-            <img :src="`/homepage/supported-platforms/${platform.src}`" alt="" />
-            {{ platform.name }}
-          </span>
         </div>
       </div>
     </div>
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { useCompanionTour } from "./companionTour";
 
-const capabilities = [
-  {
-    icon: "fa-bolt",
-    title: "Hot reload",
-    description: "Save your code and the preview refreshes in place."
-  },
-  {
-    icon: "fa-folder-tree",
-    title: "Document hierarchy",
-    description: "Select any element and jump to its code in your IDE."
-  },
-  {
-    icon: "fa-magnifying-glass",
-    title: "Magnify and measure",
-    description: "Zoom into details and measure sizes and distances."
-  },
-  {
-    icon: "fa-bug",
-    title: "Exception and layout debugging",
-    description: "Jump to the code that threw or the element that overflowed."
-  }
+interface View {
+  icon: string;
+  /* the list's label: what the reader can do, a verb and its object */
+  label: string;
+  /* the label on phones, one word */
+  short: string;
+  /* the card: the feature's name, one line about it, and its shortcut as documented */
+  title: string;
+  description: string;
+  keys: string[];
+  /* keys pressed together (Ctrl + W) rather than alternatives (↑, ↓) */
+  combo?: boolean;
+  keysLabel: string;
+}
+
+/* wording from docs/companion/features.md, shortcuts as documented there */
+const views: View[] = [
+  { label: "See changes live", short: "Preview", icon: "fa-window-maximize", title: "Application", description: "The document's structure on the left, its live preview on the right. Save your code and the preview refreshes in place.", keys: [], keysLabel: "" },
+  { label: "Browse the structure", short: "Structure", icon: "fa-folder-tree", title: "Document hierarchy", description: "Every element of the document as a tree, in the same shape as your fluent API code.", keys: ["Ctrl", "W"], combo: true, keysLabel: "show or hide the tree" },
+  { label: "Inspect any element", short: "Inspect", icon: "fa-arrow-pointer", title: "Selected element", description: "Select any element to see its page, position and size, and jump to its code in your IDE.", keys: ["Ctrl", "Click"], combo: true, keysLabel: "open its code" },
+  { label: "Zoom into details", short: "Zoom", icon: "fa-magnifying-glass-plus", title: "Magnify", description: "See small details up close without zooming the preview.", keys: ["1"], keysLabel: "magnifier" },
+  { label: "Read coordinates", short: "Coordinates", icon: "fa-location-crosshairs", title: "Check position", description: "Point at anything to read its page and its X and Y coordinates.", keys: ["2"], keysLabel: "coordinates" },
+  { label: "Measure distances", short: "Measure", icon: "fa-ruler-combined", title: "Measure", description: "Measure sizes and distances, vertically or horizontally.", keys: [], keysLabel: "" },
+  { label: "Find any phrase", short: "Search", icon: "fa-magnifying-glass", title: "Search", description: "Find any phrase; matches are highlighted in both the tree and the preview.", keys: ["Ctrl", "F"], combo: true, keysLabel: "find" },
+  { label: "Debug layout issues", short: "Layout", icon: "fa-triangle-exclamation", title: "Layout debugging", description: "When content does not fit, find the likely root cause, with every element color-coded by how it was laid out.", keys: ["↑", "↓"], keysLabel: "previous, next issue" },
+  { label: "Trace exceptions", short: "Exceptions", icon: "fa-bug", title: "Exception debugging", description: "See the exception, its message and the stack trace down to the code that threw.", keys: [], keysLabel: "" }
 ];
 
-const platforms = [
-  { src: "windows.svg", name: "Windows" },
-  { src: "apple.svg", name: "macOS" },
-  { src: "linux.svg", name: "Linux" }
+interface Step {
+  view: number;
+  /* the screenshot in public/companion */
+  frame: string;
+  /* the shortcut of this screen, when the view has one per screen (Measure: 3 vertical, 4 horizontal) */
+  keys?: string[];
+  keysLabel?: string;
+  /* the spotlight's centre as fractions of the screenshot (null: the whole app, evenly lit), and the
+     radius of its clear part */
+  focus: [number, number] | null;
+  radius: number;
+  /* the card's top-left corner as fractions of the frame, set per screen so it covers nothing the view
+     is about; check these whenever a screenshot changes */
+  card: [number, number];
+}
+
+const steps: Step[] = [
+  { view: 0, frame: "application", focus: null, radius: 0, card: [0.035, 0.6] },
+  { view: 1, frame: "application", focus: [0.12, 0.42], radius: 170, card: [0.36, 0.5] },
+  { view: 2, frame: "selection", focus: [0.62, 0.3], radius: 170, card: [0.03, 0.12] },
+  { view: 3, frame: "magnifier", focus: [0.5, 0.4], radius: 160, card: [0.665, 0.16] },
+  { view: 4, frame: "measurement-point", focus: [0.6, 0.6], radius: 110, card: [0.17, 0.33] },
+  { view: 5, frame: "measurement-vertical", keys: ["3"], keysLabel: "vertical", focus: [0.497, 0.21], radius: 110, card: [0.035, 0.1] },
+  { view: 5, frame: "measurement-horizontal", keys: ["4"], keysLabel: "horizontal", focus: [0.66, 0.6], radius: 130, card: [0.43, 0.18] },
+  { view: 6, frame: "search", focus: [0.655, 0.53], radius: 120, card: [0.035, 0.2] },
+  { view: 7, frame: "layout-error", focus: [0.1, 0.285], radius: 140, card: [0.2, 0.42] },
+  { view: 8, frame: "generic-exception", focus: [0.47, 0.21], radius: 150, card: [0.55, 0.45] }
 ];
+
+const frames = [...new Set(steps.map(s => s.frame))];
+
+/* the frame is cropped at the bottom to 1.62:1 from the top left; focus heights are fractions of each
+   screenshot, so they stretch by the frame's proportion over the screenshot's */
+const aspect = 1.62;
+const squarer = new Set(["layout-error", "generic-exception"]);
+
+const root = ref<HTMLElement | null>(null);
+const { step, current, hovered, focused, selectView } = useCompanionTour(root, steps, 3800);
+
+const view = computed(() => views[current.value.view]);
+
+/* the card shows only the shortcut of the screen being shown */
+const shortcut = computed(() => ({
+  keys: current.value.keys ?? view.value.keys,
+  label: current.value.keysLabel ?? view.value.keysLabel,
+  combo: view.value.combo
+}));
+
+/* the overview keeps the last focus, so the spotlight fades out where it was instead of jumping */
+const lastFocus = ref<[number, number]>([0.5, 0.4]);
+watch(current, s => {
+  if (s.focus)
+    lastFocus.value = s.focus;
+}, { immediate: true });
+
+const focusX = computed(() => (current.value.focus ?? lastFocus.value)[0]);
+const focusY = computed(() => {
+  const [, y] = current.value.focus ?? lastFocus.value;
+  const image = squarer.has(current.value.frame) ? 1592 / 1341 : 1917 / 1328;
+  return y * aspect / image;
+});
+
+
+/* Download menu */
 
 // keep in sync with the latest release listed in docs/companion/download.md
 const companionVersion = "2026.2.2";
@@ -119,14 +215,14 @@ const downloads = [
 ];
 
 const isDownloadOpen = ref(false);
-const downloadRef = ref(null);
+const downloadRef = ref<HTMLElement | null>(null);
 
-function closeOnOutsideClick(event) {
-  if (downloadRef.value && !downloadRef.value.contains(event.target))
+function closeOnOutsideClick(event: MouseEvent) {
+  if (downloadRef.value && !downloadRef.value.contains(event.target as Node))
     isDownloadOpen.value = false;
 }
 
-function closeOnEscape(event) {
+function closeOnEscape(event: KeyboardEvent) {
   if (event.key === "Escape")
     isDownloadOpen.value = false;
 }
@@ -143,112 +239,327 @@ onBeforeUnmount(() => {
 
 </script>
 
-<style scoped>
+<style>
 
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* registered so the spotlight glides between places and sizes; @property is global, hence the prefix */
+@property --companion-fx {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 50%;
 }
 
+@property --companion-fy {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 40%;
+}
+
+@property --companion-r {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 140px;
+}
+
+</style>
+
+<style scoped>
+
 .companion-panel {
-  display: flex;
-  flex-direction: column;
   width: 100%;
 }
 
-.companion-main {
+/* One row: the app, and a column with the words, the list of views and the calls to action */
+
+.companion-tour {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  grid-gap: 64px;
-  align-items: start;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 44px;
+  align-items: center;
 }
 
-@media screen and (max-width: 960px) {
-  .companion-main {
-    grid-template-columns: minmax(0, 1fr);
-    grid-gap: 40px;
-  }
-}
-
-
-/* Heading and capabilities: the section heading sits inside the card, left-aligned, with the list below it */
-
-.companion-text {
+.companion-side {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 }
 
-.companion-text .card-description {
-  margin-bottom: 32px;
+
+/* The stage: the app with its spotlight; the card is placed in the stage's coordinates */
+
+.companion-stage {
+  position: relative;
+  transition: --companion-fx 0.7s cubic-bezier(0.3, 0.7, 0.2, 1), --companion-fy 0.7s cubic-bezier(0.3, 0.7, 0.2, 1), --companion-r 0.7s cubic-bezier(0.3, 0.7, 0.2, 1);
 }
 
-/* Capabilities: the list style of the quick start cards, bold titles in the text colour on their own
-   line, explanations under them at the same size, an icon on an inset tile level with the title */
+.companion-frames {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background-color: var(--vp-c-bg);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 10%, transparent), 0 16px 40px -16px rgba(16, 24, 40, 0.22);
+}
 
-.notes {
+html.dark .companion-frames {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 16px 40px -16px rgba(0, 0, 0, 0.6);
+}
+
+.companion-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: left top;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.companion-frame.shown {
+  opacity: 1;
+}
+
+html:not(.dark) .companion-frame.dark,
+html.dark .companion-frame.light {
+  display: none;
+}
+
+.companion-refresh {
+  position: absolute;
+  top: 7%;
+  bottom: 0;
+  left: 43%;
+  width: 46%;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent) 46%, color-mix(in srgb, var(--vp-c-brand-1) 20%, transparent) 50%, transparent 52%);
+  background-size: 100% 220%;
+  background-position: 0 100%;
+  opacity: 0;
+  animation: companion-refresh 1.2s ease-in-out 0.35s;
+}
+
+@keyframes companion-refresh {
+  0% { opacity: 1; background-position: 0 100%; }
+  85% { opacity: 1; background-position: 0 -10%; }
+  100% { opacity: 0; background-position: 0 -10%; }
+}
+
+/* everything but a soft circle around the focus is dimmed; the overview has no spotlight */
+.companion-scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--companion-fx) var(--companion-fy), transparent 0, transparent var(--companion-r), rgba(16, 24, 40, 0.26) calc(var(--companion-r) + 120px));
+  transition: opacity 0.5s ease;
+}
+
+/* dark mode dims less and fades out over a longer distance: the document page stays white in the dark
+   screenshots, so a strong dim turned the clear circle into a bright halo */
+html.dark .companion-scrim {
+  background: radial-gradient(circle at var(--companion-fx) var(--companion-fy), transparent 0, transparent var(--companion-r), rgba(0, 0, 0, 0.22) calc(var(--companion-r) + 220px));
+}
+
+.companion-marker {
+  position: absolute;
+  left: var(--companion-fx);
+  top: var(--companion-fy);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--vp-c-brand-1);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--vp-c-brand-1) 25%, transparent), 0 0 0 1px #FFF;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.companion-marker::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--vp-c-brand-1);
+  animation: companion-ping 1.8s ease-out infinite;
+}
+
+@keyframes companion-ping {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+
+.overview .companion-scrim,
+.overview .companion-marker {
+  opacity: 0;
+}
+
+
+/* The card */
+
+.companion-card {
+  position: absolute;
+  width: 290px;
+  padding: 18px 20px 20px;
+  border-radius: 16px;
+  background-color: var(--vp-c-bg);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 9%, transparent), 0 20px 48px -12px rgba(16, 24, 40, 0.3);
+}
+
+html.dark .companion-card {
+  background-color: var(--vp-c-bg-elv);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 20px 48px -12px rgba(0, 0, 0, 0.7);
+}
+
+.companion-card strong {
   display: flex;
-  flex-direction: column;
-  gap: 32px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-size: 1rem;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.125rem;
   line-height: 1.5rem;
-  color: var(--vp-c-text-2);
-}
-
-.notes strong {
-  display: block;
   font-weight: 600;
   color: var(--vp-c-text-1);
 }
 
-.notes p {
-  margin: 2px 0 0;
+.companion-card strong i {
+  font-size: 15px;
 }
 
-.note {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
+.companion-card p {
+  margin: 6px 0 0;
 }
 
-.note i {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background-color: var(--home-surface-inner);
-  font-size: 20px;
-  color: var(--vp-c-text-1);
+.companion-card-enter-active,
+.companion-card-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
+.companion-card-enter-from,
+.companion-card-leave-to {
+  opacity: 0;
+  transform: translateY(6px);
+}
 
-/* Footer: a hairline, then the calls to action on the left and the platforms on the right */
+/* Shortcuts: only the one for the screen being shown, as light-grey key caps with a thicker bottom
+   edge, no glow; keys pressed together are joined by a small plus, a quiet caption says what they do */
 
-.companion-footer {
+.companion-shortcut {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px 32px;
-  margin-top: 48px;
-  padding-top: 32px;
-  border-top: 1px solid var(--vp-c-divider);
+  gap: 8px 12px;
+  margin-top: 16px;
 }
+
+.companion-caps {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.companion-cap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 26px;
+  padding: 0 8px;
+  border: 1px solid #D5D9E0;
+  border-bottom-width: 3px;
+  border-bottom-color: #BFC4CD;
+  border-radius: 7px;
+  background: linear-gradient(180deg, #F7F8FA, #ECEEF2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+  color: #3B414D;
+}
+
+/* on the dark card the caps stay light grey, a shade softer */
+html.dark .companion-cap {
+  border-color: #B9BEC7;
+  border-bottom-color: #8E949E;
+  background: linear-gradient(180deg, #D9DCE2, #C8CCD3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
+  color: #22262E;
+}
+
+.companion-plus {
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.75rem;
+  color: var(--vp-c-text-3);
+}
+
+.companion-shortcut-label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--vp-c-text-3);
+}
+
+
+/* The list of views: icons and words at 1rem in the text colour, the current view in the brand colour
+   and semibold; phones use the one-word names */
+
+.companion-views {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 24px;
+}
+
+.companion-view {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  text-align: left;
+  color: var(--vp-c-text-1);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.companion-view i {
+  flex-shrink: 0;
+  width: 18px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.companion-view .short {
+  display: none;
+}
+
+.companion-view:hover,
+.companion-view.active {
+  color: var(--vp-c-brand-1);
+}
+
+.companion-view.active {
+  font-weight: 600;
+}
+
+.companion-view:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+
+/* Calls to action; the download menu opens upwards, over the list */
 
 .actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  margin-top: 28px;
 }
-
-/* Download dropdown: the trigger keeps the shared .action look, the menu floats below it */
 
 .download {
   position: relative;
@@ -290,7 +601,7 @@ onBeforeUnmount(() => {
 
 .download-menu {
   position: absolute;
-  top: calc(100% + 8px);
+  bottom: calc(100% + 8px);
   left: 0;
   z-index: 10;
   min-width: 240px;
@@ -335,7 +646,6 @@ onBeforeUnmount(() => {
 }
 
 .download-format {
-  font-size: 1rem;
   color: var(--vp-c-text-3);
 }
 
@@ -346,55 +656,74 @@ onBeforeUnmount(() => {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   justify-content: space-between;
-  font-size: 1rem;
   color: var(--vp-c-text-2);
 }
 
-.platforms {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 20px;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  color: var(--vp-c-text-2);
+
+@media (prefers-reduced-motion: reduce) {
+  .companion-stage,
+  .companion-scrim,
+  .companion-frame {
+    transition: none;
+  }
+
+  .companion-marker::after,
+  .companion-refresh {
+    animation: none;
+  }
 }
 
-.platforms-label {
-  color: var(--vp-c-text-3);
+/* below 1200px everything stacks: title and description, the app, the views as a 3x3 grid, the
+   calls to action */
+@media screen and (max-width: 1200px) {
+  .companion-tour {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  .companion-side {
+    display: contents;
+  }
+
+  .companion-title { order: 1; }
+  .companion-description { order: 2; }
+  .companion-stage { order: 3; margin-top: 28px; }
+  .companion-views { order: 4; margin-top: 22px; }
+  .actions { order: 5; }
+
+  .companion-views {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px 10px;
+  }
+
+  .companion-view {
+    min-height: 32px;
+  }
 }
 
-.platform {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 500;
+/* below 1040px the card would cover too much of a smaller app: it sits under the app */
+@media screen and (max-width: 1040px) {
+  .companion-card {
+    position: relative;
+    left: auto !important;
+    top: auto !important;
+    width: auto;
+    margin-top: 16px;
+  }
 }
 
-.platform img {
-  width: 20px;
-  height: 20px;
+@media screen and (max-width: 760px) {
+  .companion-view .full,
+  .companion-view i {
+    display: none;
+  }
+
+  .companion-view .short {
+    display: inline;
+  }
 }
-
-
-/* Screenshot */
-
-.companion-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  border: 1px solid #8884;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-html:not(.dark) .companion-image.dark {
-  display: none;
-}
-
-html.dark .companion-image.light {
-  display: none;
-}
-
 
 </style>

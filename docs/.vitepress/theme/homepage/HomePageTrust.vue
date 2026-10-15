@@ -1,10 +1,12 @@
 <script setup lang="ts">
-/* Two cards side by side, replacing the former "Enterprise-grade foundations" and "Industry-standard
-   PDF compliance" sections. Each card carries its own heading, like the Companion App and license cards.
-   Left, the compliance story: the promise and the independent validators, then the supported conformance
-   levels as chips grouped by purpose. Right, no heading: the foundations fill the card as a two-by-two
-   grid of short labels and concrete facts divided by hairlines, one cell per thing a manager, product
-   owner or programmer checks before buying; a cell with a supporting page is a link to it. */
+/* Two cards side by side, replacing the former "Enterprise-grade foundations", "Industry-standard
+   PDF compliance" and platform sections. Left, with a heading like the Companion App and license cards,
+   the compliance story: the promise and the independent validators, then the supported conformance
+   levels as chips grouped by purpose. Right, no heading: a two-by-two grid of cells divided by a cross
+   of hairlines, one per thing a manager, product owner or programmer checks before buying. The first
+   cell is the data privacy fact, linked to its page; the other three answer whether the library runs
+   in the buyer's environment: the runtimes as text, the operating systems and the deployment
+   environments as small monochrome logos with labels. Everything is visible at once. */
 
 interface StandardsCategory {
   title: string;
@@ -36,32 +38,55 @@ const standardsRows : StandardsCategory[][] = [
 interface Fact {
   label: string;
   text: string;
-  /* the page that backs the claim; a fact without one renders as plain text */
-  href?: string;
+  /* the page that backs the claim */
+  href: string;
 }
 
-/* the four strongest enterprise arguments, a short label and concrete facts each; the frameworks and
-   operating systems repeat the support matrix of the NuGet package README (.NET 6+ and .NET Framework
-   4.6.2+; the package ships net6.0, net8.0 and net10.0 builds, Windows, Linux and macOS natives). No
-   measured benchmark is published, so the performance line stays qualitative and unlinked */
-const facts : Fact[] = [
+const privacy : Fact = {
+  label: "Data privacy",
+  text: "No network calls, no telemetry, no license server. Works air-gapped.",
+  href: "/security-policy"
+};
+
+interface Platform {
+  name: string;
+  /* logo in /homepage/supported-platforms, painted in the text colour through a CSS mask; a runtime has none */
+  src?: string;
+  /* rendered logo height in px, inside a slot of fixed width so the labels line up; the marks differ
+     in proportion (the Windows flag is nearly square, the Docker whale and the AWS smile are wide),
+     so each gets its own height for an even optical weight */
+  height?: number;
+}
+
+interface PlatformGroup {
+  label: string;
+  platforms: Platform[];
+}
+
+const platformGroups : PlatformGroup[] = [
   {
-    label: "Data privacy",
-    text: "No network calls, no telemetry, no license server. Works air-gapped.",
-    href: "/security-policy"
+    /* as the package README states them: .NET 6 and later, .NET Framework 4.6.2 and later */
+    label: "Runtimes",
+    platforms: [
+      { name: ".NET 6+" },
+      { name: ".NET Framework 4.6.2+" }
+    ]
   },
   {
-    label: "Platforms and runtimes",
-    text: "Windows, Linux and macOS. .NET 6 to .NET 10 and .NET Framework 4.6.2+. Docker, AWS Lambda, Azure Functions."
+    label: "Operating systems",
+    platforms: [
+      { name: "Windows", src: "windows.svg", height: 17 },
+      { name: "Linux", src: "linux.svg", height: 18 },
+      { name: "macOS", src: "apple.svg", height: 18 }
+    ]
   },
   {
-    label: "Performance",
-    text: "Thousands of pages per second with low CPU and memory usage."
-  },
-  {
-    label: "Languages and scripts",
-    text: "Arabic, Hebrew, CJK, emoji and 100+ scripts. Bi-directional layout and advanced text shaping.",
-    href: "/api-reference/text/font-management#covering-additional-languages"
+    label: "Deployment",
+    platforms: [
+      { name: "Docker", src: "docker.svg", height: 17 },
+      { name: "Azure", src: "azure.svg", height: 17 },
+      { name: "AWS", src: "aws.svg", height: 18 }
+    ]
   }
 ];
 
@@ -73,10 +98,9 @@ const facts : Fact[] = [
       <!-- the compliance story; the promise and validators in the description, the conformance levels as grouped chips -->
       <div class="panel compliance">
         <h2 class="card-title">Industry-standard output</h2>
-        <!-- the promise and the evidence in one breath: standards out of the box, validated independently on every build -->
+        <!-- the evidence: validated independently on every build -->
         <p class="card-description">
-          Generate PDFs that meet industry standards out of the box.
-          Every build is automatically validated with the independent, open-source
+          Every build is automatically validated with the independent, trusted and open-source
           <a href="https://verapdf.org/" target="_blank" rel="noopener">veraPDF</a> and
           <a href="https://www.mustangproject.org/" target="_blank" rel="noopener">Mustang</a> validators.
         </p>
@@ -93,23 +117,35 @@ const facts : Fact[] = [
         </div>
       </div>
 
-      <!-- the foundations as a two-by-two grid of short labels and concrete facts, no heading and no
-           icons; a cell backed by a page is one link, the label underlines and grows an arrow on hover -->
+      <!-- the foundations as a two-by-two grid of cells, no heading and no icons: the privacy fact
+           (one link, the label underlines and grows an arrow on hover) and the three platform groups -->
       <section class="panel foundations" aria-label="Enterprise-grade foundations">
-        <div class="facts">
-          <component
-              v-for="fact of facts"
-              :key="fact.label"
-              :is="fact.href ? 'a' : 'div'"
-              :href="fact.href"
-              class="fact"
-              :class="{ linked: fact.href }">
-            <span class="fact-label">
-              <span class="fact-label-text">{{ fact.label }}</span>
-              <i v-if="fact.href" class="fa-regular fa-arrow-right fact-arrow" aria-hidden="true"></i>
+        <div class="cells">
+          <a :href="privacy.href" class="cell fact">
+            <span class="cell-label">
+              <span class="cell-label-text">{{ privacy.label }}</span>
+              <i class="fa-regular fa-arrow-right fact-arrow" aria-hidden="true"></i>
             </span>
-            <span class="fact-text">{{ fact.text }}</span>
-          </component>
+            <span class="fact-text">{{ privacy.text }}</span>
+          </a>
+
+          <section v-for="group of platformGroups" :key="group.label" class="cell group">
+            <h3 class="cell-label">{{ group.label }}</h3>
+
+            <ul class="platforms">
+              <li v-for="platform of group.platforms" :key="platform.name" class="platform">
+                <span
+                    v-if="platform.src"
+                    class="platform-logo"
+                    aria-hidden="true"
+                    :style="{
+                      '--logo': `url(/homepage/supported-platforms/${platform.src})`,
+                      height: `${platform.height}px`
+                    }"></span>
+                <span>{{ platform.name }}</span>
+              </li>
+            </ul>
+          </section>
         </div>
       </section>
     </div>
@@ -133,7 +169,7 @@ const facts : Fact[] = [
   width: 100%;
 }
 
-.layout .panel {
+.layout > .panel {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -146,8 +182,8 @@ const facts : Fact[] = [
 }
 
 
-/* Conformance levels: one group per purpose, each a wrapped set of chips under a quiet one-word
-   label; the label is small uppercase secondary text, so the chips stay the thing the eye lands on.
+/* Conformance levels: one group per purpose, each a wrapped set of chips under a one-word label in
+   the same small uppercase style as the cell labels in the card beside it.
    Groups in the same row sit side by side and wrap under each other when the card gets narrow */
 
 .standards {
@@ -163,6 +199,7 @@ const facts : Fact[] = [
   gap: 20px 40px;
 }
 
+/* the same label style as the cells in the card beside it */
 .standards-category-title {
   margin: 0;
   font-size: 0.75rem;
@@ -170,7 +207,7 @@ const facts : Fact[] = [
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--vp-c-text-2);
+  color: var(--vp-c-text-1);
 }
 
 .standards-badges {
@@ -210,21 +247,21 @@ const facts : Fact[] = [
 }
 
 
-/* Facts: four cells in a two-by-two grid that fills the card, divided by a cross of hairlines in
-   the panel's divider colour: one vertical line between the columns, one horizontal line between
-   the rows. The cells carry the spacing as padding, so both lines run edge to edge of the grid
-   while the outer edges stay open; the content sits in the middle of each quadrant.
+/* Cells: four in a two-by-two grid that fills the card, divided by a cross of hairlines in the
+   panel's divider colour: one vertical line between the columns, one horizontal line between the
+   rows. The cells carry the spacing as padding, so both lines run edge to edge of the grid while
+   the outer edges stay open; the content sits in the middle of each quadrant.
    The label is the scanning anchor: the same small uppercase style as the chip categories in the
-   card beside it, in the primary text colour, over a quieter line of facts */
+   card beside it, in the primary text colour, over quieter secondary text */
 
-.facts {
+.cells {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-rows: minmax(0, 1fr);
 }
 
-.fact {
+.cell {
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -233,50 +270,51 @@ const facts : Fact[] = [
 }
 
 /* left column: open on the left; right column: open on the right, the vertical line on its left */
-.fact:nth-child(odd) {
+.cell:nth-child(odd) {
   padding-left: 0;
 }
 
-.fact:nth-child(even) {
+.cell:nth-child(even) {
   padding-right: 0;
   border-left: 1px solid var(--vp-c-divider);
 }
 
 /* first row: open on top; second row: open at the bottom, the horizontal line on its top */
-.fact:nth-child(-n + 2) {
+.cell:nth-child(-n + 2) {
   padding-top: 0;
 }
 
-.fact:nth-child(n + 3) {
+.cell:nth-child(n + 3) {
   padding-bottom: 0;
   border-top: 1px solid var(--vp-c-divider);
 }
 
 /* one column: no vertical line, every cell after the first gets a line above */
 @media screen and (max-width: 500px) {
-  .facts {
+  .cells {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .fact {
+  .cell,
+  .cell:nth-child(even) {
     padding: 20px 0;
     border-left: none;
   }
 
-  .fact:first-child {
+  .cell:first-child {
     padding-top: 0;
   }
 
-  .fact:last-child {
+  .cell:last-child {
     padding-bottom: 0;
   }
 
-  .fact:nth-child(n + 2) {
+  .cell:nth-child(n + 2) {
     border-top: 1px solid var(--vp-c-divider);
   }
 }
 
-.fact-label {
+.cell-label {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -298,29 +336,64 @@ const facts : Fact[] = [
 }
 
 
-/* A linked cell reads like the plain ones until pointed at: then the label underlines and a small
+/* The platform groups: the items in a vertical list, a logo and a label each, in the fact text style */
+
+.platforms {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.platform {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: var(--vp-c-text-2);
+  white-space: nowrap;
+}
+
+/* the logos are painted through a mask in the text colour, inside a slot of one fixed width so the
+   labels line up in a column; the height comes from the data, see the Platform interface */
+
+.platform-logo {
+  flex-shrink: 0;
+  display: inline-block;
+  width: 24px;
+  background-color: color-mix(in srgb, var(--vp-c-text-2) 90%, transparent);
+  mask: var(--logo) center / contain no-repeat;
+  -webkit-mask: var(--logo) center / contain no-repeat;
+}
+
+
+/* The linked cell reads like the plain ones until pointed at: then the label underlines and a small
    arrow slides in beside it, the same arrow as the links in the Companion card; the text below does
    not change. The focus ring is the one the CTA cards use */
 
-.fact.linked {
+.fact {
   color: inherit;
   text-decoration: none;
   border-radius: 4px;
 }
 
-.fact.linked:focus-visible {
+.fact:focus-visible {
   outline: 2px solid var(--vp-c-brand-1);
   outline-offset: 4px;
 }
 
-.fact-label-text {
+.cell-label-text {
   text-decoration: underline transparent;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   transition: text-decoration-color 0.2s;
 }
 
-.fact.linked:is(:hover, :focus-visible) .fact-label-text {
+.fact:is(:hover, :focus-visible) .cell-label-text {
   text-decoration-color: currentColor;
 }
 
@@ -331,7 +404,7 @@ const facts : Fact[] = [
   transition: opacity 0.2s, transform 0.25s ease;
 }
 
-.fact.linked:is(:hover, :focus-visible) .fact-arrow {
+.fact:is(:hover, :focus-visible) .fact-arrow {
   opacity: 1;
   transform: translateX(0);
 }

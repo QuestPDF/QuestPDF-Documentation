@@ -277,7 +277,7 @@ html:not(.dark) .stage :deep(.file-container-header) {
 .stage :deep(.code-source) {
   flex-grow: 1;
   padding: 12px 8px; /* with the 16px of each line, the code starts at 24px, in line with the header and the composer */
-  font-size: 13px;
+  font-size: 0.875rem;
 }
 
 .composer-dock {
@@ -362,19 +362,19 @@ html:not(.dark) .agent-card .note i {
   border-color: color-mix(in srgb, var(--agent-accent) 50%, transparent);
 }
 
-/* in light mode the tinted fill and border are too heavy against the white window, so the composer
-   is a white field with a quiet border; the purple stays on the sparkle, the caret and the send button */
+/* in light mode the composer is a light purple field with a quiet border; the text is dark with a
+   purple cast so it reads as part of the same tinted surface */
 html:not(.dark) .composer {
-  border-color: color-mix(in srgb, var(--agent-accent) 12%, var(--vp-c-divider));
-  background-color: var(--vp-c-bg);
+  border-color: color-mix(in srgb, var(--agent-accent) 18%, var(--vp-c-divider));
+  background-color: color-mix(in srgb, var(--agent-accent) 8%, var(--vp-c-bg));
 }
 
 html:not(.dark) .composer.sent {
-  border-color: color-mix(in srgb, var(--agent-accent) 30%, var(--vp-c-divider));
+  border-color: color-mix(in srgb, var(--agent-accent) 35%, var(--vp-c-divider));
 }
 
 html:not(.dark) .composer-text {
-  color: var(--vp-c-text-1);
+  color: color-mix(in srgb, var(--agent-accent) 30%, var(--vp-c-text-1));
 }
 
 .composer > * {
