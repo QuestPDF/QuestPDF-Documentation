@@ -83,15 +83,15 @@ const documents = [
 
   padding: 18px 24px 18px 32px;
   transition: background-color 0.2s ease;
+}
 
-  .link-title {
-    color: var(--vp-c-text-1);
-    font-weight: 500;
-  }
+.document-link .link-title {
+  color: var(--vp-c-text-1);
+  font-weight: 500;
+}
 
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--vp-c-divider);
-  }
+.document-link:not(:last-child) {
+  border-bottom: 1px solid var(--vp-c-divider);
 }
 
 .document-link .arrow {
@@ -104,15 +104,15 @@ const documents = [
 
 .document-link:hover {
   background-color: color-mix(in srgb, #2196F3 5%, transparent);
+}
 
-  .link-title {
-    color: #2196F3;
-  }
+.document-link:hover .link-title {
+  color: #2196F3;
+}
 
-  .arrow {
-    color: #2196F3;
-    transform: translateX(4px);
-  }
+.document-link:hover .arrow {
+  color: #2196F3;
+  transform: translateX(4px);
 }
 
 @media screen and (max-width: 700px) {

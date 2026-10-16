@@ -520,13 +520,11 @@ onBeforeUnmount(() => {
   transition-delay: calc(0.1s + var(--i) * 110ms);
 }
 
-.deck.hover {
-  .shape.strong { color: var(--ink-strong); }
-  .shape.accent { opacity: 1; }
-  .shape.block { background-color: color-mix(in srgb, var(--accent) 45%, #C9D0DB); opacity: 0.55; }
-  .shape.block.accent { background-color: var(--accent-secondary); opacity: 0.85; }
-  .shape.band { background-color: var(--accent-secondary); opacity: 0.09; }
-  .shape.ring.strong { color: var(--accent-secondary); }
-}
+.deck.hover .shape.strong { color: var(--ink-strong); }
+.deck.hover .shape.accent { opacity: 1; }
+.deck.hover .shape.block { background-color: color-mix(in srgb, var(--accent) 45%, #C9D0DB); opacity: 0.55; }
+.deck.hover .shape.block.accent { background-color: var(--accent-secondary); opacity: 0.85; }
+.deck.hover .shape.band { background-color: var(--accent-secondary); opacity: 0.09; }
+.deck.hover .shape.ring.strong { color: var(--accent-secondary); }
 
 </style>
