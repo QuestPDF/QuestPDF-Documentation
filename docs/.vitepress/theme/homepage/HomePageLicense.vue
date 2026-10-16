@@ -57,7 +57,7 @@ const includes = [
           <h3 class="tier-name">{{ tier.name }}</h3>
           <span class="tier-price">{{ tier.price }}</span>
         </div>
-        <p class="tier-description">{{ tier.description }}</p>
+        <p>{{ tier.description }}</p>
       </article>
     </div>
   </div>
@@ -116,8 +116,6 @@ const includes = [
   align-items: center;
   gap: 14px;
   min-height: 36px;
-  font-size: 1rem;
-  line-height: 1.5rem;
   font-weight: 500;
   color: var(--vp-c-text-1);
 }
@@ -203,12 +201,6 @@ const includes = [
   font-weight: 600;
   color: var(--vp-c-text-1);
   white-space: nowrap;
-}
-
-.tier-description {
-  font-size: 1rem;
-  line-height: 1.5rem;
-  color: var(--vp-c-text-2);
 }
 
 

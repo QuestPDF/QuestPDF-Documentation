@@ -284,9 +284,6 @@ const platformGroups : PlatformGroup[] = [
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  color: var(--vp-c-text-2);
   white-space: nowrap;
 }
 

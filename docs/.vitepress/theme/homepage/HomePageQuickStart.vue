@@ -194,9 +194,6 @@ html.dark .quick-start {
   flex-direction: column;
   gap: 40px;
   margin: 28px 0 0;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  color: var(--vp-c-text-2);
 }
 
 .notes strong {

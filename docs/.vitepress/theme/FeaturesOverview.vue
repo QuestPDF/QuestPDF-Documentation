@@ -141,8 +141,6 @@ a.feature-row:hover .feature-icon {
 
 .feature-name {
   flex-shrink: 0;
-  font-size: 1rem;
-  line-height: 1.5rem;
   font-weight: 600;
 }
 
@@ -155,8 +153,6 @@ a.feature-row:hover .feature-name {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 1rem;
-  line-height: 1.5rem;
   color: var(--vp-c-text-2);
 }
 
