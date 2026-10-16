@@ -70,7 +70,7 @@ const cards = [
   <div class="custom-page purchase-page texture-dots">
     <div class="content">
       <header class="section-header purchase-header">
-        <div class="section-tag status-tag">
+        <div class="status-tag">
           <i class="fa-solid fa-check"></i>
           Order completed
         </div>
@@ -89,7 +89,7 @@ const cards = [
               </div>
               <div class="description-item-content">
                 <strong class="row-title">{{ item.title }}</strong>
-                <span class="row-description" v-html="item.description" />
+                <p class="row-description" v-html="item.description" />
               </div>
             </div>
           </div>
@@ -139,7 +139,6 @@ const cards = [
   line-height: 2.125rem;
   font-weight: 600;
   color: var(--vp-c-text-1);
-  text-wrap: balance;
 }
 
 .purchase-title b {
@@ -159,8 +158,8 @@ const cards = [
   }
 }
 
-/* the page's status, a step up from the section tag: deep green with white text in light mode (5.1:1), the
-   inbox phrase's light green with near-black text in dark mode (7.7:1) */
+/* the order's status as a small uppercase tag: deep green with white text in light mode (5.1:1), the inbox
+   phrase's light green with near-black text in dark mode (7.7:1) */
 .status-tag {
   display: inline-flex;
   align-items: center;
@@ -169,6 +168,9 @@ const cards = [
   padding: 9px 24px;
   border-radius: 14px;
   font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  word-spacing: 2px;
   background-color: light-dark(#2E7D32, #A5D6A7);
   color: light-dark(#FFFFFF, #0D3B12);
 }
@@ -219,10 +221,6 @@ const cards = [
 .description-item-content {
   display: flex;
   flex-direction: column;
-}
-
-.description-item-content :deep(a) {
-  color: var(--vp-c-brand-1);
 }
 
 /* buttons sit at the bottom, so they line up across the two cards */

@@ -257,7 +257,6 @@ onBeforeUnmount(() => {
   inset: 0;
   width: 100%;
   height: 100%;
-  max-width: none;
   object-fit: cover;
   object-position: left top;
   opacity: 0;
@@ -496,6 +495,7 @@ html.dark .companion-frame.light {
 /* the shared .action button (CustomPages.css), with room for the chevron */
 .download-toggle {
   display: inline-flex;
+  align-items: center;
   gap: 10px;
 }
 

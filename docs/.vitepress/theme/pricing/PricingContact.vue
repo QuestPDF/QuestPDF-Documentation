@@ -98,7 +98,7 @@ const resellers = [
 .resellers-list img {
   display: block;
   opacity: 0.85;
-  transition: all 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out, filter 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .resellers-list a:hover img {

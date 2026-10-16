@@ -270,6 +270,11 @@ onBeforeUnmount(() => {
   font-weight: 600;
 }
 
+.document-page .document-contents-link:hover,
+.document-page .document-contents-compact a:hover {
+  color: var(--vp-c-brand-2);
+}
+
 /* the folded list for narrow screens, on the same surface as the text */
 .document-page .document-contents-compact {
   display: none;

@@ -264,7 +264,7 @@ html.dark .quick-start {
   height: 12px;
   border-radius: 6px;
   background-color: #8883;
-  transition: all 100ms ease-in-out;
+  transition: background-color 100ms ease-in-out;
 }
 
 .window:hover .dot.red {

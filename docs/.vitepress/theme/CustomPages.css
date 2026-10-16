@@ -76,7 +76,7 @@
 
 /* a heading that wraps breaks into lines of even length instead of leaving its last word alone (a browser
    without text-wrap: balance wraps as before) */
-.custom-page :is(h1, h2, h3, .card-title, .row-title) {
+.custom-page :is(h1, h2, h3, .row-title) {
   text-wrap: balance;
 }
 
@@ -378,26 +378,14 @@ body:has(.custom-page:is(.contact-page, .purchase-page)) {
       radial-gradient(ellipse 1000px 600px at 10% 55%, var(--wash-cyan), transparent 70%);
 }
 
-/* a small uppercase label above a heading (the purchase confirmation) */
+/* a link in running text is blue; a link that is a component of its own (a card, a row, a menu item) colours
+   its own parts */
 
-.section-tag {
-  background-color: color-mix(in srgb, var(--vp-c-brand-2), transparent 85%);
-  border-radius: 12px;
-  padding: 6px 18px;
-  word-spacing: 2px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  margin-bottom: 24px;
-  color: var(--vp-c-brand-1);
-  width: fit-content;
-  text-transform: uppercase;
-}
-
-.custom-page p a:not(.action) {
+.custom-page p a {
   color: var(--vp-c-brand-1);
 }
 
-.custom-page a:not(.action):hover {
+.custom-page p a:hover {
   color: var(--vp-c-brand-2);
 }
 
@@ -410,7 +398,6 @@ body:has(.custom-page:is(.contact-page, .purchase-page)) {
   display: inline-block;
   max-width: 100%;
   text-align: center;
-  align-items: center;
   font-weight: 500;
 
   border-radius: 12px;
@@ -422,7 +409,7 @@ body:has(.custom-page:is(.contact-page, .purchase-page)) {
   color: var(--vp-c-text-1);
   font-size: 1rem;
 
-  transition: all 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
 }
 
 :is(a, button).action:hover {
