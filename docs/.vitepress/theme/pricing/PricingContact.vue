@@ -111,9 +111,16 @@ html.dark .resellers-list a:hover img {
   filter: brightness(1.4);
 }
 
+/* touch: every logo link at least 44px tall, grown evenly, so each logo keeps its tuned position */
+@media (pointer: coarse) {
+  .resellers-list a {
+    padding-block: 4px;
+  }
+}
+
 .action {
   margin-top: 24px;
-  padding: 12px 20px;
+  padding-inline: 20px;
 }
 
 </style>

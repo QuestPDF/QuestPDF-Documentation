@@ -238,8 +238,8 @@ html:not(.dark) .background-gradient {
 }
 
 
-/* narrow cards between the stacking point and the full width: more room for the text */
-@media screen and (max-width: 1280px) and (min-width: 901px) {
+/* narrow cards between the stacking point (HomePage.vue) and the full width: more room for the text */
+@media screen and (max-width: 1280px) and (min-width: 1181px) {
   .cta-card {
     grid-template-columns: 34% minmax(0, 1fr);
     column-gap: 24px;

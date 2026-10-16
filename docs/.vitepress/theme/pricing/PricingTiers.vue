@@ -147,13 +147,15 @@ const licenses = [
   gap: 0 32px;
 }
 
+/* 48px from 1280px, wider than the shared panel inset; on a narrower window, where the three cards share less
+   room, it gives way down to 24px at 961px */
 .license-tier {
   display: grid;
   grid-template-rows: subgrid;
   grid-row: span 6;
   justify-items: start;
   align-items: start;
-  padding: 48px; /* wider than the shared 40px panel inset */
+  padding: clamp(24px, 7.5vw - 48px, 48px);
 }
 
 .license-tier .tag { grid-row: 1; }
@@ -168,12 +170,6 @@ const licenses = [
   border: none;
   border-top: 1px solid var(--vp-c-divider);
   width: 100%
-}
-
-@media screen and (max-width: 700px) {
-  .license-tier hr {
-    border: 1px solid var(--vp-c-divider);
-  }
 }
 
 
@@ -262,10 +258,12 @@ const licenses = [
   color: var(--vp-c-text-1);
 }
 
+/* when the price and the tax note do not fit one line, the note moves down whole */
 .license-tier .price-tax {
   margin-left: 8px;
   font-weight: 400;
   color: var(--vp-c-text-1);
+  white-space: nowrap;
 }
 
 .license-tier .price-free {
@@ -376,11 +374,12 @@ const licenses = [
     gap: 32px;
   }
 
+  /* the shared panel inset, which narrows to 32px by 24px on phones */
   .license-tier {
     grid-template-rows: auto; /* subgrid has no parent grid here */
     width: 100%;
     max-width: 560px;
-    padding: 40px;
+    padding: var(--panel-padding);
   }
 
   .license-tier.community,

@@ -119,13 +119,14 @@ const platformGroups : PlatformGroup[] = [
 
 <style scoped>
 
+/* side by side from 1181px; narrower, the facts in the two-by-two grid would be squeezed to a few words a line */
 .trust {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 32px;
 }
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 1180px) {
   .trust {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -231,14 +232,15 @@ const platformGroups : PlatformGroup[] = [
   border-top: 1px solid var(--vp-c-divider);
 }
 
-/* one column: no vertical line, every cell after the first gets a line above */
-@media screen and (max-width: 500px) {
+/* one column below 541px, where two would not fit ".NET Framework 4.6.2+": no vertical line, every cell after
+   the first gets a line above; :nth-child(n) matches every cell and weighs as much as the two-column rules
+   above, so it replaces their paddings */
+@media screen and (max-width: 540px) {
   .cells {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .cell,
-  .cell:nth-child(even) {
+  .cell:nth-child(n) {
     padding: 20px 0;
     border-left: none;
   }
@@ -322,6 +324,18 @@ const platformGroups : PlatformGroup[] = [
 .fact:is(:hover, :focus-visible) .fact-arrow {
   opacity: 1;
   transform: translateX(0);
+}
+
+/* a touch screen never hovers, so there the cues show at rest, or the link would read as plain text */
+@media (hover: none) {
+  .label-text {
+    text-decoration-color: currentColor;
+  }
+
+  .fact-arrow {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 </style>

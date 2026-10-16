@@ -192,7 +192,9 @@ const cards = [
   }
 }
 
+/* a size container: its items adapt to the card's width (half the row, or all of it), see below */
 .success-card {
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -251,6 +253,36 @@ const cards = [
 
   .success-card a.action {
     align-self: stretch;
+  }
+}
+
+/* a narrow card (phones): the icon sits beside the title and the description takes the full width under both,
+   instead of a column a few words wide */
+@container (max-width: 360px) {
+  .description-item {
+    grid-template-areas:
+        "icon title"
+        "text text";
+    align-items: center;
+    column-gap: 16px;
+    row-gap: 12px;
+  }
+
+  .description-item .icon-tile {
+    grid-area: icon;
+  }
+
+  .description-item-content {
+    display: contents;
+  }
+
+  .description-item .row-title {
+    grid-area: title;
+  }
+
+  .description-item .row-description {
+    grid-area: text;
+    margin-top: 0;
   }
 }
 

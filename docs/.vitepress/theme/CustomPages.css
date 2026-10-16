@@ -1,5 +1,7 @@
-/* --custom-page-width: the width (32px side padding included) shared by the page content, the navbar and the
-   footer, so all three align; custom pages take 90rem, the rest of the site 1216px.
+/* --custom-page-width: the width (side padding included) shared by the page content, the navbar and the footer,
+   so all three align; custom pages take 90rem, the rest of the site 1216px.
+   --custom-page-gutter: that side padding, the navbar's own (VitePress pads it 24px below 768px, 32px from 768px),
+   so the logo, the content and the footer start at the same x.
    --custom-page-bg: the canvas, a touch off-white in light mode so the white panels lift from it.
 
    Theme colours: a single colour that differs per theme is written with light-dark() (the build lowers it for
@@ -7,7 +9,14 @@
 
 :root {
   --custom-page-width: 1216px;
+  --custom-page-gutter: 32px;
   --custom-page-bg: light-dark(#FAFAFC, var(--vp-c-bg));
+}
+
+@media screen and (max-width: 767px) {
+  :root {
+    --custom-page-gutter: 24px;
+  }
 }
 
 /* on the layout root, so the navbar and the footer widen with the page */
@@ -17,7 +26,7 @@
 
 /* the navbar of a page without a sidebar spans the page content */
 .VPNavBar:not(.has-sidebar) .container {
-  max-width: calc(var(--custom-page-width) - 64px);
+  max-width: calc(var(--custom-page-width) - 2 * var(--custom-page-gutter));
 }
 
 /* VitePress gives the title the sidebar's width on every page but home, to line it up with a sidebar */
@@ -31,28 +40,30 @@
    load in. */
 
 .custom-page :where(.content) {
-  padding: 64px 32px;
+  padding: 64px var(--custom-page-gutter);
   margin: 0 auto;
   max-width: var(--custom-page-width);
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .custom-page :where(.content) {
-    padding: 48px 24px;
+    padding-block: 48px;
   }
 }
 
+/* the headings grow from their phone size at 390px to their full size at 700px */
+
 .custom-page h1 {
-  font-size: 2.75rem;
+  font-size: clamp(2.25rem, 25.8px + 2.6vw, 2.75rem);
   font-weight: 700;
-  line-height: 3.25rem;
+  line-height: clamp(2.5rem, 24.7px + 3.9vw, 3.25rem);
   margin-bottom: 2rem;
 }
 
 .custom-page h2 {
-  font-size: 2rem;
+  font-size: clamp(1.75rem, 22.9px + 1.3vw, 2rem);
   font-weight: 700;
-  line-height: 2.5rem;
+  line-height: clamp(2.25rem, 30.9px + 1.3vw, 2.5rem);
   margin-bottom: 1rem;
 }
 
@@ -61,6 +72,12 @@
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.5rem;
+}
+
+/* a heading that wraps breaks into lines of even length instead of leaving its last word alone (a browser
+   without text-wrap: balance wraps as before) */
+.custom-page :is(h1, h2, h3, .card-title, .row-title) {
+  text-wrap: balance;
 }
 
 .custom-page p, .custom-page ul {
@@ -77,16 +94,6 @@
 }
 
 @media screen and (max-width: 700px) {
-  .custom-page h1 {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-  }
-
-  .custom-page h2 {
-    font-size: 1.75rem;
-    line-height: 2.25rem;
-  }
-
   .custom-page p.sub-header {
     color: var(--vp-c-text-1);
     font-size: 1rem;
@@ -151,7 +158,9 @@
    sheen (its background image) and a one-pixel rim, both kept faint. */
 
 .custom-page {
-  --panel-padding: 40px;
+  /* the panel inset, block and inline: 32px by 24px up to 700px, 40px from 1280px, scaling with the window in
+     between */
+  --panel-padding: clamp(32px, 22.4px + 1.38vw, 40px) clamp(24px, 4.7px + 2.76vw, 40px);
   --surface: #FFFFFF;
   --surface-inner: #F0F2F6;
   --surface-edge:
@@ -192,12 +201,6 @@ html.dark .custom-page {
   background: var(--surface-rim);
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   mask-composite: exclude;
-}
-
-@media screen and (max-width: 700px) {
-  .custom-page :where(.panel) {
-    padding: 32px 24px;
-  }
 }
 
 /* a neutral inset square holding an icon (contact cards, purchase facts) */
@@ -374,7 +377,7 @@ body:has(.custom-page:is(.contact-page, .purchase-page)) {
       radial-gradient(ellipse 1000px 600px at 10% 55%, var(--wash-cyan), transparent 70%);
 }
 
-/* a small uppercase label above a heading (purchase confirmation, legal documents) */
+/* a small uppercase label above a heading (the purchase confirmation) */
 
 .section-tag {
   background-color: color-mix(in srgb, var(--vp-c-brand-2), transparent 85%);
@@ -400,16 +403,18 @@ body:has(.custom-page:is(.contact-page, .purchase-page)) {
 /* a button-styled link; a <button> takes the class too, for a control that only runs script (the VitePress
    router intercepts clicks on links) */
 
+/* a label longer than its container (a narrow phone) wraps rather than run out of the button; the 1.25 line box
+   with 10px of padding keeps a one-line button 40px tall */
 :is(a, button).action {
   display: inline-block;
+  max-width: 100%;
   text-align: center;
   align-items: center;
   font-weight: 500;
-  white-space: nowrap;
 
   border-radius: 12px;
-  padding: 12px 24px;
-  line-height: 1;
+  padding: 10px 24px;
+  line-height: 1.25;
 
   background-color: #8883;
 
@@ -434,4 +439,11 @@ body:has(.custom-page:is(.contact-page, .purchase-page)) {
 
 :is(a, button).action.primary:hover {
   background-color: #1E88E5;
+}
+
+/* touch: 44px tall, the size of a fingertip */
+@media (pointer: coarse) {
+  :is(a, button).action {
+    padding-block: 12px;
+  }
 }

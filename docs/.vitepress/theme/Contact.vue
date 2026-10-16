@@ -184,9 +184,10 @@ const contacts: ContactInformation[] = [
   line-height: 1.75rem;
 }
 
+/* as many columns as fit the email address, up to all three side by side */
 .business-facts {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10.5rem), 1fr));
   gap: 24px;
 }
 
@@ -206,7 +207,8 @@ const contacts: ContactInformation[] = [
   color: var(--vp-c-text-1);
 }
 
-@media screen and (max-width: 960px) {
+/* the facts go under the owner below 1181px, where beside it they would have no room for three columns */
+@media screen and (max-width: 1180px) {
   .business-details {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -214,7 +216,6 @@ const contacts: ContactInformation[] = [
 
 @media screen and (max-width: 600px) {
   .business-facts {
-    grid-template-columns: minmax(0, 1fr);
     gap: 16px;
   }
 }

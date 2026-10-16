@@ -163,10 +163,12 @@ const includes = [
   gap: 10px;
 }
 
+/* the price drops under the name when a narrow phone has no room for both */
 .tier-head {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 14px;
+  gap: 8px 14px;
 }
 
 .tier-name {

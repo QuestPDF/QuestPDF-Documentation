@@ -113,20 +113,14 @@ html.dark h1 .highlight-foreground {
   filter: drop-shadow(0 6px 20px rgba(50, 198, 255, 0.18));
 }
 
+/* 1.5rem from 1100px, easing down to 1.25rem at 600px */
 .tagline {
   max-width: 770px;
-  font-size: 1.5rem;
-  line-height: 2.25rem;
+  font-size: clamp(1.25rem, 15.2px + 0.8vw, 1.5rem);
+  line-height: 1.5;
   font-weight: 400;
   word-spacing: 2px;
   color: light-dark(#000B, #FFFB);
-}
-
-@media screen and (max-width: 1024px) {
-  .tagline {
-    font-size: 1.25rem;
-    line-height: 1.5rem;
-  }
 }
 
 /* stacked, the column is the full width, where 11.5cqi would give the full 4.5rem */
@@ -137,8 +131,8 @@ html.dark h1 .highlight-foreground {
 }
 
 
-/* Statistics: a vertical list, because four in a row would squeeze the headline and a wrapped row looks
-   broken */
+/* Statistics: a vertical list beside the text, because four in a row would squeeze the headline and a wrapped
+   row looks broken; stacked under the text, a two-by-two grid */
 
 .statistics {
   display: flex;
@@ -149,7 +143,11 @@ html.dark h1 .highlight-foreground {
 
 @media screen and (max-width: 820px) {
   .statistics {
-    justify-self: start;
+    container-type: inline-size; /* only here: beside the text it sizes itself to its content */
+    justify-self: stretch;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 24px;
   }
 }
 
@@ -203,6 +201,46 @@ html:not(.dark) .statistic-icon i {
   font-size: 1rem;
   line-height: 1.25rem;
   color: var(--vp-c-text-2);
+}
+
+/* a grid too narrow for two full-size statistics side by side (phones): smaller tiles and type; the labels wrap,
+   so each statistic hangs from the top and the values of a row stay level */
+@container (max-width: 460px) {
+  .statistic {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .statistic-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+
+  .statistic-icon i {
+    font-size: 20px;
+  }
+
+  .statistic .value {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .statistic .label {
+    font-size: 0.875rem;
+  }
+}
+
+/* the narrowest phones: a little more room for "production" */
+@container (max-width: 300px) {
+  .statistic {
+    gap: 10px;
+  }
+
+  .statistic-icon {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 /* a faint dot grid under the statistics, fading out towards the headline and the page edges (the washes

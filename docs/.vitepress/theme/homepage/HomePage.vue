@@ -69,19 +69,20 @@ import HomePageLicense from "./HomePageLicense.vue";
   padding-bottom: 48px;
 }
 
-/* more breathing room in the homepage panels (phones keep the shared inset) */
+/* more breathing room in the homepage panels: 48px from 1280px, down to the shared 32px by 24px at 700px */
 .custom-page.home-page {
-  --panel-padding: 48px;
+  --panel-padding: clamp(32px, 12.7px + 2.76vw, 48px) clamp(24px, 4.14vw - 4.95px, 48px);
 }
 
 
+/* side by side from 1181px; narrower, the text beside each visual would be a sliver */
 .custom-page.home-page .cta-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 32px;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1180px) {
   .custom-page.home-page .cta-row {
     grid-template-columns: minmax(0, 1fr);
     gap: 24px;

@@ -637,4 +637,46 @@ html.dark .companion-frame.light {
   }
 }
 
+/* one column where two would cut "Coordinates" short (the narrowest phones); measured on the tour itself, so a
+   classic scrollbar or a zoom level cannot fool it */
+.companion-tour {
+  container-type: inline-size;
+}
+
+@container (max-width: 249px) {
+  .companion-views {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-auto-flow: row;
+  }
+}
+
+/* touch: each view a 44px row; the rows close up, so the labels keep their spacing */
+@media (pointer: coarse) {
+  .companion-views {
+    row-gap: 0;
+  }
+
+  .companion-view {
+    min-height: 44px;
+  }
+}
+
+/* the menu (240px) beside the first button (about 190px) needs about 430px; on a narrower tour it spans the
+   whole row of buttons instead of running out of the panel */
+@container (max-width: 440px) {
+  .actions {
+    position: relative;
+  }
+
+  .download {
+    position: static;
+  }
+
+  .download-menu {
+    right: 0;
+    min-width: 0;
+  }
+}
+
 </style>

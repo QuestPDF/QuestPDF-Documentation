@@ -3,7 +3,6 @@
     <div class="container texture-dots">
       <div class="content">
         <header class="section-header document-header">
-          <div class="section-tag">{{ tag }}</div>
           <h1>{{ doc.title }}</h1>
 
           <!-- effective date and version, taken from the top of the markdown source -->
@@ -75,18 +74,6 @@ const props = defineProps({
 });
 
 const doc = data[props.id];
-
-// eyebrow above the title, by document kind
-const tags = {
-  "license-community": "License",
-  "license-professional": "License",
-  "license-selection-guide": "Licensing",
-  "terms-of-service": "Terms",
-  "privacy-policy": "Policy",
-  "security-policy": "Policy"
-};
-
-const tag = tags[props.id] ?? "Legal";
 
 
 /* Contents rail: the section being read is the last one whose heading has passed a line 160px from the top,
@@ -176,9 +163,15 @@ onBeforeUnmount(() => {
   margin-bottom: 0;
 }
 
+/* The text column is never wider than the 820px it has from 1200px up (1180 - 64 - 240 - 56), so a narrower
+   window, where the rail shrinks or folds away, does not stretch the lines longer than on a desktop. */
+
 .document-page .document-layout {
+  --document-text-width: 820px;
+
   display: grid;
-  grid-template-columns: 240px minmax(0, 1fr);
+  grid-template-columns: 240px minmax(0, var(--document-text-width));
+  justify-content: center;
   gap: 56px;
   width: 100%;
 }
@@ -336,9 +329,25 @@ onBeforeUnmount(() => {
   color: var(--vp-c-text-1);
 }
 
+/* touch: every section link a 44px row */
+@media (pointer: coarse) {
+  .document-page .document-contents-link {
+    padding-block: 12px;
+  }
+
+  .document-page .document-contents-compact li {
+    margin: 0;
+  }
+
+  .document-page .document-contents-compact a {
+    display: block;
+    padding-block: 11px;
+  }
+}
+
 @media screen and (max-width: 1200px) {
   .document-page .document-layout {
-    grid-template-columns: 200px minmax(0, 1fr);
+    grid-template-columns: 200px minmax(0, var(--document-text-width));
     gap: 40px;
   }
 }
@@ -346,6 +355,11 @@ onBeforeUnmount(() => {
 @media screen and (max-width: 960px) {
   .document-page .document-layout {
     display: block;
+  }
+
+  .document-page .document-main {
+    max-width: var(--document-text-width);
+    margin-inline: auto;
   }
 
   .document-page .document-contents {

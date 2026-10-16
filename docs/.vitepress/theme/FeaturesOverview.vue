@@ -20,7 +20,6 @@ import { featureCategories as categories } from "./features";
             <p class="card-description">{{ category.description }}</p>
           </header>
 
-          <!-- the summary is only transparent until the row is hovered, so screen readers read it either way -->
           <ul class="feature-list">
             <li v-for="item in category.items" :key="item.name">
               <component :is="item.link ? 'a' : 'div'" :href="item.link" class="feature-row">
@@ -156,19 +155,7 @@ a.feature-row:hover .feature-name {
   color: var(--vp-c-text-2);
 }
 
-/* with a pointer, a row shows its summary only while hovered or focused, so the list reads as a calm column
-   of names */
-@media (hover: hover) and (min-width: 1025px) {
-  .feature-summary {
-    opacity: 0;
-  }
-
-  .feature-row:hover .feature-summary,
-  .feature-row:focus-visible .feature-summary {
-    opacity: 1;
-  }
-}
-
+/* almost every row is a link, so the arrow is hover feedback rather than a marker of which rows link */
 .feature-arrow {
   flex-shrink: 0;
   margin-left: auto;
@@ -225,6 +212,12 @@ a.feature-row:hover .feature-name {
     padding: 8px;
   }
 
+  /* a long name wraps beside its icon instead of dropping to a line of its own */
+  .feature-name {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
   .feature-summary {
     width: 100%;
     padding-left: 44px;
@@ -246,6 +239,13 @@ a.feature-row:hover .feature-name {
 
   .feature-arrow {
     display: none;
+  }
+}
+
+/* touch: every row at least the 44px of a fingertip */
+@media (pointer: coarse) {
+  .feature-row.child {
+    min-height: 44px;
   }
 }
 

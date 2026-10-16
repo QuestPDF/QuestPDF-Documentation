@@ -32,8 +32,8 @@ import PricingContact from "./PricingContact.vue";
    48px padding spaces them (64px at the top and the bottom of the page). */
 
 .custom-page.pricing-page > .dotted-divider {
-  width: calc(100% - 64px);
-  max-width: calc(var(--custom-page-width) - 64px);
+  width: calc(100% - 2 * var(--custom-page-gutter));
+  max-width: calc(var(--custom-page-width) - 2 * var(--custom-page-gutter));
   margin: 0 auto;
 }
 
@@ -48,12 +48,6 @@ import PricingContact from "./PricingContact.vue";
 
 .pricing-page > .container:last-child .content {
   padding-bottom: 64px;
-}
-
-@media screen and (max-width: 768px) {
-  .custom-page.pricing-page > .dotted-divider {
-    width: calc(100% - 48px);
-  }
 }
 
 </style>

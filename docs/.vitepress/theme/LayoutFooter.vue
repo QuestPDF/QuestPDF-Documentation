@@ -110,7 +110,7 @@ footer * {
 .content > * {
   margin: 0 auto;
   max-width: var(--custom-page-width);
-  padding: 48px 32px;
+  padding: 48px var(--custom-page-gutter);
 }
 
 .link-categories {
@@ -151,10 +151,26 @@ footer * {
   }
 }
 
+/* touch: each link a 44px row (its text keeps its place under the heading) */
+@media (pointer: coarse) {
+  .link-category h2 {
+    margin-bottom: 2px;
+  }
+
+  .link-category ul {
+    gap: 0;
+  }
+
+  .link-category a {
+    display: block;
+    padding-block: 10px;
+  }
+}
+
 
 .copyright {
   text-align: center;
-  padding: 24px 32px;
+  padding: 24px var(--custom-page-gutter);
 }
 
 </style>
