@@ -1,15 +1,10 @@
 <template>
   <div class="custom-page home-page">
-    <div class="container hero-container">
-      <HomePageHero />
-    </div>
+    <HomePageHero />
 
     <div class="container">
       <div class="content sections">
-        <!-- the two calls to action, right under the hero: the invoice tutorial (its video lives on the
-             Quick Start page) and the sample gallery. The gallery href is a placeholder until the page
-             exists (see roadmap.md); its indigo accent is the one the page background uses next to the
-             brand blue. -->
+        <!-- the gallery link is a placeholder until the page exists (see roadmap.md) -->
         <div class="cta-row">
           <HomePageCtaCard
               title="Build an invoice in 10 minutes"
@@ -36,7 +31,7 @@
 
         <div class="dotted-divider" aria-hidden="true"></div>
 
-        <!-- the quick start, the Companion App and the trust panels read as one run, with no seams between them -->
+        <!-- one run, with no seams between these three -->
         <HomePageQuickStart />
         <HomePageCompanion />
         <HomePageTrust />
@@ -64,16 +59,7 @@ import HomePageLicense from "./HomePageLicense.vue";
 
 <style>
 
-/* the hero's dot grid (HomePageHero.vue, position: absolute) is sized against this container */
-.hero-container {
-  position: relative;
-}
-
-/* Sections
-   Everything under the hero is one column of panels, 32px apart. The sections open without a header,
-   so the two breaks (after the calls to action, before the license) are marked by the shared dotted
-   seam (CustomPages.css), 48px from the panels on either side, so the eye reads a break without a
-   heading. The hero's own bottom padding spaces the CTA cards, so the column has none on top. */
+/* everything under the hero is one column of panels; the hero's bottom padding spaces the first row */
 
 .custom-page.home-page .sections {
   display: flex;
@@ -83,13 +69,11 @@ import HomePageLicense from "./HomePageLicense.vue";
   padding-bottom: 48px;
 }
 
-/* the section panels get more breathing room on the homepage (phones keep the shared inset) */
+/* more breathing room in the homepage panels (phones keep the shared inset) */
 .custom-page.home-page {
   --panel-padding: 48px;
 }
 
-
-/* CTA row: the two cards side by side, stretched to the same height */
 
 .custom-page.home-page .cta-row {
   display: grid;

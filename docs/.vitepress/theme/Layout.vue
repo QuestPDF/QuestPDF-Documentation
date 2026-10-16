@@ -1,20 +1,20 @@
+<script setup lang="ts">
+import { onMounted } from "vue";
+import DefaultTheme from "vitepress/theme";
+import LayoutFooter from "./LayoutFooter.vue";
+import { loadPaddle } from "./paddle";
+
+const { Layout } = DefaultTheme;
+
+/* Paddle.js is initialised on every page, not only on pricing: a Paddle payment link (?_ptxn=…) can open its
+   checkout only on a page where Paddle.js is loaded */
+onMounted(loadPaddle);
+</script>
+
 <template>
   <Layout>
     <template #layout-bottom>
-      <layout-footer />
-
-      <ClientOnly>
-        <paddle-integration />
-      </ClientOnly>
+      <LayoutFooter />
     </template>
   </Layout>
 </template>
-
-<script setup>
-import DefaultTheme from 'vitepress/theme';
-const { Layout } = DefaultTheme
-
-import PaddleIntegration from "./PaddleIntegration.vue";
-import LayoutFooter from "./LayoutFooter.vue";
-
-</script>

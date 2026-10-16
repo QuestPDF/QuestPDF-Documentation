@@ -20,11 +20,6 @@
 }
 
 :root {
-    --vp-home-hero-name-color: transparent;
-
-    --vp-home-hero-image-background-image: conic-gradient(from 100deg, #2979FF55 70deg, #88888855 70deg);
-    --vp-home-hero-image-filter: blur(48px);
-
     --vp-c-gutter: var(--vp-c-divider);
 
     --elevation: 0 13px 27px -5px rgb(0 0 0 / 5%), 0 8px 16px -8px rgb(0 0 0 / 8%), 0 -6px 16px -6px rgb(0 0 0 / 3%);
@@ -52,10 +47,6 @@ body {
     margin-right: 16px !important;
 }
 
-.VPHero img.VPImage {
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.25);
-}
-
 .VPLink.link.active,
 .VPLink.link.active > span.link-text,
 .outline-link.active,
@@ -65,63 +56,6 @@ body {
 
 .VPHome {
     margin-bottom: 0 !important;
-}
-
-.VPHero {
-    padding: 198px 0 96px 0 !important;
-    margin: 0 32px;
-}
-
-@media (min-width: 425px) {
-    .VPHero h1 span.name {
-        font-size: 4rem !important;
-        line-height: 4rem !important;
-        margin-bottom: 2rem !important;
-    }
-
-    .VPHero h1 span.text {
-        font-size: 1.5rem !important;
-        line-height: 2rem !important;
-        margin-bottom: 1rem !important;
-    }
-}
-
-@media (min-width: 960px) {
-    .VPHero h1 span.name {
-        font-size: 6rem !important;
-        line-height: 6rem !important;
-        margin-bottom: 1rem !important;
-    }
-
-    .VPHero h1 span.text {
-        font-size: 2.5rem !important;
-        line-height: 3rem !important;
-        margin-bottom: 1rem !important;
-    }
-}
-
-@media (max-width: 960px) {
-    .VPHero {
-        padding: 128px 32px 64px 32px !important;
-    }
-}
-
-@media (max-width: 425px) {
-    .VPHero {
-        padding: 96px 24px 48px !important;
-    }
-
-    .VPHero h1 span.name {
-        font-size: 3rem !important;
-        line-height: 3rem !important;
-        margin-bottom: 2rem !important;
-    }
-
-    .VPHero h1 span.text {
-        font-size: 1.25rem !important;
-        line-height: 2rem !important;
-        margin-bottom: 1rem !important;
-    }
 }
 
 html:not(.dark) .VPDoc img[alt=example] {
@@ -141,10 +75,6 @@ html.dark .VPDoc img[alt=example] {
 .vp-doc strong,
 .vp-doc b {
     color: var(--vp-c-tip-1);
-}
-
-.VPHero .VPButton {
-    font-size: 1rem !important;
 }
 
 .custom-block-title {

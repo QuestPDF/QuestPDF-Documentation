@@ -1,12 +1,9 @@
-/* What the two CTA visuals share: the invoice build (HomePageCtaBuildVisual.vue) and the pile of samples
-   (HomePageCtaDeckVisual.vue) both include this file as a scoped style, then add their own pose,
-   content and motion. Everything is CSS: no image assets. */
+/* Shared by the two CTA visuals (HomePageCtaBuildVisual.vue, HomePageCtaDeckVisual.vue), which include it as a
+   scoped style and add their own pose, content and motion.
 
-
-/* The scene fills the card's visual column. The model (the sheet, the pile) keeps a 148 x 200 coordinate
-   system for its shapes; it is centred on the column, then shifted, raised, scaled to fit and rotated
-   into a three-quarter view, all from the variables, so the two visuals and their hover poses differ in
-   values only. */
+   The model (the sheet, the pile) has a 148 x 200 coordinate system for its shapes; it is centred in the
+   column, then shifted, raised, scaled and rotated by the pose variables, so the two visuals and their hover
+   poses differ in values only. */
 
 .scene {
   --tilt-x: 8deg;
@@ -43,16 +40,12 @@
 /* a sheet of paper: white, a hairline, dimmed a little on the dark theme so it is not the brightest
    thing on the page */
 .paper {
-  background: #FFF;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.10);
+  background-color: light-dark(#FFF, #F4F4F6);
+  box-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.10), rgba(255, 255, 255, 0.06));
 }
 
-html.dark .paper {
-  background: #F4F4F6;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
-}
-
-/* a page: a faint light from the top-left, shading to --page-shade at the bottom right */
+/* a page: a faint light from the top-left, shading to --page-shade at the bottom right; flat on the dark
+   theme, where the light would make the paper the brightest thing on the page */
 .page {
   position: absolute;
   inset: 0;
@@ -60,18 +53,18 @@ html.dark .paper {
   background-image: linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, var(--page-shade, 0.025)));
 }
 
+html.dark .page {
+  background-image: none;
+}
+
 /* the shadow the model throws, just behind it in its own plane, offset down and to the right */
 .shadow {
   position: absolute;
   inset: 8px -6px -10px 10px;
   border-radius: 8px;
-  background: rgba(20, 24, 40, 0.16);
+  background: light-dark(rgba(20, 24, 40, 0.16), rgba(0, 0, 0, 0.45));
   filter: blur(10px);
   transform: translateZ(-1px);
-}
-
-html.dark .shadow {
-  background: rgba(0, 0, 0, 0.45);
 }
 
 /* the placeholders: shapes in the ink colour, in three strengths */
@@ -93,8 +86,7 @@ html.dark .shadow {
 }
 
 
-/* Compact: below 700px the column is a 72px tile beside the title (see the compact rules in
-   HomePageCtaCard.vue), and the scene gives way to a flat miniature of the front page */
+/* below 700px the visual is a 72px tile beside the title (HomePageCtaCard.vue): a flat miniature of the page */
 
 .thumb {
   display: none;

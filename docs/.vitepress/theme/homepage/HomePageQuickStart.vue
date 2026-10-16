@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import {ref} from "vue";
-import quickStartExample from './codeExamples/quickStart.cs?raw';
-import HomePageHighlightedCode from "./HomePageHighlightedCode.vue";
-import {type Round, useAgentSession} from "./agentSession";
+import {computed, ref} from "vue";
+import {type Line, useAgentSession} from "./agentSession";
+import {data as session} from "./quickStart.data";
 
-/* One surface in three regions, divided by hairlines: two cards stacked on the left and one code
-   window on the right, embedded edge to edge and as tall as both cards together. The first card makes
-   the case for writing the document in C#. The second card shows how an AI assistant fits in. A
-   composer sits at the foot of the window, where a request types itself in; the window then shows the
-   assistant's edit as a diff on the same Program.cs. Three rounds, then the session starts over
-   (agentSession.ts). While the assistant works, the send button turns into a spinner. */
+/* One panel in three regions divided by hairlines: two cards on the left (why C#, and how an AI assistant
+   fits in) and a code window on the right, as tall as both. A request types itself into the window's
+   composer, and the window shows the assistant's edit as a diff (agentSession.ts plays the session). */
 
 interface Card {
   kind: "code-card" | "agent-card";
@@ -22,7 +18,6 @@ interface Card {
   }[];
 }
 
-/* the points as a list: the title bold on its own line, the explanation under it in the quieter colour */
 const cards: Card[] = [
   {
     kind: "code-card",
@@ -70,45 +65,30 @@ const cards: Card[] = [
   }
 ];
 
-
-/* The session: the quick start sample, refined by three requests. The anchors are lines of
-   codeExamples/quickStart.cs, matched by text. */
-
-const rounds: Round[] = [
-  {
-    prompt: "Highlight important tasks in orange.",
-    after: "                .Text(task.Title)",
-    add: [
-      "                .FontColor(task.IsImportant ? Colors.Orange.Darken2 : Colors.Black)"
-    ]
-  },
-  {
-    prompt: "Show overdue due dates in red.",
-    after: "            row.ConstantItem(50).Text(task.DueDate?.ToString(\"d\") ?? \"No due date\");",
-    replace: true,
-    add: [
-      "            row.ConstantItem(50)",
-      "                .Text(task.DueDate?.ToString(\"d\") ?? \"No due date\")",
-      "                .FontColor(task.IsOverdue ? Colors.Red.Medium : Colors.Black);"
-    ]
-  },
-  {
-    prompt: "Hide completed subtasks.",
-    after: "        foreach (var subtask in task.Subtasks)",
-    replace: true,
-    add: [
-      "        foreach (var subtask in task.Subtasks.Where(x => !x.IsDone))"
-    ]
-  }
-];
-
 const root = ref<HTMLElement | null>(null);
-const { code, codeTransformer, promptText, typing, sent, working } = useAgentSession(root, quickStartExample.trimEnd().split("\n"), rounds);
+const { lines, promptText, typing, sent, working } = useAgentSession(root, session.code, session.rounds);
+
+/* the window's markup, as Shiki writes it, from the tokens highlighted at build time (quickStart.data.ts); a
+   line being typed shows only its first characters */
+const codeHtml = computed(() => lines.value.map(lineHtml).join("\n"));
+
+function lineHtml({ text, kind, typed = Infinity }: Line) {
+  let html = "";
+
+  for (const { content, style } of session.tokens[text]) {
+    if (typed <= 0)
+      break;
+
+    html += `<span style="${style}">${content.slice(0, typed).replace(/&/g, "&amp;").replace(/</g, "&lt;")}</span>`;
+    typed -= content.length;
+  }
+
+  return `<span class="line${kind === "normal" ? "" : ` line-${kind}`}">${html}</span>`;
+}
 </script>
 
 <template>
   <div ref="root" class="panel quick-start">
-    <!-- the case for code, then the AI story -->
     <article v-for="card of cards" :key="card.kind" class="quick-start-card" :class="card.kind">
       <h2 class="card-title">{{ card.title }}</h2>
 
@@ -123,7 +103,7 @@ const { code, codeTransformer, promptText, typing, sent, working } = useAgentSes
       </ul>
     </article>
 
-    <!-- the one code window, embedded edge to edge in the right region, as tall as the two cards together -->
+    <!-- the code window, edge to edge in the right region -->
     <div class="window">
       <div class="window-header">
         <span class="dot red" />
@@ -132,12 +112,11 @@ const { code, codeTransformer, promptText, typing, sent, working } = useAgentSes
         <span class="file-name">Program.cs</span>
       </div>
 
-      <suspense>
-        <home-page-highlighted-code :code="code" :code-transformer="codeTransformer" />
-      </suspense>
+      <div class="code-source">
+        <pre class="shiki" tabindex="0"><code v-html="codeHtml"></code></pre>
+      </div>
 
-      <!-- the composer at the foot of the window: the request types itself, the send button lights
-           up once it is sent and spins while the assistant works -->
+      <!-- the request types itself; the send button lights up once sent and spins while the assistant works -->
       <div class="composer-dock">
         <div class="composer" :class="{ sent, working }" aria-live="polite">
           <i class="fa-regular fa-sparkles composer-icon" aria-hidden="true"></i>
@@ -159,14 +138,8 @@ const { code, codeTransformer, promptText, typing, sent, working } = useAgentSes
 
 <style scoped>
 
-/* Layout: one panel, the cards in the first column, the window spanning both rows in the second, all
-   divided by hairlines. The window takes 6/11 of the width so the code has room; the rows are as tall
-   as the cards, and the window stretches to them (or, if the code is taller, the cards stretch to the
-   window). */
-
-/* the AI card's purple: in light mode its icon tiles take a purple tint, and the composer is a light
-   purple field with a quiet border and dark text with a purple cast, so it reads as part of the same
-   tinted surface */
+/* the cards in the first column, the window across both rows of the second (6/11 of the width, room for the
+   code); the tokens are the AI card's purple, for its icon tiles and the composer */
 .quick-start {
   --agent-accent: #7E57C2;
   --tile-purple: #5E35B1;
@@ -195,7 +168,6 @@ html.dark .quick-start {
   --composer-text: color-mix(in srgb, var(--agent-accent) 35%, var(--vp-c-text-1));
 }
 
-/* a region of the panel: the card's inset, the notes spanning its width */
 .quick-start-card {
   display: flex;
   flex-direction: column;
@@ -207,8 +179,7 @@ html.dark .quick-start {
   grid-area: code;
 }
 
-/* the AI card's halo: a faint purple glow from the left edge, centred behind the heading; no rays, to
-   keep it quiet */
+/* a faint purple glow from the left edge, behind the heading */
 .agent-card {
   grid-area: agent;
   border-top: 1px solid var(--vp-c-divider);
@@ -218,9 +189,6 @@ html.dark .quick-start {
 }
 
 
-/* Cards: the title, then the notes */
-
-/* the points as a list: bold titles in the text colour on their own line, explanations under them */
 .notes {
   display: flex;
   flex-direction: column;
@@ -241,7 +209,7 @@ html.dark .quick-start {
   margin: 2px 0 0;
 }
 
-/* an icon in front of each item on an inset tile, level with the top of the item's title */
+/* each point's icon on an inset tile, level with the top of its title */
 .note {
   display: flex;
   align-items: flex-start;
@@ -267,9 +235,8 @@ html.dark .quick-start {
 }
 
 
-/* The window: no frame of its own, the panel's hairlines and corners are its edges. The code grows
-   into the room above the composer. In light mode the header bar is white like the code below it, so
-   the window reads as one plain surface; dark mode keeps the slightly raised bar. */
+/* The window has no frame of its own: the panel's hairlines and corners are its edges. In light mode its
+   header is as white as the code; dark mode keeps a raised bar. */
 
 .window {
   grid-area: window;
@@ -286,10 +253,7 @@ html.dark .quick-start {
   gap: 6px;
   padding: 10px 24px;
   border-bottom: 1px solid var(--vp-c-divider);
-}
-
-html.dark .window-header {
-  background-color: var(--vp-c-bg-alt);
+  background-color: light-dark(transparent, var(--vp-c-bg-alt));
 }
 
 .file-name {
@@ -320,9 +284,35 @@ html.dark .window-header {
   background-color: #4CAF50CC;
 }
 
-.window :deep(.code-source) {
+.code-source {
   flex-grow: 1;
   padding: 12px 8px; /* with the 16px of each line, the code starts at 24px, in line with the header and the composer */
+  overflow: hidden;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* long lines scroll sideways */
+.code-source pre {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.code-source :deep(.line) {
+  display: inline-block;
+  min-width: 100%;
+  padding: 0 16px;
+}
+
+/* a diff line: a tint and a bar along its left edge, inside the line's padding */
+.code-source :deep(.line-removed) {
+  background-color: #F4433622;
+  box-shadow: inset 3px 0 0 #F44336AA;
+}
+
+.code-source :deep(.line-added) {
+  background-color: #4CAF5022;
+  box-shadow: inset 3px 0 0 #4CAF50AA;
 }
 
 .composer-dock {
@@ -330,8 +320,7 @@ html.dark .window-header {
 }
 
 
-/* Composer: a chat input on a faint purple tint, a sparkle at the start, the send button a purple
-   circle once the request is sent */
+/* Composer */
 
 .composer {
   position: relative;
@@ -355,8 +344,7 @@ html.dark .window-header {
   z-index: 1;
 }
 
-/* while the assistant works, a soft band of purple, magenta and blue sweeps slowly across the
-   composer from left to right, fading in and out with the state */
+/* while the assistant works, a soft purple band sweeps across the composer */
 .composer::before {
   content: "";
   position: absolute;
@@ -371,9 +359,8 @@ html.dark .window-header {
   background-position: 120% 0;
   opacity: 0;
   transition: opacity 1.2s ease;
-  /* the sweep runs all the time (invisible at opacity 0) so that only the
-     opacity changes with the state: removing the animation on exit would snap
-     the band back to its start position and cut the fade-out short */
+  /* the sweep always runs, invisible at opacity 0, so only the opacity follows the state: stopping it would
+     snap the band back and cut the fade-out short */
   animation: sweep 3.2s linear infinite;
 }
 
@@ -468,8 +455,7 @@ html.dark .window-header {
 }
 
 
-/* Below this width the window no longer fits beside the cards: the two cards sit side by side
-   and the window goes under them, full width */
+/* below 1180px the window goes under the cards, which sit side by side */
 @media screen and (max-width: 1180px) {
   .quick-start {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -510,6 +496,10 @@ html.dark .window-header {
 
   .window-header {
     padding: 10px 16px;
+  }
+
+  .code-source {
+    line-height: 1.25;
   }
 
   .composer-dock {

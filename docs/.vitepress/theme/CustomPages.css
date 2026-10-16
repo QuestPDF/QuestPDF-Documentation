@@ -1,26 +1,21 @@
-/* --custom-page-width: page width (including the 32px side padding) shared by the custom page
-   content, the top navigation bar and the footer, so all three align. Every custom page (a page whose
-   content is a `.custom-page`) takes the wider 90rem layout; the rest of the site keeps 1216px.
+/* --custom-page-width: the width (32px side padding included) shared by the page content, the navbar and the
+   footer, so all three align; custom pages take 90rem, the rest of the site 1216px.
+   --custom-page-bg: the canvas, a touch off-white in light mode so the white panels lift from it.
 
-   --custom-page-bg: page canvas of the custom pages (home, pricing, contact, legal and so on). A
-   touch off-white on the light theme so the white cards and panels lift from the page; the dark
-   theme keeps the regular page colour. The navbar and footer stay on --vp-c-bg. */
+   Theme colours: a single colour that differs per theme is written with light-dark() (the build lowers it for
+   older browsers); sets of tokens, gradients and other values switch in an `html.dark` rule. */
 
 :root {
   --custom-page-width: 1216px;
-  --custom-page-bg: #FAFAFC;
+  --custom-page-bg: light-dark(#FAFAFC, var(--vp-c-bg));
 }
 
-html.dark {
-  --custom-page-bg: var(--vp-c-bg);
-}
-
-/* set on the layout root, so the navbar and the footer around the page widen with it */
+/* on the layout root, so the navbar and the footer widen with the page */
 .Layout:has(.custom-page) {
   --custom-page-width: 90rem;
 }
 
-/* the navbar of pages without a sidebar spans the same width as the page content */
+/* the navbar of a page without a sidebar spans the page content */
 .VPNavBar:not(.has-sidebar) .container {
   max-width: calc(var(--custom-page-width) - 64px);
 }
@@ -30,9 +25,9 @@ html.dark {
 }
 
 
-/* The shared building blocks that pages restyle (the content column, the section header, the panel)
-   are wrapped in :where(), so they weigh no more than a single class: any page or component rule naming
-   the element's own class outranks them, whatever order the stylesheets load in. */
+/* The bases that pages restyle (content column, section header, panel) are wrapped in :where(), so they weigh
+   no more than a class: a component rule naming the element's own class wins, whatever order the stylesheets
+   load in. */
 
 .custom-page :where(.content) {
   padding: 64px 32px;
@@ -65,7 +60,6 @@ html.dark {
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.5rem;
-  margin: 24px 0 8px 0;
 }
 
 .custom-page p, .custom-page ul {
@@ -108,13 +102,9 @@ html.dark {
   text-align: center;
 }
 
-/* Card typography
-   Text inside a panel or card sits one step below the section headings on the canvas, and every
-   card uses the same two pairs. `card-title` + `card-description`: the heading of a panel or card
-   and its lead (the homepage panels, a contact card, a features category).
-   `row-title` + `row-description`: a labelled row inside a card (an icon tile beside a name and
-   a short line, as in the purchase facts). The classes carry their own margins, so the element
-   (h2, h3, p, strong) does not matter. */
+/* Text in a panel: card-title + card-description for its heading and lead, row-title + row-description for a
+   labelled row inside it. The classes carry their own margins, so the element (h2, h3, p, strong) does not
+   matter. */
 
 .custom-page .card-title {
   margin: 0;
@@ -154,22 +144,10 @@ html.dark {
 }
 
 
-/* Surfaces
-   A custom page paints its canvas (grain tile plus colour washes) on <body>, see "Page canvas" below,
-   and its sections are see-through, so the canvas shows between the surfaces. The layering is the
-   same in both modes: the canvas, a lifted surface on it, and an inset layer (chips, badges) on the
-   surface. Light mode lifts with white: solid white panels on the tinted
-   canvas, a hairline ring and a soft shadow for the edge, and light-grey chips inset on them. Dark mode
-   lifts with light: translucent white panels on the dark canvas (the washes show through) and
-   translucent black chips, with no ring or shadow (neither reads on a dark canvas).
-
-   Every surface is also lit from above, like a sheet of glass: a one-pixel rim that is white at the
-   top and fades out down the sides (--surface-rim, drawn by a masked ::before), and a sheen
-   that fades out over the first 160px of the surface (--surface-sheen, the surface's
-   background-image). Both are gradients, so either can be swapped or set to `none` on its own.
-   On the solid white light-mode surface they are invisible and kept only so the two modes share one
-   structure; dark mode keeps them very faint, because there every bit of white reads.
-   Both are deliberately quiet: a first pass at twice these values was too much. */
+/* Surfaces: the canvas (on <body>, see "Page canvas"), a surface lifted from it and an inset layer (chips,
+   tiles) on the surface. Light mode lifts with white panels, a hairline ring and a soft shadow; dark mode with
+   translucent white and no edge, so the washes show through. Every surface is lit from above like glass: a
+   sheen (its background image) and a one-pixel rim, both kept faint. */
 
 .custom-page {
   --panel-padding: 40px;
@@ -191,11 +169,8 @@ html.dark .custom-page {
   --surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0) 160px);
 }
 
-/* The surface: a panel groups a section's content (each page lays out its own panels). It carries the
-   glass lighting: the sheen is the background image, and the rim a ::before covering the surface, its
-   gradient masked to a one-pixel border so the surface itself stays see-through; it follows the
-   surface's own corner radius. The inset is --panel-padding (the homepage's panels take 48px); on
-   phones every panel takes the same narrower inset. */
+/* the panel: the rim is a ::before whose gradient is masked to a one-pixel border, so the surface stays
+   see-through */
 
 .custom-page :where(.panel) {
   position: relative;
@@ -226,8 +201,7 @@ html.dark .custom-page {
   }
 }
 
-/* A neutral inset square holding a regular-weight icon in the text colour, beside or above a title
-   (contact cards, purchase facts). */
+/* a neutral inset square holding an icon (contact cards, purchase facts) */
 
 .custom-page .icon-tile {
   display: flex;
@@ -245,11 +219,8 @@ html.dark .custom-page {
   color: var(--vp-c-text-1);
 }
 
-/* Dot wings: two faint dot fields flanking a section header, each fading out before it reaches
-   the 650px text column, so the texture frames the header instead of sitting under the text.
-   Put `texture-dots` on the `.container` whose header sits directly on the canvas. The wings are
-   sized in pixels so they look the same under every header. Below 960px there is no room beside
-   the column, so they are dropped. */
+/* Dot wings: two faint dot fields beside a header that sits on the canvas (put `texture-dots` on its
+   container), fading out before the 650px text column; dropped below 960px, where there is no room. */
 
 .custom-page .texture-dots {
   position: relative;
@@ -282,7 +253,7 @@ html.dark .custom-page {
   -webkit-mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%);
 }
 
-/* light dots on a dark canvas stand out more than dark dots on white, so they are fainter there */
+/* light dots on a dark canvas read stronger than dark dots on white, so they are fainter there */
 html.dark .custom-page .texture-dots::before,
 html.dark .custom-page .texture-dots::after {
   background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 14%, transparent) 1px, transparent 1.5px);
@@ -296,13 +267,8 @@ html.dark .custom-page .texture-dots::after {
 }
 
 
-/* Dotted divider
-   The seam between sections of a custom page: a faint dotted line across the content width,
-   fading out at both ends, so the eye reads a break without a heading. The dots are the same 1px
-   dots as the homepage hero's dot grid and share its blue tint in light mode. Pages place this
-   element where their seams go: in a column or a grid of panels 32px apart (the usual gap), its
-   margin puts the middle of the dot row 48px from the panels on either side, and in a grid it spans
-   every column. */
+/* The seam between sections: a dotted line that fades out at both ends. Between panels 32px apart its margin
+   puts the dots 48px from the panels on either side; in a grid it spans every column. */
 
 .custom-page .dotted-divider {
   grid-column: 1 / -1;
@@ -316,23 +282,16 @@ html.dark .custom-page .texture-dots::after {
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
 
-/* light dots on the dark canvas stand out more than dark dots on white, so they are fainter there */
 html.dark .custom-page .dotted-divider {
   background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 16%, transparent) 1px, transparent 1.5px);
 }
 
 
-/* Page canvas
-   Every custom page paints one continuous canvas on <body>, so the page, the strip under the navbar
-   and the footer all share it with no seams: a fine grain tile (256px, its native size) over soft
-   colour washes. The rules live here rather than in the page components because in dev mode a
-   component's CSS is only loaded on pages that import it.
-
-   The washes share one palette, each colour defined once per theme (below), all near the brand blue
-   (yellows and greens were tried and rejected); the strengths are the homepage's, the most colourful
-   page. Each page places its own washes at page-height percentages, none in the last stretch, so the
-   footer stays calm. The shared rule lists one repeat value per layer: the grain tiles, the washes do
-   not. Values beyond a page's layer count are ignored, so the list covers up to nine washes. */
+/* Page canvas: one continuous background on <body>, so the page, the strip under the navbar and the footer
+   share it: a grain tile over colour washes from one palette near the brand blue, placed per page at
+   page-height percentages (none near the footer). It lives here, not in the page components, because in dev a
+   component's CSS loads only on the pages that import it. The repeat list has one value per layer (the grain
+   repeats, the washes do not); values beyond a page's layers are ignored. */
 
 body:has(.custom-page) {
   --wash-sky: color-mix(in srgb, #2196F3 22%, transparent);
@@ -349,7 +308,7 @@ body:has(.custom-page) {
   background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
 }
 
-/* the dark canvas takes most washes a little stronger, and the soft top wash and the teal lean greener */
+/* the dark canvas takes most washes a little stronger */
 html.dark body:has(.custom-page) {
   --wash-sky: color-mix(in srgb, #2196F3 24%, transparent);
   --wash-sky-soft: color-mix(in srgb, #00BCD4 7%, transparent);
@@ -362,11 +321,7 @@ html.dark body:has(.custom-page) {
   --wash-indigo: color-mix(in srgb, #3F51B5 14%, transparent);
 }
 
-/* Homepage: a sky-blue glow behind the statistics and a softer one across the top, a violet glow behind
-   the headline and a cyan wash at the foot of the hero (the hero is the most colourful part of the
-   page), a faint cyan wash on the right by the quick start, a teal wash by the Companion App, a tall
-   blue glow along the right edge by the trust panels, a light-blue wash on the left and an indigo wash
-   behind the license panel. */
+/* the homepage is the most colourful: four glows around the hero, then washes down both sides */
 
 body:has(.custom-page.home-page) {
   background-image:
@@ -382,9 +337,7 @@ body:has(.custom-page.home-page) {
       radial-gradient(ellipse 1200px 800px at 0% 80%, var(--wash-indigo), transparent 70%);
 }
 
-/* Pricing: the sky-blue and violet glows behind the title, like the hero; a cyan wash at the foot of
-   the tier cards; a teal wash on the left and a tall blue glow on the right along the questions. The
-   reseller and contact cards stay calm. */
+/* the other pages open with the hero's sky-blue and violet glows */
 
 body:has(.custom-page.pricing-page) {
   background-image:
@@ -396,10 +349,6 @@ body:has(.custom-page.pricing-page) {
       radial-gradient(ellipse 600px 1400px at 100% 66%, var(--wash-blue), transparent 70%);
 }
 
-/* Features overview: the page is long, so the washes are spread along it: the two hero glows behind
-   the header, then a teal wash on the left and a tall blue glow on the right along the chapters, and
-   an indigo wash on the left further down. */
-
 body:has(.custom-page.features-page) {
   background-image:
       url("/homepage/grain.png"),
@@ -410,10 +359,7 @@ body:has(.custom-page.features-page) {
       radial-gradient(ellipse 1200px 800px at 0% 72%, var(--wash-indigo), transparent 70%);
 }
 
-/* Legal hub and documents (`legal-page`, LicenseIndex.vue and DocumentTemplate.vue share it, so moving
-   between them keeps the canvas): the documents are long, so the washes stay near the top: the two
-   hero glows behind the title, then a teal wash on the left and a tall blue glow on the right along
-   the text. */
+/* the legal hub and the documents share one canvas, so moving between them keeps it */
 
 body:has(.custom-page.legal-page) {
   background-image:
@@ -424,9 +370,6 @@ body:has(.custom-page.legal-page) {
       radial-gradient(ellipse 600px 1400px at 100% 60%, var(--wash-blue), transparent 70%);
 }
 
-/* Contact and purchase confirmation: short pages, so only a few washes: the two hero glows behind the
-   header and a cyan wash at the foot of the cards. */
-
 body:has(.custom-page:is(.contact-page, .purchase-page)) {
   background-image:
       url("/homepage/grain.png"),
@@ -435,7 +378,7 @@ body:has(.custom-page:is(.contact-page, .purchase-page)) {
       radial-gradient(ellipse 1000px 600px at 10% 55%, var(--wash-cyan), transparent 70%);
 }
 
-/* Small uppercase label above a section heading (purchase confirmation, legal documents). */
+/* a small uppercase label above a heading (purchase confirmation, legal documents) */
 
 .section-tag {
   background-color: color-mix(in srgb, var(--vp-c-brand-2), transparent 85%);
@@ -458,8 +401,8 @@ body:has(.custom-page:is(.contact-page, .purchase-page)) {
   color: var(--vp-c-brand-2);
 }
 
-/* a.action is a button-styled link; a <button> takes the class as well, for a control that only runs
-   script (the VitePress router intercepts clicks on links) */
+/* a button-styled link; a <button> takes the class too, for a control that only runs script (the VitePress
+   router intercepts clicks on links) */
 
 :is(a, button).action {
   display: inline-block;

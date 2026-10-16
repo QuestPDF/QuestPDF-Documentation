@@ -64,10 +64,9 @@ const documents = [
   flex-direction: column;
   gap: 32px;
   align-items: center;
-  width: 100%;
 }
 
-/* the shared panel surface, its rows reaching the edges, like the pricing FAQ */
+/* the rows reach the panel's edges, like the pricing FAQ */
 .documents {
   display: flex;
   flex-direction: column;

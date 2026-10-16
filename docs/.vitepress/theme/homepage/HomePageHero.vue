@@ -3,33 +3,35 @@ import { data as statistics } from "../statistics.data";
 </script>
 
 <template>
-  <div class="hero-pattern" />
+  <div class="container hero">
+    <div class="hero-pattern" />
 
-  <section class="content">
-    <div class="text">
-      <h1>
-        <span class="highlight-foreground">Code-first</span> PDF <br>generation <span class="keep-together">for C#</span>
-      </h1>
+    <section class="content">
+      <div class="text">
+        <h1>
+          <span class="highlight-foreground">Code-first</span> PDF <br>generation <span class="keep-together">for C#</span>
+        </h1>
 
-      <div class="tagline">
-        Design documents the way you design software, in readable C# code that renders to precise, standards-compliant PDFs on every platform. Effortlessly collaborate with your AI agent to create perfect designs.
+        <div class="tagline">
+          Design documents the way you design software, in readable C# code that renders to precise, standards-compliant PDFs on every platform. Effortlessly collaborate with your AI agent to create perfect designs.
+        </div>
       </div>
-    </div>
 
-    <!-- the adoption numbers -->
-    <aside class="statistics">
-      <a v-for="statistic in statistics" :key="statistic.label" :href="statistic.link" :target="statistic.link.startsWith('http') ? '_blank' : undefined" rel="noopener" class="statistic">
-        <span class="statistic-icon">
-          <i class="fa-solid" :class="[statistic.icon]"></i>
-        </span>
+      <!-- the adoption numbers -->
+      <aside class="statistics">
+        <a v-for="statistic in statistics" :key="statistic.label" :href="statistic.link" :target="statistic.link.startsWith('http') ? '_blank' : undefined" rel="noopener" class="statistic">
+          <span class="statistic-icon">
+            <i class="fa-solid" :class="statistic.icon"></i>
+          </span>
 
-        <span class="title">
-          <span class="value">{{ statistic.value }}</span>
-          <span class="label">{{ statistic.label }}</span>
-        </span>
-      </a>
-    </aside>
-  </section>
+          <span class="title">
+            <span class="value">{{ statistic.value }}</span>
+            <span class="label">{{ statistic.label }}</span>
+          </span>
+        </a>
+      </aside>
+    </section>
+  </div>
 </template>
 
 
@@ -37,23 +39,23 @@ import { data as statistics } from "../statistics.data";
 
 /* Layout */
 
-.content {
+.hero {
   position: relative;
+}
+
+.content {
+  position: relative; /* paints the text and the statistics over the dot grid */
 
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto; /* the text caps its own width, the statistics take what they need */
-  grid-gap: 64px;
+  gap: 64px;
   align-items: center;
-
-  /* 64px above (after the -64px pull-up) and 64px below */
-  margin-top: -64px;
-  padding-top: 128px;
-  padding-bottom: 64px;
+  padding-block: 64px;
 }
 
 @media screen and (max-width: 1023px) {
   .content {
-    grid-gap: 48px;
+    gap: 48px;
   }
 }
 
@@ -70,15 +72,11 @@ import { data as statistics } from "../statistics.data";
 }
 
 
-/* Content styles */
-
-/* the text column is a size container so the headline can scale with the room the statistics leave
-   it: "generation for C#" is about 8x the font size wide, so 11.5cqi keeps it on one line and the
-   clamp holds it between the phone size and the full 4.5rem. The headline rules name the column, so
-   they outrank the shared `.custom-page h1` sizes. */
+/* the text column is a size container, so the headline scales with the room the statistics leave it:
+   "generation for C#" is about 8x the font size wide, so 11.5cqi keeps it on one line, clamped between the
+   phone size and 4.5rem. The headline rules name the column, so they outrank the shared `.custom-page h1`. */
 .text {
   container-type: inline-size;
-  z-index: 10;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -97,9 +95,8 @@ h1 .keep-together {
   white-space: nowrap; /* when the line has to break, "for C#" moves down together, never a lone "C#" */
 }
 
-/* "Code-first" carries the cyan-to-blue gradient of the logo, painted through the glyphs, with a soft
-   glow in the same colours underneath so the line lifts off the page. The glow is a drop-shadow filter,
-   not a text-shadow: a text-shadow would paint over the gradient inside the transparent letters. */
+/* "Code-first" in the logo's gradient, painted through the glyphs; the glow is a drop-shadow filter because a
+   text-shadow would paint over the gradient inside the transparent letters */
 h1 .highlight-foreground {
   display: inline-block; /* so the gradient box ends at the word, not the full line */
   padding-right: 0.05em; /* keeps the gradient clip from shaving the last letter's edge */
@@ -125,11 +122,7 @@ html.dark h1 .highlight-foreground {
   line-height: 2.25rem;
   font-weight: 400;
   word-spacing: 2px;
-  color: #000B;
-}
-
-html.dark .tagline {
-  color: #FFFB;
+  color: light-dark(#000B, #FFFB);
 }
 
 @media screen and (max-width: 1024px) {
@@ -147,14 +140,10 @@ html.dark .tagline {
 }
 
 
-/* Hero statistics
-   The adoption numbers sit directly on the page, with no surface of their own, as a vertical list:
-   four stats in a row would squeeze the headline, and a wrapped row looks broken. Stacked, the list
-   keeps one shape at every width. It is only as wide as its stats need and sits flush with the right
-   edge of the page content; stacked under the text, it starts at the left edge. */
+/* Statistics: a vertical list, because four in a row would squeeze the headline and a wrapped row looks
+   broken */
 
 .statistics {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: 28px;
@@ -167,16 +156,15 @@ html.dark .tagline {
   }
 }
 
-/* each stat is a link, but it reads as plain content: no frame, no lift, and the icon, the value and
-   the label set their own colours, so the global link hover colour never reaches them */
+/* each stat is a link that reads as plain content: its parts set their own colours, so the global link hover
+   never reaches them */
 .statistic {
   display: flex;
   align-items: center;
   gap: 20px;
 }
 
-/* the icon sits on a quiet tile: a faint wash of the text colour with an ink glyph, so the numbers
-   stay the loudest thing in the list */
+/* a quiet tile, so the numbers stay the loudest thing in the list */
 .statistic-icon {
   display: inline-flex;
   flex: 0 0 auto;
@@ -194,9 +182,7 @@ html.dark .tagline {
   color: var(--vp-c-text-1);
 }
 
-/* a solid near-black glyph is too heavy on the light theme, so the light theme draws the same
-   glyph in the outlined (regular) style instead: weight 400 of the Font Awesome Pro family that
-   fa-solid sets to 900. The glyph keeps the full ink colour; the thin stroke carries the weight. */
+/* a solid near-black glyph is too heavy on the light theme, so it takes the regular (outlined) weight there */
 html:not(.dark) .statistic-icon i {
   font-weight: 400;
 }
@@ -226,13 +212,12 @@ html:not(.dark) .statistic-icon {
   color: var(--vp-c-text-2);
 }
 
-/* Background
-   The colour washes and grain belong to the whole page (see "Page canvas" in CustomPages.css). The hero
-   only adds a faint dot grid under the statistics, fading out towards the headline and the page edges. */
+/* a faint dot grid under the statistics, fading out towards the headline and the page edges (the washes
+   belong to the page canvas, see CustomPages.css) */
 
 .hero-pattern {
   position: absolute;
-  inset: 0;
+  inset: -64px 0 0; /* from under the navbar, the box the mask below is drawn on */
   pointer-events: none;
 
   /* the dots lean towards the brand blue, so the grid reads as part of the blue washes rather than grey noise */

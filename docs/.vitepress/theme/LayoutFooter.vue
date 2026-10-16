@@ -90,7 +90,7 @@ const year = 2026;
   </footer>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 
 footer {
   /* opaque, like the navbar: the homepage canvas (washes and grain) stops at the footer's top border */
@@ -107,12 +107,12 @@ footer * {
 
 .content {
   border-top: 1px solid var(--vp-c-divider);
+}
 
-  & > * {
-    margin: 0 auto;
-    max-width: var(--custom-page-width);
-    padding: 48px 32px;
-  }
+.content > * {
+  margin: 0 auto;
+  max-width: var(--custom-page-width);
+  padding: 48px 32px;
 }
 
 .link-categories {
@@ -121,26 +121,24 @@ footer * {
   gap: 48px 32px;
 }
 
-.link-category {
-  h2 {
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--vp-c-text-1);
-    margin-bottom: 12px;
-  }
+.link-category h2 {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--vp-c-text-1);
+  margin-bottom: 12px;
+}
 
-  ul {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+.link-category ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-  a:hover {
-    color: var(--vp-c-text-1);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
+.link-category a:hover {
+  color: var(--vp-c-text-1);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 @media screen and (max-width: 960px) {

@@ -20,10 +20,7 @@ import { featureCategories as categories } from "./features";
             <p class="card-description">{{ category.description }}</p>
           </header>
 
-          <!-- One row per feature: icon, name, and a one-line summary that appears while the row is
-               hovered or focused (always shown where there is no pointer to hover with; it is only
-               transparent, so screen readers read it as part of the row either way). The row links to
-               the documentation page. Sub-pages follow their parent as child rows, always visible. -->
+          <!-- the summary is only transparent until the row is hovered, so screen readers read it either way -->
           <ul class="feature-list">
             <li v-for="item in category.items" :key="item.name">
               <component :is="item.link ? 'a' : 'div'" :href="item.link" class="feature-row">
@@ -53,8 +50,6 @@ import { featureCategories as categories } from "./features";
 
 <style scoped>
 
-/* Page styles */
-
 .content {
   display: flex;
   flex-direction: column;
@@ -70,8 +65,6 @@ import { featureCategories as categories } from "./features";
   margin-bottom: 0;
 }
 
-
-/* Category: the shared panel surface (CustomPages.css) with a heading and a list of feature rows */
 
 .category {
   display: flex;
@@ -105,8 +98,6 @@ import { featureCategories as categories } from "./features";
   }
 }
 
-
-/* Feature row: icon, name, one-line summary; the whole row is the link */
 
 .feature-row {
   position: relative;
@@ -169,9 +160,8 @@ a.feature-row:hover .feature-name {
   color: var(--vp-c-text-2);
 }
 
-/* with a pointer to hover with, the summary of a row shows only while the row is hovered or
-   focused, so the list reads as a calm column of names; touch devices and the stacked layout below
-   show every summary */
+/* with a pointer, a row shows its summary only while hovered or focused, so the list reads as a calm column
+   of names */
 @media (hover: hover) and (min-width: 1025px) {
   .feature-summary {
     opacity: 0;
@@ -197,14 +187,13 @@ a.feature-row:hover .feature-name {
 }
 
 
-/* Child row: a sub-page of the feature above, hung on a tree line instead of carrying an icon */
+/* a sub-page of the feature above, hung on a tree line instead of carrying an icon */
 
 .feature-row.child {
   min-height: 36px;
   padding-left: 48px;
 }
 
-/* child rows keep the row text size; the indent, tree line and lighter weight mark them as sub-pages */
 .feature-row.child .feature-name {
   font-weight: 500;
 }
@@ -231,8 +220,7 @@ a.feature-row:hover .feature-name {
 }
 
 
-/* Narrower windows: the summary no longer fits beside the name on one line, so it wraps under
-   it; the hover arrow goes */
+/* narrower windows: the summary wraps under the name and the hover arrow goes */
 
 @media screen and (max-width: 1024px) {
   .feature-row {

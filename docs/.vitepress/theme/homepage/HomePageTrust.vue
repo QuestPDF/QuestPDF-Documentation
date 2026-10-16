@@ -1,20 +1,14 @@
 <script setup lang="ts">
-/* Two panels side by side. Left, with a heading like the Companion App and license panels, the
-   compliance story: the promise and the independent validators, then the supported conformance levels
-   as chips grouped by purpose. Right, no heading: a two-by-two grid of cells divided by a cross of
-   hairlines, one per thing a manager, product owner or programmer checks before buying. The first
-   cell is the data privacy fact, linked to its page; the other three answer whether the library runs
-   in the buyer's environment: the runtimes as text, the operating systems and the deployment
-   environments as small monochrome logos with labels. Everything is visible at once. */
+/* Two panels: the compliance story (the validators, then the conformance levels as chips grouped by
+   purpose), and a two-by-two grid of what buyers check first: data privacy (linked to its policy), the
+   runtimes, the operating systems and the deployment environments. */
 
 interface StandardsCategory {
   title: string;
   levels: string[];
 }
 
-/* every conformance level the library can produce, grouped by what the buyer needs it for; the
-   description names no standards, so both the purposes and the standard names live here.
-   Archiving (six chips) takes a row of its own, the two short groups share the next one */
+/* every conformance level the library produces, grouped by purpose */
 const standards : StandardsCategory[] = [
   {
     title: "Archiving",
@@ -34,9 +28,7 @@ interface Platform {
   name: string;
   /* logo in /homepage/supported-platforms, painted in the text colour through a CSS mask; a runtime has none */
   src?: string;
-  /* rendered logo height in px, inside a slot of fixed width so the labels line up; the marks differ
-     in proportion (the Windows flag is nearly square, the Docker whale and the AWS smile are wide),
-     so each gets its own height for an even optical weight */
+  /* logo height in px, tuned per mark for an even optical weight (the slot width is fixed, so labels line up) */
   height?: number;
 }
 
@@ -76,10 +68,8 @@ const platformGroups : PlatformGroup[] = [
 
 <template>
   <div class="trust">
-    <!-- the compliance story; the promise and validators in the description, the conformance levels as grouped chips -->
     <div class="panel compliance">
       <h2 class="card-title">Industry-standard output</h2>
-      <!-- the evidence: validated independently on every build -->
       <p class="card-description">
         Every build is automatically validated with the independent, trusted and open-source
         <a href="https://verapdf.org/" target="_blank" rel="noopener">veraPDF</a> and
@@ -96,8 +86,6 @@ const platformGroups : PlatformGroup[] = [
       </div>
     </div>
 
-    <!-- the foundations as a two-by-two grid of cells, no heading and no icons: the privacy fact
-         (one link, the label underlines and grows an arrow on hover) and the three platform groups -->
     <section class="panel foundations" aria-label="Enterprise-grade foundations">
       <div class="cells">
         <!-- the security policy backs the claim -->
@@ -133,8 +121,6 @@ const platformGroups : PlatformGroup[] = [
 
 <style scoped>
 
-/* Two equal columns, one card each, the same height; everything in one column on narrow screens */
-
 .trust {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -153,14 +139,12 @@ const platformGroups : PlatformGroup[] = [
 }
 
 
-/* The label is the scanning anchor of both cards, over the conformance groups and in the cells: small
-   uppercase, in the primary text colour, over quieter secondary text */
+/* the label over each group and cell, the scanning anchor of both panels */
 
 .label {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin: 0;
   font-size: 0.75rem;
   line-height: 1.25rem;
   font-weight: 600;
@@ -170,9 +154,7 @@ const platformGroups : PlatformGroup[] = [
 }
 
 
-/* Conformance levels: one group per purpose, each a wrapped set of chips under a one-word label.
-   The first group (archiving) fills a row; the others sit side by side and wrap under each other
-   when the card gets narrow */
+/* the first group (archiving) fills a row; the others share the next one and wrap when narrow */
 
 .standards {
   display: flex;
@@ -192,7 +174,6 @@ const platformGroups : PlatformGroup[] = [
   margin-top: 8px;
 }
 
-/* small labels on the inset layer of the surface (--surface-inner, see CustomPages.css) */
 .standards-badges > span {
   display: inline-flex;
   align-items: center;
@@ -205,8 +186,6 @@ const platformGroups : PlatformGroup[] = [
   background-color: var(--surface-inner);
 }
 
-
-/* The validator names in the description are linked to the tools' sites */
 
 .compliance .card-description a {
   color: var(--vp-c-text-1);
@@ -222,10 +201,8 @@ const platformGroups : PlatformGroup[] = [
 }
 
 
-/* Cells: four in a two-by-two grid that fills the card, divided by a cross of hairlines in the
-   panel's divider colour: one vertical line between the columns, one horizontal line between the
-   rows. The cells carry the spacing as padding, so both lines run edge to edge of the grid while
-   the outer edges stay open; the content sits in the middle of each quadrant. */
+/* Cells: a two-by-two grid divided by a cross of hairlines. The cells pad only their inner sides, so the
+   lines run edge to edge while the outer edges stay open. */
 
 .cells {
   flex: 1;
@@ -296,8 +273,6 @@ const platformGroups : PlatformGroup[] = [
 }
 
 
-/* The platform groups: the items in a vertical list, a logo and a label each, in the fact text style */
-
 .platforms {
   display: flex;
   flex-direction: column;
@@ -315,8 +290,7 @@ const platformGroups : PlatformGroup[] = [
   white-space: nowrap;
 }
 
-/* the logos are painted through a mask in the text colour, inside a slot of one fixed width so the
-   labels line up in a column; the height comes from the data, see the Platform interface */
+/* painted in the text colour through a mask; the height comes from the data */
 
 .platform-logo {
   flex-shrink: 0;
@@ -328,9 +302,7 @@ const platformGroups : PlatformGroup[] = [
 }
 
 
-/* The linked cell reads like the plain ones until pointed at: then the label underlines and a small
-   arrow slides in beside it; the text below does not change. The focus ring is the one the CTA cards
-   use */
+/* the linked cell reads like the others until pointed at: then its label underlines and an arrow slides in */
 
 .fact {
   border-radius: 4px;

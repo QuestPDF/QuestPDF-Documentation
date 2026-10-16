@@ -1,33 +1,26 @@
 import {computed, onMounted, onUnmounted, ref, type Ref} from "vue";
-import type {ShikiTransformer} from "@shikijs/types";
+import type {Round} from "./quickStart.data";
 
 /* A looped simulation of a session with a coding agent: a prompt types itself into a composer and is
    sent, the agent works for a moment, and the code window shows the edit as a diff, the replaced line
    in red and the new lines typed in green. When the next prompt starts, the previous diff is accepted
    into the code. After the last round the session resets. The loop plays while the root is in view and
-   pauses off-screen; under prefers-reduced-motion the finished session is shown still. The quick start
-   section drives it with the Program.cs sample. */
+   pauses off-screen; under prefers-reduced-motion the finished session is shown still. */
 
-export interface Round {
-  prompt: string;
-  /* the line the new lines go under, matched by text */
-  after: string;
-  /* the edit replaces that line: it is marked red and kept in place above the new lines */
-  replace?: boolean;
-  add: string[];
-}
-
-type LineKind = "normal" | "removed" | "added";
-
-interface Line {
+export interface Line {
   text: string;
-  kind: LineKind;
+  kind: "normal" | "removed" | "added";
+  /* how many characters of a line being typed are in (unset: all of them) */
+  typed?: number;
 }
 
 type Phase = "idle" | "typing" | "working" | "editing" | "done";
 
 const promptSpeed = 28;
 const codeSpeed = 16;
+
+/* thrown out of a pause once the component is gone, which ends the loop */
+const unmounted = Symbol("unmounted");
 
 export function useAgentSession(root: Ref<HTMLElement | null>, initialCode: string[], rounds: Round[]) {
   const lines = ref<Line[]>([]);
@@ -42,22 +35,6 @@ export function useAgentSession(root: Ref<HTMLElement | null>, initialCode: stri
   const typing = computed(() => phase.value === "typing" && promptTyped.value < round.value.prompt.length);
   const sent = computed(() => phase.value !== "idle" && phase.value !== "typing");
   const working = computed(() => phase.value === "working" || phase.value === "editing");
-
-  const code = computed(() => lines.value.map(line => line.text).join("\n"));
-
-  /* shiki line numbers are 1-based and follow the lines array one to one */
-  const codeTransformer = computed<ShikiTransformer>(() => {
-    const kinds = lines.value.map(line => line.kind);
-
-    return {
-      line(node, line) {
-        const kind = kinds[line - 1];
-
-        if (kind !== "normal")
-          this.addClassToHast(node, `line-${kind}`);
-      }
-    };
-  });
 
 
   /* Edits on the lines */
@@ -90,7 +67,7 @@ export function useAgentSession(root: Ref<HTMLElement | null>, initialCode: stri
 
     for (const r of rounds) {
       if (r.replace) markReplaced(r);
-      lines.value.splice(insertionIndex(r), 0, ...r.add.map(text => ({ text, kind: "added" as LineKind })));
+      lines.value.splice(insertionIndex(r), 0, ...r.add.map(text => ({ text, kind: "added" as const })));
       acceptDiff();
     }
 
@@ -116,6 +93,9 @@ export function useAgentSession(root: Ref<HTMLElement | null>, initialCode: stri
       await sleep(250);
 
     await sleep(ms);
+
+    if (!alive)
+      throw unmounted;
   }
 
   /* types the added block line by line, character by character, under the insertion line */
@@ -123,11 +103,11 @@ export function useAgentSession(root: Ref<HTMLElement | null>, initialCode: stri
     let at = insertionIndex(r);
 
     for (const text of r.add) {
-      lines.value.splice(at, 0, { text: "", kind: "added" });
+      lines.value.splice(at, 0, { text, kind: "added", typed: 0 });
       const line = lines.value[at]; /* the reactive proxy, so each character re-renders the window */
 
-      for (const character of text) {
-        line.text += character;
+      while (line.typed! < text.length) {
+        line.typed!++;
         await pause(codeSpeed);
       }
 
@@ -142,7 +122,7 @@ export function useAgentSession(root: Ref<HTMLElement | null>, initialCode: stri
     await pause(index === 0 ? 1500 : 1200);
 
     phase.value = "typing";
-    while (promptTyped.value < round.value.prompt.length && alive) {
+    while (promptTyped.value < round.value.prompt.length) {
       promptTyped.value++;
       await pause(promptSpeed);
     }
@@ -174,16 +154,22 @@ export function useAgentSession(root: Ref<HTMLElement | null>, initialCode: stri
   async function loop() {
     running = true;
 
-    while (alive) {
-      for (let index = 0; index < rounds.length && alive; index++)
-        await playRound(index);
+    try {
+      while (alive) {
+        for (let index = 0; index < rounds.length; index++)
+          await playRound(index);
+      }
+    }
+    catch (error) {
+      if (error !== unmounted)
+        throw error;
     }
   }
 
   resetSession();
 
   onMounted(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window) || !root.value) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       showFinishedSession();
       return;
     }
@@ -192,10 +178,10 @@ export function useAgentSession(root: Ref<HTMLElement | null>, initialCode: stri
       visible = entries.some(entry => entry.isIntersecting);
 
       if (visible && !running)
-        loop();
+        void loop();
     }, { threshold: 0.25 });
 
-    observer.observe(root.value);
+    observer.observe(root.value!);
   });
 
   onUnmounted(() => {
@@ -203,5 +189,5 @@ export function useAgentSession(root: Ref<HTMLElement | null>, initialCode: stri
     observer?.disconnect();
   });
 
-  return { code, codeTransformer, promptText, typing, sent, working };
+  return { lines, promptText, typing, sent, working };
 }

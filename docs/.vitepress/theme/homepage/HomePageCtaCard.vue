@@ -1,14 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 
-/* One of the two calls to action right under the hero: a card that is a single link, with an animated
-   visual on the left and the pitch on the right, ending in a text link row in the card's accent colour.
-
-   The visual comes from the "visual" slot: the intro-video card fills it with the 3D invoice build
-   (HomePageCtaBuildVisual.vue), the sample-gallery card with the 3D pile of sample pages
-   (HomePageCtaDeckVisual.vue). The card is `active` while it is hovered or has keyboard focus (a click's
-   focus does not count: the click navigates anyway): the card lifts and lights its ring, and the slot
-   gets `active` so the visual plays its hover. */
+/* A call to action under the hero: one link with a visual (the "visual" slot) and the pitch. It is `active`
+   while hovered or keyboard-focused (a click's focus does not count: the click navigates anyway); the slot
+   gets `active` too, so the visual plays its hover. */
 
 withDefaults(defineProps<{
   title: string;
@@ -66,8 +61,6 @@ function onFocus(event: FocusEvent) {
 
 <style scoped>
 
-/* Card: a link styled as a panel; the visual takes the left 38%, the text the rest */
-
 .cta-card {
   isolation: isolate; /* keeps the gradient (z-index: -1) above the panel background but below the content */
   overflow: hidden; /* a visual that runs past its column is clipped at the card's rounded edge */
@@ -99,12 +92,9 @@ html.dark .cta-card.active {
 }
 
 
-/* Hover ring: the card's edge lights up in the accent colours while the card is active, with three
-   brighter highlights travelling around the edge, and a soft halo in the same colour spreads under the
-   card. The ring is an ::after covering the card, its conic gradient masked to the outer 2px (the same
-   technique as the glass rim in CustomPages.css); it sits above the visual, so a visual reaching the
-   card's edge runs under it. The gradient's start angle is a registered property, so it can be animated;
-   a browser without @property shows the ring without the motion. */
+/* Hover ring: an ::after over the card, its conic gradient masked to the outer 2px (like the panel rim), with
+   three highlights travelling round. The start angle is a registered property so it can be animated; without
+   @property the ring just stands still. */
 
 @property --cta-ring-angle {
   syntax: "<angle>";
@@ -113,21 +103,19 @@ html.dark .cta-card.active {
 }
 
 .cta-card {
-  /* light theme: the lift shadow itself is tinted with the accent and replaces the resting edge; the grey
-     lift shadow and a blue glow stacked on the pale page turned into a muddy smear under the card, and the
-     1px grey inset line showed through the ring. The upward part of --elevation-hover is left out. */
+  /* light theme: an accent-tinted lift shadow replaces the resting edge (a grey shadow under a blue glow reads
+     muddy, and the grey hairline would show through the ring) */
   --accent-halo:
       0 1px 2px rgba(16, 24, 40, 0.04),
       0 13px 27px -5px color-mix(in srgb, var(--accent) 18%, transparent),
       0 8px 16px -8px color-mix(in srgb, var(--accent) 24%, transparent);
 
-  /* the accent is a glow colour; as text (the link row) it is darkened on the light theme and lightened
-     on the dark one, so it stays readable on both */
+  /* the accent is a glow colour: as text it is darkened on the light theme and lightened on the dark one */
   --accent-text: color-mix(in srgb, var(--accent-secondary) 85%, #000);
 }
 
 html.dark .cta-card {
-  /* dark theme: a soft glow of the accent, over the usual lift shadow */
+  /* dark theme: a soft glow of the accent over the usual lift shadow */
   --accent-halo: 0 0 48px -16px color-mix(in srgb, var(--accent) 50%, transparent);
   --accent-text: color-mix(in srgb, var(--accent) 75%, #FFF);
 }
@@ -141,10 +129,9 @@ html.dark .cta-card {
   padding: 2px;
   pointer-events: none;
 
-  /* a faint tint all the way round, and three arcs of the accent colours spaced evenly (every 120deg);
-     the peak of each arc is lightened a little on the dark theme, where a tint of white reads as light */
+  /* a faint tint all round and three accent arcs, 120deg apart; the peaks lighten on the dark theme */
   --ring-base: color-mix(in srgb, var(--accent) 22%, transparent);
-  --ring-peak: var(--accent);
+  --ring-peak: light-dark(var(--accent), color-mix(in srgb, var(--accent) 80%, #FFF));
   background: conic-gradient(
       from var(--cta-ring-angle),
       var(--ring-base) 0deg,
@@ -169,10 +156,6 @@ html.dark .cta-card {
   transition: opacity 0.35s ease;
 }
 
-html.dark .cta-card::after {
-  --ring-peak: color-mix(in srgb, var(--accent) 80%, #FFF);
-}
-
 /* the ring never reaches full strength: it should invite, not shout */
 .cta-card.active::after {
   opacity: 0.75;
@@ -185,8 +168,6 @@ html.dark .cta-card::after {
   }
 }
 
-
-/* Text column: the title, the pitch, then the link row in the accent colour */
 
 .cta-text {
   display: flex;
@@ -222,8 +203,6 @@ html.dark .cta-card::after {
 }
 
 
-/* Visual: the slot's content, centred in its column */
-
 .visual {
   position: relative;
   min-width: 0;
@@ -234,8 +213,7 @@ html.dark .cta-card::after {
 }
 
 
-/* Background: a glow in the accent colour from the top-left corner, behind the visual. The glow
-   brightens a little on hover. */
+/* a glow in the accent colour behind the visual, a little brighter on hover */
 
 .background-gradient {
   position: absolute;
@@ -253,9 +231,8 @@ html.dark .cta-card::after {
   opacity: 1;
 }
 
-/* light theme: the glow is centred behind the visual rather than in the card's top-left corner.
-   The visual's column is 38% of the content width after the 32px padding, so its centre sits at
-   32px + 19% of (width - 64px) = 19% + 20px */
+/* light theme: centred behind the visual, whose column is 38% of the width after the 32px padding: its
+   centre is at 32px + 19% of (width - 64px) = 19% + 20px */
 html:not(.dark) .background-gradient {
   background-image:
       radial-gradient(ellipse 28% 60% at calc(19% + 20px) 50%, color-mix(in srgb, var(--accent) 16%, transparent), transparent),
@@ -263,8 +240,7 @@ html:not(.dark) .background-gradient {
 }
 
 
-/* Between the stacking point and the full width the cards are narrow, so the visual gives the text
-   a little more room */
+/* narrow cards between the stacking point and the full width: more room for the text */
 @media screen and (max-width: 1280px) and (min-width: 901px) {
   .cta-card {
     grid-template-columns: 34% minmax(0, 1fr);
@@ -274,8 +250,7 @@ html:not(.dark) .background-gradient {
 }
 
 
-/* Compact: below 700px the visual shrinks to an icon-sized thumbnail beside the title, so the card
-   stays short and the code panel is not pushed too far down */
+/* Compact: below 700px the visual is a thumbnail beside the title, so the card stays short */
 
 @media screen and (max-width: 700px) {
   .cta-card {
@@ -296,7 +271,7 @@ html:not(.dark) .background-gradient {
     align-self: center;
   }
 
-  /* the title leaves the text column to sit beside the thumbnail; the rest of the column follows below */
+  /* the text column dissolves, so the title can sit beside the thumbnail */
   .cta-text {
     display: contents;
   }
@@ -333,7 +308,7 @@ html:not(.dark) .background-gradient {
 }
 
 
-/* Reduced motion: nothing moves; hover and entrance change colour, opacity and shadow only */
+/* Reduced motion: hover changes colour, opacity and shadow only */
 
 @media (prefers-reduced-motion: reduce) {
   .cta-card,

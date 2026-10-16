@@ -28,11 +28,8 @@ import PricingContact from "./PricingContact.vue";
 
 <style>
 
-/* Section seams
-   The shared dotted divider (CustomPages.css) between the sections, outside the content column, so
-   it takes the column's width itself (the page width minus the content's side padding) and the
-   sections' own padding spaces it: they sit 48px from the seam on either side, as on the homepage;
-   the title keeps the usual 64px under the navbar and the contact card keeps 64px above the footer. */
+/* The dividers sit between the section containers, so they take the content width themselves; the sections'
+   48px padding spaces them (64px at the top and the bottom of the page). */
 
 .custom-page.pricing-page > .dotted-divider {
   width: calc(100% - 64px);

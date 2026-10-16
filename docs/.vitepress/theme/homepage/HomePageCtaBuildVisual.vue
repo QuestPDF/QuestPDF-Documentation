@@ -1,32 +1,22 @@
 <script setup lang="ts">
 import { onBeforeUnmount, ref, watch } from "vue";
 
-/* The visual of the intro-video card: an invoice is implemented in front of the reader, in 3D. A blank
-   sheet stands on the card in perspective, like a page held slightly turned. The invoice's sections are
-   skeletons, placeholder bars laid out like a real invoice (title block, the two parties, the table header,
-   four rows, the totals, a footer line). The card shows the finished page from the start: no entrance.
+/* The intro-video card's visual: an invoice page in 3D, its sections drawn as placeholder bars (title block,
+   the two parties, the table, the totals, a footer line).
 
-   Hover (`active`, from HomePageCtaCard.vue): the play button goes at once, the finished content fades
-   out in place (0.2s), the sheet turns towards the reader, and the build plays once: each section fades
-   in a little in front of the page and moves onto it, top to bottom, about 1.65s in all; the play button
-   lands with the totals. From then on, while the pointer rests, only the play button moves: it breathes,
-   with a ring spreading out of it. The pointer leaving lets a pass in progress finish; the next hover
-   plays another.
-   Reduced motion: the finished page, the play button in place, nothing moves. Below 700px the card shows
-   a flat miniature of the finished page instead (see the compact rules in ctaVisual.css).
-
-   Everything is CSS: no image assets. */
+   Hover (`active`, from HomePageCtaCard.vue): the content fades out, the sheet turns towards the reader and
+   the sections land on it one after another, top to bottom; the play button returns with the totals and
+   breathes while the pointer rests. A pass always finishes, even if the pointer leaves; the next hover plays
+   another. Reduced motion: the finished page, nothing moves. */
 
 const props = defineProps<{ active: boolean }>();
 
-/* rest: the finished page, as the card first shows it. fading: a pass has started, the finished content
-   fades out in place. landing: the sections land one after another. play: the play button is in place;
-   it goes the moment a pass starts and lands with the totals. */
+/* rest: the finished page. fading: a pass has started and the content fades out. landing: the sections land.
+   play: the play button is shown; it hides when a pass starts and returns with the totals. */
 const phase = ref<"rest" | "fading" | "landing">("rest");
 const play = ref(true);
 
-/* the sections of the page, in page coordinates (the page is 148 x 200): where each one sits, how long
-   after the first one it lands, and the bars inside it */
+/* the sections in page coordinates (148 x 200): where each sits, its delay after the first, and its bars */
 interface Bar {
   x: number;
   y: number;
@@ -114,9 +104,8 @@ function box(item: { x: number; y: number; w: number; h: number }) {
   return { left: `${item.x}px`, top: `${item.y}px`, width: `${item.w}px`, height: `${item.h}px` };
 }
 
-/* the clock of a pass, matching the CSS below: the content fades out (0.2s), then the sections land, the
-   last one starting 0.95s after the first and taking 0.7s; the play button lands with the totals, 1s in,
-   while the footer is still on its way. A hover while a pass runs does not start another. */
+/* the clock of a pass, matching the CSS below: the fade (0.2s), then the landings (the last starts 0.95s in
+   and takes 0.7s); the play button returns with the totals, 1s in. A hover during a pass starts nothing. */
 const FADE = 200;
 const PLAY_AT = 1000;
 const LAND = 950 + 700;
@@ -183,9 +172,7 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
 
 <style scoped>
 
-/* The pose of the sheet (the scene, the paper, its shadow, the shapes and the miniature are shared, see
-   ctaVisual.css): a page standing in three-quarter view, its left edge nearer, leaning back a little, so
-   the sections that come forward (translateZ) grow towards the reader. Hover turns it towards the reader. */
+/* the pose (the rest is shared, see ctaVisual.css): three-quarter view, the left edge nearer */
 .build {
   --tilt-y: 26deg;
   --tilt-z: -2deg;
@@ -193,9 +180,7 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
 }
 
 
-/* Sections: blocks of grey bars, resting on the page; a hover pass fades them out in place, quickly, and
-   lands them again one after another (--d is each section's own offset): each fades in a little in front
-   of the page and is carried onto it */
+/* a pass fades the sections out, then lands each one (after its own --d) from in front of the page onto it */
 .section {
   position: absolute;
   color: var(--ink);
@@ -238,8 +223,8 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
 }
 
 
-/* The play button, centred on the column. Hidden (small, transparent) from the start of a pass until the
-   script sets .play as the totals land; the show transition overshoots. */
+/* the play button, hidden from the start of a pass until the script sets .play; it overshoots on its way
+   back */
 .play-button {
   position: absolute;
   z-index: 10;
@@ -283,9 +268,8 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
   pointer-events: none;
 }
 
-/* Hover, with motion allowed: the sheet turns towards the reader and rises a little; the button, once in
-   place, grows a touch and breathes: the disc swells 4% and settles, and a ring of the accent colour
-   spreads out of it and fades, once every 1.8s, until the next pass hides it */
+/* hover, with motion allowed: the sheet turns towards the reader; the button breathes and sends out a ring
+   every 1.8s */
 @media (prefers-reduced-motion: no-preference) {
   .build.active {
     --tilt-x: 4deg;

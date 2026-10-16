@@ -34,7 +34,6 @@ const resellers = [
 </script>
 
 <template>
-  <!-- the closing pair: buying through a reseller, then the contact card; no seam between them -->
   <article class="content closing">
     <section class="panel">
       <div class="section-header">
@@ -70,8 +69,6 @@ const resellers = [
   gap: 32px;
 }
 
-/* surface, radius and padding come from the shared `.panel` style (CustomPages.css): two centred cards of
-   the same width, each with a centred header */
 .closing > .panel {
   display: flex;
   flex-direction: column;

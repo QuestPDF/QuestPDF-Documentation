@@ -1,4 +1,8 @@
-<script setup>
+<script setup lang="ts">
+import { licensePrices } from "../pricing/prices";
+
+const perYear = (price: number) => `$${price.toLocaleString("en-US")} / year`;
+
 const tiers = [
   {
     name: "Community",
@@ -7,17 +11,16 @@ const tiers = [
   },
   {
     name: "Professional",
-    price: "$1,999 / year",
+    price: perYear(licensePrices.professional),
     description: "For one legal entity shipping PDFs in production. Every developer covered at one flat price, with no seat counting or usage fees."
   },
   {
     name: "Enterprise",
-    price: "$4,999 / year",
+    price: perYear(licensePrices.enterprise),
     description: "For corporate groups that need affiliate-wide coverage, priority support, reduced risk and procurement-friendly terms."
   }
 ]
 
-/* each point carries its own regular-weight icon, listed like the Companion App views */
 const includes = [
   { icon: "fa-infinity", text: "Perpetual license, not a subscription: keep your version forever" },
   { icon: "fa-layer-group", text: "All features included in every tier without restrictions" },
@@ -29,8 +32,6 @@ const includes = [
 </script>
 
 <template>
-  <!-- one panel split by a vertical hairline: the section heading, what every tier includes and the
-       calls to action on the left; the tiers stacked on the right -->
   <div class="panel license-panel">
     <div class="includes">
       <h2 class="card-title">Fair and Sustainable License</h2>
@@ -64,9 +65,8 @@ const includes = [
 
 <style scoped>
 
-/* One panel, two halves of equal width with a hairline between them; the halves stack on
-   narrow screens and the hairline turns horizontal. A glow in the Community tier's green comes from
-   the panel's left edge, centred behind the heading, over the panel's own sheen (CustomPages.css). */
+/* two halves split by a hairline; a glow in the Community green from the left edge, behind the heading,
+   over the panel's own sheen */
 
 .license-panel {
   display: grid;
@@ -97,9 +97,6 @@ const includes = [
 }
 
 
-/* Left half: the section heading, left-aligned like the Companion App panel, then the points
-   every tier includes, and the calls to action pinned to the bottom */
-
 .includes {
   display: flex;
   flex-direction: column;
@@ -113,8 +110,7 @@ const includes = [
   margin: 32px 0 0;
 }
 
-/* the same rows as the Companion App views list (HomePageCompanion.vue): an 18px icon and a
-   medium-weight label, both in the text colour, 36px tall */
+/* rows like the Companion App's list of views */
 .includes-list li {
   display: flex;
   align-items: center;
@@ -154,10 +150,7 @@ const includes = [
 }
 
 
-/* Tiers: stacked blocks spread to fill the panel's height, at least 40px apart. Each block opens
-   with the tier's name badge followed by the price, then the description below.
-   The badge carries its tier's colour from the pricing page: green for Community, solid blue for
-   Professional, black for Enterprise (inverted to light grey in dark mode) */
+/* Tiers: spread over the panel's height; each badge takes its tier's colour from the pricing page */
 
 .tiers {
   display: flex;
@@ -172,7 +165,6 @@ const includes = [
   gap: 10px;
 }
 
-/* the price sits right after the badge, in the primary text colour, so badge and price read as one strong row */
 .tier-head {
   display: flex;
   align-items: center;
@@ -180,7 +172,6 @@ const includes = [
 }
 
 .tier-name {
-  margin: 0;
   padding: 7px 14px;
   border-radius: 10px;
   background-color: var(--surface-inner);
@@ -192,31 +183,18 @@ const includes = [
 }
 
 .tier.community .tier-name {
-  color: #2E7D32;
+  color: light-dark(#2E7D32, #A5D6A7);
   background-color: #67B84D33;
 }
 
 .tier.professional .tier-name {
   color: white;
-  background-color: #2196F3;
+  background-color: light-dark(#2196F3, #1976D2);
 }
 
 .tier.enterprise .tier-name {
-  color: white;
-  background-color: #212121;
-}
-
-html.dark .tier.community .tier-name {
-  color: #A5D6A7;
-}
-
-html.dark .tier.professional .tier-name {
-  background-color: #1976D2;
-}
-
-html.dark .tier.enterprise .tier-name {
-  color: #212121;
-  background-color: #EEEEEE;
+  color: light-dark(white, #212121);
+  background-color: light-dark(#212121, #EEEEEE);
 }
 
 .tier-price {
@@ -234,24 +212,14 @@ html.dark .tier.enterprise .tier-name {
 }
 
 
-/* Pricing button */
-
 .action.pricing-button {
-  background-color: #66BB6A;
+  background-color: light-dark(#66BB6A, #4CAF50);
   color: var(--vp-button-brand-text);
   font-weight: bold;
 }
 
 .action.pricing-button:hover {
-  background-color: #4CAF50;
-}
-
-html.dark .action.pricing-button {
-  background-color: #4CAF50;
-}
-
-html.dark .action.pricing-button:hover {
-  background-color: #66BB6A;
+  background-color: light-dark(#4CAF50, #66BB6A);
 }
 
 </style>

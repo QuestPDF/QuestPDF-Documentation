@@ -98,8 +98,6 @@ const cards = [
             <a class="action" :class="{ primary: card.action.primary }" :href="card.action.href" :target="card.action.target">{{ card.action.label }}</a>
           </section>
 
-          <!-- the same dotted seam as on the contact page: the license and billing facts above it,
-               the assistance note below -->
           <div class="dotted-divider" aria-hidden="true"></div>
 
           <!-- full width, so the short assistance note does not sit alone in a half-empty row -->
@@ -121,8 +119,6 @@ const cards = [
 
 <style scoped>
 
-/* Page */
-
 .content {
   display: flex;
   flex-direction: column;
@@ -131,9 +127,8 @@ const cards = [
 }
 
 
-/* Header: the order state as a solid green tag with a check, then one line at lead size instead of a
-   display title: the thanks, the inbox note in green and what the email holds, so the cards carry
-   the page. The shared 650px header width breaks the line into two balanced lines, after "for your". */
+/* the order state as a green tag, then one line at lead size instead of a display title, so the cards carry
+   the page */
 
 .purchase-header {
   padding-bottom: 16px; /* a little more air above the cards than the page's 32px gap */
@@ -151,11 +146,7 @@ const cards = [
 
 .purchase-title b {
   font-weight: 600;
-  color: #2E7D32;
-}
-
-html.dark .purchase-title b {
-  color: #A5D6A7;
+  color: light-dark(#2E7D32, #A5D6A7);
 }
 
 .purchase-title span {
@@ -170,9 +161,8 @@ html.dark .purchase-title b {
   }
 }
 
-/* a step up from the shared section tag: here it is the page's status, not a section label. Solid,
-   tuned per mode: deep green with white text (5.1:1) in light mode; in dark mode the inbox phrase's own
-   light green with near-black green text (7.7:1), so the fill stays bright on the dark page */
+/* the page's status, a step up from the section tag: deep green with white text in light mode (5.1:1), the
+   inbox phrase's light green with near-black text in dark mode (7.7:1) */
 .status-tag {
   display: inline-flex;
   align-items: center;
@@ -181,20 +171,13 @@ html.dark .purchase-title b {
   padding: 9px 24px;
   border-radius: 14px;
   font-size: 1rem;
-  background-color: #2E7D32;
-  color: #FFFFFF;
-}
-
-html.dark .status-tag {
-  background-color: #A5D6A7;
-  color: #0D3B12;
+  background-color: light-dark(#2E7D32, #A5D6A7);
+  color: light-dark(#FFFFFF, #0D3B12);
 }
 
 .status-tag i {
   font-size: 18px;
 }
-
-/* Cards: the two detail cards side by side, the assistance note across the full width below */
 
 .purchase-cards {
   display: grid;
@@ -215,7 +198,6 @@ html.dark .status-tag {
   align-items: flex-start;
 }
 
-/* fact list: an icon tile, a bold name and a description, rows divided by hairlines */
 .description-items {
   display: flex;
   flex-direction: column;

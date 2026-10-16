@@ -1,51 +1,27 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from "vue";
 
-/* The visual of the sample-gallery card: a pile of sample documents, in 3D. Six pages stand on the card in
-   three-quarter view, the same pose as the invoice of the intro-video card next to it but turned the other
-   way, so the two visuals face each other. Each page behind the front one is set back a little and peeks
-   out to the right, so the pile has depth. Every page is a different kind of document, drawn as skeleton
-   placeholders: a report with a bar chart, a certificate with a seal, a product catalogue, a dashboard, a
-   letter, a long table. One element on each page carries the card's accent, the way a real sample has a
-   touch of colour.
+/* The sample-gallery card's visual: a pile of six sample pages in 3D (a report, a certificate, a catalogue,
+   a dashboard, a letter, a long table), placeholders with one accent element each, turned to face the
+   invoice in the card beside it.
 
-   The card shows the pile from the start: no entrance.
-   Hover (`active`, from HomePageCtaCard.vue), "pick one up": the pile turns towards the reader and the
-   front page lifts off it, 64px towards the camera, turned to face the camera square on (its own
-   rotations undo the pile's pose), with a deep shadow; the camera comes closer (a shorter perspective) so
-   the lift reads as depth, and the pages left behind shrink a touch, sink and dim. Centred in the column.
-   Meanwhile colour arrives on the pages, one after another from the front: headings darken, the accent
-   element brightens, photos take a tint, the seal fills in (the samples are rendered documents, not
-   placeholders). Once settled, the pile browses: the held page fades away where it is while the pile
-   advances beneath it and the next front page rises into the hand; the faded page reappears at the back.
-   The exchange is slow, a cross-fade rather than a swap, so the hand is never seen empty; and a blank
-   sheet stands still at the back place, a hair behind the back page, so the place is never seen empty
-   either while the pile advances and the faded page returns: the page fades in on a sheet that is already
-   there. One page every 1.3s while the pointer rests, the first one once the page in hand has had the
-   same moment of rest as the later ones. When the pointer leaves, the step in progress finishes in the
-   hover pose (the pile would otherwise fall back under a page mid-fade and the page would pop), then the
-   pile returns and the colour drains back from the rear.
-   Reduced motion: the pile in its pose, nothing moves (the script sets neither the hover class nor a
-   step). Below 700px the card shows a flat miniature of the front page instead (see the compact rules
-   in ctaVisual.css).
-
-   Everything is CSS: no image assets. The hover class is the component's own, not the card's hover, so
-   it can hold the pose while a step finishes. */
+   Hover (`active`, from HomePageCtaCard.vue): the pile turns towards the reader, the front page lifts off it
+   to face the camera and colour arrives on the pages. Then the pile browses, one page every 1.3s: the page
+   in hand fades out while the next one rises into its place, and reappears at the back. When the pointer
+   leaves, the step in progress finishes in the hover pose first; the hover class is the component's own
+   for that reason. Reduced motion: the pile stays still. */
 
 const props = defineProps<{ active: boolean }>();
 
-/* hover: the pile is in its hover pose (set on enter, cleared on leave, or at the end of the step in
-   progress if one is running then). front: the page in front. leaving: the page that has just left the
-   front and is on its way to the back (-1: none), so a browse step is in progress and the pile waits a
-   moment before it advances. The card shows the pile from the start: no entrance. */
+/* hover: the hover pose, which outlasts the pointer until a running step ends. front: the page in front.
+   leaving: the page on its way from the front to the back while a step runs (-1: none). */
 const hover = ref(false);
 const front = ref(0);
 const leaving = ref(-1);
 const stepping = computed(() => leaving.value >= 0);
 
-/* the shapes on a page, in page coordinates (the page is 148 x 200). No kind: a placeholder line or block.
-   block: a photo. frame: an outline. ring / disc: a circle (the donut, a seal, an emblem). band: a faint
-   stripe behind a table row. One per page is "accent": the card's colour. */
+/* a shape on a page, in page coordinates (148 x 200): a placeholder bar, or a photo (block), an outline
+   (frame), a circle (ring, disc) or a stripe behind a table row (band); one per page takes the accent */
 interface Shape {
   kind?: "block" | "frame" | "ring" | "disc" | "band";
   x: number;
@@ -191,8 +167,7 @@ const pages: Page[] = [
   }
 ];
 
-/* a page's place in the pile: 0 is the front, 5 the back; the pages behind the front one lean a little
-   each way, so the pile is not a perfect block */
+/* each place in the pile (0 in front) leans a little, so the pile is not a perfect block */
 const LAST = pages.length - 1;
 const TILTS = [0, 1.2, -1, 0.8, -1.4, 0.6];
 
@@ -209,11 +184,9 @@ function shapeStyle(shape: Shape) {
   };
 }
 
-/* the clock, matching the CSS below: a browse step takes 1.2s. The page in hand rests about 0.7s before
-   it leaves, whether it is the first one or a later one: on hover the front page is in hand at 0.53s
-   (lift 0.45s after 0.08s), and in a step the next page is in hand 0.6s after the step begins (rise
-   0.6s, no delay), so the first step comes 1.2s after hover and the later ones 1.3s apart. The step is
-   shorter than the interval, so a page is back in place before the next one leaves. */
+/* the clock, matching the CSS below: a step takes 1.2s, and each page rests in hand about 0.7s before it
+   leaves (it is in hand 0.53s after hover, 0.6s into a step), so the first step comes 1.2s after hover and
+   the next ones 1.3s apart */
 const STEP = 1200;
 const FIRST_STEP_DELAY = 1200;
 const STEP_INTERVAL = 1300;
@@ -221,11 +194,9 @@ const STEP_INTERVAL = 1300;
 let browseTimer: ReturnType<typeof setTimeout> | undefined;
 let stepTimer: ReturnType<typeof setTimeout> | undefined;
 
-/* one browse step: the front page leaves (its animation fades it out and brings it back at the rear),
-   the pile advances, and once the step is over the page that left is just the back page. The step ends
-   on a timer, not on animationend (Chrome sends no animation events to a hidden tab); the animation holds
-   its end state, the back place, so the class can go a little late but never early (removing it mid-step
-   would snap the page into place) */
+/* one browse step: the front page leaves (its animation fades it out and brings it back at the rear) and the
+   pile advances. The step ends on a timer, not on animationend, which Chrome does not send to a hidden tab;
+   the animation holds its end state, so the class may go a little late, never early. */
 function step() {
   clearTimeout(stepTimer);
 
@@ -319,12 +290,8 @@ onBeforeUnmount(() => {
 
 <style scoped>
 
-/* The pose of the pile (the scene, the paper, its shadow, the shapes and the miniature are shared, see
-   ctaVisual.css): pages standing in three-quarter view, the right edge nearer (the mirror of the invoice
-   next door), leaning back a little. Each page behind the front one is set back by --dz and shifted by
-   --dx / --dy, so the pile shows its depth to the right. Hover turns the pile towards the reader and
-   opens the offsets. The pile is nudged left so its depth stays inside the column. --ink-strong is the
-   darker grey the headings take on hover. */
+/* the pose, the mirror of the invoice beside it; each place back is set back by --dz and shifted by --dx /
+   --dy, and the pile is nudged left so its depth stays in the column. --ink-strong: the headings on hover. */
 .deck {
   --tilt-y: -26deg;
   --tilt-z: 2deg;
@@ -340,11 +307,10 @@ onBeforeUnmount(() => {
   transition: perspective 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-/* a page in the pile: its place is --i (0 in front), its lean --r; the transition carries it to a new
-   place when the pile advances or opens on hover. The other inputs are for the page in hand: --lift
-   (towards the reader), --par-x / --par-y (a shift), --spin / --turn-y / --flat (rotations about Z, Y
-   and X, in that order: the reverse of the pile's, so a page can undo the pile's pose exactly) and
-   --shrink for the pages left behind. */
+/* a page in the pile: its place --i (0 in front) and lean --r. The rest is for the page in hand: --lift
+   (towards the reader), --par-x / --par-y (a shift), --spin / --turn-y / --flat (rotations about Z, Y and X,
+   the reverse of the pile's order, so a page can undo the pile's pose exactly) and --shrink for the pages
+   left behind. */
 .page-3d {
   --lift: 0px;
   --par-x: 0px;
@@ -369,36 +335,26 @@ onBeforeUnmount(() => {
   transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.3s ease;
 }
 
-/* the page: a faint light from the top-left and a hairline edge, nothing more (the pages throw no
-   shadows of their own: six of them stacked would darken the pile well past the invoice next door,
-   which has one shadow under the sheet); the pages behind the front one are dimmed a touch more for each
-   place back, so the pile reads as depth even where the pages overlap */
+/* no shadow per page (six would darken the pile past the invoice beside it); each place back is shaded a
+   touch darker instead, so the pile reads as depth */
 .page {
   --page-shade: calc(0.025 + var(--i) * 0.012);
   overflow: hidden;
   color: var(--ink);
   box-shadow:
-      0 0 0 1px rgba(0, 0, 0, 0.10),
-      0 1px 2px rgba(16, 24, 40, 0.08);
+      0 0 0 1px light-dark(rgba(0, 0, 0, 0.10), rgba(255, 255, 255, 0.06)),
+      0 1px 2px light-dark(rgba(16, 24, 40, 0.08), rgba(0, 0, 0, 0.3));
   transition: box-shadow 0.45s ease, filter 0.45s ease;
 }
 
-html.dark .page {
-  box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.06),
-      0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-/* the shadow the pile throws: the shared one, the same as under the invoice next door, one for the
-   whole pile, just behind the blank sheet at the back and centred on the pile's depth */
+/* one shadow for the whole pile, behind the back place and centred on the pile's depth */
 .shadow {
   transform: translate3d(calc(var(--last) * var(--dx) / 2), calc(var(--last) * var(--dy) / 2), calc(var(--last) * -1 * var(--dz) - 16px));
   transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-/* the blank sheet: the back place, 2px behind the back page, so the back page covers it while it is
-   there and it shows the moment the pile advances; it never moves (its place is fixed in the template).
-   On hover it sits with the receded pages, still just behind them */
+/* the blank sheet stands still just behind the back page, so the back place never looks empty while the
+   pile advances */
 .page-3d.blank {
   --lift: -2px;
 }
@@ -408,7 +364,7 @@ html.dark .page {
 }
 
 
-/* Shapes: the shared grey placeholders in more kinds, and one accent element per page */
+/* Shapes: the shared placeholders in more kinds, and the accent */
 .shape.accent {
   color: var(--accent-secondary);
   opacity: 0.55;
@@ -446,21 +402,11 @@ html.dark .page {
 }
 
 
-/* A browse step (1.2s): the page in front stays where it is and fades out over the first 0.42s (a soft
-   ease-in-out, so it neither pops nor lingers) while the next page rises slowly into its place, so the
-   two cross-fade in the hand and the exchange never blinks; invisible, the page that left takes the
-   back place, in front of the blank sheet, and fades in there slowly, over the remaining 0.75s, well
-   after the pile has closed up: the arrival at the back is the quiet end of the step, not a second
-   event, and it happens on the sheet already standing there. It does not fly: an earlier version
-   lifted the page towards the reader and dissolved it in flight, which was too much motion for a small
-   visual. The only movement is a 6px rise off the pile, which keeps the fading page in front of the one
-   arriving in its place (the two would otherwise meet in one plane). Place and fade are two animations,
-   so the fade has a single easing of its own and the place can jump while the page is out of sight. The
-   other pages take their new places slowly and after a moment, so the pile is seen to advance gently
-   under the fading page rather than jump with it; the page rising into the hand starts at once and takes
-   0.6s with a plain ease, so it arrives as the old one dissolves (its shadow deepens at the same pace).
-   The page leaves from the hand: raised, square to the camera, a touch higher; it lands at the back at
-   the receded size (see the pickup rules below). */
+/* A browse step (1.2s): the page in hand fades out where it is while the next one rises into its place, a
+   cross-fade, so the hand is never seen empty; out of sight, the page that left jumps to the back place and
+   fades in there. Place and fade are separate animations, so the place can jump while the page is invisible.
+   A 6px rise keeps the fading page in front of the one arriving (they would otherwise share a plane). The
+   rest of the pile advances slowly and a moment later. */
 .deck.stepping .page-3d:not(.leaving) {
   transition-duration: 0.7s;
   transition-delay: 0.1s;
@@ -480,9 +426,8 @@ html.dark .page {
   animation: deck-leave-place 1.2s both, deck-leave-fade 1.2s both;
 }
 
-/* the place: at the front, a touch off the pile, until the page is out of sight; then the back place,
-   settling the last 4px from the front as it fades in (never from behind: it would cross the blank
-   sheet's plane and its edge would pop) */
+/* at the front until the page is out of sight, then the back place, settling the last 4px from the front
+   (from behind, it would cross the blank sheet's plane and its edge would pop) */
 @keyframes deck-leave-place {
   0% {
     transform: translate3d(-2px, 10px, 64px) rotateZ(-1deg) rotateY(16deg) rotateX(-6deg) scale(1);
@@ -522,9 +467,7 @@ html.dark .page {
 }
 
 
-/* Hover (the .hover class, set from the script on hover or keyboard focus of the card): the pile turns
-   towards the reader (rotated X 6, Y -16, Z 1), rises a little and fans open; the camera comes closer;
-   the browsing is driven from the script */
+/* Hover: the pile turns towards the reader and fans open, and the camera comes closer */
 .deck.hover {
   --tilt-x: 6deg;
   --tilt-y: -16deg;
@@ -539,9 +482,8 @@ html.dark .page {
   perspective: 500px;
 }
 
-/* Pick one up: the front page lifts 64px off the pile and faces the camera square on (Z -1, Y 16, X -6
-   undo the pile's pose), shifted so that, projected, it sits centred in the column; a deep shadow under
-   it. The pages left behind shrink, sink and dim, so the one in hand is clearly the one in hand. */
+/* the front page lifts off the pile and faces the camera square on (its rotations undo the pile's pose),
+   centred in the column; the pages left behind shrink, sink and dim */
 .deck.hover .page-3d.front:not(.leaving) {
   --lift: 64px;
   --par-x: -2px;
@@ -568,12 +510,10 @@ html.dark .page {
   filter: brightness(0.95);
 }
 
-/* Colour prints on: while the pointer rests, the pages render in colour one after another from the
-   front (headings darken, the accent element brightens, photos take a tint, bands and seals colour);
-   on leave the colour drains back from the rear */
+/* colour arrives page by page from the front on hover, and drains back from the rear on leave */
 .shape {
   transition: color 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
-  transition-delay: calc((5 - var(--i)) * 60ms);
+  transition-delay: calc((var(--last) - var(--i)) * 60ms);
 }
 
 .deck.hover .shape {

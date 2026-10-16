@@ -12,10 +12,10 @@ const sandboxConfiguration = {
 };
 
 const productionConfiguration = {
-    isProduction: true,
-    token: 'live_aae6e100288a0ab158a101d61e6',
-    professionalLicenseId: 'pri_01kwq136d75spr88pmq7txaayw',
-    enterpriseLicenseId: 'pri_01kwq14xaqf9kz54jvya86cx6q',
+  isProduction: true,
+  token: 'live_aae6e100288a0ab158a101d61e6',
+  professionalLicenseId: 'pri_01kwq136d75spr88pmq7txaayw',
+  enterpriseLicenseId: 'pri_01kwq14xaqf9kz54jvya86cx6q',
 };
 
 
@@ -28,31 +28,19 @@ const configuration = productionConfiguration;
 
 let paddlePromise: Promise<Paddle | undefined> | null = null;
 
-function loadPaddle(): Promise<Paddle | undefined> {
-  if (typeof window === 'undefined')
-    return Promise.resolve(undefined);
-
-  if (paddlePromise)
-    return paddlePromise;
-
-  paddlePromise = import('@paddle/paddle-js')
-      .then(({initializePaddle}) => {
-
-        return initializePaddle({
-          token: configuration.token,
-          environment: configuration.isProduction ? 'production' : 'sandbox',
-        });
-      })
+/* client only (Layout.vue calls it on mount); a failed load is retried on the next call */
+export function loadPaddle(): Promise<Paddle | undefined> {
+  paddlePromise ??= import('@paddle/paddle-js')
+      .then(({initializePaddle}) => initializePaddle({
+        token: configuration.token,
+        environment: configuration.isProduction ? 'production' : 'sandbox',
+      }))
       .catch(() => {
         paddlePromise = null;
         return undefined;
       });
 
   return paddlePromise;
-}
-
-if (typeof window !== 'undefined') {
-  void loadPaddle();
 }
 
 export const usePaddle = () => {

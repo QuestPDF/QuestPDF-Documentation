@@ -33,10 +33,7 @@ import { faqCategories as categories } from "./faq";
 
 <style scoped>
 
-/* Each category is a row: its header (the title and a line naming what it covers) in
-   a column on the left, level with the first question, and a card of questions divided by hairlines
-   on the right, the same surface as the other cards on the page. The cards keep about the width of a
-   single centred column; the header column takes the room the wide layout has beside them. */
+/* each category is a row: its header on the left, level with the first question, its questions on a panel */
 
 .faq-categories {
   --faq-accent: #2196F3;
@@ -65,7 +62,6 @@ import { faqCategories as categories } from "./faq";
 
 /* in the text colour: on this page blue marks what is open or clickable */
 .faq-category-title {
-  margin: 0;
   font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 700;
@@ -79,8 +75,7 @@ import { faqCategories as categories } from "./faq";
   color: var(--vp-c-text-2);
 }
 
-/* the shared panel surface, its rows reaching the edges; the card keeps its own height when the
-   header is the taller of the two (Client Work) */
+/* the rows reach the panel's edges; the panel keeps its own height when the header is taller */
 .faq-list {
   align-self: start;
   display: flex;
@@ -116,6 +111,11 @@ import { faqCategories as categories } from "./faq";
   font-size: 1rem;
   font-weight: 500;
   color: var(--vp-c-text-1);
+}
+
+/* older Safari draws its disclosure triangle through this pseudo-element, whatever the display */
+.faq-question::-webkit-details-marker {
+  display: none;
 }
 
 .faq-item[open] .faq-question {

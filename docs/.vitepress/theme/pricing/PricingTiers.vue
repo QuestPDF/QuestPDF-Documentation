@@ -16,9 +16,7 @@
             <span class="price-tax">+ local tax</span>
           </div>
 
-          <div v-else>
-            <p class="price-value price-free">Free forever</p>
-          </div>
+          <p v-else class="price-value price-free">Free forever</p>
 
           <div class="tier-description" v-html="license.description" />
         </header>
@@ -47,6 +45,7 @@
 <script setup lang="ts">
 
 import {usePaddle} from "../paddle";
+import {licensePrices} from "./prices";
 
 const paddle = usePaddle();
 
@@ -81,7 +80,7 @@ const CommunityLicense: License = {
 const ProfessionalLicense: License = {
   name: "professional",
   description: "For one legal entity shipping PDFs in production — every developer covered at one flat, predictable price, with no seat counting or usage fees",
-  price: 1999,
+  price: licensePrices.professional,
   paddlePriceId: paddle.professionalLicensePriceId,
   details: [
     "Perpetual license for entire company",
@@ -99,7 +98,7 @@ const ProfessionalLicense: License = {
 const EnterpriseLicense: License = {
   name: "enterprise",
   description: "For corporate groups that need affiliate-wide coverage, priority support, reduced risk, and procurement-friendly terms",
-  price: 4999,
+  price: licensePrices.enterprise,
   paddlePriceId: paddle.enterpriseLicensePriceId,
   details: [
     "Everything in Professional",
@@ -120,9 +119,7 @@ const licenses = [
 
 </script>
 
-<style scoped lang="scss">
-
-/* Page layout */
+<style scoped>
 
 @media screen and (max-width: 450px) {
   h1 {
@@ -137,23 +134,19 @@ const licenses = [
 }
 
 
-/* Tier grid
-   Desktop: three equal columns; each card is a subgrid spanning six shared
-   row tracks, so every section starts at the same height across all cards.
-   Children are pinned to their rows explicitly because the tag is rendered
-   only on the professional card — auto-placement would shift the rows of
-   the other two. */
+/* Each card is a subgrid spanning six shared row tracks, so every section starts at the same height across
+   the cards. The children are pinned to their rows because only the professional card has the tag:
+   auto-placement would shift the rows of the other two. */
 
 .license-tiers {
   margin-top: 28px;
 
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: repeat(6, auto); // tag, header, divider, details, action, footnote
-  grid-gap: 0 32px;
+  grid-template-rows: repeat(6, auto); /* tag, header, divider, details, action, footnote */
+  gap: 0 32px;
 }
 
-/* the cards sit on the shared surface (`.panel`, CustomPages.css) */
 .license-tier {
   display: grid;
   grid-template-rows: subgrid;
@@ -173,33 +166,25 @@ const licenses = [
 .license-tier hr {
   margin: 32px 0;
   border: none;
-  border-top: 1px solid var(--vp-c-gutter);
+  border-top: 1px solid var(--vp-c-divider);
   width: 100%
 }
 
 @media screen and (max-width: 700px) {
   .license-tier hr {
-    border: 1px solid var(--vp-c-gutter);
+    border: 1px solid var(--vp-c-divider);
   }
 }
 
 
-/* Card frames
-   The three cards read as one joined unit: the outer cards drop their inner
-   corner radii and are inset vertically, while the professional card in the
-   middle stays full height and elevated. Only the professional card tints the surface with the brand
-   blue, so it reads as the highlighted one: a faint wash in both modes, small enough that the blue
-   stays a tint over the translucent surface rather than a solid fill. */
+/* The three cards read as one unit: the outer cards drop their inner corners and are inset vertically; the
+   professional card in the middle stays full height, framed and tinted blue. */
 
 .license-tier.professional {
-  border: 3px solid #2196F388;
+  border: 3px solid light-dark(#2196F388, #2196F355);
   border-radius: 32px;
   z-index: 1;
   background-color: color-mix(in srgb, #2196F3 5%, var(--surface));
-}
-
-html.dark .license-tier.professional {
-  border-color: #2196F355;
 }
 
 /* the glass rim sits inside the 3px border, so its corners are 3px tighter than the card's */
@@ -227,7 +212,7 @@ html.dark .license-tier.professional {
   height: 32px;
   transform: translateY(-8px);
 
-  color: #2196F3;
+  color: light-dark(#2196F3, #64B5F6);
   font-size: 0.875rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -239,12 +224,6 @@ html.dark .license-tier.professional {
   font-size: 1rem;
 }
 
-html.dark .license-tier .tag {
-  color: #64B5F6;
-}
-
-
-/* Card header: tier name, price, description */
 
 .license-tier header {
   display: flex;
@@ -263,35 +242,18 @@ html.dark .license-tier .tag {
 }
 
 .license-tier.community .tier-name {
-  background-color: #67B84D33;
-  color: #1B5E20;
+  background-color: light-dark(#67B84D33, #4CAF5022);
+  color: light-dark(#1B5E20, #A5D6A7);
 }
 
 .license-tier.professional .tier-name {
-  background-color: #2196F3;
+  background-color: light-dark(#2196F3, #1976D2);
   color: white;
 }
 
 .license-tier.enterprise .tier-name {
-  background-color: #212121;
-  color: white;
-}
-
-html.dark {
-  .license-tier.community .tier-name {
-    background-color: #4CAF5022;
-    color: #A5D6A7;
-  }
-
-  .license-tier.professional .tier-name {
-    background-color: #1976D2;
-    color: white;
-  }
-
-  .license-tier.enterprise .tier-name {
-    background-color: #EEEEEE;
-    color: #212121;
-  }
+  background-color: light-dark(#212121, #EEEEEE);
+  color: light-dark(white, #212121);
 }
 
 .license-tier .price-value {
@@ -317,8 +279,6 @@ html.dark {
   line-height: 1.5rem;
 }
 
-
-/* Details list */
 
 .details {
   display: flex;
@@ -347,41 +307,23 @@ html.dark {
 }
 
 .license-tier.community .fa-square-check {
-  --fa-primary-color: #67B84D;
-  --fa-secondary-color: #67B84D;
+  --fa-primary-color: light-dark(#67B84D, #81C784);
+  --fa-secondary-color: light-dark(#67B84D, #81C784);
 }
 
 /* white tick on a solid blue square, the same blue as the tier name badge */
 .license-tier.professional .fa-square-check {
   --fa-primary-color: white;
-  --fa-secondary-color: #2196F3;
+  --fa-secondary-color: light-dark(#2196F3, #1976D2);
   --fa-secondary-opacity: 1.0;
 }
 
 .license-tier.enterprise .fa-square-check {
-  --fa-primary-color: transparent;
-  --fa-secondary-color: #444;
+  --fa-primary-color: light-dark(transparent, #444);
+  --fa-secondary-color: light-dark(#444, white);
   --fa-secondary-opacity: 1.0;
 }
 
-html.dark {
-  .license-tier.community .fa-square-check {
-    --fa-primary-color: #81C784;
-    --fa-secondary-color: #81C784;
-  }
-
-  .license-tier.professional .fa-square-check {
-    --fa-secondary-color: #1976D2;
-  }
-
-  .license-tier.enterprise .fa-square-check {
-    --fa-primary-color: #444;
-    --fa-secondary-color: white;
-  }
-}
-
-
-/* Action button */
 
 .license-tier .action {
   justify-self: stretch;
@@ -400,47 +342,36 @@ html.dark {
 }
 
 .license-tier.enterprise .action {
-  background-color: #212121;
-  color: white;
+  background-color: light-dark(#212121, #EEEEEE);
+  color: light-dark(white, #212121);
 }
 
-html.dark {
-  .license-tier.enterprise .action {
-    background-color: #EEEEEE;
-    color: #212121;
-  }
-
-  .license-tier.enterprise .action:hover {
-    background-color: white;
-  }
+.license-tier.enterprise .action:hover {
+  background-color: light-dark(#212121, white);
 }
 
-
-/* Footnote */
 
 .license-tier .footnote {
-  place-self: normal; // stretch across the column so the centered text aligns with the button above
+  place-self: normal; /* stretch across the column so the centered text aligns with the button above */
   text-align: center;
   margin-top: 16px;
 
   font-size: 0.8125em;
   line-height: 1.5;
   color: var(--vp-c-text-2);
+}
 
-  :deep(a) {
-    color: var(--vp-c-text-2);
-    text-decoration: underline;
-  }
+.license-tier .footnote :deep(a) {
+  color: var(--vp-c-text-2);
+  text-decoration: underline;
+}
 
-  :deep(a):hover {
-    color: var(--vp-c-text-1);
-  }
+.license-tier .footnote :deep(a:hover) {
+  color: var(--vp-c-text-1);
 }
 
 
-/* Stacked layout: below the width where three cards fit comfortably,
-   cards form a single centered column and the joined-card styling
-   (flat inner corners, vertical inset margins) is reset. */
+/* below 960px: one centred column, without the joined-card styling */
 
 @media screen and (max-width: 960px) {
   .license-tiers {
@@ -451,7 +382,7 @@ html.dark {
   }
 
   .license-tier {
-    grid-template-rows: auto; // subgrid has no parent grid here
+    grid-template-rows: auto; /* subgrid has no parent grid here */
     width: 100%;
     max-width: 560px;
     padding: 40px;

@@ -1,11 +1,7 @@
 <template>
-  <!-- One row: the app on the left, and beside it the title, the description, the eight views as a
-       two-column list and the calls to action. The app is a tour: the whole app first, then one view at
-       a time with a marker on its part of the app and a card placed so it covers nothing the view is
-       about, naming the feature and showing its shortcut. The tour moves on by itself
-       (companionTour.ts); the list picks a view, the current one in the brand colour.
-       Below 1320px everything stacks (title, app, views as two rows of one-word names, actions); below
-       1040px the card sits under the app. -->
+  <!-- A tour of the app: the whole app first, then one view at a time, with a marker on its part of the app
+       and a card naming the feature, placed where it covers nothing the view is about. It moves on by
+       itself (companionTour.ts); the list beside it picks a view. -->
   <div class="panel">
     <div ref="root" class="companion-tour" @mouseenter="hovered = true" @mouseleave="hovered = false" @focusin="focused = true" @focusout="focused = false">
       <div class="companion-stage" :class="{ overview: !current.focus }" :style="marker">
@@ -62,8 +58,7 @@
         <div class="actions">
           <a class="action primary" href="/companion/features.html">Explore features</a>
 
-          <!-- a disclosure: a real button (the VitePress router ignores clicks inside buttons, so it will not
-               try to navigate) that shows a list of plain links -->
+          <!-- a <button>, not a link: the VitePress router would navigate on a link click -->
           <div ref="downloadRef" class="download">
             <button
               type="button"
@@ -132,13 +127,11 @@ interface Step {
   view: number;
   /* the screenshot in public/companion */
   frame: string;
-  /* the keyboard shortcut of this screen, as documented (only key presses: a mouse gesture goes in the
-     description, the layout issue arrows are buttons in the app); several keys are pressed together */
+  /* the screen's documented keyboard shortcut; several keys are pressed together */
   keys?: string[];
   /* the marker's place (null: the whole app, no marker) */
   focus: [number, number] | null;
-  /* the card's top-left corner, set per screen so it covers nothing the view is about (kept clear of
-     the right edge) */
+  /* the card's top-left corner, placed per screen so the card covers nothing the view is about */
   card: [number, number];
 }
 
@@ -176,7 +169,7 @@ const marker = computed(() => {
 
 /* Download menu */
 
-// keep in sync with the latest release listed in docs/companion/download.md
+/* the latest release; keep in sync with docs/companion/download.md and public/companion/latest-version */
 const companionVersion = "2026.2.2";
 const releaseUrl = `https://github.com/QuestPDF/QuestPDF.Companion/releases/download/${companionVersion}`;
 
@@ -212,9 +205,9 @@ onBeforeUnmount(() => {
 
 </script>
 
-<style>
+<style scoped>
 
-/* registered so the marker glides between places; @property is global, hence the prefix */
+/* registered so the marker glides between places; @property is global even in a scoped block, hence the prefix */
 @property --companion-fx {
   syntax: "<percentage>";
   inherits: true;
@@ -226,12 +219,6 @@ onBeforeUnmount(() => {
   inherits: true;
   initial-value: 40%;
 }
-
-</style>
-
-<style scoped>
-
-/* One row: the app, and a column with the words, the list of views and the calls to action */
 
 .companion-tour {
   display: grid;
@@ -246,7 +233,7 @@ onBeforeUnmount(() => {
 }
 
 
-/* The stage: the app with its marker; the card is placed in the stage's coordinates */
+/* the stage: the app with its marker; the card is placed in the stage's coordinates */
 
 .companion-stage {
   position: relative;
@@ -260,11 +247,9 @@ onBeforeUnmount(() => {
   overflow: hidden;
   border-radius: 14px;
   background-color: var(--vp-c-bg);
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 10%, transparent), 0 16px 40px -16px rgba(16, 24, 40, 0.22);
-}
-
-html.dark .companion-frames {
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 16px 40px -16px rgba(0, 0, 0, 0.6);
+  box-shadow:
+      0 0 0 1px light-dark(color-mix(in srgb, var(--vp-c-text-1) 10%, transparent), rgba(255, 255, 255, 0.08)),
+      0 16px 40px -16px light-dark(rgba(16, 24, 40, 0.22), rgba(0, 0, 0, 0.6));
 }
 
 .companion-frame {
@@ -308,8 +293,7 @@ html.dark .companion-frame.light {
   100% { opacity: 0; background-position: 0 -10%; }
 }
 
-/* the marker: a brand dot in a white ring with a shadow, so it stands out on any screen in either
-   theme, and a ring that keeps pulsing out of it; the overview has none */
+/* the marker: a brand dot in a white ring, so it shows on any screen in either theme */
 .companion-marker {
   position: absolute;
   left: var(--companion-fx);
@@ -344,10 +328,7 @@ html.dark .companion-frame.light {
 }
 
 
-/* The card */
-
-/* narrower on a smaller app, so it still leaves the view's subject in sight; a faint brand tint, kept
-   opaque, sets it apart from the app behind it */
+/* the card: narrower on a smaller app; a faint brand tint, kept opaque, sets it apart from the app */
 .companion-card {
   --companion-card-width: clamp(210px, 30%, 240px);
   position: absolute;
@@ -358,13 +339,10 @@ html.dark .companion-frame.light {
   border-radius: 12px;
   font-size: 0.8125rem;
   line-height: 1.25rem;
-  background-color: color-mix(in srgb, var(--vp-c-brand-1) 5%, var(--vp-c-bg));
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent), 0 20px 48px -12px rgba(16, 24, 40, 0.3);
-}
-
-html.dark .companion-card {
-  background-color: color-mix(in srgb, var(--vp-c-brand-1) 7%, var(--vp-c-bg-elv));
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent), 0 20px 48px -12px rgba(0, 0, 0, 0.7);
+  background-color: light-dark(color-mix(in srgb, var(--vp-c-brand-1) 5%, var(--vp-c-bg)), color-mix(in srgb, var(--vp-c-brand-1) 7%, var(--vp-c-bg-elv)));
+  box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--vp-c-brand-1) 18%, transparent),
+      0 20px 48px -12px light-dark(rgba(16, 24, 40, 0.3), rgba(0, 0, 0, 0.7));
 }
 
 .companion-card strong {
@@ -398,10 +376,7 @@ html.dark .companion-card {
   transform: translateY(6px);
 }
 
-/* Shortcuts: a footer strip across the card (a hairline and a faint tint, in place of the card's bottom
-   padding, so the card keeps its height), a quiet "Shortcut" on the left and the keys of the screen being
-   shown on the right, as light-grey key caps with a thicker bottom edge, no glow; keys pressed together are
-   joined by a small plus */
+/* the shortcut: a strip in place of the card's bottom padding, so the card keeps its height */
 
 .companion-shortcut {
   display: flex;
@@ -428,26 +403,17 @@ html.dark .companion-card {
   min-width: 22px;
   height: 20px;
   padding: 0 6px;
-  border: 1px solid #D5D9E0;
+  border: 1px solid light-dark(#D5D9E0, #B9BEC7);
   border-bottom-width: 2px;
-  border-bottom-color: #BFC4CD;
+  border-bottom-color: light-dark(#BFC4CD, #8E949E);
   border-radius: 5px;
-  background: linear-gradient(180deg, #F7F8FA, #ECEEF2);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  background: linear-gradient(180deg, light-dark(#F7F8FA, #D9DCE2), light-dark(#ECEEF2, #C8CCD3));
+  box-shadow: inset 0 1px 0 light-dark(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.45));
   font-family: var(--vp-font-family-mono);
   font-size: 0.6875rem;
   font-weight: 600;
   line-height: 1;
-  color: #3B414D;
-}
-
-/* on the dark card the caps stay light grey, a shade softer */
-html.dark .companion-cap {
-  border-color: #B9BEC7;
-  border-bottom-color: #8E949E;
-  background: linear-gradient(180deg, #D9DCE2, #C8CCD3);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45);
-  color: #22262E;
+  color: light-dark(#3B414D, #22262E);
 }
 
 .companion-plus {
@@ -463,8 +429,7 @@ html.dark .companion-cap {
 }
 
 
-/* The list of views: two columns filled top to bottom, icons and words at 1rem in the text colour, the
-   current view in the brand colour and semibold; phones use the one-word names */
+/* the views: two columns filled top to bottom; phones use the one-word names */
 
 .companion-views {
   display: grid;
@@ -516,7 +481,7 @@ html.dark .companion-cap {
 }
 
 
-/* Calls to action; the download menu opens upwards, over the list */
+/* the download menu opens upwards, over the list */
 
 .actions {
   display: flex;
@@ -617,9 +582,7 @@ html.dark .companion-cap {
   }
 }
 
-/* below 1320px everything stacks: title and description, the app, the views as two rows of four
-   one-word names, the calls to action; beside the words a narrower app would leave the card too
-   little room */
+/* below 1320px everything stacks: beside the words, a narrower app would leave the card too little room */
 @media screen and (max-width: 1320px) {
   .companion-tour {
     grid-template-columns: minmax(0, 1fr);

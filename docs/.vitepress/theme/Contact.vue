@@ -74,7 +74,7 @@ const contacts: ContactInformation[] = [
         <section class="contacts">
           <article v-for="contact of contacts" :key="contact.title" class="panel contact-card">
             <div class="icon-tile">
-              <i class="fa-regular" :class="[contact.icon]"></i>
+              <i class="fa-regular" :class="contact.icon"></i>
             </div>
 
             <h3 class="card-title">{{ contact.title }}</h3>
@@ -85,8 +85,6 @@ const contacts: ContactInformation[] = [
             </div>
           </article>
 
-          <!-- the same dotted seam as between the homepage sections: the four ways to reach us above
-               it, the company behind the project below -->
           <div class="dotted-divider" aria-hidden="true"></div>
 
           <!-- full width, so the company details do not sit alone in a half-empty row -->
@@ -149,7 +147,6 @@ const contacts: ContactInformation[] = [
   align-items: flex-start;
 }
 
-/* the icon tile is the shared one (CustomPages.css), above the title */
 .contact-card .icon-tile {
   margin-bottom: 16px;
 }
@@ -188,7 +185,6 @@ const contacts: ContactInformation[] = [
   line-height: 1.75rem;
 }
 
-/* labelled columns, like the standards in the homepage compliance card */
 .business-facts {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
