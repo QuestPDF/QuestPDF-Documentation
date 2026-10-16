@@ -103,7 +103,6 @@ function lineHtml({ text, kind, typed = Infinity }: Line) {
       </ul>
     </article>
 
-    <!-- the code window, edge to edge in the right region -->
     <div class="window">
       <div class="window-header">
         <span class="dot red" />
@@ -287,7 +286,6 @@ html.dark .quick-start {
   line-height: 1.5;
 }
 
-/* long lines scroll sideways */
 .code-source pre {
   overflow-x: auto;
   overflow-y: hidden;

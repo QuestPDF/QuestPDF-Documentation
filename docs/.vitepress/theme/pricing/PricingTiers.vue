@@ -198,8 +198,6 @@ const licenses = [
 }
 
 
-/* "Most Popular" tag, on the professional card */
-
 .license-tier .tag {
   display: flex;
   align-items: center;
@@ -228,7 +226,7 @@ const licenses = [
 }
 
 .license-tier .tier-name {
-  border-radius: 12px; /* same corner as the homepage section tags */
+  border-radius: 12px;
   padding: 6px 24px;
   font-weight: 600;
   text-transform: uppercase;

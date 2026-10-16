@@ -110,7 +110,6 @@ function toThousands(n: number): number {
     return Math.round(n / 100) / 10
 }
 
-/* elapsed years, rounded to the nearest whole year */
 function toYears(since: Date): number {
     const millisecondsPerYear = 365.25 * 24 * 60 * 60 * 1000;
     return Math.round((Date.now() - since.getTime()) / millisecondsPerYear);
