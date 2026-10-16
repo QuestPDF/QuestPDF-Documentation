@@ -17,7 +17,6 @@ import { data as statistics } from "../statistics.data";
         </div>
       </div>
 
-      <!-- the adoption numbers -->
       <aside class="statistics">
         <a v-for="statistic in statistics" :key="statistic.label" :href="statistic.link" :target="statistic.link.startsWith('http') ? '_blank' : undefined" rel="noopener" class="statistic">
           <span class="statistic-icon">

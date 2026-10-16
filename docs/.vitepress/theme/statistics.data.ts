@@ -78,7 +78,6 @@ async function getNugetDownloads(): Promise<number> {
     if (!searchResource)
         throw new Error('SearchQueryService not found in service index');
 
-    // query for the package
     const queryUrl = `${searchResource['@id']}?q=packageid:questpdf&prerelease=true`;
     const data = await fetchJson(queryUrl);
 

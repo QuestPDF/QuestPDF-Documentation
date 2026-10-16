@@ -103,8 +103,6 @@ footer * {
 }
 
 
-/* LINKS */
-
 .content {
   border-top: 1px solid var(--vp-c-divider);
 }
@@ -153,8 +151,6 @@ footer * {
   }
 }
 
-
-/* COPYRIGHT */
 
 .copyright {
   text-align: center;
