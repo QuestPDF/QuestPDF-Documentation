@@ -182,7 +182,6 @@ const licenses = [
 
 .license-tier.professional {
   border: 3px solid light-dark(#2196F388, #2196F355);
-  border-radius: 32px;
   z-index: 1;
   background-color: color-mix(in srgb, #2196F3 5%, var(--surface));
 }
