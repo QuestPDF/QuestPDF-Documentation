@@ -86,7 +86,7 @@ const platformGroups : PlatformGroup[] = [
       </div>
     </div>
 
-    <section class="panel foundations" aria-label="Enterprise-grade foundations">
+    <section class="panel" aria-label="Enterprise-grade foundations">
       <div class="cells">
         <!-- the security policy backs the claim -->
         <a href="/security-policy" class="cell fact">
@@ -97,7 +97,7 @@ const platformGroups : PlatformGroup[] = [
           <span class="fact-text">No network calls, no telemetry, no license server. Works air-gapped.</span>
         </a>
 
-        <section v-for="group of platformGroups" :key="group.label" class="cell group">
+        <section v-for="group of platformGroups" :key="group.label" class="cell">
           <h3 class="label">{{ group.label }}</h3>
 
           <ul class="platforms">
