@@ -415,13 +415,10 @@ body:has(.custom-page:is(.contact-page, .purchase-page)) {
   padding: 12px 24px;
   line-height: 1;
 
-  border: 0;
   background-color: #8883;
 
   color: var(--vp-c-text-1);
-  font-family: inherit;
   font-size: 1rem;
-  cursor: pointer;
 
   transition: all 0.2s ease-in-out;
 }

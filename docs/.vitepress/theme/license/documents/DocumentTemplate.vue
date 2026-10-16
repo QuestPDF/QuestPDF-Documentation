@@ -417,8 +417,4 @@ onBeforeUnmount(() => {
   color: var(--vp-c-text-1);
 }
 
-.document-body a {
-  color: var(--vp-c-brand-1);
-}
-
 </style>

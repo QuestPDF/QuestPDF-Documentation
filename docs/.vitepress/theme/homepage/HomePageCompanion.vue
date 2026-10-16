@@ -450,7 +450,6 @@ html.dark .companion-frame.light {
   font-weight: 500;
   text-align: left;
   color: var(--vp-c-text-1);
-  cursor: pointer;
   transition: color 0.2s ease;
 }
 
@@ -534,14 +533,12 @@ html.dark .companion-frame.light {
   font-size: 1rem;
   line-height: 1.5rem;
   color: var(--vp-c-text-1);
-  text-decoration: none;
   white-space: nowrap;
 }
 
 .download-item:hover,
 .download-all:hover {
   background-color: var(--vp-c-default-soft);
-  color: var(--vp-c-text-1);
 }
 
 .download-item img {

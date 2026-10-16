@@ -62,10 +62,8 @@ import { faqCategories as categories } from "./faq";
 
 /* in the text colour: on this page blue marks what is open or clickable */
 .faq-category-title {
-  font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 700;
-  color: var(--vp-c-text-1);
 }
 
 .faq-category-description {
@@ -141,10 +139,6 @@ import { faqCategories as categories } from "./faq";
   max-width: 85ch;
   color: var(--vp-c-text-1);
   white-space: pre-line;
-}
-
-.faq-answer :deep(a) {
-  color: var(--vp-c-brand-1);
 }
 
 .faq-answer :deep(a:hover) {

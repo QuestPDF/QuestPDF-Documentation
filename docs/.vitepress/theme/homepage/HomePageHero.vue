@@ -85,7 +85,6 @@ import { data as statistics } from "../statistics.data";
 .text h1 {
   font-size: clamp(2.75rem, 11.5cqi, 4.5rem);
   line-height: 1.05;
-  font-weight: 700;
   letter-spacing: -0.02em;
   max-width: 760px;
   word-spacing: 4px;

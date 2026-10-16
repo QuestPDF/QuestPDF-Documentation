@@ -325,7 +325,6 @@ const licenses = [
 
 .license-tier .action {
   justify-self: stretch;
-  text-align: center;
   margin-top: 32px;
 }
 
@@ -336,7 +335,6 @@ const licenses = [
 
 .license-tier.professional .action:hover {
   background-color: #42A5F5;
-  color: white;
 }
 
 .license-tier.enterprise .action {

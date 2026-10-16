@@ -181,7 +181,6 @@ const contacts: ContactInformation[] = [
 
 .business-name {
   margin: 4px 0 0;
-  font-size: 1.25rem;
   line-height: 1.75rem;
 }
 
