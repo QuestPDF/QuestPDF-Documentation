@@ -295,7 +295,6 @@ const platformGroups : PlatformGroup[] = [
   width: 24px;
   background-color: color-mix(in srgb, var(--vp-c-text-2) 90%, transparent);
   mask: var(--logo) center / contain no-repeat;
-  -webkit-mask: var(--logo) center / contain no-repeat;
 }
 
 

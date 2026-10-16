@@ -232,7 +232,6 @@ onBeforeUnmount(() => {
 }
 
 .document-page .document-contents.is-clipped {
-  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 48px), transparent);
   mask-image: linear-gradient(to bottom, #000 calc(100% - 48px), transparent);
 }
 

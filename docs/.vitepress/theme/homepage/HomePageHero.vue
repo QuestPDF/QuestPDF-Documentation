@@ -102,7 +102,6 @@ h1 .highlight-foreground {
   font-weight: 800;
 
   background-image: linear-gradient(100deg, #00c6ff 0%, #0094f9 55%, #2979ff 100%);
-  -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
@@ -225,7 +224,6 @@ html:not(.dark) .statistic-icon {
   background-position: 12px 12px;
 
   mask-image: radial-gradient(ellipse 55% 85% at 72% 50%, #000, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 55% 85% at 72% 50%, #000, transparent 80%);
 }
 
 /* light dots on a dark canvas stand out more than dark dots on white, so they are fainter there */
@@ -236,7 +234,6 @@ html.dark .hero-pattern {
 @media screen and (max-width: 820px) {
   .hero-pattern {
     mask-image: radial-gradient(ellipse 90% 60% at 50% 70%, #000, transparent 80%);
-    -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 70%, #000, transparent 80%);
   }
 }
 

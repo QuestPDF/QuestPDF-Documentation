@@ -147,8 +147,6 @@ html.dark .cta-card {
       var(--ring-peak) 280deg,
       var(--ring-base) 312deg,
       var(--ring-base) 360deg);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   mask-composite: exclude;
 

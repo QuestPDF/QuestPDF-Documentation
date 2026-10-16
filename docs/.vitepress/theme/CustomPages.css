@@ -189,8 +189,6 @@ html.dark .custom-page {
   padding: 1px;
   pointer-events: none;
   background: var(--surface-rim);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   mask-composite: exclude;
 }
@@ -244,13 +242,11 @@ html.dark .custom-page {
 .custom-page .texture-dots::before {
   left: 0;
   mask-image: radial-gradient(ellipse 55% 55% at 40% 42%, #000, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 55% 55% at 40% 42%, #000, transparent 100%);
 }
 
 .custom-page .texture-dots::after {
   right: 0;
   mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%);
 }
 
 /* light dots on a dark canvas read stronger than dark dots on white, so they are fainter there */
@@ -279,7 +275,6 @@ html.dark .custom-page .texture-dots::after {
   background-size: 12px 4px;
   background-position: center;
   mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
 
 html.dark .custom-page .dotted-divider {
