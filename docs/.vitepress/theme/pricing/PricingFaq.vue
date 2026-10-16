@@ -21,7 +21,7 @@ import { faqCategories as categories } from "./faq";
           <details v-for="item of category.items" :key="item.question" class="faq-item">
             <summary class="faq-question">
               <span>{{ item.question }}</span>
-              <i class="fa-solid fa-chevron-down faq-chevron"></i>
+              <i class="fa-solid fa-chevron-down faq-chevron" aria-hidden="true"></i>
             </summary>
             <p class="faq-answer" v-html="item.answer"></p>
           </details>

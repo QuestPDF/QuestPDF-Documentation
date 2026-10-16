@@ -4,13 +4,13 @@
       <pricing-tiers />
     </div>
 
-    <div class="dotted-divider" aria-hidden="true"></div>
+    <div class="dotted-divider"></div>
 
     <div class="container texture-dots">
       <pricing-faq />
     </div>
 
-    <div class="dotted-divider" aria-hidden="true"></div>
+    <div class="dotted-divider"></div>
 
     <div class="container texture-dots">
       <pricing-contact />

@@ -61,7 +61,7 @@ const columns: FooterColumn[] = [
   }
 ];
 
-const year = 2026;
+const year = new Date().getFullYear();
 </script>
 
 <template>
@@ -73,11 +73,7 @@ const year = 2026;
 
           <ul>
             <li v-for="link in column.links" :key="link.label">
-              <a :href="link.href"
-                 :target="link.external ? '_blank' : undefined"
-                 :rel="link.external ? 'noopener' : undefined">
-                {{ link.label }}
-              </a>
+              <a :href="link.href" :target="link.external ? '_blank' : undefined">{{ link.label }}</a>
             </li>
           </ul>
         </div>

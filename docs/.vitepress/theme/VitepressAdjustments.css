@@ -9,7 +9,7 @@
 }
 
 
-:root:is(.dark) {
+:root.dark {
     --vp-c-brand-1: #4FC3F7;
     --vp-c-brand-2: #03A9F4;
     --vp-c-brand-3: #0288D1;
@@ -23,6 +23,7 @@
     font-size: 16px;
 
     --vp-c-gutter: var(--vp-c-divider);
+    --vp-nav-logo-height: 32px;
 
     --elevation: 0 13px 27px -5px rgb(0 0 0 / 5%), 0 8px 16px -8px rgb(0 0 0 / 8%), 0 -6px 16px -6px rgb(0 0 0 / 3%);
     --elevation-hover: 0 13px 27px -5px rgb(0 0 0 / 15%), 0 8px 16px -8px rgb(0 0 0 / 24%), 0 -6px 16px -6px rgb(0 0 0 / 9%);
@@ -36,13 +37,12 @@ body {
     line-height: 24px;
 }
 
-.VPNavBar .title {
-    font-size: 24px !important;
+.VPNavBar .VPNavBarTitle .title {
+    font-size: 24px;
 }
 
-.logo {
-    height: 32px !important;
-    margin-right: 16px !important;
+.VPNavBar .VPNavBarTitle .logo {
+    margin-right: 16px;
 }
 
 .VPLink.link.active,

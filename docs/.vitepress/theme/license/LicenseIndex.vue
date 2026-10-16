@@ -40,7 +40,7 @@ const documents = [
       <nav class="panel documents" aria-label="Legal documents">
         <a v-for="document in documents" :key="document.title" :href="document.link" class="document-link">
           <span class="link-title">{{ document.title }}</span>
-          <i class="fa-solid fa-arrow-right arrow"></i>
+          <i class="fa-solid fa-arrow-right arrow" aria-hidden="true"></i>
         </a>
       </nav>
 

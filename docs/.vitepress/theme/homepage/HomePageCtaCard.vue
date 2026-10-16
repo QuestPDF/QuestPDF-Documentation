@@ -53,7 +53,7 @@ function onFocus(event: FocusEvent) {
 
       <span class="cta-link">
         {{ label }}
-        <i class="fa-solid fa-arrow-right arrow-icon"></i>
+        <i class="fa-solid fa-arrow-right arrow-icon" aria-hidden="true"></i>
       </span>
     </div>
   </a>

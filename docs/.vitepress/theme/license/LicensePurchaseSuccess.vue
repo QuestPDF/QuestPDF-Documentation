@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const shareEmailSubject = 'QuestPDF License Purchased – Setup Instructions';
 const shareEmailBody = `Hi Team,
 
@@ -14,52 +14,54 @@ Best`;
 
 const shareMailtoLink = `mailto:?subject=${encodeURIComponent(shareEmailSubject)}&body=${encodeURIComponent(shareEmailBody)}`;
 
-const licenseItems = [
-  {
-    icon: 'fa-award-simple',
-    title: "Perpetual license",
-    description: "Your perpetual license never expires. This purchase includes one year of feature, quality and security updates, along with one year of dedicated support."
-  },
-  {
-    icon: 'fa-bolt',
-    title: "Ready to use",
-    description: "Your organization is now licensed to use QuestPDF in production. No license keys, activation servers, or compliance tracking are required. Your team can start immediately - licensing never blocks builds or deployments."
-  },
-  {
-    icon: 'fa-code',
-    title: "License configuration",
-    description: "Please share <a href=\"https://www.questpdf.com/license/configuration.html\"><u>the license setup guide</u></a> with your software development team. Configuration takes only a few minutes and requires changing a single line of code.",
-  },
-];
-
-const billingItems = [
-  {
-    icon: 'fa-receipt',
-    title: "Purchase confirmation",
-    description: "All purchase details, invoices, and receipts will be delivered to your email by Paddle, our Merchant of Record."
-  },
-  {
-    icon: 'fa-calendar-day',
-    title: "Updates & support auto-renewal",
-    description: "Renewal extends access to software updates and support for another year. If renewal is canceled, your team keeps the right to use the version already licensed. We will send a renewal reminder 30 days before the renewal date.",
-  },
-  {
-    icon: 'fa-credit-card',
-    title: "Invoice and billing",
-    description: "You can update your account details and payment information, manage or cancel the license auto-renewal process as well as access payment history on the Paddle Customer Portal.",
-  }
-];
-
 /* the two detail cards, each a fact list with its button at the foot */
-const cards = [
+interface Card {
+  title: string;
+  items: { icon: string; title: string; description: string }[];
+  action: { label: string; href: string; primary?: boolean; target?: string };
+}
+
+const cards: Card[] = [
   {
     title: "License information",
-    items: licenseItems,
+    items: [
+      {
+        icon: "fa-award-simple",
+        title: "Perpetual license",
+        description: "Your perpetual license never expires. This purchase includes one year of feature, quality and security updates, along with one year of dedicated support."
+      },
+      {
+        icon: "fa-bolt",
+        title: "Ready to use",
+        description: "Your organization is now licensed to use QuestPDF in production. No license keys, activation servers, or compliance tracking are required. Your team can start immediately - licensing never blocks builds or deployments."
+      },
+      {
+        icon: "fa-code",
+        title: "License configuration",
+        description: "Please share <a href=\"https://www.questpdf.com/license/configuration.html\"><u>the license setup guide</u></a> with your software development team. Configuration takes only a few minutes and requires changing a single line of code."
+      }
+    ],
     action: { label: "Forward to Development Team", href: shareMailtoLink, primary: true }
   },
   {
     title: "Billing and renewal",
-    items: billingItems,
+    items: [
+      {
+        icon: "fa-receipt",
+        title: "Purchase confirmation",
+        description: "All purchase details, invoices, and receipts will be delivered to your email by Paddle, our Merchant of Record."
+      },
+      {
+        icon: "fa-calendar-day",
+        title: "Updates & support auto-renewal",
+        description: "Renewal extends access to software updates and support for another year. If renewal is canceled, your team keeps the right to use the version already licensed. We will send a renewal reminder 30 days before the renewal date."
+      },
+      {
+        icon: "fa-credit-card",
+        title: "Invoice and billing",
+        description: "You can update your account details and payment information, manage or cancel the license auto-renewal process as well as access payment history on the Paddle Customer Portal."
+      }
+    ],
     action: { label: "Open Customer Portal", href: "https://customer-portal.paddle.com/cpl_01gmdq0qdr8madhdchknpb52we", target: "_blank" }
   }
 ];
@@ -71,7 +73,7 @@ const cards = [
     <div class="content">
       <header class="section-header purchase-header">
         <div class="status-tag">
-          <i class="fa-solid fa-check"></i>
+          <i class="fa-solid fa-check" aria-hidden="true"></i>
           Order completed
         </div>
 
@@ -85,7 +87,7 @@ const cards = [
           <div class="description-items">
             <div v-for="item in card.items" :key="item.title" class="description-item">
               <div class="icon-tile">
-                <i class="fa-regular" :class="item.icon" />
+                <i class="fa-regular" :class="item.icon" aria-hidden="true" />
               </div>
               <div class="description-item-content">
                 <strong class="row-title">{{ item.title }}</strong>
@@ -97,7 +99,7 @@ const cards = [
           <a class="action" :class="{ primary: card.action.primary }" :href="card.action.href" :target="card.action.target">{{ card.action.label }}</a>
         </section>
 
-        <div class="dotted-divider" aria-hidden="true"></div>
+        <div class="dotted-divider"></div>
 
         <!-- full width, so the short assistance note does not sit alone in a half-empty row -->
         <section class="panel assistance-card">

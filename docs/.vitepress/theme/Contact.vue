@@ -73,7 +73,7 @@ const contacts: ContactInformation[] = [
       <section class="contacts">
         <article v-for="contact of contacts" :key="contact.title" class="panel contact-card">
           <div class="icon-tile">
-            <i class="fa-regular" :class="contact.icon"></i>
+            <i class="fa-regular" :class="contact.icon" aria-hidden="true"></i>
           </div>
 
           <h3 class="card-title">{{ contact.title }}</h3>
@@ -84,13 +84,13 @@ const contacts: ContactInformation[] = [
           </div>
         </article>
 
-        <div class="dotted-divider" aria-hidden="true"></div>
+        <div class="dotted-divider"></div>
 
         <!-- full width, so the company details do not sit alone in a half-empty row -->
         <article class="panel business-details">
           <div class="business-owner">
             <div class="icon-tile">
-              <i class="love-icon fa-solid fa-heart"></i>
+              <i class="love-icon fa-solid fa-heart" aria-hidden="true"></i>
             </div>
 
             <div>

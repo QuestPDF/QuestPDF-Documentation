@@ -66,7 +66,7 @@
               :aria-expanded="isDownloadOpen"
               @click="isDownloadOpen = !isDownloadOpen">
               Download
-              <i class="fa-regular fa-chevron-down download-chevron" :class="{ open: isDownloadOpen }"></i>
+              <i class="fa-regular fa-chevron-down download-chevron" aria-hidden="true"></i>
             </button>
 
             <div v-if="isDownloadOpen" class="download-menu">
@@ -83,7 +83,7 @@
 
               <a class="download-all" href="/companion/download.html" @click="isDownloadOpen = false">
                 All versions
-                <i class="fa-regular fa-arrow-right"></i>
+                <i class="fa-regular fa-arrow-right" aria-hidden="true"></i>
               </a>
             </div>
           </div>
@@ -504,7 +504,7 @@ html.dark .companion-frame.light {
   transition: transform 0.2s ease;
 }
 
-.download-chevron.open {
+.download-toggle[aria-expanded="true"] .download-chevron {
   transform: rotate(180deg);
 }
 

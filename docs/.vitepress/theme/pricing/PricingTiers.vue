@@ -6,7 +6,7 @@
 
     <div class="license-tiers">
       <section v-for="license of licenses" :key="license.name" class="license-tier panel" :class="license.name">
-        <div v-if="license.name === 'professional'" class="tag"><i class="fa-solid fa-star"></i>Most Popular</div>
+        <div v-if="license.name === 'professional'" class="tag"><i class="fa-solid fa-star" aria-hidden="true"></i>Most Popular</div>
 
         <header>
           <div class="tier-name">{{ license.name }}</div>
@@ -25,7 +25,7 @@
 
         <div class="details">
           <div v-for="detail of license.details" :key="detail" class="details-item">
-            <i class="fa-duotone fa-square-check"></i>
+            <i class="fa-duotone fa-square-check" aria-hidden="true"></i>
             <p>{{ detail }}</p>
           </div>
         </div>

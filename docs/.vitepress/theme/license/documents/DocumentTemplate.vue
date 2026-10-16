@@ -22,7 +22,7 @@
                   class="document-contents-link"
                   :class="{ 'is-active': index === active }"
                   :href="`#${section.id}`"
-                  :ref="element => links[index] = element"
+                  :ref="element => links[index] = element as HTMLElement"
                   @click="active = index">
                 {{ section.title }}
               </a>
@@ -36,7 +36,7 @@
             <summary>
               <span>Contents</span>
               <span class="document-contents-count">{{ doc.sections.length }} sections</span>
-              <i class="fa-solid fa-chevron-down"></i>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
             </summary>
             <ol>
               <li v-for="section in doc.sections" :key="section.id">
@@ -62,13 +62,11 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
-import { data } from "./licenseDocuments.data.ts";
+import { data } from "./licenseDocuments.data";
 
-const props = defineProps({
-  id: { type: String, required: true }
-});
+const props = defineProps<{ id: string }>();
 
 const doc = data[props.id];
 
@@ -79,18 +77,18 @@ const doc = data[props.id];
    one. The marker is measured from the active link (titles wrap), and the rail scrolls itself to keep that
    link in view. */
 
-const rail = ref(null);
-const body = ref(null);
-const links = [];
+const rail = ref<HTMLElement | null>(null);
+const body = ref<HTMLElement | null>(null);
+const links: HTMLElement[] = [];
 const active = ref(0);
-const markerBox = ref(null);
+const markerBox = ref<{ top: number; height: number } | null>(null);
 const railClipped = ref(false);
 
 const marker = computed(() => markerBox.value
     ? { "--marker-top": `${markerBox.value.top}px`, "--marker-height": `${markerBox.value.height}px`, "--marker-opacity": 1 }
     : {});
 
-let headings = [];
+let headings: HTMLElement[] = [];
 
 function update() {
   const line = 160;
@@ -108,7 +106,7 @@ function update() {
 
 // the rail's bottom edge fades out while more sections are hidden below it
 function clipRail() {
-  const container = rail.value;
+  const container = rail.value!;
   railClipped.value = container.scrollTop + container.clientHeight < container.scrollHeight - 1;
 }
 
@@ -121,7 +119,7 @@ function placeMarker() {
   markerBox.value = { top: link.offsetTop, height: link.offsetHeight };
 
   // keep the active link inside the rail's own scroll area, without scrolling the page
-  const container = rail.value;
+  const container = rail.value!;
   const linkTop = link.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop;
 
   if (linkTop < container.scrollTop + 40 || linkTop + link.offsetHeight > container.scrollTop + container.clientHeight - 40)
@@ -133,7 +131,7 @@ function placeMarker() {
 watch(active, () => nextTick(placeMarker));
 
 onMounted(() => {
-  headings = [...body.value.querySelectorAll("h2[id]")];
+  headings = [...body.value!.querySelectorAll<HTMLElement>("h2[id]")];
   window.addEventListener("scroll", update, { passive: true });
   window.addEventListener("resize", placeMarker, { passive: true });
   update();

@@ -18,9 +18,9 @@ import { data as statistics } from "../statistics.data";
       </div>
 
       <aside class="statistics">
-        <a v-for="statistic in statistics" :key="statistic.label" :href="statistic.link" :target="statistic.link.startsWith('http') ? '_blank' : undefined" rel="noopener" class="statistic">
+        <a v-for="statistic in statistics" :key="statistic.label" :href="statistic.link" :target="statistic.link.startsWith('http') ? '_blank' : undefined" class="statistic">
           <span class="statistic-icon">
-            <i class="fa-solid" :class="statistic.icon"></i>
+            <i class="fa-solid" :class="statistic.icon" aria-hidden="true"></i>
           </span>
 
           <span class="title">

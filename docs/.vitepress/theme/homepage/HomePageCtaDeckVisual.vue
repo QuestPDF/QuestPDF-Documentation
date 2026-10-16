@@ -167,6 +167,21 @@ const pages: Page[] = [
   }
 ];
 
+/* the compact thumbnail (72 x 72): a flat miniature of the front page, the report */
+const thumb: Shape[] = [
+  { x: 8, y: 8, w: 30, h: 6, tone: "strong" },
+  { x: 8, y: 17, w: 20, h: 3, tone: "soft" },
+  { x: 8, y: 40, w: 7, h: 12 },
+  { x: 18, y: 32, w: 7, h: 20 },
+  { x: 28, y: 44, w: 7, h: 8 },
+  { x: 38, y: 28, w: 7, h: 24 },
+  { x: 48, y: 36, w: 7, h: 16 },
+  { x: 58, y: 24, w: 7, h: 28, tone: "accent" },
+  { x: 8, y: 52, w: 57, h: 1, tone: "soft" },
+  { x: 8, y: 60, w: 56, h: 3 },
+  { x: 8, y: 66, w: 44, h: 3, tone: "soft" }
+];
+
 /* each place in the pile (0 in front) leans a little, so the pile is not a perfect block */
 const LAST = pages.length - 1;
 const TILTS = [0, 1.2, -1, 0.8, -1.4, 0.6];
@@ -267,20 +282,9 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <!-- compact: a flat miniature of the front page, the report -->
     <div class="thumb">
       <div class="paper mini">
-        <span class="shape strong" style="left: 8px; top: 8px; width: 30px; height: 6px" />
-        <span class="shape soft" style="left: 8px; top: 17px; width: 20px; height: 3px" />
-        <span class="shape" style="left: 8px; top: 40px; width: 7px; height: 12px" />
-        <span class="shape" style="left: 18px; top: 32px; width: 7px; height: 20px" />
-        <span class="shape" style="left: 28px; top: 44px; width: 7px; height: 8px" />
-        <span class="shape" style="left: 38px; top: 28px; width: 7px; height: 24px" />
-        <span class="shape" style="left: 48px; top: 36px; width: 7px; height: 16px" />
-        <span class="shape accent" style="left: 58px; top: 24px; width: 7px; height: 28px" />
-        <span class="shape soft" style="left: 8px; top: 52px; width: 57px; height: 1px" />
-        <span class="shape" style="left: 8px; top: 60px; width: 56px; height: 3px" />
-        <span class="shape soft" style="left: 8px; top: 66px; width: 44px; height: 3px" />
+        <span v-for="(shape, index) of thumb" :key="index" class="shape" :class="shape.tone" :style="shapeStyle(shape)" />
       </div>
     </div>
   </div>

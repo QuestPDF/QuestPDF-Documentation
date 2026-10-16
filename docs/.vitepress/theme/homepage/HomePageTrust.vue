@@ -72,8 +72,8 @@ const platformGroups : PlatformGroup[] = [
       <h2 class="card-title">Industry-standard output</h2>
       <p class="card-description">
         Every build is automatically validated with the independent, trusted and open-source
-        <a href="https://verapdf.org/" target="_blank" rel="noopener">veraPDF</a> and
-        <a href="https://www.mustangproject.org/" target="_blank" rel="noopener">Mustang</a> validators.
+        <a href="https://verapdf.org/" target="_blank">veraPDF</a> and
+        <a href="https://www.mustangproject.org/" target="_blank">Mustang</a> validators.
       </p>
 
       <div class="standards">
@@ -87,7 +87,6 @@ const platformGroups : PlatformGroup[] = [
     </div>
 
     <section class="panel cells" aria-label="Enterprise-grade foundations">
-      <!-- the security policy backs the claim -->
       <a href="/security-policy" class="cell fact">
         <span class="label">
           <span class="label-text">Data privacy</span>

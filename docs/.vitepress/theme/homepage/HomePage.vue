@@ -28,13 +28,13 @@
         </HomePageCtaCard>
       </div>
 
-      <div class="dotted-divider" aria-hidden="true"></div>
+      <div class="dotted-divider"></div>
 
       <HomePageQuickStart />
       <HomePageCompanion />
       <HomePageTrust />
 
-      <div class="dotted-divider" aria-hidden="true"></div>
+      <div class="dotted-divider"></div>
 
       <HomePageLicense />
     </div>
@@ -54,11 +54,15 @@ import HomePageLicense from "./HomePageLicense.vue";
 
 </script>
 
-<style>
+<style scoped>
 
-/* everything under the hero is one column of panels; the hero's bottom padding spaces the first row */
+/* more breathing room in the homepage panels: 48px from 1280px, down to the shared 32px by 24px at 700px */
+.home-page {
+  --panel-padding: clamp(32px, 12.7px + 2.76vw, 48px) clamp(24px, 4.14vw - 4.95px, 48px);
+}
 
-.custom-page.home-page .sections {
+/* everything under the hero is one column of panels; the hero's own bottom padding spaces the first row */
+.sections {
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -66,21 +70,15 @@ import HomePageLicense from "./HomePageLicense.vue";
   padding-bottom: 48px;
 }
 
-/* more breathing room in the homepage panels: 48px from 1280px, down to the shared 32px by 24px at 700px */
-.custom-page.home-page {
-  --panel-padding: clamp(32px, 12.7px + 2.76vw, 48px) clamp(24px, 4.14vw - 4.95px, 48px);
-}
-
-
 /* side by side from 1181px; narrower, the text beside each visual would be a sliver */
-.custom-page.home-page .cta-row {
+.cta-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 32px;
 }
 
 @media screen and (max-width: 1180px) {
-  .custom-page.home-page .cta-row {
+  .cta-row {
     grid-template-columns: minmax(0, 1fr);
     gap: 24px;
   }

@@ -17,31 +17,28 @@ const phase = ref<"rest" | "fading" | "landing">("rest");
 const play = ref(true);
 
 /* the sections in page coordinates (148 x 200): where each sits, its delay after the first, and its bars */
-interface Bar {
+interface Box {
   x: number;
   y: number;
   w: number;
   h: number;
+}
+
+interface Bar extends Box {
   tone?: "strong" | "soft";
 }
 
-interface Section {
-  x: number;
-  y: number;
-  w: number;
-  h: number;
+interface Section extends Box {
   delay: number;
   bars: Bar[];
 }
 
-function row(y: number): Bar[] {
-  return [
-    { x: 4, y, w: 44, h: 4 },
-    { x: 60, y, w: 14, h: 4, tone: "soft" },
-    { x: 82, y, w: 18, h: 4, tone: "soft" },
-    { x: 104, y, w: 18, h: 4 }
-  ];
-}
+const tableRow: Bar[] = [
+  { x: 4, y: 4, w: 44, h: 4 },
+  { x: 60, y: 4, w: 14, h: 4, tone: "soft" },
+  { x: 82, y: 4, w: 18, h: 4, tone: "soft" },
+  { x: 104, y: 4, w: 18, h: 4 }
+];
 
 const sections: Section[] = [
   /* the title block */
@@ -75,10 +72,10 @@ const sections: Section[] = [
     x: 10, y: 90, w: 128, h: 12, delay: 0.33,
     bars: [{ x: 0, y: 0, w: 128, h: 12, tone: "strong" }]
   },
-  { x: 10, y: 104, w: 128, h: 12, delay: 0.45, bars: row(4) },
-  { x: 10, y: 116, w: 128, h: 12, delay: 0.53, bars: row(4) },
-  { x: 10, y: 128, w: 128, h: 12, delay: 0.6, bars: row(4) },
-  { x: 10, y: 140, w: 128, h: 12, delay: 0.68, bars: row(4) },
+  { x: 10, y: 104, w: 128, h: 12, delay: 0.45, bars: tableRow },
+  { x: 10, y: 116, w: 128, h: 12, delay: 0.53, bars: tableRow },
+  { x: 10, y: 128, w: 128, h: 12, delay: 0.6, bars: tableRow },
+  { x: 10, y: 140, w: 128, h: 12, delay: 0.68, bars: tableRow },
   /* the totals */
   {
     x: 74, y: 158, w: 64, h: 26, delay: 0.83,
@@ -100,7 +97,19 @@ const sections: Section[] = [
   }
 ];
 
-function box(item: { x: number; y: number; w: number; h: number }) {
+/* the compact thumbnail (72 x 72): a flat miniature of the finished page */
+const thumb: Bar[] = [
+  { x: 8, y: 8, w: 10, h: 10, tone: "strong" },
+  { x: 22, y: 9, w: 28, h: 6, tone: "strong" },
+  { x: 8, y: 26, w: 24, h: 4 },
+  { x: 40, y: 26, w: 24, h: 4 },
+  { x: 8, y: 38, w: 56, h: 7, tone: "strong" },
+  { x: 8, y: 50, w: 56, h: 4 },
+  { x: 8, y: 58, w: 56, h: 4 },
+  { x: 8, y: 66, w: 56, h: 4 }
+];
+
+function box(item: Box) {
   return { left: `${item.x}px`, top: `${item.y}px`, width: `${item.w}px`, height: `${item.h}px` };
 }
 
@@ -151,17 +160,9 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
 
     <span class="play-button"><i class="fa-solid fa-play"></i></span>
 
-    <!-- compact: a flat miniature of the finished page -->
     <div class="thumb">
       <div class="paper mini">
-        <span class="shape strong" style="left: 8px; top: 8px; width: 10px; height: 10px" />
-        <span class="shape strong" style="left: 22px; top: 9px; width: 28px; height: 6px" />
-        <span class="shape" style="left: 8px; top: 26px; width: 24px; height: 4px" />
-        <span class="shape" style="left: 40px; top: 26px; width: 24px; height: 4px" />
-        <span class="shape strong" style="left: 8px; top: 38px; width: 56px; height: 7px" />
-        <span class="shape" style="left: 8px; top: 50px; width: 56px; height: 4px" />
-        <span class="shape" style="left: 8px; top: 58px; width: 56px; height: 4px" />
-        <span class="shape" style="left: 8px; top: 66px; width: 56px; height: 4px" />
+        <span v-for="(bar, index) of thumb" :key="index" class="shape" :class="bar.tone" :style="box(bar)" />
       </div>
       <span class="play-button"><i class="fa-solid fa-play"></i></span>
     </div>
