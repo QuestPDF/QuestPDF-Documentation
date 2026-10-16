@@ -64,61 +64,59 @@ const contacts: ContactInformation[] = [
 </script>
 
 <template>
-  <div class="custom-page contact-page">
-    <div class="container texture-dots">
-      <div class="content">
-        <header class="section-header contact-header">
-          <h1>Contact us</h1>
-        </header>
+  <div class="custom-page contact-page texture-dots">
+    <div class="content">
+      <header class="section-header contact-header">
+        <h1>Contact us</h1>
+      </header>
 
-        <section class="contacts">
-          <article v-for="contact of contacts" :key="contact.title" class="panel contact-card">
+      <section class="contacts">
+        <article v-for="contact of contacts" :key="contact.title" class="panel contact-card">
+          <div class="icon-tile">
+            <i class="fa-regular" :class="contact.icon"></i>
+          </div>
+
+          <h3 class="card-title">{{ contact.title }}</h3>
+          <p class="card-description">{{ contact.description }}</p>
+
+          <div class="links">
+            <a v-for="link in contact.links" :key="link.href" class="action" :href="link.href" :target="link.href.startsWith('http') ? '_blank' : undefined">{{ link.label }}</a>
+          </div>
+        </article>
+
+        <div class="dotted-divider" aria-hidden="true"></div>
+
+        <!-- full width, so the company details do not sit alone in a half-empty row -->
+        <article class="panel business-details">
+          <div class="business-owner">
             <div class="icon-tile">
-              <i class="fa-regular" :class="contact.icon"></i>
+              <i class="love-icon fa-solid fa-heart"></i>
             </div>
 
-            <h3 class="card-title">{{ contact.title }}</h3>
-            <p class="card-description">{{ contact.description }}</p>
-
-            <div class="links">
-              <a v-for="link in contact.links" :key="link.href" class="action" :href="link.href" :target="link.href.startsWith('http') ? '_blank' : undefined">{{ link.label }}</a>
+            <div>
+              <p class="business-intro">QuestPDF is owned and proudly developed by</p>
+              <h3 class="business-name">Marcin Ziąbek CodeFlint</h3>
             </div>
-          </article>
+          </div>
 
-          <div class="dotted-divider" aria-hidden="true"></div>
-
-          <!-- full width, so the company details do not sit alone in a half-empty row -->
-          <article class="panel business-details">
-            <div class="business-owner">
-              <div class="icon-tile">
-                <i class="love-icon fa-solid fa-heart"></i>
-              </div>
-
-              <div>
-                <p class="business-intro">QuestPDF is owned and proudly developed by</p>
-                <h3 class="business-name">Marcin Ziąbek CodeFlint</h3>
-              </div>
+          <dl class="business-facts">
+            <div>
+              <dt>Address</dt>
+              <dd>Chrzanowska 29<br>32-551 Mętków<br>Poland</dd>
             </div>
 
-            <dl class="business-facts">
-              <div>
-                <dt>Address</dt>
-                <dd>Chrzanowska 29<br>32-551 Mętków<br>Poland</dd>
-              </div>
+            <div>
+              <dt>Email</dt>
+              <dd>contact@questpdf.com</dd>
+            </div>
 
-              <div>
-                <dt>Email</dt>
-                <dd>contact@questpdf.com</dd>
-              </div>
-
-              <div>
-                <dt>VAT</dt>
-                <dd>PL6282275649</dd>
-              </div>
-            </dl>
-          </article>
-        </section>
-      </div>
+            <div>
+              <dt>VAT</dt>
+              <dd>PL6282275649</dd>
+            </div>
+          </dl>
+        </article>
+      </section>
     </div>
   </div>
 </template>

@@ -67,51 +67,49 @@ const cards = [
 </script>
 
 <template>
-  <div class="custom-page purchase-page">
-    <div class="container texture-dots">
-      <div class="content">
-        <header class="section-header purchase-header">
-          <div class="section-tag status-tag">
-            <i class="fa-solid fa-check"></i>
-            Order completed
-          </div>
+  <div class="custom-page purchase-page texture-dots">
+    <div class="content">
+      <header class="section-header purchase-header">
+        <div class="section-tag status-tag">
+          <i class="fa-solid fa-check"></i>
+          Order completed
+        </div>
 
-          <h1 class="purchase-title">Thank you! <b>Please check your inbox</b> <span>for your license confirmation and setup instructions.</span></h1>
-        </header>
+        <h1 class="purchase-title">Thank you! <b>Please check your inbox</b> <span>for your license confirmation and setup instructions.</span></h1>
+      </header>
 
-        <div class="purchase-cards">
-          <section v-for="card in cards" :key="card.title" class="panel success-card">
-            <h3 class="card-title">{{ card.title }}</h3>
+      <div class="purchase-cards">
+        <section v-for="card in cards" :key="card.title" class="panel success-card">
+          <h3 class="card-title">{{ card.title }}</h3>
 
-            <div class="description-items">
-              <div v-for="item in card.items" :key="item.title" class="description-item">
-                <div class="icon-tile">
-                  <i class="fa-regular" :class="item.icon" />
-                </div>
-                <div class="description-item-content">
-                  <strong class="row-title">{{ item.title }}</strong>
-                  <span class="row-description" v-html="item.description" />
-                </div>
+          <div class="description-items">
+            <div v-for="item in card.items" :key="item.title" class="description-item">
+              <div class="icon-tile">
+                <i class="fa-regular" :class="item.icon" />
+              </div>
+              <div class="description-item-content">
+                <strong class="row-title">{{ item.title }}</strong>
+                <span class="row-description" v-html="item.description" />
               </div>
             </div>
+          </div>
 
-            <a class="action" :class="{ primary: card.action.primary }" :href="card.action.href" :target="card.action.target">{{ card.action.label }}</a>
-          </section>
+          <a class="action" :class="{ primary: card.action.primary }" :href="card.action.href" :target="card.action.target">{{ card.action.label }}</a>
+        </section>
 
-          <div class="dotted-divider" aria-hidden="true"></div>
+        <div class="dotted-divider" aria-hidden="true"></div>
 
-          <!-- full width, so the short assistance note does not sit alone in a half-empty row -->
-          <section class="panel assistance-card">
-            <div>
-              <h3 class="card-title">Do you need assistance?</h3>
-              <p class="card-description">
-                If you have any questions about your license, setup, or billing, please reach out. We typically respond within one business day.
-              </p>
-            </div>
+        <!-- full width, so the short assistance note does not sit alone in a half-empty row -->
+        <section class="panel assistance-card">
+          <div>
+            <h3 class="card-title">Do you need assistance?</h3>
+            <p class="card-description">
+              If you have any questions about your license, setup, or billing, please reach out. We typically respond within one business day.
+            </p>
+          </div>
 
-            <a class="action" href="mailto:contact@questpdf.com">Contact Support</a>
-          </section>
-        </div>
+          <a class="action" href="mailto:contact@questpdf.com">Contact Support</a>
+        </section>
       </div>
     </div>
   </div>

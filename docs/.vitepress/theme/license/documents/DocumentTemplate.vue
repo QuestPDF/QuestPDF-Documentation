@@ -1,63 +1,60 @@
 <template>
-  <section class="custom-page document-page legal-page">
-    <div class="container texture-dots">
-      <div class="content">
-        <header class="section-header document-header">
-          <h1>{{ doc.title }}</h1>
+  <section class="custom-page document-page legal-page texture-dots">
+    <div class="content">
+      <header class="section-header document-header">
+        <h1>{{ doc.title }}</h1>
 
-          <!-- effective date and version, taken from the top of the markdown source -->
-          <dl v-if="doc.meta.length" class="document-meta">
-            <div v-for="item in doc.meta" :key="item.label">
-              <dt>{{ item.label }}</dt>
-              <dd>{{ item.value }}</dd>
-            </div>
-          </dl>
-        </header>
+        <!-- effective date and version, taken from the top of the markdown source -->
+        <dl v-if="doc.meta.length" class="document-meta">
+          <div v-for="item in doc.meta" :key="item.label">
+            <dt>{{ item.label }}</dt>
+            <dd>{{ item.value }}</dd>
+          </div>
+        </dl>
+      </header>
 
-        <div class="document-layout">
-          <!-- sticky beside the text; a marker follows the section being read -->
-          <nav class="document-contents" :class="{ 'is-clipped': railClipped }" aria-label="Sections" ref="rail" @scroll.passive="clipRail">
-            <span class="document-contents-label">Contents</span>
-            <ol class="document-contents-list" :style="marker">
-              <li v-for="(section, index) in doc.sections" :key="section.id">
-                <a
-                    class="document-contents-link"
-                    :class="{ 'is-active': index === active }"
-                    :href="`#${section.id}`"
-                    :ref="element => links[index] = element"
-                    @click="active = index">
-                  {{ section.title }}
-                </a>
+      <div class="document-layout">
+        <nav class="document-contents" :class="{ 'is-clipped': railClipped }" aria-label="Sections" ref="rail" @scroll.passive="clipRail">
+          <span class="document-contents-label">Contents</span>
+          <ol class="document-contents-list" :style="marker">
+            <li v-for="(section, index) in doc.sections" :key="section.id">
+              <a
+                  class="document-contents-link"
+                  :class="{ 'is-active': index === active }"
+                  :href="`#${section.id}`"
+                  :ref="element => links[index] = element"
+                  @click="active = index">
+                {{ section.title }}
+              </a>
+            </li>
+          </ol>
+        </nav>
+
+        <div class="document-main">
+          <!-- on narrow screens the sections fold into a list above the text -->
+          <details class="document-contents-compact">
+            <summary>
+              <span>Contents</span>
+              <span class="document-contents-count">{{ doc.sections.length }} sections</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </summary>
+            <ol>
+              <li v-for="section in doc.sections" :key="section.id">
+                <a :href="`#${section.id}`">{{ section.title }}</a>
               </li>
             </ol>
-          </nav>
+          </details>
 
-          <div class="document-main">
-            <!-- on narrow screens the sections fold into a list above the text -->
-            <details class="document-contents-compact">
-              <summary>
-                <span>Contents</span>
-                <span class="document-contents-count">{{ doc.sections.length }} sections</span>
-                <i class="fa-solid fa-chevron-down"></i>
-              </summary>
-              <ol>
-                <li v-for="section in doc.sections" :key="section.id">
-                  <a :href="`#${section.id}`">{{ section.title }}</a>
-                </li>
-              </ol>
-            </details>
+          <article class="panel document-body vp-doc" ref="body" v-html="doc.html"></article>
 
-            <article class="panel document-body vp-doc" ref="body" v-html="doc.html"></article>
+          <div class="links">
+            <a class="action" href="/license">
+              View all licensing documents
+            </a>
 
-            <div class="links">
-              <a class="action" href="/license">
-                View all licensing documents
-              </a>
-
-              <a class="action primary" href="/license/QuestPDF%20License%20Terms.pdf" download>
-                Download (PDF)
-              </a>
-            </div>
+            <a class="action primary" href="/license/QuestPDF%20License%20Terms.pdf" download>
+              Download (PDF)
+            </a>
           </div>
         </div>
       </div>

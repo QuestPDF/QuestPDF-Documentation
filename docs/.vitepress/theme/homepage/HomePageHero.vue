@@ -3,7 +3,7 @@ import { data as statistics } from "../statistics.data";
 </script>
 
 <template>
-  <div class="container hero">
+  <div class="hero">
     <div class="hero-pattern" />
 
     <section class="content">

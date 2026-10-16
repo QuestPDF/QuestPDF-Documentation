@@ -221,16 +221,17 @@ html.dark .custom-page {
   color: var(--vp-c-text-1);
 }
 
-/* Dot wings: two faint dot fields beside a header that sits on the canvas (put `texture-dots` on its
-   container), fading out before the 650px text column; dropped below 960px, where there is no room. */
+/* Dot wings: two faint dot fields beside a header that sits on the canvas (`texture-dots` goes on the page root,
+   or on each section band of a page with several), fading out before the 650px text column; dropped below 960px,
+   where there is no room. */
 
-.custom-page .texture-dots {
+.texture-dots {
   position: relative;
   isolation: isolate; /* keeps the wings (z-index: -1) above the canvas but below the content */
 }
 
-.custom-page .texture-dots::before,
-.custom-page .texture-dots::after {
+.texture-dots::before,
+.texture-dots::after {
   content: "";
   position: absolute;
   top: 0;
@@ -243,25 +244,25 @@ html.dark .custom-page {
   background-position: center top;
 }
 
-.custom-page .texture-dots::before {
+.texture-dots::before {
   left: 0;
   mask-image: radial-gradient(ellipse 55% 55% at 40% 42%, #000, transparent 100%);
 }
 
-.custom-page .texture-dots::after {
+.texture-dots::after {
   right: 0;
   mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%);
 }
 
 /* light dots on a dark canvas read stronger than dark dots on white, so they are fainter there */
-html.dark .custom-page .texture-dots::before,
-html.dark .custom-page .texture-dots::after {
+html.dark .texture-dots::before,
+html.dark .texture-dots::after {
   background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 14%, transparent) 1px, transparent 1.5px);
 }
 
 @media screen and (max-width: 960px) {
-  .custom-page .texture-dots::before,
-  .custom-page .texture-dots::after {
+  .texture-dots::before,
+  .texture-dots::after {
     display: none;
   }
 }

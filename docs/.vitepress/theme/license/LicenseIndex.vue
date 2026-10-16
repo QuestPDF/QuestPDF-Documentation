@@ -30,27 +30,24 @@ const documents = [
 </script>
 
 <template>
-  <!-- the canvas (body background) is shared with the document pages, see "Page canvas" in CustomPages.css -->
-  <div class="custom-page legal-page">
-    <div class="container texture-dots">
-      <article class="content">
-        <header class="section-header">
-          <h1>QuestPDF Legal Terms</h1>
-          <p class="sub-header">Review or download the official legal documents and licensing terms for QuestPDF. If you have questions or need assistance, our team is here to help.</p>
-        </header>
+  <div class="custom-page legal-page texture-dots">
+    <article class="content">
+      <header class="section-header">
+        <h1>QuestPDF Legal Terms</h1>
+        <p class="sub-header">Review or download the official legal documents and licensing terms for QuestPDF. If you have questions or need assistance, our team is here to help.</p>
+      </header>
 
-        <nav class="panel documents" aria-label="Legal documents">
-          <a v-for="document in documents" :key="document.title" :href="document.link" class="document-link">
-            <span class="link-title">{{ document.title }}</span>
-            <i class="fa-solid fa-arrow-right arrow"></i>
-          </a>
-        </nav>
-
-        <a class="action primary" href="/license/QuestPDF%20License%20Terms.pdf" download>
-          Download all documents (PDF)
+      <nav class="panel documents" aria-label="Legal documents">
+        <a v-for="document in documents" :key="document.title" :href="document.link" class="document-link">
+          <span class="link-title">{{ document.title }}</span>
+          <i class="fa-solid fa-arrow-right arrow"></i>
         </a>
-      </article>
-    </div>
+      </nav>
+
+      <a class="action primary" href="/license/QuestPDF%20License%20Terms.pdf" download>
+        Download all documents (PDF)
+      </a>
+    </article>
   </div>
 </template>
 

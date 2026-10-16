@@ -2,44 +2,41 @@
   <div class="custom-page home-page">
     <HomePageHero />
 
-    <div class="container">
-      <div class="content sections">
-        <!-- the gallery link is a placeholder until the page exists (see roadmap.md) -->
-        <div class="cta-row">
-          <HomePageCtaCard
-              title="Build an invoice in 10 minutes"
-              description="Learn the core concepts of QuestPDF, then build a complete invoice step by step. Go from a blank page to a finished PDF in fewer than 200 lines of C#."
-              label="Watch the tutorial"
-              href="/quick-start.html">
-            <template #visual="{ active }">
-              <HomePageCtaBuildVisual :active="active" />
-            </template>
-          </HomePageCtaCard>
+    <div class="content sections">
+      <!-- the gallery link is a placeholder until the page exists (see roadmap.md) -->
+      <div class="cta-row">
+        <HomePageCtaCard
+            title="Build an invoice in 10 minutes"
+            description="Learn the core concepts of QuestPDF, then build a complete invoice step by step. Go from a blank page to a finished PDF in fewer than 200 lines of C#."
+            label="Watch the tutorial"
+            href="/quick-start.html">
+          <template #visual="{ active }">
+            <HomePageCtaBuildVisual :active="active" />
+          </template>
+        </HomePageCtaCard>
 
-          <HomePageCtaCard
-              title="Explore the sample gallery"
-              description="Explore complete document examples, reusable components and layout ideas. Each includes C# source code you can copy and adapt to your own projects."
-              label="Browse the examples"
-              href="/sample-gallery.html"
-              accent="#5C6BC0"
-              accent-secondary="#3F51B5">
-            <template #visual="{ active }">
-              <HomePageCtaDeckVisual :active="active" />
-            </template>
-          </HomePageCtaCard>
-        </div>
-
-        <div class="dotted-divider" aria-hidden="true"></div>
-
-        <!-- one run, with no seams between these three -->
-        <HomePageQuickStart />
-        <HomePageCompanion />
-        <HomePageTrust />
-
-        <div class="dotted-divider" aria-hidden="true"></div>
-
-        <HomePageLicense />
+        <HomePageCtaCard
+            title="Explore the sample gallery"
+            description="Explore complete document examples, reusable components and layout ideas. Each includes C# source code you can copy and adapt to your own projects."
+            label="Browse the examples"
+            href="/sample-gallery.html"
+            accent="#5C6BC0"
+            accent-secondary="#3F51B5">
+          <template #visual="{ active }">
+            <HomePageCtaDeckVisual :active="active" />
+          </template>
+        </HomePageCtaCard>
       </div>
+
+      <div class="dotted-divider" aria-hidden="true"></div>
+
+      <HomePageQuickStart />
+      <HomePageCompanion />
+      <HomePageTrust />
+
+      <div class="dotted-divider" aria-hidden="true"></div>
+
+      <HomePageLicense />
     </div>
   </div>
 </template>
