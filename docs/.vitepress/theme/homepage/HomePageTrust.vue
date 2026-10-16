@@ -86,35 +86,33 @@ const platformGroups : PlatformGroup[] = [
       </div>
     </div>
 
-    <section class="panel" aria-label="Enterprise-grade foundations">
-      <div class="cells">
-        <!-- the security policy backs the claim -->
-        <a href="/security-policy" class="cell fact">
-          <span class="label">
-            <span class="label-text">Data privacy</span>
-            <i class="fa-regular fa-arrow-right fact-arrow" aria-hidden="true"></i>
-          </span>
-          <span class="fact-text">No network calls, no telemetry, no license server. Works air-gapped.</span>
-        </a>
+    <section class="panel cells" aria-label="Enterprise-grade foundations">
+      <!-- the security policy backs the claim -->
+      <a href="/security-policy" class="cell fact">
+        <span class="label">
+          <span class="label-text">Data privacy</span>
+          <i class="fa-regular fa-arrow-right fact-arrow" aria-hidden="true"></i>
+        </span>
+        <span class="fact-text">No network calls, no telemetry, no license server. Works air-gapped.</span>
+      </a>
 
-        <section v-for="group of platformGroups" :key="group.label" class="cell">
-          <h3 class="label">{{ group.label }}</h3>
+      <section v-for="group of platformGroups" :key="group.label" class="cell">
+        <h3 class="label">{{ group.label }}</h3>
 
-          <ul class="platforms">
-            <li v-for="platform of group.platforms" :key="platform.name" class="platform">
-              <span
-                  v-if="platform.src"
-                  class="platform-logo"
-                  aria-hidden="true"
-                  :style="{
-                    '--logo': `url(/homepage/supported-platforms/${platform.src})`,
-                    height: `${platform.height}px`
-                  }"></span>
-              <span>{{ platform.name }}</span>
-            </li>
-          </ul>
-        </section>
-      </div>
+        <ul class="platforms">
+          <li v-for="platform of group.platforms" :key="platform.name" class="platform">
+            <span
+                v-if="platform.src"
+                class="platform-logo"
+                aria-hidden="true"
+                :style="{
+                  '--logo': `url(/homepage/supported-platforms/${platform.src})`,
+                  height: `${platform.height}px`
+                }"></span>
+            <span>{{ platform.name }}</span>
+          </li>
+        </ul>
+      </section>
     </section>
   </div>
 </template>
@@ -125,11 +123,6 @@ const platformGroups : PlatformGroup[] = [
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 32px;
-}
-
-.trust > .panel {
-  display: flex;
-  flex-direction: column;
 }
 
 @media screen and (max-width: 960px) {
@@ -205,7 +198,6 @@ const platformGroups : PlatformGroup[] = [
    lines run edge to edge while the outer edges stay open. */
 
 .cells {
-  flex: 1;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-rows: minmax(0, 1fr);

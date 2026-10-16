@@ -117,19 +117,17 @@ function lineHtml({ text, kind, typed = Infinity }: Line) {
       </div>
 
       <!-- the request types itself; the send button lights up once sent and spins while the assistant works -->
-      <div class="composer-dock">
-        <div class="composer" :class="{ sent, working }" aria-live="polite">
-          <i class="fa-regular fa-sparkles composer-icon" aria-hidden="true"></i>
+      <div class="composer" :class="{ sent, working }" aria-live="polite">
+        <i class="fa-regular fa-sparkles composer-icon" aria-hidden="true"></i>
 
-          <div class="composer-text">
-            <span>{{ promptText }}</span>
-            <span v-if="!sent" class="caret" :class="{ steady: typing }"></span>
-          </div>
+        <div class="composer-text">
+          <span>{{ promptText }}</span>
+          <span v-if="!sent" class="caret" :class="{ steady: typing }"></span>
+        </div>
 
-          <div class="composer-send" aria-hidden="true">
-            <i v-if="working" class="spinner"></i>
-            <i v-else class="fa-regular fa-arrow-up"></i>
-          </div>
+        <div class="composer-send" aria-hidden="true">
+          <i v-if="working" class="spinner"></i>
+          <i v-else class="fa-regular fa-arrow-up"></i>
         </div>
       </div>
     </div>
@@ -312,10 +310,6 @@ html.dark .quick-start {
   box-shadow: inset 3px 0 0 #4CAF50AA;
 }
 
-.composer-dock {
-  padding: 16px 24px 24px;
-}
-
 
 /* Composer */
 
@@ -324,6 +318,7 @@ html.dark .quick-start {
   display: flex;
   align-items: center;
   gap: 12px;
+  margin: 16px 24px 24px;
   padding: 10px 10px 10px 16px;
   border: 1px solid var(--composer-border);
   border-radius: 14px;
@@ -499,8 +494,8 @@ html.dark .quick-start {
     line-height: 1.25;
   }
 
-  .composer-dock {
-    padding: 12px 16px 16px;
+  .composer {
+    margin: 12px 16px 16px;
   }
 }
 
