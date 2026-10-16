@@ -161,7 +161,8 @@ html.dark h1 .highlight-foreground {
   gap: 20px;
 }
 
-/* a quiet tile, so the numbers stay the loudest thing in the list */
+/* a quiet tile, so the numbers stay the loudest thing in the list; on the light theme it is solid white, and a
+   hairline ring keeps its shape on the pale page */
 .statistic-icon {
   display: inline-flex;
   flex: 0 0 auto;
@@ -171,7 +172,8 @@ html.dark h1 .highlight-foreground {
   height: 56px;
   border-radius: 16px;
 
-  background-color: color-mix(in srgb, var(--vp-c-text-1) 8%, transparent);
+  background-color: light-dark(#FFFFFF, color-mix(in srgb, var(--vp-c-text-1) 8%, transparent));
+  box-shadow: inset 0 0 0 1px light-dark(color-mix(in srgb, var(--vp-c-text-1) 8%, transparent), transparent);
 }
 
 .statistic-icon i {
@@ -182,12 +184,6 @@ html.dark h1 .highlight-foreground {
 /* a solid near-black glyph is too heavy on the light theme, so it takes the regular (outlined) weight there */
 html:not(.dark) .statistic-icon i {
   font-weight: 400;
-}
-
-/* on the light theme the tile is solid white; a hairline ring keeps its shape on the pale page */
-html:not(.dark) .statistic-icon {
-  background-color: #FFFFFF;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 8%, transparent);
 }
 
 .statistic .title {
