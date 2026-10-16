@@ -15,7 +15,6 @@ export interface LegalDocumentSection {
 }
 
 export interface LegalDocument {
-    id: string;
     title: string;
     meta: LegalDocumentMeta[];
     sections: LegalDocumentSection[];
@@ -91,13 +90,7 @@ export default defineLoader({
             const env = { sections: [] as LegalDocumentSection[], slugCounts: {} as Record<string, number> };
             const html = markdown.render(body, env);
 
-            documents[id] = {
-                id,
-                title,
-                meta,
-                sections: env.sections,
-                html
-            };
+            documents[id] = { title, meta, sections: env.sections, html };
         }
 
         return documents;
