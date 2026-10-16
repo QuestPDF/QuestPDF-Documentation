@@ -315,6 +315,7 @@ html.dark .quick-start {
 
 .composer {
   position: relative;
+  isolation: isolate; /* keeps the band (z-index: -1) above the composer's background but below its content */
   display: flex;
   align-items: center;
   gap: 12px;
@@ -331,17 +332,12 @@ html.dark .quick-start {
   border-color: var(--composer-border-sent);
 }
 
-.composer > * {
-  position: relative;
-  z-index: 1;
-}
-
 /* while the assistant works, a soft purple band sweeps across the composer */
 .composer::before {
   content: "";
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
   background-image: linear-gradient(100deg,
       transparent 20%,
