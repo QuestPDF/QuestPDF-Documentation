@@ -176,10 +176,17 @@ html.dark .quick-start {
   grid-area: code;
 }
 
-/* a faint purple glow from the left edge, behind the heading */
+/* a faint purple glow. On white it falls from the top-left corner in a cleaner violet (the muted purple of the
+   dark glow turns grey there); in dark mode it spreads from the left edge, behind the heading. */
 .agent-card {
   grid-area: agent;
   border-top: 1px solid var(--vp-c-divider);
+  background-image:
+      radial-gradient(ellipse 70% 100% at 0% 0%, color-mix(in srgb, #7C4DFF 7%, transparent), transparent),
+      radial-gradient(ellipse 35% 45% at 0% 0%, color-mix(in srgb, #B388FF 5%, transparent), transparent);
+}
+
+html.dark .agent-card {
   background-image:
       radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, var(--agent-accent) 10%, transparent), transparent),
       radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #AB47BC 4%, transparent), transparent);
