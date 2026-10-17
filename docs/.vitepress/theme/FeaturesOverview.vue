@@ -1,5 +1,29 @@
 <script setup lang="ts">
-import { featureCategories as categories } from "./features";
+import { featureChapters, type FeatureCategory } from "./features";
+
+/* A chapter's categories split into two columns of near-equal height, measured in lines: a title with the gap
+   above it counts as three, each feature as one. Every split that keeps the first category top left is tried
+   (a chapter has at most six categories), and each column keeps the data order, so the masonry reads the same
+   way every time instead of wherever the browser balances it. */
+function balance(categories: FeatureCategory[]): FeatureCategory[][] {
+  const height = (list: FeatureCategory[]) => list.reduce((sum, category) => sum + 3 + category.features.length, 0);
+  const total = height(categories);
+
+  let best = { difference: Infinity, columns: [categories] };
+
+  for (let mask = 1; mask < 1 << categories.length; mask += 2) {
+    const left = categories.filter((_, index) => mask & (1 << index));
+    const right = categories.filter((_, index) => !(mask & (1 << index)));
+    const difference = Math.abs(total - 2 * height(left));
+
+    if (difference < best.difference)
+      best = { difference, columns: [left, right] };
+  }
+
+  return best.columns.filter(column => column.length > 0);
+}
+
+const chapters = featureChapters.map(chapter => ({ ...chapter, columns: balance(chapter.categories) }));
 </script>
 
 <template>
@@ -12,47 +36,36 @@ import { featureCategories as categories } from "./features";
         </p>
       </header>
 
-      <section v-for="category in categories" :key="category.name" class="panel category">
-        <header class="category-header">
-          <h2 class="card-title">{{ category.name }}</h2>
-          <p class="card-description">{{ category.description }}</p>
-        </header>
+      <div class="chapters">
+        <section v-for="chapter in chapters" :key="chapter.name" class="panel chapter">
+          <h2 class="chapter-title">{{ chapter.name }}</h2>
 
-        <ul class="feature-list">
-          <li v-for="item in category.items" :key="item.name">
-            <component :is="item.link ? 'a' : 'div'" :href="item.link" class="feature-row">
-              <i class="feature-icon fa-regular" :class="item.icon" aria-hidden="true" />
-              <span class="feature-name">{{ item.name }}</span>
-              <span class="feature-summary">{{ item.summary }}</span>
-              <i v-if="item.link" class="feature-arrow fa-regular fa-arrow-right" aria-hidden="true" />
-            </component>
+          <div class="columns">
+            <div v-for="(column, index) in chapter.columns" :key="index" class="column">
+              <section v-for="category in column" :key="category.name" class="category" :style="{ order: chapter.categories.indexOf(category) }">
+                <h3 class="category-title">
+                  <i class="fa-regular category-icon" :class="category.icon" aria-hidden="true"></i>
+                  {{ category.name }}
+                </h3>
 
-            <ul v-if="item.children">
-              <li v-for="child in item.children" :key="child.name" class="feature-child">
-                <a :href="child.link" class="feature-row child">
-                  <span class="feature-name">{{ child.name }}</span>
-                  <span class="feature-summary">{{ child.summary }}</span>
-                  <i class="feature-arrow fa-regular fa-arrow-right" aria-hidden="true" />
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
+                <ul class="features">
+                  <li v-for="feature in category.features" :key="feature.link">
+                    <a :href="feature.link" class="feature">{{ feature.name }}</a>
+                  </li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
 
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
 .features-header {
-  margin-bottom: 16px; /* with the 32px gap, the same 48px as on the contact page */
+  margin-bottom: 48px; /* the same 48px as on the contact page */
 }
 
 .features-header .sub-header {
@@ -61,187 +74,113 @@ import { featureCategories as categories } from "./features";
 }
 
 
-.category {
+/* one card per chapter, about the width of a document page: its name over a hairline, then its categories in
+   two balanced columns (see balance above) */
+
+.chapters {
   display: flex;
   flex-direction: column;
   gap: 32px;
+}
+
+.chapter {
   width: 100%;
-  max-width: 960px; /* a one-line row reads best at about the width of a document page */
+  max-width: 960px;
   margin: 0 auto;
-  padding: 48px;
 }
 
-/* the list is pulled out by the rows' own 8px inset, so at rest the icons line up with the category
-   title above and only the hover background reaches into the panel's margin */
-.feature-list {
-  margin: 0 -8px;
+.chapter-title {
+  margin: 0 0 40px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  font-size: 1.375rem;
+  line-height: 1.75rem;
 }
 
-@media screen and (max-width: 700px) {
-  .category {
-    padding: 32px 16px;
-    gap: 24px;
+.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px 64px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* one column on a phone: the column wrappers step aside and every category takes its data order again */
+@media screen and (max-width: 560px) {
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .category-header {
-    padding: 0 8px;
-  }
-
-  /* the panel's 16px inset leaves room for only 4px of overhang: the icons still meet the title at 24px */
-  .feature-list {
-    margin: 0 -4px;
+  .column {
+    display: contents;
   }
 }
 
 
-.feature-row {
-  position: relative;
+/* a category: its icon on an inset tile and its name, then every feature as a plain link */
+
+.category-title {
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-height: 44px;
-  padding: 6px 8px;
-  border-radius: 12px;
+  gap: 10px;
+  margin: 0 0 12px;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
   color: var(--vp-c-text-1);
 }
 
-/* only a row with a page of its own is a link */
-a.feature-row:hover,
-a.feature-row:focus-visible {
-  background-color: var(--surface-inner);
-}
-
-.feature-row:focus-visible {
-  outline: 2px solid #2196F3;
-  outline-offset: -2px;
-}
-
-.feature-icon {
+.category-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   width: 32px;
   height: 32px;
-  line-height: 32px;
-  text-align: center;
-  font-size: 1rem;
-  border-radius: 8px;
-
-  color: var(--vp-c-text-1);
+  border-radius: 9px;
   background-color: var(--surface-inner);
+  font-size: 1rem;
 }
 
-a.feature-row:hover .feature-icon {
-  color: #2196F3;
-  background-color: #2196F322;
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
 }
 
-.feature-name {
-  flex-shrink: 0;
-  font-weight: 600;
-}
-
-a.feature-row:hover .feature-name {
-  color: #2196F3;
-}
-
-.feature-summary {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+/* a feature reads as plain text until pointed at: then it darkens and underlines */
+.feature {
+  display: inline-block;
+  padding: 3px 0;
+  font-size: 0.9375rem;
+  line-height: 1.375rem;
   color: var(--vp-c-text-2);
+  text-decoration: underline transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s, text-decoration-color 0.2s;
 }
 
-/* almost every row is a link, so the arrow is hover feedback rather than a marker of which rows link */
-.feature-arrow {
-  flex-shrink: 0;
-  margin-left: auto;
-  font-size: 0.75rem;
-  color: var(--vp-c-text-3);
-  opacity: 0;
+.feature:hover {
+  color: var(--vp-c-text-1);
+  text-decoration-color: currentColor;
 }
 
-.feature-row:hover .feature-arrow,
-.feature-row:focus-visible .feature-arrow {
-  opacity: 1;
+.feature:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+  border-radius: 3px;
 }
 
-
-/* a sub-page of the feature above, hung on a tree line instead of carrying an icon */
-
-.feature-row.child {
-  min-height: 36px;
-  padding-left: 48px;
-}
-
-.feature-row.child .feature-name {
-  font-weight: 500;
-}
-
-.feature-row.child::before,
-.feature-row.child::after {
-  content: "";
-  position: absolute;
-  left: 23px;
-  border-left: 1px solid var(--vp-c-divider);
-}
-
-.feature-row.child::before {
-  top: -6px;
-  bottom: calc(100% - 18px);
-  width: 12px;
-  border-bottom: 1px solid var(--vp-c-divider);
-  border-bottom-left-radius: 6px;
-}
-
-.feature-child:not(:last-child) .feature-row.child::after {
-  top: 18px;
-  bottom: -6px;
-}
-
-
-/* narrower windows: the summary wraps under the name and the hover arrow goes */
-
-@media screen and (max-width: 1024px) {
-  .feature-row {
-    flex-wrap: wrap;
-    row-gap: 0;
-    padding: 8px;
-  }
-
-  /* a long name wraps beside its icon instead of dropping to a line of its own */
-  .feature-name {
-    flex: 1 1 0;
-    min-width: 0;
-  }
-
-  .feature-summary {
-    width: 100%;
-    padding-left: 44px;
-    white-space: normal;
-  }
-
-  .feature-row.child {
-    padding-left: 36px;
-  }
-
-  .feature-row.child .feature-summary {
-    padding-left: 0;
-  }
-
-  .feature-row.child::before,
-  .feature-row.child::after {
-    left: 16px;
-  }
-
-  .feature-arrow {
-    display: none;
-  }
-}
-
-/* touch: every row at least the 44px of a fingertip */
+/* touch: each link a 44px row */
 @media (pointer: coarse) {
-  .feature-row.child {
-    min-height: 44px;
+  .feature {
+    padding: 8px 0;
   }
 }
 

@@ -21,7 +21,8 @@
             label="Browse the examples"
             href="/sample-gallery.html"
             accent="#5C6BC0"
-            accent-secondary="#3F51B5">
+            accent-secondary="#3F51B5"
+            light-glow="#536DFE">
           <template #visual="{ active }">
             <HomePageCtaDeckVisual :active="active" />
           </template>

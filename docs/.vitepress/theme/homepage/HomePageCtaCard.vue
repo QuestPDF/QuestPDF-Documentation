@@ -16,6 +16,10 @@ withDefaults(defineProps<{
   /* the glow behind the visual and the colour of the link row */
   accent?: string;
   accentSecondary?: string;
+
+  /* the glow on the light theme, for an accent too muted to stay clean on white (it turns grey); the accent when
+     unset */
+  lightGlow?: string;
 }>(), {
   accent: "#0094F9",
   accentSecondary: "#2979FF"
@@ -34,7 +38,7 @@ function onFocus(event: FocusEvent) {
   <a
       class="panel cta-card"
       :class="{ active }"
-      :style="{ '--accent': accent, '--accent-secondary': accentSecondary }"
+      :style="{ '--accent': accent, '--accent-secondary': accentSecondary, '--light-glow': lightGlow }"
       :href="href"
       @mouseenter="hovered = true"
       @mouseleave="hovered = false"
@@ -112,12 +116,19 @@ html.dark .cta-card.active {
 
   /* the accent is a glow colour: as text it is darkened on the light theme and lightened on the dark one */
   --accent-text: color-mix(in srgb, var(--accent-secondary) 85%, #000);
+
+  /* the glow behind the visual: on white one clean hue, a little weaker, since a tint there takes light away
+     rather than adding it */
+  --glow-outer: color-mix(in srgb, var(--light-glow, var(--accent)) 10%, transparent);
+  --glow-inner: color-mix(in srgb, var(--light-glow, var(--accent)) 5%, transparent);
 }
 
 html.dark .cta-card {
   /* dark theme: a soft glow of the accent over the usual lift shadow */
   --accent-halo: 0 0 48px -16px color-mix(in srgb, var(--accent) 50%, transparent);
   --accent-text: color-mix(in srgb, var(--accent) 75%, #FFF);
+  --glow-outer: color-mix(in srgb, var(--accent) 13%, transparent);
+  --glow-inner: color-mix(in srgb, var(--accent-secondary) 6%, transparent);
 }
 
 .cta-card::after {
@@ -192,7 +203,7 @@ html.dark .cta-card {
 }
 
 .arrow-icon {
-  font-size: 14px;
+  font-size: 1rem;
   transition: transform 0.25s ease;
 }
 
@@ -211,7 +222,7 @@ html.dark .cta-card {
 }
 
 
-/* a glow in the accent colour behind the visual, a little brighter on hover */
+/* a glow in the accent colour from the top edge above the visual, a little brighter on hover */
 
 .background-gradient {
   position: absolute;
@@ -219,22 +230,14 @@ html.dark .cta-card {
   inset: 0;
   z-index: -1;
   background-image:
-      radial-gradient(ellipse 70% 90% at 18% 0%, color-mix(in srgb, var(--accent) 13%, transparent), transparent),
-      radial-gradient(ellipse 40% 50% at 18% 0%, color-mix(in srgb, var(--accent-secondary) 6%, transparent), transparent);
+      radial-gradient(ellipse 70% 90% at 18% 0%, var(--glow-outer), transparent),
+      radial-gradient(ellipse 40% 50% at 18% 0%, var(--glow-inner), transparent);
   opacity: 0.8;
   transition: opacity 0.3s ease;
 }
 
 .cta-card.active .background-gradient {
   opacity: 1;
-}
-
-/* light theme: centred behind the visual, whose column is 38% of the width after the 32px padding: its
-   centre is at 32px + 19% of (width - 64px) = 19% + 20px */
-html:not(.dark) .background-gradient {
-  background-image:
-      radial-gradient(ellipse 28% 60% at calc(19% + 20px) 50%, color-mix(in srgb, var(--accent) 16%, transparent), transparent),
-      radial-gradient(ellipse 18% 36% at calc(19% + 20px) 50%, color-mix(in srgb, var(--accent-secondary) 7%, transparent), transparent);
 }
 
 
@@ -294,14 +297,7 @@ html:not(.dark) .background-gradient {
   }
 
   .background-gradient {
-    background-image:
-        radial-gradient(ellipse 70% 90% at 0% 0%, color-mix(in srgb, var(--accent) 13%, transparent), transparent);
-  }
-
-  /* the thumbnail is 72px wide after 20px of padding */
-  html:not(.dark) .background-gradient {
-    background-image:
-        radial-gradient(ellipse 80px 80px at 56px 50%, color-mix(in srgb, var(--accent) 16%, transparent), transparent);
+    background-image: radial-gradient(ellipse 70% 90% at 0% 0%, var(--glow-outer), transparent);
   }
 }
 

@@ -409,7 +409,7 @@ html.dark .quick-start {
   border-radius: 50%;
   background-color: color-mix(in srgb, var(--agent-accent) 14%, transparent);
   color: var(--agent-accent);
-  font-size: 0.875rem;
+  font-size: 1rem;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 

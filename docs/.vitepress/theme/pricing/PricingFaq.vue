@@ -53,11 +53,12 @@ import { faqCategories as categories } from "./faq";
   gap: 56px;
 }
 
-/* the title's first line sits level with the first question's text */
+/* the title's first line sits level with the first question's text; set to the right, against its panel */
 .faq-category-header {
   display: flex;
   flex-direction: column;
   padding-top: 22px;
+  text-align: right;
 }
 
 /* in the text colour: on this page blue marks what is open or clickable */
@@ -123,7 +124,7 @@ import { faqCategories as categories } from "./faq";
 
 .faq-chevron {
   flex-shrink: 0;
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--vp-c-text-2);
   transition: transform 0.2s ease;
 }
@@ -163,6 +164,7 @@ import { faqCategories as categories } from "./faq";
 
   .faq-category-header {
     padding: 0 32px;
+    text-align: left;
   }
 }
 

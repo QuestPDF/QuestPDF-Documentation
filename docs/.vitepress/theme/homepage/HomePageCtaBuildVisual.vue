@@ -327,7 +327,7 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
   }
 
   .thumb .play-button i {
-    font-size: 10px;
+    font-size: 1rem;
     margin-left: 2px;
   }
 }

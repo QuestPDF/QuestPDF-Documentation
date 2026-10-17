@@ -5,28 +5,28 @@ const resellers = [
     name: "SoftwareOne",
     link: "https://www.softwareone.com/",
     src: "software-one.svg",
-    size: 42,
+    size: 38,
     marginTop: -3
   },
   {
     name: "Insight",
     link: "https://www.insight.com/",
     src: "insight.svg",
-    size: 48,
+    size: 43,
     marginTop: 3
   },
   {
     name: "SHI",
     link: "https://www.shi.com/",
     src: "shi.svg",
-    size: 50,
-    marginTop: -14
+    size: 45,
+    marginTop: -13
   },
   {
     name: "QBS Software",
     link: "https://www.qbssoftware.com/",
     src: "qbs-software.svg",
-    size: 62,
+    size: 56,
     marginTop: 4
   }
 ];
@@ -38,7 +38,7 @@ const resellers = [
     <section class="panel">
       <div class="section-header">
         <h3 class="card-title">Purchase Through Your Preferred Reseller</h3>
-        <p class="card-description">Any software reseller can order QuestPDF for you, with no partner agreement or registration needed. Invoices, purchase orders, and multi-year terms are supported — <a href="mailto:contact@questpdf.com">request a quote</a>.</p>
+        <p class="card-description">Any software reseller can order QuestPDF for you, with no partner agreement or registration needed. Invoices, purchase orders, and multi-year terms are supported.</p>
       </div>
 
       <div class="resellers-list">

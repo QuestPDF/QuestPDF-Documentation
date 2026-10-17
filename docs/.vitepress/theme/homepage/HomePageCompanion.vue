@@ -76,7 +76,7 @@
                 class="download-item"
                 :href="download.url"
                 @click="isDownloadOpen = false">
-                <img :src="`/homepage/supported-platforms/${download.src}`" alt="" />
+                <i class="fa-brands download-icon" :class="download.icon" aria-hidden="true"></i>
                 <span class="download-name">{{ download.name }}</span>
                 <span class="download-format">{{ download.format }}</span>
               </a>
@@ -174,10 +174,10 @@ const companionVersion = "2026.2.2";
 const releaseUrl = `https://github.com/QuestPDF/QuestPDF.Companion/releases/download/${companionVersion}`;
 
 const downloads = [
-  { src: "windows.svg", name: "Windows", format: ".msix", url: `${releaseUrl}/questpdf_companion-${companionVersion}-windows.msix` },
-  { src: "apple.svg", name: "macOS", format: ".dmg", url: `${releaseUrl}/QuestPDF.Companion.${companionVersion}.dmg` },
-  { src: "linux.svg", name: "Linux", format: ".deb", url: `${releaseUrl}/questpdf_companion-${companionVersion}-linux.deb` },
-  { src: "linux.svg", name: "Linux", format: ".rpm", url: `${releaseUrl}/questpdf_companion-${companionVersion}-linux.rpm` }
+  { icon: "fa-windows", name: "Windows", format: ".msix", url: `${releaseUrl}/questpdf_companion-${companionVersion}-windows.msix` },
+  { icon: "fa-apple", name: "macOS", format: ".dmg", url: `${releaseUrl}/QuestPDF.Companion.${companionVersion}.dmg` },
+  { icon: "fa-linux", name: "Linux", format: ".deb", url: `${releaseUrl}/questpdf_companion-${companionVersion}-linux.deb` },
+  { icon: "fa-linux", name: "Linux", format: ".rpm", url: `${releaseUrl}/questpdf_companion-${companionVersion}-linux.rpm` }
 ];
 
 const isDownloadOpen = ref(false);
@@ -355,7 +355,7 @@ html.dark .companion-frame.light {
 }
 
 .companion-card strong i {
-  font-size: 15px;
+  font-size: 1rem;
 }
 
 .companion-card p {
@@ -500,7 +500,7 @@ html.dark .companion-frame.light {
 }
 
 .download-chevron {
-  font-size: 0.75em;
+  font-size: 1rem;
   transition: transform 0.2s ease;
 }
 
@@ -541,10 +541,12 @@ html.dark .companion-frame.light {
   background-color: var(--vp-c-default-soft);
 }
 
-.download-item img {
-  width: 18px;
-  height: 18px;
+.download-icon {
   flex-shrink: 0;
+  width: 18px;
+  text-align: center;
+  font-size: 1.0625rem;
+  color: var(--vp-c-text-2);
 }
 
 .download-name {

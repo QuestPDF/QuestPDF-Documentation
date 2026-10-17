@@ -24,45 +24,38 @@ const standards : StandardsCategory[] = [
   }
 ];
 
-interface Platform {
-  name: string;
-  /* logo in /homepage/supported-platforms, painted in the text colour through a CSS mask; a runtime has none */
-  src?: string;
-  /* logo height in px, tuned per mark for an even optical weight (the slot width is fixed, so labels line up) */
-  height?: number;
-}
-
 interface PlatformGroup {
   label: string;
-  platforms: Platform[];
+  platforms: string[];
 }
 
 const platformGroups : PlatformGroup[] = [
   {
-    /* as the package README states them: .NET 6 and later, .NET Framework 4.6.2 and later */
+    /* as the package README states them: .NET 6 and later, .NET Framework 4.6.2 and later; Native AOT as
+       listed under "Recently delivered" on the roadmap */
     label: "Runtimes",
-    platforms: [
-      { name: ".NET 6+" },
-      { name: ".NET Framework 4.6.2+" }
-    ]
+    platforms: [".NET 6+", ".NET Framework 4.6.2+", "Native AOT"]
   },
   {
     label: "Operating systems",
-    platforms: [
-      { name: "Windows", src: "windows.svg", height: 17 },
-      { name: "Linux", src: "linux.svg", height: 18 },
-      { name: "macOS", src: "apple.svg", height: 18 }
-    ]
+    platforms: ["Windows", "Linux", "macOS"]
   },
   {
     label: "Deployment",
-    platforms: [
-      { name: "Docker", src: "docker.svg", height: 17 },
-      { name: "Azure", src: "azure.svg", height: 17 },
-      { name: "AWS", src: "aws.svg", height: 18 }
-    ]
+    platforms: ["Docker", "Azure", "AWS"]
   }
 ];
+
+/* the Font Awesome brand mark beside a name; the runtimes have none, and Azure takes Microsoft's (Font Awesome
+   has no Azure mark) */
+const platformIcons : Record<string, string> = {
+  Windows: "fa-windows",
+  Linux: "fa-linux",
+  macOS: "fa-apple",
+  Docker: "fa-docker",
+  Azure: "fa-microsoft",
+  AWS: "fa-aws"
+};
 
 </script>
 
@@ -99,16 +92,9 @@ const platformGroups : PlatformGroup[] = [
         <h3 class="label">{{ group.label }}</h3>
 
         <ul class="platforms">
-          <li v-for="platform of group.platforms" :key="platform.name" class="platform">
-            <span
-                v-if="platform.src"
-                class="platform-logo"
-                aria-hidden="true"
-                :style="{
-                  '--logo': `url(/homepage/supported-platforms/${platform.src})`,
-                  height: `${platform.height}px`
-                }"></span>
-            <span>{{ platform.name }}</span>
+          <li v-for="platform of group.platforms" :key="platform" class="platform">
+            <i v-if="platformIcons[platform]" class="fa-brands platform-icon" :class="platformIcons[platform]" aria-hidden="true"></i>
+            {{ platform }}
           </li>
         </ul>
       </section>
@@ -280,14 +266,13 @@ const platformGroups : PlatformGroup[] = [
   white-space: nowrap;
 }
 
-/* painted in the text colour through a mask; the height comes from the data */
-
-.platform-logo {
+/* a fixed-width slot, so the names line up whatever the mark's shape */
+.platform-icon {
   flex-shrink: 0;
-  display: inline-block;
   width: 24px;
-  background-color: color-mix(in srgb, var(--vp-c-text-2) 90%, transparent);
-  mask: var(--logo) center / contain no-repeat;
+  text-align: center;
+  font-size: 1.0625rem;
+  color: var(--vp-c-text-2);
 }
 
 
@@ -314,7 +299,7 @@ const platformGroups : PlatformGroup[] = [
 }
 
 .fact-arrow {
-  font-size: 0.6875rem;
+  font-size: 1rem;
   opacity: 0;
   transform: translateX(-4px);
   transition: opacity 0.2s, transform 0.25s ease;

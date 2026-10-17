@@ -305,7 +305,7 @@ onBeforeUnmount(() => {
 }
 
 .document-page .document-contents-compact summary i {
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--vp-c-text-2);
   transition: transform 0.2s ease;
 }
