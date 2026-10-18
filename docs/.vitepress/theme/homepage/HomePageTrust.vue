@@ -162,7 +162,7 @@ const platformIcons : Record<string, string> = {
   font-size: 0.8125rem;
   font-weight: 500;
   color: var(--vp-c-text-2);
-  background-color: var(--surface-inner);
+  border: 1px solid #8884;
 }
 
 

@@ -118,7 +118,7 @@ html.dark .license-panel {
 .includes-list {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
   flex-grow: 1;
   margin: 32px 0 0;
 }
@@ -127,19 +127,20 @@ html.dark .license-panel {
 .includes-list li {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   min-height: 36px;
   font-weight: 500;
   color: var(--vp-c-text-1);
 }
 
-/* green on white ties the list to the glow and the button; white in dark mode, like the labels */
+/* green ties the list to the glow and the button; a lighter green in dark mode, as the quick start cards lighten
+   their tints */
 .includes-list i {
   flex-shrink: 0;
   width: 18px;
   text-align: center;
   font-size: 1rem;
-  color: light-dark(#43A047, var(--vp-c-text-1));
+  color: light-dark(#43A047, #81C784);
 }
 
 /* on phones the labels wrap, so the icon sits on the first line instead of the middle of the label */

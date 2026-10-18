@@ -70,8 +70,8 @@ function onFocus(event: FocusEvent) {
   overflow: hidden; /* a visual that runs past its column is clipped at the card's rounded edge */
 
   display: grid;
-  grid-template-columns: 38% minmax(0, 1fr);
-  column-gap: 32px;
+  grid-template-columns: 200px minmax(0, 1fr);
+  column-gap: 24px;
   align-items: center;
   min-height: 256px;
   padding: 32px;
@@ -200,6 +200,7 @@ html.dark .cta-card {
   line-height: 1.5rem;
   font-weight: 600;
   color: var(--accent-text);
+  align-self: flex-end;
 }
 
 .arrow-icon {
@@ -244,8 +245,7 @@ html.dark .cta-card {
 /* narrow cards between the stacking point (HomePage.vue) and the full width: more room for the text */
 @media screen and (max-width: 1280px) and (min-width: 1181px) {
   .cta-card {
-    grid-template-columns: 34% minmax(0, 1fr);
-    column-gap: 24px;
+    grid-template-columns: 180px minmax(0, 1fr);
     padding: 28px;
   }
 }
@@ -292,6 +292,7 @@ html.dark .cta-card {
 
   .cta-link {
     grid-area: link;
+    justify-self: end;
     margin-top: 0;
     font-size: 0.9375rem;
   }

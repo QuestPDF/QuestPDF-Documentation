@@ -295,10 +295,12 @@ onBeforeUnmount(() => {
 <style scoped>
 
 /* the pose, the mirror of the invoice beside it; each place back is set back by --dz and shifted by --dx /
-   --dy, and the pile is nudged left so its depth stays in the column. --ink-strong: the headings on hover. */
+   --dy, and the pile is nudged left so its depth stays in the column, and drawn a little smaller than the sheet,
+   as its depth makes it look bigger. --ink-strong: the headings on hover. */
 .deck {
   --tilt-y: -26deg;
   --tilt-z: 2deg;
+  --scale: 0.8;
   --shift: -12px;
   --dx: 4px;
   --dy: -4px;

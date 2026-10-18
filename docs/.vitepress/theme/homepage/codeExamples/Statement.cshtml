@@ -1,0 +1,10 @@
+<table class="invoices">
+    @foreach (var invoice in Model.Invoices)
+    {
+        <tr>
+            <td class="customer">@invoice.Customer</td>
+            <td class="due">@invoice.DueDate.ToString("MMM d")</td>
+            <td class="total">@invoice.Total.ToString("C")</td>
+        </tr>
+    }
+</table>

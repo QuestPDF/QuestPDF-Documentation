@@ -6,8 +6,8 @@
       <!-- the gallery link is a placeholder until the page exists (see roadmap.md) -->
       <div class="cta-row">
         <HomePageCtaCard
-            title="Build an invoice in 10 minutes"
-            description="Learn the core concepts of QuestPDF, then build a complete invoice step by step. Go from a blank page to a finished PDF in fewer than 200 lines of C#."
+            title="Invoice in 10 minutes"
+            description="Learn the core concepts step by step, from blank page to finished PDF in under 200 lines of C# code."
             label="Watch the tutorial"
             href="/quick-start.html">
           <template #visual="{ active }">
@@ -16,9 +16,9 @@
         </HomePageCtaCard>
 
         <HomePageCtaCard
-            title="Explore the sample gallery"
-            description="Explore complete document examples, reusable components and layout ideas. Each includes C# source code you can copy and adapt to your own projects."
-            label="Browse the examples"
+            title="230+ real-world examples"
+            description="Invoices, reports, certificates and more, each with complete C# code your team can reuse to ship faster."
+            label="Browse the gallery"
             href="/sample-gallery.html"
             accent="#5C6BC0"
             accent-secondary="#3F51B5"
@@ -32,7 +32,13 @@
       <div class="dotted-divider"></div>
 
       <HomePageQuickStart />
+
+      <div class="dotted-divider"></div>
+
       <HomePageCompanion />
+
+      <div class="dotted-divider"></div>
+
       <HomePageTrust />
 
       <div class="dotted-divider"></div>

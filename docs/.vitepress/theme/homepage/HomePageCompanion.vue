@@ -38,7 +38,7 @@
 
       <div class="companion-side">
         <h2 class="card-title companion-title">Preview, inspect and debug</h2>
-        <p class="card-description companion-description">The Companion App refreshes your document the moment you save: no recompiling, no restarting. Inspect any element, measure the layout and trace issues to their cause.</p>
+        <p class="card-description companion-description">The Companion App runs beside your IDE on Windows, macOS and Linux, and connects to your project with a single line of code.</p>
 
         <nav class="companion-views" aria-label="Companion App views">
           <button
@@ -64,12 +64,12 @@
               type="button"
               class="action download-toggle"
               :aria-expanded="isDownloadOpen"
-              @click="isDownloadOpen = !isDownloadOpen">
+              @click="toggleDownload">
               Download
               <i class="fa-regular fa-chevron-down download-chevron" aria-hidden="true"></i>
             </button>
 
-            <div v-if="isDownloadOpen" class="download-menu">
+            <div v-if="isDownloadOpen" ref="downloadMenuRef" class="download-menu" :class="{ below: isDownloadBelow }">
               <a
                 v-for="download of downloads"
                 :key="download.url"
@@ -95,7 +95,7 @@
 
 <script setup lang="ts">
 
-import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useCompanionTour } from "./companionTour";
 
 interface View {
@@ -181,7 +181,34 @@ const downloads = [
 ];
 
 const isDownloadOpen = ref(false);
+const isDownloadBelow = ref(false);
 const downloadRef = ref<HTMLElement | null>(null);
+const downloadMenuRef = ref<HTMLElement | null>(null);
+
+/* the menu opens upwards, over the list, unless the navbar would cover it and there is more room below;
+   measured once it is rendered, before the browser paints it */
+async function toggleDownload() {
+  isDownloadOpen.value = !isDownloadOpen.value;
+
+  if (!isDownloadOpen.value)
+    return;
+
+  await nextTick();
+
+  const menu = downloadMenuRef.value;
+  const anchor = menu?.offsetParent;
+
+  if (!menu || !anchor)
+    return;
+
+  const height = menu.offsetHeight + 8;
+  const { top, bottom } = anchor.getBoundingClientRect();
+  const navbarBottom = Math.max(0, document.querySelector(".VPNav")?.getBoundingClientRect().bottom ?? 0);
+
+  const roomAbove = top - navbarBottom;
+  const roomBelow = window.innerHeight - bottom;
+  isDownloadBelow.value = roomAbove < height && roomBelow > roomAbove;
+}
 
 function closeOnOutsideClick(event: MouseEvent) {
   if (downloadRef.value && !downloadRef.value.contains(event.target as Node))
@@ -479,7 +506,7 @@ html.dark .companion-frame.light {
 }
 
 
-/* the download menu opens upwards, over the list */
+/* the download menu opens upwards, over the list, or downwards when the navbar would cover it (toggleDownload) */
 
 .actions {
   display: flex;
@@ -521,6 +548,11 @@ html.dark .companion-frame.light {
   border: 1px solid var(--vp-c-divider);
   border-radius: 12px;
   box-shadow: var(--elevation);
+}
+
+.download-menu.below {
+  top: calc(100% + 8px);
+  bottom: auto;
 }
 
 .download-item,
