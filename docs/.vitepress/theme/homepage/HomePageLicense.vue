@@ -134,13 +134,13 @@ html.dark .license-panel {
 }
 
 /* green ties the list to the glow and the button; a lighter green in dark mode, as the quick start cards lighten
-   their tints */
+   their tints (both are Material's greens 600 and 300 with their saturation raised to 50%) */
 .includes-list i {
   flex-shrink: 0;
   width: 18px;
   text-align: center;
   font-size: 1rem;
-  color: light-dark(#43A047, #81C784);
+  color: light-dark(#38A83E, #6ECF73);
 }
 
 /* on phones the labels wrap, so the icon sits on the first line instead of the middle of the label */

@@ -1,6 +1,6 @@
 /* The window shows the method a request works on and folds every other one to its signature, as an IDE does.
-   Shared by the session (agentSession.ts), which folds the code it shows, and its data loader
-   (quickStart.data.ts), which counts the lines the window has to keep room for. */
+   Shared by the session (agentSession.ts), which folds the code it shows, and the session builder
+   (sessionBuilder.ts), which counts the lines the window has to keep room for. */
 
 export interface FoldableLine {
   text: string;

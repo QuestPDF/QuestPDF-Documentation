@@ -1,0 +1,26 @@
+<style>
+  @page { size: A4; margin: 2cm; }
+  body { font-size: 10pt; }
+  .items td { padding: 6pt 0; border-bottom: 0.5pt solid; }
+  .totals { margin-left: auto; width: 200pt; }
+  .total { font-size: 14pt; font-weight: bold; }
+</style>
+<header>
+  <h1>Invoice {{number}}</h1>
+  <p>Issued {{issued}}</p>
+  <address>Bill to<br>{{customer}}</address>
+</header>
+<table class="items">
+  {{#each items}}
+  <tr>
+    <td>{{name}}</td>
+    <td>{{quantity}} × {{money price}}</td>
+    <td>{{money amount}}</td>
+  </tr>
+  {{/each}}
+</table>
+<table class="totals">
+  <tr><td>Subtotal</td><td>{{money subtotal}}</td></tr>
+  <tr><td>VAT</td><td>{{money vat}}</td></tr>
+</table>
+<p class="total">Total {{money total}}</p>

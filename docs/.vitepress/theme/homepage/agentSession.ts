@@ -1,17 +1,18 @@
 import {computed, onMounted, onUnmounted, ref, type Ref} from "vue";
-import type {Edit, Lang, QuickStartSession} from "./quickStart.data";
+import type {Edit, QuickStartSession, Round} from "./sessionBuilder";
 import {foldLines} from "./codeFolding";
 
 /* A simulated session with a coding agent that plays by itself while the window is mostly on screen: a request
-   types itself into a composer and sends itself a moment later; the agent then works for a moment and edits the files, which the
-   window shows as a diff, the replaced lines in red and the new lines typed in green (a file the agent creates
-   opens in a new tab and types in untinted). Room for the new lines opens in one move before they type in, and
-   replaced lines close the same way when the diff is taken in, so the code never jumps line by line. Once the
-   diff is done, the page zooms in on the part the request changes and shows its result there, and the next
-   request types itself in; when that one is sent, the previous diff is taken into the code and the page zooms
-   back out. After the last request the session fades out and starts over. Every pause stops while the window is
-   less than mostly on screen or the tab is hidden, and goes on from where it was; under prefers-reduced-motion the
-   finished session is shown still. */
+   types itself into a composer and sends itself a moment later; the agent then edits the files, which the window
+   shows as a diff, the replaced lines in red and the new lines typed in green (a file the agent creates comes to
+   the front and types in untinted). Room for the new lines opens in one move before they type in, and replaced
+   lines close the same way when the diff is taken in, so the code never jumps line by line. A moment after a
+   request is sent, the page zooms in on the part it changes (unless it shows it already), the agent edits, and once
+   the edit is done the page shows its result; after a hold the diff is taken into the code, and the code stays a
+   while before the next request types itself in, the page still zoomed. After the last request the page draws back
+   to its overview and stays a while, then the session fades out and starts over. A file longer than the window
+   scrolls as an editor does. Every pause stops while the window is less than mostly on screen or the tab is hidden,
+   and goes on from where it was; under prefers-reduced-motion the finished session is shown still. */
 
 export interface Line {
   text: string;
@@ -24,7 +25,6 @@ export interface Line {
 
 export interface OpenFile {
   name: string;
-  lang: Lang;
   lines: Line[];
 }
 
@@ -36,14 +36,14 @@ const tick = 16;
 const timing = {
   /* from the window coming into view to the first request typing in */
   start: 800,
-  /* the composer empties and lights up a moment before the next request types in */
-  beforeTyping: 450,
+  /* the composer empties and is clicked into (HomePageQuickStart.vue) before the next request types in */
+  beforeTyping: 750,
   /* the typed request stays in the composer this long before it sends itself */
   beforeSend: 1400,
-  /* the replaced lines close as the previous diff is taken in */
-  closeLines: 320,
-  /* the agent "thinks" before its first edit */
-  working: 900,
+  /* from the send to the page zooming in, or the agent's first edit when it stays */
+  working: 1000,
+  /* the page's flight (1-1.3s, HomePageQuickStart.vue) ends before the agent edits, so the change happens in close-up */
+  zoom: 1350,
   /* a file the agent opens comes to the front before it is edited */
   switchFile: 600,
   /* the lines an edit replaces turn red before the new ones arrive */
@@ -53,14 +53,15 @@ const timing = {
   /* typing one line, at most, and one edit, at most */
   perLine: 170,
   perEdit: 2600,
-  /* the finished diff stays before the page changes: longer the more lines the round added */
-  diffHold: (added: number) => Math.min(2600, 1300 + 45 * added),
-  /* the zoom (0.9s in CSS) ends before the new page fades in, so the change happens in close-up */
-  zoom: 1100,
-  noZoom: 600,
-  /* the page with its rings stays this long before the next request types in (and stays while it does) */
-  resultHold: 3600,
-  /* after the last request, before the session fades out and starts over */
+  /* the finished diff, a beat before the page changes */
+  diffHold: 500,
+  /* the diff stays, with the page it made, before it is taken in */
+  resultHold: 2500,
+  /* the replaced lines close as the diff is taken in */
+  closeLines: 320,
+  /* the code, taken in, stays before the next request types in (the page stays zoomed while it does) */
+  acceptedHold: 2500,
+  /* after the last request, the code and the page's overview stay before the session fades out and starts over */
   endHold: 7000,
   fade: 450
 };
@@ -96,15 +97,18 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
   const promptTyped = ref(0);
   /* how many rounds the page shows the result of */
   const applied = ref(0);
-  /* the page is zoomed in on the part the round changes (its zoom), from just before its result shows until the
-     next request is sent */
-  const zoomed = ref(false);
+  /* the part of the page the viewer is zoomed in on, from a moment after a request is sent until another request
+     zooms elsewhere (none: the page's overview) */
+  const zoom = ref<Round["zoom"]>();
   /* the method the code shows unfolded (none folds until the first request that names one) */
   const unfold = ref<string>();
   /* the next request is arriving in the composer: from it emptying until it is sent */
   const asking = ref(false);
   /* a wait the composer shows as a ring filling around the send button (the key restarts it) */
   const countdown = ref<{ key: number, ms: number }>();
+  /* how many lines the code is scrolled by: a file longer than the window (session.lines) scrolls as an editor
+     does, to the method a request opens and to each line as it types in, only as far as it must */
+  const scrolled = ref(0);
   /* the window is not mostly on screen, so the session and the composer's motion stand still */
   const paused = ref(true);
   /* the session fades out before it starts over */
@@ -128,14 +132,15 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
   /* Edits on the files */
 
   function resetSession() {
-    files.value = session.files.map(({ name, lines }) => ({ name, lang: session.langs[name], lines: lines.map(text => ({ text, kind: "normal" as const })) }));
+    files.value = session.files.map(({ name, lines }) => ({ name, lines: lines.map(text => ({ text, kind: "normal" as const })) }));
     active.value = session.files[0].name;
     roundIndex.value = 0;
     promptIndex.value = 0;
     promptTyped.value = 0;
     applied.value = 0;
-    zoomed.value = false;
+    zoom.value = undefined;
     unfold.value = undefined;
+    scrolled.value = 0;
     asking.value = false;
     countdown.value = undefined;
     phase.value = "idle";
@@ -144,12 +149,20 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
   function acceptDiff() {
     for (const file of files.value)
       file.lines = file.lines.filter(line => line.kind !== "removed").map(line => ({ text: line.text, kind: "normal" as const }));
+
+    scrolled.value = Math.min(scrolled.value, Math.max(0, lines.value.length - session.lines));
   }
 
-  /* the file's reactive proxy, opened in a new tab if the edit creates it */
+  /* scrolls the shown line at `index` into the window, only as far as it must, so the code around it stays put */
+  function scrollTo(index: number) {
+    if (index >= 0)
+      scrolled.value = Math.min(Math.max(scrolled.value, index - session.lines + 1), index);
+  }
+
+  /* the file's reactive proxy, added if the edit creates it */
   function open(name: string) {
     if (!files.value.some(file => file.name === name))
-      files.value.push({ name, lang: session.langs[name], lines: [] });
+      files.value.push({ name, lines: [] });
 
     return files.value.find(file => file.name === name)!;
   }
@@ -253,8 +266,8 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
     asking.value = false;
   }
 
-  /* the replaced lines close before the diff is taken in */
-  async function closeReplacedLines() {
+  /* the replaced lines close, then the diff is taken in */
+  async function takeInDiff() {
     const removed = files.value.flatMap(file => file.lines.filter(line => line.kind === "removed"));
 
     if (removed.length) {
@@ -286,10 +299,14 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
     for (let index = at; index < at + edit.add.length; index++)
       file.lines[index].state = undefined;
 
-    const lineTicks = Math.max(1, Math.round(Math.min(timing.perLine, timing.perEdit / edit.add.length) / tick));
+    /* the new lines the window shows (one inside a folded method takes no time), as reactive proxies, so each step
+       re-renders the window */
+    const shown = new Set(lines.value.map(({ line }) => line));
+    const added = file.lines.slice(at, at + edit.add.length).filter(line => shown.has(line));
+    const lineTicks = Math.max(1, Math.round(Math.min(timing.perLine, timing.perEdit / added.length) / tick));
 
-    for (let index = at; index < at + edit.add.length; index++) {
-      const line = file.lines[index]; /* the reactive proxy, so each step re-renders the window */
+    for (const line of added) {
+      scrollTo(lines.value.findIndex(shown => shown.line === line));
 
       if (!line.text)
         await pause(tick * lineTicks);
@@ -301,31 +318,28 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
     }
   }
 
-  /* from the moment the prompt is sent: the previous diff is taken in and the page zooms out, the method the
-     request works on unfolds, the agent edits, and once the diff has been on screen a while, the page zooms in on
-     the part the request changes and shows the result there */
+  /* from the moment the prompt is sent: the method the request works on unfolds; a moment later the page flies to
+     the part the request changes, unless it shows it already (or back to its overview for a request without a
+     zoom); the agent edits, and once it is done the page shows the result */
   async function playRound(index: number) {
     roundIndex.value = index;
-    zoomed.value = false;
     phase.value = "working";
-    await closeReplacedLines();
     unfold.value = round.value.unfold ?? unfold.value;
+    scrollTo(lines.value.findIndex(({ line }) => line.text === unfold.value));
     await pause(timing.working);
+
+    /* compared by value: two requests may change the same part of the page */
+    if (String(round.value.zoom) !== String(zoom.value)) {
+      zoom.value = round.value.zoom;
+      await pause(timing.zoom);
+    }
 
     phase.value = "editing";
     for (const edit of round.value.edits)
       await playEdit(edit);
 
     phase.value = "built";
-    await pause(timing.diffHold(round.value.edits.reduce((sum, edit) => sum + edit.add.length, 0)));
-
-    if (round.value.zoom) {
-      zoomed.value = true;
-      await pause(timing.zoom);
-    }
-    else
-      await pause(timing.noZoom);
-
+    await pause(timing.diffHold);
     phase.value = "done";
     applied.value = index + 1;
   }
@@ -340,7 +354,15 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
         for (let index = 0; index < rounds.length; index++) {
           await askNext(index);
           await playRound(index);
-          await wait(index < rounds.length - 1 ? timing.resultHold : timing.endHold);
+          await pause(timing.resultHold);
+          await takeInDiff();
+
+          if (index === rounds.length - 1) {
+            zoom.value = undefined;
+            await wait(timing.endHold);
+          }
+          else
+            await wait(timing.acceptedHold);
         }
 
         resetting.value = true;
@@ -381,5 +403,5 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
     document.removeEventListener("visibilitychange", updatePaused);
   });
 
-  return { files, active, lines, roundIndex, promptIndex, promptText, typing, sent, working, finished, applied, zoomed, asking, countdown, paused, resetting };
+  return { files, active, lines, promptIndex, promptText, typing, sent, working, finished, applied, zoom, scrolled, asking, countdown, paused, resetting, unfold };
 }

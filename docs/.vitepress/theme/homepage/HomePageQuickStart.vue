@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, onMounted, onUnmounted, ref} from "vue";
+import {computed, onMounted, onUnmounted, ref, watch} from "vue";
 import {type Line, useAgentSession} from "./agentSession";
 import {data as session} from "./quickStart.data";
 
@@ -7,8 +7,8 @@ import {data as session} from "./quickStart.data";
    under it on its left and the rendered page, in a window of its own, on its right; and two cards side by side
    under it (why C#, and how an AI assistant fits in). While the window is mostly on screen, a request types
    itself into the composer and sends itself; the code then shows the assistant's edit as a diff (agentSession.ts
-   plays the session), and the page zooms in on the part it changes and shows what QuestPDF renders from it, with
-   a ring on what changed. The session starts from a Razor view, which the first request converts. */
+   plays the session), and the page flies to the part it changes and shows what QuestPDF renders from it. The
+   session (quickStart.data.ts) starts from a legacy HTML invoice template that the first request converts. */
 
 interface Card {
   kind: "code-card" | "agent-card";
@@ -37,52 +37,45 @@ const cards: Card[] = [
     title: "Develop with AI agents",
     label: "How an AI assistant helps",
     notes: [
-      { icon: "fa-sparkles", text: "Describe a document and get code built from your data models" },
-      { icon: "fa-arrow-right-arrow-left", text: "Migrate HTML layouts and other tools' templates to QuestPDF" },
-      { icon: "fa-comments", text: "Adjust layouts and add business rules through conversation" },
-      { icon: "fa-code-compare", text: "Review each edit as a diff, like any other code change" }
+      { icon: "fa-arrow-right-arrow-left", text: "Migrate legacy HTML-based reports to QuestPDF with AI" },
+      { icon: "fa-comments", text: "Create and modify documents confidently through prompts" },
+      { icon: "fa-stopwatch", text: "Deliver new documents and changes significantly faster" },
+      { icon: "fa-shield-check", text: "Keep every AI change type-checked and easy to review" }
     ]
   }
 ];
 
 const windowElement = ref<HTMLElement | null>(null);
-const { files, active, lines, roundIndex, promptIndex, promptText, typing, sent, working, finished, applied, zoomed, asking, countdown, paused, resetting } = useAgentSession(windowElement, session);
+const { files, active, lines, promptIndex, promptText, typing, sent, working, finished, applied, zoom, scrolled, asking, countdown, paused, resetting, unfold } = useAgentSession(windowElement, session);
 
-/* the A5 page rendered by QuestPDF with one, two... of the requests applied (A5 rather than A4, so the type is
-   legible), three times the size of the page's box, so it stays sharp when zoomed in on. Each is large once
-   decoded, so only the one shown, the one fading out and the next one are in the document. */
-const page = { width: 595, height: 842 };
-const pages = computed(() => session.rounds
-    .map((_, index) => ({ index, src: `/homepage/quick-start-${index + 1}.webp` }))
-    .filter(({ index }) => index >= applied.value - 2 && index <= applied.value));
+/* the page rendered by QuestPDF with none, one, two... of the requests applied (none: the page's chrome alone,
+   shown from the start), three times the size of the page's box, so it stays sharp when zoomed in on. Each is
+   large once decoded, so only the one shown, the one fading out and the next one are in the document. */
+const page = session.page;
+const pages = computed(() => Array.from({ length: session.rounds.length + 1 }, (_, index) => ({ index, src: `${session.renders}${index}.webp` }))
+    .filter(({ index }) => Math.abs(index - applied.value) <= 1));
 
-/* from the moment the page shows a request until the next one is sent, rings mark what it changed */
-const spots = computed(() => applied.value === roundIndex.value + 1
-    ? session.rounds[roundIndex.value].focus.map(([x, y, width, height]) => ({ left: `${x}px`, top: `${y}px`, width: `${width}px`, height: `${height}px` }))
-    : []);
-
-/* The page's box is 595 x 842 px, the pixels the rounds' focus and zoom are measured in, and the result column
-   shows it scaled and moved. At rest the page's head and the statement fill the column inside its padding, the
-   page's top edge in view and its foot running on below. While zoomed, the round's zoom fills the column, padding
-   and all, its top at the column's top, so the column's sides fall in the gaps between the page's columns that
-   the zoom's sides were chosen for; it is enlarged twice the rest at most, and 1.5 times at most wherever the page
-   then fits across the column. */
+/* The page's box is 595 px wide and as tall as the session's page (842 px for the A4 invoice), the pixels the
+   rounds' zoom is measured in, and the result column shows it scaled and moved. At rest the page's head
+   and the statement fill the column inside its padding, the page's top edge in view and its foot running on below.
+   While zoomed, the round's zoom fills the column, padding and all, its top at the column's top, so the column's
+   sides fall in the gaps between the page's columns that the zoom's sides were chosen for; it is enlarged twice the
+   rest at most, and 1.5 times at most wherever the page then fits across the column. */
 const result = ref<HTMLElement | null>(null);
 /* the column inside its padding, measured; until then, as it is on a wide screen */
 const view = ref({ x: 24, y: 24, width: 528, height: 444 });
-/* the page's head and the statement, with room for the total under it */
-const overview = { width: page.width, height: 340 };
+/* the page's head and its first content, the part of the page the viewer shows at rest */
+const overview = session.overview;
 const maxScale = 1.5;
 
 const camera = computed(() => {
   const { x, y, width, height } = view.value;
   const rest = Math.min(width / overview.width, height / overview.height);
-  const zoom = zoomed.value ? session.rounds[roundIndex.value].zoom : undefined;
 
-  if (!zoom)
+  if (!zoom.value)
     return { scale: rest, x: x + (width - page.width * rest) / 2, y };
 
-  const [left, top, w, h] = zoom;
+  const [left, top, w, h] = zoom.value;
   const across = width + 2 * x;
   const down = height + 2 * y;
   let scale = Math.min(across / w, down / h, rest * 2);
@@ -97,9 +90,82 @@ const camera = computed(() => {
   };
 });
 
+/* The camera as shown. When the page zooms in, out or on to another part, it flies there along the smooth zoom and
+   pan path of van Wijk and Nuij (as d3's interpolateZoom): between parts far apart it draws back a little on the
+   way, so the page never slides by in close-up, and the zoom runs evenly instead of rushing at its start. A longer
+   way takes a little longer. When the column is resized, or the session starts over behind its fade, it moves at
+   once. */
+type Camera = { scale: number; x: number; y: number };
+
+const shot = ref<Camera>(camera.value);
+let shotZoom = zoom.value;
+let flight = 0;
+
+watch(camera, target => {
+  cancelAnimationFrame(flight);
+  const moved = zoom.value !== shotZoom;
+  shotZoom = zoom.value;
+
+  if (moved && !resetting.value && !window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+    fly(shot.value, target);
+  else
+    shot.value = target;
+});
+
+function fly(from: Camera, to: Camera) {
+  /* a camera as the part of the page at the column's centre and how wide a part of the page the column shows */
+  const across = view.value.width + 2 * view.value.x;
+  const down = view.value.height + 2 * view.value.y;
+  const toView = ({ scale, x, y }: Camera) => [(across / 2 - x) / scale, (down / 2 - y) / scale, across / scale];
+  const path = zoomPath(toView(from), toView(to));
+  const duration = clamp(900 + 400 * path.length, 1000, 1300);
+  const start = performance.now();
+
+  const frame = (now: number) => {
+    const t = Math.min((now - start) / duration, 1);
+    const [cx, cy, width] = path.at(t < 0.5 ? 4 * t ** 3 : 1 - (2 - 2 * t) ** 3 / 2);
+    const scale = across / width;
+    shot.value = t < 1 ? { scale, x: across / 2 - cx * scale, y: down / 2 - cy * scale } : to;
+
+    if (t < 1)
+      flight = requestAnimationFrame(frame);
+  };
+
+  flight = requestAnimationFrame(frame);
+}
+
+/* van Wijk and Nuij, "Smooth and efficient zooming and panning" (2003), with rho = √2; `length` in the paper's units */
+function zoomPath([x0, y0, w0]: number[], [x1, y1, w1]: number[]) {
+  const rho = Math.SQRT2;
+  const dx = x1 - x0;
+  const dy = y1 - y0;
+  const d = Math.hypot(dx, dy);
+
+  if (d < 1e-6) {
+    const length = Math.abs(Math.log(w1 / w0)) / rho;
+    return { length, at: (t: number) => [x0 + t * dx, y0 + t * dy, w0 * (w1 / w0) ** t] };
+  }
+
+  const b = (w: number, sign: number) => (w1 * w1 - w0 * w0 + sign * rho ** 4 * d * d) / (2 * w * rho * rho * d);
+  const r0 = Math.asinh(-b(w0, 1));
+  const r1 = Math.asinh(-b(w1, -1));
+  const length = (r1 - r0) / rho;
+
+  return {
+    length,
+    at: (t: number) => {
+      const r = rho * t * length + r0;
+      const u = w0 / (rho * rho * d) * (Math.cosh(r0) * Math.tanh(r) - Math.sinh(r0));
+      return [x0 + u * dx, y0 + u * dy, w0 * Math.cosh(r0) / Math.cosh(r)];
+    }
+  };
+}
+
 const pageStyle = computed(() => ({
-  transform: `translate(${camera.value.x}px, ${camera.value.y}px) scale(${camera.value.scale})`,
-  "--scale": camera.value.scale
+  width: `${page.width}px`,
+  height: `${page.height}px`,
+  transform: `translate(${shot.value.x}px, ${shot.value.y}px) scale(${shot.value.scale})`,
+  "--scale": shot.value.scale
 }));
 
 function clamp(value: number, min: number, max: number) {
@@ -113,25 +179,50 @@ onMounted(() => {
   resizeObserver.observe(result.value!);
 });
 
-onUnmounted(() => resizeObserver?.disconnect());
+onUnmounted(() => {
+  cancelAnimationFrame(flight);
+  resizeObserver?.disconnect();
+});
 
 /* the window's markup, as Shiki writes it, from the tokens highlighted at build time (quickStart.data.ts); a
    line being typed shows only its first characters. Lines are blocks, so a line's height can open and close. */
-const codeHtml = computed(() => lines.value.map(({ line, folded }) => lineHtml(line, folded)).join(""));
+const codeHtml = computed(() => {
+  const numbers = lineNumbers();
+  return lines.value.map(({ line, folded }) => lineHtml(line, folded, numbers.get(line))).join("");
+});
 
-function lineHtml({ text, kind, typed = Infinity, state }: Line, folded: boolean) {
+/* a line's number in the file as it will be once the diff is taken in, as an IDE numbers it with methods folded
+   (the numbers skip a folded body): a removed line has none */
+function lineNumbers() {
+  const numbers = new Map<Line, number>();
+  let number = 0;
+
+  for (const line of files.value.find(file => file.name === active.value)?.lines ?? [])
+    if (line.kind !== "removed")
+      numbers.set(line, ++number);
+
+  return numbers;
+}
+
+function lineHtml(line: Line, folded: boolean, number?: number) {
+  const { text, kind, state, typed = text.length } = line;
+  let left = typed;
   let html = "";
 
   for (const { content, style } of session.tokens[session.langs[active.value]][text]) {
-    if (typed <= 0)
+    if (left <= 0)
       break;
 
-    html += `<span style="${style}">${content.slice(0, typed).replace(/&/g, "&amp;").replace(/</g, "&lt;")}</span>`;
-    typed -= content.length;
+    html += `<span style="${style}">${content.slice(0, left).replace(/&/g, "&amp;").replace(/</g, "&lt;")}</span>`;
+    left -= content.length;
   }
 
+  /* the number is there, still, once the line's room has opened (a line without one keeps a blank slot), and a
+     folded method's { … } once its signature has typed in */
   const classes = ["line", kind === "normal" ? "" : `line-${kind}`, state ? `line-${state}` : ""].filter(Boolean).join(" ");
-  return `<span class="${classes}">${html}${folded ? `<span class="fold">{ … }</span>` : ""}</span>`;
+  const gutter = `<span class="gutter">${state ? " " : number ?? " "}</span>`;
+  const fold = folded && typed >= text.length ? `<span class="fold">{ … }</span>` : "";
+  return `<span class="${classes}">${gutter}${html}${fold}</span>`;
 }
 </script>
 
@@ -143,16 +234,14 @@ function lineHtml({ text, kind, typed = Infinity, state }: Line, folded: boolean
         <span class="dot yellow" />
         <span class="dot green" />
 
-        <!-- a file the assistant creates opens in a new tab -->
-        <div class="tabs">
-          <span v-for="file of files" :key="file.name" class="tab" :class="{ active: file.name === active }">{{ file.name }}</span>
-        </div>
+        <!-- the file in front: the HTML template, then the C# the assistant writes from it -->
+        <span class="window-title">{{ active }}</span>
       </div>
 
       <div class="window-body" :class="{ resetting }">
         <!-- the composer sticks within this part, so it never rides up over the code's title bar -->
         <div class="window-main">
-          <div class="code-source" :style="{ '--code-lines': session.lines }">
+          <div class="code-source" :style="{ '--code-lines': session.lines, '--gutter-digits': session.digits, '--scroll': scrolled }">
             <pre class="shiki" tabindex="0"><code v-html="codeHtml"></code></pre>
           </div>
 
@@ -192,17 +281,14 @@ function lineHtml({ text, kind, typed = Infinity, state }: Line, folded: boolean
               <span class="dot green" />
             </span>
 
-            <span class="window-title">Statement.pdf</span>
+            <span class="window-title">{{ session.title }}</span>
           </div>
 
           <div ref="result" class="result">
-            <!-- the page, as rendered after the requests made so far; blank until the first one -->
-            <div class="page" :class="{ blank: !applied }" :style="pageStyle">
-              <img v-for="{ index, src } of pages" :key="src" :src="src" :alt="index + 1 === applied ? 'The statement rendered by QuestPDF' : ''" :class="{ shown: index + 1 === applied }" :width="page.width" :height="page.height" loading="lazy" />
-              <span v-for="(spot, index) of spots" :key="`${roundIndex}-${index}`" class="spot" :style="spot" aria-hidden="true"></span>
+            <!-- the page, as rendered after the requests made so far; its chrome alone before the first one -->
+            <div class="page" :style="pageStyle">
+              <img v-for="{ index, src } of pages" :key="src" :src="src" :alt="index === applied ? `${session.title} rendered by QuestPDF` : ''" :class="{ shown: index === applied }" :width="page.width" :height="page.height" loading="lazy" />
             </div>
-
-            <span class="page-empty" :class="{ hidden: applied }">Statement.pdf</span>
           </div>
         </div>
       </div>
@@ -231,6 +317,7 @@ function lineHtml({ text, kind, typed = Infinity, state }: Line, folded: boolean
   --composer-border: color-mix(in srgb, var(--agent-accent) 18%, var(--vp-c-divider));
   --composer-border-sent: color-mix(in srgb, var(--agent-accent) 35%, var(--vp-c-divider));
   --composer-text: color-mix(in srgb, var(--agent-accent) 30%, var(--vp-c-text-1));
+  --composer-step: color-mix(in srgb, var(--agent-accent) 35%, var(--vp-c-text-3));
   --composer-bg-asking: color-mix(in srgb, var(--agent-accent) 11%, var(--vp-c-bg));
   --composer-border-asking: color-mix(in srgb, var(--agent-accent) 55%, var(--vp-c-divider));
   --composer-ring: color-mix(in srgb, var(--agent-accent) 12%, transparent);
@@ -252,6 +339,7 @@ html.dark .quick-start {
   --composer-border: color-mix(in srgb, var(--agent-accent) 22%, var(--vp-c-divider));
   --composer-border-sent: color-mix(in srgb, var(--agent-accent) 50%, transparent);
   --composer-text: color-mix(in srgb, var(--agent-accent) 35%, var(--vp-c-text-1));
+  --composer-step: color-mix(in srgb, var(--agent-accent) 40%, var(--vp-c-text-3));
   --composer-bg-asking: color-mix(in srgb, var(--agent-accent) 18%, var(--surface-inner));
   --composer-border-asking: color-mix(in srgb, var(--agent-accent) 70%, transparent);
   --composer-ring: color-mix(in srgb, var(--agent-accent) 20%, transparent);
@@ -362,7 +450,7 @@ html.dark .agent-card {
   gap: 6px;
   padding: 8px 16px 8px 24px;
   border-bottom: 1px solid var(--vp-c-divider);
-  background-color: light-dark(transparent, var(--vp-c-bg-alt));
+  background-color: light-dark(var(--vp-c-bg), var(--vp-c-bg-alt));
 }
 
 .window-body {
@@ -380,51 +468,20 @@ html.dark .agent-card {
 }
 
 /* off screen, the composer's motion stands still with the session */
+.window.paused .composer,
 .window.paused .composer *,
 .window.paused .composer::before {
   animation-play-state: paused;
 }
 
+/* the code's column carries the code's top padding, so the composer, which sticks within the column, stops short
+   of the title bar by as much */
 .window-main {
   grid-area: main;
   display: flex;
   flex-direction: column;
   min-width: 0;
-}
-
-/* the open files, the one in front raised; short of room, the others shrink to the start of their names */
-.tabs {
-  display: flex;
-  gap: 2px;
-  min-width: 0;
-  margin-left: 12px;
-  overflow: hidden;
-}
-
-.tab {
-  flex: 0 1 auto;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding: 4px 10px;
-  border-radius: 7px;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  line-height: 1.25rem;
-  color: var(--vp-c-text-3);
-  transition: background-color 0.25s ease, color 0.25s ease;
-  animation: tab-open 0.35s ease;
-}
-
-.tab.active {
-  flex-shrink: 0;
-  color: var(--vp-c-text-1);
-  background-color: var(--surface-inner);
-}
-
-@keyframes tab-open {
-  from { opacity: 0; transform: translateY(4px); }
+  padding-top: 12px;
 }
 
 /* each window's three buttons are grey until that window is pointed at */
@@ -453,29 +510,48 @@ html.dark .agent-card {
   background-color: var(--lit);
 }
 
-/* tall enough for the most lines the session shows, so the window keeps its height while lines come and go */
+/* as tall as the most lines the session shows, so the window keeps its height while lines come and go; a longer
+   file scrolls inside it (by the session's --scroll, in lines), cut at the padding as under an editor's title bar */
 .code-source {
   flex-grow: 1;
-  min-height: calc(var(--code-lines) * 1lh + 24px);
-  padding: 12px 8px; /* with the 16px of each line, the code starts at 24px, in line with the title bar's buttons */
-  overflow: hidden;
+  padding-bottom: 12px;
   font-size: 0.875rem;
   line-height: 1.5;
 }
 
 .code-source pre {
+  height: calc(var(--code-lines) * 1lh);
   overflow-x: auto;
   overflow-y: hidden;
 }
 
+.code-source :deep(code) {
+  display: block;
+  translate: 0 calc(var(--scroll) * -1lh);
+  transition: translate 0.6s ease;
+}
+
 /* lines are blocks, so the room for new lines can open in one move before they type in, and replaced lines
-   close the same way */
+   close the same way; they run from edge to edge, so a diff line's tint does, with the line numbers starting in
+   line with the title bar's buttons and little room after the longest line, so it fits the narrowest window */
 .code-source :deep(.line) {
   display: block;
   width: max-content;
   min-width: 100%;
   min-height: 1lh;
-  padding: 0 16px;
+  padding: 0 4px 0 24px;
+}
+
+/* line numbers, as an IDE shows them: dim, right-aligned and still while the code changes (a blank slot holds a
+   space, so every line keeps one baseline) */
+.code-source :deep(.gutter) {
+  display: inline-block;
+  width: calc(var(--gutter-digits) * 1ch);
+  margin-right: 12px;
+  text-align: right;
+  color: var(--vp-c-text-3);
+  opacity: 0.7;
+  user-select: none;
 }
 
 .code-source :deep(.line-opening) {
@@ -522,19 +598,15 @@ html.dark .agent-card {
 /* Result: the page in a viewer, a window of its own beside the code, that the page fills under its title bar;
    the padding is the room the page keeps at rest from the column's sides and top */
 
+/* the page lies on a grey desk, as in a PDF viewer, so its edges show on white too; the desk is the viewer's, not
+   the result's, so it stays while the session fades out and starts over */
 .viewer {
   grid-area: viewer;
   display: flex;
   flex-direction: column;
   min-width: 0;
   border-left: 1px solid var(--vp-c-divider);
-}
-
-/* the file's name in the middle of the title bar, as tall as a tab, so both title bars line up */
-.viewer .window-header {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  padding-right: 24px;
+  background-color: var(--surface-inner);
 }
 
 .buttons {
@@ -542,8 +614,10 @@ html.dark .agent-card {
   gap: 6px;
 }
 
+/* each window's file name after its buttons, spaced alike, so both title bars line up */
 .window-title {
-  padding: 4px 0;
+  margin-left: 12px;
+  padding: 4px 10px;
   font-size: 0.8125rem;
   font-weight: 500;
   line-height: 1.25rem;
@@ -557,8 +631,9 @@ html.dark .agent-card {
   padding: 24px;
 }
 
-/* a page, in the proportions of A4 and A5 (1 : √2), that the camera scales and moves (its edge and the rings are
-   divided by its scale, so they keep their widths); the renders are stacked and cross-fade when a request is done */
+/* a page, sized from the session's page box (A4 and A5, 1 : √2, by default), that the camera scales and moves (its
+   edge is divided by its scale, so it keeps its width); the renders are stacked and cross-fade when a request is
+   done */
 .page {
   position: absolute;
   top: 0;
@@ -572,12 +647,6 @@ html.dark .agent-card {
       0 0 0 calc(1px / var(--scale)) light-dark(rgba(16, 24, 40, 0.1), rgba(255, 255, 255, 0.1)),
       0 calc(6px / var(--scale)) calc(18px / var(--scale)) calc(-8px / var(--scale)) light-dark(rgba(16, 24, 40, 0.25), rgba(0, 0, 0, 0.6));
   transform-origin: 0 0;
-  transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1);
-}
-
-/* a blank page moves at once: as the column is first measured, and as the session starts over behind its fade */
-.page.blank {
-  transition: none;
 }
 
 .page img {
@@ -593,61 +662,19 @@ html.dark .agent-card {
   opacity: 1;
 }
 
-.page-empty {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8125rem;
-  color: #9E9E9E;
-  transition: opacity 0.3s ease;
-}
-
-.page-empty.hidden {
-  opacity: 0;
-}
-
-/* a ring around what the request changed, drawn in once the new page has settled */
-.spot {
-  position: absolute;
-  border-radius: calc(4px / var(--scale));
-  pointer-events: none;
-  box-shadow:
-      0 0 0 calc(2px / var(--scale)) color-mix(in srgb, #1E88E5 75%, transparent),
-      0 0 0 calc(5px / var(--scale)) color-mix(in srgb, #1E88E5 14%, transparent);
-  animation: spot-in 0.8s cubic-bezier(0.3, 0.7, 0.2, 1) 0.35s both;
-}
-
-@keyframes spot-in {
-  from { opacity: 0; transform: scale(1.3); }
-  60% { opacity: 1; }
-  to { opacity: 1; transform: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .tab,
-  .spot {
-    animation: none;
-  }
-
-  .page {
-    transition: none;
-  }
-}
-
 
 /* Composer */
 
 /* sticks to the bottom of the screen while the window runs past it, so the request stays in view; its tint is
-   laid on the page colour, as it is see-through in dark mode */
+   laid on the page colour, as it is see-through in dark mode. Like a chat box, where a request takes more than one
+   line (on narrow screens), the icon stays by its first line and the send button by its last. */
 .composer {
   position: sticky;
   bottom: 16px;
   z-index: 1;
   isolation: isolate; /* keeps the band (z-index: -1) above the composer's background but below its content */
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 12px;
   margin: 0 24px 24px;
   padding: 10px 10px 10px 16px;
@@ -659,20 +686,38 @@ html.dark .agent-card {
   transition: border-color 0.3s ease, box-shadow 0.4s ease, opacity 0.45s ease;
 }
 
+/* the composer is clicked twice in a round, the same way each time: as it is clicked into for the next request,
+   and as the request is sent (in step with its button). It goes down like a key under a finger and a ring swells
+   once out of it. Each click has its keyframes under its own name: an animation whose name stays on the element
+   from one state to the next carries on instead of playing again. */
 .composer.sent {
   border-color: var(--composer-border-sent);
+  animation: keystroke 0.35s ease, ripple 0.9s ease-out;
 }
 
 /* while a request arrives and waits to be sent, the composer lights up: a stronger border and tint, and a soft
-   ring outside it, which swells once as the composer empties for the next request */
+   ring outside it */
 .composer.asking {
   border-color: var(--composer-border-asking);
   background-image: linear-gradient(var(--composer-bg-asking), var(--composer-bg-asking));
   box-shadow: 0 0 0 4px var(--composer-ring), var(--composer-shadow);
-  animation: asking 0.9s ease-out;
+  animation: keystroke-in 0.35s ease, ripple-in 0.9s ease-out;
 }
 
-@keyframes asking {
+@keyframes keystroke {
+  35% { transform: translateY(2px) scale(0.99); }
+}
+
+@keyframes keystroke-in {
+  35% { transform: translateY(2px) scale(0.99); }
+}
+
+@keyframes ripple {
+  from { box-shadow: 0 0 0 0 var(--composer-ring-strong), var(--composer-shadow); }
+  40% { box-shadow: 0 0 0 8px var(--composer-ring), var(--composer-shadow); }
+}
+
+@keyframes ripple-in {
   from { box-shadow: 0 0 0 0 var(--composer-ring-strong), var(--composer-shadow); }
   40% { box-shadow: 0 0 0 8px var(--composer-ring), var(--composer-shadow); }
 }
@@ -713,15 +758,19 @@ html.dark .agent-card {
   }
 }
 
+/* the icon, the step and the send button each take a row as tall as the button, and the text's lines sit in the
+   middle of one, so they line up on a single line */
 .composer-icon {
   flex: 0 0 auto;
   font-size: 1rem;
+  line-height: 2rem;
   color: var(--agent-accent);
 }
 
 .composer-text {
   display: grid;
   flex: 1 1 auto;
+  padding: 5px 0;
   font-size: 0.9375rem;
   line-height: 1.375rem;
   color: var(--composer-text);
@@ -764,9 +813,11 @@ html.dark .agent-card {
 /* which request of the session is in the composer */
 .composer-step {
   flex: 0 0 auto;
+  align-self: flex-end;
   font-size: 0.8125rem;
+  line-height: 2rem;
   font-variant-numeric: tabular-nums;
-  color: var(--vp-c-text-3);
+  color: var(--composer-step);
 }
 
 .composer-send {
@@ -775,6 +826,7 @@ html.dark .agent-card {
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
+  align-self: flex-end;
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -842,6 +894,7 @@ html.dark .agent-card {
 @media (prefers-reduced-motion: reduce) {
   .spinner,
   .composer.asking,
+  .composer.sent,
   .composer.sent .composer-send {
     animation: none;
   }
@@ -853,8 +906,9 @@ html.dark .agent-card {
 
 
 /* below 1280px the longest line of code needs the window's full width: the page's window goes under the code and
-   the composer under the page, in the body's column, so the composer still sticks over the code. The page is then
-   as tall as the page's head and the statement need at its width, 440px at most. */
+   the composer under the page, in the body's column, so the composer still sticks over the code; a hairline closes
+   the page's window above it. The page is then as tall as the page's head and the statement need at its width,
+   440px at most. */
 @media screen and (max-width: 1280px) {
   .window {
     display: flex;
@@ -870,13 +924,21 @@ html.dark .agent-card {
     display: contents;
   }
 
+  /* the code's top padding is its own here: the composer, which then sticks within the body, keeps its margin from
+     the title bar */
+  .code-source {
+    padding-top: 12px;
+  }
+
   .composer {
     order: 1;
+    margin-top: 24px;
   }
 
   .viewer {
     border-left: none;
     border-top: 1px solid var(--vp-c-divider);
+    border-bottom: 1px solid var(--vp-c-divider);
   }
 
   .result {
@@ -900,8 +962,7 @@ html.dark .agent-card {
     border-top: 1px solid var(--vp-c-divider);
   }
 
-  .window-header,
-  .viewer .window-header {
+  .window-header {
     padding: 8px 16px;
   }
 
@@ -914,7 +975,7 @@ html.dark .agent-card {
   }
 
   .composer {
-    margin: 0 16px 16px;
+    margin: 16px;
   }
 }
 
