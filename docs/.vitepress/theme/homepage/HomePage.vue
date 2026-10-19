@@ -17,7 +17,7 @@
 
         <HomePageCtaCard
             title="230+ real-world examples"
-            description="Invoices, reports, certificates and more, each with complete C# code your team can reuse to ship faster."
+            description="Get inspired by our catalog of predesigned components, then reuse them and adjust them to your needs."
             label="Browse the gallery"
             href="/sample-gallery.html"
             accent="#5C6BC0"

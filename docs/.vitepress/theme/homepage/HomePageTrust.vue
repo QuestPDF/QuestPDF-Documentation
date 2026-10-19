@@ -62,7 +62,7 @@ const platformIcons : Record<string, string> = {
 <template>
   <div class="trust">
     <div class="panel compliance">
-      <h2 class="card-title">Industry-standard output</h2>
+      <h2 class="card-title">Industry-standard compliant output</h2>
       <p class="card-description">
         Every build is automatically validated with the independent, trusted and open-source
         <a href="https://verapdf.org/" target="_blank">veraPDF</a> and
