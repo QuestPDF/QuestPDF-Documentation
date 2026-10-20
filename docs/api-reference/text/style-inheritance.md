@@ -51,7 +51,7 @@ It reduces repetitive code, enhances maintainability, and provides flexibility t
                 table.Cell().Element(Style).Text(Placeholders.Sentence());
             }
         
-            IContainer Style(IContainer container) => container.container.Padding(5);
+            IContainer Style(IContainer container) => container.Padding(5);
         });
 });
 ```

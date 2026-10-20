@@ -38,7 +38,7 @@ The same setting is also available via the GUI in your preferred IDE.
 :::
 
 :::tip
-SVG content supports the same scaling options as raster images. [Learn more](/api-reference/image/basics.html#image-scaling)
+SVG content supports the `FitWidth`, `FitHeight` and `FitArea` scaling options and always keeps its aspect ratio. `FitUnproportionally` is available only for raster images. [Learn more](/api-reference/image/basics.html#image-scaling)
 
 For example:
 ```csharp{4}
@@ -100,6 +100,11 @@ The `QuestPDF.Settings.ThrowOnMissingFontFamilies` and `QuestPDF.Settings.ThrowO
 :::
 
 Learn more in the [font management](/api-reference/text/font-management) section.
+
+
+## Transparent colors
+
+QuestPDF writes a translucent color as `#AARRGGBB` (alpha first), while the SVG renderer reads 8-digit colors as `#RRGGBBAA`, so such a color inside SVG markup renders wrong or not at all. In SVG, use a 6-digit color with an opacity attribute instead, e.g. `fill="#D50000" fill-opacity="0.5"`.
 
 
 ## Limitations

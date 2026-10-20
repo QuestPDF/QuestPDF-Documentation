@@ -470,7 +470,7 @@ Allows a line to break between any two characters, not only at word boundaries s
 
 With this setting enabled, lines are filled as fully as possible, at the cost of splitting words at arbitrary positions without hyphenation.
 
-It is useful for content without natural break points, such as long URLs, identifiers, hashes, or file paths, especially in narrow columns. For regular prose, prefer the default behavior.
+Without this setting, a word longer than the line is still split where it overflows, so no text is cut off. `BreakAnywhere` changes where lines break: they are filled completely instead of breaking early at natural break points such as `/` or `-`. Use it when evenly filled lines matter more than readable breaks, e.g. hashes or identifiers in narrow columns; for prose and URLs the default is usually easier to read.
 
 ```csharp
 .Column(column =>

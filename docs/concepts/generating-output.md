@@ -39,7 +39,7 @@ The library also supports generating SVG files.
 Each page is represented as a separate SVG file.
 
 ```csharp
-ICollection<string> svgFiles = document.GenerateSvgFiles();
+ICollection<string> svgFiles = document.GenerateSvg();
 ```
 
 

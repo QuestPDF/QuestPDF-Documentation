@@ -19,6 +19,11 @@ This component places page numbers on alternating sides of the page - left for o
 It demonstrates how to use the page number information to conditionally format content.
 
 ```csharp
+using QuestPDF.Elements;
+using QuestPDF.Fluent;
+using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
+
 public class PageNumberSideComponent : IDynamicComponent
 {
     public DynamicComponentComposeResult Compose(DynamicContext context)
@@ -173,6 +178,9 @@ The following component implements a paging algorithm that:
 6) Updates state to track progress
 
 ```csharp
+using System.Globalization;
+using QuestPDF.Elements;
+
 public class OrdersTableWithPageSubtotalsComponent : IDynamicComponent<OrdersTableWithPageSubtotalsComponentState>
 {
     private ICollection<OrderItem> Items { get; }
