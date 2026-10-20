@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "Position content in the available space: `AlignLeft`, `AlignCenter`, `AlignRight` and `AlignTop`, `AlignMiddle`, `AlignBottom`."
 ---
 
 

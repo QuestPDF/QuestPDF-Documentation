@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "Render trees of arbitrary depth (categories, org charts, nested bills of materials) with a recursive compose method."
 ---
 
 

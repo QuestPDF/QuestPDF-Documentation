@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`EnsureSpace(minHeight)` (default 150 points): move content to the next page unless at least that much fits on the current one; applies only to its first page. Wrap a heading together with the start of what follows to keep them together."
 ---
 
 

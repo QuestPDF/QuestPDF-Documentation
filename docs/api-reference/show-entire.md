@@ -1,3 +1,7 @@
+---
+description: "`ShowEntire`: keep content on one page; throws `DocumentLayoutException` if it is taller than a page. Put it on every cell of a table row to keep the row together."
+---
+
 # Show entire
 
 The ShowEntire element is designed to ensure that specific content remains on a single page, preventing it from being split across multiple pages.

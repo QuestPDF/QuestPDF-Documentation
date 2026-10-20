@@ -1,3 +1,7 @@
+---
+description: "Legacy Previewer for QuestPDF before 2024.10, replaced by the Companion App; use `ShowInCompanion()` instead."
+---
+
 # Document previewer
 
 ::: danger LEGACY TOOL

@@ -1,3 +1,7 @@
+---
+description: "`ScaleToFit`: shrink content proportionally until it fits the available space; costly for complex content and can still fail with fixed sizes or aspect ratios."
+---
+
 # Scale to fit
 
 This container dynamically adjusts its content to fit within the available space by proportionally scaling it down if necessary. 

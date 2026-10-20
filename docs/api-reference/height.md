@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`Height`, `MinHeight`, `MaxHeight`: constrain the vertical size of content; impossible constraints (e.g. taller than the available space) throw a layout exception."
 ---
 
 

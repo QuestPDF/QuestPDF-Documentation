@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`Width`, `MinWidth`, `MaxWidth`: constrain the horizontal size of content; impossible constraints (e.g. wider than the available space) throw a layout exception."
 ---
 
 

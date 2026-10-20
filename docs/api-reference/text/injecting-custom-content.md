@@ -1,3 +1,7 @@
+---
+description: "Put an image, SVG or any element inline in text with `Element(...)`; it must fit on one line and can't span pages."
+---
+
 # Injecting custom content
 
 It is possible to inject custom content into the document, e.g. images.

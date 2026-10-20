@@ -1,3 +1,7 @@
+---
+description: "Style table cells consistently with a reusable function passed to `Element(...)`."
+---
+
 # Cell Style Pattern
 
 This code pattern provides a structured approach to styling individual table cells in a consistent and reusable manner. 

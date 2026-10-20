@@ -1,3 +1,7 @@
+---
+description: "There is no list element: build bullet, numbered and nested lists from `Column` and `Row`."
+---
+
 # Ordered and bullet lists
 
 Lists are an essential part of structured documents, helping to present information in an organized and easy-to-read format. 

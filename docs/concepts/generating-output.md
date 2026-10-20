@@ -1,3 +1,7 @@
+---
+description: "Generate a PDF to a file, stream or byte array, or render pages as SVG or images; how layout errors are reported (the message can include document text)."
+---
+
 # Generating output
 
 The primary goal of the QuestPDF library is to generate PDF files. 

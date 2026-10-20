@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`PreventPageBreak`: if the content doesn't fit in the rest of the page, move it to the next one; if it is taller than a page, it still splits there. On table cells it tears rows apart: to keep a row together, use `ShowEntire` on every cell."
 ---
 
 

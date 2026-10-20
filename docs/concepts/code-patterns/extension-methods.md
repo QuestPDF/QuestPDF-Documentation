@@ -1,3 +1,7 @@
+---
+description: "Extension methods on `IContainer` that share styles and building blocks across documents."
+---
+
 # Code pattern: extension methods
 
 When you find yourself implementing the same styling or content patterns repeatedly across different documents, extension methods offer the perfect solution. 

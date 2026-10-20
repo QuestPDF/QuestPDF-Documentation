@@ -1,3 +1,7 @@
+---
+description: "A minimal page with margins, header, content and footer; the starting point for every document."
+---
+
 # Page
 
 This container allows you to define your page layout by configuring margins, watermarks, and different content sections such as header, footer, and the main content area. 

@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`DebugArea(label, color)` draws a labeled box around content to inspect spacing and alignment during development."
 ---
 
 

@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`Column`: stack items vertically with optional `Spacing`; items flow onto the next page when needed."
 ---
 
 

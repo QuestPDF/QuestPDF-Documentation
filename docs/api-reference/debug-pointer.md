@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`DebugPointer(label)` adds a named marker visible only in the Companion App hierarchy and in layout exception traces, not in the PDF."
 ---
 
 

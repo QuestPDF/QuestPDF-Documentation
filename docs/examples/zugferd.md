@@ -1,3 +1,7 @@
+---
+description: "Create a ZUGFeRD 2.1 e-invoice: PDF/A-3b document, invoice XML attachment and XMP metadata via Document Operations (`AddAttachment`, `ExtendMetadata`); validate with veraPDF and Mustang."
+---
+
 # Creating ZUGFeRD-Compliant PDF Documents
 
 ## Introduction

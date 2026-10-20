@@ -1,3 +1,7 @@
+---
+description: "A shared cell or block style as a local function passed to `Element(...)`."
+---
+
 # Code pattern: content styling
 
 When designing PDF documents, many elements often share similar styles. 

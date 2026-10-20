@@ -1,3 +1,7 @@
+---
+description: "`ShowOnce`: draw content only on the first page where it would repeat (headers, footers, `Decoration` sections), e.g. a different first-page header."
+---
+
 # Show once
 
 The ShowOnce element provides fine-grained control over content rendering across multiple pages. 

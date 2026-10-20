@@ -1,3 +1,7 @@
+---
+description: "Horizontal and vertical lines (`LineHorizontal`, `LineVertical`) with thickness, color, gradient and dash pattern (the pattern array length must be even)."
+---
+
 # Line
 
 The Line component allows you to render simple yet customizable vertical and horizontal lines within your layout. 

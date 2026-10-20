@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`AspectRatio`: keep a width-to-height ratio, fitting the available width by default (or height, or area)."
 ---
 
 

@@ -1,3 +1,7 @@
+---
+description: "Charts are not built in: draw them with a charting library and embed the result as SVG via `Svg(size => ...)`; examples use ScottPlot (pie and bar)."
+---
+
 # Charts
 
 QuestPDF integrates seamlessly with the ScottPlot library to provide powerful charting capabilities in your PDF documents. 

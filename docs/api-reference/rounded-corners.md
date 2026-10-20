@@ -1,3 +1,7 @@
+---
+description: "`CornerRadius` for all corners or each corner separately; it also clips the content, e.g. a photo inside a card."
+---
+
 # Rounded Corners
 
 Rounded corners can be applied to containers to create visually appealing designs. 

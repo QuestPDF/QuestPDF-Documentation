@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`MultiColumn`: newspaper-style columns; content fills columns left to right, then continues on the next page; `BalanceHeight` evens out the last page; costly to compute."
 ---
 
 

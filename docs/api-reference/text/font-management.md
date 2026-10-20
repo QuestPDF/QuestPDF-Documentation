@@ -1,3 +1,7 @@
+---
+description: "Lato is the default font (Latin, Greek, Cyrillic); for other scripts and emoji, deploy Noto fonts. Fonts next to the app are registered automatically and used by the family name stored in the file (registering under a custom name is deprecated); `RegisterFontFrom*` for other sources; system fonts are off by default (`UseSystemFonts`); missing families or glyphs throw."
+---
+
 # Font management
 
 ## Library default font

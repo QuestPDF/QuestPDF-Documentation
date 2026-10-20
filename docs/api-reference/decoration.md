@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`Decoration`: content with a `Before` and `After` section that repeat on every page the content spans, e.g. a table caption on each page."
 ---
 
 

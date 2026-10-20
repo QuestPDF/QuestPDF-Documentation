@@ -1,3 +1,7 @@
+---
+description: "Custom shapes beyond built-in elements (rounded gradient rectangle, dotted line) drawn as SVG sized to the available space."
+---
+
 # Complex Graphics
 
 QuestPDF supports various built-in drawing capabilities, but there may be times when you need to include more sophisticated or custom graphics in your PDF. 
