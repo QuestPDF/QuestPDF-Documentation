@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`ContentFromLeftToRight` (default) and `ContentFromRightToLeft` for RTL languages; affects text alignment, wrapping, and the order of items in rows and tables."
 ---
 
 

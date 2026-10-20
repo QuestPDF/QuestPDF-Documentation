@@ -1,3 +1,7 @@
+---
+description: "`Extend`, `ExtendVertical`, `ExtendHorizontal`: make content fill all available space."
+---
+
 # Extend
 
 | Method               | Description                                                                              |

@@ -1,3 +1,7 @@
+---
+description: "`Section(\"name\")` marks a part of the document; `SectionLink(\"name\")` jumps to it, and section page numbers build a table of contents."
+---
+
 # Section
 
 A **Section** defines a named fragment of a document that can span multiple pages. 

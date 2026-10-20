@@ -1,3 +1,7 @@
+---
+description: "`Shrink`, `ShrinkVertical`, `ShrinkHorizontal`: make content as small as its contents allow."
+---
+
 # Shrink
 
 Renders its content in the most compact size achievable. 

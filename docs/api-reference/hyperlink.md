@@ -1,3 +1,7 @@
+---
+description: "`Hyperlink(url)` makes any content clickable (text, images, other elements); also usable inside text."
+---
+
 # Hyperlink
 
 The Hyperlink element creates a clickable area that redirects the user to a designated webpage.

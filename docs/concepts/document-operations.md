@@ -1,3 +1,7 @@
+---
+description: "Work on existing PDF files (since 2024.12.0): merge, select pages, overlay or underlay, encrypt or decrypt, linearize, attach files and extend XMP metadata (PDF/A-3b, ZUGFeRD). Option types are nested: `DocumentOperation.LayerConfiguration`, `DocumentOperation.Encryption256Bit`."
+---
+
 # PDF Document Operations
 
 The Document Operations API provides functionality for performing various operations on PDF documents, including loading, merging, overlaying, underlaying, selecting specific pages, adding attachments, and applying encryption settings.

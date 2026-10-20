@@ -1,3 +1,7 @@
+---
+description: "A different header or footer on the first page with `ShowOnce` and `SkipOnce`."
+---
+
 # Customizing Header/Footer on the first page
 
 A common requirement in document design is to create a distinct header for the first page, with all subsequent pages sharing a standard header format. 

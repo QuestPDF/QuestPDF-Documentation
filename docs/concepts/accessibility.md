@@ -1,5 +1,6 @@
 ---
 outline: [2, 3]
+description: "Create tagged, accessible PDFs (PDF/UA-1, PDF/A): `Semantic*` elements for headings, lists, tables, images and links; semantic headings also build the PDF outline (bookmarks); set `PDFUA_Conformance` so the tags are written; validate with veraPDF or PAC."
 ---
 
 

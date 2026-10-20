@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`Lazy` and `LazyWithCache` build content only when it is rendered, to cut memory use in documents with thousands of pages (`LazyWithCache` is faster but uses more native memory)."
 ---
 
 

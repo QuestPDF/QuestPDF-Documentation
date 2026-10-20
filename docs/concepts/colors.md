@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "Color formats (`#RRGGBB`, `#AARRGGBB` with alpha first, shorthand) and the built-in Material Design palette in `Colors`."
 ---
 
 

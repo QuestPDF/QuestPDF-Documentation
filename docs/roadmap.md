@@ -1,3 +1,7 @@
+---
+description: "Features in progress, planned (more platforms, AcroForms, PDF signing, PDF/A-4, PDF/UA-2) and recently delivered (e.g. Native AOT); no fixed dates."
+---
+
 # Roadmap
 
 QuestPDF is built to be a dependable, long-term foundation for generating PDF documents in code. This page outlines where the library is heading, including the capabilities we are actively building and our strategic direction over the coming releases.

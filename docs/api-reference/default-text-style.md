@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`DefaultTextStyle` applies a text style to all nested text; it extends existing styles, and later calls can override it."
 ---
 
 

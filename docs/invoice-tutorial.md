@@ -1,5 +1,6 @@
 ---
 outline: [2, 3]
+description: "Build a complete paginated invoice step by step: data models, data source, header and footer, line-item table, reusable address component."
 ---
 
 # In-Depth Invoice Tutorial

@@ -1,3 +1,7 @@
+---
+description: "Embed static maps from the Mapbox Static Maps API (paid service with a free tier) as images; use your own access token and fetch the map before generating the document, not during it."
+---
+
 # Maps
 
 QuestPDF provides seamless integration with Mapbox Static Maps API, allowing you to embed high-quality, customizable maps into your PDF documents. 

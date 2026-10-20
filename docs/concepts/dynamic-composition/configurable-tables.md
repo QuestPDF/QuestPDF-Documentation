@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "Build table columns, headers and cells from runtime configuration, e.g. user-selected report columns."
 ---
 
 

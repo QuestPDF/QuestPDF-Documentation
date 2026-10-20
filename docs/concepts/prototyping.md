@@ -1,3 +1,7 @@
+---
+description: "Generate placeholder text, numbers, colors and images with `Placeholders` to prototype a layout before real data exists."
+---
+
 # Prototyping
 
 Placeholders in QuestPDF let you quickly generate random text, numbers, colors, and images. 

@@ -1,3 +1,7 @@
+---
+description: "Borders on all or selected sides: thickness, color, gradient, alignment (inside, middle, outside); combines with rounded corners."
+---
+
 # Border
 
 You can use borders to create visual separation between elements in your document. 

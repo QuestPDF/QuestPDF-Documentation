@@ -1,3 +1,7 @@
+---
+description: "Install the NuGet package, set the license, and generate a first PDF with a minimal `Document.Create` example."
+---
+
 # Quick start
 
 QuestPDF is a modern C# library for PDF generation that provides a dedicated layout engine optimized specifically for creating PDF documents. Its component-based architecture lets you compose simple elements (such as text, images, tables, and grids) into sophisticated layouts through an intuitive, declarative API. Because it's pure C#, you get full access to familiar programming constructs, strong typing, and seamless IDE support.

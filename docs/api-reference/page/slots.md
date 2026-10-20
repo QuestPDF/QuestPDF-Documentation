@@ -1,3 +1,7 @@
+---
+description: "`Header` and `Footer` appear on every page and must fit on it; `Content` flows across pages and sets the page count; `Background` and `Foreground` cover the whole page behind or in front of them, ignoring margins (e.g. a watermark)."
+---
+
 # Page Slots
 
 The Page container is a multi-child container that allows you to define the layout of the page. 

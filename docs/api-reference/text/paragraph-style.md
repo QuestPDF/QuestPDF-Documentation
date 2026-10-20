@@ -1,3 +1,7 @@
+---
+description: "Paragraph alignment (incl. justify), default paragraph style, spacing between paragraphs, first-line indentation, `ClampLines` with ellipsis."
+---
+
 # Paragraph Style
 
 ## Text Alignment

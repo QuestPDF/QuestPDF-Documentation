@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`Padding` and per-side variants (`PaddingHorizontal`, `PaddingTop`, …) add space around content; negative values push content beyond its edges."
 ---
 
 

@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`Scale`, `ScaleHorizontal`, `ScaleVertical`: enlarge or shrink content by a factor (squeeze or stretch on one axis)."
 ---
 
 

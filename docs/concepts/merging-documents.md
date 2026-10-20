@@ -1,3 +1,7 @@
+---
+description: "Generate several documents and merge them into one PDF with original or continuous page numbers; to merge existing files, use Document Operations."
+---
+
 # Merging documents
 
 QuestPDF makes it easy to generate multiple PDF documents and then combine them into one. 

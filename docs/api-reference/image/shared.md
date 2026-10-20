@@ -1,3 +1,7 @@
+---
+description: "Load an image once with `Image.FromFile` and reuse it across many placements; since 2025.4.0 images loaded by file path are also cached automatically."
+---
+
 # Shared Images
 
 When generating a PDF with multiple items that use the same image, processing the image repeatedly can negatively affect both performance and the final file size. 

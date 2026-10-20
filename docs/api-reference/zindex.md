@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`ZIndex`: change drawing order; higher values are drawn on top (default 0, inherited from the parent)."
 ---
 
 

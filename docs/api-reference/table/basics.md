@@ -1,3 +1,7 @@
+---
+description: "`Table`: define columns (`ConstantColumn`, `RelativeColumn`), add cells in order or at a given row and column, span with `RowSpan` and `ColumnSpan`; also for fixed grids such as a label sheet. To keep a row on one page, put `ShowEntire` on every cell of it."
+---
+
 # Table
 
 QuestPDF’s table component provides a robust, flexible way to create complex, dynamic layouts in your PDF documents.

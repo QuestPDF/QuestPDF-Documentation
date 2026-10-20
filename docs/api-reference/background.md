@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "Solid color or linear gradient behind content (`Background`, `BackgroundLinearGradient`); combines with rounded corners."
 ---
 
 # Background

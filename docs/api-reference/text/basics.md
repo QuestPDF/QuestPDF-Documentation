@@ -1,3 +1,7 @@
+---
+description: "Add text with `Text(\"...\")` or rich text built from spans, style it, and add hyperlinks."
+---
+
 # Text
 
 ## Simple usage

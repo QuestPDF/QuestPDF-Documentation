@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "Record where content lands with `CaptureContentPosition` and read it in a dynamic component via `GetContentCapturedPositions`; may be empty in the first layout pass."
 ---
 
 

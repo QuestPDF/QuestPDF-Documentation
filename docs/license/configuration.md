@@ -1,3 +1,7 @@
+---
+description: "Set `QuestPDF.Settings.License` at startup: `Community`, `Professional` or `Enterprise` (`Evaluation` for learning); no license key, no network calls."
+---
+
 # License configuration
 
 QuestPDF uses a hybrid license, which is a model that benefits everyone.

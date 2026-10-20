@@ -1,3 +1,7 @@
+---
+description: "Draw SVG from a file path or markup, or preload it with `SvgImage.FromFile`; SVG always keeps its aspect ratio; text in SVG uses fonts available to QuestPDF, and a missing font or glyph there does not throw."
+---
+
 # SVG Support
 
 QuestPDF supports SVG images, allowing you to integrate scalable vector graphics just as you would with raster images. 

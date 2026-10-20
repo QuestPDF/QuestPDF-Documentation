@@ -1,3 +1,7 @@
+---
+description: "Page numbers inside text: `CurrentPageNumber()`, `TotalPages()`, per-section variants such as `BeginPageNumberOfSection`, and custom number formatting (the formatter receives `null` in the first layout pass)."
+---
+
 # Page Numbers
 
 ## Document related

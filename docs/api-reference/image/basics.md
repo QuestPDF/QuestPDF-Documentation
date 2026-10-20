@@ -1,3 +1,7 @@
+---
+description: "Embed JPEG, PNG, BMP or WEBP images; the aspect ratio is kept by default; scaling with `FitWidth`, `FitHeight`, `FitArea`, `FitUnproportionally`. Files loaded by relative path must be copied to the output directory."
+---
+
 # Image
 
 Use this element to embed images into your document. By default, it preserves the image's original aspect ratio, ensuring that your visuals remain undistorted.

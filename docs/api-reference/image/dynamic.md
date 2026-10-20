@@ -1,3 +1,7 @@
+---
+description: "Generate an image at the exact size of its slot: a delegate receives the available space and returns image bytes; useful for charts and maps."
+---
+
 # Dynamic Images
 
 QuestPDF provides flexible layouts, which means the optimal image resolution cannot always be determined in advance. 
