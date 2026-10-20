@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "Points (1/72 inch) are the default unit; most size methods accept a `Unit`: `Point`, `Inch`, `Feet`, `Mil`, `Meter`, `Centimetre`, `Millimetre` (British spelling)."
 ---
 
 

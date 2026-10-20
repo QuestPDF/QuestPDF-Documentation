@@ -1,3 +1,7 @@
+---
+description: "`SkipOnce`: hide content on its first page and show it from the second on (e.g. \"continued\" labels); combine with `ShowOnce`, the order matters."
+---
+
 # Skip once
 
 If the container spans multiple pages, its content is omitted on the first page and then displayed on the second and subsequent pages.

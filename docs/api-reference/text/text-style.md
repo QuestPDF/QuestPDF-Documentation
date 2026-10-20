@@ -1,3 +1,7 @@
+---
+description: "Font size, family, fallback, color, weight, italic, decorations, sub- and superscript, line height, letter and word spacing, hyphenation, font features, `BreakAnywhere`. No variable-weight fonts; no automatic hyphenation (a hyphen appears only at soft hyphens); ligatures are off by default."
+---
+
 # Text Style
 
 ## Font Size

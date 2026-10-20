@@ -1,3 +1,7 @@
+---
+description: "Live document preview with hot reload: install the Companion App and call `ShowInCompanion()` (QuestPDF 2024.10 or newer); hot-reload steps for Visual Studio, Rider and the terminal."
+---
+
 # Companion App
 
 ## Introduction

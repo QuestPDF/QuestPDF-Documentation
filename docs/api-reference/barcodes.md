@@ -1,3 +1,7 @@
+---
+description: "Barcodes and QR codes are not built in: generate them with a barcode library and embed the result as SVG via `Svg(size => ...)`; examples use ZXing.Net."
+---
+
 # Barcodes
 
 QuestPDF provides robust support for generating various types of barcodes in your PDF documents through integration with the ZXing.Net library. 

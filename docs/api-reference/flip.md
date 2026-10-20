@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`FlipHorizontal`, `FlipVertical`, `FlipOver`: mirror content along one or both axes."
 ---
 
 

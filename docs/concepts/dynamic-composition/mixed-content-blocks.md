@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "Render content blocks known only at runtime (headings, paragraphs, images, quotes) by pattern matching over a record hierarchy."
 ---
 
 

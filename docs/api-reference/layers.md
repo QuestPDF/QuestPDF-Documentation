@@ -1,3 +1,7 @@
+---
+description: "`Layers`: content under or over the main layer, with exactly one `PrimaryLayer`; layers defined before it are drawn underneath, after it on top. Extra layers are not repeated on every page; for a watermark or background on every page, use `page.Foreground()` or `page.Background()`."
+---
+
 # Layers
 
 The Layers element adds content either underneath (as a background) or on top of (as a watermark) the main content.

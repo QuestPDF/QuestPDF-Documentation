@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`Row`: place items side by side as `RelativeItem`, `ConstantItem` or `AutoItem`, with spacing; for items that should wrap to the next line, use `Inlined`."
 ---
 
 

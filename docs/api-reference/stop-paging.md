@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`StopPaging`: draw only what fits on the first page and drop the rest; to limit content to an area, prefer `ClampLines` or `ScaleToFit`."
 ---
 
 

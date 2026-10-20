@@ -4,6 +4,26 @@ import imageSizePlugin from "./markdownit-imagesize-plugin";
 
 const isProd = process.env.NODE_ENV === 'production';
 
+const llmsTxtHeader = `# QuestPDF
+
+> C# library for generating PDF documents with a fluent, code-first API.
+> Layout engine with automatic paging: tables, headers and footers, page numbers, images, SVG, barcodes.
+
+## About
+
+- Install: \`dotnet add package QuestPDF\`. Select a license at application startup: \`QuestPDF.Settings.License = LicenseType.Community;\`
+- License: free for individuals, non-profits, all FOSS projects, and organizations under $1M in annual revenue; otherwise Professional or Enterprise.
+  Details: [Pricing](https://www.questpdf.com/pricing.html), [License Selection Guide](https://www.questpdf.com/license/guide.html), [Community License](https://www.questpdf.com/license/community.html), [Professional / Enterprise License](https://www.questpdf.com/license/professional-enterprise.html).
+  Binding terms: [LICENSE.md](https://github.com/QuestPDF/QuestPDF/blob/main/LICENSE.md)
+- What QuestPDF can do: [Features Overview](https://www.questpdf.com/features-overview.html)
+- Policies: [Security](https://www.questpdf.com/security-policy.html), [Privacy](https://www.questpdf.com/privacy-policy.html), [Terms of Service](https://www.questpdf.com/terms-of-service.html)
+- Start here: [Quick start](/quick-start.md), then [In-Depth Invoice Tutorial](/invoice-tutorial.md)
+- Everything in one file: [llms-full.txt](/llms-full.txt)
+
+## Table of Contents
+
+{toc}`;
+
 function getPlausibleScript() : HeadConfig[] {
     if (!isProd)
         return [];
@@ -23,7 +43,16 @@ export default defineConfig({
     cleanUrls: false,
 
     vite: {
-      plugins: [llmstxt()]
+      plugins: [llmstxt({
+          customLLMsTxtTemplate: llmsTxtHeader,
+          ignoreFilesPerOutput: {
+              llmsTxt: [
+                  'api-reference/tip-*.md',
+                  'license.md', 'license/community.md', 'license/guide.md', 'license/professional-enterprise.md', 'license/purchase-success.md',
+                  'pricing.md', 'features-overview.md', 'contact.md', 'privacy-policy.md', 'security-policy.md', 'terms-of-service.md',
+              ],
+          },
+      })]
     },
 
     head: [

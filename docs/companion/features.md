@@ -1,3 +1,7 @@
+---
+description: "What the Companion App preview offers: element hierarchy, measuring, search, go to code, layout-issue debugging, shortcuts."
+---
+
 # Companion: Features
 
 The companion app provides a preview of the document. The preview is interactive and allows you to navigate the document, select elements, and measure distances.

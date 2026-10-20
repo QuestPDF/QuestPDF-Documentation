@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "`ShowIf(bool)` shows or hides content at compose time. The `ShowIf(ctx => ...)` overload decides per page, but conditions on `TotalPages` are unreliable (e.g. \"only on the last page\" never shows with default settings)."
 ---
 
 

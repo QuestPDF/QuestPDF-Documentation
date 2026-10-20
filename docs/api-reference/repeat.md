@@ -1,3 +1,7 @@
+---
+description: "`Repeat`: draw the content again on every page its container spans (e.g. a term label next to a long definition)."
+---
+
 # Repeat
 
 When designing a document, you may need certain elements—such as headers, footers, labels, or key terms—to be visible on every page where applicable. 

@@ -1,3 +1,7 @@
+---
+description: "Set the license once at startup in ASP.NET, then generate a PDF in an endpoint and return it as a file."
+---
+
 # Integration with ASP.NET
 
 ## License configuration

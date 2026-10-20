@@ -1,3 +1,7 @@
+---
+description: "Drop shadow with blur, spread, offset and color via `Shadow(new BoxShadowStyle { ... })`; a blur other than 0 slows rendering and enlarges the file."
+---
+
 # Shadow
 
 Shadows can enhance the visual depth and separation of elements in a document.

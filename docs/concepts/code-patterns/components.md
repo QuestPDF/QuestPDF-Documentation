@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "Reusable content as a class implementing `IComponent` (`Compose(IContainer)`), placed with `container.Component(...)`."
 ---
 
 

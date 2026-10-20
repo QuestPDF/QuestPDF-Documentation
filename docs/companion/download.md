@@ -1,3 +1,7 @@
+---
+description: "Companion App downloads for Windows, macOS and Linux, and which library versions each app version supports."
+---
+
 # Companion App: Downloads
 
 The QuestPDF Companion application is available for download on Windows, MacOS, and Linux.

@@ -1,3 +1,7 @@
+---
+description: "Reduce PDF size with `WithCompressionQuality` and `WithRasterDpi`, per image or globally in `DocumentSettings`, or keep the source with `UseOriginalImage`."
+---
+
 # Optimization
 
 Images can be a significant factor in the file size of your PDF documents.

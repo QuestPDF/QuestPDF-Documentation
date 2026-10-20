@@ -1,3 +1,7 @@
+---
+description: "Table `Header` and `Footer` repeat on every page the table spans; they are separate from the body rows."
+---
+
 # Table: Header And Foot
 
 When working with larger tables that span multiple pages, it is often helpful to define a dedicated table header and footer. 

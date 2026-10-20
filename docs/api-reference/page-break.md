@@ -1,3 +1,7 @@
+---
+description: "`PageBreak()`: start the following content on a new page, e.g. one section per page."
+---
+
 # Page break
 
 The Page Break feature allows you to control the layout of your document by forcing content to start on a new page. 

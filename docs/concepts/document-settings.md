@@ -1,3 +1,7 @@
+---
+description: "`DocumentSettings`: PDF/A and PDF/UA conformance, compression, image quality and raster DPI, content direction."
+---
+
 # Document Settings
 
 QuestPDF provides comprehensive control over the document generation process through the `DocumentSettings` class. These settings allow you to fine-tune various aspects of your PDF output, including compliance standards, compression, image quality, and content direction.

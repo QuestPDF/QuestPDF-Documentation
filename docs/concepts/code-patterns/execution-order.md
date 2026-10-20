@@ -1,3 +1,7 @@
+---
+description: "Fluent calls apply in order: `Border().Background().Padding()` looks different from `Padding().Background().Border()`."
+---
+
 # Execution order
 
 QuestPDF uses a fluent API with method chaining to define your document's structure and appearance.

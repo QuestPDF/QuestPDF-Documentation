@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "Draw with SkiaSharp when SVG is not enough, as vector SVG or rasterized image. SkiaSharp is installed separately (on Linux also `SkiaSharp.NativeAssets.Linux.NoDependencies`); `SkiaSharpSvgCanvas` and `SkiaSharpRasterizedCanvas` are helper classes defined on this page, not library types."
 ---
 
 

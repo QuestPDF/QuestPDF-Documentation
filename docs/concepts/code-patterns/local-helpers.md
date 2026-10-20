@@ -1,3 +1,7 @@
+---
+description: "C# local functions inside a compose method that reuse small layout fragments without new classes."
+---
+
 # Code pattern: local helpers
 
 When building complex document layouts, you might find yourself repeating similar code structures. 

@@ -1,3 +1,7 @@
+---
+description: "Set PDF metadata (title, author, subject, keywords, dates) with `WithMetadata`."
+---
+
 # Document metadata
 
 It is possible to include additional information about the PDF document. 

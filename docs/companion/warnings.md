@@ -1,3 +1,7 @@
+---
+description: "What the Companion App warnings mean (complex document, hot reload) and how to resolve them."
+---
+
 # Companion App: Warning Messages
 
 ## Complex document

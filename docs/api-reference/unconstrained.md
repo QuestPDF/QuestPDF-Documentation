@@ -1,3 +1,7 @@
+---
+description: "`Unconstrained`: content takes no layout space and ignores parent size limits, so it can overlap or extend past its container; position it with `OffsetX`, `OffsetY`."
+---
+
 # Unconstrained
 
 The Unconstrained container creates a space where content can go beyond the limits set by parent elements. 

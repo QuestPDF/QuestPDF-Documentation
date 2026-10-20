@@ -1,3 +1,7 @@
+---
+description: "`OffsetX`, `OffsetY`: move content visually without changing its layout size (replaces the obsolete `TranslateX`, `TranslateY`)."
+---
+
 # Offset
 
 This container allows you to precisely position content by moving it horizontally and vertically relative to its original position, independent of layout constraints. 

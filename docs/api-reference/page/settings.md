@@ -1,3 +1,7 @@
+---
+description: "Page size (presets such as `PageSizes.A4.Landscape()`, custom, continuous or flexible height), margins, page color, default text style, content direction, and several page setups in one document."
+---
+
 # Page Settings
 
 This section describes how to configure the page settings in your document.

@@ -1,3 +1,7 @@
+---
+description: "`Inlined`: items in a line that wraps to the next line when full (tags, chips), with spacing and horizontal and baseline alignment."
+---
+
 # Inlined
 
 The Inlined component arranges elements sequentially in a line, automatically wrapping to the next line when needed. 

@@ -1,3 +1,7 @@
+---
+description: "`Placeholder()`: a box with an icon or label for sketching a layout before content exists."
+---
+
 # Placeholder
 
 The Placeholder element is a simple utility for prototyping and layout visualization. 

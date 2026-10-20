@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "Content composed separately for each page (page number, total pages, available space) with `IDynamicComponent` and `container.Dynamic(...)`; `DynamicContext` lives in `QuestPDF.Elements`. `Compose` may run several times per page: treat state as read-only and return a new one. Example: per-page subtotals."
 ---
 
 

@@ -1,3 +1,7 @@
+---
+description: "`DefaultTextStyle` sets the text style for everything inside a container; children can override it locally."
+---
+
 # Style inheritance
 
 The `DefaultTextStyle` API allows you to define text styles that are automatically inherited by all child elements unless explicitly overridden. 

@@ -1,3 +1,7 @@
+---
+description: "A complex grid built from cells that span rows and columns and overlap (e.g. a schedule)."
+---
+
 # Overlapping Cells
 
 This example demonstrates how to create complex structures by overlapping multiple cells, spanning them across rows and columns, and applying dynamic styling.

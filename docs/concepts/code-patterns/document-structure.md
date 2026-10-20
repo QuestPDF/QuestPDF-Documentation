@@ -1,3 +1,7 @@
+---
+description: "One way to split document code: each section in its own well-named method, placed with `Element(...)`."
+---
+
 # Code pattern: document code structure
 
 Organizing your code effectively is crucial for maintainability and readability. 

@@ -1,5 +1,6 @@
 ---
 outline: false
+description: "Style values by data with plain C# conditions, e.g. highlight price changes above a threshold."
 ---
 
 

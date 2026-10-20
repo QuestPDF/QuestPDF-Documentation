@@ -1,3 +1,7 @@
+---
+description: "`RotateLayoutClockwise` and `RotateLayoutCounterclockwise` turn content by 90° and swap width and height; `Rotate(angle)` turns it freely around its center."
+---
+
 # Rotate
 
 ## Constrained

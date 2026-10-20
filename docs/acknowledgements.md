@@ -1,3 +1,7 @@
+---
+description: "Third-party libraries QuestPDF builds on and their licenses."
+---
+
 # Acknowledgements
 
 ::: details Six Labors
