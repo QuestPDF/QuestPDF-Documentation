@@ -2,23 +2,9 @@
 
 Shadows can enhance the visual depth and separation of elements in a document.
 
-```csharp{3-10}
-container
-    .Border(1, Colors.Black)
-    .Shadow(new BoxShadowStyle
-    {
-        Color = Colors.Grey.Medium, 
-        Blur = 5, 
-        Spread = 5,
-        OffsetX = 5, 
-        OffsetY = 5
-    })
-    .Background(Colors.White)
-    .Padding(15)
-    .Text("Important content");
-```
+<<< @/snippets/shadow/simple.cs{3-10 csharp}
 
-![example](/api-reference/shadow-simple.webp)
+![A soft grey shadow falls below and to the right of the bordered box.](/api-reference/shadow-simple.webp){.example}
 
 
 ## Blur
@@ -33,26 +19,9 @@ Values different from 0 may significantly impact performance and enlarge the out
 Use with caution, especially in large documents or when rendering complex shadows.
 :::
 
-```csharp{12}
-.Row(row =>
-{
-    row.Spacing(50);
+<<< @/snippets/shadow/blur.cs{12 csharp}
 
-    foreach (var blur in new[] { 5, 10, 20 })
-    {
-        row.ConstantItem(100)
-            .AspectRatio(1)
-            .Shadow(new BoxShadowStyle
-            {
-                Color = Colors.Grey.Darken1,
-                Blur = blur
-            })
-            .Background(Colors.White);
-    }
-});
-```
-
-![example](/api-reference/shadow-blur.webp)
+![Three squares with increasing blur: the shadow gets wider and softer, spreading evenly on all sides.](/api-reference/shadow-blur.webp){.example}
 
 
 ## Spread
@@ -61,27 +30,9 @@ Gets or sets the spread radius of the shadow in points.
 
 Positive values cause the shadow to expand, negative values cause it to contract.
 
-```csharp{13}
-.Row(row =>
-{
-    row.Spacing(50);
+<<< @/snippets/shadow/spread.cs{13 csharp}
 
-    foreach (var spread in new[] { 0, 5, 10 })
-    {
-        row.ConstantItem(100)
-            .AspectRatio(1)
-            .Shadow(new BoxShadowStyle
-            {
-                Color = Colors.Grey.Darken1,
-                Blur = 5,
-                Spread = spread
-            })
-            .Background(Colors.White);
-    }
-});
-```
-
-![example](/api-reference/shadow-spread.webp)
+![Three squares with increasing spread: from a faint halo to a wide, darker band around the square.](/api-reference/shadow-spread.webp){.example}
 
 
 ## Offset X
@@ -90,27 +41,9 @@ Gets or sets the horizontal offset of the shadow in points.
 
 Positive values move the shadow to the right, negative values move it to the left.
 
-```csharp{13}
-.Row(row =>
-{
-    row.Spacing(50);
-    
-    foreach (var offsetX in new[] { -10, 0, 10 })
-    {
-        row.ConstantItem(100)
-            .AspectRatio(1)
-            .Shadow(new BoxShadowStyle
-            {
-                Color = Colors.Grey.Darken1,
-                Blur = 10,
-                OffsetX = offsetX
-            })
-            .Background(Colors.White);
-    }
-});
-```
+<<< @/snippets/shadow/offset-x.cs{13 csharp}
 
-![example](/api-reference/shadow-offset-x.webp)
+![A negative offset moves the shadow to the left, zero keeps it centred, and a positive offset moves it to the right.](/api-reference/shadow-offset-x.webp){.example}
 
 
 ## Offset Y
@@ -119,60 +52,18 @@ Gets or sets the vertical offset of the shadow in points.
 
 Positive values move the shadow downward, negative values move it upward.
 
-```csharp{13}
-.Row(row =>
-{
-    row.Spacing(50);
-    
-    foreach (var offsetY in new[] { -10, 0, 10 })
-    {
-        row.ConstantItem(100)
-            .AspectRatio(1)
-            .Shadow(new BoxShadowStyle
-            {
-                Color = Colors.Grey.Darken2,
-                Blur = 10,
-                OffsetY = offsetY
-            })
-            .Background(Colors.White);
-    }
-});
-```
+<<< @/snippets/shadow/offset-y.cs{13 csharp}
 
-![example](/api-reference/shadow-offset-y.webp)
+![A negative offset moves the shadow up, zero keeps it centred, and a positive offset moves it down.](/api-reference/shadow-offset-y.webp){.example}
 
 
 ## Color
 
 Gets or sets the color of the shadow.
 
-```csharp{18}
-.Row(row =>
-{
-    row.Spacing(50);
-    
-    var colors = new[]
-    {
-        Colors.Red.Darken2,
-        Colors.Green.Darken2,
-        Colors.Blue.Darken2
-    };
-    
-    foreach (var color in colors)
-    {
-        row.ConstantItem(100)
-            .AspectRatio(1)
-            .Shadow(new BoxShadowStyle
-            {
-                Color = color,
-                Blur = 10
-            })
-            .Background(Colors.White);
-    }
-});
-```
+<<< @/snippets/shadow/color.cs{18 csharp}
 
-![example](/api-reference/shadow-color.webp)
+![Red, green and blue glows around three white squares: the shadow takes the given colour.](/api-reference/shadow-color.webp){.example}
 
 
 ## Without Blur (Fast)
@@ -181,36 +72,6 @@ Shadows can be applied without any blur effect for a sharper appearance.
 
 This approach is faster and results in significantly smaller file sizes, making it suitable for performance-sensitive applications.
 
-```csharp{10,22}
-.Row(row =>
-{
-    row.Spacing(50);
+<<< @/snippets/shadow/no-blur.cs{10,22 csharp}
 
-    row.ConstantItem(100)
-        .AspectRatio(1)
-        .Shadow(new BoxShadowStyle
-        {
-            Color = Colors.Grey.Lighten1,
-            Blur = 0, 
-            OffsetX = 8,
-            OffsetY = 8
-        })
-        .Border(1, Colors.Black)
-        .Background(Colors.White);
-    
-    row.ConstantItem(100)
-        .AspectRatio(1)
-        .Shadow(new BoxShadowStyle
-        {
-            Color = Colors.Grey.Lighten1,
-            Blur = 0,
-            OffsetX = 8,
-            OffsetY = 8
-        })
-        .Border(1, Colors.Black)
-        .CornerRadius(16)
-        .Background(Colors.White);
-});
-```
-
-![example](/api-reference/shadow-no-blur.webp)
+![Without blur the shadow is a solid grey copy of the shape, offset down and to the right; on the second square it follows the rounded corners.](/api-reference/shadow-no-blur.webp){.example}
