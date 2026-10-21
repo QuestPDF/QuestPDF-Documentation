@@ -18,41 +18,9 @@ Sets a solid background color behind its content.
 .Background(Colors.Green.Lighten2)
 ```
 
-```csharp{30}
-using QuestPDF.Helpers;
+<<< @/snippets/background/solid.cs{28 csharp}
 
-var colors = new[]
-{
-    Colors.LightBlue.Darken4,
-    Colors.LightBlue.Darken3,
-    Colors.LightBlue.Darken2,
-    Colors.LightBlue.Darken1,
-
-    Colors.LightBlue.Medium,
-
-    Colors.LightBlue.Lighten1,
-    Colors.LightBlue.Lighten2,
-    Colors.LightBlue.Lighten3,
-    Colors.LightBlue.Lighten4,
-    Colors.LightBlue.Lighten5,
-
-    Colors.LightBlue.Accent1,
-    Colors.LightBlue.Accent2,
-    Colors.LightBlue.Accent3,
-    Colors.LightBlue.Accent4,
-};
-
-container
-    .Height(150)
-    .Width(420)
-    .Row(row =>
-    {
-        foreach (var color in colors)
-            row.RelativeItem().Background(color);
-    });
-```
-
-![example](/api-reference/background-solid.webp)
+![Fourteen equal-width stripes, each filled edge to edge with one shade of the LightBlue palette: from dark to light (Darken4 to Lighten5), then the four Accent shades.](/api-reference/background-solid.webp){.example}
 
 
 ## Gradient
@@ -61,26 +29,9 @@ Applies a linear gradient background to the container with the specified angle a
 
 The first argument is the angle in degrees, and the second argument is an array of colors that define the gradient.
 
-```csharp{6,10,14}
-.Column(column =>
-{
-    column.Spacing(25);
+<<< @/snippets/background/gradient.cs{6,10,14 csharp}
 
-    column.Item()
-        .BackgroundLinearGradient(0, [Colors.Red.Lighten2, Colors.Blue.Lighten2])
-        .AspectRatio(2);
-
-    column.Item()
-        .BackgroundLinearGradient(45, [Colors.Green.Lighten2, Colors.LightGreen.Lighten2, Colors.Yellow.Lighten2])
-        .AspectRatio(2);
-    
-    column.Item()
-        .BackgroundLinearGradient(90, [Colors.Yellow.Lighten2, Colors.Amber.Lighten2, Colors.Orange.Lighten2])
-        .AspectRatio(2);
-});
-```
-
-![example](/api-reference/background-gradient.webp)
+![Three gradients showing the angle convention: 0° runs from left (red) to right (blue), 45° from the top-left corner (green) to the bottom-right corner (yellow), and 90° from top (yellow) to bottom (orange).](/api-reference/background-gradient.webp){.example}
 
 
 ## Rounded Corners
@@ -91,12 +42,6 @@ Sets the corner radius for the background, creating rounded corners.
 Read more about [rounded corners](/api-reference/rounded-corners.md).
 :::
 
-```csharp{2-3}
-container
-    .Background(Colors.Grey.Lighten2)
-    .CornerRadius(25)
-    .Padding(25)
-    .Text("Content with rounded corners");
-```
+<<< @/snippets/background/rounded-corners.cs{3-4 csharp}
 
-![example](/api-reference/background-rounded-corners.webp)
+![The grey background follows the rounded corners, and the box is only as wide as its padded text.](/api-reference/background-rounded-corners.webp){.example}

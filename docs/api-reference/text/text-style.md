@@ -6,26 +6,9 @@ Font size measures the height of text characters, determining how large or small
 
 It's worth noting that different fonts may render text with different visual sizes, even when assigned the same numerical font size.
 
-```csharp{7,11,15}
-.Column(column =>
-{
-    column.Spacing(10);
+<<< @/snippets/text-style/font-size.cs{7,11,15 csharp}
 
-    column.Item()
-        .Text("This is small text (16pt)")
-        .FontSize(16);
-
-    column.Item()
-        .Text("This is medium text (24pt)")
-        .FontSize(24);
-
-    column.Item()
-        .Text("This is large text (36pt)")
-        .FontSize(36);
-});
-```
-
-![example](/api-reference/text-font-size.webp)
+![Three lines of the same sentence at 16, 24 and 36 points, each one clearly larger than the last.](/api-reference/text-font-size.webp){.example}
 
 
 ## Font Family
@@ -34,22 +17,9 @@ A font family is a collection of related fonts that share a consistent design st
 
 Examples of font families include Lato, Noto Serif and JetBrains Mono. Fonts other than the built-in Lato must be available to your application, see [font management](/api-reference/text/font-management).
 
-```csharp{8,11}
-.Column(column =>
-{
-    column.Spacing(10);
+<<< @/snippets/text-style/font-family.cs{8,11 csharp}
 
-    column.Item().Text("This is text with default font (Lato)");
-
-    column.Item().Text("This is text with Noto Serif font")
-        .FontFamily("Noto Serif");
-
-    column.Item().Text("This is text with JetBrains Mono font")
-        .FontFamily("JetBrains Mono");
-});
-```
-
-![example](/api-reference/text-font-family.webp)
+![The same sentence in three fonts: the default sans-serif Lato, Noto Serif with serifs, and the monospaced JetBrains Mono.](/api-reference/text-font-family.webp){.example}
 
 
 ## Font Fallback
@@ -58,23 +28,15 @@ The Font Fallback option is a list of alternative fonts that are used when speci
 
 A common example is the display of non-Latin characters, such as Arabic or Chinese, which may not be supported by all fonts.
 
-```csharp{3}
-container
-    .Text("The Arabic word for programming is البرمجة.")
-    .FontFamily("Lato", "Noto Sans Arabic");
-```
+<<< @/snippets/text-style/font-fallback.cs{3 csharp}
 
-![example](/api-reference/text-font-fallback.webp)
+![An English sentence in Lato ends with the Arabic word البرمجة, which is drawn correctly by the fallback font instead of missing-glyph boxes.](/api-reference/text-font-fallback.webp){.example}
 
 It's also useful for displaying emojis, which are not universally supported by all fonts.
 
-```csharp{3}
-container
-    .Text("Popular emojis include 😊, 😂, ❤️, 👍, and 😎.")
-    .FontFamily("Lato", "Noto Emoji");
-```
+<<< @/snippets/text-style/font-fallback-emoji.cs{3 csharp}
 
-![example](/api-reference/text-font-fallback-emoji.webp)
+![Five emojis drawn inline with the text by the fallback font; they appear as black-and-white outlines, not in colour.](/api-reference/text-font-fallback-emoji.webp){.example}
 
 ::: tip
 Rather than repeating the fallback list on every text element, configure it once in the [default text style](/api-reference/default-text-style) of the page or document.
@@ -87,20 +49,9 @@ The font color determines the color applied to text characters, affecting their 
 
 It also influences the default color of text decorations, such as underlines.
 
-```csharp{4,6,8}
-.Text(text =>
-{
-    text.Span("Each pixels consists of three sub-pixels: ");
-    text.Span("red").FontColor(Colors.Red.Medium);
-    text.Span(", ");
-    text.Span("green").FontColor(Colors.Green.Medium);
-    text.Span(" and ");
-    text.Span("blue").FontColor(Colors.Blue.Medium);
-    text.Span(".");
-});
-```
+<<< @/snippets/text-style/font-color.cs{4,6,8 csharp}
 
-![example](/api-reference/text-font-color.webp)
+![Only the words "red", "green" and "blue" take their colours; the rest of the sentence stays black.](/api-reference/text-font-color.webp){.example}
 
 
 ## Background Color
@@ -109,16 +60,9 @@ Sets a solid background color for the text.
 
 This color fills the area behind the text or other elements, enhancing contrast and providing visual emphasis.
 
-```csharp{4}
-.Text(text =>
-{
-    text.Span("The term ");
-    text.Span("algorithm").BackgroundColor(Colors.Yellow.Lighten3).Bold();
-    text.Span("  ");
-});
-```
+<<< @/snippets/text-style/background-color.cs{4 csharp}
 
-![example](/api-reference/text-font-background.webp)
+![Only the bold word "algorithm" has a pale yellow background that hugs the word; the rest of the sentence wraps to a second line without a background.](/api-reference/text-font-background.webp){.example}
 
 
 ## Font Weight
@@ -141,22 +85,9 @@ Please note that not all fonts support every weight. If the specified weight isn
 | ExtraBlack    | 1000      | <span style="font-weight: 1000">Example</span> |
 
 
-```csharp{4,6,8,10}
-.Text(text =>
-{
-    text.Span("This sentence demonstrates ");
-    text.Span("bold").Bold();
-    text.Span(", ");
-    text.Span("normal").NormalWeight();
-    text.Span(", ");
-    text.Span("light").Light();
-    text.Span(" and ");
-    text.Span("thin").Thin();
-    text.Span(" font weights.");
-});
-```
+<<< @/snippets/text-style/font-weight.cs{4,6,8,10 csharp}
 
-![example](/api-reference/text-font-weight.webp)
+![Bold, normal, light and thin weights in one sentence; the thin word is barely visible.](/api-reference/text-font-weight.webp){.example}
 
 :::warning
 QuestPDF does not currently support fonts with variable weights.
@@ -169,16 +100,9 @@ Renders text with an italic effect, where letters are slightly slanted to the ri
 
 Commonly used for emphasis or to distinguish specific words.
 
-```csharp{4}
-.Text(text =>
-{
-    text.Span("In this sentence, the word ");
-    text.Span("important").Italic();
-    text.Span(" is emphasized using italics.");
-});
-```
+<<< @/snippets/text-style/italic.cs{4 csharp}
 
-![example](/api-reference/text-font-italic.webp)
+![The word "important" is slanted while the rest of the sentence stays upright.](/api-reference/text-font-italic.webp){.example}
 
 
 ## Decorations
@@ -192,20 +116,9 @@ It is also possible to customize the decoration position:
 - Strikethrough,
 - Overline.
 
-```csharp{4,6,8}
-.Text(text =>
-{
-    text.Span("There are a couple of available text decorations: ");
-    text.Span("underline").Underline().FontColor(Colors.Red.Medium);
-    text.Span(", ");
-    text.Span("strikethrough").Strikethrough().FontColor(Colors.Green.Medium);
-    text.Span(" and ");
-    text.Span("overline").Overline().FontColor(Colors.Blue.Medium);
-    text.Span(". ");
-});
-```
+<<< @/snippets/text-style/decoration-positions.cs{4,6,8 csharp}
 
-![example](/api-reference/text-decoration-types.webp)
+![A red line below "underline", a green line through "strikethrough", and a blue line above "overline", as far above the tallest letters as the underline is below the baseline.](/api-reference/text-decoration-types.webp){.example}
 
 ### Styles
 
@@ -216,46 +129,18 @@ It is also possible to customize the decoration line style:
 - DecorationDotted,
 - DecorationDashed.
 
-```csharp{4,6,8,10,12}
-.Text(text =>
-{
-    text.Span("Moreover, the decoration can be ");
-    text.Span("solid").Underline().DecorationSolid().FontColor(Colors.Indigo.Medium);
-    text.Span(", ");
-    text.Span("double").Underline().DecorationDouble().FontColor(Colors.Blue.Medium);
-    text.Span(", ");
-    text.Span("wavy").Underline().DecorationWavy().FontColor(Colors.LightBlue.Medium);
-    text.Span(", ");
-    text.Span("dotted").Underline().DecorationDotted().FontColor(Colors.Cyan.Medium);
-    text.Span(" or ");
-    text.Span("dashed").Underline().DecorationDashed().FontColor(Colors.Green.Medium);
-    text.Span(".");
-});
-```
+<<< @/snippets/text-style/decoration-styles.cs{5,7,9,11,13-14 csharp}
 
-![example](/api-reference/text-decoration-styles.webp)
+![Five underline styles under coloured words: solid, double, wavy, dotted and dashed.](/api-reference/text-decoration-styles.webp){.example}
 
 ### Styling
 
 By default, the decoration line color is the same as the text color, and the decoration thickness is determined by the font. 
 However, these properties can be customized.
 
-```csharp{6-9}
-.Text(text =>
-{
-    text.Span("This text contains a ");
-    
-    text.Span("seriuos")
-        .Underline()
-        .DecorationWavy()
-        .DecorationColor(Colors.Red.Medium)
-        .DecorationThickness(2);
-    
-    text.Span(" typo.");
-});
-```
+<<< @/snippets/text-style/decoration-styling.cs{6-9 csharp}
 
-![example](/api-reference/text-decoration-advanced.webp)
+![A red wavy line under the misspelled word "seriuos", in a different colour from the black text.](/api-reference/text-decoration-advanced.webp){.example}
 
 
 ## Subscript
@@ -263,16 +148,9 @@ However, these properties can be customized.
 Subscript displays text slightly below the baseline, often in a smaller size. 
 Commonly used for chemical formulas or mathematical notations
 
-```csharp{4}
-.Text(text =>
-{
-    text.Span("H");
-    text.Span("2").Subscript();
-    text.Span("O is the chemical formula for water.");
-});
-```
+<<< @/snippets/text-style/subscript.cs{4 csharp}
 
-![example](/api-reference/text-subscript.webp)
+![The 2 in H2O is smaller and sits below the baseline.](/api-reference/text-subscript.webp){.example}
 
 
 ## Superscript
@@ -280,16 +158,9 @@ Commonly used for chemical formulas or mathematical notations
 Superscript displays text slightly above the baseline, often in a smaller size.
 Typically used for exponents, footnotes, or ordinal indicators
 
-```csharp{4}
-.Text(text =>
-{
-    text.Span("E = mc");
-    text.Span("2").Superscript();
-    text.Span(" is the equation of mass-energy equivalence.");
-});
-```
+<<< @/snippets/text-style/superscript.cs{4 csharp}
 
-![example](/api-reference/text-superscript.webp)
+![The 2 in E = mc2 is smaller and raised above the baseline.](/api-reference/text-superscript.webp){.example}
 
 
 ## Line Height
@@ -297,28 +168,9 @@ Typically used for exponents, footnotes, or ordinal indicators
 Adjusts the vertical spacing between lines of text, affecting readability and overall text layout.
 The added space is proportional to the text size.
 
-```csharp{16}
-.Column(column =>
-{
-    column.Spacing(20);
+<<< @/snippets/text-style/line-height.cs{16 csharp}
 
-    float[] lineHeights = [0.75f, 1f, 2f];
-    var paragraph = Placeholders.Paragraph();
-    
-    foreach (var lineHeight in lineHeights)
-    {
-        column
-            .Item()
-            .Background(Colors.Grey.Lighten3)
-            .Padding(5)
-            .Text(paragraph)
-            .FontSize(16)
-            .LineHeight(lineHeight);
-    }
-});
-```
-
-![example](/api-reference/text-line-height.webp)
+![The same paragraph with three increasing line heights: in the tightest one the lines overlap, and in the widest one there is a full empty line between them.](/api-reference/text-line-height.webp){.example}
 
 
 ## Letter Spacing
@@ -327,28 +179,9 @@ Adjusts the horizontal spacing between characters in the text, affecting readabi
 
 The adjustment is proportional to the text size.
 
-```csharp
-.Column(column =>
-{
-    column.Spacing(20);
-    
-    var letterSpacing = new[] { -0.08f, 0f, 0.2f };
-    var paragraph = Placeholders.Sentence();
+<<< @/snippets/text-style/letter-spacing.cs{csharp}
 
-    foreach (var spacing in letterSpacing)
-    {
-        column
-            .Item()
-            .Background(Colors.Grey.Lighten3)
-            .Padding(5)
-            .Text(paragraph)
-            .FontSize(18)
-            .LetterSpacing(spacing);
-    }
-});
-```
-
-![example](/api-reference/text-letter-spacing.webp)
+![The same sentence with tighter, normal and wider letter spacing: tight letters touch each other, and wide spacing pushes the text onto a second line.](/api-reference/text-letter-spacing.webp){.example}
 
 
 ## Word Spacing
@@ -356,27 +189,9 @@ The adjustment is proportional to the text size.
 Adjusts the horizontal spacing between words in the text, affecting readability and overall visual style.
 The adjustment is proportional to the text size.
 
-```csharp
-.Column(column =>
-{
-    column.Spacing(20);
-    
-    var wordSpacing = new[] { -0.2f, 0f, 0.4f };
-    var paragraph = Placeholders.Sentence();
+<<< @/snippets/text-style/word-spacing.cs{csharp}
 
-    foreach (var spacing in wordSpacing)
-    {
-        column.Item()
-            .Background(Colors.Grey.Lighten3)
-            .Padding(5)
-            .Text(paragraph)
-            .FontSize(16)
-            .WordSpacing(spacing);
-    }
-});
-```
-
-![example](/api-reference/text-word-spacing.webp)
+![Negative word spacing removes the gaps between words, normal spacing keeps them, and positive spacing widens them.](/api-reference/text-word-spacing.webp){.example}
 
 
 ## Hyphenation
@@ -387,24 +202,9 @@ It does not hyphenate text automatically. Please use a dedicated hyphenation lib
 
 A soft hyphen is invisible and is rendered only when the line actually breaks at that position. This behavior is always enabled and requires no configuration.
 
-```csharp
-.Column(column =>
-{
-    column.Spacing(20);
+<<< @/snippets/text-style/hyphenation.cs{csharp}
 
-    column.Item()
-        .Background(Colors.Grey.Lighten3)
-        .Text("Bitte aktualisieren Sie die Zugriffsberechtigungen in der Serverkonfigurationsdatei.");
-
-    column.Item()
-        .Background(Colors.Grey.Lighten3)
-        .Text("Bit\u00ADte ak\u00ADtua\u00ADli\u00ADsie\u00ADren Sie die " +
-              "Zu\u00ADgriffs\u00ADbe\u00ADrech\u00ADti\u00ADgun\u00ADgen in der " +
-              "Ser\u00ADver\u00ADkon\u00ADfi\u00ADgu\u00ADra\u00ADti\u00ADons\u00ADda\u00ADtei.");
-});
-```
-
-![example](/api-reference/text-hyphenation.webp)
+![Without soft hyphens the long German words move to the next line whole; with them, the words break at the soft hyphens and a hyphen is drawn at each break.](/api-reference/text-hyphenation.webp){.example}
 
 
 ## Font Features
@@ -429,39 +229,9 @@ QuestPDF disables the `StandardLigatures` feature by default. Enable it explicit
 
 Let's analyze the `StandardLigatures` font feature, which replaces specific pairs of letters (such as 'fi' or 'fl') with a single, combined glyph to enhance aesthetics.
 
-```csharp{15,27}
-.Row(row =>
-{
-    row.Spacing(25);
+<<< @/snippets/text-style/font-features.cs{15,27 csharp}
 
-    row.RelativeItem()
-        .Background(Colors.Grey.Lighten3)
-        .Padding(10)
-        .Column(column =>
-        {
-            column.Item().Text("Without ligatures").FontSize(16);
-            
-            column.Item()
-                .Text("fly and fight")
-                .FontSize(32)
-                .DisableFontFeature(FontFeatures.StandardLigatures);
-        });
-
-    row.RelativeItem()
-        .Background(Colors.Grey.Lighten3)
-        .Padding(10)
-        .Column(column =>
-        {
-            column.Item().Text("With ligatures").FontSize(16);
-            
-            column.Item().Text("fly and fight")
-                .FontSize(32)
-                .EnableFontFeature(FontFeatures.StandardLigatures);
-        });
-});
-```
-
-![example](/api-reference/text-font-features.webp)
+![Without ligatures, "fl" and "fi" are separate letters; with ligatures, each pair is joined into a single glyph.](/api-reference/text-font-features.webp){.example}
 
 
 ## Break Anywhere
@@ -472,20 +242,6 @@ With this setting enabled, lines are filled as fully as possible, at the cost of
 
 Without this setting, a word longer than the line is still split where it overflows, so no text is cut off. `BreakAnywhere` changes where lines break: they are filled completely instead of breaking early at natural break points such as `/` or `-`. Use it when evenly filled lines matter more than readable breaks, e.g. hashes or identifiers in narrow columns; for prose and URLs the default is usually easier to read.
 
-```csharp
-.Column(column =>
-{
-    column.Spacing(20);
+<<< @/snippets/text-style/break-anywhere.cs{csharp}
 
-    column.Item()
-        .Background(Colors.Grey.Lighten3)
-        .Text("https://www.questpdf.com/api-reference/text/font-management.html#manual-font-registration");
-
-    column.Item()
-        .Background(Colors.Grey.Lighten3)
-        .Text("https://www.questpdf.com/api-reference/text/font-management.html#manual-font-registration")
-        .BreakAnywhere();
-});
-```
-
-![example](/api-reference/text-break-anywhere.webp)
+![By default the URL breaks after "-" and "/", leaving uneven lines; with BreakAnywhere every line is filled and words are split at any character, such as "api-ref" / "erence".](/api-reference/text-break-anywhere.webp){.example}

@@ -3,20 +3,9 @@
 You can use borders to create visual separation between elements in your document. 
 Borders can be applied to any element, including text, images, and containers.
 
-```csharp{2}
-container
-    .Border(3, Colors.Blue.Darken4)
-    .Background(Colors.Blue.Lighten5)
-    .Padding(25) 
-    .Text(text =>
-    {
-        text.DefaultTextStyle(x => x.FontColor(Colors.Blue.Darken4).FontSize(16));
-        text.Span("TIP: ").Bold();
-        text.Span("You can use borders to create visual separation between elements in your document. Borders can be applied to any element, including text, images, and containers.");
-    });
-```
+<<< @/snippets/border/simple.cs{2 csharp}
 
-![example](/api-reference/border-simple.webp)
+![A dark blue border surrounds the padded light blue box, and the wrapped tip text stays inside it.](/api-reference/border-simple.webp){.example}
 
 
 ## Thickness
@@ -43,47 +32,16 @@ container.Border(1, Unit.Millimetre);
 
 ### Consistent thickness
 
-```csharp{6,12,18}
-.Row(row =>
-{
-    row.Spacing(25);
-    
-    row.RelativeItem()
-        .Border(1, Colors.Black)
-        .Padding(10)
-        .AlignCenter()
-        .Text("Thin");
-    
-    row.RelativeItem()
-        .Border(3, Colors.Black)
-        .Padding(10)
-        .AlignCenter()
-        .Text("Medium");
-    
-    row.RelativeItem()
-        .Border(9, Colors.Black)
-        .Padding(10)
-        .AlignCenter()
-        .Text("Bold");
-});
-```
+<<< @/snippets/border/thickness-consistent.cs{6,12,18 csharp}
 
-![example](/api-reference/border-thickness-consistent.webp)
+![Three boxes with 1, 3 and 9 point borders: the thicker the border, the more it grows outward as well as inward, so the "Bold" box looks larger than the "Thin" one.](/api-reference/border-thickness-consistent.webp){.example}
 
 
 ### Various thickness
 
-```csharp{2-5}
-container
-    .BorderLeft(4)
-    .BorderTop(6)
-    .BorderRight(8) 
-    .BorderBottom(10)
-    .Padding(25)
-    .Text("Sample text");
-```
+<<< @/snippets/border/thickness-various.cs{2-5 csharp}
 
-![example](/api-reference/border-thickness-various.webp)
+![Each side has its own thickness: the left edge is the thinnest and the bottom edge the thickest.](/api-reference/border-thickness-various.webp){.example}
 
 
 ## Solid Color
@@ -92,31 +50,9 @@ In the vast majority of cases, borders are applied with a solid color.
 
 <!--@include: tip-color.md-->
 
-```csharp{16}
-.Row(row =>
-{
-    var colors = new[]
-    {
-        Colors.Red.Medium,
-        Colors.Green.Medium,
-        Colors.Blue.Medium
-    };
-    
-    row.Spacing(25);
-    
-    foreach (var color in colors)
-    {
-        row.RelativeItem()
-            .Border(5)
-            .BorderColor(color)
-            .Padding(15)
-            .Text(color)
-            .FontColor(color);
-    }
-});
-```
+<<< @/snippets/border/color-solid.cs{16 csharp}
 
-![example](/api-reference/border-color-solid.webp)
+![Three boxes with red, green and blue borders; each shows its colour as a hex code (#F44336, #4CAF50, #2196F3) in the same colour.](/api-reference/border-color-solid.webp){.example}
 
 
 ## Gradient
@@ -125,35 +61,9 @@ Applies a linear gradient background to the border with the specified angle and 
 
 The first argument is the angle in degrees, and the second argument is an array of colors that define the gradient.
 
-```csharp{7,14,21}
-.Column(column =>
-{
-    column.Spacing(25);
-    
-    column.Item()
-        .Border(5)
-        .BorderLinearGradient(0, [Colors.Red.Darken1, Colors.Blue.Darken1])
-        .BorderAlignmentInside()
-        .Padding(25)
-        .Text("Horizontal gradient");
-    
-    column.Item()
-        .Border(10)
-        .BorderLinearGradient(45, [Colors.Green.Darken1, Colors.LightGreen.Darken1, Colors.Yellow.Darken1])
-        .BorderAlignmentInside()
-        .Padding(25)
-        .Text("Diagonal gradient");
-    
-    column.Item()
-        .Border(10)
-        .BorderLinearGradient(90, [Colors.Yellow.Darken1, Colors.Amber.Darken1, Colors.Orange.Darken1])
-        .CornerRadius(20)
-        .Padding(25)
-        .Text("Vertical gradient");
-});
-```
+<<< @/snippets/border/color-gradient.cs{7,14,21 csharp}
 
-![example](/api-reference/border-color-gradient.webp)
+![Three gradient borders: 0° runs from red on the left to blue on the right, 45° from green at the top-left to yellow at the bottom-right, and 90° from yellow at the top to orange at the bottom, following the rounded corners.](/api-reference/border-color-gradient.webp){.example}
 
 
 ## Alignment
@@ -170,37 +80,9 @@ By default, the border is aligned to the middle of the container boundaries.
 
 However, if the border has rounded corners, the alignment is set to inside by default.
 
-```csharp{12,18,24}
-.Row(row =>
-{
-    row.Spacing(25);
-    
-    row.RelativeItem()
-        .Background(Colors.Grey.Lighten1)
-        .Padding(25)
-        .Text("No Border");
-    
-    row.RelativeItem()
-        .Border(10, Colors.Grey.Darken2)
-        .BorderAlignmentInside()
-        .Padding(25)
-        .Text("Border Inside");
-    
-    row.RelativeItem()
-        .Border(10, Colors.Grey.Darken2)
-        .BorderAlignmentMiddle()
-        .Padding(25)
-        .Text("Border Middle");
-    
-    row.RelativeItem()
-        .Border(10, Colors.Grey.Darken2)
-        .BorderAlignmentOutside()
-        .Padding(25)
-        .Text("Border Outside");
-});
-```
+<<< @/snippets/border/alignment.cs{12,18,24 csharp}
 
-![example](/api-reference/border-alignment.webp)
+![Four boxes with the same content: "Border Inside" keeps the size of the box without a border, "Border Middle" is larger because the border straddles the edge, and "Border Outside" is the largest because the whole border lies outside it.](/api-reference/border-alignment.webp){.example}
 
 
 ## Examples
@@ -213,63 +95,24 @@ Borders support rounded corners, which can be applied using the `CornerRadius` m
 Read more about [rounded corners](/api-reference/rounded-corners.md).
 :::
 
-```csharp{2-3}
-container
-    .CornerRadius(10)
-    .Border(1, Colors.Black)
-    .Background(Colors.Grey.Lighten2)
-    .Padding(25)
-    .Text("Border with rounded corners"); 
-```
+<<< @/snippets/border/rounded-corners.cs{2-3 csharp}
 
-![example](/api-reference/border-rounded-corners-1.webp)
+![A thin black border follows the rounded corners of the grey box.](/api-reference/border-rounded-corners-1.webp){.example}
 
 
 ### Multiple borders
 
 It is possible to apply multiple borders to the same content by separating each border instance with the `Container` method.
 
-```csharp{6}
-container
-    .BorderVertical(5)
-    .BorderColor(Colors.Green.Darken2)
-    .BorderAlignmentInside()
+<<< @/snippets/border/multiple.cs{8 csharp}
 
-    .Container()
-
-    .BorderHorizontal( 10)
-    .BorderColor(Colors.Blue.Lighten1)
-    .BorderAlignmentInside()
-    
-    .Background(Colors.Grey.Lighten2)
-    .PaddingVertical(25)
-    .PaddingHorizontal(50)
-    .Text("Content");
-```
-
-![example](/api-reference/border-multiple.webp)
+![Two borders on one box: green bars on the left and right run the full height, and the blue bars on the top and bottom sit between them, inside the first border.](/api-reference/border-multiple.webp){.example}
 
 
 ### Advanced style
 
 You can create advanced styles by combining borders with other properties, such as background color, padding, and text styles.
 
-```csharp{2-5}
-container
-    .CornerRadius(10)
-    .BorderLeft(10)
-    .BorderAlignmentInside()
-    .BorderColor(Colors.Green.Darken2)
-    .Background(Colors.Green.Lighten4)
-    .Padding(25)
-    .PaddingLeft(10)
-    .DefaultTextStyle(x => x.FontColor(Colors.Green.Darken4))
-    .Column(column =>
-    {
-        column.Item().Text("Completed").Bold();
-        column.Item().Height(5);
-        column.Item().Text("The invoice has been paid in full.").FontSize(16);
-    });
-```
+<<< @/snippets/border/advanced-style.cs{2-5 csharp}
 
-![example](/api-reference/border-rounded-corners-2.webp)
+![A status card: a thick green bar on the left edge, rounded together with the light green box, next to the bold title "Completed" and the line "The invoice has been paid in full."](/api-reference/border-rounded-corners-2.webp){.example}
