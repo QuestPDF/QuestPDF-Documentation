@@ -32,7 +32,7 @@ It's worth noting that different fonts may render text with different visual siz
 
 A font family is a collection of related fonts that share a consistent design style but may vary in weight, style, or width.
 
-Examples of font families include Arial, Times New Roman, and Calibri.
+Examples of font families include Lato, Noto Serif and JetBrains Mono. Fonts other than the built-in Lato must be available to your application, see [font management](/api-reference/text/font-management).
 
 ```csharp{8,11}
 .Column(column =>
@@ -41,11 +41,11 @@ Examples of font families include Arial, Times New Roman, and Calibri.
 
     column.Item().Text("This is text with default font (Lato)");
 
-    column.Item().Text("This is text with Times New Roman font")
-        .FontFamily("Times New Roman");
+    column.Item().Text("This is text with Noto Serif font")
+        .FontFamily("Noto Serif");
 
-    column.Item().Text("This is text with Courier New font")
-        .FontFamily("Courier New");
+    column.Item().Text("This is text with JetBrains Mono font")
+        .FontFamily("JetBrains Mono");
 });
 ```
 
