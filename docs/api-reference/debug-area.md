@@ -17,14 +17,14 @@ You can specify text and color to better distinguish between various debug eleme
 
 ```csharp{2}
 container
-    .DebugArea("Grid example", Colors.Blue.Medium)
+    .DebugArea("Photo gallery", Colors.Blue.Medium)
     // content
 ```
 
 It is also possible to skip the color (it is red by default), and even the label:
 
 ```csharp
-.DebugArea("Grid example")
+.DebugArea("Photo gallery")
 .DebugArea()
 ```
 
@@ -32,27 +32,6 @@ It is also possible to skip the color (it is red by default), and even the label
 
 ## Example
 
-```csharp{5}
-container
-    .Width(250)
-    .Height(250)
-    .Padding(25)
-    .DebugArea("Grid example", Colors.Blue.Medium)
-    .Column(column =>
-    {
-        column.Spacing(5);
+<<< @/snippets/debug-area/example.cs{5 csharp}
 
-        foreach (var _ in Enumerable.Range(0, 3))
-        {
-            column.Item().Row(row =>
-            {
-                row.Spacing(5);
-
-                foreach (var _ in Enumerable.Range(0, 3))
-                    row.RelativeItem().Height(50).Placeholder();
-            });
-        }
-    });
-```
-
-![example](/api-reference/debug-area.webp)
+![DebugArea covers the whole area it wraps with a translucent blue fill and a thin border, including the space the content doesn't use, and shows the label "Photo gallery" at the top centre.](/api-reference/debug-area.webp){.example}

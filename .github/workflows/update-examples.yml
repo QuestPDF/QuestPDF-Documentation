@@ -1,0 +1,63 @@
+name: Update examples
+
+# Exports the code examples and images from QuestPDF.DocumentationExamples (QuestPDF repository)
+# into docs/snippets and docs/public, and commits the changes to the branch it runs on.
+
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      questpdf-ref:
+        description: QuestPDF branch or tag to take the examples from
+        required: true
+        default: main
+
+permissions: {}
+
+env:
+  QUESTPDF_REF: ${{ inputs.questpdf-ref || 'docs-examples/snippet-export' }}
+
+jobs:
+  update:
+    name: Update examples
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout documentation
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - name: Checkout QuestPDF
+        uses: actions/checkout@v4
+        with:
+          repository: QuestPDF/QuestPDF
+          ref: ${{ env.QUESTPDF_REF }}
+          path: .questpdf
+          sparse-checkout: src/dotnet/library
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Export examples
+        run: dotnet run .questpdf/src/dotnet/library/tools/export-documentation-snippets.cs -- docs
+
+      - name: Commit changes
+        run: |
+          git add docs/snippets docs/public
+
+          if git diff --cached --quiet; then
+            echo "The examples are up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update examples from QuestPDF $QUESTPDF_REF ($(git -C .questpdf rev-parse --short HEAD))"
+          git push

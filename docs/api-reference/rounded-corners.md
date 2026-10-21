@@ -17,99 +17,33 @@ This feature allows you to specify the radius of the corners, giving a softer lo
 
 In the vast majority of cases, you will want to apply the same corner radius to all corners of a container.
 
-```csharp{4}
-container
-    .Border(1, Colors.Black)
-    .Background(Colors.Grey.Lighten3)
-    .CornerRadius(25)
-    .Padding(25)
-    .Text("Container with consistently rounded corners");
-```
+<<< @/snippets/rounded-corners/consistent.cs{4 csharp}
 
-![example](/api-reference/rounded-corners-consistent.webp)
+![All four corners are rounded with the same radius; the thin black border and the light grey background both follow the curve.](/api-reference/rounded-corners-consistent.webp){.example}
 
 
 ## Various Corner Radius
 
 It is also possible to apply different corner radii to each corner of a container, allowing for more complex designs.
 
-```csharp{4-7}
-container
-    .Border(1, Colors.Black)
-    .Background(Colors.Grey.Lighten3)
-    .CornerRadiusTopLeft(5)
-    .CornerRadiusTopRight(10)
-    .CornerRadiusBottomRight(20)
-    .CornerRadiusBottomLeft(40)
-    .Padding(25)
-    .Text("Container with rounded corners");
-```
+<<< @/snippets/rounded-corners/various.cs{4-7 csharp}
 
-![example](/api-reference/rounded-corners-various.webp)
+![Each corner has its own radius, from a barely rounded top-left corner to a wide curve at the bottom-left; the border and the background follow every corner.](/api-reference/rounded-corners-various.webp){.example}
 
 
 ## Image Example
 
 Rounded corners can also be applied to images, enhancing their appearance in documents.
 
-```csharp{2}
-container
-    .CornerRadius(25)
-    .Image("Resources/landscape.jpg");
-```
+<<< @/snippets/rounded-corners/image.cs{2 csharp}
 
-![example](/api-reference/rounded-corners-image.webp)
+![The photo is clipped to rounded corners, so its edges curve instead of meeting at sharp corners.](/api-reference/rounded-corners-image.webp){.example}
 
 
 ## Complex Example
 
 Rounded corners can be used in more complex layouts, such as tables, to create a polished look.
 
-```csharp{3}
-container
-    .Border(1, Colors.Black)
-    .CornerRadius(15)
-    .Table(table =>
-    {
-        table.ColumnsDefinition(columns =>
-        {
-            columns.ConstantColumn(100);
-            columns.RelativeColumn();
-            columns.ConstantColumn(150);
-        });
-        
-        table.Header(header =>
-        {
-            header.Cell().Element(Style).Text("Index");
-            header.Cell().Element(Style).Text("Label");
-            header.Cell().Element(Style).Text("Price");
+<<< @/snippets/rounded-corners/complex.cs{3 csharp}
 
-            IContainer Style(IContainer container)
-            {
-                return container
-                    .Border(1, Colors.Grey.Darken2)
-                    .Background(Colors.Grey.Lighten3)
-                    .PaddingVertical(10)
-                    .PaddingHorizontal(15)
-                    .DefaultTextStyle(x => x.Bold());
-            }
-        });
-
-        foreach (var index in Enumerable.Range(1, 5))
-        {
-            table.Cell().Element(Style).Text(index.ToString());
-            table.Cell().Element(Style).Text(Placeholders.Label());
-            table.Cell().Element(Style).Text(Placeholders.Price());
-            
-            IContainer Style(IContainer container)
-            {
-                return container
-                    .Border(1, Colors.Grey.Darken2)
-                    .PaddingVertical(10)
-                    .PaddingHorizontal(15);
-            }
-        }
-    });
-```
-
-![example](/api-reference/rounded-corners-complex.webp)
+![A table with a header row and five rows inside a rounded black border: the outer corners of the header and the last row are clipped to the curve, while the inner cell borders stay straight.](/api-reference/rounded-corners-complex.webp){.example}
