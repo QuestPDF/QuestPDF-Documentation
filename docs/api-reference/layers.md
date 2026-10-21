@@ -3,7 +3,7 @@
 The Layers element adds content either underneath (as a background) or on top of (as a watermark) the main content.
 
 The main layer supports paging, can span multiple pages, and determines the container's target length.
-Additional layers can also span multiple pages and are repeated on each one.
+Additional layers can also span multiple pages: like the main layer, a long layer continues on the next page, but it is not repeated on each one. For content on every page, such as a watermark, use the page's [Background or Foreground slot](/api-reference/page/slots).
 
 | Method           | Description                                      |
 |------------------|--------------------------------------------------|

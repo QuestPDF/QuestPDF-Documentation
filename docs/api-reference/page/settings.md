@@ -36,7 +36,7 @@ document.Page(page =>
 {
     page.Size(595, 842); // in points
     // or
-    page.Size(21, 29.7f, Unit.Centimeter);
+    page.Size(21, 29.7f, Unit.Centimetre);
     // or
     page.Size(PageSizes.A4);
 });
@@ -53,7 +53,7 @@ document.Page(page =>
 {
     page.ContinuousSize(215);
     // or
-    page.ContinuousSize(76, Unit.Millimeter);
+    page.ContinuousSize(76, Unit.Millimetre);
 });
 ```
 
@@ -116,7 +116,7 @@ You can configure each side individually or use combined methods for convenience
 document.Page(page =>
 {
     page.MarginVertical(32);
-    page.MarginHorizontal(2, Unit.Centimeter);
+    page.MarginHorizontal(2, Unit.Centimetre);
 });
 ```
 
@@ -173,7 +173,7 @@ Document
         document.Page(page =>
         {
             page.Size(PageSizes.A5.Landscape());
-            page.Margin(2f, Unit.Centimeter);
+            page.Margin(2f, Unit.Centimetre);
     
             page.Content().AlignCenter().AlignMiddle().Text("A5 LANDSCAPE");
         });

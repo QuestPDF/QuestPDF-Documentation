@@ -54,7 +54,7 @@ You can also omit the hash sign (`#`) at the beginning of the color code.
 
 
 ::: warning
-Please be aware that in some software the alpha channel is specified at the end of the color code, e.g. `#RRGGBBAA`.
+Please be aware that in some software the alpha channel is specified at the end of the color code, e.g. `#RRGGBBAA`. This includes the SVG renderer used by QuestPDF: in SVG markup, use `fill-opacity` instead (see [SVG Support](/api-reference/image/svg#transparent-colors)).
 :::
 
 ## Examples

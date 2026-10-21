@@ -32,7 +32,7 @@ It's worth noting that different fonts may render text with different visual siz
 
 A font family is a collection of related fonts that share a consistent design style but may vary in weight, style, or width.
 
-Examples of font families include Arial, Times New Roman, and Calibri.
+Examples of font families include Lato, Noto Serif and JetBrains Mono. Fonts other than the built-in Lato must be available to your application, see [font management](/api-reference/text/font-management).
 
 ```csharp{8,11}
 .Column(column =>
@@ -41,11 +41,11 @@ Examples of font families include Arial, Times New Roman, and Calibri.
 
     column.Item().Text("This is text with default font (Lato)");
 
-    column.Item().Text("This is text with Times New Roman font")
-        .FontFamily("Times New Roman");
+    column.Item().Text("This is text with Noto Serif font")
+        .FontFamily("Noto Serif");
 
-    column.Item().Text("This is text with Courier New font")
-        .FontFamily("Courier New");
+    column.Item().Text("This is text with JetBrains Mono font")
+        .FontFamily("JetBrains Mono");
 });
 ```
 
@@ -470,7 +470,7 @@ Allows a line to break between any two characters, not only at word boundaries s
 
 With this setting enabled, lines are filled as fully as possible, at the cost of splitting words at arbitrary positions without hyphenation.
 
-It is useful for content without natural break points, such as long URLs, identifiers, hashes, or file paths, especially in narrow columns. For regular prose, prefer the default behavior.
+Without this setting, a word longer than the line is still split where it overflows, so no text is cut off. `BreakAnywhere` changes where lines break: they are filled completely instead of breaking early at natural break points such as `/` or `-`. Use it when evenly filled lines matter more than readable breaks, e.g. hashes or identifiers in narrow columns; for prose and URLs the default is usually easier to read.
 
 ```csharp
 .Column(column =>
