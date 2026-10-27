@@ -22,7 +22,7 @@ the items will occupy sizes of 15 points, 75 points, and 10 points respectively.
 | **RelativeItem** | Adds a new item to the row element. This item occupies space proportionally to other relative items.                                                                                                                                                                                                               |
 | **AutoItem**     | Adds a new item to the row element. It requests as much horizontal space as its content requires. **Warning**: It doesn't adjust its size based on other items and may frequently result in layout exceptions. It is recommended to use this API in conjunction with the [MaxWidth](/api-reference/width) element. |
 
-For ConstantItem, you can optionally specify the unit value (default is `Unit.Points`).
+For ConstantItem, you can optionally specify the unit value (default is `Unit.Point`).
 
 ```csharp
 row.ConstantItem(5, Unit.Centimetre);
@@ -85,10 +85,10 @@ container
 
 <br>
 
-Optionally, you can specify the unit value (default is `Unit.Points`).
+Optionally, you can specify the unit value (default is `Unit.Point`).
 
 ```csharp
-row.Spacing(5, Unit.Millimeters);
+row.Spacing(5, Unit.Millimetre);
 ```
 
 <!--@include: tip-unit.md--> 

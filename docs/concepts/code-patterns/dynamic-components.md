@@ -173,6 +173,9 @@ The following component implements a paging algorithm that:
 6) Updates state to track progress
 
 ```csharp
+using System.Globalization;
+using QuestPDF.Elements;
+
 public class OrdersTableWithPageSubtotalsComponent : IDynamicComponent<OrdersTableWithPageSubtotalsComponentState>
 {
     private ICollection<OrderItem> Items { get; }

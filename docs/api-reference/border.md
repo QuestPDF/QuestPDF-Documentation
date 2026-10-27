@@ -31,11 +31,11 @@ container
 | **BorderTop**        | Sets a border on the top side of its content.              |
 | **BorderBottom**     | Sets a border on the bottom side of its content.           |
 
-Each method requires a thickness value as a parameter. Optionally, you can specify the unit value (default is `Unit.Points`).
+Each method requires a thickness value as a parameter. Optionally, you can specify the unit value (default is `Unit.Point`).
 
 ```csharp
 container.Border(1);
-container.Border(1, Unit.Millimeters);
+container.Border(1, Unit.Millimetre);
 ```
 
 <!--@include: tip-unit.md-->

@@ -38,7 +38,7 @@ The same setting is also available via the GUI in your preferred IDE.
 :::
 
 :::tip
-SVG content supports the same scaling options as raster images. [Learn more](/api-reference/image/basics.html#image-scaling)
+SVG content supports the `FitWidth`, `FitHeight` and `FitArea` scaling options and always keeps its aspect ratio. `FitUnproportionally` is available only for raster images. [Learn more](/api-reference/image/basics.html#image-scaling)
 
 For example:
 ```csharp{4}
@@ -111,3 +111,6 @@ If an SVG file does not render as expected after considering the following point
 
 Learn more on [the Shopify page](https://shopify.github.io/react-native-skia/docs/images-svg/#svg-support).
 
+::: warning
+QuestPDF uses transparent colors written as `#AARRGGBB`, while SVG expects `#RRGGBBAA`.
+:::

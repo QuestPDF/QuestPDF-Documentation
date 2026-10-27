@@ -23,7 +23,7 @@ container
 
 ## Blur
 
-Gets or sets the blur radius of the shadow in pixels.
+Gets or sets the blur radius of the shadow in points.
 Higher values produce a more diffused shadow with softer edges.
 
 A value of 0 results in a sharp, unblurred shadow.
@@ -57,7 +57,7 @@ Use with caution, especially in large documents or when rendering complex shadow
 
 ## Spread
 
-Gets or sets the spread radius of the shadow in pixels.
+Gets or sets the spread radius of the shadow in points.
 
 Positive values cause the shadow to expand, negative values cause it to contract.
 
@@ -86,7 +86,7 @@ Positive values cause the shadow to expand, negative values cause it to contract
 
 ## Offset X
 
-Gets or sets the horizontal offset of the shadow in pixels.
+Gets or sets the horizontal offset of the shadow in points.
 
 Positive values move the shadow to the right, negative values move it to the left.
 
@@ -115,7 +115,7 @@ Positive values move the shadow to the right, negative values move it to the lef
 
 ## Offset Y
 
-Gets or sets the vertical offset of the shadow in pixels.
+Gets or sets the vertical offset of the shadow in points.
 
 Positive values move the shadow downward, negative values move it upward.
 
