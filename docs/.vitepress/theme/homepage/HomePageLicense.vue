@@ -81,8 +81,8 @@ const includes = [
 
 html.dark .license-panel {
   background-image:
-      radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, #67B84D 11%, transparent), transparent),
-      radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #4CAF50 5%, transparent), transparent),
+      radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, #67B84D 7%, transparent), transparent),
+      radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #4CAF50 3%, transparent), transparent),
       var(--surface-sheen);
 }
 

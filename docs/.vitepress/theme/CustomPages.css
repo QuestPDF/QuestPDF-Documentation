@@ -289,14 +289,14 @@ html.dark .custom-page .dotted-divider {
 
 /* Page canvas: one continuous background on <body>, so the page, the strip under the navbar and the footer share
    it: a faint grain tile (a barely visible texture that also stops banding in the gradients) over three glows
-   around the top of the page, the rest of the canvas plain. The glows are white light (on the grey light canvas,
-   faintly on the dark one), on the homepage a single brand blue; several hues or grey washes read as smudges. It
-   lives here, not in the page components, because in dev a component's CSS loads only on the pages that import it. */
+   around the top of the page, the rest of the canvas plain. The glows are a single brand blue on every page, the
+   homepage and the rest alike; several hues or grey washes read as smudges. It lives here, not in the page
+   components, because in dev a component's CSS loads only on the pages that import it. */
 
 body:has(.custom-page) {
-  --canvas-glow: #FFFFFF;
-  --canvas-glow-soft: color-mix(in srgb, #FFFFFF 70%, transparent);
-  --canvas-glow-side: color-mix(in srgb, #FFFFFF 85%, transparent);
+  --canvas-glow: color-mix(in srgb, #2196F3 16%, transparent);
+  --canvas-glow-soft: color-mix(in srgb, #2196F3 6%, transparent);
+  --canvas-glow-side: color-mix(in srgb, #2196F3 10%, transparent);
 
   background-color: var(--custom-page-bg);
   background-image:
@@ -308,20 +308,6 @@ body:has(.custom-page) {
 }
 
 html.dark body:has(.custom-page) {
-  --canvas-glow: color-mix(in srgb, #FFFFFF 7%, transparent);
-  --canvas-glow-soft: color-mix(in srgb, #FFFFFF 2.5%, transparent);
-  --canvas-glow-side: color-mix(in srgb, #FFFFFF 5%, transparent);
-}
-
-/* the homepage's glows are one brand blue */
-
-body:has(.custom-page.home-page) {
-  --canvas-glow: color-mix(in srgb, #2196F3 16%, transparent);
-  --canvas-glow-soft: color-mix(in srgb, #2196F3 6%, transparent);
-  --canvas-glow-side: color-mix(in srgb, #2196F3 10%, transparent);
-}
-
-html.dark body:has(.custom-page.home-page) {
   --canvas-glow: color-mix(in srgb, #2196F3 20%, transparent);
   --canvas-glow-soft: color-mix(in srgb, #2196F3 7%, transparent);
   --canvas-glow-side: color-mix(in srgb, #2196F3 12%, transparent);

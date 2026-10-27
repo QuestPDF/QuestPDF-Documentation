@@ -39,7 +39,7 @@ const cards: Card[] = [
     notes: [
       { icon: "fa-arrow-right-arrow-left", text: "Migrate legacy HTML-based reports to QuestPDF with AI" },
       { icon: "fa-comments", text: "Create and modify documents confidently through prompts" },
-      { icon: "fa-stopwatch", text: "Deliver new documents and changes significantly faster" },
+      { icon: "fa-bolt", text: "Deliver new documents and changes significantly faster" },
       { icon: "fa-shield-check", text: "Keep every AI change type-checked and easy to review" }
     ]
   }
