@@ -70,18 +70,13 @@ const includes = [
 
 <style scoped>
 
-/* two halves split by a hairline; a glow in the Community green over the panel's own sheen. On white it falls
-   from the top-left corner in a cooler green (the yellow-green of the dark glow reads as a stain there); in dark
-   mode it spreads from the left edge, behind the heading. */
+/* two halves split by a hairline; in dark mode a glow in the Community green spreads from the left edge, behind
+   the heading, over the panel's own sheen (on white a tint reads as a stain, so the panel stays plain) */
 
 .license-panel {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   gap: 48px;
-  background-image:
-      radial-gradient(ellipse 70% 100% at 0% 0%, color-mix(in srgb, #4CAF50 7.5%, transparent), transparent),
-      radial-gradient(ellipse 35% 45% at 0% 0%, color-mix(in srgb, #66BB6A 4%, transparent), transparent),
-      var(--surface-sheen);
 }
 
 html.dark .license-panel {

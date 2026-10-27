@@ -13,13 +13,9 @@ withDefaults(defineProps<{
   label: string;
   href: string;
 
-  /* the glow behind the visual and the colour of the link row */
+  /* the glow behind the visual (dark theme) and the colour of the link row */
   accent?: string;
   accentSecondary?: string;
-
-  /* the glow on the light theme, for an accent too muted to stay clean on white (it turns grey); the accent when
-     unset */
-  lightGlow?: string;
 }>(), {
   accent: "#0094F9",
   accentSecondary: "#2979FF"
@@ -38,7 +34,7 @@ function onFocus(event: FocusEvent) {
   <a
       class="panel cta-card"
       :class="{ active }"
-      :style="{ '--accent': accent, '--accent-secondary': accentSecondary, '--light-glow': lightGlow }"
+      :style="{ '--accent': accent, '--accent-secondary': accentSecondary }"
       :href="href"
       @mouseenter="hovered = true"
       @mouseleave="hovered = false"
@@ -116,11 +112,6 @@ html.dark .cta-card.active {
 
   /* the accent is a glow colour: as text it is darkened on the light theme and lightened on the dark one */
   --accent-text: color-mix(in srgb, var(--accent-secondary) 85%, #000);
-
-  /* the glow behind the visual: on white one clean hue, a little weaker, since a tint there takes light away
-     rather than adding it */
-  --glow-outer: color-mix(in srgb, var(--light-glow, var(--accent)) 10%, transparent);
-  --glow-inner: color-mix(in srgb, var(--light-glow, var(--accent)) 5%, transparent);
 }
 
 html.dark .cta-card {
@@ -223,9 +214,11 @@ html.dark .cta-card {
 }
 
 
-/* a glow in the accent colour from the top edge above the visual, a little brighter on hover */
+/* dark theme: a glow in the accent colour from the top edge above the visual, a little brighter on hover; the
+   light theme keeps the card plain white (a tint there takes light away rather than adding it) */
 
 .background-gradient {
+  display: none;
   position: absolute;
   pointer-events: none;
   inset: 0;
@@ -235,6 +228,10 @@ html.dark .cta-card {
       radial-gradient(ellipse 40% 50% at 18% 0%, var(--glow-inner), transparent);
   opacity: 0.8;
   transition: opacity 0.3s ease;
+}
+
+html.dark .background-gradient {
+  display: block;
 }
 
 .cta-card.active .background-gradient {

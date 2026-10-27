@@ -2,7 +2,7 @@
    so all three align; custom pages take 90rem, the rest of the site 1216px.
    --custom-page-gutter: that side padding, the navbar's own (VitePress pads it 24px below 768px, 32px from 768px),
    so the logo, the content and the footer start at the same x.
-   --custom-page-bg: the canvas, a touch off-white in light mode so the white panels lift from it.
+   --custom-page-bg: the canvas, a light grey in light mode so the white panels lift from it.
 
    Theme colours: a single colour that differs per theme is written with light-dark() (the build lowers it for
    older browsers); sets of tokens, gradients and other values switch in an `html.dark` rule. */
@@ -10,7 +10,7 @@
 :root {
   --custom-page-width: 1216px;
   --custom-page-gutter: 32px;
-  --custom-page-bg: light-dark(#FAFAFC, var(--vp-c-bg));
+  --custom-page-bg: light-dark(#F7F8FA, var(--vp-c-bg));
 }
 
 @media screen and (max-width: 767px) {
@@ -287,95 +287,44 @@ html.dark .custom-page .dotted-divider {
 }
 
 
-/* Page canvas: one continuous background on <body>, so the page, the strip under the navbar and the footer
-   share it: a grain tile over colour washes from one palette near the brand blue, placed per page at
-   page-height percentages (none near the footer). It lives here, not in the page components, because in dev a
-   component's CSS loads only on the pages that import it. The repeat list has one value per layer (the grain
-   repeats, the washes do not); values beyond a page's layers are ignored. */
+/* Page canvas: one continuous background on <body>, so the page, the strip under the navbar and the footer share
+   it: a faint grain tile (a barely visible texture that also stops banding in the gradients) over three glows
+   around the top of the page, the rest of the canvas plain. The glows are white light (on the grey light canvas,
+   faintly on the dark one), on the homepage a single brand blue; several hues or grey washes read as smudges. It
+   lives here, not in the page components, because in dev a component's CSS loads only on the pages that import it. */
 
 body:has(.custom-page) {
-  --wash-sky: color-mix(in srgb, #2196F3 22%, transparent);
-  --wash-sky-soft: color-mix(in srgb, #2196F3 9%, transparent);
-  --wash-violet: color-mix(in srgb, #5C6BC0 13%, transparent);
-  --wash-cyan: color-mix(in srgb, #00BCD4 9%, transparent);
-  --wash-cyan-faint: color-mix(in srgb, #00BCD4 6%, transparent);
-  --wash-teal: color-mix(in srgb, #26C6DA 8%, transparent);
-  --wash-blue: color-mix(in srgb, #1E88E5 11%, transparent);
-  --wash-light-blue: color-mix(in srgb, #039BE5 7%, transparent);
-  --wash-indigo: color-mix(in srgb, #3F51B5 9%, transparent);
+  --canvas-glow: #FFFFFF;
+  --canvas-glow-soft: color-mix(in srgb, #FFFFFF 70%, transparent);
+  --canvas-glow-side: color-mix(in srgb, #FFFFFF 85%, transparent);
 
   background-color: var(--custom-page-bg);
-  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-image:
+      url("/homepage/grain.png"),
+      radial-gradient(ellipse 1400px 700px at 92% 0%, var(--canvas-glow), transparent 70%),
+      radial-gradient(ellipse 1000px 500px at 30% 0%, var(--canvas-glow-soft), transparent 70%),
+      radial-gradient(ellipse 800px 450px at 0% 2%, var(--canvas-glow-side), transparent 70%);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
 }
 
-/* the dark canvas takes most washes a little stronger */
 html.dark body:has(.custom-page) {
-  --wash-sky: color-mix(in srgb, #2196F3 24%, transparent);
-  --wash-sky-soft: color-mix(in srgb, #00BCD4 7%, transparent);
-  --wash-violet: color-mix(in srgb, #5C6BC0 12%, transparent);
-  --wash-cyan: color-mix(in srgb, #00ACC1 9%, transparent);
-  --wash-cyan-faint: color-mix(in srgb, #00BCD4 7%, transparent);
-  --wash-teal: color-mix(in srgb, #26A69A 12%, transparent);
-  --wash-blue: color-mix(in srgb, #1E88E5 16%, transparent);
-  --wash-light-blue: color-mix(in srgb, #039BE5 8%, transparent);
-  --wash-indigo: color-mix(in srgb, #3F51B5 14%, transparent);
+  --canvas-glow: color-mix(in srgb, #FFFFFF 7%, transparent);
+  --canvas-glow-soft: color-mix(in srgb, #FFFFFF 2.5%, transparent);
+  --canvas-glow-side: color-mix(in srgb, #FFFFFF 5%, transparent);
 }
 
-/* the homepage is the most colourful: four glows around the hero, then washes down both sides */
+/* the homepage's glows are one brand blue */
 
 body:has(.custom-page.home-page) {
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, var(--wash-sky), transparent 70%),
-      radial-gradient(ellipse 1000px 500px at 30% 0%, var(--wash-sky-soft), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, var(--wash-violet), transparent 70%),
-      radial-gradient(ellipse 900px 400px at 55% 9%, var(--wash-cyan), transparent 70%),
-      radial-gradient(ellipse 900px 700px at 100% 22%, var(--wash-cyan-faint), transparent 70%),
-      radial-gradient(ellipse 900px 1000px at 0% 42%, var(--wash-teal), transparent 70%),
-      radial-gradient(ellipse 600px 1800px at 100% 60%, var(--wash-blue), transparent 70%),
-      radial-gradient(ellipse 1000px 800px at 0% 64%, var(--wash-light-blue), transparent 70%),
-      radial-gradient(ellipse 1200px 800px at 0% 80%, var(--wash-indigo), transparent 70%);
+  --canvas-glow: color-mix(in srgb, #2196F3 16%, transparent);
+  --canvas-glow-soft: color-mix(in srgb, #2196F3 6%, transparent);
+  --canvas-glow-side: color-mix(in srgb, #2196F3 10%, transparent);
 }
 
-/* the other pages open with the hero's sky-blue and violet glows */
-
-body:has(.custom-page.pricing-page) {
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, var(--wash-sky), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, var(--wash-violet), transparent 70%),
-      radial-gradient(ellipse 900px 500px at 100% 24%, var(--wash-cyan), transparent 70%),
-      radial-gradient(ellipse 900px 900px at 0% 48%, var(--wash-teal), transparent 70%),
-      radial-gradient(ellipse 600px 1400px at 100% 66%, var(--wash-blue), transparent 70%);
-}
-
-body:has(.custom-page.features-page) {
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, var(--wash-sky), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, var(--wash-violet), transparent 70%),
-      radial-gradient(ellipse 900px 900px at 0% 30%, var(--wash-teal), transparent 70%),
-      radial-gradient(ellipse 600px 1600px at 100% 50%, var(--wash-blue), transparent 70%),
-      radial-gradient(ellipse 1200px 800px at 0% 72%, var(--wash-indigo), transparent 70%);
-}
-
-/* the legal hub and the documents share one canvas, so moving between them keeps it */
-
-body:has(.custom-page.legal-page) {
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, var(--wash-sky), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, var(--wash-violet), transparent 70%),
-      radial-gradient(ellipse 900px 900px at 0% 36%, var(--wash-teal), transparent 70%),
-      radial-gradient(ellipse 600px 1400px at 100% 60%, var(--wash-blue), transparent 70%);
-}
-
-body:has(.custom-page:is(.contact-page, .purchase-page)) {
-  background-image:
-      url("/homepage/grain.png"),
-      radial-gradient(ellipse 1400px 700px at 92% 0%, var(--wash-sky), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, var(--wash-violet), transparent 70%),
-      radial-gradient(ellipse 1000px 600px at 10% 55%, var(--wash-cyan), transparent 70%);
+html.dark body:has(.custom-page.home-page) {
+  --canvas-glow: color-mix(in srgb, #2196F3 20%, transparent);
+  --canvas-glow-soft: color-mix(in srgb, #2196F3 7%, transparent);
+  --canvas-glow-side: color-mix(in srgb, #2196F3 12%, transparent);
 }
 
 /* a link in running text is blue; a link that is a component of its own (a card, a row, a menu item) colours

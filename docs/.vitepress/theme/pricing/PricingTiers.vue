@@ -174,11 +174,15 @@ const licenses = [
 
 
 /* The three cards read as one unit: the outer cards drop their inner corners and are inset vertically; the
-   professional card in the middle stays full height, framed and tinted blue. */
+   professional card in the middle stays full height, framed in blue (and tinted blue in dark mode; light-mode
+   cards stay pure white). */
 
 .license-tier.professional {
   border: 3px solid light-dark(#2196F388, #2196F355);
   z-index: 1;
+}
+
+html.dark .license-tier.professional {
   background-color: color-mix(in srgb, #2196F3 5%, var(--surface));
 }
 

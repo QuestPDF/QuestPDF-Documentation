@@ -357,15 +357,12 @@ html.dark .quick-start {
 
 /* each card has a colour, its tint, for its icons: blue for C#, purple for the AI card (as the composer) */
 
-/* a faint blue glow, the same shape as the AI card's purple one: from the top-left corner on white, from the left
-   edge behind the heading in dark mode */
+/* dark mode: a faint blue glow from the left edge behind the heading, the same shape as the AI card's purple one;
+   on white both cards stay plain (a tint there reads as a smudge) */
 .code-card {
   --tint: #0288D1;
 
   grid-area: code;
-  background-image:
-      radial-gradient(ellipse 70% 100% at 0% 0%, color-mix(in srgb, #2979FF 7%, transparent), transparent),
-      radial-gradient(ellipse 35% 45% at 0% 0%, color-mix(in srgb, #82B1FF 5%, transparent), transparent);
 }
 
 html.dark .code-card {
@@ -376,16 +373,11 @@ html.dark .code-card {
       radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #29B6F6 4%, transparent), transparent);
 }
 
-/* a faint purple glow. On white it falls from the top-left corner in a cleaner violet (the muted purple of the
-   dark glow turns grey there); in dark mode it spreads from the left edge, behind the heading. */
 .agent-card {
   --tint: #5E35B1;
 
   grid-area: agent;
   border-left: 1px solid var(--vp-c-divider);
-  background-image:
-      radial-gradient(ellipse 70% 100% at 0% 0%, color-mix(in srgb, #7C4DFF 7%, transparent), transparent),
-      radial-gradient(ellipse 35% 45% at 0% 0%, color-mix(in srgb, #B388FF 5%, transparent), transparent);
 }
 
 html.dark .agent-card {

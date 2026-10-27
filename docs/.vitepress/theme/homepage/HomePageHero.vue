@@ -93,8 +93,7 @@ h1 .keep-together {
   white-space: nowrap; /* when the line has to break, "for C#" moves down together, never a lone "C#" */
 }
 
-/* "Code-first" in the logo's gradient, painted through the glyphs; the glow is a drop-shadow filter because a
-   text-shadow would paint over the gradient inside the transparent letters */
+/* "Code-first" in the logo's gradient, painted through the glyphs */
 h1 .highlight-foreground {
   display: inline-block; /* so the gradient box ends at the word, not the full line */
   padding-right: 0.05em; /* keeps the gradient clip from shaving the last letter's edge */
@@ -104,13 +103,10 @@ h1 .highlight-foreground {
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-
-  filter: drop-shadow(0 6px 18px rgba(0, 148, 249, 0.14));
 }
 
 html.dark h1 .highlight-foreground {
   background-image: linear-gradient(100deg, #5ef0ff 0%, #32c6ff 50%, #4d8dff 100%);
-  filter: drop-shadow(0 6px 20px rgba(50, 198, 255, 0.18));
 }
 
 /* 1.5rem from 1100px, easing down to 1.25rem at 600px */
@@ -171,7 +167,6 @@ html.dark h1 .highlight-foreground {
   border-radius: 16px;
 
   background-color: light-dark(#FFFFFF, color-mix(in srgb, var(--vp-c-text-1) 8%, transparent));
-  box-shadow: inset 0 0 0 1px light-dark(color-mix(in srgb, var(--vp-c-text-1) 8%, transparent), transparent);
 }
 
 .statistic-icon i {
@@ -200,7 +195,7 @@ html:not(.dark) .statistic-icon i {
 .statistic .label {
   font-size: 1rem;
   line-height: 1.25rem;
-  color: var(--vp-c-text-2);
+  color: light-dark(var(--vp-c-text-1), var(--vp-c-text-2));
 }
 
 /* a grid too narrow for two full-size statistics side by side (phones): smaller tiles and type; the labels wrap,
@@ -243,23 +238,20 @@ html:not(.dark) .statistic-icon i {
   }
 }
 
-/* a faint dot grid under the statistics, fading out towards the headline and the page edges (the washes
-   belong to the page canvas, see CustomPages.css) */
+/* dark theme: a faint dot grid under the statistics, fading out towards the headline and the page edges (the
+   glows belong to the page canvas, see CustomPages.css); the light theme keeps the canvas plain */
 
 .hero-pattern {
   position: absolute;
   inset: -64px 0 0; /* from under the navbar, the box the mask below is drawn on */
   pointer-events: none;
 
-  /* the dots lean towards the brand blue, so the grid reads as part of the blue washes rather than grey noise */
-  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 36%, transparent) 1px, transparent 1.5px);
   background-size: 24px 24px;
   background-position: 12px 12px;
 
   mask-image: radial-gradient(ellipse 55% 85% at 72% 50%, #000, transparent 80%);
 }
 
-/* light dots on a dark canvas stand out more than dark dots on white, so they are fainter there */
 html.dark .hero-pattern {
   background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 11%, transparent) 1px, transparent 1.5px);
 }
