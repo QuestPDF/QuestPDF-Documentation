@@ -1,7 +1,6 @@
 import { defineLoader } from 'vitepress'
 
 export interface StatisticEntry {
-    icon: string;
     label: string;
     link: string;
     value: string;
@@ -22,26 +21,22 @@ export default defineLoader({
 
         return [
             {
-                icon: "fa-star",
                 label: "GitHub stars",
                 link: "https://github.com/QuestPDF/QuestPDF",
                 value: `${toThousands(githubStars)}K`
             },
             {
-                icon: "fa-download",
                 label: "NuGet downloads",
                 link: "https://www.nuget.org/packages/QuestPDF/",
                 value: `${toMillions(nugetDownloads)}M`
             },
             {
-                icon: "fa-building",
-                label: "Paying customers",
+                label: "paying customers",
                 link: "/pricing",
                 value: "800+"
             },
             {
-                icon: "fa-calendar-check",
-                label: "Years in production",
+                label: "years in production",
                 link: "https://www.nuget.org/packages/QuestPDF/#versions-body-tab",
                 value: `${toYears(firstRelease)}`
             }

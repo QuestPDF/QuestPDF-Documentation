@@ -32,14 +32,8 @@ const benefits = [
         <ul class="statistics">
           <li v-for="statistic in statistics" :key="statistic.label">
             <a :href="statistic.link" :target="statistic.link.startsWith('http') ? '_blank' : undefined" class="statistic">
-              <span class="list-icon">
-                <i class="fa-regular" :class="statistic.icon" aria-hidden="true"></i>
-              </span>
-
-              <span>
-                <span class="value">{{ statistic.value }}</span>
-                <span class="label">{{ statistic.label }}</span>
-              </span>
+              <span class="value">{{ statistic.value }}</span>
+              <span class="label">{{ statistic.label }}</span>
             </a>
           </li>
         </ul>
@@ -109,22 +103,27 @@ html.dark h1 .highlight-foreground {
 .statistics {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 /* the icon box is one line tall, so a wrapped row keeps its icon beside the first line */
-.benefits li,
-.statistic {
+.benefits li {
   display: flex;
   align-items: flex-start;
   gap: 16px;
+  color: var(--vp-c-text-1);
+}
+
+/* the statistics share the benefits' type size, so the rows of both lists line up */
+.benefits li,
+.statistic {
   font-size: 1.25rem;
   line-height: 1.75rem;
   text-wrap: pretty;
 }
 
-.benefits li {
-  color: var(--vp-c-text-1);
+.statistic {
+  display: block; /* its own line box, so the row is exactly one line tall like a benefit */
 }
 
 /* a bare icon in the primary colour, at a fixed width so the texts line up whatever each glyph's own width */
@@ -150,11 +149,6 @@ html.dark h1 .highlight-foreground {
   color: var(--vp-c-text-1);
 }
 
-/* the statistics' icons in the text colour, so the primary colour stays with the benefits */
-.statistic .list-icon i {
-  color: var(--vp-c-text-1);
-}
-
 .statistic .label {
   font-weight: 400;
   color: var(--vp-c-text-2);
@@ -163,7 +157,7 @@ html.dark h1 .highlight-foreground {
 @media screen and (max-width: 1023px) {
   .lists {
     grid-template-columns: 1fr;
-    gap: 48px; /* clearly more than the 20px between rows, so the two lists stay two groups */
+    gap: 48px; /* clearly more than the 24px between rows, so the two lists stay two groups */
   }
 
   /* stacked, the dot grid shares the statistics' cell instead of taking a row of its own */
@@ -175,7 +169,7 @@ html.dark h1 .highlight-foreground {
   .statistics {
     display: grid;
     grid-template-columns: repeat(2, max-content);
-    gap: 20px 96px;
+    gap: 24px 96px;
   }
 }
 
