@@ -19,11 +19,6 @@ This component places page numbers on alternating sides of the page - left for o
 It demonstrates how to use the page number information to conditionally format content.
 
 ```csharp
-using QuestPDF.Elements;
-using QuestPDF.Fluent;
-using QuestPDF.Helpers;
-using QuestPDF.Infrastructure;
-
 public class PageNumberSideComponent : IDynamicComponent
 {
     public DynamicComponentComposeResult Compose(DynamicContext context)

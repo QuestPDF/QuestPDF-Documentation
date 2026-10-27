@@ -102,11 +102,6 @@ The `QuestPDF.Settings.ThrowOnMissingFontFamilies` and `QuestPDF.Settings.ThrowO
 Learn more in the [font management](/api-reference/text/font-management) section.
 
 
-## Transparent colors
-
-QuestPDF writes a translucent color as `#AARRGGBB` (alpha first), while the SVG renderer reads 8-digit colors as `#RRGGBBAA`, so such a color inside SVG markup renders wrong or not at all. In SVG, use a 6-digit color with an opacity attribute instead, e.g. `fill="#D50000" fill-opacity="0.5"`.
-
-
 ## Limitations
 
 The SVG module displays SVGs as images with high capabilities and compliance.
@@ -116,3 +111,6 @@ If an SVG file does not render as expected after considering the following point
 
 Learn more on [the Shopify page](https://shopify.github.io/react-native-skia/docs/images-svg/#svg-support).
 
+::: warning
+QuestPDF uses transparent colors written as `#AARRGGBB`, while SVG expects `#RRGGBBAA`.
+:::
