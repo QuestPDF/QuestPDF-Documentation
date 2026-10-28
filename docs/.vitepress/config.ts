@@ -4,6 +4,24 @@ import imageSizePlugin from "./markdownit-imagesize-plugin";
 
 const isProd = process.env.NODE_ENV === 'production';
 
+const llmsTxtHeader = `# QuestPDF
+
+> C# library for generating PDF documents with a fluent, code-first API.
+> Layout engine with automatic paging: tables, headers and footers, page numbers, images, SVG, and barcodes through ZXing.Net.
+
+## About
+
+- Install: \`dotnet add package QuestPDF\`
+- License: [Pricing](https://www.questpdf.com/pricing.html), [License Selection Guide](https://www.questpdf.com/license/guide.html), binding terms in [LICENSE.md](https://github.com/QuestPDF/QuestPDF/blob/main/LICENSE.md)
+- What QuestPDF can do: [Features Overview](https://www.questpdf.com/features-overview.html)
+- Policies: [Security](https://www.questpdf.com/security-policy.html), [Privacy](https://www.questpdf.com/privacy-policy.html), [Terms of Service](https://www.questpdf.com/terms-of-service.html)
+- Start here: [Quick start](/quick-start.md), then [In-Depth Invoice Tutorial](/invoice-tutorial.md)
+- Everything in one file: [llms-full.txt](/llms-full.txt)
+
+## Table of Contents
+
+{toc}`;
+
 function getPlausibleScript() : HeadConfig[] {
     if (!isProd)
         return [];
@@ -23,7 +41,16 @@ export default defineConfig({
     cleanUrls: false,
 
     vite: {
-      plugins: [llmstxt()]
+      plugins: [llmstxt({
+          customLLMsTxtTemplate: llmsTxtHeader,
+          ignoreFilesPerOutput: {
+              llmsTxt: [
+                  'api-reference/tip-*.md',
+                  'license.md', 'license/community.md', 'license/guide.md', 'license/professional-enterprise.md', 'license/purchase-success.md',
+                  'pricing.md', 'features-overview.md', 'contact.md', 'privacy-policy.md', 'security-policy.md', 'terms-of-service.md',
+              ],
+          },
+      })]
     },
 
     head: [
