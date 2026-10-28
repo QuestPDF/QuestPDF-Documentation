@@ -55,4 +55,4 @@ container
     });
 ```
 
-![example](/api-reference/debug-area.webp)
+![DebugArea covers the whole area it wraps with a translucent blue fill and a thin border, including the space the content doesn't use, and shows the label "Grid example" at the top centre.](/api-reference/debug-area.webp){.example}
