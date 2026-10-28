@@ -8,10 +8,10 @@
     "@paddle/paddle-js": "1.6.5",
     "@types/node": "^22.19.21",
     "image-size": "^2.0.4",
-    "sass": "^1.103.1",
-    "vitepress": "^2.0.0-alpha.20",
+    "sass": "^1.105.2",
+    "vitepress": "^2.0.0-alpha.21",
     "vitepress-plugin-llms": "^1.13.5",
-    "vue": "3.5.43"
+    "vue": "3.5.44"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",
