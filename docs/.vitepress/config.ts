@@ -42,7 +42,8 @@ export default defineConfig({
             options: {
                 appId: '5E5298MYDN',
                 apiKey: 'f5935a5a2217e1314f710853d01ac857',
-                indexName: 'questpdf_documentation'
+                indexName: 'questpdf_documentation',
+                maxResultsPerGroup: 10
             }
         },
         nav: [
