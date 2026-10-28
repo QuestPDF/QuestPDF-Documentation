@@ -52,7 +52,7 @@ container
     });
 ```
 
-![example](/api-reference/background-solid.webp)
+![Fourteen equal-width stripes, each filled edge to edge with one shade of the LightBlue palette: from dark to light (Darken4 to Lighten5), then the four Accent shades.](/api-reference/background-solid.webp){.example}
 
 
 ## Gradient
@@ -80,7 +80,7 @@ The first argument is the angle in degrees, and the second argument is an array 
 });
 ```
 
-![example](/api-reference/background-gradient.webp)
+![Three gradients showing the angle convention: 0° runs from left (red) to right (blue), 45° from the top-left corner (green) to the bottom-right corner (yellow), and 90° from top (yellow) to bottom (orange).](/api-reference/background-gradient.webp){.example}
 
 
 ## Rounded Corners
@@ -99,4 +99,4 @@ container
     .Text("Content with rounded corners");
 ```
 
-![example](/api-reference/background-rounded-corners.webp)
+![The grey background follows the rounded corners, and the box is only as wide as its padded text.](/api-reference/background-rounded-corners.webp){.example}

@@ -18,7 +18,7 @@ container
     .Text("Important content");
 ```
 
-![example](/api-reference/shadow-simple.webp)
+![A soft grey shadow falls below and to the right of the bordered box.](/api-reference/shadow-simple.webp){.example}
 
 
 ## Blur
@@ -52,7 +52,7 @@ Use with caution, especially in large documents or when rendering complex shadow
 });
 ```
 
-![example](/api-reference/shadow-blur.webp)
+![Three squares with increasing blur: the shadow gets wider and softer, spreading evenly on all sides.](/api-reference/shadow-blur.webp){.example}
 
 
 ## Spread
@@ -81,7 +81,7 @@ Positive values cause the shadow to expand, negative values cause it to contract
 });
 ```
 
-![example](/api-reference/shadow-spread.webp)
+![Three squares with increasing spread: from a faint halo to a wide, darker band around the square.](/api-reference/shadow-spread.webp){.example}
 
 
 ## Offset X
@@ -110,7 +110,7 @@ Positive values move the shadow to the right, negative values move it to the lef
 });
 ```
 
-![example](/api-reference/shadow-offset-x.webp)
+![A negative offset moves the shadow to the left, zero keeps it centred, and a positive offset moves it to the right.](/api-reference/shadow-offset-x.webp){.example}
 
 
 ## Offset Y
@@ -139,7 +139,7 @@ Positive values move the shadow downward, negative values move it upward.
 });
 ```
 
-![example](/api-reference/shadow-offset-y.webp)
+![A negative offset moves the shadow up, zero keeps it centred, and a positive offset moves it down.](/api-reference/shadow-offset-y.webp){.example}
 
 
 ## Color
@@ -172,7 +172,7 @@ Gets or sets the color of the shadow.
 });
 ```
 
-![example](/api-reference/shadow-color.webp)
+![Red, green and blue glows around three white squares: the shadow takes the given colour.](/api-reference/shadow-color.webp){.example}
 
 
 ## Without Blur (Fast)
@@ -213,4 +213,4 @@ This approach is faster and results in significantly smaller file sizes, making 
 });
 ```
 
-![example](/api-reference/shadow-no-blur.webp)
+![Without blur the shadow is a solid grey copy of the shape, offset down and to the right; on the second square it follows the rounded corners.](/api-reference/shadow-no-blur.webp){.example}

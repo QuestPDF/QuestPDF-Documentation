@@ -16,7 +16,7 @@ container
     });
 ```
 
-![example](/api-reference/border-simple.webp)
+![A dark blue border surrounds the padded light blue box, and the wrapped tip text stays inside it.](/api-reference/border-simple.webp){.example}
 
 
 ## Thickness
@@ -68,7 +68,7 @@ container.Border(1, Unit.Millimetre);
 });
 ```
 
-![example](/api-reference/border-thickness-consistent.webp)
+![Three boxes with 1, 3 and 9 point borders: the thicker the border, the more it grows outward as well as inward, so the "Bold" box looks larger than the "Thin" one.](/api-reference/border-thickness-consistent.webp){.example}
 
 
 ### Various thickness
@@ -83,7 +83,7 @@ container
     .Text("Sample text");
 ```
 
-![example](/api-reference/border-thickness-various.webp)
+![Each side has its own thickness: the left edge is the thinnest and the bottom edge the thickest.](/api-reference/border-thickness-various.webp){.example}
 
 
 ## Solid Color
@@ -116,7 +116,7 @@ In the vast majority of cases, borders are applied with a solid color.
 });
 ```
 
-![example](/api-reference/border-color-solid.webp)
+![Three boxes with red, green and blue borders; each shows its colour as a hex code (#F44336, #4CAF50, #2196F3) in the same colour.](/api-reference/border-color-solid.webp){.example}
 
 
 ## Gradient
@@ -153,7 +153,7 @@ The first argument is the angle in degrees, and the second argument is an array 
 });
 ```
 
-![example](/api-reference/border-color-gradient.webp)
+![Three gradient borders: 0° runs from red on the left to blue on the right, 45° from green at the top-left to yellow at the bottom-right, and 90° from yellow at the top to orange at the bottom, following the rounded corners.](/api-reference/border-color-gradient.webp){.example}
 
 
 ## Alignment
@@ -200,7 +200,7 @@ However, if the border has rounded corners, the alignment is set to inside by de
 });
 ```
 
-![example](/api-reference/border-alignment.webp)
+![Four boxes with the same content: "Border Inside" keeps the size of the box without a border, "Border Middle" is larger because the border straddles the edge, and "Border Outside" is the largest because the whole border lies outside it.](/api-reference/border-alignment.webp){.example}
 
 
 ## Examples
@@ -222,7 +222,7 @@ container
     .Text("Border with rounded corners"); 
 ```
 
-![example](/api-reference/border-rounded-corners-1.webp)
+![A thin black border follows the rounded corners of the grey box.](/api-reference/border-rounded-corners-1.webp){.example}
 
 
 ### Multiple borders
@@ -247,7 +247,7 @@ container
     .Text("Content");
 ```
 
-![example](/api-reference/border-multiple.webp)
+![Two borders on one box: green bars on the left and right run the full height, and the blue bars on the top and bottom sit between them, inside the first border.](/api-reference/border-multiple.webp){.example}
 
 
 ### Advanced style
@@ -272,4 +272,4 @@ container
     });
 ```
 
-![example](/api-reference/border-rounded-corners-2.webp)
+![A status card: a thick green bar on the left edge, rounded together with the light green box, next to the bold title "Completed" and the line "The invoice has been paid in full."](/api-reference/border-rounded-corners-2.webp){.example}
