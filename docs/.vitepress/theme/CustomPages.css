@@ -274,10 +274,11 @@ body:has(.custom-page) {
   --canvas-glow-soft: color-mix(in srgb, #2196F3 12%, transparent);
   --canvas-glow-side: color-mix(in srgb, #2196F3 20%, transparent);
   --canvas-glow-side-shape: ellipse 800px 450px at 0% 2%;
+  --canvas-grain: url("/homepage/grain.png");
 
   background-color: var(--custom-page-bg);
   background-image:
-      url("/homepage/grain.png"),
+      var(--canvas-grain),
       radial-gradient(ellipse 1400px 700px at 92% 0%, var(--canvas-glow), transparent 70%),
       radial-gradient(ellipse 1000px 500px at 30% 0%, var(--canvas-glow-soft), transparent 70%),
       radial-gradient(var(--canvas-glow-side-shape), var(--canvas-glow-side), transparent 70%);
@@ -296,6 +297,8 @@ html.dark body:has(.custom-page) {
   --canvas-glow-soft: color-mix(in srgb, #2196F3 7%, transparent);
   --canvas-glow-side: color-mix(in srgb, #2196F3 12%, transparent);
   --canvas-glow-side-shape: ellipse 800px 450px at 0% 2%;
+  /* same specks at 60% alpha: grey grain reads stronger on a near-black canvas */
+  --canvas-grain: url("/homepage/grain-dark.png");
 }
 
 .custom-page p a {

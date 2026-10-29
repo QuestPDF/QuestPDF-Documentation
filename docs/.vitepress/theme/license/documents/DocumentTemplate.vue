@@ -2,33 +2,33 @@
   <section class="custom-page document-page legal-page texture-dots">
     <div class="content">
       <header class="section-header document-header">
-        <h1>{{ doc.title }}</h1>
-
-        <div class="document-meta-row">
-          <a class="document-back" href="/license">
-            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-            View all licensing documents
-          </a>
-
-          <dl v-if="doc.meta.length" class="document-meta">
-            <div v-for="item in doc.meta" :key="item.label">
-              <dt>{{ item.label }}</dt>
-              <dd>{{ item.value }}</dd>
-            </div>
-          </dl>
-        </div>
-      </header>
-
-      <article class="panel document-body vp-doc" v-html="doc.html"></article>
-
-      <div class="links">
-        <a class="action" href="/license">
+        <a class="document-back" href="/license">
+          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
           View all licensing documents
         </a>
 
-        <a class="action primary" href="/license/QuestPDF%20License%20Terms.pdf" download>
-          Download (PDF)
-        </a>
+        <h1>{{ doc.title }}</h1>
+      </header>
+
+      <div class="panel document-card">
+        <dl v-if="doc.meta.length" class="document-meta">
+          <div v-for="item in doc.meta" :key="item.label">
+            <dt>{{ item.label }}:</dt>
+            <dd>{{ item.value }}</dd>
+          </div>
+        </dl>
+
+        <article class="document-body vp-doc" v-html="doc.html"></article>
+
+        <footer class="links">
+          <a class="action" href="/license">
+            View all licensing documents
+          </a>
+
+          <a class="action primary" href="/license/QuestPDF%20License%20Terms.pdf" download>
+            Download (PDF)
+          </a>
+        </footer>
       </div>
     </div>
   </section>
@@ -56,26 +56,14 @@ const doc = data[props.id];
   margin-bottom: 0;
 }
 
-.document-page .document-meta-row,
-.document-page .document-meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 16px 56px;
-}
-
-.document-page .document-meta-row {
-  margin-top: 28px;
-}
-
 .document-page .document-back {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  margin-bottom: 24px;
   font-weight: 500;
   white-space: nowrap;
-  color: light-dark(#5B6B82, #9AA8BE);
+  color: var(--vp-c-brand-1);
   transition: color 0.2s ease;
 }
 
@@ -84,36 +72,45 @@ const doc = data[props.id];
 }
 
 .document-page .document-back:hover {
-  color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-2);
 }
 
-/* slate, not VitePress's neutral greys, which read muddy (light) or warm (dark) on the blue canvas */
+.document-page .document-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.document-page .document-meta div {
+  display: flex;
+  gap: 8px;
+}
+
 .document-page .document-meta dt {
-  margin-bottom: 6px;
-  font-size: 0.75rem;
-  line-height: 1rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: light-dark(#5B6B82, #8796AE);
+  color: var(--vp-c-text-2);
 }
 
 .document-page .document-meta dd {
-  font-size: 1rem;
-  line-height: 1.5rem;
   font-weight: 600;
-  color: light-dark(#0F172A, #E6ECF4);
+  color: var(--vp-c-text-1);
 }
 
 
-.document-page .document-body {
+.document-page .document-card {
   width: 100%;
   padding: 48px 56px;
 }
 
 @media screen and (max-width: 700px) {
-  .document-page .document-body {
+  .document-page .document-card {
     padding: 32px 24px;
+  }
+
+  .document-page .links .action {
+    flex-grow: 1;
   }
 }
 
@@ -141,6 +138,7 @@ const doc = data[props.id];
   flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
+  margin-top: 64px;
 }
 
 
