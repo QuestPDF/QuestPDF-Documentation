@@ -103,15 +103,20 @@ html.dark h1 .highlight-foreground {
 .statistics {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 1.75rem;
 }
 
 /* the icon box is one line tall, so a wrapped row keeps its icon beside the first line */
 .benefits li {
   display: flex;
   align-items: flex-start;
-  gap: 16px;
+  gap: 1.5rem;
   color: var(--vp-c-text-1);
+}
+
+/* regular text looks thinner on a white canvas than on a dark one, so light mode takes half a weight step up (Inter is variable) */
+html:not(.dark) .benefits li {
+  font-weight: 450;
 }
 
 /* the statistics share the benefits' type size, so the rows of both lists line up */
@@ -132,19 +137,19 @@ html.dark h1 .highlight-foreground {
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  width: 24px;
+  width: 1.875rem;
   height: 1.75rem;
 }
 
 .list-icon i {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   color: var(--vp-c-brand-1);
 }
 
 /* each stat is a link that reads as plain content: its parts set their own colours, so the global link hover
    never reaches them; the value leads, the label stays quiet */
 .statistic .value {
-  margin-right: 0.3em;
+  margin-right: 0.5rem;
   font-weight: 700;
   color: var(--vp-c-text-1);
 }
@@ -157,7 +162,7 @@ html.dark h1 .highlight-foreground {
 @media screen and (max-width: 1023px) {
   .lists {
     grid-template-columns: 1fr;
-    gap: 48px; /* clearly more than the 24px between rows, so the two lists stay two groups */
+    gap: 48px;
   }
 
   /* stacked, the dot grid shares the statistics' cell instead of taking a row of its own */
@@ -169,7 +174,7 @@ html.dark h1 .highlight-foreground {
   .statistics {
     display: grid;
     grid-template-columns: repeat(2, max-content);
-    gap: 24px 96px;
+    gap: 1.75rem 96px;
   }
 }
 
