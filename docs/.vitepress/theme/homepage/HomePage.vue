@@ -64,6 +64,7 @@ import HomePageLicense from "./HomePageLicense.vue";
 
 .home-page {
   --panel-padding: clamp(32px, 12.7px + 2.76vw, 48px) clamp(24px, 4.14vw - 4.95px, 48px);
+  --vp-c-text-2: light-dark(#56565C, #B3B3B9);
 }
 
 .sections {

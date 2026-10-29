@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from "vue";
+import { reducedMotion, Timeline } from "./ctaTimeline";
 
 /* The sample-gallery card's visual: a pile of six sample pages in 3D that browses on hover. When the pointer leaves,
    the running step finishes in the hover pose first, hence the component's own hover class. Reduced motion: the pile
@@ -13,6 +14,7 @@ const hover = ref(false);
 const front = ref(0);
 const leaving = ref(-1);
 const stepping = computed(() => leaving.value >= 0);
+const root = ref<HTMLElement>();
 
 /* a shape on a page, in page coordinates (148 x 200): a placeholder bar, or a photo (block), an outline
    (frame), a circle (ring, disc) or a stripe behind a table row (band); one per page takes the accent */
@@ -192,61 +194,83 @@ function shapeStyle(shape: Shape) {
   };
 }
 
-/* the clock, matching the CSS below: a step takes 1.2s, and each page rests in hand about 0.7s before it
-   leaves (it is in hand 0.53s after hover, 0.6s into a step), so the first step comes 1.2s after hover and
-   the next ones 1.3s apart */
+/* the clock: a page rests in hand about 0.7s before it leaves (it is in hand 0.53s after hover, 0.6s into a step),
+   so the first step comes 1.2s after hover and the next ones 1.3s apart; see ctaTimeline.ts for the waits */
 const STEP = 1200;
 const FIRST_STEP_DELAY = 1200;
 const STEP_INTERVAL = 1300;
 
-let browseTimer: ReturnType<typeof setTimeout> | undefined;
-let stepTimer: ReturnType<typeof setTimeout> | undefined;
+/* a leaving page: lifted out of the hand while it fades (to 35%), moved to the back while invisible (at 36%, 4px in
+   front of its place: from behind it would cross the blank sheet's plane and its edge would pop), then settled while
+   it fades back in. The hand pose repeats .deck.hover .page-3d.front; the place is the page's own transform. */
+const HAND = "translate3d(-2px, 10px, 64px) rotateZ(-1deg) rotateY(16deg) rotateX(-6deg) scale(1)";
+const LIFTED = "translate3d(-2px, 6px, 76px) rotateZ(-1deg) rotateY(16deg) rotateX(-6deg) scale(1)";
+const place = (offset: string) => `translate3d(calc(var(--last) * var(--dx)), calc(var(--last) * var(--dy)), calc(var(--last) * -1 * var(--dz) + var(--lift)${offset})) rotateZ(var(--r)) scale(var(--shrink))`;
 
-/* one browse step: the front page leaves (its animation fades it out and brings it back at the rear) and the
-   pile advances. The step ends on a timer, not on animationend, which Chrome does not send to a hidden tab;
-   the animation holds its end state, so the class may go a little late, never early. */
-function step() {
-  clearTimeout(stepTimer);
+const LEAVE_PLACE: Keyframe[] = [
+  { transform: HAND, easing: "ease-out" },
+  { transform: LIFTED, offset: 0.35, easing: "step-end" },
+  { transform: place(" + 4px"), offset: 0.36, easing: "cubic-bezier(0.2, 0.7, 0.2, 1)" },
+  { transform: place("") }
+];
 
+const LEAVE_FADE: Keyframe[] = [
+  { opacity: 1, easing: "cubic-bezier(0.45, 0, 0.55, 1)" },
+  { opacity: 0, offset: 0.35, easing: "cubic-bezier(0.2, 0.7, 0.2, 1)" },
+  { opacity: 0, offset: 0.39, easing: "cubic-bezier(0.2, 0.7, 0.2, 1)" },
+  { opacity: 1 }
+];
+
+const timeline = new Timeline();
+let pending: Animation | undefined; /* the wait before the next step; cancelled when the pointer leaves */
+
+/* one browse step: the front page leaves and the pile advances; the hover pose is held until the page has settled */
+async function step() {
+  const page = root.value!.querySelectorAll(".page-3d:not(.blank)")[front.value];
   leaving.value = front.value;
   front.value = (front.value + 1) % pages.length;
 
-  stepTimer = setTimeout(settle, STEP + 50);
-}
+  const motions = [
+    timeline.animate(page, LEAVE_PLACE, { duration: STEP, fill: "both" }),
+    timeline.animate(page, LEAVE_FADE, { duration: STEP, fill: "both" })
+  ];
 
-/* the hover pose was held while the step finished; it goes now if the pointer has left */
-function settle() {
+  if (!await Timeline.settled(motions))
+    return;
+
+  motions.forEach(motion => motion.cancel()); /* the end state is the page's own place */
   leaving.value = -1;
   hover.value = props.active;
 }
 
-function browse(delay: number) {
-  browseTimer = setTimeout(() => {
+async function browse() {
+  for (let delay = FIRST_STEP_DELAY; ; delay = STEP_INTERVAL) {
+    pending = timeline.wait(root.value!, delay);
+
+    if (!await Timeline.settled([pending]))
+      return;
+
     step();
-    browse(STEP_INTERVAL);
-  }, delay);
+  }
 }
 
 watch(() => props.active, isActive => {
-  clearTimeout(browseTimer);
+  pending?.cancel();
 
-  if (isActive && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (isActive && !reducedMotion()) {
     hover.value = true;
-    browse(FIRST_STEP_DELAY);
+    browse();
   }
   else if (!stepping.value) {
     hover.value = false;
   }
 });
 
-onBeforeUnmount(() => {
-  clearTimeout(browseTimer);
-  clearTimeout(stepTimer);
-});
+onBeforeUnmount(() => timeline.cancel());
 </script>
 
 <template>
-  <div class="scene deck" :class="{ hover, stepping }" :style="{ '--last': LAST }">
+  <div ref="root" class="scene deck" :class="{ hover, stepping }" :style="{ '--last': LAST }">
     <div class="stage">
       <div class="model">
         <div class="shadow" />
@@ -393,8 +417,7 @@ onBeforeUnmount(() => {
 }
 
 
-/* Browse step (1.2s): place and fade are separate animations, so the place can jump while the page is invisible; a
-   6px rise keeps the fading page in front of the arriving one. */
+/* Browse step: the leaving page's motion is in the script */
 .deck.stepping .page-3d:not(.leaving) {
   transition-duration: 0.7s;
   transition-delay: 0.1s;
@@ -408,48 +431,6 @@ onBeforeUnmount(() => {
 
 .deck.hover.stepping .page-3d.front:not(.leaving) .page {
   transition-duration: 0.6s;
-}
-
-.page-3d.leaving {
-  animation: deck-leave-place 1.2s both, deck-leave-fade 1.2s both;
-}
-
-/* settles the last 4px from the front: from behind, it would cross the blank sheet's plane and its edge would pop */
-@keyframes deck-leave-place {
-  0% {
-    transform: translate3d(-2px, 10px, 64px) rotateZ(-1deg) rotateY(16deg) rotateX(-6deg) scale(1);
-    animation-timing-function: ease-out;
-  }
-
-  35% {
-    transform: translate3d(-2px, 6px, 76px) rotateZ(-1deg) rotateY(16deg) rotateX(-6deg) scale(1);
-    animation-timing-function: step-end;
-  }
-
-  36% {
-    transform: translate3d(calc(var(--last) * var(--dx)), calc(var(--last) * var(--dy)), calc(var(--last) * -1 * var(--dz) + var(--lift) + 4px)) rotateZ(var(--r)) scale(var(--shrink));
-    animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-
-  100% {
-    transform: translate3d(calc(var(--last) * var(--dx)), calc(var(--last) * var(--dy)), calc(var(--last) * -1 * var(--dz) + var(--lift))) rotateZ(var(--r)) scale(var(--shrink));
-  }
-}
-
-@keyframes deck-leave-fade {
-  0% {
-    opacity: 1;
-    animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
-  }
-
-  35%, 39% {
-    opacity: 0;
-    animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-
-  100% {
-    opacity: 1;
-  }
 }
 
 

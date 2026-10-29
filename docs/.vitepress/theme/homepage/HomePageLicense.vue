@@ -241,7 +241,7 @@ html.dark .license-panel {
 
 .tier-description {
   font-size: 1rem;
-  line-height: 1.5rem;
+  line-height: 1.75rem;
   color: var(--vp-c-text-2);
 }
 

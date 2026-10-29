@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { onBeforeUnmount, ref, watch } from "vue";
+import { reducedMotion, Timeline } from "./ctaTimeline";
 
 /* The intro-video card's visual: an invoice page in 3D whose sections land on it on hover. A pass always finishes,
    even if the pointer leaves. Reduced motion: the finished page, nothing moves. */
 
 const props = defineProps<{ active: boolean }>();
 
-/* rest: the finished page. fading: a pass has started and the content fades out. landing: the sections land.
-   play: the play button is shown; it hides when a pass starts and returns with the totals. */
-const phase = ref<"rest" | "fading" | "landing">("rest");
+/* play: the play button is shown; it hides when a pass starts and returns with the totals */
 const play = ref(true);
+const root = ref<HTMLElement>();
 
 /* the sections in page coordinates (148 x 200): where each sits, its delay after the first, and its bars */
 interface Box {
@@ -108,46 +108,60 @@ function box(item: Box) {
   return { left: `${item.x}px`, top: `${item.y}px`, width: `${item.w}px`, height: `${item.h}px` };
 }
 
-/* the clock of a pass, matching the CSS below: the fade (0.2s), then the landings (the last starts 0.95s in
-   and takes 0.7s); the play button returns with the totals, 1s in. A hover during a pass starts nothing. */
+/* a pass: the content fades out (0.2s), then the sections land one after another (0.7s each, the last starting
+   0.95s in) and the play button returns 1s into the landings; see ctaTimeline.ts for the waits */
 const FADE = 200;
+const LAND = 700;
 const PLAY_AT = 1000;
-const LAND = 950 + 700;
+const LAND_EASING = "cubic-bezier(0.3, 0.6, 0.15, 1)";
 
+const timeline = new Timeline();
 let busy = false;
-let timers: ReturnType<typeof setTimeout>[] = [];
 
-function after(delay: number, action: () => void) {
-  timers.push(setTimeout(action, delay));
+async function pass() {
+  busy = true;
+  play.value = false;
+
+  const targets = [...root.value!.querySelectorAll(".section")];
+
+  const fades = targets.map(section => timeline.animate(section, [{ opacity: 1 }, { opacity: 0 }], { duration: FADE, easing: "ease-out", fill: "both" }));
+
+  if (!await Timeline.settled(fades))
+    return;
+
+  const landings = targets.map((section, index) => timeline.animate(section, [
+    { transform: "translateZ(var(--lift))", opacity: 0, easing: LAND_EASING },
+    { opacity: 1, offset: 0.4, easing: LAND_EASING },
+    { transform: "translateZ(0)", opacity: 1 }
+  ], { duration: LAND, delay: sections[index].delay * 1000, fill: "both" }));
+
+  fades.forEach(fade => fade.cancel()); /* each landing holds its section invisible until its turn */
+
+  Timeline.settled([timeline.wait(root.value!, PLAY_AT)]).then(reached => reached && (play.value = true));
+
+  if (!await Timeline.settled(landings))
+    return;
+
+  landings.forEach(landing => landing.cancel()); /* their end state is the page's own */
+  busy = false;
 }
 
 watch(() => props.active, active => {
-  if (!active || busy || window.matchMedia("(prefers-reduced-motion: reduce)").matches)
-    return;
-
-  busy = true;
-  play.value = false;
-  phase.value = "fading";
-  timers = [];
-
-  after(FADE, () => {
-    phase.value = "landing";
-    after(PLAY_AT, () => play.value = true);
-    after(LAND, () => busy = false);
-  });
+  if (active && !busy && !reducedMotion())
+    pass();
 });
 
-onBeforeUnmount(() => timers.forEach(clearTimeout));
+onBeforeUnmount(() => timeline.cancel());
 </script>
 
 <template>
-  <div class="scene build" :class="[`phase-${phase}`, { play, active }]">
+  <div ref="root" class="scene build" :class="{ play, active }">
     <div class="stage">
       <div class="model">
         <div class="shadow" />
         <div class="paper page" />
 
-        <div v-for="(section, index) of sections" :key="index" class="section" :style="{ ...box(section), '--d': `${section.delay}s` }">
+        <div v-for="(section, index) of sections" :key="index" class="section" :style="box(section)">
           <span v-for="(bar, barIndex) of section.bars" :key="barIndex" class="shape" :class="bar.tone" :style="box(bar)" />
         </div>
       </div>
@@ -180,43 +194,6 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
   position: absolute;
   color: var(--ink);
 }
-
-.build.phase-fading .section {
-  animation: build-fade 0.2s ease-out both;
-}
-
-.build.phase-landing .section {
-  animation: build-land 0.7s cubic-bezier(0.3, 0.6, 0.15, 1) var(--d) both;
-}
-
-@keyframes build-fade {
-  from {
-    transform: translateZ(0);
-    opacity: 1;
-  }
-
-  to {
-    transform: translateZ(0);
-    opacity: 0;
-  }
-}
-
-@keyframes build-land {
-  from {
-    transform: translateZ(var(--lift));
-    opacity: 0;
-  }
-
-  40% {
-    opacity: 1;
-  }
-
-  to {
-    transform: translateZ(0);
-    opacity: 1;
-  }
-}
-
 
 /* hidden from the start of a pass until the script sets .play */
 .play-button {
