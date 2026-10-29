@@ -9,15 +9,9 @@ export interface LegalDocumentMeta {
     value: string;
 }
 
-export interface LegalDocumentSection {
-    id: string;
-    title: string;
-}
-
 export interface LegalDocument {
     title: string;
     meta: LegalDocumentMeta[];
-    sections: LegalDocumentSection[];
     html: string;
 }
 
@@ -34,7 +28,7 @@ const markdown = new MarkdownIt({
     breaks: true
 });
 
-// Every "## Section" gets an id and is listed in `sections`, the page's contents rail.
+// Every "## Section" gets an id, so a link can point to it.
 markdown.renderer.rules.heading_open = (tokens, index, options, env, self) => {
     const token = tokens[index];
 
@@ -52,7 +46,6 @@ markdown.renderer.rules.heading_open = (tokens, index, options, env, self) => {
         env.slugCounts[slug] = repeats + 1;
 
         token.attrSet('id', id);
-        env.sections.push({ id, title });
     }
 
     return self.renderToken(tokens, index, options);
@@ -86,10 +79,10 @@ export default defineLoader({
             const { title, body: bodyWithMeta } = extractTitle(source);
             const { meta, body } = extractMeta(bodyWithMeta);
 
-            const env = { sections: [] as LegalDocumentSection[], slugCounts: {} as Record<string, number> };
+            const env = { slugCounts: {} as Record<string, number> };
             const html = markdown.render(body, env);
 
-            documents[id] = { title, meta, sections: env.sections, html };
+            documents[id] = { title, meta, html };
         }
 
         return documents;

@@ -8,7 +8,7 @@ Action Required:
 Please update the application configuration accordingly. Setup takes only a few minutes, requires a single line of code, and does not involve any license keys or activation servers.
 
 License Configuration Guide:
-https://www.questpdf.com/license/configuration
+https://configure.questpdf.com
 
 Best`;
 

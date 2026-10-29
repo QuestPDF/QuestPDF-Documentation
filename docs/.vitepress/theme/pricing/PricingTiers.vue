@@ -219,7 +219,7 @@ html.dark .license-tier.professional {
 
   color: light-dark(#2196F3, #7CC4FF);
   background-color: light-dark(#FFFFFF, transparent);
-  box-shadow: inset 0 -1px 0 light-dark(rgba(33, 150, 243, 0.4), rgba(100, 181, 246, 0.25));
+  box-shadow: inset 0 -2px 0 light-dark(rgba(33, 150, 243, 0.2), rgba(100, 181, 246, 0.14));
   font-size: 0.875rem;
   font-weight: 700;
   line-height: 1;
