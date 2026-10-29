@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-page pricing-page">
+  <div class="custom-page pricing-page texture-dots">
     <div class="container">
       <pricing-tiers />
     </div>

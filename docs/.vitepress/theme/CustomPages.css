@@ -274,7 +274,7 @@ body:has(.custom-page) {
   --canvas-glow-soft: color-mix(in srgb, #2196F3 12%, transparent);
   --canvas-glow-side: color-mix(in srgb, #2196F3 20%, transparent);
   --canvas-glow-side-shape: ellipse 800px 450px at 0% 2%;
-  --canvas-grain: url("/homepage/grain.png");
+  --canvas-grain: none;
 
   background-color: var(--custom-page-bg);
   background-image:
@@ -297,7 +297,7 @@ html.dark body:has(.custom-page) {
   --canvas-glow-soft: color-mix(in srgb, #2196F3 7%, transparent);
   --canvas-glow-side: color-mix(in srgb, #2196F3 12%, transparent);
   --canvas-glow-side-shape: ellipse 800px 450px at 0% 2%;
-  /* same specks at 60% alpha: grey grain reads stronger on a near-black canvas */
+  /* grain only on the dark canvas */
   --canvas-grain: url("/homepage/grain-dark.png");
 }
 
