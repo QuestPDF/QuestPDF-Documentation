@@ -53,7 +53,6 @@ const includes = [
     <div class="divider" aria-hidden="true"></div>
 
     <div class="tiers">
-      <!-- each tier links to its card on the pricing page -->
       <a v-for="tier of tiers" :key="tier.name" class="tier" :class="tier.name.toLowerCase()" href="/pricing.html">
         <span class="tier-head">
           <span class="tier-name">{{ tier.name }}</span>
@@ -69,9 +68,6 @@ const includes = [
 </template>
 
 <style scoped>
-
-/* two halves split by a hairline; in dark mode a glow in the Community green spreads from the left edge, behind
-   the heading, over the panel's own sheen (on white a tint reads as a stain, so the panel stays plain) */
 
 .license-panel {
   display: grid;
@@ -118,7 +114,6 @@ html.dark .license-panel {
   margin: 32px 0 0;
 }
 
-/* rows like the Companion App's list of views */
 .includes-list li {
   display: flex;
   align-items: center;
@@ -128,8 +123,6 @@ html.dark .license-panel {
   color: var(--vp-c-text-1);
 }
 
-/* green ties the list to the glow and the button; a lighter green in dark mode, as the quick start cards lighten
-   their tints (both are Material's greens 600 and 300 with their saturation raised to 50%) */
 .includes-list i {
   flex-shrink: 0;
   width: 18px;
@@ -138,7 +131,6 @@ html.dark .license-panel {
   color: light-dark(#38A83E, #6ECF73);
 }
 
-/* on phones the labels wrap, so the icon sits on the first line instead of the middle of the label */
 @media screen and (max-width: 700px) {
   .includes-list li {
     align-items: flex-start;
@@ -159,8 +151,7 @@ html.dark .license-panel {
 }
 
 
-/* Tiers: spread over the panel's height; each badge takes its tier's colour from the pricing page. A tier is
-   a link that reads like plain content until pointed at: then its price underlines and an arrow slides in. */
+/* Tiers */
 
 .tiers {
   display: flex;
@@ -181,7 +172,6 @@ html.dark .license-panel {
   outline-offset: 6px;
 }
 
-/* the price drops under the name when a narrow phone has no room for both */
 .tier-head {
   display: flex;
   flex-wrap: wrap;
@@ -274,8 +264,7 @@ html.dark .license-panel {
 }
 
 
-/* filled in the list's green, two steps deeper so the white label passes AA (#2E7D32, 5.1:1); hover deepens it on
-   white and lightens it in dark mode */
+/* two steps deeper than the list's green, so the white label passes AA */
 .action.pricing-button {
   --fill: #2E7D32;
 

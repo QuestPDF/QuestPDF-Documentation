@@ -4,7 +4,6 @@
       <header class="section-header document-header">
         <h1>{{ doc.title }}</h1>
 
-        <!-- effective date and version, taken from the top of the markdown source -->
         <dl v-if="doc.meta.length" class="document-meta">
           <div v-for="item in doc.meta" :key="item.label">
             <dt>{{ item.label }}</dt>
@@ -31,7 +30,6 @@
         </nav>
 
         <div class="document-main">
-          <!-- on narrow screens the sections fold into a list above the text -->
           <details class="document-contents-compact">
             <summary>
               <span>Contents</span>
@@ -71,11 +69,8 @@ const props = defineProps<{ id: string }>();
 const doc = data[props.id];
 
 
-/* Contents rail: the section being read is the last one whose heading has passed a line 160px from the top,
-   just under where a jump lands a heading. At the bottom of the page, where short closing sections never
-   reach that line, it is the section the address points to while its heading is on screen, else the last
-   one. The marker is measured from the active link (titles wrap), and the rail scrolls itself to keep that
-   link in view. */
+/* Contents rail: the section being read is the last one whose heading has passed a line 160px from the top; at the
+   bottom of the page, the one the address points to while its heading is on screen, else the last. */
 
 const rail = ref<HTMLElement | null>(null);
 const body = ref<HTMLElement | null>(null);
@@ -158,8 +153,7 @@ onBeforeUnmount(() => {
   margin-bottom: 0;
 }
 
-/* The text column is never wider than the 820px it has from 1200px up (1180 - 64 - 240 - 56), so a narrower
-   window, where the rail shrinks or folds away, does not stretch the lines longer than on a desktop. */
+/* capped at the 820px it has from 1200px up, so narrower windows do not get longer lines than a desktop */
 
 .document-page .document-layout {
   --document-text-width: 820px;
@@ -179,7 +173,6 @@ onBeforeUnmount(() => {
   min-width: 0;
 }
 
-/* labelled facts, like the company details on the contact page */
 .document-page .document-meta {
   display: flex;
   flex-wrap: wrap;
@@ -206,8 +199,7 @@ onBeforeUnmount(() => {
 }
 
 
-/* Contents rail: the sections on a hairline track, a marker sliding to the one being read; it scrolls on its
-   own when taller than the screen (the Professional license has 30 sections) */
+/* Contents rail */
 
 .document-page .document-contents {
   position: sticky;
@@ -273,7 +265,6 @@ onBeforeUnmount(() => {
   color: var(--vp-c-brand-2);
 }
 
-/* the folded list for narrow screens, on the same surface as the text */
 .document-page .document-contents-compact {
   display: none;
   width: 100%;
@@ -329,7 +320,6 @@ onBeforeUnmount(() => {
   color: var(--vp-c-text-1);
 }
 
-/* touch: every section link a 44px row */
 @media (pointer: coarse) {
   .document-page .document-contents-link {
     padding-block: 12px;
@@ -383,9 +373,7 @@ onBeforeUnmount(() => {
   }
 }
 
-/* Sections are divided by hairlines. A jump lands the hairline 16px under the navbar (the heading text 57px);
-   the first heading has none, so its offset lands its text at the same height. Prefixed with .document-page
-   to outrank VitePress's `.vp-doc h2` and its offset for `.vp-doc [id]`. */
+/* prefixed with .document-page to outrank VitePress's `.vp-doc h2` and its offset for `.vp-doc [id]` */
 .document-page .document-body h2 {
   margin: 40px 0 16px;
   padding-top: 40px;

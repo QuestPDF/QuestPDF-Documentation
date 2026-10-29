@@ -34,8 +34,7 @@ const markdown = new MarkdownIt({
     breaks: true
 });
 
-// Every "## Section" gets an id, so it can be linked to (/license/guide#community-license-eligibility),
-// and is listed in the document's `sections`, which the page shows as its contents rail.
+// Every "## Section" gets an id and is listed in `sections`, the page's contents rail.
 markdown.renderer.rules.heading_open = (tokens, index, options, env, self) => {
     const token = tokens[index];
 

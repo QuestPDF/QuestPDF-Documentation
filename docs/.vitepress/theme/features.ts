@@ -1,7 +1,5 @@
-/* The Features Overview page (FeaturesOverview.vue): every documented feature, grouped by area of the library
-   (a chapter), then by kind (a category), each a plain link to its page. Chapter and category names are plain
-   descriptions in the documentation's own terms; feature names say what a reader gets, not what the API calls
-   it, and a page with sub-pages lists each one on its own. */
+/* The Features Overview page (FeaturesOverview.vue). Chapter and category names use the documentation's own terms;
+   feature names say what a reader gets, not what the API calls it. */
 
 export interface Feature {
   name: string;

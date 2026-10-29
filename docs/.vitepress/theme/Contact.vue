@@ -86,7 +86,6 @@ const contacts: ContactInformation[] = [
 
         <div class="dotted-divider"></div>
 
-        <!-- full width, so the company details do not sit alone in a half-empty row -->
         <article class="panel business-details">
           <div class="business-owner">
             <div class="icon-tile">
@@ -149,7 +148,6 @@ const contacts: ContactInformation[] = [
   margin-bottom: 16px;
 }
 
-/* buttons sit at the bottom, so they line up across the cards of a row */
 .links {
   display: flex;
   flex-wrap: wrap;
@@ -182,7 +180,6 @@ const contacts: ContactInformation[] = [
   line-height: 1.75rem;
 }
 
-/* as many columns as fit the email address, up to all three side by side */
 .business-facts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 10.5rem), 1fr));
@@ -205,7 +202,6 @@ const contacts: ContactInformation[] = [
   color: var(--vp-c-text-1);
 }
 
-/* the facts go under the owner below 1181px, where beside it they would have no room for three columns */
 @media screen and (max-width: 1180px) {
   .business-details {
     grid-template-columns: minmax(0, 1fr);
@@ -218,7 +214,6 @@ const contacts: ContactInformation[] = [
   }
 }
 
-/* the one coloured icon on the page: the heart keeps its red on the neutral tile */
 .icon-tile .love-icon {
   color: #F44336;
 }

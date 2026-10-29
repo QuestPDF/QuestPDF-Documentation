@@ -1,16 +1,12 @@
-/* Shared by the two CTA visuals (HomePageCtaBuildVisual.vue, HomePageCtaDeckVisual.vue), which include it as a
-   scoped style and add their own pose, content and motion.
-
-   The model (the sheet, the pile) has a 148 x 200 coordinate system for its shapes; it is centred in the
-   column, then shifted, raised, scaled and rotated by the pose variables, so the two visuals and their hover
-   poses differ in values only. */
+/* Shared by HomePageCtaBuildVisual.vue and HomePageCtaDeckVisual.vue. The model has a 148 x 200 coordinate system
+   for its shapes; the pose variables place it. */
 
 .scene {
   --tilt-x: 8deg;
   --scale: 0.86;
   --shift: 0px;
   --rise: 0px;
-  --ink: #A7AEBB; /* the grey of the placeholders */
+  --ink: #A7AEBB;
 
   position: relative;
   width: 100%;
@@ -37,15 +33,11 @@
   transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-/* a sheet of paper: white, a hairline, dimmed a little on the dark theme so it is not the brightest
-   thing on the page */
 .paper {
   background-color: light-dark(#FFF, #F4F4F6);
   box-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.10), rgba(255, 255, 255, 0.06));
 }
 
-/* a page: a faint light from the top-left, shading to --page-shade at the bottom right; flat on the dark
-   theme, where the light would make the paper the brightest thing on the page */
 .page {
   position: absolute;
   inset: 0;
@@ -57,7 +49,6 @@ html.dark .page {
   background-image: none;
 }
 
-/* the shadow the model throws, just behind it in its own plane, offset down and to the right */
 .shadow {
   position: absolute;
   inset: 8px -6px -10px 10px;
@@ -67,7 +58,7 @@ html.dark .page {
   transform: translateZ(-1px);
 }
 
-/* the placeholders: shapes in the ink colour, in three strengths */
+/* Placeholders */
 .shape {
   position: absolute;
   display: block;
@@ -86,7 +77,7 @@ html.dark .page {
 }
 
 
-/* below 700px the visual is a 72px tile beside the title (HomePageCtaCard.vue): a flat miniature of the page */
+/* Compact */
 
 .thumb {
   display: none;

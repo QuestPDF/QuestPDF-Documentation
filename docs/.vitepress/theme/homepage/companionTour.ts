@@ -1,8 +1,5 @@
-/* The Companion App tour on the homepage (HomePageCompanion.vue): which screen is shown, and the timer
-   that moves on to the next one. The cycle is a timer, never animationend (Chrome does not dispatch
-   animation events in a hidden document). It keeps the time left in a screen across pauses, and it
-   pauses while the section is off screen, the tab is hidden, or the pointer or keyboard focus is
-   inside it; under reduced motion it never starts. */
+/* The Companion App tour (HomePageCompanion.vue). The cycle is a timer, never animationend: Chrome does not dispatch
+   animation events in a hidden document. */
 
 import { computed, onBeforeUnmount, onMounted, ref, watch, type Ref } from "vue";
 

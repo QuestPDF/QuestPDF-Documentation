@@ -14,7 +14,6 @@ Best`;
 
 const shareMailtoLink = `mailto:?subject=${encodeURIComponent(shareEmailSubject)}&body=${encodeURIComponent(shareEmailBody)}`;
 
-/* the two detail cards, each a fact list with its button at the foot */
 interface Card {
   title: string;
   items: { icon: string; title: string; description: string }[];
@@ -101,7 +100,6 @@ const cards: Card[] = [
 
         <div class="dotted-divider"></div>
 
-        <!-- full width, so the short assistance note does not sit alone in a half-empty row -->
         <section class="panel assistance-card">
           <div>
             <h3 class="card-title">Do you need assistance?</h3>
@@ -127,14 +125,10 @@ const cards: Card[] = [
 }
 
 
-/* the order state as a green tag, then one line at lead size instead of a display title, so the cards carry
-   the page */
-
 .purchase-header {
-  padding-bottom: 16px; /* a little more air above the cards than the page's 32px gap */
+  padding-bottom: 16px;
 }
 
-/* still the page's h1, set at the size of a lead */
 .purchase-title {
   margin: 0 0 8px;
   font-size: 1.5rem;
@@ -160,8 +154,6 @@ const cards: Card[] = [
   }
 }
 
-/* the order's status as a small uppercase tag: deep green with white text in light mode (5.1:1), the inbox
-   phrase's light green with near-black text in dark mode (7.7:1) */
 .status-tag {
   display: inline-flex;
   align-items: center;
@@ -194,7 +186,7 @@ const cards: Card[] = [
   }
 }
 
-/* a size container: its items adapt to the card's width (half the row, or all of it), see below */
+/* a size container: its items adapt to the card's width */
 .success-card {
   container-type: inline-size;
   display: flex;
@@ -225,7 +217,6 @@ const cards: Card[] = [
   flex-direction: column;
 }
 
-/* buttons sit at the bottom, so they line up across the two cards */
 .success-card a.action {
   margin-top: auto;
   align-self: flex-end;
@@ -254,8 +245,6 @@ const cards: Card[] = [
   }
 }
 
-/* a narrow card (phones): the icon sits beside the title and the description takes the full width under both,
-   instead of a column a few words wide */
 @container (max-width: 360px) {
   .description-item {
     grid-template-areas:

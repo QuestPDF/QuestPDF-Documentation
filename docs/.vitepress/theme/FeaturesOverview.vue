@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { featureChapters, type FeatureCategory } from "./features";
 
-/* A chapter's categories split into two columns of near-equal height, measured in lines: a title with the gap
-   above it counts as three, each feature as one. Every split that keeps the first category top left is tried
-   (a chapter has at most six categories), and each column keeps the data order, so the masonry reads the same
-   way every time instead of wherever the browser balances it. */
+/* Splits a chapter's categories into two columns of near-equal height, counted in lines (a title with its gap as
+   three, a feature as one); each column keeps the data order. */
 function balance(categories: FeatureCategory[]): FeatureCategory[][] {
   const height = (list: FeatureCategory[]) => list.reduce((sum, category) => sum + 3 + category.features.length, 0);
   const total = height(categories);
@@ -65,7 +63,7 @@ const chapters = featureChapters.map(chapter => ({ ...chapter, columns: balance(
 <style scoped>
 
 .features-header {
-  margin-bottom: 48px; /* the same 48px as on the contact page */
+  margin-bottom: 48px;
 }
 
 .features-header .sub-header {
@@ -73,9 +71,6 @@ const chapters = featureChapters.map(chapter => ({ ...chapter, columns: balance(
   margin-bottom: 0;
 }
 
-
-/* one card per chapter, about the width of a document page: its name over a hairline, then its categories in
-   two balanced columns (see balance above) */
 
 .chapters {
   display: flex;
@@ -109,7 +104,6 @@ const chapters = featureChapters.map(chapter => ({ ...chapter, columns: balance(
   gap: 48px;
 }
 
-/* one column on a phone: the column wrappers step aside and every category takes its data order again */
 @media screen and (max-width: 560px) {
   .columns {
     grid-template-columns: minmax(0, 1fr);
@@ -120,8 +114,6 @@ const chapters = featureChapters.map(chapter => ({ ...chapter, columns: balance(
   }
 }
 
-
-/* a category: its icon on an inset tile and its name, then every feature as a plain link */
 
 .category-title {
   display: flex;
@@ -153,7 +145,6 @@ const chapters = featureChapters.map(chapter => ({ ...chapter, columns: balance(
   margin: 0;
 }
 
-/* a feature reads as plain text until pointed at: then it darkens and underlines */
 .feature {
   display: inline-block;
   padding: 3px 0;
@@ -177,7 +168,6 @@ const chapters = featureChapters.map(chapter => ({ ...chapter, columns: balance(
   border-radius: 3px;
 }
 
-/* touch: each link a 44px row */
 @media (pointer: coarse) {
   .feature {
     padding: 8px 0;

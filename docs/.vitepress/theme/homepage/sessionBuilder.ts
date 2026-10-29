@@ -1,10 +1,8 @@
 import { codeToHtml, stringifyTokenStyle, type ThemedToken } from "shiki";
 import { type FoldableLine, foldLines } from "./codeFolding";
 
-/* A coding session for the quick start window (HomePageQuickStart.vue, played by agentSession.ts): the files open
-   as it starts, the requests that edit them, and the page rendered by QuestPDF after each request. buildSession()
-   turns the definition (quickStart.data.ts) into what the window needs, highlighting every line it will show at
-   build time (so no highlighter ships to the browser) and checking the definition the way the window depends on it. */
+/* Turns the quick start session (quickStart.data.ts) into what the window needs, highlighting every line it will
+   show at build time, so no highlighter ships to the browser. */
 
 /* Shiki's languages: the legacy HTML template stays plain text, so the C# it becomes is what stands out */
 export type Lang = "csharp" | "text";
@@ -23,10 +21,8 @@ export interface Round {
   edits: Edit[];
   /* the method the request works on: the window shows it and folds every other one */
   unfold?: string;
-  /* the part of the page the viewer flies to as the request is made, as [x, y, width, height] in the page box's
-     pixels (the renders are three times that): the change and what it sits among, its sides in the gaps between
-     the columns of both the page before and after, so the viewer's edges cut no words, and its top under the
-     heading (none: the page's overview) */
+  /* the part of the page the viewer flies to, as [x, y, width, height] in the page box's pixels, its sides in the
+     gaps between columns so the viewer's edges cut no words (none: the page's overview) */
   zoom?: [number, number, number, number];
 }
 

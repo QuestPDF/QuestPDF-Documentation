@@ -62,12 +62,10 @@ import HomePageLicense from "./HomePageLicense.vue";
 
 <style scoped>
 
-/* more breathing room in the homepage panels: 48px from 1280px, down to the shared 32px by 24px at 700px */
 .home-page {
   --panel-padding: clamp(32px, 12.7px + 2.76vw, 48px) clamp(24px, 4.14vw - 4.95px, 48px);
 }
 
-/* everything under the hero is one column of panels; the hero's own bottom padding spaces the first row */
 .sections {
   display: flex;
   flex-direction: column;
@@ -76,7 +74,6 @@ import HomePageLicense from "./HomePageLicense.vue";
   padding-bottom: 48px;
 }
 
-/* side by side from 1181px; narrower, the text beside each visual would be a sliver */
 .cta-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

@@ -2,17 +2,9 @@ import {computed, onMounted, onUnmounted, ref, type Ref} from "vue";
 import type {Edit, QuickStartSession, Round} from "./sessionBuilder";
 import {foldLines} from "./codeFolding";
 
-/* A simulated session with a coding agent that plays by itself while the window is mostly on screen: a request
-   types itself into a composer and sends itself a moment later; the agent then edits the files, which the window
-   shows as a diff, the replaced lines in red and the new lines typed in green (a file the agent creates comes to
-   the front and types in untinted). Room for the new lines opens in one move before they type in, and replaced
-   lines close the same way when the diff is taken in, so the code never jumps line by line. A moment after a
-   request is sent, the page zooms in on the part it changes (unless it shows it already), the agent edits, and once
-   the edit is done the page shows its result; after a hold the diff is taken into the code, and the code stays a
-   while before the next request types itself in, the page still zoomed. After the last request the page draws back
-   to its overview and stays a while, then the session fades out and starts over. A file longer than the window
-   scrolls as an editor does. Every pause stops while the window is less than mostly on screen or the tab is hidden,
-   and goes on from where it was; under prefers-reduced-motion the finished session is shown still. */
+/* A simulated session with a coding agent that plays by itself while the window is mostly on screen. Every pause
+   stops while the window is not mostly on screen or the tab is hidden, and goes on from where it was; under
+   prefers-reduced-motion the finished session is shown still. */
 
 export interface Line {
   text: string;
@@ -66,8 +58,7 @@ const timing = {
   fade: 450
 };
 
-/* how long the next key takes, after the typed text: a person's uneven rhythm, a beat at the end of each word,
-   a longer one after punctuation, and now and then a short hesitation */
+/* how long the next key takes: a person's uneven rhythm */
 function keyDelay(typed: string) {
   const last = typed.at(-1);
   const delay = 26 + Math.random() * 24;
@@ -119,7 +110,6 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
   const promptText = computed(() => prompt.value.slice(0, promptTyped.value));
 
   const sent = computed(() => phase.value !== "idle" && promptIndex.value === roundIndex.value);
-  /* the caret stays lit while characters arrive, like a real editor */
   const typing = computed(() => !sent.value && promptTyped.value > 0 && promptTyped.value < prompt.value.length);
   /* from the send until the page shows the result: the agent edits and QuestPDF renders */
   const working = computed(() => phase.value === "working" || phase.value === "editing" || phase.value === "built");
@@ -249,8 +239,6 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
     countdown.value = undefined;
   }
 
-  /* the composer empties and lights up, the next prompt types itself in, under the previous diff and page, and
-     sends itself a moment later */
   async function askNext(index: number) {
     promptIndex.value = index;
     promptTyped.value = 0;
@@ -266,7 +254,6 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
     asking.value = false;
   }
 
-  /* the replaced lines close, then the diff is taken in */
   async function takeInDiff() {
     const removed = files.value.flatMap(file => file.lines.filter(line => line.kind === "removed"));
 
@@ -278,7 +265,6 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
     acceptDiff();
   }
 
-  /* the room for the new lines opens in one move, then each line types in, a short time per line */
   async function playEdit(edit: Edit) {
     const file = open(edit.file);
 
@@ -318,9 +304,6 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
     }
   }
 
-  /* from the moment the prompt is sent: the method the request works on unfolds; a moment later the page flies to
-     the part the request changes, unless it shows it already (or back to its overview for a request without a
-     zoom); the agent edits, and once it is done the page shows the result */
   async function playRound(index: number) {
     roundIndex.value = index;
     phase.value = "working";

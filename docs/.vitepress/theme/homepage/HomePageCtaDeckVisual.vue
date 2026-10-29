@@ -1,15 +1,9 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from "vue";
 
-/* The sample-gallery card's visual: a pile of six sample pages in 3D (a report, a certificate, a catalogue,
-   a dashboard, a letter, a long table), placeholders with one accent element each, turned to face the
-   invoice in the card beside it.
-
-   Hover (`active`, from HomePageCtaCard.vue): the pile turns towards the reader, the front page lifts off it
-   to face the camera and colour arrives on the pages. Then the pile browses, one page every 1.3s: the page
-   in hand fades out while the next one rises into its place, and reappears at the back. When the pointer
-   leaves, the step in progress finishes in the hover pose first; the hover class is the component's own
-   for that reason. Reduced motion: the pile stays still. */
+/* The sample-gallery card's visual: a pile of six sample pages in 3D that browses on hover. When the pointer leaves,
+   the running step finishes in the hover pose first, hence the component's own hover class. Reduced motion: the pile
+   stays still. */
 
 const props = defineProps<{ active: boolean }>();
 
@@ -182,7 +176,6 @@ const thumb: Shape[] = [
   { x: 8, y: 66, w: 44, h: 3, tone: "soft" }
 ];
 
-/* each place in the pile (0 in front) leans a little, so the pile is not a perfect block */
 const LAST = pages.length - 1;
 const TILTS = [0, 1.2, -1, 0.8, -1.4, 0.6];
 
@@ -258,7 +251,6 @@ onBeforeUnmount(() => {
       <div class="model">
         <div class="shadow" />
 
-        <!-- the stationary blank sheet at the back place -->
         <div class="page-3d blank" :style="{ '--i': LAST, '--r': `${TILTS[LAST]}deg` }">
           <div class="paper page" />
         </div>
@@ -294,9 +286,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 
-/* the pose, the mirror of the invoice beside it; each place back is set back by --dz and shifted by --dx /
-   --dy, and the pile is nudged left so its depth stays in the column, and drawn a little smaller than the sheet,
-   as its depth makes it look bigger. --ink-strong: the headings on hover. */
+/* the pose, the mirror of the invoice beside it; each place back is offset by --dz, --dx and --dy */
 .deck {
   --tilt-y: -26deg;
   --tilt-z: 2deg;
@@ -308,7 +298,6 @@ onBeforeUnmount(() => {
   --ink-strong: #5A6472;
 }
 
-/* the camera comes closer on hover */
 .stage {
   transition: perspective 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
@@ -341,8 +330,7 @@ onBeforeUnmount(() => {
   transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.3s ease;
 }
 
-/* no shadow per page (six would darken the pile past the invoice beside it); each place back is shaded a
-   touch darker instead, so the pile reads as depth */
+/* no shadow per page (six would darken the pile); each place back is shaded a touch darker instead */
 .page {
   --page-shade: calc(0.025 + var(--i) * 0.012);
   overflow: hidden;
@@ -353,14 +341,12 @@ onBeforeUnmount(() => {
   transition: box-shadow 0.45s ease, filter 0.45s ease;
 }
 
-/* one shadow for the whole pile, behind the back place and centred on the pile's depth */
 .shadow {
   transform: translate3d(calc(var(--last) * var(--dx) / 2), calc(var(--last) * var(--dy) / 2), calc(var(--last) * -1 * var(--dz) - 16px));
   transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-/* the blank sheet stands still just behind the back page, so the back place never looks empty while the
-   pile advances */
+/* keeps the back place from looking empty while the pile advances */
 .page-3d.blank {
   --lift: -2px;
 }
@@ -370,13 +356,12 @@ onBeforeUnmount(() => {
 }
 
 
-/* Shapes: the shared placeholders in more kinds, and the accent */
+/* Shapes */
 .shape.accent {
   color: var(--accent-secondary);
   opacity: 0.55;
 }
 
-/* a photo: a lighter block with a sheen */
 .shape.block {
   opacity: 0.32;
   background-image: linear-gradient(145deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 60%);
@@ -408,11 +393,8 @@ onBeforeUnmount(() => {
 }
 
 
-/* A browse step (1.2s): the page in hand fades out where it is while the next one rises into its place, a
-   cross-fade, so the hand is never seen empty; out of sight, the page that left jumps to the back place and
-   fades in there. Place and fade are separate animations, so the place can jump while the page is invisible.
-   A 6px rise keeps the fading page in front of the one arriving (they would otherwise share a plane). The
-   rest of the pile advances slowly and a moment later. */
+/* Browse step (1.2s): place and fade are separate animations, so the place can jump while the page is invisible; a
+   6px rise keeps the fading page in front of the arriving one. */
 .deck.stepping .page-3d:not(.leaving) {
   transition-duration: 0.7s;
   transition-delay: 0.1s;
@@ -432,8 +414,7 @@ onBeforeUnmount(() => {
   animation: deck-leave-place 1.2s both, deck-leave-fade 1.2s both;
 }
 
-/* at the front until the page is out of sight, then the back place, settling the last 4px from the front
-   (from behind, it would cross the blank sheet's plane and its edge would pop) */
+/* settles the last 4px from the front: from behind, it would cross the blank sheet's plane and its edge would pop */
 @keyframes deck-leave-place {
   0% {
     transform: translate3d(-2px, 10px, 64px) rotateZ(-1deg) rotateY(16deg) rotateX(-6deg) scale(1);
@@ -455,7 +436,6 @@ onBeforeUnmount(() => {
   }
 }
 
-/* the fade: out over the first 0.42s, out of sight across the jump, then slowly back in over 0.75s */
 @keyframes deck-leave-fade {
   0% {
     opacity: 1;
@@ -473,7 +453,7 @@ onBeforeUnmount(() => {
 }
 
 
-/* Hover: the pile turns towards the reader and fans open, and the camera comes closer */
+/* Hover */
 .deck.hover {
   --tilt-x: 6deg;
   --tilt-y: -16deg;
@@ -488,8 +468,6 @@ onBeforeUnmount(() => {
   perspective: 500px;
 }
 
-/* the front page lifts off the pile and faces the camera square on (its rotations undo the pile's pose),
-   centred in the column; the pages left behind shrink, sink and dim */
 .deck.hover .page-3d.front:not(.leaving) {
   --lift: 64px;
   --par-x: -2px;
@@ -516,7 +494,6 @@ onBeforeUnmount(() => {
   filter: brightness(0.95);
 }
 
-/* colour arrives page by page from the front on hover, and drains back from the rear on leave */
 .shape {
   transition: color 0.5s ease, opacity 0.5s ease, background-color 0.5s ease;
   transition-delay: calc((var(--last) - var(--i)) * 60ms);

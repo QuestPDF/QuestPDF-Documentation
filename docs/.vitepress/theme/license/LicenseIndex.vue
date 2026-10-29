@@ -63,7 +63,6 @@ const documents = [
   align-items: center;
 }
 
-/* the rows reach the panel's edges, like the pricing FAQ */
 .documents {
   display: flex;
   flex-direction: column;

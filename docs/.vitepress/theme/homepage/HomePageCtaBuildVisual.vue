@@ -1,13 +1,8 @@
 <script setup lang="ts">
 import { onBeforeUnmount, ref, watch } from "vue";
 
-/* The intro-video card's visual: an invoice page in 3D, its sections drawn as placeholder bars (title block,
-   the two parties, the table, the totals, a footer line).
-
-   Hover (`active`, from HomePageCtaCard.vue): the content fades out, the sheet turns towards the reader and
-   the sections land on it one after another, top to bottom; the play button returns with the totals and
-   breathes while the pointer rests. A pass always finishes, even if the pointer leaves; the next hover plays
-   another. Reduced motion: the finished page, nothing moves. */
+/* The intro-video card's visual: an invoice page in 3D whose sections land on it on hover. A pass always finishes,
+   even if the pointer leaves. Reduced motion: the finished page, nothing moves. */
 
 const props = defineProps<{ active: boolean }>();
 
@@ -173,7 +168,7 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
 
 <style scoped>
 
-/* the pose (the rest is shared, see ctaVisual.css): three-quarter view, the left edge nearer */
+/* the pose; the rest is shared, see ctaVisual.css */
 .build {
   --tilt-y: 26deg;
   --tilt-z: -2deg;
@@ -181,7 +176,6 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
 }
 
 
-/* a pass fades the sections out, then lands each one (after its own --d) from in front of the page onto it */
 .section {
   position: absolute;
   color: var(--ink);
@@ -224,8 +218,7 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
 }
 
 
-/* the play button, hidden from the start of a pass until the script sets .play; it overshoots on its way
-   back */
+/* hidden from the start of a pass until the script sets .play */
 .play-button {
   position: absolute;
   z-index: 10;
@@ -258,7 +251,6 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
   transition-timing-function: ease-in;
 }
 
-/* the ring that spreads out of the button while it breathes */
 .play-button::before {
   content: "";
   position: absolute;
@@ -269,8 +261,7 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
   pointer-events: none;
 }
 
-/* hover, with motion allowed: the sheet turns towards the reader; the button breathes and sends out a ring
-   every 1.8s */
+/* Hover */
 @media (prefers-reduced-motion: no-preference) {
   .build.active {
     --tilt-x: 4deg;
@@ -312,7 +303,7 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
 }
 
 
-/* Compact: the shared flat miniature, with a small play button of its own that never moves */
+/* Compact */
 @media screen and (max-width: 700px) {
   .build > .play-button {
     display: none;

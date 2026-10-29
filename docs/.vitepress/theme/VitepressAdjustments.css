@@ -33,13 +33,10 @@ body {
     line-height: 24px;
 }
 
-/* the logo's height is the --vp-nav-logo-height token above (32px) */
 .VPNavBar .VPNavBarTitle .logo {
     margin-right: 0;
 }
 
-/* more air between the logo and the search box where the title sits inline (pages without a sidebar);
-   VitePress uses 1.5rem / 2rem at these breakpoints */
 @media (min-width: 48rem) {
     .VPNavBar:not(.has-sidebar) .VPNavBarSearch {
         padding-inline-start: 2.5rem;
@@ -88,9 +85,7 @@ html.dark .VPDoc img[alt=example] {
     font-weight: bold;
 }
 
-/* An embedded PDF scrolls on its own, so it is never taller than three quarters of the window: on a short laptop
-   screen or a phone the page around it stays in view and scrolls past it. On a phone it is also no taller than
-   about one A4 page at its width (140vw). The cap also limits the pages that set a taller inline height. */
+/* an embedded PDF scrolls on its own, so it stays shorter than the window and the page can scroll past it */
 .pdf-viewer {
     width: 100%;
     height: 625px;
@@ -100,8 +95,6 @@ html.dark .VPDoc img[alt=example] {
     border-radius: 8px;
 }
 
-/* where the browser cannot show a PDF inline (most phones), the fallback "Download instead" line sits inside the
-   frame rather than against its corner */
 .pdf-viewer > p {
     margin: 0;
     padding: 16px 20px;
@@ -127,16 +120,14 @@ html:not(.dark) .dark-only {
     border-radius: 8px;
 }
 
-/* Dark navbar is lifted one step: the bg-alt token (#161618, also the sidebar and code blocks) instead
-   of the #101010 page, so the bar reads as its own surface without introducing a new colour.
-   VitePress paints the bar through this token (VPNavBar::before), so the local nav and the home bar
-   pick it up as well. Light mode keeps the page-coloured bar. */
+/* Dark navbar: the bg-alt token, so the bar reads as its own surface. VitePress paints the bar through this token
+   (VPNavBar::before), so the local nav and the home bar pick it up as well. */
 html.dark {
     --vp-nav-bg-color: var(--vp-c-bg-alt);
 }
 
-/* The home navbar looks like the one on every other page: VitePress makes it transparent
-   at the top of the page (and always below 60rem), so restore the regular surface and divider. */
+/* VitePress makes the home navbar transparent at the top of the page (and always below 60rem): restore the regular
+   surface and divider. */
 .VPNavBar.home::before {
     background-color: var(--vp-nav-bg-color) !important;
     backdrop-filter: var(--vp-nav-backdrop-filter) !important;
@@ -146,25 +137,19 @@ html.dark {
     background-color: var(--vp-nav-divider-color);
 }
 
-/* at the top of a custom page (home included) the divider leans blue with the canvas's glows under it; scrolled,
-   it is the regular divider again */
 html:not(.dark) .Layout:has(.custom-page) .VPNavBar.top .divider-line {
     background-color: color-mix(in srgb, #2196F3 28%, #E2E2E3);
 }
 
-/* the same lean on the dark divider, lighter-handed: the dark canvas glow under it is already blue */
 html.dark .Layout:has(.custom-page) .VPNavBar.top .divider-line {
     background-color: color-mix(in srgb, #2196F3 20%, #2E2E32);
 }
 
-/* navbar links one step larger than the VitePress default (0.875rem) */
 .VPNavBar .VPNavMenuLink.VPNavBarMenuLink {
     font-size: 1rem;
 }
 
-/* Navbar links are soft pills: grey on hover, filled for the current section. Only colours change, so nothing
-   moves. The padding is 2px wider than VitePress's 0.75rem, so the texts sit 28px apart and the links collapse
-   into the ⋯ menu a little earlier. */
+/* Navbar links */
 .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink {
     min-height: 36px;
     padding: 0 0.875rem;
@@ -180,7 +165,7 @@ html.dark .Layout:has(.custom-page) .VPNavBar.top .divider-line {
 
 .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {
     color: #ffffff;
-    background-color: #1976D2; /* the buttons' blue; the black pill (#2C2C32) was tried too */
+    background-color: #1976D2;
 }
 
 html.dark .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {
@@ -188,8 +173,7 @@ html.dark .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {
     background-color: #F5F5F7;
 }
 
-/* the ⋯ menu button matches the links; the pill is painted behind it, because the button
-   keeps the full bar height so its dropdown still opens right below it, without a gap */
+/* the pill is painted behind the ⋯ button, which keeps the full bar height so its dropdown opens right below it */
 .VPNavBar .VPNavBarExtra > .button {
     position: relative;
     isolation: isolate;
@@ -208,7 +192,7 @@ html.dark .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {
     background-color: var(--vp-c-default-soft);
 }
 
-/* search reads as a field: bordered, same corner radius as the links, wider when there is room */
+/* Search */
 @media (min-width: 48rem) {
     .VPNavBar .VPNavBarSearchButton {
         height: 40px;
@@ -228,7 +212,6 @@ html.dark .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {
     }
 }
 
-/* the wider field and larger text only from 80rem: below that every pixel counts towards fitting the links */
 @media (min-width: 80rem) {
     .VPNavBar .VPNavBarSearchButton {
         min-width: 220px;

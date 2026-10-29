@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 
-/* A call to action under the hero: one link with a visual (the "visual" slot) and the pitch. It is `active`
-   while hovered or keyboard-focused (a click's focus does not count: the click navigates anyway); the slot
-   gets `active` too, so the visual plays its hover. */
+/* `active` while hovered or keyboard-focused (a click's focus does not count: the click navigates anyway); the
+   visual slot gets it too. */
 
 withDefaults(defineProps<{
   title: string;
   description: string;
 
-  /* the link row at the bottom: "label →" */
   label: string;
   href: string;
 
@@ -63,7 +61,7 @@ function onFocus(event: FocusEvent) {
 
 .cta-card {
   isolation: isolate; /* keeps the gradient (z-index: -1) above the panel background but below the content */
-  overflow: hidden; /* a visual that runs past its column is clipped at the card's rounded edge */
+  overflow: hidden;
 
   display: grid;
   grid-template-columns: 200px minmax(0, 1fr);
@@ -92,9 +90,7 @@ html.dark .cta-card.active {
 }
 
 
-/* Hover ring: an ::after over the card, its conic gradient masked to the outer 2px (like the panel rim), with
-   three highlights travelling round. The start angle is a registered property so it can be animated; without
-   @property the ring just stands still. */
+/* Hover ring: a conic gradient masked to the outer 2px; without @property it stands still */
 
 @property --cta-ring-angle {
   syntax: "<angle>";
@@ -103,8 +99,6 @@ html.dark .cta-card.active {
 }
 
 .cta-card {
-  /* light theme: an accent-tinted lift shadow replaces the resting edge (a grey shadow under a blue glow reads
-     muddy, and the grey hairline would show through the ring) */
   --accent-halo:
       0 1px 2px rgba(16, 24, 40, 0.04),
       0 13px 27px -5px color-mix(in srgb, var(--accent) 18%, transparent),
@@ -115,7 +109,6 @@ html.dark .cta-card.active {
 }
 
 html.dark .cta-card {
-  /* dark theme: a soft glow of the accent over the usual lift shadow */
   --accent-halo: 0 0 48px -16px color-mix(in srgb, var(--accent) 50%, transparent);
   --accent-text: color-mix(in srgb, var(--accent) 75%, #FFF);
   --glow-outer: color-mix(in srgb, var(--accent) 13%, transparent);
@@ -131,7 +124,6 @@ html.dark .cta-card {
   padding: 2px;
   pointer-events: none;
 
-  /* a faint tint all round and three accent arcs, 120deg apart; the peaks lighten on the dark theme */
   --ring-base: color-mix(in srgb, var(--accent) 22%, transparent);
   --ring-peak: light-dark(var(--accent), color-mix(in srgb, var(--accent) 80%, #FFF));
   background: conic-gradient(
@@ -156,7 +148,6 @@ html.dark .cta-card {
   transition: opacity 0.35s ease;
 }
 
-/* the ring never reaches full strength: it should invite, not shout */
 .cta-card.active::after {
   opacity: 0.75;
   animation: cta-ring-spin 12s linear infinite;
@@ -214,9 +205,6 @@ html.dark .cta-card {
 }
 
 
-/* dark theme: a glow in the accent colour from the top edge above the visual, a little brighter on hover; the
-   light theme keeps the card plain white (a tint there takes light away rather than adding it) */
-
 .background-gradient {
   display: none;
   position: absolute;
@@ -239,7 +227,6 @@ html.dark .background-gradient {
 }
 
 
-/* narrow cards between the stacking point (HomePage.vue) and the full width: more room for the text */
 @media screen and (max-width: 1280px) and (min-width: 1181px) {
   .cta-card {
     grid-template-columns: 180px minmax(0, 1fr);
@@ -248,7 +235,7 @@ html.dark .background-gradient {
 }
 
 
-/* Compact: below 700px the visual is a thumbnail beside the title, so the card stays short */
+/* Compact: below 700px the visual is a thumbnail beside the title */
 
 @media screen and (max-width: 700px) {
   .cta-card {
@@ -300,7 +287,7 @@ html.dark .background-gradient {
 }
 
 
-/* Reduced motion: hover changes colour, opacity and shadow only */
+/* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
   .cta-card,
@@ -309,7 +296,6 @@ html.dark .background-gradient {
     transition: box-shadow 0.3s ease, background-color 0.3s ease;
   }
 
-  /* the ring still lights up, but its highlights stay where they are */
   .cta-card.active::after {
     animation: none;
   }

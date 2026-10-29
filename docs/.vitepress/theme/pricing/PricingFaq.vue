@@ -33,8 +33,6 @@ import { faqCategories as categories } from "./faq";
 
 <style scoped>
 
-/* each category is a row: its header on the left, level with the first question, its questions on a panel */
-
 .faq-categories {
   --faq-accent: #2196F3;
 
@@ -53,7 +51,6 @@ import { faqCategories as categories } from "./faq";
   gap: 56px;
 }
 
-/* the title's first line sits level with the first question's text; set to the right, against its panel */
 .faq-category-header {
   display: flex;
   flex-direction: column;
@@ -61,7 +58,6 @@ import { faqCategories as categories } from "./faq";
   text-align: right;
 }
 
-/* in the text colour: on this page blue marks what is open or clickable */
 .faq-category-title {
   line-height: 1.75rem;
   font-weight: 700;
@@ -74,7 +70,6 @@ import { faqCategories as categories } from "./faq";
   color: var(--vp-c-text-2);
 }
 
-/* the rows reach the panel's edges; the panel keeps its own height when the header is taller */
 .faq-list {
   align-self: start;
   display: flex;
@@ -146,7 +141,6 @@ import { faqCategories as categories } from "./faq";
   text-decoration: underline;
 }
 
-/* a narrower header column on mid-size screens, so the card keeps about 700px */
 @media screen and (max-width: 1200px) {
   .faq-category {
     grid-template-columns: 220px minmax(0, 1fr);
@@ -154,7 +148,6 @@ import { faqCategories as categories } from "./faq";
   }
 }
 
-/* below 960px the header stacks above its card, indented to line up with the question text */
 @media screen and (max-width: 960px) {
   .faq-category {
     display: flex;

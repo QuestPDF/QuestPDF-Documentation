@@ -1,14 +1,10 @@
 <script setup lang="ts">
-/* Two panels: the compliance story (the validators, then the conformance levels as chips grouped by
-   purpose), and a two-by-two grid of what buyers check first: data privacy (linked to its policy), the
-   runtimes, the operating systems and the deployment environments. */
 
 interface StandardsCategory {
   title: string;
   levels: string[];
 }
 
-/* every conformance level the library produces, grouped by purpose */
 const standards : StandardsCategory[] = [
   {
     title: "Archiving",
@@ -46,8 +42,7 @@ const platformGroups : PlatformGroup[] = [
   }
 ];
 
-/* the Font Awesome brand mark beside a name; the runtimes have none, and Azure takes Microsoft's (Font Awesome
-   has no Azure mark) */
+/* Azure takes Microsoft's mark: Font Awesome has none for Azure */
 const platformIcons : Record<string, string> = {
   Windows: "fa-windows",
   Linux: "fa-linux",
@@ -104,7 +99,6 @@ const platformIcons : Record<string, string> = {
 
 <style scoped>
 
-/* side by side from 1181px; narrower, the facts in the two-by-two grid would be squeezed to a few words a line */
 .trust {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -118,8 +112,6 @@ const platformIcons : Record<string, string> = {
 }
 
 
-/* the label over each group and cell, the scanning anchor of both panels */
-
 .label {
   display: flex;
   align-items: center;
@@ -132,8 +124,6 @@ const platformIcons : Record<string, string> = {
   color: var(--vp-c-text-1);
 }
 
-
-/* the first group (archiving) fills a row; the others share the next one and wrap when narrow */
 
 .standards {
   display: flex;
@@ -180,8 +170,7 @@ const platformIcons : Record<string, string> = {
 }
 
 
-/* Cells: a two-by-two grid divided by a cross of hairlines. The cells pad only their inner sides, so the
-   lines run edge to edge while the outer edges stay open. */
+/* Cells */
 
 .cells {
   display: grid;
@@ -197,7 +186,6 @@ const platformIcons : Record<string, string> = {
   padding: 24px 32px;
 }
 
-/* left column: open on the left; right column: open on the right, the vertical line on its left */
 .cell:nth-child(odd) {
   padding-left: 0;
 }
@@ -207,7 +195,6 @@ const platformIcons : Record<string, string> = {
   border-left: 1px solid var(--vp-c-divider);
 }
 
-/* first row: open on top; second row: open at the bottom, the horizontal line on its top */
 .cell:nth-child(-n + 2) {
   padding-top: 0;
 }
@@ -217,9 +204,7 @@ const platformIcons : Record<string, string> = {
   border-top: 1px solid var(--vp-c-divider);
 }
 
-/* one column below 541px, where two would not fit ".NET Framework 4.6.2+": no vertical line, every cell after
-   the first gets a line above; :nth-child(n) matches every cell and weighs as much as the two-column rules
-   above, so it replaces their paddings */
+/* :nth-child(n) weighs as much as the two-column rules above, so it replaces their paddings */
 @media screen and (max-width: 540px) {
   .cells {
     grid-template-columns: minmax(0, 1fr);
@@ -266,7 +251,6 @@ const platformIcons : Record<string, string> = {
   white-space: nowrap;
 }
 
-/* a fixed-width slot, so the names line up whatever the mark's shape */
 .platform-icon {
   flex-shrink: 0;
   width: 24px;
@@ -275,8 +259,6 @@ const platformIcons : Record<string, string> = {
   color: var(--vp-c-text-2);
 }
 
-
-/* the linked cell reads like the others until pointed at: then its label underlines and an arrow slides in */
 
 .fact {
   border-radius: 4px;

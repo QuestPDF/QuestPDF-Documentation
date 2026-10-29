@@ -89,7 +89,7 @@ const year = new Date().getFullYear();
 <style scoped>
 
 footer {
-  /* opaque, like the navbar: the page canvas (glows and grain) stops at the footer's top border */
+  /* opaque, so the page canvas stops at the footer's top border */
   background-color: var(--vp-c-bg);
 }
 
@@ -147,7 +147,6 @@ footer * {
   }
 }
 
-/* touch: each link a 44px row (its text keeps its place under the heading) */
 @media (pointer: coarse) {
   .link-category h2 {
     margin-bottom: 2px;

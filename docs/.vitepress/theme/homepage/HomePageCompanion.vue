@@ -1,20 +1,14 @@
 <template>
-  <!-- A tour of the app: the whole app first, then one view at a time, with a marker on its part of the app
-       and a card naming the feature, placed where it covers nothing the view is about. It moves on by
-       itself (companionTour.ts); the list beside it picks a view. -->
   <div class="panel">
     <div ref="root" class="companion-tour" @mouseenter="hovered = true" @mouseleave="hovered = false" @focusin="focused = true" @focusout="focused = false">
       <div class="companion-stage" :class="{ overview: !current.focus }" :style="marker">
 
-        <!-- the screens, stacked and cross-fading, in the reader's theme, all cropped from the top left
-             to one proportion (the layout error screenshot is squarer, so it shows larger) -->
         <div class="companion-frames">
           <template v-for="frame of frames" :key="frame">
             <img :src="`/companion/${frame}-light.webp`" :alt="frame === current.frame ? 'QuestPDF Companion App' : ''" class="companion-frame light" :class="{ shown: frame === current.frame }" loading="lazy" />
             <img :src="`/companion/${frame}-dark.webp`" :alt="frame === current.frame ? 'QuestPDF Companion App' : ''" class="companion-frame dark" :class="{ shown: frame === current.frame }" loading="lazy" />
           </template>
 
-          <!-- hot reload: a faint band passes down the page each time the overview comes round -->
           <span v-if="current.view === 0" :key="step" class="companion-refresh" aria-hidden="true"></span>
           <span class="companion-marker" aria-hidden="true"></span>
         </div>
@@ -100,11 +94,9 @@ import { useCompanionTour } from "./companionTour";
 
 interface View {
   icon: string;
-  /* the list's label: what the reader can do, a verb and its object */
   label: string;
-  /* the label on phones, one word */
+  /* the label on phones */
   short: string;
-  /* the card: the feature's name and one line about it */
   title: string;
   description: string;
 }
@@ -121,17 +113,14 @@ const views: View[] = [
   { label: "Debug layout issues", short: "Layout", icon: "fa-bug", title: "Layout debugging", description: "When content does not fit, find the likely root cause, with every element color-coded by how it was laid out." }
 ];
 
-/* Places are fractions of the frame: the screenshot cropped at the bottom to 1.62:1 from the top left
-   (see .companion-frames). Check them whenever a screenshot changes. */
+/* Places are fractions of the cropped frame (see .companion-frames): check them whenever a screenshot changes. */
 interface Step {
   view: number;
   /* the screenshot in public/companion */
   frame: string;
-  /* the screen's documented keyboard shortcut; several keys are pressed together */
   keys?: string[];
-  /* the marker's place (null: the whole app, no marker) */
+  /* null: the whole app, no marker */
   focus: [number, number] | null;
-  /* the card's top-left corner, placed per screen so the card covers nothing the view is about */
   card: [number, number];
 }
 
@@ -185,8 +174,7 @@ const isDownloadBelow = ref(false);
 const downloadRef = ref<HTMLElement | null>(null);
 const downloadMenuRef = ref<HTMLElement | null>(null);
 
-/* the menu opens upwards, over the list, unless the navbar would cover it and there is more room below;
-   measured once it is rendered, before the browser paints it */
+/* opens upwards unless the navbar would cover it and there is more room below; measured before the browser paints it */
 async function toggleDownload() {
   isDownloadOpen.value = !isDownloadOpen.value;
 
@@ -260,14 +248,11 @@ onBeforeUnmount(() => {
 }
 
 
-/* the stage: the app with its marker; the card is placed in the stage's coordinates */
-
 .companion-stage {
   position: relative;
   transition: --companion-fx 0.7s cubic-bezier(0.3, 0.7, 0.2, 1), --companion-fy 0.7s cubic-bezier(0.3, 0.7, 0.2, 1);
 }
 
-/* the screenshots are cropped at the bottom to one proportion, from the top left */
 .companion-frames {
   position: relative;
   aspect-ratio: 1.62;
@@ -319,7 +304,6 @@ html.dark .companion-frame.light {
   100% { opacity: 0; background-position: 0 -10%; }
 }
 
-/* the marker: a brand dot in a white ring, so it shows on any screen in either theme */
 .companion-marker {
   position: absolute;
   left: var(--companion-fx);
@@ -354,7 +338,6 @@ html.dark .companion-frame.light {
 }
 
 
-/* the card: narrower on a smaller app; a faint brand tint, kept opaque, sets it apart from the app */
 .companion-card {
   --companion-card-width: clamp(210px, 30%, 240px);
   position: absolute;
@@ -401,8 +384,6 @@ html.dark .companion-frame.light {
   opacity: 0;
   transform: translateY(6px);
 }
-
-/* the shortcut: a strip in place of the card's bottom padding, so the card keeps its height */
 
 .companion-shortcut {
   display: flex;
@@ -455,8 +436,6 @@ html.dark .companion-frame.light {
 }
 
 
-/* the views: two columns filled top to bottom; phones use the one-word names */
-
 .companion-views {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -506,8 +485,6 @@ html.dark .companion-frame.light {
 }
 
 
-/* the download menu opens upwards, over the list, or downwards when the navbar would cover it (toggleDownload) */
-
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -519,7 +496,6 @@ html.dark .companion-frame.light {
   position: relative;
 }
 
-/* the shared .action button (CustomPages.css), with room for the chevron */
 .download-toggle {
   display: inline-flex;
   align-items: center;
@@ -613,7 +589,6 @@ html.dark .companion-frame.light {
   }
 }
 
-/* below 1320px everything stacks: beside the words, a narrower app would leave the card too little room */
 @media screen and (max-width: 1320px) {
   .companion-tour {
     grid-template-columns: minmax(0, 1fr);
@@ -652,7 +627,6 @@ html.dark .companion-frame.light {
   }
 }
 
-/* below 1040px the card would cover too much of a smaller app: it sits under the app */
 @media screen and (max-width: 1040px) {
   .companion-card {
     position: relative;
@@ -671,8 +645,7 @@ html.dark .companion-frame.light {
   }
 }
 
-/* one column where two would cut "Coordinates" short (the narrowest phones); measured on the tour itself, so a
-   classic scrollbar or a zoom level cannot fool it */
+/* measured on the tour itself, so a classic scrollbar or a zoom level cannot fool it */
 .companion-tour {
   container-type: inline-size;
 }
@@ -685,7 +658,6 @@ html.dark .companion-frame.light {
   }
 }
 
-/* touch: each view a 44px row; the rows close up, so the labels keep their spacing */
 @media (pointer: coarse) {
   .companion-views {
     row-gap: 0;
@@ -696,8 +668,6 @@ html.dark .companion-frame.light {
   }
 }
 
-/* the menu (240px) beside the first button (about 190px) needs about 430px; on a narrower tour it spans the
-   whole row of buttons instead of running out of the panel */
 @container (max-width: 440px) {
   .actions {
     position: relative;

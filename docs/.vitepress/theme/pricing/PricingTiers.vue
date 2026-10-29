@@ -134,9 +134,8 @@ const licenses = [
 }
 
 
-/* Each card is a subgrid spanning six shared row tracks, so every section starts at the same height across
-   the cards. The children are pinned to their rows because only the professional card has the tag:
-   auto-placement would shift the rows of the other two. */
+/* Each card is a subgrid of six shared rows, so sections line up across the cards; the children are pinned to their
+   rows because only the professional card has the tag. */
 
 .license-tiers {
   margin-top: 28px;
@@ -147,8 +146,7 @@ const licenses = [
   gap: 0 32px;
 }
 
-/* 48px from 1280px, wider than the shared panel inset; on a narrower window, where the three cards share less
-   room, it gives way down to 24px at 961px. The inset is a token so the badge can reach the card's edges. */
+/* the inset is a token so the badge can reach the card's edges */
 .license-tier {
   --tier-padding: clamp(24px, 7.5vw - 48px, 48px);
 
@@ -175,10 +173,6 @@ const licenses = [
 }
 
 
-/* The three cards read as one unit: the outer cards drop their inner corners and are inset vertically; the
-   professional card in the middle stays full height, framed in blue (and tinted blue in dark mode; light-mode
-   cards stay pure white). */
-
 .license-tier.professional {
   border: 2px solid light-dark(#2196F3, #3D8BD4);
   box-shadow:
@@ -188,8 +182,6 @@ const licenses = [
   z-index: 1;
 }
 
-/* dark mode keeps the border alone: the halo around it read as a second, translucent border. The frame, tint and
-   shadow are a step less saturated than the brand blue, which glowed on the near-black canvas. */
 html.dark .license-tier.professional {
   background-color: color-mix(in srgb, #2196F3 3%, var(--surface));
   box-shadow: 0 24px 48px -24px color-mix(in srgb, #3D8BD4 22%, transparent);
@@ -211,13 +203,8 @@ html.dark .license-tier.professional {
 }
 
 
-/* The badge is a title bar: the 46px by which the professional card rises above its neighbours, with the label
-   centred in it, so the band's bottom edge is the neighbours' top edge and the three white bodies start on one
-   line. Light mode keeps the band white like the card body (a pale blue tint was tried) under a hairline, with
-   the label and star in the frame's own blue (a navy label read as a separate colour); dark mode keeps the card's
-   own surface, draws only the hairline and sets the label and star in a light sky blue (the brand-1 #64B5F6 read
-   as greyish, white lost the blue). The tracked capitals need a wider word space than the font's own, or "MOST
-   POPULAR" runs together. The corners follow the frame's inner radius. */
+/* The badge fills the 46px by which the professional card rises above its neighbours; the tracked capitals need a
+   wider word space, or "MOST POPULAR" runs together. */
 .license-tier .tag {
   justify-self: stretch;
   margin: calc(-1 * var(--tier-padding)) calc(-1 * var(--tier-padding)) 0;
@@ -246,7 +233,6 @@ html.dark .license-tier.professional {
   color: light-dark(#2196F3, #7CC4FF);
 }
 
-/* dark mode sets the label semibold like the tier name: the bold cut glared in light blue on the dark card */
 html.dark .license-tier .tag {
   gap: 10px;
   font-weight: 600;
@@ -293,7 +279,6 @@ html.dark .license-tier .tag {
   color: var(--vp-c-text-1);
 }
 
-/* when the price and the tax note do not fit one line, the note moves down whole */
 .license-tier .price-tax {
   margin-left: 8px;
   font-weight: 400;
@@ -324,8 +309,6 @@ html.dark .license-tier .tag {
   gap: 12px;
 }
 
-/* a duotone tick on a faint square, in the tier's colour; the professional and enterprise ticks sit on
-   a solid square instead */
 .fa-square-check {
   width: 24px;
   font-size: 24px;
@@ -341,7 +324,6 @@ html.dark .license-tier .tag {
   --fa-secondary-color: light-dark(#67B84D, #81C784);
 }
 
-/* white tick on a solid blue square, the same blue as the tier name badge */
 .license-tier.professional .fa-square-check {
   --fa-primary-color: white;
   --fa-secondary-color: light-dark(#2196F3, #1976D2);
@@ -360,7 +342,7 @@ html.dark .license-tier .tag {
   margin-top: 32px;
 }
 
-/* filled like the shared primary button (its blue) and in the tier's black; see CustomPages.css for --fill */
+/* see CustomPages.css for --fill */
 .license-tier.professional .action {
   --fill: #1976D2;
 
@@ -387,7 +369,7 @@ html.dark .license-tier .tag {
 
 
 .license-tier .footnote {
-  place-self: normal; /* stretch across the column so the centered text aligns with the button above */
+  place-self: normal;
   text-align: center;
   margin-top: 16px;
 
@@ -406,8 +388,6 @@ html.dark .license-tier .tag {
 }
 
 
-/* below 960px: one centred column, without the joined-card styling */
-
 @media screen and (max-width: 960px) {
   .license-tiers {
     display: flex;
@@ -416,7 +396,6 @@ html.dark .license-tier .tag {
     gap: 32px;
   }
 
-  /* the shared panel inset, which narrows to 32px by 24px on phones */
   .license-tier {
     --tier-padding-block: clamp(32px, 22.4px + 1.38vw, 40px);
     --tier-padding-inline: clamp(24px, 4.7px + 2.76vw, 40px);
@@ -427,7 +406,6 @@ html.dark .license-tier .tag {
     padding: var(--tier-padding-block) var(--tier-padding-inline);
   }
 
-  /* stacked, the badge's row is its own height, so it spaces itself from the header */
   .license-tier .tag {
     margin: calc(-1 * var(--tier-padding-block)) calc(-1 * var(--tier-padding-inline)) var(--tier-padding-block);
   }

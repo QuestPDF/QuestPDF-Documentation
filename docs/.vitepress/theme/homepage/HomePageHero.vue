@@ -47,8 +47,6 @@ const benefits = [
 
 /* Layout */
 
-/* "Code-first PDF library for C#" is about 13x the font size wide, so it stays on one line down to tablets; when
-   it has to wrap, it wraps balanced, and phones take a smaller size */
 .content {
   display: flex;
   flex-direction: column;
@@ -71,7 +69,6 @@ const benefits = [
   }
 }
 
-/* "Code-first" in the logo's gradient, painted through the glyphs */
 h1 .highlight-foreground {
   display: inline-block; /* so the gradient box ends at the word, not the full line */
   padding-right: 0.05em; /* keeps the gradient clip from shaving the last letter's edge */
@@ -88,9 +85,7 @@ html.dark h1 .highlight-foreground {
 }
 
 
-/* Lists: the benefits and the statistics side by side, one row each, so their rows line up, with the dot grid in
-   the room between them (at least 64px; the benefits give way first and wrap); once the benefits would wrap, the
-   statistics move under them */
+/* Lists */
 
 .lists {
   isolation: isolate; /* so the dot grid's z-index puts it under the lists, not under the page canvas */
@@ -106,7 +101,6 @@ html.dark h1 .highlight-foreground {
   gap: 1.75rem;
 }
 
-/* the icon tile is centred on the first line of text, so a wrapped row keeps its icon beside the first line */
 .benefits li {
   display: flex;
   align-items: flex-start;
@@ -114,12 +108,11 @@ html.dark h1 .highlight-foreground {
   color: var(--vp-c-text-1);
 }
 
-/* regular text looks thinner on a white canvas than on a dark one, so light mode takes half a weight step up (Inter is variable) */
+/* regular text looks thinner on white, so light mode takes half a weight step up */
 html:not(.dark) .benefits li {
   font-weight: 450;
 }
 
-/* the statistics share the benefits' type size, so the rows of both lists line up */
 .benefits li,
 .statistic {
   font-size: 1.25rem;
@@ -128,15 +121,9 @@ html:not(.dark) .benefits li {
 }
 
 .statistic {
-  display: block; /* its own line box, so the row is exactly one line tall like a benefit */
+  display: block;
 }
 
-/* a plain 40px tile holding the outline glyph: four equal squares read as bullets whatever each glyph's own
-   width or mass (a bare glyph did in dark mode, where it was the brightest mark in the row, but not on the pale
-   canvas). White with a hairline of the glyph's blue on the light canvas (the hairline keeps the tile's edge where
-   the wash turns white on the lower rows); on the dark one a faint chip of the glyph's own sky blue, so the tile
-   and the glyph read as one blue mark (plain black wells, tints and panel-style lifts were compared and set
-   aside). No sheen or shadow. The line is 28px, so the tile overhangs 6px above and below it */
 .list-icon {
   display: inline-flex;
   flex: 0 0 auto;
@@ -150,17 +137,12 @@ html:not(.dark) .benefits li {
   box-shadow: inset 0 0 0 1px light-dark(rgba(25, 118, 210, 0.16), transparent);
 }
 
-/* the buttons' blue in light mode (the link blue, a light-blue-800, leans teal on the pale canvas); the brand-1
-   sky blue in dark mode */
 .list-icon i {
   font-size: 1.25rem;
   color: light-dark(#1976D2, var(--vp-c-brand-1));
 }
 
-/* each stat is a link that reads as plain content: its parts set their own colours, so the global link hover
-   never reaches them; the value leads, the label stays quiet. In light mode the grey label sank into the blue
-   canvas, so there it takes the text colour at the benefits' weight and the value goes near black, the navbar's
-   active pill (a blue value was tried and rejected) */
+/* each stat is a link whose parts set their own colours, so the global link hover never reaches them */
 .statistic .value {
   margin-right: 0.5rem;
   font-weight: 700;
@@ -184,7 +166,6 @@ html:not(.dark) .statistic .label {
     gap: 48px;
   }
 
-  /* stacked, the dot grid shares the statistics' cell instead of taking a row of its own */
   .hero-pattern,
   .statistics {
     grid-area: 2 / 1;
@@ -197,16 +178,14 @@ html:not(.dark) .statistic .label {
   }
 }
 
-/* two max-content columns and the 96px gap need about 650px with the gutters, so narrower viewports stack the
-   statistics; the breakpoint keeps some room for the live values to grow */
+/* the two columns and the 96px gap need about 650px with the gutters */
 @media screen and (max-width: 720px) {
   .statistics {
     grid-template-columns: 1fr;
   }
 }
 
-/* Dot grid: a faint field of dots filling the room between the benefits and the statistics, reaching above and
-   below the lists, with soft edges on all four sides (the glows belong to the page canvas, see CustomPages.css) */
+/* Dot grid */
 
 .hero-pattern {
   z-index: -1;
@@ -214,7 +193,6 @@ html:not(.dark) .statistic .label {
   margin-block: -64px;
   pointer-events: none;
 
-  /* the dots lean towards the brand blue, so the grid reads as part of the blue canvas rather than grey noise */
   background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 36%, transparent) 1px, transparent 1.5px);
   background-size: 24px 24px;
   background-position: 12px 12px;
@@ -225,8 +203,6 @@ html:not(.dark) .statistic .label {
   mask-composite: intersect;
 }
 
-/* light dots on a dark canvas stand out more than dark dots on white, so they are fainter there, with a hint of
-   the blue (as the dot wings in CustomPages.css) */
 html.dark .hero-pattern {
   background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #64B5F6 50%, var(--vp-c-text-1)) 13%, transparent) 1px, transparent 1.5px);
 }

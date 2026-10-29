@@ -1,12 +1,5 @@
-/* --custom-page-width: the width (side padding included) shared by the page content, the navbar and the footer,
-   so all three align; custom pages take 90rem, the rest of the site 1216px.
-   --custom-page-gutter: that side padding, the navbar's own (VitePress pads it 24px below 768px, 32px from 768px),
-   so the logo, the content and the footer start at the same x.
-   --custom-page-bg: the canvas, the theme background with a faint blue tint: very light so the white panels lift
-   from it, near black in dark mode.
-
-   Theme colours: a single colour that differs per theme is written with light-dark() (the build lowers it for
-   older browsers); sets of tokens, gradients and other values switch in an `html.dark` rule. */
+/* --custom-page-gutter is the navbar's own side padding, so the logo, the content and the footer start at the same x.
+   light-dark() is lowered by the build for older browsers. */
 
 :root {
   --custom-page-width: 1216px;
@@ -25,7 +18,6 @@
   --custom-page-width: 90rem;
 }
 
-/* the navbar of a page without a sidebar spans the page content */
 .VPNavBar:not(.has-sidebar) .container {
   max-width: calc(var(--custom-page-width) - 2 * var(--custom-page-gutter));
 }
@@ -36,9 +28,8 @@
 }
 
 
-/* The bases that pages restyle (content column, section header, panel) are wrapped in :where(), so they weigh
-   no more than a class: a component rule naming the element's own class wins, whatever order the stylesheets
-   load in. */
+/* The bases are wrapped in :where(), so a component rule naming the element's own class wins whatever order the
+   stylesheets load in. */
 
 .custom-page :where(.content) {
   padding: 64px var(--custom-page-gutter);
@@ -52,9 +43,6 @@
   }
 }
 
-/* the headings grow from their phone size at 390px to their full size at 700px */
-
-/* display sizes of Inter sit a little tight (negative tracking), as the hero's headline does */
 .custom-page h1 {
   font-size: clamp(2.25rem, 25.8px + 2.6vw, 2.75rem);
   font-weight: 700;
@@ -78,8 +66,6 @@
   line-height: 1.5rem;
 }
 
-/* a heading that wraps breaks into lines of even length instead of leaving its last word alone (a browser
-   without text-wrap: balance wraps as before) */
 .custom-page :is(h1, h2, h3, .row-title) {
   text-wrap: balance;
 }
@@ -114,9 +100,7 @@
   text-align: center;
 }
 
-/* Text in a panel: card-title + card-description for its heading and lead, row-title + row-description for a
-   labelled row inside it. The classes carry their own margins, so the element (h2, h3, p, strong) does not
-   matter. */
+/* Text in a panel */
 
 .custom-page .card-title {
   margin: 0;
@@ -157,20 +141,13 @@
 }
 
 
-/* Surfaces: the canvas (on <body>, see "Page canvas"), a surface lifted from it and an inset layer (chips,
-   tiles) on the surface. Light mode lifts with white panels, a hairline ring and a soft shadow; dark mode with
-   translucent white and no edge, so the washes show through. Every surface is lit from above like glass: a
-   sheen (its background image) and a one-pixel rim, both kept faint. */
+/* Surfaces */
 
 .custom-page {
-  /* the panel inset, block and inline: 32px by 24px up to 700px, 40px from 1280px, scaling with the window in
-     between */
   --panel-padding: clamp(32px, 22.4px + 1.38vw, 40px) clamp(24px, 4.7px + 2.76vw, 40px);
   --surface: #FFFFFF;
   --surface-inner: #F0F2F6;
-  /* the hairlines inside a panel (window title bars, card and column splits): VitePress's light grey is too faint
-     on white, so light mode takes a cool grey a couple of steps darker (one more, #D4D8DF, was too strong); dark
-     mode keeps VitePress's own value */
+  /* VitePress's light divider is too faint on white */
   --vp-c-divider: light-dark(#DBDDE1, #2E2E32);
   --surface-edge:
       inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 7%, transparent),
@@ -188,8 +165,7 @@ html.dark .custom-page {
   --surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0) 160px);
 }
 
-/* the panel: the rim is a ::before whose gradient is masked to a one-pixel border, so the surface stays
-   see-through */
+/* the rim is a ::before whose gradient is masked to a one-pixel border, so the surface stays see-through */
 
 .custom-page :where(.panel) {
   position: relative;
@@ -212,8 +188,6 @@ html.dark .custom-page {
   mask-composite: exclude;
 }
 
-/* a neutral inset square holding an icon (contact cards, purchase facts) */
-
 .custom-page .icon-tile {
   display: flex;
   flex-shrink: 0;
@@ -230,9 +204,7 @@ html.dark .custom-page {
   color: var(--vp-c-text-1);
 }
 
-/* Dot wings: two faint dot fields beside a header that sits on the canvas (`texture-dots` goes on the page root,
-   or on each section band of a page with several), fading out before the 650px text column; dropped below 960px,
-   where there is no room. */
+/* Dot wings */
 
 .texture-dots {
   position: relative;
@@ -248,7 +220,6 @@ html.dark .custom-page {
   height: 420px;
   z-index: -1;
   pointer-events: none;
-  /* the dots lean towards the brand blue, as the hero's grid does, so they read as part of the blue canvas */
   background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 36%, transparent) 1px, transparent 1.5px);
   background-size: 24px 24px;
   background-position: center top;
@@ -264,8 +235,6 @@ html.dark .custom-page {
   mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%);
 }
 
-/* light dots on a dark canvas read stronger than dark dots on white, so they are fainter there, with a hint of the
-   blue (half a light blue into the text colour) */
 html.dark .texture-dots::before,
 html.dark .texture-dots::after {
   background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #64B5F6 50%, var(--vp-c-text-1)) 16%, transparent) 1px, transparent 1.5px);
@@ -279,8 +248,7 @@ html.dark .texture-dots::after {
 }
 
 
-/* The seam between sections: a dotted line that fades out at both ends. Between panels 32px apart its margin
-   puts the dots 48px from the panels on either side; in a grid it spans every column. */
+/* Seam between sections */
 
 .custom-page .dotted-divider {
   grid-column: 1 / -1;
@@ -298,12 +266,8 @@ html.dark .custom-page .dotted-divider {
 }
 
 
-/* Page canvas: one continuous background on <body>, so the page, the strip under the navbar and the footer share
-   it: a faint grain tile (a barely visible texture that also stops banding in the gradients) over three glows,
-   two at the top of the page and one in the top left corner (on the homepage in light mode, down the left edge
-   instead), the rest of the canvas plain. The glows are a single brand blue on every page, the homepage and the
-   rest alike; several hues or grey washes read as smudges. It lives here, not in the page components, because in
-   dev a component's CSS loads only on the pages that import it. */
+/* Page canvas: it lives here, not in the page components, because in dev a component's CSS loads only on the pages
+   that import it. */
 
 body:has(.custom-page) {
   --canvas-glow: color-mix(in srgb, #2196F3 32%, transparent);
@@ -320,11 +284,11 @@ body:has(.custom-page) {
   background-repeat: repeat, no-repeat, no-repeat, no-repeat;
 }
 
-/* the homepage alone, in light mode, takes the side glow down the left edge by the cards, where the top glows have
-   faded, and softer; the dark rule below, more specific, keeps the corner there */
+/* the homepage in light mode takes the side glow down the left edge; the more specific dark rule below keeps the
+   corner */
 body:has(.home-page) {
   --canvas-glow-side-shape: ellipse 760px 500px at 0% 780px;
-  --canvas-glow-side: color-mix(in srgb, #2196F3 11%, transparent); /* an edge glow shows more of itself than a corner one */
+  --canvas-glow-side: color-mix(in srgb, #2196F3 11%, transparent);
 }
 
 html.dark body:has(.custom-page) {
@@ -334,9 +298,6 @@ html.dark body:has(.custom-page) {
   --canvas-glow-side-shape: ellipse 800px 450px at 0% 2%;
 }
 
-/* a link in running text is blue; a link that is a component of its own (a card, a row, a menu item) colours
-   its own parts */
-
 .custom-page p a {
   color: var(--vp-c-brand-1);
 }
@@ -345,17 +306,8 @@ html.dark body:has(.custom-page) {
   color: var(--vp-c-brand-2);
 }
 
-/* Buttons: a button-styled link; a <button> takes the class too, for a control that only runs script (the
-   VitePress router intercepts clicks on links). A secondary button is the inset grey with a hairline (white on
-   white was too faint; translucent white with a white ring in dark mode); a primary button is filled. Hover lifts a button by a pixel and strengthens its edge; the fill of a
-   filled one deepens.
-
-   The primary fill is a step deeper than the brand blue: white text on #1976D2 passes WCAG AA (4.6:1) where
-   #2196F3 does not (3.1:1). A filled button sets --fill, and --filled-edge (declared on every button, resolved
-   on the same element) tints the lift with it, so a component can fill a button in its own colour.
-
-   A label longer than its container (a narrow phone) wraps rather than run out of the button; the 1.25rem line
-   box with 10px of padding keeps a one-line button 40px tall. */
+/* Buttons: a <button> takes the class too, for a control that only runs script (the VitePress router intercepts
+   clicks on links). A filled button sets --fill, and --filled-edge tints its lift with it. */
 :is(a, button).action {
   --filled-edge:
       inset 0 1px 0 rgba(255, 255, 255, 0.18),
@@ -368,7 +320,7 @@ html.dark body:has(.custom-page) {
 
   border-radius: 10px;
   padding: 10px 22px;
-  font-size: 1rem; /* never smaller: the label is the one thing the button says */
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.25rem;
 
@@ -414,7 +366,6 @@ html.dark :is(a, button).action.primary:hover {
   background-color: light-dark(#1565C0, #1E88E5);
 }
 
-/* touch: 44px tall, the size of a fingertip */
 @media (pointer: coarse) {
   :is(a, button).action {
     padding-block: 12px;

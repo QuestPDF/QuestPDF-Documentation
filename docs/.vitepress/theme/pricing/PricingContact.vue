@@ -94,7 +94,6 @@ const resellers = [
   margin-top: 40px;
 }
 
-/* logos are monochrome grey; they rest slightly muted so the hovered one reads as the "active" choice */
 .resellers-list img {
   display: block;
   opacity: 0.85;
@@ -111,7 +110,7 @@ html.dark .resellers-list a:hover img {
   filter: brightness(1.4);
 }
 
-/* touch: every logo link at least 44px tall, grown evenly, so each logo keeps its tuned position */
+/* touch: grown evenly, so each logo keeps its tuned position */
 @media (pointer: coarse) {
   .resellers-list a {
     padding-block: 4px;

@@ -28,9 +28,6 @@ import PricingContact from "./PricingContact.vue";
 
 <style>
 
-/* The dividers sit between the section containers, so they take the content width themselves; the sections'
-   48px padding spaces them (64px at the top and the bottom of the page). */
-
 .custom-page.pricing-page > .dotted-divider {
   width: calc(100% - 2 * var(--custom-page-gutter));
   max-width: calc(var(--custom-page-width) - 2 * var(--custom-page-gutter));
