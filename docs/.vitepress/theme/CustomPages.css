@@ -2,7 +2,8 @@
    so all three align; custom pages take 90rem, the rest of the site 1216px.
    --custom-page-gutter: that side padding, the navbar's own (VitePress pads it 24px below 768px, 32px from 768px),
    so the logo, the content and the footer start at the same x.
-   --custom-page-bg: the canvas, a light grey in light mode so the white panels lift from it.
+   --custom-page-bg: the canvas, the theme background with a faint blue tint: very light so the white panels lift
+   from it, near black in dark mode.
 
    Theme colours: a single colour that differs per theme is written with light-dark() (the build lowers it for
    older browsers); sets of tokens, gradients and other values switch in an `html.dark` rule. */
@@ -10,7 +11,7 @@
 :root {
   --custom-page-width: 1216px;
   --custom-page-gutter: 32px;
-  --custom-page-bg: light-dark(#F7F8FA, var(--vp-c-bg));
+  --custom-page-bg: light-dark(#F6F8FC, #0E1014);
 }
 
 @media screen and (max-width: 767px) {
@@ -163,6 +164,10 @@
   --panel-padding: clamp(32px, 22.4px + 1.38vw, 40px) clamp(24px, 4.7px + 2.76vw, 40px);
   --surface: #FFFFFF;
   --surface-inner: #F0F2F6;
+  /* the hairlines inside a panel (window title bars, card and column splits): VitePress's light grey is too faint
+     on white, so light mode takes a cool grey a couple of steps darker (one more, #D4D8DF, was too strong); dark
+     mode keeps VitePress's own value */
+  --vp-c-divider: light-dark(#DBDDE1, #2E2E32);
   --surface-edge:
       inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 7%, transparent),
       0 1px 2px rgba(16, 24, 40, 0.04),
@@ -288,29 +293,39 @@ html.dark .custom-page .dotted-divider {
 
 
 /* Page canvas: one continuous background on <body>, so the page, the strip under the navbar and the footer share
-   it: a faint grain tile (a barely visible texture that also stops banding in the gradients) over three glows
-   around the top of the page, the rest of the canvas plain. The glows are a single brand blue on every page, the
-   homepage and the rest alike; several hues or grey washes read as smudges. It lives here, not in the page
-   components, because in dev a component's CSS loads only on the pages that import it. */
+   it: a faint grain tile (a barely visible texture that also stops banding in the gradients) over three glows,
+   two at the top of the page and one in the top left corner (on the homepage in light mode, down the left edge
+   instead), the rest of the canvas plain. The glows are a single brand blue on every page, the homepage and the
+   rest alike; several hues or grey washes read as smudges. It lives here, not in the page components, because in
+   dev a component's CSS loads only on the pages that import it. */
 
 body:has(.custom-page) {
-  --canvas-glow: color-mix(in srgb, #2196F3 16%, transparent);
-  --canvas-glow-soft: color-mix(in srgb, #2196F3 6%, transparent);
-  --canvas-glow-side: color-mix(in srgb, #2196F3 10%, transparent);
+  --canvas-glow: color-mix(in srgb, #2196F3 32%, transparent);
+  --canvas-glow-soft: color-mix(in srgb, #2196F3 12%, transparent);
+  --canvas-glow-side: color-mix(in srgb, #2196F3 20%, transparent);
+  --canvas-glow-side-shape: ellipse 800px 450px at 0% 2%;
 
   background-color: var(--custom-page-bg);
   background-image:
       url("/homepage/grain.png"),
       radial-gradient(ellipse 1400px 700px at 92% 0%, var(--canvas-glow), transparent 70%),
       radial-gradient(ellipse 1000px 500px at 30% 0%, var(--canvas-glow-soft), transparent 70%),
-      radial-gradient(ellipse 800px 450px at 0% 2%, var(--canvas-glow-side), transparent 70%);
+      radial-gradient(var(--canvas-glow-side-shape), var(--canvas-glow-side), transparent 70%);
   background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+}
+
+/* the homepage alone, in light mode, takes the side glow down the left edge by the cards, where the top glows have
+   faded, and softer; the dark rule below, more specific, keeps the corner there */
+body:has(.home-page) {
+  --canvas-glow-side-shape: ellipse 760px 500px at 0% 780px;
+  --canvas-glow-side: color-mix(in srgb, #2196F3 11%, transparent); /* an edge glow shows more of itself than a corner one */
 }
 
 html.dark body:has(.custom-page) {
   --canvas-glow: color-mix(in srgb, #2196F3 20%, transparent);
   --canvas-glow-soft: color-mix(in srgb, #2196F3 7%, transparent);
   --canvas-glow-side: color-mix(in srgb, #2196F3 12%, transparent);
+  --canvas-glow-side-shape: ellipse 800px 450px at 0% 2%;
 }
 
 /* a link in running text is blue; a link that is a component of its own (a card, a row, a menu item) colours

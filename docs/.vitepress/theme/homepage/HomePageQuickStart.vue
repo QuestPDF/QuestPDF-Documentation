@@ -248,7 +248,7 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
           <!-- the request types itself into the lit-up composer and sends itself once the ring around the send button
                fills; the button spins while the assistant works and shows a check once the page is updated -->
           <div class="composer" :class="{ asking, sent, working }">
-            <i class="fa-regular fa-sparkles composer-icon" aria-hidden="true"></i>
+            <i class="fa-solid fa-sparkles composer-icon" aria-hidden="true"></i>
 
             <!-- every request, unseen, under the typed one: the box is as tall as the longest from the start, so a
                  request that wraps while it types does not move the page -->
@@ -313,16 +313,18 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
    composer */
 .quick-start {
   --agent-accent: #7E57C2;
-  --composer-bg: color-mix(in srgb, var(--agent-accent) 8%, var(--vp-c-bg));
-  --composer-border: color-mix(in srgb, var(--agent-accent) 18%, var(--vp-c-divider));
-  --composer-border-sent: color-mix(in srgb, var(--agent-accent) 35%, var(--vp-c-divider));
-  --composer-text: color-mix(in srgb, var(--agent-accent) 30%, var(--vp-c-text-1));
-  --composer-step: color-mix(in srgb, var(--agent-accent) 35%, var(--vp-c-text-3));
-  --composer-bg-asking: color-mix(in srgb, var(--agent-accent) 11%, var(--vp-c-bg));
-  --composer-border-asking: color-mix(in srgb, var(--agent-accent) 55%, var(--vp-c-divider));
+
+  --composer-fill: linear-gradient(110deg, #8466B7 0%, #6D49AB 100%);
+  --composer-border: transparent;
+  --composer-text: #FFFFFF;
+  --composer-icon: rgba(255, 255, 255, 0.9);
+  --composer-step: rgba(255, 255, 255, 0.85);
+  --composer-ink: #FFFFFF;
+  --composer-button-ink: #6D49AB; /* the gradient's darker end, where the button sits */
+  --composer-sheen: rgba(255, 255, 255, 0.14);
   --composer-ring: color-mix(in srgb, var(--agent-accent) 12%, transparent);
   --composer-ring-strong: color-mix(in srgb, var(--agent-accent) 30%, transparent);
-  --composer-shadow: 0 8px 24px -12px color-mix(in srgb, var(--agent-accent) 40%, transparent);
+  --composer-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 10px 28px -10px rgba(109, 73, 171, 0.3);
 
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -335,16 +337,11 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
 
 html.dark .quick-start {
   --agent-accent: #9575CD;
-  --composer-bg: color-mix(in srgb, var(--agent-accent) 12%, var(--surface-inner));
-  --composer-border: color-mix(in srgb, var(--agent-accent) 22%, var(--vp-c-divider));
-  --composer-border-sent: color-mix(in srgb, var(--agent-accent) 50%, transparent);
-  --composer-text: color-mix(in srgb, var(--agent-accent) 35%, var(--vp-c-text-1));
-  --composer-step: color-mix(in srgb, var(--agent-accent) 40%, var(--vp-c-text-3));
-  --composer-bg-asking: color-mix(in srgb, var(--agent-accent) 18%, var(--surface-inner));
-  --composer-border-asking: color-mix(in srgb, var(--agent-accent) 70%, transparent);
+  --composer-fill: linear-gradient(110deg, #6B509B 0%, #583E84 100%);
+  --composer-button-ink: #583E84;
   --composer-ring: color-mix(in srgb, var(--agent-accent) 20%, transparent);
   --composer-ring-strong: color-mix(in srgb, var(--agent-accent) 45%, transparent);
-  --composer-shadow: 0 8px 28px -10px rgba(0, 0, 0, 0.6);
+  --composer-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 10px 28px -10px rgba(0, 0, 0, 0.6);
 }
 
 /* the panel itself has no padding, so each card takes the panels' own */
@@ -466,8 +463,8 @@ html.dark .agent-card {
   animation-play-state: paused;
 }
 
-/* the code's column carries the code's top padding, so the composer, which sticks within the column, stops short
-   of the title bar by as much */
+/* the code's column carries the code's top padding; the composer, which sticks within the column, stops short of
+   the title bar by this padding plus its own top margin, 24px, as far as it keeps from the window's foot */
 .window-main {
   grid-area: main;
   display: flex;
@@ -590,15 +587,16 @@ html.dark .agent-card {
 /* Result: the page in a viewer, a window of its own beside the code, that the page fills under its title bar;
    the padding is the room the page keeps at rest from the column's sides and top */
 
-/* the page lies on a grey desk, as in a PDF viewer, so its edges show on white too; the desk is the viewer's, not
-   the result's, so it stays while the session fades out and starts over */
+/* the page lies on a grey desk, as in a PDF viewer, so its edges show on white too: in light mode a deeper grey
+   than the inset tone, so the desk also tells from the page canvas around the window. The desk is the viewer's,
+   not the result's, so it stays while the session fades out and starts over */
 .viewer {
   grid-area: viewer;
   display: flex;
   flex-direction: column;
   min-width: 0;
   border-left: 1px solid var(--vp-c-divider);
-  background-color: var(--surface-inner);
+  background-color: light-dark(#E3E7EE, var(--surface-inner));
 }
 
 .buttons {
@@ -668,14 +666,14 @@ html.dark .agent-card {
   display: flex;
   align-items: flex-start;
   gap: 12px;
-  margin: 0 24px 24px;
+  margin: 12px 24px 24px; /* 24px of room above (with the code's bottom padding) and below, at rest and stuck */
   padding: 10px 10px 10px 16px;
   border: 1px solid var(--composer-border);
   border-radius: 14px;
-  background-color: var(--vp-c-bg);
-  background-image: linear-gradient(var(--composer-bg), var(--composer-bg));
+  background-image: var(--composer-fill);
+  box-shadow: var(--composer-shadow);
   overflow: hidden;
-  transition: border-color 0.3s ease, box-shadow 0.4s ease, opacity 0.45s ease;
+  transition: box-shadow 0.4s ease, opacity 0.45s ease;
 }
 
 /* the composer is clicked twice in a round, the same way each time: as it is clicked into for the next request,
@@ -683,15 +681,11 @@ html.dark .agent-card {
    once out of it. Each click has its keyframes under its own name: an animation whose name stays on the element
    from one state to the next carries on instead of playing again. */
 .composer.sent {
-  border-color: var(--composer-border-sent);
   animation: keystroke 0.35s ease, ripple 0.9s ease-out;
 }
 
-/* while a request arrives and waits to be sent, the composer lights up: a stronger border and tint, and a soft
-   ring outside it */
+/* while a request arrives and waits to be sent, a soft ring sits outside the composer */
 .composer.asking {
-  border-color: var(--composer-border-asking);
-  background-image: linear-gradient(var(--composer-bg-asking), var(--composer-bg-asking));
   box-shadow: 0 0 0 4px var(--composer-ring), var(--composer-shadow);
   animation: keystroke-in 0.35s ease, ripple-in 0.9s ease-out;
 }
@@ -714,7 +708,7 @@ html.dark .agent-card {
   40% { box-shadow: 0 0 0 8px var(--composer-ring), var(--composer-shadow); }
 }
 
-/* while the assistant works, a soft purple band sweeps across the composer */
+/* while the assistant works, a soft band in the ink sweeps across the composer */
 .composer::before {
   content: "";
   position: absolute;
@@ -723,7 +717,7 @@ html.dark .agent-card {
   pointer-events: none;
   background-image: linear-gradient(100deg,
       transparent 20%,
-      color-mix(in srgb, var(--agent-accent) 9%, transparent) 50%,
+      var(--composer-sheen) 50%,
       transparent 80%);
   background-size: 250% 100%;
   background-position: 120% 0;
@@ -756,14 +750,15 @@ html.dark .agent-card {
   flex: 0 0 auto;
   font-size: 1rem;
   line-height: 2rem;
-  color: var(--agent-accent);
+  color: var(--composer-icon);
 }
 
 .composer-text {
   display: grid;
   flex: 1 1 auto;
   padding: 5px 0;
-  font-size: 0.9375rem;
+  font-size: 1rem;
+  font-weight: 600; /* the request is what the reader follows, so it leads the icon and the step counter */
   line-height: 1.375rem;
   color: var(--composer-text);
 }
@@ -786,10 +781,10 @@ html.dark .agent-card {
 .caret {
   display: inline-block;
   width: 2px;
-  height: 1.0625rem;
+  height: 1.125rem;
   margin-left: 1px;
   vertical-align: -0.1875rem;
-  background-color: var(--agent-accent);
+  background-color: var(--composer-ink);
   animation: blink 1s step-end infinite;
 }
 
@@ -806,7 +801,7 @@ html.dark .agent-card {
 .composer-step {
   flex: 0 0 auto;
   align-self: flex-end;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   line-height: 2rem;
   font-variant-numeric: tabular-nums;
   color: var(--composer-step);
@@ -822,8 +817,8 @@ html.dark .agent-card {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: color-mix(in srgb, var(--agent-accent) 14%, transparent);
-  color: var(--agent-accent);
+  background-color: color-mix(in srgb, var(--composer-ink) 16%, transparent);
+  color: var(--composer-ink);
   font-size: 1rem;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -831,8 +826,8 @@ html.dark .agent-card {
 /* filled while the request waits to send itself, and from then on; it presses itself in as the request goes */
 .composer.asking .composer-send,
 .composer.sent .composer-send {
-  background-color: var(--agent-accent);
-  color: white;
+  background-color: var(--composer-ink);
+  color: var(--composer-button-ink);
 }
 
 .composer.sent .composer-send {
@@ -856,7 +851,7 @@ html.dark .agent-card {
 
 .countdown circle {
   fill: none;
-  stroke: var(--agent-accent);
+  stroke: var(--composer-ink);
   stroke-width: 2;
   stroke-linecap: round;
   stroke-dasharray: 100;
@@ -873,8 +868,8 @@ html.dark .agent-card {
   display: block;
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.35);
-  border-top-color: white;
+  border: 2px solid color-mix(in srgb, var(--composer-button-ink) 35%, transparent);
+  border-top-color: var(--composer-button-ink);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -892,7 +887,7 @@ html.dark .agent-card {
   }
 
   .spinner {
-    border-color: white;
+    border-color: var(--composer-button-ink);
   }
 }
 

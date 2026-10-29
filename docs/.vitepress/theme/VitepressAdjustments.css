@@ -139,6 +139,10 @@ html.dark {
     background-color: var(--vp-nav-divider-color);
 }
 
+html:not(.dark) .VPNavBar.home.top .divider-line {
+    background-color: #CDD9EA;
+}
+
 /* navbar links one step larger than the VitePress default (0.875rem) */
 .VPNavBar .VPNavMenuLink.VPNavBarMenuLink {
     font-size: 1rem;
