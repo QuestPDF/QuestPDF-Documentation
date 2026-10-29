@@ -274,16 +274,18 @@ html.dark .license-panel {
 }
 
 
-/* on white the green is a step deeper, so the white label holds; hover darkens it there and lightens it in dark
-   mode */
+/* filled in the list's green, two steps deeper so the white label passes AA (#2E7D32, 5.1:1); hover deepens it on
+   white and lightens it in dark mode */
 .action.pricing-button {
-  background-color: light-dark(#43A047, #4CAF50);
-  color: var(--vp-button-brand-text);
-  font-weight: bold;
+  --fill: #2E7D32;
+
+  color: #FFF;
+  background-color: var(--fill);
+  box-shadow: var(--filled-edge);
 }
 
 .action.pricing-button:hover {
-  background-color: light-dark(#388E3C, #66BB6A);
+  background-color: light-dark(#1B5E20, #388E3C);
 }
 
 </style>

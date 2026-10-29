@@ -54,10 +54,12 @@
 
 /* the headings grow from their phone size at 390px to their full size at 700px */
 
+/* display sizes of Inter sit a little tight (negative tracking), as the hero's headline does */
 .custom-page h1 {
   font-size: clamp(2.25rem, 25.8px + 2.6vw, 2.75rem);
   font-weight: 700;
   line-height: clamp(2.5rem, 24.7px + 3.9vw, 3.25rem);
+  letter-spacing: -0.02em;
   margin-bottom: 2rem;
 }
 
@@ -65,6 +67,7 @@
   font-size: clamp(1.75rem, 22.9px + 1.3vw, 2rem);
   font-weight: 700;
   line-height: clamp(2.25rem, 30.9px + 1.3vw, 2.5rem);
+  letter-spacing: -0.015em;
   margin-bottom: 1rem;
 }
 
@@ -120,6 +123,7 @@
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 700;
+  letter-spacing: -0.015em;
   color: var(--vp-c-text-1);
 }
 
@@ -244,7 +248,8 @@ html.dark .custom-page {
   height: 420px;
   z-index: -1;
   pointer-events: none;
-  background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 24%, transparent) 1px, transparent 1.5px);
+  /* the dots lean towards the brand blue, as the hero's grid does, so they read as part of the blue canvas */
+  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 36%, transparent) 1px, transparent 1.5px);
   background-size: 24px 24px;
   background-position: center top;
 }
@@ -259,10 +264,11 @@ html.dark .custom-page {
   mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%);
 }
 
-/* light dots on a dark canvas read stronger than dark dots on white, so they are fainter there */
+/* light dots on a dark canvas read stronger than dark dots on white, so they are fainter there, with a hint of the
+   blue (half a light blue into the text colour) */
 html.dark .texture-dots::before,
 html.dark .texture-dots::after {
-  background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 14%, transparent) 1px, transparent 1.5px);
+  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #64B5F6 50%, var(--vp-c-text-1)) 16%, transparent) 1px, transparent 1.5px);
 }
 
 @media screen and (max-width: 960px) {
@@ -339,44 +345,73 @@ html.dark body:has(.custom-page) {
   color: var(--vp-c-brand-2);
 }
 
-/* a button-styled link; a <button> takes the class too, for a control that only runs script (the VitePress
-   router intercepts clicks on links) */
+/* Buttons: a button-styled link; a <button> takes the class too, for a control that only runs script (the
+   VitePress router intercepts clicks on links). A secondary button is the inset grey with a hairline (white on
+   white was too faint; translucent white with a white ring in dark mode); a primary button is filled. Hover lifts a button by a pixel and strengthens its edge; the fill of a
+   filled one deepens.
 
-/* a label longer than its container (a narrow phone) wraps rather than run out of the button; the 1.25 line box
-   with 10px of padding keeps a one-line button 40px tall */
+   The primary fill is a step deeper than the brand blue: white text on #1976D2 passes WCAG AA (4.6:1) where
+   #2196F3 does not (3.1:1). A filled button sets --fill, and --filled-edge (declared on every button, resolved
+   on the same element) tints the lift with it, so a component can fill a button in its own colour.
+
+   A label longer than its container (a narrow phone) wraps rather than run out of the button; the 1.25rem line
+   box with 10px of padding keeps a one-line button 40px tall. */
 :is(a, button).action {
+  --filled-edge:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      0 1px 2px rgba(16, 24, 40, 0.12),
+      0 6px 16px -8px color-mix(in srgb, var(--fill, #000) 70%, transparent);
+
   display: inline-block;
   max-width: 100%;
   text-align: center;
-  font-weight: 500;
 
-  border-radius: 12px;
-  padding: 10px 24px;
-  line-height: 1.25;
-
-  background-color: #8883;
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-size: 1rem; /* never smaller: the label is the one thing the button says */
+  font-weight: 600;
+  line-height: 1.25rem;
 
   color: var(--vp-c-text-1);
-  font-size: 1rem;
+  background-color: var(--surface-inner);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 12%, transparent);
 
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
 }
 
 :is(a, button).action:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--elevation);
-
-  background-color: #8885;
+  transform: translateY(-1px);
+  background-color: color-mix(in srgb, var(--surface-inner), var(--vp-c-text-1) 4%);
+  box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 20%, transparent),
+      0 4px 12px -4px rgba(16, 24, 40, 0.14);
 }
 
-:is(a, button).action.primary {
+html.dark :is(a, button).action {
+  --filled-edge: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 6px 16px -8px rgba(0, 0, 0, 0.6);
+
+  background-color: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+html.dark :is(a, button).action:hover {
+  background-color: rgba(255, 255, 255, 0.11);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+/* the dark rules name the primary button too, so the secondary's dark fill (a more specific rule) does not win */
+:is(a, button).action.primary,
+html.dark :is(a, button).action.primary {
+  --fill: #1976D2;
+
   color: #FFF;
-  background-color: #2196F3;
-  font-weight: bold;
+  background-color: var(--fill);
+  box-shadow: var(--filled-edge);
 }
 
-:is(a, button).action.primary:hover {
-  background-color: #1E88E5;
+:is(a, button).action.primary:hover,
+html.dark :is(a, button).action.primary:hover {
+  background-color: light-dark(#1565C0, #1E88E5);
 }
 
 /* touch: 44px tall, the size of a fingertip */

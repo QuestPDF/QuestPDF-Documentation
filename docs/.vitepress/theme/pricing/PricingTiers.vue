@@ -148,14 +148,16 @@ const licenses = [
 }
 
 /* 48px from 1280px, wider than the shared panel inset; on a narrower window, where the three cards share less
-   room, it gives way down to 24px at 961px */
+   room, it gives way down to 24px at 961px. The inset is a token so the badge can reach the card's edges. */
 .license-tier {
+  --tier-padding: clamp(24px, 7.5vw - 48px, 48px);
+
   display: grid;
   grid-template-rows: subgrid;
   grid-row: span 6;
   justify-items: start;
   align-items: start;
-  padding: clamp(24px, 7.5vw - 48px, 48px);
+  padding: var(--tier-padding);
 }
 
 .license-tier .tag { grid-row: 1; }
@@ -178,17 +180,24 @@ const licenses = [
    cards stay pure white). */
 
 .license-tier.professional {
-  border: 3px solid light-dark(#2196F388, #2196F355);
+  border: 2px solid light-dark(#2196F3, #3D8BD4);
+  box-shadow:
+      var(--surface-edge),
+      0 0 0 6px color-mix(in srgb, #2196F3 10%, transparent),
+      0 24px 48px -24px color-mix(in srgb, #2196F3 35%, transparent);
   z-index: 1;
 }
 
+/* dark mode keeps the border alone: the halo around it read as a second, translucent border. The frame, tint and
+   shadow are a step less saturated than the brand blue, which glowed on the near-black canvas. */
 html.dark .license-tier.professional {
-  background-color: color-mix(in srgb, #2196F3 5%, var(--surface));
+  background-color: color-mix(in srgb, #2196F3 3%, var(--surface));
+  box-shadow: 0 24px 48px -24px color-mix(in srgb, #3D8BD4 22%, transparent);
 }
 
-/* the glass rim sits inside the 3px border, so its corners are 3px tighter than the card's */
+/* the glass rim sits inside the 2px border, so its corners are 2px tighter than the card's */
 .license-tier.professional::before {
-  border-radius: 29px;
+  border-radius: 30px;
 }
 
 .license-tier.community {
@@ -202,23 +211,45 @@ html.dark .license-tier.professional {
 }
 
 
+/* The badge is a title bar: the 46px by which the professional card rises above its neighbours, with the label
+   centred in it, so the band's bottom edge is the neighbours' top edge and the three white bodies start on one
+   line. Light mode keeps the band white like the card body (a pale blue tint was tried) under a hairline, with
+   the label and star in the frame's own blue (a navy label read as a separate colour); dark mode keeps the card's
+   own surface, draws only the hairline and sets the label and star in a light sky blue (the brand-1 #64B5F6 read
+   as greyish, white lost the blue). The tracked capitals need a wider word space than the font's own, or "MOST
+   POPULAR" runs together. The corners follow the frame's inner radius. */
 .license-tier .tag {
+  justify-self: stretch;
+  margin: calc(-1 * var(--tier-padding)) calc(-1 * var(--tier-padding)) 0;
+  height: 46px;
+  border-radius: 30px 30px 0 0;
+
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
-  height: 32px;
-  transform: translateY(-8px);
+  white-space: nowrap;
 
-  color: light-dark(#2196F3, #64B5F6);
+  color: light-dark(#2196F3, #7CC4FF);
+  background-color: light-dark(#FFFFFF, transparent);
+  box-shadow: inset 0 -1px 0 light-dark(rgba(33, 150, 243, 0.4), rgba(100, 181, 246, 0.25));
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 1;
   text-transform: uppercase;
   letter-spacing: 1px;
-  word-spacing: 3px;
+  word-spacing: 4px;
 }
 
 .license-tier .tag .fa-star {
   font-size: 1rem;
+  color: light-dark(#2196F3, #7CC4FF);
+}
+
+/* dark mode sets the label semibold like the tier name: the bold cut glared in light blue on the dark card */
+html.dark .license-tier .tag {
+  gap: 10px;
+  font-weight: 600;
 }
 
 
@@ -257,6 +288,8 @@ html.dark .license-tier.professional {
   font-size: 2.25rem;
   line-height: 2.25rem;
   font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
   color: var(--vp-c-text-1);
 }
 
@@ -327,22 +360,29 @@ html.dark .license-tier.professional {
   margin-top: 32px;
 }
 
+/* filled like the shared primary button (its blue) and in the tier's black; see CustomPages.css for --fill */
 .license-tier.professional .action {
-  background-color: #2196F3;
-  color: white;
+  --fill: #1976D2;
+
+  color: #FFF;
+  background-color: var(--fill);
+  box-shadow: var(--filled-edge);
 }
 
 .license-tier.professional .action:hover {
-  background-color: #42A5F5;
+  background-color: light-dark(#1565C0, #1E88E5);
 }
 
 .license-tier.enterprise .action {
-  background-color: light-dark(#212121, #EEEEEE);
+  --fill: light-dark(#212121, #EEEEEE);
+
   color: light-dark(white, #212121);
+  background-color: var(--fill);
+  box-shadow: var(--filled-edge);
 }
 
 .license-tier.enterprise .action:hover {
-  background-color: light-dark(#212121, white);
+  background-color: light-dark(#000000, #FFFFFF);
 }
 
 
@@ -351,8 +391,8 @@ html.dark .license-tier.professional {
   text-align: center;
   margin-top: 16px;
 
-  font-size: 0.8125em;
-  line-height: 1.5;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   color: var(--vp-c-text-2);
 }
 
@@ -378,10 +418,18 @@ html.dark .license-tier.professional {
 
   /* the shared panel inset, which narrows to 32px by 24px on phones */
   .license-tier {
+    --tier-padding-block: clamp(32px, 22.4px + 1.38vw, 40px);
+    --tier-padding-inline: clamp(24px, 4.7px + 2.76vw, 40px);
+
     grid-template-rows: auto; /* subgrid has no parent grid here */
     width: 100%;
     max-width: 560px;
-    padding: var(--panel-padding);
+    padding: var(--tier-padding-block) var(--tier-padding-inline);
+  }
+
+  /* stacked, the badge's row is its own height, so it spaces itself from the header */
+  .license-tier .tag {
+    margin: calc(-1 * var(--tier-padding-block)) calc(-1 * var(--tier-padding-inline)) var(--tier-padding-block);
   }
 
   .license-tier.community,

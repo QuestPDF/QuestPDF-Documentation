@@ -84,7 +84,7 @@ h1 .highlight-foreground {
 }
 
 html.dark h1 .highlight-foreground {
-  background-image: linear-gradient(100deg, #5ef0ff 0%, #32c6ff 50%, #4d8dff 100%);
+  background-image: linear-gradient(100deg, #4ED4FF 0%, #2FAEFA 50%, #5C8DFF 100%);
 }
 
 
@@ -106,11 +106,11 @@ html.dark h1 .highlight-foreground {
   gap: 1.75rem;
 }
 
-/* the icon box is one line tall, so a wrapped row keeps its icon beside the first line */
+/* the icon tile is centred on the first line of text, so a wrapped row keeps its icon beside the first line */
 .benefits li {
   display: flex;
   align-items: flex-start;
-  gap: 1.5rem;
+  gap: 1.25rem;
   color: var(--vp-c-text-1);
 }
 
@@ -131,32 +131,51 @@ html:not(.dark) .benefits li {
   display: block; /* its own line box, so the row is exactly one line tall like a benefit */
 }
 
-/* a bare icon in the primary colour, at a fixed width so the texts line up whatever each glyph's own width */
+/* a plain 40px tile holding the outline glyph: four equal squares read as bullets whatever each glyph's own
+   width or mass (a bare glyph did in dark mode, where it was the brightest mark in the row, but not on the pale
+   canvas). White with a hairline of the glyph's blue on the light canvas (the hairline keeps the tile's edge where
+   the wash turns white on the lower rows); on the dark one a faint chip of the glyph's own sky blue, so the tile
+   and the glyph read as one blue mark (plain black wells, tints and panel-style lifts were compared and set
+   aside). No sheen or shadow. The line is 28px, so the tile overhangs 6px above and below it */
 .list-icon {
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  width: 1.875rem;
-  height: 1.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-block: -0.375rem;
+  border-radius: 10px;
+  background-color: light-dark(#FFFFFF, color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent));
+  box-shadow: inset 0 0 0 1px light-dark(rgba(25, 118, 210, 0.16), transparent);
 }
 
+/* the buttons' blue in light mode (the link blue, a light-blue-800, leans teal on the pale canvas); the brand-1
+   sky blue in dark mode */
 .list-icon i {
-  font-size: 1.5rem;
-  color: var(--vp-c-brand-1);
+  font-size: 1.25rem;
+  color: light-dark(#1976D2, var(--vp-c-brand-1));
 }
 
 /* each stat is a link that reads as plain content: its parts set their own colours, so the global link hover
-   never reaches them; the value leads, the label stays quiet */
+   never reaches them; the value leads, the label stays quiet. In light mode the grey label sank into the blue
+   canvas, so there it takes the text colour at the benefits' weight and the value goes near black, the navbar's
+   active pill (a blue value was tried and rejected) */
 .statistic .value {
   margin-right: 0.5rem;
   font-weight: 700;
-  color: var(--vp-c-text-1);
+  font-variant-numeric: tabular-nums;
+  color: light-dark(#1C1C1E, var(--vp-c-text-1));
 }
 
 .statistic .label {
   font-weight: 400;
   color: var(--vp-c-text-2);
+}
+
+html:not(.dark) .statistic .label {
+  font-weight: 450;
+  color: var(--vp-c-text-1);
 }
 
 @media screen and (max-width: 1023px) {
@@ -206,9 +225,10 @@ html:not(.dark) .benefits li {
   mask-composite: intersect;
 }
 
-/* light dots on a dark canvas stand out more than dark dots on white, so they are fainter there */
+/* light dots on a dark canvas stand out more than dark dots on white, so they are fainter there, with a hint of
+   the blue (as the dot wings in CustomPages.css) */
 html.dark .hero-pattern {
-  background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 11%, transparent) 1px, transparent 1.5px);
+  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #64B5F6 50%, var(--vp-c-text-1)) 13%, transparent) 1px, transparent 1.5px);
 }
 
 </style>

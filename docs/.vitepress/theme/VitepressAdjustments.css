@@ -29,20 +29,27 @@
     --elevation-hover: 0 13px 27px -5px rgb(0 0 0 / 15%), 0 8px 16px -8px rgb(0 0 0 / 24%), 0 -6px 16px -6px rgb(0 0 0 / 9%);
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 body {
     line-height: 24px;
 }
 
-.VPNavBar .VPNavBarTitle .title {
-    font-size: 24px;
+/* the logo's height is the --vp-nav-logo-height token above (32px) */
+.VPNavBar .VPNavBarTitle .logo {
+    margin-right: 0;
 }
 
-.VPNavBar .VPNavBarTitle .logo {
-    margin-right: 16px;
+/* more air between the logo and the search box where the title sits inline (pages without a sidebar);
+   VitePress uses 1.5rem / 2rem at these breakpoints */
+@media (min-width: 48rem) {
+    .VPNavBar:not(.has-sidebar) .VPNavBarSearch {
+        padding-inline-start: 2.5rem;
+    }
+}
+
+@media (min-width: 60rem) {
+    .VPNavBar:not(.has-sidebar) .VPNavBarSearch {
+        padding-inline-start: 3.5rem;
+    }
 }
 
 .VPLink.link.active,
@@ -139,8 +146,15 @@ html.dark {
     background-color: var(--vp-nav-divider-color);
 }
 
-html:not(.dark) .VPNavBar.home.top .divider-line {
-    background-color: #CDD9EA;
+/* at the top of a custom page (home included) the divider leans blue with the canvas's glows under it; scrolled,
+   it is the regular divider again */
+html:not(.dark) .Layout:has(.custom-page) .VPNavBar.top .divider-line {
+    background-color: color-mix(in srgb, #2196F3 28%, #E2E2E3);
+}
+
+/* the same lean on the dark divider, lighter-handed: the dark canvas glow under it is already blue */
+html.dark .Layout:has(.custom-page) .VPNavBar.top .divider-line {
+    background-color: color-mix(in srgb, #2196F3 20%, #2E2E32);
 }
 
 /* navbar links one step larger than the VitePress default (0.875rem) */
@@ -148,13 +162,13 @@ html:not(.dark) .VPNavBar.home.top .divider-line {
     font-size: 1rem;
 }
 
-/* Navbar links are soft pills: grey on hover, inverted (text colour as fill, page colour as text) for the current section.
-   Only colours change, so nothing moves. Padding + margin add up to the VitePress 0.75rem,
-   so each item keeps its width and links collapse into the ⋯ menu at the same widths as before. */
+/* Navbar links are soft pills: grey on hover, filled for the current section. Only colours change, so nothing
+   moves. The padding is 2px wider than VitePress's 0.75rem, so the texts sit 28px apart and the links collapse
+   into the ⋯ menu a little earlier. */
 .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink {
     min-height: 36px;
-    padding: 0 0.625rem;
-    margin: 0 0.125rem;
+    padding: 0 0.875rem;
+    margin: 0;
     border-radius: 10px;
     transition: color 0.2s, background-color 0.2s;
 }
@@ -166,7 +180,7 @@ html:not(.dark) .VPNavBar.home.top .divider-line {
 
 .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {
     color: #ffffff;
-    background-color: #1C1C1E;
+    background-color: #1976D2; /* the buttons' blue; the black pill (#2C2C32) was tried too */
 }
 
 html.dark .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {

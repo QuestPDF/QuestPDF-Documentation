@@ -36,7 +36,12 @@ export default defineConfig({
     ],
 
     themeConfig: {
-        logo: '/logo.webp',
+        logo: {
+            light: '/questpdf-logo-light.png',
+            dark: '/questpdf-logo-dark.png',
+            alt: 'QuestPDF'
+        },
+        siteTitle: false,
         search: {
             provider: 'algolia',
             options: {
