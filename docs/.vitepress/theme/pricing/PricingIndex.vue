@@ -1,18 +1,18 @@
 <template>
   <div class="custom-page pricing-page">
-    <div class="container texture-dots">
+    <div class="container">
       <pricing-tiers />
     </div>
 
     <div class="dotted-divider"></div>
 
-    <div class="container texture-dots">
+    <div class="container">
       <pricing-faq />
     </div>
 
     <div class="dotted-divider"></div>
 
-    <div class="container texture-dots">
+    <div class="container">
       <pricing-contact />
     </div>
   </div>

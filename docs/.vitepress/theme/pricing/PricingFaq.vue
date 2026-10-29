@@ -65,8 +65,8 @@ import { faqCategories as categories } from "./faq";
 
 .faq-category-description {
   margin: 6px 0 0;
-  font-size: 0.9375rem;
-  line-height: 1.375rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
   color: var(--vp-c-text-2);
 }
 

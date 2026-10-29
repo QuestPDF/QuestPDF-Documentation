@@ -292,7 +292,7 @@ html.dark .license-tier .tag {
 
 .license-tier .tier-description {
   color: var(--vp-c-text-2);
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.5rem;
 }
 
