@@ -64,7 +64,7 @@ function onFocus(event: FocusEvent) {
   overflow: hidden;
 
   display: grid;
-  grid-template-columns: 200px minmax(0, 1fr);
+  grid-template-columns: 184px minmax(0, 1fr);
   column-gap: 24px;
   align-items: center;
   min-height: 256px;
@@ -229,7 +229,7 @@ html.dark .background-gradient {
 
 @media screen and (max-width: 1280px) and (min-width: 1181px) {
   .cta-card {
-    grid-template-columns: 180px minmax(0, 1fr);
+    grid-template-columns: 168px minmax(0, 1fr);
     padding: 28px;
   }
 }

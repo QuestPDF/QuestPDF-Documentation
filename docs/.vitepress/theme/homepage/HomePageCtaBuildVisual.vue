@@ -222,25 +222,25 @@ onBeforeUnmount(() => timers.forEach(clearTimeout));
 .play-button {
   position: absolute;
   z-index: 10;
-  left: calc(50% - 26px);
-  top: calc(50% - 26px);
+  left: calc(50% - 22px);
+  top: calc(50% - 22px);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
 
   background-color: var(--accent-secondary);
   color: #FFF;
   box-shadow:
-      0 0 0 6px color-mix(in srgb, var(--accent-secondary) 22%, transparent),
+      0 0 0 5px color-mix(in srgb, var(--accent-secondary) 22%, transparent),
       0 8px 20px -4px color-mix(in srgb, var(--accent-secondary) 60%, transparent);
   transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
 }
 
 .play-button i {
-  font-size: 18px;
+  font-size: 1rem;
   margin-left: 3px; /* optical centring of the triangle */
 }
 

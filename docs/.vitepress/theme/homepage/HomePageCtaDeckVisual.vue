@@ -290,7 +290,7 @@ onBeforeUnmount(() => {
 .deck {
   --tilt-y: -26deg;
   --tilt-z: 2deg;
-  --scale: 0.8;
+  --scale: 0.68;
   --shift: -12px;
   --dx: 4px;
   --dy: -4px;
