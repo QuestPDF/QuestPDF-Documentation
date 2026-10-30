@@ -68,7 +68,7 @@ function onFocus(event: FocusEvent) {
   column-gap: 24px;
   align-items: center;
   min-height: 256px;
-  padding: 32px;
+  padding: 32px 48px 32px 32px;
 
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
