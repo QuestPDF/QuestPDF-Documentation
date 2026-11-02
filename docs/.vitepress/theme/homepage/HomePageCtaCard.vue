@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
-/* `active` while hovered or keyboard-focused (a click's focus does not count: the click navigates anyway); the
-   visual slot gets it too. */
+/* `active` while hovered or keyboard-focused (a click's focus does not count: the click navigates anyway);
+   `visible` while mostly on screen, tracked on devices without hover only. The visual slot gets both. */
 
 withDefaults(defineProps<{
   title: string;
@@ -19,17 +19,32 @@ withDefaults(defineProps<{
   accentSecondary: "#2979FF"
 });
 
+const card = ref<HTMLElement>();
 const hovered = ref(false);
 const focused = ref(false);
+const visible = ref(false);
 const active = computed(() => hovered.value || focused.value);
 
 function onFocus(event: FocusEvent) {
   focused.value = (event.target as Element).matches(":focus-visible");
 }
+
+let observer: IntersectionObserver | undefined;
+
+onMounted(() => {
+  if (window.matchMedia("(hover: hover)").matches)
+    return;
+
+  observer = new IntersectionObserver(([entry]) => visible.value = entry.isIntersecting, { threshold: 0.6 });
+  observer.observe(card.value!);
+});
+
+onBeforeUnmount(() => observer?.disconnect());
 </script>
 
 <template>
   <a
+      ref="card"
       class="panel cta-card"
       :class="{ active }"
       :style="{ '--accent': accent, '--accent-secondary': accentSecondary }"
@@ -42,7 +57,7 @@ function onFocus(event: FocusEvent) {
 
     <!-- the visual is decoration: the link is named by its text -->
     <div class="visual" aria-hidden="true">
-      <slot name="visual" :active="active" />
+      <slot name="visual" :active="active" :visible="visible" />
     </div>
 
     <div class="cta-text">
@@ -235,54 +250,27 @@ html.dark .background-gradient {
 }
 
 
-/* Compact: below 700px the visual is a thumbnail beside the title */
+/* Compact: below 700px the visual sits above the text */
 
 @media screen and (max-width: 700px) {
   .cta-card {
-    grid-template-columns: 72px minmax(0, 1fr);
-    grid-template-areas:
-        "visual title"
-        "text text"
-        "link link";
-    column-gap: 16px;
-    row-gap: 12px;
-    align-items: center;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 20px;
     min-height: 0;
-    padding: 20px;
+    padding: 24px;
   }
 
   .visual {
-    grid-area: visual;
-    align-self: center;
-  }
-
-  /* the text column dissolves, so the title can sit beside the thumbnail */
-  .cta-text {
-    display: contents;
+    align-self: auto;
   }
 
   .cta-text .card-title {
-    grid-area: title;
     font-size: 1.25rem;
     line-height: 1.625rem;
   }
 
-  .cta-text .card-description {
-    grid-area: text;
-    margin-top: 0;
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-
-  .cta-link {
-    grid-area: link;
-    justify-self: end;
-    margin-top: 0;
-    font-size: 0.9375rem;
-  }
-
   .background-gradient {
-    background-image: radial-gradient(ellipse 70% 90% at 0% 0%, var(--glow-outer), transparent);
+    background-image: radial-gradient(ellipse 80% 70% at 50% 0%, var(--glow-outer), transparent);
   }
 }
 

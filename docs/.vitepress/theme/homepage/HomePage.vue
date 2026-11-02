@@ -10,8 +10,8 @@
             description="Learn the core concepts step by step, from blank page to finished PDF in under 200 lines of C# code."
             label="Watch the tutorial"
             href="/quick-start.html">
-          <template #visual="{ active }">
-            <HomePageCtaBuildVisual :active="active" />
+          <template #visual="{ active, visible }">
+            <HomePageCtaBuildVisual :active="active" :visible="visible" />
           </template>
         </HomePageCtaCard>
 
@@ -22,8 +22,8 @@
             href="/sample-gallery.html"
             accent="#5C6BC0"
             accent-secondary="#3F51B5">
-          <template #visual="{ active }">
-            <HomePageCtaDeckVisual :active="active" />
+          <template #visual="{ active, visible }">
+            <HomePageCtaDeckVisual :active="active" :visible="visible" />
           </template>
         </HomePageCtaCard>
       </div>

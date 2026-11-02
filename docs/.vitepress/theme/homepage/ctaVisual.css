@@ -79,33 +79,8 @@ html.dark .page {
 
 /* Compact */
 
-.thumb {
-  display: none;
-}
-
-.mini {
-  position: absolute;
-  inset: 0;
-  color: var(--ink);
-}
-
 @media screen and (max-width: 700px) {
   .scene {
-    width: 72px;
-    height: 72px;
-    min-height: 0;
-  }
-
-  .stage {
-    display: none;
-  }
-
-  .thumb {
-    display: block;
-    position: relative;
-    width: 72px;
-    height: 72px;
-    border-radius: 12px;
-    overflow: hidden;
+    min-height: 180px;
   }
 }

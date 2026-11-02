@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { onBeforeUnmount, ref, watch } from "vue";
+import { computed, onBeforeUnmount, ref, watch } from "vue";
 import { reducedMotion, Timeline } from "./ctaTimeline";
 
-/* The intro-video card's visual: an invoice page in 3D whose sections land on it on hover. A pass always finishes,
-   even if the pointer leaves. Reduced motion: the finished page, nothing moves. */
+/* The intro-video card's visual: an invoice page in 3D whose sections land on it on hover, or when the card comes
+   into view on a device without hover. A pass always finishes, even if the pointer leaves. Reduced motion: the
+   finished page, nothing moves. */
 
-const props = defineProps<{ active: boolean }>();
+const props = defineProps<{ active: boolean; visible: boolean }>();
+const playing = computed(() => props.active || props.visible);
 
 /* play: the play button is shown; it hides when a pass starts and returns with the totals */
 const play = ref(true);
@@ -92,18 +94,6 @@ const sections: Section[] = [
   }
 ];
 
-/* the compact thumbnail (72 x 72): a flat miniature of the finished page */
-const thumb: Bar[] = [
-  { x: 8, y: 8, w: 10, h: 10, tone: "strong" },
-  { x: 22, y: 9, w: 28, h: 6, tone: "strong" },
-  { x: 8, y: 26, w: 24, h: 4 },
-  { x: 40, y: 26, w: 24, h: 4 },
-  { x: 8, y: 38, w: 56, h: 7, tone: "strong" },
-  { x: 8, y: 50, w: 56, h: 4 },
-  { x: 8, y: 58, w: 56, h: 4 },
-  { x: 8, y: 66, w: 56, h: 4 }
-];
-
 function box(item: Box) {
   return { left: `${item.x}px`, top: `${item.y}px`, width: `${item.w}px`, height: `${item.h}px` };
 }
@@ -146,8 +136,8 @@ async function pass() {
   busy = false;
 }
 
-watch(() => props.active, active => {
-  if (active && !busy && !reducedMotion())
+watch(playing, isPlaying => {
+  if (isPlaying && !busy && !reducedMotion())
     pass();
 });
 
@@ -155,7 +145,7 @@ onBeforeUnmount(() => timeline.cancel());
 </script>
 
 <template>
-  <div ref="root" class="scene build" :class="{ play, active }">
+  <div ref="root" class="scene build" :class="{ play, active: playing }">
     <div class="stage">
       <div class="model">
         <div class="shadow" />
@@ -168,13 +158,6 @@ onBeforeUnmount(() => timeline.cancel());
     </div>
 
     <span class="play-button"><i class="fa-solid fa-play"></i></span>
-
-    <div class="thumb">
-      <div class="paper mini">
-        <span v-for="(bar, index) of thumb" :key="index" class="shape" :class="bar.tone" :style="box(bar)" />
-      </div>
-      <span class="play-button"><i class="fa-solid fa-play"></i></span>
-    </div>
   </div>
 </template>
 
@@ -276,27 +259,6 @@ onBeforeUnmount(() => timeline.cancel());
   70%, 100% {
     box-shadow: 0 0 0 18px color-mix(in srgb, var(--accent-secondary) 45%, transparent);
     opacity: 0;
-  }
-}
-
-
-/* Compact */
-@media screen and (max-width: 700px) {
-  .build > .play-button {
-    display: none;
-  }
-
-  .thumb .play-button {
-    width: 28px;
-    height: 28px;
-    left: 22px;
-    top: 22px;
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-secondary) 22%, transparent);
-  }
-
-  .thumb .play-button i {
-    font-size: 1rem;
-    margin-left: 2px;
   }
 }
 

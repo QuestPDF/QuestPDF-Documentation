@@ -2,11 +2,11 @@
 import { computed, onBeforeUnmount, ref, watch } from "vue";
 import { reducedMotion, Timeline } from "./ctaTimeline";
 
-/* The sample-gallery card's visual: a pile of six sample pages in 3D that browses on hover. When the pointer leaves,
-   the running step finishes in the hover pose first, hence the component's own hover class. Reduced motion: the pile
-   stays still. */
+/* The sample-gallery card's visual: a pile of six sample pages in 3D that browses on hover, and for one cycle when
+   the card comes into view on a device without hover. When a run ends, the running step finishes in the hover pose
+   first, hence the component's own hover class. Reduced motion: the pile stays still. */
 
-const props = defineProps<{ active: boolean }>();
+const props = defineProps<{ active: boolean; visible: boolean }>();
 
 /* hover: the hover pose, which outlasts the pointer until a running step ends. front: the page in front.
    leaving: the page on its way from the front to the back while a step runs (-1: none). */
@@ -163,21 +163,6 @@ const pages: Page[] = [
   }
 ];
 
-/* the compact thumbnail (72 x 72): a flat miniature of the front page, the report */
-const thumb: Shape[] = [
-  { x: 8, y: 8, w: 30, h: 6, tone: "strong" },
-  { x: 8, y: 17, w: 20, h: 3, tone: "soft" },
-  { x: 8, y: 40, w: 7, h: 12 },
-  { x: 18, y: 32, w: 7, h: 20 },
-  { x: 28, y: 44, w: 7, h: 8 },
-  { x: 38, y: 28, w: 7, h: 24 },
-  { x: 48, y: 36, w: 7, h: 16 },
-  { x: 58, y: 24, w: 7, h: 28, tone: "accent" },
-  { x: 8, y: 52, w: 57, h: 1, tone: "soft" },
-  { x: 8, y: 60, w: 56, h: 3 },
-  { x: 8, y: 66, w: 44, h: 3, tone: "soft" }
-];
-
 const LAST = pages.length - 1;
 const TILTS = [0, 1.2, -1, 0.8, -1.4, 0.6];
 
@@ -221,8 +206,12 @@ const LEAVE_FADE: Keyframe[] = [
   { opacity: 1 }
 ];
 
+/* the run: without end while hovered, one cycle through the pile when the card merely came into view */
+const run = computed(() => props.active ? Infinity : props.visible ? pages.length : 0);
+
 const timeline = new Timeline();
-let pending: Animation | undefined; /* the wait before the next step; cancelled when the pointer leaves */
+let remaining = 0; /* steps left in the run */
+let pending: Animation | undefined; /* the wait before the next step; cancelled when the run changes */
 
 /* one browse step: the front page leaves and the pile advances; the hover pose is held until the page has settled */
 async function step() {
@@ -240,24 +229,26 @@ async function step() {
 
   motions.forEach(motion => motion.cancel()); /* the end state is the page's own place */
   leaving.value = -1;
-  hover.value = props.active;
+  hover.value = remaining > 0;
 }
 
 async function browse() {
-  for (let delay = FIRST_STEP_DELAY; ; delay = STEP_INTERVAL) {
+  for (let delay = FIRST_STEP_DELAY; remaining > 0; delay = STEP_INTERVAL) {
     pending = timeline.wait(root.value!, delay);
 
     if (!await Timeline.settled([pending]))
       return;
 
+    remaining--;
     step();
   }
 }
 
-watch(() => props.active, isActive => {
+watch(run, steps => {
   pending?.cancel();
+  remaining = steps;
 
-  if (isActive && !reducedMotion()) {
+  if (steps > 0 && !reducedMotion()) {
     hover.value = true;
     browse();
   }
@@ -295,12 +286,6 @@ onBeforeUnmount(() => timeline.cancel());
           </div>
         </div>
 
-      </div>
-    </div>
-
-    <div class="thumb">
-      <div class="paper mini">
-        <span v-for="(shape, index) of thumb" :key="index" class="shape" :class="shape.tone" :style="shapeStyle(shape)" />
       </div>
     </div>
   </div>
