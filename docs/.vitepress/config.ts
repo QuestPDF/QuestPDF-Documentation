@@ -1,6 +1,6 @@
-import {defineConfig, HeadConfig} from 'vitepress'
+import {defineConfig, type DefaultTheme, HeadConfig} from 'vitepress'
 import llmstxt from 'vitepress-plugin-llms'
-import imageSizePlugin from "./markdownit-imagesize-plugin";
+import imageSizePlugin from "./markdownit-imagesize-plugin.ts";
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -15,6 +15,13 @@ function getPlausibleScript() : HeadConfig[] {
 }
 
 
+/* llms.txt lists documentation pages only; an external sidebar link (GitHub releases) has no markdown source */
+function withoutExternalLinks(items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem[] {
+    return items
+        .filter(item => !item.link || !/^https?:\/\//.test(item.link))
+        .map(item => item.items ? { ...item, items: withoutExternalLinks(item.items) } : item);
+}
+
 export default defineConfig({
     lang: 'en-US',
     title: 'QuestPDF',
@@ -23,7 +30,7 @@ export default defineConfig({
     cleanUrls: false,
 
     vite: {
-      plugins: [llmstxt()]
+      plugins: [llmstxt({ sidebar: sidebar => Array.isArray(sidebar) ? withoutExternalLinks(sidebar) : sidebar })]
     },
 
     head: [

@@ -1,6 +1,6 @@
 import { defineLoader } from "vitepress";
 import fs from "node:fs";
-import { buildSession, type QuickStartSession, type Round } from "./sessionBuilder";
+import { buildSession, type QuickStartSession, type Round } from "./sessionBuilder.ts";
 
 /* The homepage quick start's coding session, built by sessionBuilder.ts. The viewer shows
    public/homepage/quick-start-<n>.webp (n requests applied; 0 is the page's chrome alone): render them again, and

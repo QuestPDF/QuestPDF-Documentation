@@ -1,5 +1,5 @@
 import { codeToHtml, stringifyTokenStyle, type ThemedToken } from "shiki";
-import { type FoldableLine, foldLines } from "./codeFolding";
+import { type FoldableLine, foldLines } from "./codeFolding.ts";
 
 /* Turns the quick start session (quickStart.data.ts) into what the window needs, highlighting every line it will
    show at build time, so no highlighter ships to the browser. */
