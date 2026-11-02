@@ -1,28 +1,6 @@
 <script setup lang="ts">
 import Icon from "./Icon.vue";
-import { featureChapters, type FeatureCategory } from "./features";
-
-/* Splits a chapter's categories into two columns of near-equal height, counted in lines (a title with its gap as
-   three, a feature as one); each column keeps the data order. */
-function balance(categories: FeatureCategory[]): FeatureCategory[][] {
-  const height = (list: FeatureCategory[]) => list.reduce((sum, category) => sum + 3 + category.features.length, 0);
-  const total = height(categories);
-
-  let best = { difference: Infinity, columns: [categories] };
-
-  for (let mask = 1; mask < 1 << categories.length; mask += 2) {
-    const left = categories.filter((_, index) => mask & (1 << index));
-    const right = categories.filter((_, index) => !(mask & (1 << index)));
-    const difference = Math.abs(total - 2 * height(left));
-
-    if (difference < best.difference)
-      best = { difference, columns: [left, right] };
-  }
-
-  return best.columns.filter(column => column.length > 0);
-}
-
-const chapters = featureChapters.map(chapter => ({ ...chapter, columns: balance(chapter.categories) }));
+import { featureChapters } from "./features";
 </script>
 
 <template>
@@ -36,26 +14,30 @@ const chapters = featureChapters.map(chapter => ({ ...chapter, columns: balance(
       </header>
 
       <div class="chapters">
-        <section v-for="chapter in chapters" :key="chapter.name" class="panel chapter">
-          <h2 class="chapter-title">{{ chapter.name }}</h2>
+        <template v-for="chapter in featureChapters" :key="chapter.name">
+          <div class="dotted-divider"></div>
 
-          <div class="columns">
-            <div v-for="(column, index) in chapter.columns" :key="index" class="column">
-              <section v-for="category in column" :key="category.name" class="category" :style="{ order: chapter.categories.indexOf(category) }">
-                <h3 class="category-title">
-                  <Icon class="category-icon" :icon="category.icon" />
-                  {{ category.name }}
-                </h3>
+          <section class="chapter">
+            <h2 class="chapter-title">{{ chapter.name }}</h2>
 
-                <ul class="features">
-                  <li v-for="feature in category.features" :key="feature.link">
-                    <a :href="feature.link" class="feature">{{ feature.name }}</a>
-                  </li>
-                </ul>
-              </section>
-            </div>
-          </div>
-        </section>
+            <section v-for="category in chapter.categories" :key="category.name" class="panel category">
+              <h3 class="category-title">{{ category.name }}</h3>
+
+              <div class="features">
+                <a v-for="feature in category.features" :key="feature.link" :href="feature.link" class="feature">
+                  <span class="icon-tile">
+                    <Icon :icon="feature.icon" />
+                  </span>
+
+                  <span class="feature-text">
+                    <strong class="row-title">{{ feature.name }}</strong>
+                    <span class="row-description">{{ feature.description }}</span>
+                  </span>
+                </a>
+              </div>
+            </section>
+          </section>
+        </template>
       </div>
     </div>
   </div>
@@ -63,8 +45,9 @@ const chapters = featureChapters.map(chapter => ({ ...chapter, columns: balance(
 
 <style scoped>
 
+/* the first chapter's divider follows at the same distance as the ones between chapters */
 .features-header {
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 
 .features-header .sub-header {
@@ -79,100 +62,103 @@ const chapters = featureChapters.map(chapter => ({ ...chapter, columns: balance(
   gap: 32px;
 }
 
-.chapter {
+.chapter,
+.chapters .dotted-divider {
   width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
+  max-width: 1040px;
+  margin-inline: auto;
+}
+
+.chapter {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .chapter-title {
-  margin: 0 0 40px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--vp-c-divider);
-  font-size: 1.375rem;
-  line-height: 1.75rem;
+  margin: 0 0 8px;
+  text-align: center;
 }
-
-.columns {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 48px 64px;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-}
-
-@media screen and (max-width: 560px) {
-  .columns {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .column {
-    display: contents;
-  }
-}
-
 
 .category-title {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 12px;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  font-weight: 600;
-  color: var(--vp-c-text-1);
-}
-
-.category-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
-  background-color: var(--surface-inner);
-  font-size: 1rem;
+  margin: 0 0 28px;
 }
 
 .features {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 48px;
 }
+
+@media screen and (max-width: 760px) {
+  .features {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+
+/* the whole row is the link; it pads outwards into the grid gap, so the hover surface wraps the row without moving it */
 
 .feature {
-  display: inline-block;
-  padding: 3px 0;
-  font-size: 0.9375rem;
-  line-height: 1.375rem;
-  color: var(--vp-c-text-2);
-  text-decoration: underline transparent;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-  transition: color 0.2s, text-decoration-color 0.2s;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin: -12px;
+  padding: 12px;
+  color: inherit;
+  border-radius: 16px;
+  transition: background-color 0.2s, box-shadow 0.2s;
 }
 
-.feature:hover {
-  color: var(--vp-c-text-1);
-  text-decoration-color: currentColor;
+.feature:is(:hover, :focus-visible) {
+  background-color: color-mix(in srgb, #2196F3 8%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, #2196F3 35%, transparent);
 }
 
 .feature:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: 2px;
-  border-radius: 3px;
+  outline: none;
 }
 
-@media (pointer: coarse) {
-  .feature {
-    padding: 8px 0;
-  }
+.feature .icon-tile {
+  transition: background-color 0.2s;
+}
+
+.feature .icon-tile .icon {
+  transition: color 0.2s;
+}
+
+.feature:is(:hover, :focus-visible) .icon-tile {
+  background-color: color-mix(in srgb, #2196F3 16%, transparent);
+}
+
+.feature:is(:hover, :focus-visible) .icon-tile .icon {
+  color: light-dark(#1976D2, #64B5F6);
+}
+
+.feature:is(:hover, :focus-visible) .row-title {
+  color: var(--vp-c-brand-1);
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.feature .row-title {
+  display: block;
+  font-size: 1.0625rem;
+  line-height: 1.5rem;
+  transition: color 0.2s;
+}
+
+.feature .row-description {
+  display: block;
+  margin-top: 4px;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: var(--vp-c-text-2);
 }
 
 </style>
