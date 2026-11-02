@@ -64,7 +64,7 @@ Document.Create(container =>
 
 This code generates a PDF document with the following layout:
 
-![example](/minimal-api.png)
+![example](/minimal-api.webp)
 
 ## License
 
@@ -85,4 +85,4 @@ For learning and evaluation, you can use the QuestPDF Evaluation license type.
 
 QuestPDF's Fluent API scales seamlessly with your document complexity. To explore its full potential, check out [the In-Depth Invoice Tutorial](/invoice-tutorial), where you'll learn to create a professional invoice in less than 200 lines of code.
 
-![invoice](/getting-started/invoice.png)
+![invoice](/getting-started/invoice.webp)

@@ -8,7 +8,7 @@ QuestPDF is a modern .NET library for PDF document generation that emphasizes cl
 
 By the end, you'll have a fully functional, paginated invoice generator that looks like this:
 
-![invoice](/getting-started/invoice.png)
+![invoice](/getting-started/invoice.webp)
 
 ::: tip INSTALLATION
 Before starting this tutorial, please familiarize yourself with [the Quick Start tutorial](/quick-start).

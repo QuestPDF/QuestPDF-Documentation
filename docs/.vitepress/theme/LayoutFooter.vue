@@ -81,7 +81,7 @@ const year = new Date().getFullYear();
     </div>
 
     <div class="content">
-      <p class="copyright">© {{ year }} QuestPDF by Marcin Ziąbek CodeFlint</p>
+      <p class="copyright">© {{ year }} QuestPDF by Marcin Ziabek CodeFlint</p>
     </div>
   </footer>
 </template>

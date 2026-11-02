@@ -27,7 +27,7 @@ export default defineConfig({
     },
 
     head: [
-        ['link', { rel: 'icon', href: '/logo.png', type: 'image/png' }],
+        ['link', { rel: 'icon', href: '/favicon.png', type: 'image/png', sizes: '64x64' }],
         ['script', { src: 'https://kit.fontawesome.com/294da38298.js', crossorigin: 'anonymous', async: "" }],
         ...getPlausibleScript(),
         ['meta', { name: "title", content: "C# PDF Generation Library | QuestPDF for .NET" }],
@@ -37,8 +37,8 @@ export default defineConfig({
 
     themeConfig: {
         logo: {
-            light: '/questpdf-logo-light.png',
-            dark: '/questpdf-logo-dark.png',
+            light: '/questpdf-logo-nav-light.webp',
+            dark: '/questpdf-logo-nav-dark.webp',
             alt: 'QuestPDF'
         },
         siteTitle: false,
