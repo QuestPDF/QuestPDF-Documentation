@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
+import { faAwardSimple, faBolt, faCalendarDay, faCode, faCreditCard, faReceipt } from "@fortawesome/pro-regular-svg-icons";
+import { faCheck } from "@fortawesome/pro-solid-svg-icons";
+import Icon from "../Icon.vue";
 const shareEmailSubject = 'QuestPDF License Purchased – Setup Instructions';
 const shareEmailBody = `Hi Team,
 
@@ -16,7 +20,7 @@ const shareMailtoLink = `mailto:?subject=${encodeURIComponent(shareEmailSubject)
 
 interface Card {
   title: string;
-  items: { icon: string; title: string; description: string }[];
+  items: { icon: IconDefinition; title: string; description: string }[];
   action: { label: string; href: string; primary?: boolean; target?: string };
 }
 
@@ -25,17 +29,17 @@ const cards: Card[] = [
     title: "License information",
     items: [
       {
-        icon: "fa-award-simple",
+        icon: faAwardSimple,
         title: "Perpetual license",
         description: "Your perpetual license never expires. This purchase includes one year of feature, quality and security updates, along with one year of dedicated support."
       },
       {
-        icon: "fa-bolt",
+        icon: faBolt,
         title: "Ready to use",
         description: "Your organization is now licensed to use QuestPDF in production. No license keys, activation servers, or compliance tracking are required. Your team can start immediately - licensing never blocks builds or deployments."
       },
       {
-        icon: "fa-code",
+        icon: faCode,
         title: "License configuration",
         description: "Please share <a href=\"https://www.questpdf.com/license/configuration.html\"><u>the license setup guide</u></a> with your software development team. Configuration takes only a few minutes and requires changing a single line of code."
       }
@@ -46,17 +50,17 @@ const cards: Card[] = [
     title: "Billing and renewal",
     items: [
       {
-        icon: "fa-receipt",
+        icon: faReceipt,
         title: "Purchase confirmation",
         description: "All purchase details, invoices, and receipts will be delivered to your email by Paddle, our Merchant of Record."
       },
       {
-        icon: "fa-calendar-day",
+        icon: faCalendarDay,
         title: "Updates & support auto-renewal",
         description: "Renewal extends access to software updates and support for another year. If renewal is canceled, your team keeps the right to use the version already licensed. We will send a renewal reminder 30 days before the renewal date."
       },
       {
-        icon: "fa-credit-card",
+        icon: faCreditCard,
         title: "Invoice and billing",
         description: "You can update your account details and payment information, manage or cancel the license auto-renewal process as well as access payment history on the Paddle Customer Portal."
       }
@@ -72,7 +76,7 @@ const cards: Card[] = [
     <div class="content">
       <header class="section-header purchase-header">
         <div class="status-tag">
-          <i class="fa-solid fa-check" aria-hidden="true"></i>
+          <Icon :icon="faCheck" />
           Order completed
         </div>
 
@@ -86,7 +90,7 @@ const cards: Card[] = [
           <div class="description-items">
             <div v-for="item in card.items" :key="item.title" class="description-item">
               <div class="icon-tile">
-                <i class="fa-regular" :class="item.icon" aria-hidden="true" />
+                <Icon :icon="item.icon" />
               </div>
               <div class="description-item-content">
                 <strong class="row-title">{{ item.title }}</strong>
@@ -169,7 +173,7 @@ const cards: Card[] = [
   color: light-dark(#FFFFFF, #0D3B12);
 }
 
-.status-tag i {
+.status-tag .icon {
   font-size: 18px;
 }
 

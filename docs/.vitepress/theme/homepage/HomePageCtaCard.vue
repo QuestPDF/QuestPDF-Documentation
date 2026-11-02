@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { faArrowRight } from "@fortawesome/pro-solid-svg-icons";
+import Icon from "../Icon.vue";
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
 /* `active` while hovered or keyboard-focused (a click's focus does not count: the click navigates anyway);
@@ -66,7 +68,7 @@ onBeforeUnmount(() => observer?.disconnect());
 
       <span class="cta-link">
         {{ label }}
-        <i class="fa-solid fa-arrow-right arrow-icon" aria-hidden="true"></i>
+        <Icon class="arrow-icon" :icon="faArrowRight" />
       </span>
     </div>
   </a>

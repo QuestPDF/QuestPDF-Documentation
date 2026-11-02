@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Icon from "./Icon.vue";
 import { featureChapters, type FeatureCategory } from "./features";
 
 /* Splits a chapter's categories into two columns of near-equal height, counted in lines (a title with its gap as
@@ -42,7 +43,7 @@ const chapters = featureChapters.map(chapter => ({ ...chapter, columns: balance(
             <div v-for="(column, index) in chapter.columns" :key="index" class="column">
               <section v-for="category in column" :key="category.name" class="category" :style="{ order: chapter.categories.indexOf(category) }">
                 <h3 class="category-title">
-                  <i class="fa-regular category-icon" :class="category.icon" aria-hidden="true"></i>
+                  <Icon class="category-icon" :icon="category.icon" />
                   {{ category.name }}
                 </h3>
 

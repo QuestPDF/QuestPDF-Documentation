@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { faArrowRight, faBoxOpen, faInfinity, faLayerGroup, faLockOpen, faRotateLeft, faTag, faUsers } from "@fortawesome/pro-regular-svg-icons";
+import Icon from "../Icon.vue";
 import { licensePrices } from "../pricing/prices";
 
 const perYear = (price: number) => `$${price.toLocaleString("en-US")} / year`;
@@ -22,13 +24,13 @@ const tiers = [
 ]
 
 const includes = [
-  { icon: "fa-infinity", text: "Perpetual license, not a subscription: keep every version you received" },
-  { icon: "fa-layer-group", text: "Full feature set in every tier, including the free Community License" },
-  { icon: "fa-users", text: "Unlimited developers, projects, servers and deployments" },
-  { icon: "fa-box-open", text: "Royalty-free redistribution in SaaS, desktop and on-premises apps" },
-  { icon: "fa-lock-open", text: "No registration, license keys, watermarks or time limits" },
-  { icon: "fa-rotate-left", text: "30-day money-back guarantee on every paid license" },
-  { icon: "fa-tag", text: "Locked renewal price: it never increases while you keep renewing" }
+  { icon: faInfinity, text: "Perpetual license, not a subscription: keep every version you received" },
+  { icon: faLayerGroup, text: "Full feature set in every tier, including the free Community License" },
+  { icon: faUsers, text: "Unlimited developers, projects, servers and deployments" },
+  { icon: faBoxOpen, text: "Royalty-free redistribution in SaaS, desktop and on-premises apps" },
+  { icon: faLockOpen, text: "No registration, license keys, watermarks or time limits" },
+  { icon: faRotateLeft, text: "30-day money-back guarantee on every paid license" },
+  { icon: faTag, text: "Locked renewal price: it never increases while you keep renewing" }
 ]
 </script>
 
@@ -39,7 +41,7 @@ const includes = [
 
       <ul class="includes-list">
         <li v-for="item of includes" :key="item.text">
-          <i class="fa-regular" :class="item.icon" aria-hidden="true"></i>
+          <Icon :icon="item.icon" />
           <span>{{ item.text }}</span>
         </li>
       </ul>
@@ -58,7 +60,7 @@ const includes = [
           <span class="tier-name">{{ tier.name }}</span>
           <span class="tier-price">
             <span class="tier-price-text">{{ tier.price }}</span>
-            <i class="fa-regular fa-arrow-right tier-arrow" aria-hidden="true"></i>
+            <Icon class="tier-arrow" :icon="faArrowRight" />
           </span>
         </span>
         <span class="tier-description">{{ tier.description }}</span>
@@ -123,7 +125,7 @@ html.dark .license-panel {
   color: var(--vp-c-text-1);
 }
 
-.includes-list i {
+.includes-list .icon {
   flex-shrink: 0;
   width: 18px;
   text-align: center;
@@ -138,7 +140,7 @@ html.dark .license-panel {
     padding: 6px 0;
   }
 
-  .includes-list i {
+  .includes-list .icon {
     line-height: 1.5rem;
   }
 }

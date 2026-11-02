@@ -1,6 +1,9 @@
 /* The Features Overview page (FeaturesOverview.vue). Chapter and category names use the documentation's own terms;
    feature names say what a reader gets, not what the API calls it. */
 
+import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
+import { faBug, faChartMixed, faCode, faCopy, faDisplay, faFile, faFileExport, faFileLines, faFont, faImage, faLanguage, faPalette, faParagraph, faPuzzlePiece, faRotate, faRulerCombined, faTable, faTableLayout, faText, faWandMagicSparkles } from "@fortawesome/pro-regular-svg-icons";
+
 export interface Feature {
   name: string;
   link: string;
@@ -8,8 +11,7 @@ export interface Feature {
 
 export interface FeatureCategory {
   name: string;
-  /* a Font Awesome regular icon */
-  icon: string;
+  icon: IconDefinition;
   features: Feature[];
 }
 
@@ -24,7 +26,7 @@ export const featureChapters: FeatureChapter[] = [
     categories: [
       {
         name: "Companion App",
-        icon: "fa-display",
+        icon: faDisplay,
         features: [
           { name: "Live preview", link: "/companion/usage.html" },
           { name: "Magnifier", link: "/companion/features.html#magnifier" },
@@ -37,7 +39,7 @@ export const featureChapters: FeatureChapter[] = [
       },
       {
         name: "Debugging",
-        icon: "fa-bug",
+        icon: faBug,
         features: [
           { name: "Exception analysis", link: "/companion/features.html#runtime-exceptions" },
           { name: "Layout debugging", link: "/companion/features.html#layout-issue-debugging" },
@@ -52,7 +54,7 @@ export const featureChapters: FeatureChapter[] = [
     categories: [
       {
         name: "Code patterns",
-        icon: "fa-code",
+        icon: faCode,
         features: [
           { name: "Execution order", link: "/concepts/code-patterns/execution-order.html" },
           { name: "Document structure", link: "/concepts/code-patterns/document-structure.html" },
@@ -63,7 +65,7 @@ export const featureChapters: FeatureChapter[] = [
       },
       {
         name: "Components",
-        icon: "fa-puzzle-piece",
+        icon: faPuzzlePiece,
         features: [
           { name: "Components", link: "/concepts/code-patterns/components.html" },
           { name: "Dynamic components", link: "/concepts/code-patterns/dynamic-components.html" },
@@ -72,7 +74,7 @@ export const featureChapters: FeatureChapter[] = [
       },
       {
         name: "Prototyping",
-        icon: "fa-wand-magic-sparkles",
+        icon: faWandMagicSparkles,
         features: [
           { name: "Placeholder text", link: "/concepts/prototyping.html#text" },
           { name: "Placeholder colours", link: "/concepts/prototyping.html#colors" },
@@ -87,7 +89,7 @@ export const featureChapters: FeatureChapter[] = [
     categories: [
       {
         name: "Page setup",
-        icon: "fa-file",
+        icon: faFile,
         features: [
           { name: "Pages", link: "/api-reference/page/basics.html" },
           { name: "Headers and footers", link: "/api-reference/page/slots.html" },
@@ -96,7 +98,7 @@ export const featureChapters: FeatureChapter[] = [
       },
       {
         name: "Tables",
-        icon: "fa-table",
+        icon: faTable,
         features: [
           { name: "Tables", link: "/api-reference/table/basics.html" },
           { name: "Table cell styles", link: "/api-reference/table/cell-style-pattern.html" },
@@ -106,7 +108,7 @@ export const featureChapters: FeatureChapter[] = [
       },
       {
         name: "Layout containers",
-        icon: "fa-table-layout",
+        icon: faTableLayout,
         features: [
           { name: "Columns", link: "/api-reference/column.html" },
           { name: "Rows", link: "/api-reference/row.html" },
@@ -119,7 +121,7 @@ export const featureChapters: FeatureChapter[] = [
       },
       {
         name: "Size and spacing",
-        icon: "fa-ruler-combined",
+        icon: faRulerCombined,
         features: [
           { name: "Width", link: "/api-reference/width.html" },
           { name: "Height", link: "/api-reference/height.html" },
@@ -134,7 +136,7 @@ export const featureChapters: FeatureChapter[] = [
       },
       {
         name: "Transformations",
-        icon: "fa-rotate",
+        icon: faRotate,
         features: [
           { name: "Rotation", link: "/api-reference/rotate.html" },
           { name: "Scaling", link: "/api-reference/scale.html" },
@@ -145,7 +147,7 @@ export const featureChapters: FeatureChapter[] = [
       },
       {
         name: "Content flow",
-        icon: "fa-file-lines",
+        icon: faFileLines,
         features: [
           { name: "Page breaks", link: "/api-reference/page-break.html" },
           { name: "Avoid page breaks", link: "/api-reference/prevent-page-break.html" },
@@ -166,7 +168,7 @@ export const featureChapters: FeatureChapter[] = [
     categories: [
       {
         name: "Text basics",
-        icon: "fa-text",
+        icon: faText,
         features: [
           { name: "Rich text", link: "/api-reference/text/basics.html" },
           { name: "Page numbers", link: "/api-reference/text/page-numbers.html" },
@@ -177,7 +179,7 @@ export const featureChapters: FeatureChapter[] = [
       },
       {
         name: "Text style",
-        icon: "fa-font",
+        icon: faFont,
         features: [
           { name: "Font size", link: "/api-reference/text/text-style.html#font-size" },
           { name: "Font family", link: "/api-reference/text/text-style.html#font-family" },
@@ -198,7 +200,7 @@ export const featureChapters: FeatureChapter[] = [
       },
       {
         name: "Paragraph style",
-        icon: "fa-paragraph",
+        icon: faParagraph,
         features: [
           { name: "Alignment and justification", link: "/api-reference/text/paragraph-style.html#text-alignment" },
           { name: "Paragraph spacing", link: "/api-reference/text/paragraph-style.html#paragraph-spacing" },
@@ -208,7 +210,7 @@ export const featureChapters: FeatureChapter[] = [
       },
       {
         name: "Fonts and languages",
-        icon: "fa-language",
+        icon: faLanguage,
         features: [
           { name: "Custom fonts", link: "/api-reference/text/font-management.html" },
           { name: "Font fallback", link: "/api-reference/text/text-style.html#font-fallback" },
@@ -224,7 +226,7 @@ export const featureChapters: FeatureChapter[] = [
     categories: [
       {
         name: "Styling",
-        icon: "fa-palette",
+        icon: faPalette,
         features: [
           { name: "Backgrounds", link: "/api-reference/background.html" },
           { name: "Borders", link: "/api-reference/border.html" },
@@ -235,7 +237,7 @@ export const featureChapters: FeatureChapter[] = [
       },
       {
         name: "Images",
-        icon: "fa-image",
+        icon: faImage,
         features: [
           { name: "Images", link: "/api-reference/image/basics.html" },
           { name: "SVG", link: "/api-reference/image/svg.html" },
@@ -246,7 +248,7 @@ export const featureChapters: FeatureChapter[] = [
       },
       {
         name: "Graphics",
-        icon: "fa-chart-mixed",
+        icon: faChartMixed,
         features: [
           { name: "Charts", link: "/api-reference/charts.html" },
           { name: "Barcodes and QR codes", link: "/api-reference/barcodes.html" },
@@ -263,7 +265,7 @@ export const featureChapters: FeatureChapter[] = [
     categories: [
       {
         name: "Document generation",
-        icon: "fa-file-export",
+        icon: faFileExport,
         features: [
           { name: "Output formats", link: "/concepts/generating-output.html" },
           { name: "Document metadata", link: "/concepts/document-metadata.html" },
@@ -276,7 +278,7 @@ export const featureChapters: FeatureChapter[] = [
       },
       {
         name: "Document operations",
-        icon: "fa-copy",
+        icon: faCopy,
         features: [
           { name: "Merge documents", link: "/concepts/document-operations.html#merging-documents" },
           { name: "Extract pages", link: "/concepts/document-operations.html#page-selection" },

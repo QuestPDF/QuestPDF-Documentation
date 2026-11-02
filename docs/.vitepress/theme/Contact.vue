@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
+import { faCreditCard, faEnvelope, faIdCard, faUserGroup } from "@fortawesome/pro-regular-svg-icons";
+import { faHeart } from "@fortawesome/pro-solid-svg-icons";
+import Icon from "./Icon.vue";
 interface Link {
   href: string;
   label: string;
 }
 
 interface ContactInformation {
-  icon: string;
+  icon: IconDefinition;
   title: string;
   description: string;
   links: Link[];
@@ -13,7 +17,7 @@ interface ContactInformation {
 
 const contacts: ContactInformation[] = [
   {
-    icon: "fa-user-group",
+    icon: faUserGroup,
     title: "Community Support",
     description: "Encountering an issue or have a feature idea? Join our community on GitHub. It is the best place to report bugs, discuss improvements, and share your insights with other developers.",
     links: [
@@ -24,7 +28,7 @@ const contacts: ContactInformation[] = [
     ]
   },
   {
-    icon: "fa-id-card",
+    icon: faIdCard,
     title: "Customer Portal",
     description: "Access your subscription details, download invoices, update payment methods, or manage your license. Our customer portal provides a convenient way to handle all your account needs in one place.",
     links: [
@@ -35,7 +39,7 @@ const contacts: ContactInformation[] = [
     ]
   },
   {
-    icon: "fa-credit-card",
+    icon: faCreditCard,
     title: "Payment Support",
     description: "We partner with Paddle to guarantee secure payments and global tax compliance. Please reach out to their team directly for assistance with invoices, billing inquiries, or returns.",
     links: [
@@ -50,7 +54,7 @@ const contacts: ContactInformation[] = [
     ]
   },
   {
-    icon: "fa-envelope",
+    icon: faEnvelope,
     title: "Get in Touch",
     description: "Have a question about licensing, or just want to share feedback? Send us an email. We value your input and are always happy to help with non-technical inquiries or dedicated support.",
     links: [
@@ -73,7 +77,7 @@ const contacts: ContactInformation[] = [
       <section class="contacts">
         <article v-for="contact of contacts" :key="contact.title" class="panel contact-card">
           <div class="icon-tile">
-            <i class="fa-regular" :class="contact.icon" aria-hidden="true"></i>
+            <Icon :icon="contact.icon" />
           </div>
 
           <h3 class="card-title">{{ contact.title }}</h3>
@@ -89,7 +93,7 @@ const contacts: ContactInformation[] = [
         <article class="panel business-details">
           <div class="business-owner">
             <div class="icon-tile">
-              <i class="love-icon fa-solid fa-heart" aria-hidden="true"></i>
+              <Icon class="love-icon" :icon="faHeart" />
             </div>
 
             <div>

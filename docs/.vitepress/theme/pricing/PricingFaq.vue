@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { faChevronDown } from "@fortawesome/pro-solid-svg-icons";
+import Icon from "../Icon.vue";
 
 import { faqCategories as categories } from "./faq";
 
@@ -21,7 +23,7 @@ import { faqCategories as categories } from "./faq";
           <details v-for="item of category.items" :key="item.question" class="faq-item">
             <summary class="faq-question">
               <span>{{ item.question }}</span>
-              <i class="fa-solid fa-chevron-down faq-chevron" aria-hidden="true"></i>
+              <Icon class="faq-chevron" :icon="faChevronDown" />
             </summary>
             <p class="faq-answer" v-html="item.answer"></p>
           </details>

@@ -5,13 +5,18 @@
   "license": "MIT",
   "type": "module",
   "devDependencies": {
+    "@fortawesome/fontawesome-common-types": "7.3.1",
+    "@fortawesome/free-brands-svg-icons": "7.3.1",
+    "@fortawesome/pro-duotone-svg-icons": "7.3.1",
+    "@fortawesome/pro-regular-svg-icons": "7.3.1",
+    "@fortawesome/pro-solid-svg-icons": "7.3.1",
     "@paddle/paddle-js": "1.6.5",
     "@types/node": "^22.19.21",
     "image-size": "^2.0.4",
-    "shiki": "^4.4.3",
-    "vitepress": "^2.0.0-alpha.20",
+    "shiki": "^4.6.0",
+    "vitepress": "^2.0.0-alpha.21",
     "vitepress-plugin-llms": "^1.13.5",
-    "vue": "3.5.43"
+    "vue": "3.5.44"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",

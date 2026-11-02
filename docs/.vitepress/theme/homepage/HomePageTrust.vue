@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
+import { faArrowRight } from "@fortawesome/pro-regular-svg-icons";
+import { faApple, faAws, faDocker, faLinux, faMicrosoft, faWindows } from "@fortawesome/free-brands-svg-icons";
+import Icon from "../Icon.vue";
 
 interface StandardsCategory {
   title: string;
@@ -43,13 +47,13 @@ const platformGroups : PlatformGroup[] = [
 ];
 
 /* Azure takes Microsoft's mark: Font Awesome has none for Azure */
-const platformIcons : Record<string, string> = {
-  Windows: "fa-windows",
-  Linux: "fa-linux",
-  macOS: "fa-apple",
-  Docker: "fa-docker",
-  Azure: "fa-microsoft",
-  AWS: "fa-aws"
+const platformIcons: Record<string, IconDefinition> = {
+  Windows: faWindows,
+  Linux: faLinux,
+  macOS: faApple,
+  Docker: faDocker,
+  Azure: faMicrosoft,
+  AWS: faAws
 };
 
 </script>
@@ -78,7 +82,7 @@ const platformIcons : Record<string, string> = {
       <a href="/security-policy" class="cell fact">
         <span class="label">
           <span class="label-text">Data privacy</span>
-          <i class="fa-regular fa-arrow-right fact-arrow" aria-hidden="true"></i>
+          <Icon class="fact-arrow" :icon="faArrowRight" />
         </span>
         <span class="fact-text">No network calls, no telemetry, no license server. Works air-gapped.</span>
       </a>
@@ -88,7 +92,7 @@ const platformIcons : Record<string, string> = {
 
         <ul class="platforms">
           <li v-for="platform of group.platforms" :key="platform" class="platform">
-            <i v-if="platformIcons[platform]" class="fa-brands platform-icon" :class="platformIcons[platform]" aria-hidden="true"></i>
+            <Icon v-if="platformIcons[platform]" class="platform-icon" :icon="platformIcons[platform]" />
             {{ platform }}
           </li>
         </ul>

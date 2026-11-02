@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import { faAward, faCloudArrowUp, faCode, faSparkles } from "@fortawesome/pro-regular-svg-icons";
+import Icon from "../Icon.vue";
 import { data as statistics } from "../statistics.data";
 
 const benefits = [
-  { icon: "fa-code", text: "Implement documents in fluent C# that's easy to read, maintain and review" },
-  { icon: "fa-award", text: "Generate valid, standards-compliant and accessible PDF documents" },
-  { icon: "fa-sparkles", text: "Develop faster with hot-reload preview and your favorite AI coding agent" },
-  { icon: "fa-cloud-arrow-up", text: "Deploy to any operating system or cloud, with excellent performance" }
+  { icon: faCode, text: "Implement documents in fluent C# that's easy to read, maintain and review" },
+  { icon: faAward, text: "Generate valid, standards-compliant and accessible PDF documents" },
+  { icon: faSparkles, text: "Develop faster with hot-reload preview and your favorite AI coding agent" },
+  { icon: faCloudArrowUp, text: "Deploy to any operating system or cloud, with excellent performance" }
 ];
 </script>
 
@@ -20,7 +22,7 @@ const benefits = [
         <ul class="benefits">
           <li v-for="benefit in benefits" :key="benefit.text">
             <span class="list-icon">
-              <i class="fa-regular" :class="benefit.icon" aria-hidden="true"></i>
+              <Icon :icon="benefit.icon" />
             </span>
 
             <span>{{ benefit.text }}</span>
@@ -137,7 +139,7 @@ html:not(.dark) .benefits li {
   box-shadow: inset 0 0 0 1px light-dark(rgba(25, 118, 210, 0.16), transparent);
 }
 
-.list-icon i {
+.list-icon .icon {
   font-size: 1.25rem;
   color: light-dark(#1976D2, var(--vp-c-brand-1));
 }

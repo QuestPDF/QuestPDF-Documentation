@@ -3,7 +3,7 @@
     <div class="content">
       <header class="section-header document-header">
         <a class="document-back" href="/license">
-          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+          <Icon :icon="faArrowLeft" />
           View all licensing documents
         </a>
 
@@ -35,6 +35,8 @@
 </template>
 
 <script setup lang="ts">
+import { faArrowLeft } from "@fortawesome/pro-solid-svg-icons";
+import Icon from "../../Icon.vue";
 import { data } from "./licenseDocuments.data";
 
 const props = defineProps<{ id: string }>();
@@ -67,7 +69,7 @@ const doc = data[props.id];
   transition: color 0.2s ease;
 }
 
-.document-page .document-back i {
+.document-page .document-back .icon {
   font-size: 1rem;
 }
 

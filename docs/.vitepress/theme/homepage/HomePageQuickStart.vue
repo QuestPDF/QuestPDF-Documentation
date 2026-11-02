@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
+import { faArrowRightArrowLeft, faArrowUp, faBolt, faCheck, faCode, faCodeBranch, faComments, faLightbulbOn, faPuzzlePiece, faShieldCheck } from "@fortawesome/pro-regular-svg-icons";
+import { faSparkles } from "@fortawesome/pro-solid-svg-icons";
+import Icon from "../Icon.vue";
 import {computed, onMounted, onUnmounted, ref, watch} from "vue";
 import {type Line, useAgentSession} from "./agentSession";
 import {data as session} from "./quickStart.data";
@@ -11,7 +15,7 @@ interface Card {
   title: string;
   label: string;
   notes: {
-    icon: string;
+    icon: IconDefinition;
     text: string;
   }[];
 }
@@ -22,10 +26,10 @@ const cards: Card[] = [
     title: "Create and review in C#",
     label: "Why write documents in C#",
     notes: [
-      { icon: "fa-code", text: "Write loops and conditions in plain C#, not a template language" },
-      { icon: "fa-puzzle-piece", text: "Build reusable components from ordinary classes and methods" },
-      { icon: "fa-lightbulb-on", text: "Get IntelliSense, type checking and refactoring in your IDE" },
-      { icon: "fa-code-branch", text: "Keep layouts in Git beside your application code" }
+      { icon: faCode, text: "Write loops and conditions in plain C#, not a template language" },
+      { icon: faPuzzlePiece, text: "Build reusable components from ordinary classes and methods" },
+      { icon: faLightbulbOn, text: "Get IntelliSense, type checking and refactoring in your IDE" },
+      { icon: faCodeBranch, text: "Keep layouts in Git beside your application code" }
     ]
   },
   {
@@ -33,10 +37,10 @@ const cards: Card[] = [
     title: "Develop with AI agents",
     label: "How an AI assistant helps",
     notes: [
-      { icon: "fa-arrow-right-arrow-left", text: "Migrate legacy HTML-based reports to QuestPDF with AI" },
-      { icon: "fa-comments", text: "Create and modify documents confidently through prompts" },
-      { icon: "fa-bolt", text: "Deliver new documents and changes significantly faster" },
-      { icon: "fa-shield-check", text: "Keep every AI change type-checked and easy to review" }
+      { icon: faArrowRightArrowLeft, text: "Migrate legacy HTML-based reports to QuestPDF with AI" },
+      { icon: faComments, text: "Create and modify documents confidently through prompts" },
+      { icon: faBolt, text: "Deliver new documents and changes significantly faster" },
+      { icon: faShieldCheck, text: "Keep every AI change type-checked and easy to review" }
     ]
   }
 ];
@@ -229,7 +233,7 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
           </div>
 
           <div class="composer" :class="{ asking, sent, working }">
-            <i class="fa-solid fa-sparkles composer-icon" aria-hidden="true"></i>
+            <Icon class="composer-icon" :icon="faSparkles" />
 
             <!-- every request, hidden, under the typed one: the box is as tall as the longest from the start, so a
                  request that wraps while it types does not move the page -->
@@ -247,8 +251,8 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
               </svg>
 
               <i v-if="working" class="spinner"></i>
-              <i v-else-if="finished" class="fa-regular fa-check"></i>
-              <i v-else class="fa-regular fa-arrow-up"></i>
+              <Icon v-else-if="finished" :icon="faCheck" />
+              <Icon v-else :icon="faArrowUp" />
             </span>
           </div>
         </div>
@@ -277,8 +281,8 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
       <h2 class="card-title">{{ card.title }}</h2>
 
       <ul class="notes" :aria-label="card.label">
-        <li v-for="note of card.notes" :key="note.icon" class="note">
-          <i class="fa-regular" :class="note.icon" aria-hidden="true"></i>
+        <li v-for="note of card.notes" :key="note.text" class="note">
+          <Icon :icon="note.icon" />
           <span>{{ note.text }}</span>
         </li>
       </ul>
@@ -374,7 +378,7 @@ html.dark .agent-card {
   color: var(--vp-c-text-1);
 }
 
-.note i {
+.note .icon {
   flex-shrink: 0;
   width: 18px;
   text-align: center;

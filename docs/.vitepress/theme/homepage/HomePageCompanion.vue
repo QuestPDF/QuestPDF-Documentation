@@ -5,8 +5,8 @@
       <p class="card-description">Add one line of code and your document opens beside your IDE. With hot-reload, every change appears in the preview at once: no recompiling, no reopening PDFs.</p>
 
       <ul class="points" aria-label="What the Companion App does">
-        <li v-for="point of points" :key="point.icon">
-          <i class="fa-regular" :class="point.icon" aria-hidden="true"></i>
+        <li v-for="point of points" :key="point.text">
+          <Icon :icon="point.icon" />
           <span>{{ point.text }}</span>
         </li>
       </ul>
@@ -22,7 +22,7 @@
             :aria-expanded="isDownloadOpen"
             @click="toggleDownload">
             Download
-            <i class="fa-regular fa-chevron-down download-chevron" aria-hidden="true"></i>
+            <Icon class="download-chevron" :icon="faChevronDown" />
           </button>
 
           <div v-if="isDownloadOpen" ref="downloadMenuRef" class="download-menu" :class="{ below: isDownloadBelow }">
@@ -32,7 +32,7 @@
               class="download-item"
               :href="download.url"
               @click="isDownloadOpen = false">
-              <i class="fa-brands download-icon" :class="download.icon" aria-hidden="true"></i>
+              <Icon class="download-icon" :icon="download.icon" />
               <span class="download-name">{{ download.name }}</span>
               <span class="download-format">{{ download.format }}</span>
             </a>
@@ -49,15 +49,18 @@
 </template>
 
 <script setup lang="ts">
+import { faBug, faChevronDown, faCode, faFolderTree, faRulerCombined } from "@fortawesome/pro-regular-svg-icons";
+import { faApple, faLinux, faWindows } from "@fortawesome/free-brands-svg-icons";
+import Icon from "../Icon.vue";
 
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 
 /* facts from docs/companion/features.md */
 const points = [
-  { icon: "fa-folder-tree", text: "Explore and navigate the document structure" },
-  { icon: "fa-ruler-combined", text: "Magnify details and measure distances" },
-  { icon: "fa-code", text: "Jump from the preview to the matching code" },
-  { icon: "fa-bug", text: "Debug exceptions and layout issues" }
+  { icon: faFolderTree, text: "Explore and navigate the document structure" },
+  { icon: faRulerCombined, text: "Magnify details and measure distances" },
+  { icon: faCode, text: "Jump from the preview to the matching code" },
+  { icon: faBug, text: "Debug exceptions and layout issues" }
 ];
 
 /* the latest release; keep in sync with docs/companion/download.md and public/companion/latest-version */
@@ -65,10 +68,10 @@ const companionVersion = "2026.2.2";
 const releaseUrl = `https://github.com/QuestPDF/QuestPDF.Companion/releases/download/${companionVersion}`;
 
 const downloads = [
-  { icon: "fa-windows", name: "Windows", format: ".msix", url: `${releaseUrl}/questpdf_companion-${companionVersion}-windows.msix` },
-  { icon: "fa-apple", name: "macOS", format: ".dmg", url: `${releaseUrl}/QuestPDF.Companion.${companionVersion}.dmg` },
-  { icon: "fa-linux", name: "Linux", format: ".deb", url: `${releaseUrl}/questpdf_companion-${companionVersion}-linux.deb` },
-  { icon: "fa-linux", name: "Linux", format: ".rpm", url: `${releaseUrl}/questpdf_companion-${companionVersion}-linux.rpm` }
+  { icon: faWindows, name: "Windows", format: ".msix", url: `${releaseUrl}/questpdf_companion-${companionVersion}-windows.msix` },
+  { icon: faApple, name: "macOS", format: ".dmg", url: `${releaseUrl}/QuestPDF.Companion.${companionVersion}.dmg` },
+  { icon: faLinux, name: "Linux", format: ".deb", url: `${releaseUrl}/questpdf_companion-${companionVersion}-linux.deb` },
+  { icon: faLinux, name: "Linux", format: ".rpm", url: `${releaseUrl}/questpdf_companion-${companionVersion}-linux.rpm` }
 ];
 
 const isDownloadOpen = ref(false);
@@ -177,7 +180,7 @@ html.dark .companion-media .light {
   color: var(--vp-c-text-1);
 }
 
-.points i {
+.points .icon {
   flex-shrink: 0;
   width: 18px;
   text-align: center;

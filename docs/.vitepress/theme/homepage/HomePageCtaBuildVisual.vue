@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { faPlay } from "@fortawesome/pro-solid-svg-icons";
+import Icon from "../Icon.vue";
 import { computed, onBeforeUnmount, ref, watch } from "vue";
 import { reducedMotion, Timeline } from "./ctaTimeline";
 
@@ -157,7 +159,7 @@ onBeforeUnmount(() => timeline.cancel());
       </div>
     </div>
 
-    <span class="play-button"><i class="fa-solid fa-play"></i></span>
+    <span class="play-button"><Icon :icon="faPlay" /></span>
   </div>
 </template>
 
@@ -199,7 +201,7 @@ onBeforeUnmount(() => timeline.cancel());
   transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
 }
 
-.play-button i {
+.play-button .icon {
   font-size: 1rem;
   margin-left: 3px; /* optical centring of the triangle */
 }

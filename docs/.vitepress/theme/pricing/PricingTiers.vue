@@ -6,7 +6,7 @@
 
     <div class="license-tiers">
       <section v-for="license of licenses" :key="license.name" class="license-tier panel" :class="license.name">
-        <div v-if="license.name === 'professional'" class="tag"><i class="fa-solid fa-star" aria-hidden="true"></i>Most Popular</div>
+        <div v-if="license.name === 'professional'" class="tag"><Icon :icon="faStar" />Most Popular</div>
 
         <header>
           <div class="tier-name">{{ license.name }}</div>
@@ -25,7 +25,7 @@
 
         <div class="details">
           <div v-for="detail of license.details" :key="detail" class="details-item">
-            <i class="fa-duotone fa-square-check" aria-hidden="true"></i>
+            <Icon class="check-icon" :icon="faSquareCheck" />
             <p>{{ detail }}</p>
           </div>
         </div>
@@ -43,6 +43,9 @@
 </template>
 
 <script setup lang="ts">
+import { faStar } from "@fortawesome/pro-solid-svg-icons";
+import { faSquareCheck } from "@fortawesome/pro-duotone-svg-icons";
+import Icon from "../Icon.vue";
 
 import {usePaddle} from "../paddle";
 import {licensePrices} from "./prices";
@@ -228,7 +231,7 @@ html.dark .license-tier.professional {
   word-spacing: 4px;
 }
 
-.license-tier .tag .fa-star {
+.license-tier .tag .icon {
   font-size: 1rem;
   color: light-dark(#2196F3, #7CC4FF);
 }
@@ -309,7 +312,7 @@ html.dark .license-tier .tag {
   gap: 12px;
 }
 
-.fa-square-check {
+.check-icon {
   width: 24px;
   font-size: 24px;
   --fa-secondary-opacity: 0.2;
@@ -319,18 +322,18 @@ html.dark .license-tier .tag {
   color: var(--vp-c-text-1);
 }
 
-.license-tier.community .fa-square-check {
+.license-tier.community .check-icon {
   --fa-primary-color: light-dark(#67B84D, #81C784);
   --fa-secondary-color: light-dark(#67B84D, #81C784);
 }
 
-.license-tier.professional .fa-square-check {
+.license-tier.professional .check-icon {
   --fa-primary-color: white;
   --fa-secondary-color: light-dark(#2196F3, #1976D2);
   --fa-secondary-opacity: 1.0;
 }
 
-.license-tier.enterprise .fa-square-check {
+.license-tier.enterprise .check-icon {
   --fa-primary-color: light-dark(transparent, #444);
   --fa-secondary-color: light-dark(#444, white);
   --fa-secondary-opacity: 1.0;
