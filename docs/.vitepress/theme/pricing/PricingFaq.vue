@@ -36,7 +36,7 @@ import { faqCategories as categories } from "./faq";
 <style scoped>
 
 .faq-categories {
-  --faq-accent: #2196F3;
+  --faq-accent: light-dark(#1976D2, #2196F3);
 
   display: flex;
   flex-direction: column;
@@ -81,17 +81,18 @@ import { faqCategories as categories } from "./faq";
   overflow: hidden;
 }
 
-.faq-item {
-  transition: background-color 0.2s ease;
-}
-
 .faq-item:not(:last-child) {
   border-bottom: 1px solid var(--vp-c-divider);
 }
 
-.faq-item:hover,
+/* a shadow, so opening an item does not push its text sideways; positioned to paint above the panel's rim */
 .faq-item[open] {
-  background-color: color-mix(in srgb, var(--faq-accent) 5%, transparent);
+  position: relative;
+  box-shadow: inset 4.5px 0 0 var(--faq-accent);
+}
+
+html.dark .faq-item[open] {
+  box-shadow: inset 3px 0 0 var(--faq-accent);
 }
 
 .faq-question {
@@ -107,6 +108,14 @@ import { faqCategories as categories } from "./faq";
   font-size: 1rem;
   font-weight: 500;
   color: var(--vp-c-text-1);
+  transition: background-color 0.2s ease;
+}
+
+/* a tap leaves :hover stuck on touch screens, which would keep the row tinted */
+@media (hover: hover) {
+  .faq-question:hover {
+    background-color: color-mix(in srgb, var(--faq-accent) 5%, transparent);
+  }
 }
 
 /* older Safari draws its disclosure triangle through this pseudo-element, whatever the display */
