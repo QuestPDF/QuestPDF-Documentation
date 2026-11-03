@@ -4,7 +4,7 @@ import llmstxt from 'vitepress-plugin-llms'
 import imageSizePlugin from "./markdownit-imagesize-plugin";
 
 const isProd = process.env.NODE_ENV === 'production';
-const llmsTxtHeader = readFileSync(new URL('./llms-txt-header.md', import.meta.url), 'utf-8').trimEnd();
+const llmsTxtTemplate = readFileSync(new URL('./llms-txt-template.md', import.meta.url), 'utf-8').trimEnd();
 
 function getPlausibleScript() : HeadConfig[] {
     if (!isProd)
@@ -27,7 +27,7 @@ export default defineConfig({
     vite: {
       plugins: [llmstxt({
           domain: 'https://www.questpdf.com',
-          customLLMsTxtTemplate: llmsTxtHeader,
+          customLLMsTxtTemplate: llmsTxtTemplate,
           ignoreFiles: [
               'api-reference/tip-*.md',
 
