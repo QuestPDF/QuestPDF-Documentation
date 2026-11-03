@@ -1,7 +1,7 @@
 # Customizing Header/Footer on the first page
 
 A common requirement in document design is to create a distinct header for the first page, with all subsequent pages sharing a standard header format. 
-This can be easily accomplished using the [ShowOnce](/api-reference/show-once) and [SkipOnce](/api-reference/skip-once) elements in QuestPDF.
+This can be easily accomplished using the [ShowOnce](/api-reference/show-once.md) and [SkipOnce](/api-reference/skip-once.md) elements in QuestPDF.
 
 ```csharp{10-15}
 Document

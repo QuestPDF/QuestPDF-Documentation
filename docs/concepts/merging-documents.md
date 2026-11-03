@@ -8,7 +8,7 @@ Choose the one that best suits your needs.
 
 ::: warning
 This feature can be used only while generating PDF documents. 
-To merge existing files, please use the [Document Operations](/concepts/document-operations) feature.
+To merge existing files, please use the [Document Operations](/concepts/document-operations.md) feature.
 :::
 
 

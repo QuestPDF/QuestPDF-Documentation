@@ -125,7 +125,7 @@ document.Page(page =>
 
 You can apply a default text style to every text element within a page. 
 This is particularly helpful for setting consistent fonts, sizes, and colors across your document:
-[Learn more](/api-reference/text/style-inheritance)
+[Learn more](/api-reference/text/style-inheritance.md)
 
 ```csharp
 document.Page(page =>
@@ -141,7 +141,7 @@ document.Page(page =>
 
 QuestPDF supports both left-to-right (LTR) and right-to-left (RTL) layouts to accommodate languages with different reading directions.
 This option applies a global content direction to the entire page set.
-[Learn more](/api-reference/content-direction)
+[Learn more](/api-reference/content-direction.md)
 
 ```csharp
 document.Page(page =>
