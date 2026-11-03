@@ -3,22 +3,23 @@
 
 import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
 import {
-  faAlignJustify, faArrowProgress, faArrowRightArrowLeft, faArrowsMaximize, faArrowsUpDownLeftRight, faBarsStaggered,
-  faBezierCurve, faBold, faBolt, faBookFont, faBookmark, faBorderAll, faBorderInner, faBorderOuter, faBracketsCurly,
-  faBrush, faBug, faChartMixed, faCircle1, faCircleExclamation, faCircleHalfStroke, faClone, faCodeBranch, faCompass,
-  faCompress, faCopy, faCrop, faCrosshairs, faCubes, faDownLeftAndUpRightToCenter, faDroplet, faEllipsis, faExpand,
-  faFile, faFileCode, faFileExport, faFileImport, faFileZipper, faFillDrip, faFont, faForwardStep, faFrame, faFunction,
-  faGlobe, faGrid2, faHashtag, faHighlighter, faHorizontalRule, faHyphen, faIdCard, faImage, faImages, faIndent,
-  faInfinity, faItalic, faKerning, faLanguage, faLayerGroup, faLayerPlus, faLeftRight, faLineHeight, faLink, faList,
-  faListOl, faLocationCrosshairs, faLocationDot, faLock, faMagnifyingGlass, faMagnifyingGlassPlus, faMapLocationDot,
-  faNewspaper, faObjectGroup, faObjectsAlignCenterHorizontal, faObjectUnion, faPageBreak, faPaintbrush, faPalette,
-  faPaperclip, faParagraph, faPenNib, faPuzzlePiece, faQrcode, faRectangleHistory, faReflectHorizontal, faRepeat,
-  faRocket, faRotate, faRuler, faRulerCombined, faRulerVertical, faScissors, faShapes, faShuffle, faSitemap, faSliders,
-  faSplit, faSquareDashed, faSquareDashedCirclePlus, faSquareQuestion, faStop, faSubscript, faSuperscript,
-  faSwatchbook, faTable, faTableColumns, faTableLayout, faTableRows, faTags, faText, faTextHeight, faTextSize,
-  faTextWidth, faUnderline, faUniversalAccess, faUnlock, faUpDown, faUpRightAndDownLeftFromCenter,
-  faWandMagicSparkles, faWindowMaximize
+  faAlignJustify, faArrowRightArrowLeft, faArrowsFromLine, faArrowsMaximize, faArrowsUpDownLeftRight, faBarsStaggered,
+  faBezierCurve, faBold, faBookFont, faBookmark, faBorderAll, faBorderOuter, faBracketsCurly, faBringFront, faBrush,
+  faBug, faChartMixed, faCircle1, faCircleExclamation, faCompress, faCrop, faCrosshairs, faCubes, faDiagramSubtask,
+  faDistributeSpacingVertical, faDownLeftAndUpRightToCenter, faDroplet, faEllipsis, faExpand, faEye, faFeather, faFile,
+  faFileCode, faFileExport, faFileSvg, faFileZipper, faFillDrip, faFont, faFontCase, faForwardStep, faFunction,
+  faGlobe, faHashtag, faHighlighter, faHorizontalRule, faHyphen, faIdCard, faImage, faImages, faIndent, faInfinity,
+  faItalic, faKerning, faLanguage, faLayerGroup, faLeftRight, faLineHeight, faLink, faLinkSimple, faList, faListOl,
+  faListTree, faLocationCrosshairs, faLocationDot, faLock, faMagnifyingGlass, faMagnifyingGlassPlus, faMapLocationDot,
+  faMerge, faMountainSun, faNewspaper, faObjectGroup, faObjectsAlignCenterHorizontal, faPageBreak, faPaintbrush,
+  faPalette, faPaperclip, faParagraph, faPuzzlePiece, faQrcode, faRectangleHistory, faReflectHorizontal, faRepeat,
+  faRotate, faRuler, faRulerCombined, faRulerVertical, faScissors, faSitemap, faSliders, faSplit, faSquareDashed,
+  faSquareDashedCirclePlus, faSquareQuestion, faSquareRing, faStamp, faStop, faSubscript, faSuperscript, faSwap,
+  faSwatchbook, faTable, faTableCellsHeader, faTableCellsMerge, faTableColumns, faTableRows, faTags, faText,
+  faTextHeight, faTextSize, faTextWidth, faToggleOn, faUnderline, faUniversalAccess, faUnlock, faUpDown,
+  faUpRightAndDownLeftFromCenter, faVectorSquare, faWandMagicSparkles
 } from "@fortawesome/pro-regular-svg-icons";
+import { faDropShadow, faRoundedCorners } from "./customIcons";
 
 export interface Feature {
   name: string;
@@ -47,7 +48,7 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Live preview",
             description: "Download, install, and integrate the Companion App with your project. Enjoy real-time hot-reload preview.",
-            icon: faRocket,
+            icon: faEye,
             link: "/companion/usage.html"
           },
           {
@@ -71,7 +72,7 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Element inspection",
             description: "Browse the document hierarchy and select any element. Review its configuration, position, size and every page it appears on.",
-            icon: faCompass,
+            icon: faListTree,
             link: "/companion/features.html#element-selection"
           },
           {
@@ -106,7 +107,7 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Debug outlines",
             description: "Colored border and label overlay showing element boundaries. Visual debugging during development.",
-            icon: faSquareDashed,
+            icon: faVectorSquare,
             link: "/api-reference/debug-area.html"
           },
           {
@@ -198,13 +199,13 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Placeholder images",
             description: "Soft gradient images generated on demand. Test image placement, sizing and alignment before real assets arrive.",
-            icon: faImages,
+            icon: faMountainSun,
             link: "/concepts/prototyping.html#image"
           },
           {
             name: "Placeholder boxes",
             description: "Gray rectangle with diagonal lines and optional label. Visualizes reserved space during layout prototyping.",
-            icon: faGrid2,
+            icon: faSquareDashed,
             link: "/api-reference/placeholder.html"
           }
         ]
@@ -226,7 +227,7 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Headers and footers",
             description: "Header, content and footer slots, plus full-page background and foreground layers for watermarks and letterhead.",
-            icon: faWindowMaximize,
+            icon: faDistributeSpacingVertical,
             link: "/api-reference/page/slots.html"
           },
           {
@@ -255,13 +256,13 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Table headers and footers",
             description: "Dedicated header and footer rows repeated on every page the table spans. Readers keep the context on long tables.",
-            icon: faTableLayout,
+            icon: faTableCellsHeader,
             link: "/api-reference/table/header-and-footer.html"
           },
           {
             name: "Overlapping table cells",
             description: "Place cells over one another and span them across rows and columns. Build complex structures with dynamic styling.",
-            icon: faObjectUnion,
+            icon: faTableCellsMerge,
             link: "/api-reference/table/overlapping-cells.html"
           }
         ]
@@ -296,7 +297,7 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Stacking order",
             description: "Stacking order for overlapping elements in Layers. Higher values render in front of lower values.",
-            icon: faLayerPlus,
+            icon: faBringFront,
             link: "/api-reference/zindex.html"
           },
           {
@@ -331,7 +332,7 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Padding",
             description: "Add breathing room around content with uniform or per-side spacing. Supports all length units for precise layout control.",
-            icon: faBorderInner,
+            icon: faSquareRing,
             link: "/api-reference/padding.html"
           },
           {
@@ -419,13 +420,13 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Avoid page breaks",
             description: "Keeps child content together on a single page. Moves entire block to next page if needed.",
-            icon: faFrame,
+            icon: faLinkSimple,
             link: "/api-reference/prevent-page-break.html"
           },
           {
             name: "Reserve space",
             description: "Requires minimum vertical space before rendering. Jumps to next page if threshold not met.",
-            icon: faArrowsMaximize,
+            icon: faArrowsFromLine,
             link: "/api-reference/ensure-space.html"
           },
           {
@@ -449,7 +450,7 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Conditional content",
             description: "Conditional rendering based on boolean logic. Content appears or disappears based on runtime conditions.",
-            icon: faCodeBranch,
+            icon: faToggleOn,
             link: "/api-reference/show-if.html"
           },
           {
@@ -507,7 +508,7 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Style inheritance",
             description: "Styles cascade from the document down to every text element unless overridden. Consistent typography with less repeated code.",
-            icon: faArrowProgress,
+            icon: faDiagramSubtask,
             link: "/api-reference/text/style-inheritance.html"
           }
         ]
@@ -596,7 +597,7 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "OpenType features",
             description: "Enable typographic features such as ligatures, kerning, small caps or old-style numerals, where the font supports them.",
-            icon: faBookFont,
+            icon: faFontCase,
             link: "/api-reference/text/text-style.html#font-features"
           },
           {
@@ -642,13 +643,13 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Custom fonts",
             description: "Font files deployed with your application are registered automatically. Load more from files, streams or embedded resources.",
-            icon: faFileImport,
+            icon: faBookFont,
             link: "/api-reference/text/font-management.html"
           },
           {
             name: "Font fallback",
             description: "A list of alternative fonts used when the primary font lacks a glyph. Mixed scripts and emoji render correctly.",
-            icon: faShuffle,
+            icon: faSwap,
             link: "/api-reference/text/text-style.html#font-fallback"
           },
           {
@@ -694,13 +695,13 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Rounded corners",
             description: "Round all corners or each one individually. Softer edges on containers, images and table cells.",
-            icon: faShapes,
+            icon: faRoundedCorners,
             link: "/api-reference/rounded-corners.html"
           },
           {
             name: "Shadows",
             description: "Drop shadows with configurable offset, blur, spread and color. Lift cards and callouts off the page.",
-            icon: faCircleHalfStroke,
+            icon: faDropShadow,
             link: "/api-reference/shadow.html"
           },
           {
@@ -723,7 +724,7 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "SVG",
             description: "Scalable vector graphics placed like any image. Text inside uses the document's fonts, and preloading avoids repeated parsing.",
-            icon: faPenNib,
+            icon: faFileSvg,
             link: "/api-reference/image/svg.html"
           },
           {
@@ -834,7 +835,7 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Lazy generation",
             description: "Optimize memory for large documents with deferred content generation. Ideal for data-intensive reports and enterprise-scale document processing.",
-            icon: faBolt,
+            icon: faFeather,
             link: "/api-reference/lazy.html"
           }
         ]
@@ -845,7 +846,7 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Merge documents",
             description: "Combine multiple PDF files into a single document. Merge entire documents or select specific pages from each source with full control.",
-            icon: faCopy,
+            icon: faMerge,
             link: "/concepts/document-operations.html#merging-documents"
           },
           {
@@ -857,7 +858,7 @@ export const featureChapters: FeatureChapter[] = [
           {
             name: "Overlays and watermarks",
             description: "Apply watermarks, headers, footers, or letterhead by layering PDF content. Configure which pages receive overlays with precise control.",
-            icon: faClone,
+            icon: faStamp,
             link: "/concepts/document-operations.html#overlays-and-underlays"
           },
           {
