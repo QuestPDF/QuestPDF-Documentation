@@ -81,7 +81,8 @@ import { featureChapters } from "./features";
 }
 
 .category-title {
-  margin: 0 0 28px;
+  margin: 0 0 48px;
+  font-weight: 700;
 }
 
 .features {
