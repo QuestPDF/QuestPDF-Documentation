@@ -80,7 +80,7 @@ const cards: Card[] = [
           Order completed
         </div>
 
-        <h1 class="purchase-title">Thank you! <b>Please check your inbox</b> <span>for your license confirmation and setup instructions.</span></h1>
+        <h1 class="purchase-title">Thank you! Please check your email inbox for license confirmation and setup instructions.</h1>
       </header>
 
       <div class="purchase-cards">
@@ -130,25 +130,15 @@ const cards: Card[] = [
 
 
 .purchase-header {
-  padding-bottom: 16px;
+  padding-bottom: 32px;
 }
 
 .purchase-title {
   margin: 0 0 8px;
   font-size: 1.5rem;
   line-height: 2.125rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--vp-c-text-1);
-}
-
-.purchase-title b {
-  font-weight: 600;
-  color: light-dark(#2E7D32, #A5D6A7);
-}
-
-.purchase-title span {
-  font-weight: 400;
-  color: var(--vp-c-text-2);
 }
 
 @media screen and (max-width: 700px) {
@@ -162,15 +152,15 @@ const cards: Card[] = [
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   padding: 9px 24px;
   border-radius: 14px;
   font-size: 1rem;
   font-weight: 600;
   text-transform: uppercase;
   word-spacing: 2px;
-  background-color: light-dark(#2E7D32, #A5D6A7);
-  color: light-dark(#FFFFFF, #0D3B12);
+  background-color: #2E7D32;
+  color: #FFFFFF;
 }
 
 .status-tag .icon {
@@ -210,10 +200,6 @@ const cards: Card[] = [
   grid-template-columns: 48px 1fr;
   gap: 20px;
   padding: 24px 0;
-}
-
-.description-item:not(:last-child) {
-  border-bottom: 1px solid var(--vp-c-divider);
 }
 
 .description-item-content {
