@@ -113,6 +113,7 @@ html.dark h1 .highlight-foreground {
 /* regular text looks thinner on white, so light mode takes half a weight step up */
 html:not(.dark) .benefits li {
   font-weight: 450;
+  color: #142630;
 }
 
 .benefits li,
@@ -136,12 +137,12 @@ html:not(.dark) .benefits li {
   margin-block: -0.375rem;
   border-radius: 10px;
   background-color: light-dark(#FFFFFF, color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent));
-  box-shadow: inset 0 0 0 1px light-dark(rgba(25, 118, 210, 0.16), transparent);
+  box-shadow: inset 0 0 0 1.5px light-dark(rgba(0, 98, 196, 0.32), transparent);
 }
 
 .list-icon .icon {
   font-size: 1.25rem;
-  color: light-dark(#1976D2, var(--vp-c-brand-1));
+  color: light-dark(#0062C4, var(--vp-c-brand-1));
 }
 
 /* each stat is a link whose parts set their own colours, so the global link hover never reaches them */

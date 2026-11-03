@@ -381,9 +381,8 @@ html.dark .agent-card {
 .note .icon {
   flex-shrink: 0;
   width: 18px;
-  text-align: center;
+  margin-top: 0.25rem;
   font-size: 1rem;
-  line-height: 1.5rem;
   color: var(--tint);
 }
 
@@ -696,7 +695,7 @@ html.dark .agent-card {
 .composer-icon {
   flex: 0 0 auto;
   font-size: 1rem;
-  line-height: 2rem;
+  margin-top: 0.5rem;
   color: var(--composer-icon);
 }
 

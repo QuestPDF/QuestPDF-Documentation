@@ -183,9 +183,8 @@ html.dark .companion-media .light {
 .points .icon {
   flex-shrink: 0;
   width: 18px;
-  text-align: center;
+  margin-top: 0.25rem;
   font-size: 1rem;
-  line-height: 1.5rem;
   color: light-dark(#1976D2, var(--vp-c-brand-1));
 }
 

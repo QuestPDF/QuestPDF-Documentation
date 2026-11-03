@@ -128,7 +128,6 @@ html.dark .license-panel {
 .includes-list .icon {
   flex-shrink: 0;
   width: 18px;
-  text-align: center;
   font-size: 1rem;
   color: light-dark(#38A83E, #6ECF73);
 }
@@ -141,7 +140,7 @@ html.dark .license-panel {
   }
 
   .includes-list .icon {
-    line-height: 1.5rem;
+    margin-top: 0.25rem;
   }
 }
 
