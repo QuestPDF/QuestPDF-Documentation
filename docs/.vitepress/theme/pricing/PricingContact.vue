@@ -1,28 +1,125 @@
-<script setup>
+<script setup lang="ts">
+
+const resellers = [
+  {
+    name: "SoftwareOne",
+    link: "https://www.softwareone.com/",
+    src: "software-one.svg",
+    size: 38,
+    marginTop: -3
+  },
+  {
+    name: "Insight",
+    link: "https://www.insight.com/",
+    src: "insight.svg",
+    size: 43,
+    marginTop: 3
+  },
+  {
+    name: "SHI",
+    link: "https://www.shi.com/",
+    src: "shi.svg",
+    size: 45,
+    marginTop: -13
+  },
+  {
+    name: "QBS Software",
+    link: "https://www.qbssoftware.com/",
+    src: "qbs-software.svg",
+    size: 56,
+    marginTop: 4
+  }
+];
 
 </script>
 
 <template>
-  <article class="content">
-    <div class="section-header">
-      <h2>Still have questions?</h2>
-      <p class="sub-header">Need further details on licensing, a custom quote, or to place a purchase order? Reach out to our team - we will respond within one business day.</p>
-    </div>
+  <article class="content closing">
+    <section class="panel">
+      <div class="section-header">
+        <h3 class="card-title">Purchase Through Your Preferred Reseller</h3>
+        <p class="card-description">Any software reseller can order QuestPDF for you, with no partner agreement or registration needed. Invoices, purchase orders, and multi-year terms are supported.</p>
+      </div>
 
-    <a class="action primary" href="mailto:contact@questpdf.com" style="margin-top: 24px;">Contact us</a>
+      <div class="resellers-list">
+        <a v-for="reseller of resellers" :key="reseller.name" :href="reseller.link" target="_blank">
+          <img :src="'/license/resellers/' + reseller.src"
+              :alt="reseller.name"
+              :style="{ height: reseller.size + 'px', marginTop: reseller.marginTop + 'px' }" />
+        </a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-header">
+        <h3 class="card-title">Still have questions?</h3>
+        <p class="card-description">Need further details on licensing, a custom quote, or to place a purchase order? Reach out to our team - we will respond within one business day.</p>
+      </div>
+
+      <a class="action primary" href="mailto:contact@questpdf.com">Contact us</a>
+    </section>
   </article>
 </template>
 
 <style scoped>
 
-.content {
+.closing {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.closing > .panel {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .section-header {
- max-width: 750px;
+  max-width: 750px;
+}
+
+.resellers-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 56px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.resellers-list img {
+  display: block;
+  opacity: 0.85;
+  transition: opacity 0.2s ease-in-out, filter 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.resellers-list a:hover img {
+  opacity: 1;
+  filter: brightness(0.7);
+  transform: scale(1.08);
+}
+
+html.dark .resellers-list a:hover img {
+  filter: brightness(1.4);
+}
+
+/* touch: grown evenly, so each logo keeps its tuned position */
+@media (pointer: coarse) {
+  .resellers-list a {
+    padding-block: 4px;
+  }
+}
+
+.action {
+  margin-top: 24px;
+  padding-inline: 20px;
 }
 
 </style>

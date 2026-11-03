@@ -1,30 +1,47 @@
 <script setup lang="ts">
-import helloWorldExample from './codeExamples/helloWorld.cs?raw';
-import HomePageCodeContainer from "./HomePageCodeContainer.vue";
+import { faAward, faCloudArrowUp, faCode, faSparkles } from "@fortawesome/pro-regular-svg-icons";
+import Icon from "../Icon.vue";
+import { data as statistics } from "../statistics.data";
+
+const benefits = [
+  { icon: faCode, text: "Implement documents in fluent C# that's easy to read, maintain and review" },
+  { icon: faAward, text: "Generate valid, standards-compliant and accessible PDF documents" },
+  { icon: faSparkles, text: "Develop faster with hot-reload preview and your favorite AI coding agent" },
+  { icon: faCloudArrowUp, text: "Deploy to any operating system or cloud, with excellent performance" }
+];
 </script>
 
 <template>
-  <div class="background-gradient" />
-  <div class="background-gradient-noise" />
-
-  <section class="content">
-    <div style="z-index: 10; display: flex; flex-direction: column; gap: 16px;">
+  <div class="hero">
+    <section class="content">
       <h1>
-        <span class="highlight-foreground">Code-first</span> PDF generation for C#
+        <span class="highlight-foreground">Code-first</span> PDF library for C#
       </h1>
 
-      <div class="tagline">
-        QuestPDF is a production-ready library that lets you design documents the way you design software with clean, maintainable C# code.
-      </div>
+      <div class="lists">
+        <ul class="benefits">
+          <li v-for="benefit in benefits" :key="benefit.text">
+            <span class="list-icon">
+              <Icon :icon="benefit.icon" />
+            </span>
 
-      <div class="cta-buttons">
-        <a class="action primary" href="/quick-start.html">Quick Start</a>
-        <a class="action" href="/features-overview.html">Features Overview</a>
-      </div>
-    </div>
+            <span>{{ benefit.text }}</span>
+          </li>
+        </ul>
 
-    <home-page-code-container file-name="HelloWorld.cs" :code="helloWorldExample" />
-  </section>
+        <div class="hero-pattern" />
+
+        <ul class="statistics">
+          <li v-for="statistic in statistics" :key="statistic.label">
+            <a :href="statistic.link" :target="statistic.link.startsWith('http') ? '_blank' : undefined" class="statistic">
+              <span class="value">{{ statistic.value }}</span>
+              <span class="label">{{ statistic.label }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </div>
 </template>
 
 
@@ -33,175 +50,164 @@ import HomePageCodeContainer from "./HomePageCodeContainer.vue";
 /* Layout */
 
 .content {
-  position: relative;
-
-  display: grid;
-  grid-template-columns: 1fr 400px;
-  grid-template-rows: auto;
-  grid-gap: 64px;
-
-  margin-top: -64px;
-  padding-top: 128px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding-block: 64px;
 }
 
-@media screen and (max-width: 1023px) {
-  .content {
-    grid-template-columns: 1fr auto;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .content {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  h1 br {
-    display: none;
-  }
-}
-
-
-/* Content styles */
-
-h1 {
-  font-size: 3.5rem !important;
-  line-height: 4rem !important;
-  font-weight: 700 !important;
-  max-width: 500px;
+.content h1 {
+  margin: 0;
+  font-size: 3.5rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   word-spacing: 4px;
+  text-wrap: balance;
+}
+
+@media screen and (max-width: 820px) {
+  .content h1 {
+    font-size: 2.75rem;
+  }
 }
 
 h1 .highlight-foreground {
-  color: #298dff;
-  font-weight: 750;
+  display: inline-block; /* so the gradient box ends at the word, not the full line */
+  padding-right: 0.05em; /* keeps the gradient clip from shaving the last letter's edge */
+  font-weight: 800;
+
+  background-image: linear-gradient(100deg, #00c6ff 0%, #0094f9 55%, #2979ff 100%);
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
-html.dark .highlight-foreground {
-  color: #32c6ff;
-}
-
-.tagline {
-  max-width: 600px;
-  font-size: 1.5rem !important;
-  line-height: 2.25rem !important;
-  font-weight: 400;
-  word-spacing: 2px;
-  color: #000B;
-}
-
-html.dark .tagline {
-  color: #FFFB;
-}
-
-@media screen and (max-width: 1024px) {
-  h1 {
-    font-size: 3rem !important;
-    line-height: 3.5rem !important;
-    max-width: 100%;
-  }
-
-  .tagline {
-    font-size: 1.25rem !important;
-    line-height: 1.5rem !important;
-  }
-}
-
-@media screen and (max-width: 821px) {
-  h1 {
-    font-size: 2.5rem !important;
-    line-height: 3rem !important;
-  }
-
-  .tagline {
-    font-size: 1.25rem !important;
-    line-height: 1.5rem !important;
-  }
+html.dark h1 .highlight-foreground {
+  background-image: linear-gradient(100deg, #4ED4FF 0%, #2FAEFA 50%, #5C8DFF 100%);
 }
 
 
-/* Call To Action Button */
+/* Lists */
 
-.cta-buttons {
+.lists {
+  isolation: isolate; /* so the dot grid's z-index puts it under the lists, not under the page canvas */
+  display: grid;
+  grid-template-columns: minmax(0, max-content) minmax(64px, 1fr) auto;
+  align-items: start;
+}
+
+.benefits,
+.statistics {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 24px;
-  margin-top: 32px;
-  z-index: 10000;
-  text-transform: uppercase;
-
-  .action {
-    word-spacing: 2px;
-    letter-spacing: 0.5px;
-  }
+  flex-direction: column;
+  gap: 1.75rem;
 }
 
-@media screen and (min-width: 1024px) {
-  .cta-buttons a.action {
-    padding: 16px 24px;
-  }
-}
-
-html.dark .action:not(.primary) {
-  background-color: #FFF2;
-
-  &:hover {
-    background-color: #FFF3;
-  }
-}
-
-html:not(.dark) .action:not(.primary) {
-  background-color: #00000014;
+.benefits li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
   color: var(--vp-c-text-1);
-  box-shadow: none;
+}
 
-  &:hover {
-    background-color: #00000022;
+/* regular text looks thinner on white, so light mode takes half a weight step up */
+html:not(.dark) .benefits li {
+  font-weight: 450;
+  color: #142630;
+}
+
+.benefits li,
+.statistic {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  text-wrap: pretty;
+}
+
+.statistic {
+  display: block;
+}
+
+.list-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-block: -0.375rem;
+  border-radius: 10px;
+  background-color: light-dark(#FFFFFF, color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent));
+  box-shadow: inset 0 0 0 1.5px light-dark(rgba(0, 98, 196, 0.32), transparent);
+}
+
+.list-icon .icon {
+  font-size: 1.25rem;
+  color: light-dark(#0062C4, var(--vp-c-brand-1));
+}
+
+/* each stat is a link whose parts set their own colours, so the global link hover never reaches them */
+.statistic .value {
+  margin-right: 0.5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: light-dark(#1C1C1E, var(--vp-c-text-1));
+}
+
+.statistic .label {
+  font-weight: 400;
+  color: var(--vp-c-text-2);
+}
+
+html:not(.dark) .statistic .label {
+  font-weight: 450;
+  color: var(--vp-c-text-1);
+}
+
+@media screen and (max-width: 1023px) {
+  .lists {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .hero-pattern,
+  .statistics {
+    grid-area: 2 / 1;
+  }
+
+  .statistics {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    gap: 1.75rem 96px;
   }
 }
 
-.action {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-  &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+/* the two columns and the 96px gap need about 650px with the gutters */
+@media screen and (max-width: 720px) {
+  .statistics {
+    grid-template-columns: 1fr;
   }
 }
 
+/* Dot grid */
 
-
-/* Background */
-
-.background-gradient {
-  position: absolute;
-  inset: 0;
+.hero-pattern {
+  z-index: -1;
+  align-self: stretch;
+  margin-block: -64px;
   pointer-events: none;
 
-  background-image:
-      radial-gradient(ellipse 100% 75% at 50% 0%, color-mix(in srgb, #2196F3 15%, transparent), transparent),
-      radial-gradient(ellipse 1500px 600px at 100% 0%, color-mix(in srgb, #81D4FA 50%, transparent), transparent),
-      radial-gradient(ellipse 1000px 200px at 20% 0%, color-mix(in srgb, #64B5F6 10%, transparent), transparent),
-      radial-gradient(ellipse 800px 100px at 60% 100%, color-mix(in srgb, #FF9800 10%, transparent), transparent);
+  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 36%, transparent) 1px, transparent 1.5px);
+  background-size: 24px 24px;
+  background-position: 12px 12px;
+
+  mask-image:
+      linear-gradient(to right, transparent, #000 25%, #000 75%, transparent),
+      linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+  mask-composite: intersect;
 }
 
-.background-gradient-noise {
-  position: absolute;
-  inset: 0;
-  background-image: url("/homepage/noise.svg");
-  opacity: 0.25;
-  pointer-events: none;
-  mix-blend-mode: overlay;
-}
-
-html.dark .background-gradient {
-  background-image:
-      radial-gradient(ellipse 75% 75% at 50% 100%, color-mix(in srgb, #2196F3 20%, transparent), transparent),
-      radial-gradient(ellipse 1500px 300px at 50% 100%, color-mix(in srgb, #00BCD4 5%, transparent), transparent),
-      radial-gradient(ellipse 1000px 200px at 40% 100%, color-mix(in srgb, #FFEB3B 10%, transparent), transparent),
-      radial-gradient(ellipse 500px 100px at 65% 100%, color-mix(in srgb, #FF9800 15%, transparent), transparent);
+html.dark .hero-pattern {
+  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #64B5F6 50%, var(--vp-c-text-1)) 13%, transparent) 1px, transparent 1.5px);
 }
 
 </style>

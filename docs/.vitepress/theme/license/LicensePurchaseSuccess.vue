@@ -1,6 +1,8 @@
-<script setup>
-import { computed } from 'vue';
-
+<script setup lang="ts">
+import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
+import { faAwardSimple, faBolt, faCalendarDay, faCode, faCreditCard, faReceipt } from "@fortawesome/pro-regular-svg-icons";
+import { faCheck } from "@fortawesome/pro-solid-svg-icons";
+import Icon from "../Icon.vue";
 const shareEmailSubject = 'QuestPDF License Purchased – Setup Instructions';
 const shareEmailBody = `Hi Team,
 
@@ -10,112 +12,107 @@ Action Required:
 Please update the application configuration accordingly. Setup takes only a few minutes, requires a single line of code, and does not involve any license keys or activation servers.
 
 License Configuration Guide:
-https://www.questpdf.com/license/configuration
+https://configure.questpdf.com
 
 Best`;
 
-const shareMailtoLink = computed(() => {
-  const subject = encodeURIComponent(shareEmailSubject);
-  const body = encodeURIComponent(shareEmailBody);
-  return `mailto:?subject=${subject}&body=${body}`;
-});
+const shareMailtoLink = `mailto:?subject=${encodeURIComponent(shareEmailSubject)}&body=${encodeURIComponent(shareEmailBody)}`;
 
-const licenseDetails = [
-  {
-    icon: 'fa-award-simple',
-    title: "Perpetual license",
-    description: "Your perpetual license never expires. This purchase includes one year of feature, quality and security updates, along with one year of dedicated support."
-  },
-  {
-    icon: 'fa-bolt',
-    title: "Ready to use",
-    description: "Your organization is now licensed to use QuestPDF in production. No license keys, activation servers, or compliance tracking are required. Your team can start immediately - licensing never blocks builds or deployments."
-  },
-  {
-    icon: 'fa-code',
-    title: "License configuration",
-    description: "Please share <a href=\"https://www.questpdf.com/license/configuration.html\"><u>the license setup guide</u></a> with your software development team. Configuration takes only a few minutes and requires changing a single line of code.",
-  },
-];
+interface Card {
+  title: string;
+  items: { icon: IconDefinition; title: string; description: string }[];
+  action: { label: string; href: string; primary?: boolean; target?: string };
+}
 
-const orderDetails = [
+const cards: Card[] = [
   {
-    icon: 'fa-receipt',
-    title: "Purchase confirmation",
-    description: "All purchase details, invoices, and receipts will be delivered to your email by Paddle, our Merchant of Record."
+    title: "License information",
+    items: [
+      {
+        icon: faAwardSimple,
+        title: "Perpetual license",
+        description: "Your perpetual license never expires. This purchase includes one year of feature, quality and security updates, along with one year of dedicated support."
+      },
+      {
+        icon: faBolt,
+        title: "Ready to use",
+        description: "Your organization is now licensed to use QuestPDF in production. No license keys, activation servers, or compliance tracking are required. Your team can start immediately - licensing never blocks builds or deployments."
+      },
+      {
+        icon: faCode,
+        title: "License configuration",
+        description: "Please share <a href=\"https://www.questpdf.com/license/configuration.html\"><u>the license setup guide</u></a> with your software development team. Configuration takes only a few minutes and requires changing a single line of code."
+      }
+    ],
+    action: { label: "Forward to Development Team", href: shareMailtoLink, primary: true }
   },
   {
-    icon: 'fa-calendar-day',
-    title: "Updates & support auto-renewal",
-    description: "Renewal extends access to software updates and support for another year. If renewal is canceled, your team keeps the right to use the version already licensed. We will send a renewal reminder 30 days before the renewal date.",
-  },
-  {
-    icon: 'fa-credit-card',
-    title: "Invoice and billing",
-    description: "You can update your account details and payment information, manage or cancel the license auto-renewal process as well as access payment history on the Paddle Customer Portal.",
+    title: "Billing and renewal",
+    items: [
+      {
+        icon: faReceipt,
+        title: "Purchase confirmation",
+        description: "All purchase details, invoices, and receipts will be delivered to your email by Paddle, our Merchant of Record."
+      },
+      {
+        icon: faCalendarDay,
+        title: "Updates & support auto-renewal",
+        description: "Renewal extends access to software updates and support for another year. If renewal is canceled, your team keeps the right to use the version already licensed. We will send a renewal reminder 30 days before the renewal date."
+      },
+      {
+        icon: faCreditCard,
+        title: "Invoice and billing",
+        description: "You can update your account details and payment information, manage or cancel the license auto-renewal process as well as access payment history on the Paddle Customer Portal."
+      }
+    ],
+    action: { label: "Open Customer Portal", href: "https://customer-portal.paddle.com/cpl_01gmdq0qdr8madhdchknpb52we", target: "_blank" }
   }
 ];
 
 </script>
 
 <template>
-  <div class="custom-page">
-    <div class="container reverse-background">
-      <div class="content">
-        <header class="section-header">
-          <h1>
-            <i class="fa-duotone fa-square-check"></i>
-            Order completed
-          </h1>
-        </header>
-
-        <div class="email-notification">
-          <i class="fa fa-solid fa-envelope"></i>
-          <span>
-            <b>Please check your inbox.</b> We have sent a confirmation email with your license details, license confirmation PDF, and developer setup instructions.
-          </span>
+  <div class="custom-page purchase-page texture-dots">
+    <div class="content">
+      <header class="section-header purchase-header">
+        <div class="status-tag">
+          <Icon :icon="faCheck" />
+          Order completed
         </div>
 
-        <section class="success-card card">
-          <h3>License information</h3>
+        <h1 class="purchase-title">Thank you! Please check your email inbox for license confirmation and setup instructions.</h1>
+      </header>
+
+      <div class="purchase-cards">
+        <section v-for="card in cards" :key="card.title" class="panel success-card">
+          <h3 class="card-title">{{ card.title }}</h3>
 
           <div class="description-items">
-            <div v-for="step in licenseDetails" :key="step.title" class="description-item">
-              <i class="fa-regular" :class="step.icon" />
+            <div v-for="item in card.items" :key="item.title" class="description-item">
+              <div class="icon-tile">
+                <Icon :icon="item.icon" />
+              </div>
               <div class="description-item-content">
-                <strong>{{ step.title }}</strong>
-                <span v-html="step.description" />
+                <strong class="row-title">{{ item.title }}</strong>
+                <p class="row-description" v-html="item.description" />
               </div>
             </div>
           </div>
 
-          <a class="action primary" :href="shareMailtoLink">Forward to Development Team</a>
+          <a class="action" :class="{ primary: card.action.primary }" :href="card.action.href" :target="card.action.target">{{ card.action.label }}</a>
         </section>
 
-        <section class="success-card card">
-          <h3>Billing and renewal</h3>
+        <div class="dotted-divider"></div>
 
-          <div class="description-items">
-            <div v-for="step in orderDetails" :key="step.title" class="description-item">
-              <i class="fa-regular" :class="step.icon" />
-              <div class="description-item-content">
-                <strong>{{ step.title }}</strong>
-                <span v-html="step.description" />
-              </div>
-            </div>
+        <section class="panel assistance-card">
+          <div>
+            <h3 class="card-title">Do you need assistance?</h3>
+            <p class="card-description">
+              If you have any questions about your license, setup, or billing, please reach out. We typically respond within one business day.
+            </p>
           </div>
 
-          <a class="action" href="https://customer-portal.paddle.com/cpl_01gmdq0qdr8madhdchknpb52we" target="_blank">Open Customer Portal</a>
-        </section>
-
-        <section class="success-card card">
-          <h3>Do you need assistance?</h3>
-
-          <p>
-            If you have any questions about your license, setup, or billing, please reach out. We typically respond within one business day.
-          </p>
-
-          <a class="action" href="mailto:contact@questpdf.com" target="_blank">Contact Support</a>
+          <a class="action" href="mailto:contact@questpdf.com">Contact Support</a>
         </section>
       </div>
     </div>
@@ -124,123 +121,146 @@ const orderDetails = [
 
 <style scoped>
 
-/* Page */
-
 .content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 800px;
   gap: 32px;
 }
 
-header {
+
+.purchase-header {
+  padding-bottom: 32px;
+}
+
+.purchase-title {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+  line-height: 2.125rem;
+  font-weight: 500;
+  color: var(--vp-c-text-1);
+}
+
+@media screen and (max-width: 700px) {
+  .purchase-title {
+    font-size: 1.25rem;
+    line-height: 1.875rem;
+  }
+}
+
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  padding: 9px 24px;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  word-spacing: 2px;
+  background-color: #2E7D32;
+  color: #FFFFFF;
+}
+
+.status-tag .icon {
+  font-size: 18px;
+}
+
+.purchase-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
+  width: 100%;
+}
+
+@media screen and (max-width: 960px) {
+  .purchase-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* a size container: its items adapt to the card's width */
+.success-card {
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-
-header h1 {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  gap: 12px;
-
-  margin-bottom: 12px;
-}
-
-header h1 i.fa-square-check {
-  font-size: 1.25em;
-  color: inherit;
-}
-
-
-/* Email notification */
-
-.email-notification .fa {
-  font-size: 40px;
-  color: #67B84D;
-}
-
-.email-notification {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-gap: 24px;
-
-  border-radius: 16px;
-  padding: 24px 32px;
-  color: #1B5E20;
-  background-color: #67B84D33;
-
-  place-self: center;
-  text-align: left;
-}
-
-html.dark .email-notification {
-  color: #A5D6A7;
-}
-
-
-/* Cards with details */
-
-.success-card .fa-regular {
-  width: 100%;
-  aspect-ratio: 1;
-
-  background-color: #8882;
-  color: #666;
-  font-size: 24px;
-  padding: 12px;
-  border-radius: 8px;
-}
-
-html.dark .success-card .fa-regular {
-  color: #AAA;
-}
-
-.card h3 {
-  margin-top: 0;
+  align-items: flex-start;
 }
 
 .description-items {
-  list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  width: 100%;
+  margin: 8px 0 24px;
 }
 
-.description-item  {
+.description-item {
   display: grid;
   grid-template-columns: 48px 1fr;
-  gap: 24px;
-  padding: 16px 0;
+  gap: 20px;
+  padding: 24px 0;
 }
 
 .description-item-content {
   display: flex;
   flex-direction: column;
-  gap: 4px;
 }
 
-.description-item-content strong {
-  color: var(--vp-c-text-2);
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.5;
+.success-card a.action {
+  margin-top: auto;
+  align-self: flex-end;
 }
 
-.description-item-content span {
-  color: var(--vp-c-text-2);
-  line-height: 1.6;
-  font-size: 0.9375rem;
+.assistance-card {
+  grid-column: 1 / -1;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px 48px;
+  align-items: center;
 }
 
-a.action {
-  margin-top: 24px;
-  place-self: end;
+.assistance-card p {
+  max-width: 70ch;
+}
+
+@media screen and (max-width: 700px) {
+  .assistance-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .success-card a.action {
+    align-self: stretch;
+  }
+}
+
+@container (max-width: 360px) {
+  .description-item {
+    grid-template-areas:
+        "icon title"
+        "text text";
+    align-items: center;
+    column-gap: 16px;
+    row-gap: 12px;
+  }
+
+  .description-item .icon-tile {
+    grid-area: icon;
+  }
+
+  .description-item-content {
+    display: contents;
+  }
+
+  .description-item .row-title {
+    grid-area: title;
+  }
+
+  .description-item .row-description {
+    grid-area: text;
+    margin-top: 0;
+  }
 }
 
 </style>

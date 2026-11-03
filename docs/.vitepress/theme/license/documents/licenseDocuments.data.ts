@@ -4,9 +4,14 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import MarkdownIt from 'markdown-it'
 
+export interface LegalDocumentMeta {
+    label: string;
+    value: string;
+}
+
 export interface LegalDocument {
-    id: string;
     title: string;
+    meta: LegalDocumentMeta[];
     html: string;
 }
 
@@ -23,6 +28,42 @@ const markdown = new MarkdownIt({
     breaks: true
 });
 
+// Every "## Section" gets an id, so a link can point to it.
+markdown.renderer.rules.heading_open = (tokens, index, options, env, self) => {
+    const token = tokens[index];
+
+    if (token.tag === 'h2') {
+        const title = tokens[index + 1].children
+            .filter(child => child.type === 'text' || child.type === 'code_inline')
+            .map(child => child.content)
+            .join('')
+            .trim();
+
+        // a repeated title gets -1, -2, … as VitePress does
+        const slug = slugify(title);
+        const repeats = env.slugCounts[slug] ?? 0;
+        const id = repeats === 0 ? slug : `${slug}-${repeats}`;
+        env.slugCounts[slug] = repeats + 1;
+
+        token.attrSet('id', id);
+    }
+
+    return self.renderToken(tokens, index, options);
+};
+
+// The same slugs VitePress gives the headings of the other pages
+function slugify(text: string): string {
+    return text
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036F]/g, '')
+        .replace(/[\u0000-\u001f]/g, '')
+        .replace(/[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'“”‘’<>,.?/]+/g, '-')
+        .replace(/-{2,}/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .replace(/^(\d)/, '_$1')
+        .toLowerCase();
+}
+
 export default defineLoader({
     watch: ['./sources/*.md'],
     load(): LegalDocuments {
@@ -35,13 +76,13 @@ export default defineLoader({
         for (const fileName of fileNames) {
             const id = fileName.replace(/\.md$/, '');
             const source = fs.readFileSync(path.join(sourcesDirectory, fileName), 'utf-8');
-            const { title, body } = extractTitle(source);
+            const { title, body: bodyWithMeta } = extractTitle(source);
+            const { meta, body } = extractMeta(bodyWithMeta);
 
-            documents[id] = {
-                id,
-                title,
-                html: markdown.render(body)
-            };
+            const env = { slugCounts: {} as Record<string, number> };
+            const html = markdown.render(body, env);
+
+            documents[id] = { title, meta, html };
         }
 
         return documents;
@@ -54,4 +95,23 @@ function extractTitle(source: string): { title: string; body: string } {
     const title = firstLine.replace(/^#\s+/, '').trim();
 
     return { title, body: rest.join('\n').trim() };
+}
+
+// Right under the title, every source lists a few facts as "**Label:** value" lines
+// (effective date, version). They are shown in the page header, not in the body.
+function extractMeta(body: string): { meta: LegalDocumentMeta[]; body: string } {
+    const lines = body.split(/\r?\n/);
+    const meta: LegalDocumentMeta[] = [];
+
+    while (lines.length > 0) {
+        const match = lines[0].match(/^\s*\*\*(.+?):\*\*\s*(.*?)\s*$/);
+
+        if (!match)
+            break;
+
+        meta.push({ label: match[1].trim(), value: match[2].trim() });
+        lines.shift();
+    }
+
+    return { meta, body: lines.join('\n').trim() };
 }

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { faArrowRight } from "@fortawesome/pro-solid-svg-icons";
+import Icon from "../Icon.vue";
 
 const documents = [
   {
@@ -30,26 +32,24 @@ const documents = [
 </script>
 
 <template>
-  <div class="custom-page">
-    <div class="container reverse-background">
-      <article class="content content-center">
-        <header class="section-header" style="margin-bottom: 24px;">
-          <h1>QuestPDF Legal Terms</h1>
-          <p class="sub-header">Review or download the official legal documents and licensing terms for QuestPDF. If you have questions or need assistance, our team is here to help.</p>
-        </header>
+  <div class="custom-page legal-page texture-dots">
+    <article class="content">
+      <header class="section-header">
+        <h1>QuestPDF Legal Terms</h1>
+        <p class="sub-header">Review or download the official legal documents and licensing terms for QuestPDF. If you have questions or need assistance, our team is here to help.</p>
+      </header>
 
-        <div class="card">
-          <a v-for="document in documents" :key="document.title" :href="document.link" class="document-link">
-            <span class="link-title">{{ document.title }}</span>
-            <i class="fa-solid fa-arrow-right arrow"></i>
-          </a>
-        </div>
-
-        <a class="action primary" href="/license/QuestPDF%20License%20Terms.pdf" download>
-          Download all documents (PDF)
+      <nav class="panel documents" aria-label="Legal documents">
+        <a v-for="document in documents" :key="document.title" :href="document.link" class="document-link">
+          <span class="link-title">{{ document.title }}</span>
+          <Icon class="arrow" :icon="faArrowRight" />
         </a>
-      </article>
-    </div>
+      </nav>
+
+      <a class="action primary" href="/license/QuestPDF%20License%20Terms.pdf" download>
+        Download all documents (PDF)
+      </a>
+    </article>
   </div>
 </template>
 
@@ -61,43 +61,35 @@ const documents = [
 .content {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
   align-items: center;
-  justify-self: center;
-
-  width: 100%;
 }
 
-.card {
-  background-color: var(--vp-c-bg) !important;
-  padding: 0;
-
+.documents {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-
+  width: 100%;
+  max-width: 640px;
+  padding: 0;
   overflow: hidden;
 }
 
 .document-link {
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 32px;
 
-  padding: 16px 24px;
-  text-decoration: none;
-  color: inherit;
+  padding: 18px 24px 18px 32px;
   transition: background-color 0.2s ease;
+}
 
-  .link-title {
-    color: var(--vp-c-text-1);
-    font-weight: 500;
-  }
+.document-link .link-title {
+  color: var(--vp-c-text-1);
+  font-weight: 500;
+}
 
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--vp-c-divider);
-  }
+.document-link:not(:last-child) {
+  border-bottom: 1px solid var(--vp-c-divider);
 }
 
 .document-link .arrow {
@@ -109,11 +101,21 @@ const documents = [
 }
 
 .document-link:hover {
-  background-color: #2196F311;
+  background-color: color-mix(in srgb, #2196F3 5%, transparent);
+}
 
-  .arrow {
-    color: #2196F3;
-    transform: translateX(4px);
+.document-link:hover .link-title {
+  color: #2196F3;
+}
+
+.document-link:hover .arrow {
+  color: #2196F3;
+  transform: translateX(4px);
+}
+
+@media screen and (max-width: 700px) {
+  .document-link {
+    padding: 18px 20px;
   }
 }
 </style>

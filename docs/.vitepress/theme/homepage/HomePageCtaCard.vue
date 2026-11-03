@@ -1,0 +1,298 @@
+<script setup lang="ts">
+import { faArrowRight } from "@fortawesome/pro-solid-svg-icons";
+import Icon from "../Icon.vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+
+/* `active` while hovered or keyboard-focused (a click's focus does not count: the click navigates anyway);
+   `visible` while mostly on screen, tracked on devices without hover only. The visual slot gets both. */
+
+withDefaults(defineProps<{
+  title: string;
+  description: string;
+
+  label: string;
+  href: string;
+
+  /* the glow behind the visual (dark theme) and the colour of the link row */
+  accent?: string;
+  accentSecondary?: string;
+}>(), {
+  accent: "#0094F9",
+  accentSecondary: "#2979FF"
+});
+
+const card = ref<HTMLElement>();
+const hovered = ref(false);
+const focused = ref(false);
+const visible = ref(false);
+const active = computed(() => hovered.value || focused.value);
+
+function onFocus(event: FocusEvent) {
+  focused.value = (event.target as Element).matches(":focus-visible");
+}
+
+let observer: IntersectionObserver | undefined;
+
+onMounted(() => {
+  if (window.matchMedia("(hover: hover)").matches)
+    return;
+
+  observer = new IntersectionObserver(([entry]) => visible.value = entry.isIntersecting, { threshold: 0.6 });
+  observer.observe(card.value!);
+});
+
+onBeforeUnmount(() => observer?.disconnect());
+</script>
+
+<template>
+  <a
+      ref="card"
+      class="panel cta-card"
+      :class="{ active }"
+      :style="{ '--accent': accent, '--accent-secondary': accentSecondary }"
+      :href="href"
+      @mouseenter="hovered = true"
+      @mouseleave="hovered = false"
+      @focus="onFocus"
+      @blur="focused = false">
+    <div class="background-gradient" />
+
+    <!-- the visual is decoration: the link is named by its text -->
+    <div class="visual" aria-hidden="true">
+      <slot name="visual" :active="active" :visible="visible" />
+    </div>
+
+    <div class="cta-text">
+      <h2 class="card-title">{{ title }}</h2>
+      <p class="card-description">{{ description }}</p>
+
+      <span class="cta-link">
+        {{ label }}
+        <Icon class="arrow-icon" :icon="faArrowRight" />
+      </span>
+    </div>
+  </a>
+</template>
+
+<style scoped>
+
+.cta-card {
+  isolation: isolate; /* keeps the gradient (z-index: -1) above the panel background but below the content */
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: 184px minmax(0, 1fr);
+  column-gap: 24px;
+  align-items: center;
+  min-height: 256px;
+  padding: 32px 48px 32px 32px;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.cta-card.active {
+  transform: translateY(-3px);
+  box-shadow: var(--accent-halo);
+  background-color: color-mix(in srgb, var(--surface), #FFF 20%);
+}
+
+html.dark .cta-card.active {
+  box-shadow: var(--elevation-hover), var(--accent-halo);
+  background-color: rgba(255, 255, 255, 0.07);
+}
+
+.cta-card:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 4px;
+}
+
+
+/* Hover ring: a conic gradient masked to the outer 2px; without @property it stands still */
+
+@property --cta-ring-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.cta-card {
+  --accent-halo:
+      0 1px 2px rgba(16, 24, 40, 0.04),
+      0 13px 27px -5px color-mix(in srgb, var(--accent) 18%, transparent),
+      0 8px 16px -8px color-mix(in srgb, var(--accent) 24%, transparent);
+
+  /* the accent is a glow colour: as text it is darkened on the light theme and lightened on the dark one */
+  --accent-text: color-mix(in srgb, var(--accent-secondary) 85%, #000);
+}
+
+html.dark .cta-card {
+  --accent-halo: 0 0 48px -16px color-mix(in srgb, var(--accent) 50%, transparent);
+  --accent-text: color-mix(in srgb, var(--accent) 75%, #FFF);
+  --glow-outer: color-mix(in srgb, var(--accent) 13%, transparent);
+  --glow-inner: color-mix(in srgb, var(--accent-secondary) 6%, transparent);
+}
+
+.cta-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  border-radius: inherit;
+  padding: 2px;
+  pointer-events: none;
+
+  --ring-base: color-mix(in srgb, var(--accent) 22%, transparent);
+  --ring-peak: light-dark(var(--accent), color-mix(in srgb, var(--accent) 80%, #FFF));
+  background: conic-gradient(
+      from var(--cta-ring-angle),
+      var(--ring-base) 0deg,
+      var(--accent-secondary) 24deg,
+      var(--ring-peak) 40deg,
+      var(--ring-base) 72deg,
+      var(--ring-base) 120deg,
+      var(--accent-secondary) 144deg,
+      var(--ring-peak) 160deg,
+      var(--ring-base) 192deg,
+      var(--ring-base) 240deg,
+      var(--accent-secondary) 264deg,
+      var(--ring-peak) 280deg,
+      var(--ring-base) 312deg,
+      var(--ring-base) 360deg);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.cta-card.active::after {
+  opacity: 0.75;
+  animation: cta-ring-spin 12s linear infinite;
+}
+
+@keyframes cta-ring-spin {
+  to {
+    --cta-ring-angle: 360deg;
+  }
+}
+
+
+.cta-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.cta-text .card-description {
+  text-wrap: pretty;
+}
+
+.cta-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  margin-top: 20px;
+
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  color: var(--accent-text);
+  align-self: flex-end;
+}
+
+.arrow-icon {
+  font-size: 1rem;
+  transition: transform 0.25s ease;
+}
+
+.cta-card.active .arrow-icon {
+  transform: translateX(4px);
+}
+
+
+.visual {
+  position: relative;
+  min-width: 0;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.background-gradient {
+  display: none;
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  z-index: -1;
+  background-image:
+      radial-gradient(ellipse 70% 90% at 18% 0%, var(--glow-outer), transparent),
+      radial-gradient(ellipse 40% 50% at 18% 0%, var(--glow-inner), transparent);
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+html.dark .background-gradient {
+  display: block;
+}
+
+.cta-card.active .background-gradient {
+  opacity: 1;
+}
+
+
+@media screen and (max-width: 1280px) and (min-width: 1181px) {
+  .cta-card {
+    grid-template-columns: 168px minmax(0, 1fr);
+    padding: 28px;
+  }
+}
+
+
+/* Compact: below 700px the visual sits above the text */
+
+@media screen and (max-width: 700px) {
+  .cta-card {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 20px;
+    min-height: 0;
+    padding: 24px;
+  }
+
+  .visual {
+    align-self: auto;
+  }
+
+  .cta-text .card-title {
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+  }
+
+  .background-gradient {
+    background-image: radial-gradient(ellipse 80% 70% at 50% 0%, var(--glow-outer), transparent);
+  }
+}
+
+
+/* Reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-card,
+  .cta-card.active {
+    transform: none;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+
+  .cta-card.active::after {
+    animation: none;
+  }
+
+  .cta-card.active .arrow-icon {
+    transform: none;
+  }
+}
+
+</style>

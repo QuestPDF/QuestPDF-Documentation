@@ -3,51 +3,50 @@
     --vp-c-brand-2: #039BE5;
     --vp-c-brand-3: #29B6F6;
     --vp-c-brand-soft: #0091EA24;
+
+    --vp-c-bg: #ffffff;
+    --vp-c-bg-alt: #f6f6f8;
 }
 
 
-:root:is(.dark) {
+:root.dark {
     --vp-c-brand-1: #4FC3F7;
     --vp-c-brand-2: #03A9F4;
     --vp-c-brand-3: #0288D1;
     --vp-c-brand-soft: #0091EA24;
-}
 
-:root {
-    --vp-home-hero-name-color: transparent;
-
-    --vp-home-hero-image-background-image: conic-gradient(from 100deg, #2979FF55 70deg, #88888855 70deg);
-    --vp-home-hero-image-filter: blur(48px);
-
-    --vp-c-gutter: var(--vp-c-divider);
-
-    --elevation: 0 13px 27px -5px rgb(0 0 0 / 5%), 0 8px 16px -8px rgb(0 0 0 / 8%), 0 -6px 16px -6px rgb(0 0 0 / 3%);
-    --elevation-hover: 0 13px 27px -5px rgb(0 0 0 / 15%), 0 8px 16px -8px rgb(0 0 0 / 24%), 0 -6px 16px -6px rgb(0 0 0 / 9%);
-}
-
-html {
-    scroll-behavior: smooth;
+    --vp-c-bg: #101010;
+    --vp-c-bg-alt: #161618;
 }
 
 :root {
     font-size: 16px;
+
+    --vp-c-gutter: var(--vp-c-divider);
+    --vp-nav-logo-height: 32px;
+
+    --elevation: 0 13px 27px -5px rgb(0 0 0 / 5%), 0 8px 16px -8px rgb(0 0 0 / 8%), 0 -6px 16px -6px rgb(0 0 0 / 3%);
+    --elevation-hover: 0 13px 27px -5px rgb(0 0 0 / 15%), 0 8px 16px -8px rgb(0 0 0 / 24%), 0 -6px 16px -6px rgb(0 0 0 / 9%);
 }
 
 body {
     line-height: 24px;
 }
 
-.VPNavBar .title {
-    font-size: 24px !important;
+.VPNavBar .VPNavBarTitle .logo {
+    margin-right: 0;
 }
 
-.logo {
-    height: 32px !important;
-    margin-right: 16px !important;
+@media (min-width: 48rem) {
+    .VPNavBar:not(.has-sidebar) .VPNavBarSearch {
+        padding-inline-start: 2.5rem;
+    }
 }
 
-.VPHero img.VPImage {
-    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.25);
+@media (min-width: 60rem) {
+    .VPNavBar:not(.has-sidebar) .VPNavBarSearch {
+        padding-inline-start: 3.5rem;
+    }
 }
 
 .VPLink.link.active,
@@ -59,63 +58,6 @@ body {
 
 .VPHome {
     margin-bottom: 0 !important;
-}
-
-.VPHero {
-    padding: 198px 0 96px 0 !important;
-    margin: 0 32px;
-}
-
-@media (min-width: 425px) {
-    .VPHero h1 span.name {
-        font-size: 4rem !important;
-        line-height: 4rem !important;
-        margin-bottom: 2rem !important;
-    }
-
-    .VPHero h1 span.text {
-        font-size: 1.5rem !important;
-        line-height: 2rem !important;
-        margin-bottom: 1rem !important;
-    }
-}
-
-@media (min-width: 960px) {
-    .VPHero h1 span.name {
-        font-size: 6rem !important;
-        line-height: 6rem !important;
-        margin-bottom: 1rem !important;
-    }
-
-    .VPHero h1 span.text {
-        font-size: 2.5rem !important;
-        line-height: 3rem !important;
-        margin-bottom: 1rem !important;
-    }
-}
-
-@media (max-width: 960px) {
-    .VPHero {
-        padding: 128px 32px 64px 32px !important;
-    }
-}
-
-@media (max-width: 425px) {
-    .VPHero {
-        padding: 96px 24px 48px !important;
-    }
-
-    .VPHero h1 span.name {
-        font-size: 3rem !important;
-        line-height: 3rem !important;
-        margin-bottom: 2rem !important;
-    }
-
-    .VPHero h1 span.text {
-        font-size: 1.25rem !important;
-        line-height: 2rem !important;
-        margin-bottom: 1rem !important;
-    }
 }
 
 html:not(.dark) .VPDoc img[alt=example] {
@@ -137,22 +79,25 @@ html.dark .VPDoc img[alt=example] {
     color: var(--vp-c-tip-1);
 }
 
-.VPHero .VPButton {
-    font-size: 1rem !important;
-}
-
 .custom-block-title {
     font-size: 1rem;
     letter-spacing: 1px;
     font-weight: bold;
 }
 
+/* an embedded PDF scrolls on its own, so it stays shorter than the window and the page can scroll past it */
 .pdf-viewer {
     width: 100%;
     height: 625px;
+    max-height: min(75svh, 140vw);
 
     box-shadow: 0 13px 27px -5px rgb(50 50 93 / 15%), 0 8px 16px -8px rgb(0 0 0 / 10%), 0 -6px 16px -6px rgb(0 0 0 / 5%);
     border-radius: 8px;
+}
+
+.pdf-viewer > p {
+    margin: 0;
+    padding: 16px 20px;
 }
 
 html.dark .light-only {
@@ -175,6 +120,108 @@ html:not(.dark) .dark-only {
     border-radius: 8px;
 }
 
-.VPNavBar.top.home .VPNavBarSearchButton {
-    display: none !important;
+/* Dark navbar: the bg-alt token, so the bar reads as its own surface. VitePress paints the bar through this token
+   (VPNavBar::before), so the local nav and the home bar pick it up as well. */
+html.dark {
+    --vp-nav-bg-color: var(--vp-c-bg-alt);
+}
+
+/* VitePress makes the home navbar transparent at the top of the page (and always below 60rem): restore the regular
+   surface and divider. */
+.VPNavBar.home::before {
+    background-color: var(--vp-nav-bg-color) !important;
+    backdrop-filter: var(--vp-nav-backdrop-filter) !important;
+}
+
+.VPNavBar.home .divider-line {
+    background-color: var(--vp-nav-divider-color);
+}
+
+html:not(.dark) .Layout:has(.custom-page) .VPNavBar.top .divider-line {
+    background-color: color-mix(in srgb, #2196F3 28%, #E2E2E3);
+}
+
+html.dark .Layout:has(.custom-page) .VPNavBar.top .divider-line {
+    background-color: color-mix(in srgb, #2196F3 20%, #2E2E32);
+}
+
+.VPNavBar .VPNavMenuLink.VPNavBarMenuLink {
+    font-size: 1rem;
+}
+
+/* Navbar links */
+.VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink {
+    min-height: 36px;
+    padding: 0 0.875rem;
+    margin: 0;
+    border-radius: 10px;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink:hover {
+    color: var(--vp-c-text-1);
+    background-color: var(--vp-c-default-soft);
+}
+
+.VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {
+    color: #ffffff;
+    background-color: #1976D2;
+}
+
+html.dark .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {
+    color: #111111;
+    background-color: #F5F5F7;
+}
+
+/* the pill is painted behind the ⋯ button, which keeps the full bar height so its dropdown opens right below it */
+.VPNavBar .VPNavBarExtra > .button {
+    position: relative;
+    isolation: isolate;
+}
+
+.VPNavBar .VPNavBarExtra > .button::before {
+    content: "";
+    position: absolute;
+    inset: calc(var(--vp-nav-height) / 2 - 18px) 0;
+    z-index: -1;
+    border-radius: 10px;
+    transition: background-color 0.2s;
+}
+
+.VPNavBar .VPNavBarExtra > .button:hover::before {
+    background-color: var(--vp-c-default-soft);
+}
+
+/* Search */
+@media (min-width: 48rem) {
+    .VPNavBar .VPNavBarSearchButton {
+        height: 40px;
+        padding: 0 8px 0 12px;
+        border: 1px solid var(--vp-c-divider);
+        border-radius: 10px;
+        transition: border-color 0.2s;
+    }
+
+    .VPNavBar .VPNavBarSearchButton:hover {
+        border-color: var(--vp-c-brand-1);
+    }
+
+    .VPNavBar .VPNavBarSearchButton .keys {
+        border-radius: 6px;
+        background-color: var(--vp-c-bg);
+    }
+}
+
+@media (min-width: 80rem) {
+    .VPNavBar .VPNavBarSearchButton {
+        min-width: 220px;
+    }
+
+    .VPNavBar .VPNavBarSearchButton .text {
+        font-size: 0.875rem;
+    }
+
+    .VPNavBar .VPNavBarSearchButton .keys {
+        margin-left: auto;
+    }
 }

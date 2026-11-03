@@ -5,8 +5,8 @@
     </header>
 
     <div class="license-tiers">
-      <section v-for="license of licenses" :key="license.name" class="license-tier card" :class="license.name">
-        <div class="tag"><i class="fa-solid fa-star"></i>Most Popular</div>
+      <section v-for="license of licenses" :key="license.name" class="license-tier panel" :class="license.name">
+        <div v-if="license.name === 'professional'" class="tag"><Icon :icon="faStar" />Most Popular</div>
 
         <header>
           <div class="tier-name">{{ license.name }}</div>
@@ -16,9 +16,7 @@
             <span class="price-tax">+ local tax</span>
           </div>
 
-          <div v-else>
-            <p class="price-value price-free">Free forever</p>
-          </div>
+          <p v-else class="price-value price-free">Free forever</p>
 
           <div class="tier-description" v-html="license.description" />
         </header>
@@ -27,14 +25,15 @@
 
         <div class="details">
           <div v-for="detail of license.details" :key="detail" class="details-item">
-            <i class="fa-duotone fa-square-check"></i>
+            <Icon class="check-icon" :icon="faSquareCheck" />
             <p>{{ detail }}</p>
           </div>
         </div>
 
-        <a v-if="license.price" class="action" @click="paddle.startCheckout(license.paddlePriceId)">
+        <!-- a button: it opens the checkout overlay, it does not go anywhere -->
+        <button v-if="license.price" type="button" class="action" @click="paddle.startCheckout(license.paddlePriceId)">
           Purchase License
-        </a>
+        </button>
         <a v-else class="action" href="/quick-start.html">Get Started</a>
 
         <p class="footnote" v-html="license.footnote" />
@@ -44,8 +43,12 @@
 </template>
 
 <script setup lang="ts">
+import { faStar } from "@fortawesome/pro-solid-svg-icons";
+import { faSquareCheck } from "@fortawesome/pro-duotone-svg-icons";
+import Icon from "../Icon.vue";
 
 import {usePaddle} from "../paddle";
+import {licensePrices} from "./prices";
 
 const paddle = usePaddle();
 
@@ -80,7 +83,7 @@ const CommunityLicense: License = {
 const ProfessionalLicense: License = {
   name: "professional",
   description: "For one legal entity shipping PDFs in production — every developer covered at one flat, predictable price, with no seat counting or usage fees",
-  price: 1999,
+  price: licensePrices.professional,
   paddlePriceId: paddle.professionalLicensePriceId,
   details: [
     "Perpetual license for entire company",
@@ -98,7 +101,7 @@ const ProfessionalLicense: License = {
 const EnterpriseLicense: License = {
   name: "enterprise",
   description: "For corporate groups that need affiliate-wide coverage, priority support, reduced risk, and procurement-friendly terms",
-  price: 4999,
+  price: licensePrices.enterprise,
   paddlePriceId: paddle.enterpriseLicensePriceId,
   details: [
     "Everything in Professional",
@@ -119,13 +122,7 @@ const licenses = [
 
 </script>
 
-<style scoped lang="scss">
-
-/* Page layout */
-
-.content {
-  padding-top: 48px;
-}
+<style scoped>
 
 @media screen and (max-width: 450px) {
   h1 {
@@ -140,94 +137,110 @@ const licenses = [
 }
 
 
-/* Tier grid
-   Desktop: three equal columns; each card is a subgrid spanning six shared
-   row tracks, so every section starts at the same height across all cards.
-   Children are pinned to their rows explicitly because the tag is rendered
-   only on the professional card — auto-placement would shift the rows of
-   the other two. */
+/* Each card is a subgrid of six shared rows, so sections line up across the cards; the children are pinned to their
+   rows because only the professional card has the tag. */
 
 .license-tiers {
-  margin-top: 16px;
+  margin-top: 28px;
 
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: repeat(6, auto); // tag, header, divider, details, action, footnote
+  grid-template-rows: repeat(6, auto); /* tag, header, divider, details, action, footnote */
+  gap: 0 32px;
 }
 
-.license-tiers .license-tier {
-  position: relative;
+/* the inset is a token so the badge can reach the card's edges */
+.license-tier {
+  --tier-padding: clamp(24px, 7.5vw - 48px, 48px);
+
   display: grid;
   grid-template-rows: subgrid;
   grid-row: span 6;
   justify-items: start;
   align-items: start;
+  padding: var(--tier-padding);
 }
 
 .license-tier .tag { grid-row: 1; }
 .license-tier header { grid-row: 2; }
 .license-tier hr { grid-row: 3; }
 .license-tier .details { grid-row: 4; }
-.license-tier a.action { grid-row: 5; }
+.license-tier .action { grid-row: 5; }
 .license-tier .footnote { grid-row: 6; }
 
+.license-tier hr {
+  margin: 32px 0;
+  border: none;
+  border-top: 1px solid var(--vp-c-divider);
+  width: 100%
+}
 
-/* Card frames
-   The three cards read as one joined unit: the outer cards drop their inner
-   corner radii and are inset vertically, while the professional card in the
-   middle stays full height and elevated. */
 
 .license-tier.professional {
-  border: 3px solid #2196F355;
-  border-radius: 24px;
-  box-shadow: 0 4px 16px rgba(33, 150, 243, 0.2) !important;
+  border: 2px solid light-dark(#2196F3, #3D8BD4);
+  box-shadow:
+      var(--surface-edge),
+      0 0 0 6px color-mix(in srgb, #2196F3 10%, transparent),
+      0 24px 48px -24px color-mix(in srgb, #2196F3 35%, transparent);
   z-index: 1;
 }
 
+html.dark .license-tier.professional {
+  background-color: color-mix(in srgb, #2196F3 3%, var(--surface));
+  box-shadow: 0 24px 48px -24px color-mix(in srgb, #3D8BD4 22%, transparent);
+}
+
+/* the glass rim sits inside the 2px border, so its corners are 2px tighter than the card's */
+.license-tier.professional::before {
+  border-radius: 30px;
+}
+
 .license-tier.community {
-  border-radius: 24px 0 0 24px;
-  margin: 32px 0;
+  border-radius: 32px 0 0 32px;
+  margin: 48px 0;
 }
 
 .license-tier.enterprise {
-  border-radius: 0 24px 24px 0;
-  margin: 32px 0;
+  border-radius: 0 32px 32px 0;
+  margin: 48px 0;
 }
 
 
-/* "Most Popular" tag */
+/* The badge fills the 46px by which the professional card rises above its neighbours; the tracked capitals need a
+   wider word space, or "MOST POPULAR" runs together. */
+.license-tier .tag {
+  justify-self: stretch;
+  margin: calc(-1 * var(--tier-padding)) calc(-1 * var(--tier-padding)) 0;
+  height: 46px;
+  border-radius: 30px 30px 0 0;
 
-.license-tier:not(.professional) .tag {
-  display: none;
-}
-
-.license-tier.professional .tag {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
-  height: 32px;
-  transform: translateY(-8px);
+  white-space: nowrap;
 
-  color: #2196F3;
-  font-size: 0.8125rem;
-  font-weight: 600;
+  color: light-dark(#2196F3, #7CC4FF);
+  background-color: light-dark(#FFFFFF, transparent);
+  box-shadow: inset 0 -2px 0 light-dark(rgba(33, 150, 243, 0.2), rgba(100, 181, 246, 0.14));
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
   text-transform: uppercase;
   letter-spacing: 1px;
-  word-spacing: 3px;
+  word-spacing: 4px;
 }
 
-.license-tier.professional .tag .fa-star {
-  color: #2196F3;
-  font-size: 0.875rem;
+.license-tier .tag .icon {
+  font-size: 1rem;
+  color: light-dark(#2196F3, #7CC4FF);
 }
 
-html.dark .license-tier.professional .tag,
-html.dark .license-tier.professional .tag .fa-star {
-  color: #64B5F6;
+html.dark .license-tier .tag {
+  gap: 10px;
+  font-weight: 600;
 }
 
-
-/* Card header: tier name, price, description */
 
 .license-tier header {
   display: flex;
@@ -237,7 +250,7 @@ html.dark .license-tier.professional .tag .fa-star {
 }
 
 .license-tier .tier-name {
-  border-radius: 128px;
+  border-radius: 12px;
   padding: 6px 24px;
   font-weight: 600;
   text-transform: uppercase;
@@ -246,48 +259,34 @@ html.dark .license-tier.professional .tag .fa-star {
 }
 
 .license-tier.community .tier-name {
-  background-color: #67B84D33;
-  color: #1B5E20;
+  background-color: light-dark(#67B84D33, #4CAF5022);
+  color: light-dark(#1B5E20, #A5D6A7);
 }
 
 .license-tier.professional .tier-name {
-  background-color: #2196F3;
+  background-color: light-dark(#2196F3, #1976D2);
   color: white;
 }
 
 .license-tier.enterprise .tier-name {
-  background-color: #212121;
-  color: white;
-}
-
-html.dark {
-  .license-tier.community .tier-name {
-    background-color: #4CAF5022;
-    color: #A5D6A7;
-  }
-
-  .license-tier.professional .tier-name {
-    background-color: #1976D2;
-    color: white;
-  }
-
-  .license-tier.enterprise .tier-name {
-    background-color: #EEEEEE;
-    color: #212121;
-  }
+  background-color: light-dark(#212121, #EEEEEE);
+  color: light-dark(white, #212121);
 }
 
 .license-tier .price-value {
   font-size: 2.25rem;
   line-height: 2.25rem;
   font-weight: 700;
-  color: var(--vp-c-text-1) !important;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--vp-c-text-1);
 }
 
 .license-tier .price-tax {
   margin-left: 8px;
   font-weight: 400;
-  color: var(--vp-c-text-1) !important;
+  color: var(--vp-c-text-1);
+  white-space: nowrap;
 }
 
 .license-tier .price-free {
@@ -296,17 +295,14 @@ html.dark {
 
 .license-tier .tier-description {
   color: var(--vp-c-text-2);
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.5rem;
 }
 
 
-/* Details list */
-
 .details {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   gap: 16px;
 }
 
@@ -316,100 +312,84 @@ html.dark {
   gap: 12px;
 }
 
-.details-item i.fa-square-check {
+.check-icon {
   width: 24px;
+  font-size: 24px;
+  --fa-secondary-opacity: 0.2;
 }
 
 .details-item p {
-  color: var(--vp-c-text-1) !important;
-  line-height: 1.5rem;
-  font-size: 1rem;
+  color: var(--vp-c-text-1);
 }
 
-.license-tier.community .fa-square-check {
-  --fa-primary-color: #67B84D;
-  --fa-secondary-color: #67B84D;
+.license-tier.community .check-icon {
+  --fa-primary-color: light-dark(#67B84D, #81C784);
+  --fa-secondary-color: light-dark(#67B84D, #81C784);
 }
 
-.license-tier.enterprise .fa-square-check {
-  --fa-primary-color: transparent;
-  --fa-secondary-color: #444;
+.license-tier.professional .check-icon {
+  --fa-primary-color: white;
+  --fa-secondary-color: light-dark(#2196F3, #1976D2);
   --fa-secondary-opacity: 1.0;
 }
 
-html.dark {
-  .license-tier.community .fa-square-check {
-    --fa-primary-color: #81C784;
-    --fa-secondary-color: #81C784;
-  }
-
-  .license-tier.enterprise .fa-square-check {
-    --fa-primary-color: #444;
-    --fa-secondary-color: white;
-  }
+.license-tier.enterprise .check-icon {
+  --fa-primary-color: light-dark(transparent, #444);
+  --fa-secondary-color: light-dark(#444, white);
+  --fa-secondary-opacity: 1.0;
 }
 
 
-/* Action button */
-
-.license-tier a.action {
+.license-tier .action {
   justify-self: stretch;
-  text-align: center;
   margin-top: 32px;
 }
 
+/* see CustomPages.css for --fill */
 .license-tier.professional .action {
-  background-color: #2196F3;
-  color: white;
+  --fill: #1976D2;
+
+  color: #FFF;
+  background-color: var(--fill);
+  box-shadow: var(--filled-edge);
 }
 
 .license-tier.professional .action:hover {
-  background-color: #42A5F5;
-  color: white;
+  background-color: light-dark(#1565C0, #1E88E5);
 }
 
 .license-tier.enterprise .action {
-  background-color: #212121;
-  color: white;
+  --fill: light-dark(#212121, #EEEEEE);
+
+  color: light-dark(white, #212121);
+  background-color: var(--fill);
+  box-shadow: var(--filled-edge);
 }
 
-html.dark {
-  .license-tier.enterprise .action {
-    background-color: #EEEEEE;
-    color: #212121;
-  }
-
-  .license-tier.enterprise .action:hover {
-    background-color: white;
-  }
+.license-tier.enterprise .action:hover {
+  background-color: light-dark(#000000, #FFFFFF);
 }
 
-
-/* Footnote */
 
 .license-tier .footnote {
-  place-self: normal; // stretch across the column so the centered text aligns with the button above
+  place-self: normal;
   text-align: center;
   margin-top: 16px;
 
-  font-size: 0.8125em;
-  line-height: 1.5;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
   color: var(--vp-c-text-2);
-
-  :deep(a) {
-    color: var(--vp-c-text-2);
-    text-decoration: underline;
-  }
-
-  :deep(a):hover {
-    color: var(--vp-c-text-1);
-  }
 }
 
+.license-tier .footnote :deep(a) {
+  color: var(--vp-c-text-2);
+  text-decoration: underline;
+}
 
-/* Stacked layout: below the width where three cards fit comfortably,
-   cards form a single centered column and the joined-card styling
-   (flat inner corners, vertical inset margins) is reset. */
+.license-tier .footnote :deep(a:hover) {
+  color: var(--vp-c-text-1);
+}
+
 
 @media screen and (max-width: 960px) {
   .license-tiers {
@@ -419,16 +399,24 @@ html.dark {
     gap: 32px;
   }
 
-  .license-tiers .license-tier {
-    grid-template-rows: auto; // subgrid has no parent grid here
+  .license-tier {
+    --tier-padding-block: clamp(32px, 22.4px + 1.38vw, 40px);
+    --tier-padding-inline: clamp(24px, 4.7px + 2.76vw, 40px);
+
+    grid-template-rows: auto; /* subgrid has no parent grid here */
     width: 100%;
     max-width: 560px;
+    padding: var(--tier-padding-block) var(--tier-padding-inline);
+  }
+
+  .license-tier .tag {
+    margin: calc(-1 * var(--tier-padding-block)) calc(-1 * var(--tier-padding-inline)) var(--tier-padding-block);
   }
 
   .license-tier.community,
   .license-tier.enterprise {
     margin: 0;
-    border-radius: 24px;
+    border-radius: 32px;
   }
 }
 

@@ -1,96 +1,73 @@
-.custom-page > .container {
-  background-color: var(--vp-c-bg);
+/* --custom-page-gutter is the navbar's own side padding, so the logo, the content and the footer start at the same x.
+   light-dark() is lowered by the build for older browsers. */
+
+:root {
+  --custom-page-width: 1216px;
+  --custom-page-gutter: 32px;
+  --custom-page-bg: light-dark(#F6F8FC, #0E1014);
 }
 
-.container.no-border {
-  border-top: none;
+@media screen and (max-width: 767px) {
+  :root {
+    --custom-page-gutter: 24px;
+  }
 }
 
-.custom-page .content {
-  padding: 64px 32px;
+/* on the layout root, so the navbar and the footer widen with the page */
+.Layout:has(.custom-page) {
+  --custom-page-width: 90rem;
+}
+
+.VPNavBar:not(.has-sidebar) .container {
+  max-width: calc(var(--custom-page-width) - 2 * var(--custom-page-gutter));
+}
+
+/* VitePress gives the title the sidebar's width on every page but home, to line it up with a sidebar */
+.VPNavBar:not(.has-sidebar):not(.home) .container > .title {
+  min-width: 0;
+}
+
+
+/* The bases are wrapped in :where(), so a component rule naming the element's own class wins whatever order the
+   stylesheets load in. */
+
+.custom-page :where(.content) {
+  padding: 64px var(--custom-page-gutter);
   margin: 0 auto;
-  max-width: 1216px;
+  max-width: var(--custom-page-width);
 }
 
-.custom-page .content-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-@media screen and (max-width: 768px) {
-  .custom-page .content {
-    padding: 48px 24px;
-  }
-}
-
-.custom-page .reverse-background {
-  background-color: var(--vp-c-bg-alt);
-}
-
-.custom-page .card {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  border: 1px solid #8882;
-  background-color: var(--vp-c-bg);
-  border-radius: 16px;
-  padding: 32px;
-}
-
-.custom-page .card img.icon {
-  height: 48px;
-}
-
-.custom-page h3 {
-  margin-bottom: 8px;
-}
-
-.custom-page a:hover .card {
-  box-shadow: var(--elevation-hover);
-}
-
-.custom-page .card hr {
-  margin: 32px 0;
-  border: none;
-  border-top: 1px solid var(--vp-c-gutter);
-  width: 100%
-}
-
-@media screen and (max-width: 700px) {
-  .custom-page .card {
-    padding: 24px;
-  }
-
-  .custom-page .card hr {
-    border: 1px solid var(--vp-c-gutter);
+@media screen and (max-width: 767px) {
+  .custom-page :where(.content) {
+    padding-block: 48px;
   }
 }
 
 .custom-page h1 {
-  font-family: var(--vp-font-family-base);
-  font-size: 2.75rem;
+  font-size: clamp(2.25rem, 25.8px + 2.6vw, 2.75rem);
   font-weight: 700;
-  line-height: 3.25rem;
+  line-height: clamp(2.5rem, 24.7px + 3.9vw, 3.25rem);
+  letter-spacing: -0.02em;
   margin-bottom: 2rem;
 }
 
 .custom-page h2 {
-  font-family: var(--vp-font-family-base);
-  font-size: 2rem;
+  font-size: clamp(1.75rem, 22.9px + 1.3vw, 2rem);
   font-weight: 700;
-  line-height: 2.5rem;
+  line-height: clamp(2.25rem, 30.9px + 1.3vw, 2.5rem);
+  letter-spacing: -0.015em;
   margin-bottom: 1rem;
 }
 
 .custom-page h3 {
-  font-family: var(--vp-font-family-base);
   color: var(--vp-c-text-1);
   font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.5rem;
-  margin: 24px 0 8px 0;
+}
+
+.custom-page :is(h1, h2, h3, .row-title) {
+  text-wrap: balance;
 }
 
 .custom-page p, .custom-page ul {
@@ -101,157 +78,299 @@
 }
 
 .custom-page p.sub-header {
-  color: var(--vp-c-text-2);
   font-size: 1.25rem;
   line-height: 2rem;
   margin-bottom: 1.25rem;
 }
 
-.custom-page .section-header {
-  max-width: 650px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .fa-2xl {
-    margin-bottom: 16px;
-  }
-}
-
-.custom-page .section-header * {
-  text-align: center;
-}
-
-span.highlight-background {
-  background: -webkit-linear-gradient(120deg, #2979FF33, #00E5FF33);
-  color: var(--vp-c-text-1);
-  font-weight: 500;
-
-  border-radius: 8px;
-  padding: 4px 8px;
-}
-
-.custom-page {
-  .fa-duotone, .fa-solid {
-    color: #2196F3;
-  }
-
-  .fa-2xl {
-    background-color: #2196F322;
-    border-radius: 12px;
-    padding: 12px 0;
-    font-size: 32px;
-    height: 56px;
-    min-width: 56px;
-    text-align: center;
-    line-height: 32px;
-  }
-
-  .fa-square-check {
-    font-size: 24px;
-    --fa-secondary-opacity: 0.2;
-  }
-
-  .fa-money-bill-transfer {
-    --fa-secondary-opacity: 0.6;
-  }
-
-  .fa-star {
-    --fa-secondary-opacity: 0.9;
-  }
-
-  .fa-calendar-circle-plus {
-    --fa-secondary-opacity: 0.6;
-  }
-}
-
-.custom-page p a:not(.action) {
-  color: var(--vp-c-brand-1);
-}
-
-.custom-page a:not(.action):hover {
-  color: var(--vp-c-brand-2);
-}
-
-a.action {
-  display: inline-block;
-  text-align: center;
-  align-items: center;
-  font-weight: 500;
-  white-space: nowrap;
-
-  border-radius: 12px;
-  padding: 12px 24px;
-  line-height: 1;
-
-  background-color: #8883;
-
-  color: var(--vp-c-text-1);
-  font-size: 1rem;
-
-  transition: all 0.2s ease-in-out;
-}
-
-.card a.action {
-  padding: 12px 20px;
-}
-
-a.action:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--elevation);
-
-  background-color: #8885;
-  cursor: pointer;
-}
-
-a.action.primary {
-  color: #FFF;
-  background-color: #2196F3;
-  font-weight: bold;
-}
-
-a.action.primary:hover {
-  background-color: #1E88E5;
-}
-
-.custom-page {
-  .unordered-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    p {
-      font-size: 1.0625rem;
-    }
-
-    .unordered-list-item {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      grid-gap: 12px;
-    }
-  }
-}
-
-
 @media screen and (max-width: 700px) {
-  .custom-page h1 {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-  }
-
-  .custom-page h2 {
-    font-size: 1.75rem;
-    line-height: 2.25rem;
-  }
-
   .custom-page p.sub-header {
     color: var(--vp-c-text-1);
     font-size: 1rem;
     line-height: 1.5rem;
   }
+}
 
-  .custom-page .unordered-list p {
-    font-size: 1rem !important;
+.custom-page :where(.section-header) {
+  max-width: 650px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Text in a panel */
+
+.custom-page .card-title {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--vp-c-text-1);
+}
+
+.custom-page .card-description {
+  margin: 12px 0 0;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  color: var(--vp-c-text-2);
+}
+
+.custom-page .row-title {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+.custom-page .row-description {
+  margin: 4px 0 0;
+  font-size: 1rem;
+  line-height: 1.625rem;
+  color: var(--vp-c-text-2);
+}
+
+@media screen and (max-width: 768px) {
+  .custom-page .card-description {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+
+
+/* Surfaces */
+
+.custom-page {
+  --panel-padding: clamp(32px, 22.4px + 1.38vw, 40px) clamp(24px, 4.7px + 2.76vw, 40px);
+  --surface: #FFFFFF;
+  --surface-inner: #F0F2F6;
+  /* VitePress's light divider is too faint on white */
+  --vp-c-divider: light-dark(#DBDDE1, #2E2E32);
+  --surface-edge:
+      inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 7%, transparent),
+      0 1px 2px rgba(16, 24, 40, 0.04),
+      0 16px 40px -20px rgba(16, 24, 40, 0.16);
+  --surface-rim: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0));
+  --surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 160px);
+}
+
+html.dark .custom-page {
+  --surface: rgba(255, 255, 255, 0.045);
+  --surface-inner: rgba(0, 0, 0, 0.4);
+  --surface-edge: none;
+  --surface-rim: linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.015));
+  --surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0) 160px);
+}
+
+/* the rim is a ::before whose gradient is masked to a one-pixel border, so the surface stays see-through */
+
+.custom-page :where(.panel) {
+  position: relative;
+  border-radius: 32px;
+  padding: var(--panel-padding);
+  background-color: var(--surface);
+  background-image: var(--surface-sheen);
+  box-shadow: var(--surface-edge);
+}
+
+.custom-page :where(.panel)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: var(--surface-rim);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
+.custom-page .icon-tile {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: var(--surface-inner);
+}
+
+.custom-page .icon-tile .icon {
+  font-size: 1.25rem;
+  color: var(--vp-c-text-1);
+}
+
+/* Dot wings */
+
+.texture-dots {
+  position: relative;
+  isolation: isolate; /* keeps the wings (z-index: -1) above the canvas but below the content */
+}
+
+.texture-dots::before,
+.texture-dots::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 28%;
+  height: 420px;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 36%, transparent) 1px, transparent 1.5px);
+  background-size: 24px 24px;
+  background-position: center top;
+}
+
+.texture-dots::before {
+  left: 0;
+  mask-image: radial-gradient(ellipse 55% 55% at 40% 42%, #000, transparent 100%);
+}
+
+.texture-dots::after {
+  right: 0;
+  mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%);
+}
+
+html.dark .texture-dots::before,
+html.dark .texture-dots::after {
+  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #64B5F6 50%, var(--vp-c-text-1)) 16%, transparent) 1px, transparent 1.5px);
+}
+
+@media screen and (max-width: 960px) {
+  .texture-dots::before,
+  .texture-dots::after {
+    display: none;
+  }
+}
+
+
+/* Seam between sections */
+
+.custom-page .dotted-divider {
+  grid-column: 1 / -1;
+  height: 4px;
+  margin: 14px 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 40%, transparent) 1px, transparent 1.5px);
+  background-size: 12px 4px;
+  background-position: center;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+html.dark .custom-page .dotted-divider {
+  background-image: radial-gradient(circle, color-mix(in srgb, var(--vp-c-text-1) 16%, transparent) 1px, transparent 1.5px);
+}
+
+
+/* Page canvas: it lives here, not in the page components, because in dev a component's CSS loads only on the pages
+   that import it. */
+
+body:has(.custom-page) {
+  --canvas-glow: color-mix(in srgb, #2196F3 32%, transparent);
+  --canvas-glow-soft: color-mix(in srgb, #2196F3 12%, transparent);
+  --canvas-glow-side: color-mix(in srgb, #2196F3 20%, transparent);
+  --canvas-glow-side-shape: ellipse 800px 450px at 0% 2%;
+  --canvas-grain: none;
+
+  background-color: var(--custom-page-bg);
+  background-image:
+      var(--canvas-grain),
+      radial-gradient(ellipse 1400px 700px at 92% 0%, var(--canvas-glow), transparent 70%),
+      radial-gradient(ellipse 1000px 500px at 30% 0%, var(--canvas-glow-soft), transparent 70%),
+      radial-gradient(var(--canvas-glow-side-shape), var(--canvas-glow-side), transparent 70%);
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+}
+
+/* the homepage in light mode takes the side glow down the left edge; the more specific dark rule below keeps the
+   corner */
+body:has(.home-page) {
+  --canvas-glow-side-shape: ellipse 760px 500px at 0% 780px;
+  --canvas-glow-side: color-mix(in srgb, #2196F3 11%, transparent);
+}
+
+html.dark body:has(.custom-page) {
+  --canvas-glow: color-mix(in srgb, #2196F3 20%, transparent);
+  --canvas-glow-soft: color-mix(in srgb, #2196F3 7%, transparent);
+  --canvas-glow-side: color-mix(in srgb, #2196F3 12%, transparent);
+  --canvas-glow-side-shape: ellipse 800px 450px at 0% 2%;
+  /* grain only on the dark canvas */
+  --canvas-grain: url("/homepage/grain-dark.png");
+}
+
+.custom-page p a {
+  color: var(--vp-c-brand-1);
+}
+
+.custom-page p a:hover {
+  color: var(--vp-c-brand-2);
+}
+
+/* Buttons: a <button> takes the class too, for a control that only runs script (the VitePress router intercepts
+   clicks on links). A filled button sets --fill, and --filled-edge tints its lift with it. */
+:is(a, button).action {
+  --filled-edge:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      0 1px 2px rgba(16, 24, 40, 0.12),
+      0 6px 16px -8px color-mix(in srgb, var(--fill, #000) 70%, transparent);
+
+  display: inline-block;
+  max-width: 100%;
+  text-align: center;
+
+  border-radius: 10px;
+  padding: 10px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+
+  color: var(--vp-c-text-1);
+  background-color: var(--surface-inner);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 12%, transparent);
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+:is(a, button).action:hover {
+  transform: translateY(-1px);
+  background-color: color-mix(in srgb, var(--surface-inner), var(--vp-c-text-1) 4%);
+  box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 20%, transparent),
+      0 4px 12px -4px rgba(16, 24, 40, 0.14);
+}
+
+html.dark :is(a, button).action {
+  --filled-edge: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 6px 16px -8px rgba(0, 0, 0, 0.6);
+
+  background-color: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+html.dark :is(a, button).action:hover {
+  background-color: rgba(255, 255, 255, 0.11);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+/* the dark rules name the primary button too, so the secondary's dark fill (a more specific rule) does not win */
+:is(a, button).action.primary,
+html.dark :is(a, button).action.primary {
+  --fill: #1976D2;
+
+  color: #FFF;
+  background-color: var(--fill);
+  box-shadow: var(--filled-edge);
+}
+
+:is(a, button).action.primary:hover,
+html.dark :is(a, button).action.primary:hover {
+  background-color: light-dark(#1565C0, #1E88E5);
+}
+
+@media (pointer: coarse) {
+  :is(a, button).action {
+    padding-block: 12px;
   }
 }

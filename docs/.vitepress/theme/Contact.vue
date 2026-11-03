@@ -1,19 +1,23 @@
 <script setup lang="ts">
+import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
+import { faCreditCard, faEnvelope, faIdCard, faUserGroup } from "@fortawesome/pro-regular-svg-icons";
+import { faHeart } from "@fortawesome/pro-solid-svg-icons";
+import Icon from "./Icon.vue";
 interface Link {
   href: string;
   label: string;
 }
 
 interface ContactInformation {
-    icon: string;
-    title: string;
-    description: string;
-    links: Link[];
+  icon: IconDefinition;
+  title: string;
+  description: string;
+  links: Link[];
 }
 
 const contacts: ContactInformation[] = [
   {
-    icon: "fa-duotone fa-user-group",
+    icon: faUserGroup,
     title: "Community Support",
     description: "Encountering an issue or have a feature idea? Join our community on GitHub. It is the best place to report bugs, discuss improvements, and share your insights with other developers.",
     links: [
@@ -24,7 +28,7 @@ const contacts: ContactInformation[] = [
     ]
   },
   {
-    icon: "fa-duotone fa-id-card",
+    icon: faIdCard,
     title: "Customer Portal",
     description: "Access your subscription details, download invoices, update payment methods, or manage your license. Our customer portal provides a convenient way to handle all your account needs in one place.",
     links: [
@@ -35,7 +39,7 @@ const contacts: ContactInformation[] = [
     ]
   },
   {
-    icon: "fa-duotone fa-credit-card",
+    icon: faCreditCard,
     title: "Payment Support",
     description: "We partner with Paddle to guarantee secure payments and global tax compliance. Please reach out to their team directly for assistance with invoices, billing inquiries, or returns.",
     links: [
@@ -50,7 +54,7 @@ const contacts: ContactInformation[] = [
     ]
   },
   {
-    icon: "fa-duotone fa-envelope",
+    icon: faEnvelope,
     title: "Get in Touch",
     description: "Have a question about licensing, or just want to share feedback? Send us an email. We value your input and are always happy to help with non-technical inquiries or dedicated support.",
     links: [
@@ -64,69 +68,158 @@ const contacts: ContactInformation[] = [
 </script>
 
 <template>
-  <div class="custom-page">
-    <div class="container reverse-background">
-      <div class="content">
+  <div class="custom-page contact-page texture-dots">
+    <div class="content">
+      <header class="section-header contact-header">
+        <h1>Contact us</h1>
+      </header>
 
-        <section class="contacts">
-          <template v-for="contact of contacts" :key="contact">
-            <article class="card">
-              <i class="fa-2xl" :class="[contact.icon]"></i>
-              <h3>{{ contact.title }}</h3>
-              <p>{{ contact.description }}</p>
+      <section class="contacts">
+        <article v-for="contact of contacts" :key="contact.title" class="panel contact-card">
+          <div class="icon-tile">
+            <Icon :icon="contact.icon" />
+          </div>
 
-              <div class="links">
-                <a v-for="link in contact.links" class="action" :href="link.href" target="_blank">{{ link.label }}</a>
-              </div>
-            </article>
-          </template>
+          <h3 class="card-title">{{ contact.title }}</h3>
+          <p class="card-description">{{ contact.description }}</p>
 
-          <article class="card business-details">
-            <i class="love-icon fa-duotone fa-heart fa-swap-opacity fa-2xl"></i>
-            <h3>QuestPDF is owned and proudly developed by:</h3>
-            <p>Marcin Ziąbek CodeFlint</p>
-            <p>Chrzanowska 29<br>32-551 Mętków<br>Poland</p>
-            <p>contact@questpdf.com<br>VAT: PL6282275649</p>
-          </article>
-        </section>
+          <div class="links">
+            <a v-for="link in contact.links" :key="link.href" class="action" :href="link.href" :target="link.href.startsWith('http') ? '_blank' : undefined">{{ link.label }}</a>
+          </div>
+        </article>
 
-      </div>
+        <div class="dotted-divider"></div>
+
+        <article class="panel business-details">
+          <div class="business-owner">
+            <div class="icon-tile">
+              <Icon class="love-icon" :icon="faHeart" />
+            </div>
+
+            <div>
+              <p class="business-intro">QuestPDF is owned and proudly developed by</p>
+              <h3 class="business-name">Marcin Ziąbek CodeFlint</h3>
+            </div>
+          </div>
+
+          <dl class="business-facts">
+            <div>
+              <dt>Address</dt>
+              <dd>Chrzanowska 29<br>32-551 Mętków<br>Poland</dd>
+            </div>
+
+            <div>
+              <dt>Email</dt>
+              <dd>contact@questpdf.com</dd>
+            </div>
+
+            <div>
+              <dt>VAT</dt>
+              <dd>PL6282275649</dd>
+            </div>
+          </dl>
+        </article>
+      </section>
     </div>
   </div>
 </template>
 
 <style scoped>
 
+.contact-header {
+  margin-bottom: 48px;
+}
+
 .contacts {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 32px;
 }
 
 @media screen and (max-width: 750px) {
   .contacts {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    grid-template-columns: minmax(0, 1fr);
   }
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.contact-card .icon-tile {
+  margin-bottom: 16px;
 }
 
 .links {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: end;
-  place-self: end;
-  gap: 16px;
-  margin-top: 24px;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 24px;
 }
 
-.love-icon {
-  background-color: #F4433622 !important;
-  color: #F44336BB !important;
+.business-details {
+  grid-column: 1 / -1;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 32px 48px;
+  align-items: center;
 }
 
-.business-details p {
-  padding-top: 8px;
+.business-owner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.business-intro {
+  font-size: 0.9375rem;
+}
+
+.business-name {
+  margin: 4px 0 0;
+  line-height: 1.75rem;
+}
+
+.business-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10.5rem), 1fr));
+  gap: 24px;
+}
+
+.business-facts dt {
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--vp-c-text-3);
+}
+
+.business-facts dd {
+  font-size: 0.9375rem;
+  line-height: 1.5rem;
+  color: var(--vp-c-text-1);
+}
+
+@media screen and (max-width: 1180px) {
+  .business-details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .business-facts {
+    gap: 16px;
+  }
+}
+
+.icon-tile .love-icon {
+  color: #F44336;
 }
 
 </style>

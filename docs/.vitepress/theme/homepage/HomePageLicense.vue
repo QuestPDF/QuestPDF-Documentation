@@ -1,129 +1,281 @@
-w<script setup>
-const SummaryContent = [
-  "Actively maintained with regular feature, quality, and security updates",
-  "Full source code available on GitHub",
-  "All features included in every tier without restrictions",
-  "Predictable pricing: no per-seat, per-server, or usage fees"
+<script setup lang="ts">
+import { faArrowRight, faBoxOpen, faInfinity, faLayerGroup, faLockOpen, faRotateLeft, faTag, faUsers } from "@fortawesome/pro-regular-svg-icons";
+import Icon from "../Icon.vue";
+import { licensePrices } from "../pricing/prices";
+
+const perYear = (price: number) => `$${price.toLocaleString("en-US")} / year`;
+
+const tiers = [
+  {
+    name: "Community",
+    price: "Free",
+    description: "For individuals, FOSS projects, charities, academic institutions and businesses under $1M in annual revenue. Public-sector bodies and publicly traded companies need a paid license."
+  },
+  {
+    name: "Professional",
+    price: perYear(licensePrices.professional),
+    description: "For one legal entity shipping PDFs in production. Every developer covered at one flat price, with no seat counting or usage fees."
+  },
+  {
+    name: "Enterprise",
+    price: perYear(licensePrices.enterprise),
+    description: "For corporate groups that need affiliate-wide coverage, priority support, reduced risk and procurement-friendly terms."
+  }
+]
+
+const includes = [
+  { icon: faInfinity, text: "Perpetual license, not a subscription: keep every version you received" },
+  { icon: faLayerGroup, text: "Full feature set in every tier, including the free Community License" },
+  { icon: faUsers, text: "Unlimited developers, projects, servers and deployments" },
+  { icon: faBoxOpen, text: "Royalty-free redistribution in SaaS, desktop and on-premises apps" },
+  { icon: faLockOpen, text: "No registration, license keys, watermarks or time limits" },
+  { icon: faRotateLeft, text: "30-day money-back guarantee on every paid license" },
+  { icon: faTag, text: "Locked renewal price: it never increases while you keep renewing" }
 ]
 </script>
 
 <template>
-  <div class="background-gradient" />
+  <div class="panel license-panel">
+    <div class="includes">
+      <h2 class="card-title">Fair and Sustainable License</h2>
 
-  <section class="content">
+      <ul class="includes-list">
+        <li v-for="item of includes" :key="item.text">
+          <Icon :icon="item.icon" />
+          <span>{{ item.text }}</span>
+        </li>
+      </ul>
 
-    <i class="fa-duotone fa-file-certificate license-icon"></i>
-
-    <div class="section-header">
-      <h2>Fair and Sustainable License</h2>
-      <p class="sub-header">A model that benefits everyone. Commercial licensing provides businesses with legal safety and long-term stability, while funding a feature-complete, unrestricted library for the open-source community.</p>
+      <div class="actions">
+        <a class="action pricing-button" href="/pricing.html">View Pricing</a>
+        <a class="action" href="/license/guide.html">License Selection Guide</a>
+      </div>
     </div>
 
-    <div class="unordered-list">
-      <article v-for="summary of SummaryContent" class="unordered-list-item">
-        <i class="fa-duotone fa-square-check license-check-icon"></i>
-        <p>{{ summary }}</p>
-      </article>
-    </div>
+    <div class="divider" aria-hidden="true"></div>
 
-    <div class="license-description">
-      Free for individuals, non-profits, all FOSS projects, and organizations under $1M in annual revenue.
+    <div class="tiers">
+      <a v-for="tier of tiers" :key="tier.name" class="tier" :class="tier.name.toLowerCase()" href="/pricing.html">
+        <span class="tier-head">
+          <span class="tier-name">{{ tier.name }}</span>
+          <span class="tier-price">
+            <span class="tier-price-text">{{ tier.price }}</span>
+            <Icon class="tier-arrow" :icon="faArrowRight" />
+          </span>
+        </span>
+        <span class="tier-description">{{ tier.description }}</span>
+      </a>
     </div>
-
-    <div style="display: flex; flex-direction: row; gap: 16px; justify-content: center">
-      <a class="action pricing-button" href="/pricing.html">View Pricing</a>
-      <a class="action" href="/license.html">License terms</a>
-    </div>
-
-  </section>
+  </div>
 </template>
 
 <style scoped>
 
-  .content {
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.license-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 48px;
+}
+
+html.dark .license-panel {
+  background-image:
+      radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, #67B84D 7%, transparent), transparent),
+      radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #4CAF50 3%, transparent), transparent),
+      var(--surface-sheen);
+}
+
+.divider {
+  align-self: stretch;
+  width: 1px;
+  background-color: var(--vp-c-divider);
+}
+
+@media screen and (max-width: 960px) {
+  .license-panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
   }
 
-  .background-gradient {
-    position: absolute;
-    pointer-events: none;
-    inset: 0;
-    background-image:
-        radial-gradient(ellipse 75% 500px at 75% 100%, color-mix(in srgb, #4CAF50 15%, transparent), transparent),
-        radial-gradient(ellipse 600px 100px at 50% 100%, color-mix(in srgb, #00BCD4 5%, transparent), transparent);
+  .divider {
+    width: auto;
+    height: 1px;
+  }
+}
+
+
+.includes {
+  display: flex;
+  flex-direction: column;
+}
+
+.includes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+  margin: 32px 0 0;
+}
+
+.includes-list li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 36px;
+  font-weight: 500;
+  color: var(--vp-c-text-1);
+}
+
+.includes-list .icon {
+  flex-shrink: 0;
+  width: 18px;
+  font-size: 1rem;
+  color: light-dark(#38A83E, #6ECF73);
+}
+
+@media screen and (max-width: 700px) {
+  .includes-list li {
+    align-items: flex-start;
+    min-height: 0;
+    padding: 6px 0;
   }
 
-  .license-icon {
-    font-size: 64px;
-    margin-bottom: 32px;
-    color: #67B84D;
+  .includes-list .icon {
+    margin-top: 0.25rem;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+
+/* Tiers */
+
+.tiers {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.tier {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 4px;
+}
+
+.tier:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 6px;
+}
+
+.tier-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+.tier-name {
+  padding: 7px 14px;
+  border-radius: 10px;
+  background-color: var(--surface-inner);
+
+  font-size: 0.9375rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+  color: var(--vp-c-text-2);
+}
+
+.tier.community .tier-name {
+  color: light-dark(#2E7D32, #A5D6A7);
+  background-color: #67B84D33;
+}
+
+.tier.professional .tier-name {
+  color: white;
+  background-color: light-dark(#2196F3, #1976D2);
+}
+
+.tier.enterprise .tier-name {
+  color: light-dark(white, #212121);
+  background-color: light-dark(#212121, #EEEEEE);
+}
+
+.tier-price {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  white-space: nowrap;
+}
+
+.tier-price-text {
+  text-decoration: underline transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+
+.tier:is(:hover, :focus-visible) .tier-price-text {
+  text-decoration-color: currentColor;
+}
+
+.tier-arrow {
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s, transform 0.25s ease;
+}
+
+.tier:is(:hover, :focus-visible) .tier-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.tier-description {
+  font-size: 1rem;
+  line-height: 1.75rem;
+  color: var(--vp-c-text-2);
+}
+
+/* a touch screen never hovers, so there the cues show at rest */
+@media (hover: none) {
+  .tier-price-text {
+    text-decoration-color: currentColor;
   }
 
-  .license-check-icon {
-    font-size: 24px;
-    color: #4CAF50;
+  .tier-arrow {
+    opacity: 1;
+    transform: none;
   }
+}
 
-  .license-description {
-    border-radius: 12px;
-    padding: 12px 16px;
-    color: #1B5E20;
-    background-color: #67B84D33;
-    margin-top: 32px;
-
-    max-width: 500px;
-    place-self: center;
+@media (prefers-reduced-motion: reduce) {
+  .tier:is(:hover, :focus-visible) .tier-arrow {
+    transform: none;
   }
-
-  html.dark .license-description {
-    color: #A5D6A7;
-  }
-
-  .action {
-    margin-top: 32px;
-  }
-
-  @media screen and (max-width: 400px) {
-    .license-icon {
-      font-size: 48px;
-    }
-  }
-
-  @media screen and (max-width: 650px) {
-    .sub-header {
-      text-align: justify;
-    }
-  }
-
-  /* Features list */
-
-  .unordered-list {
-    margin: 32px 0;
-  }
+}
 
 
-  /* License button */
+/* two steps deeper than the list's green, so the white label passes AA */
+.action.pricing-button {
+  --fill: #2E7D32;
 
-  .action.pricing-button {
-    background-color: #66BB6A;
-    color: var(--vp-button-brand-text);
-    font-weight: bold;
-  }
+  color: #FFF;
+  background-color: var(--fill);
+  box-shadow: var(--filled-edge);
+}
 
-  .action.pricing-button:hover {
-    background-color: #4CAF50;
-  }
-
-  html.dark .action.pricing-button {
-    background-color: #4CAF50;
-  }
-
-  html.dark .action.pricing-button:hover {
-    background-color: #66BB6A;
-  }
+.action.pricing-button:hover {
+  background-color: light-dark(#1B5E20, #388E3C);
+}
 
 </style>

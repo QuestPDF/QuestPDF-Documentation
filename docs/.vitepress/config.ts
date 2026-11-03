@@ -1,7 +1,7 @@
 import {readFileSync} from 'node:fs'
-import {defineConfig, HeadConfig} from 'vitepress'
+import {defineConfig, type DefaultTheme, HeadConfig} from 'vitepress'
 import llmstxt from 'vitepress-plugin-llms'
-import imageSizePlugin from "./markdownit-imagesize-plugin";
+import imageSizePlugin from "./markdownit-imagesize-plugin.ts";
 
 const isProd = process.env.NODE_ENV === 'production';
 const llmsTxtTemplate = readFileSync(new URL('./llms-txt-template.md', import.meta.url), 'utf-8').trimEnd();
@@ -17,6 +17,13 @@ function getPlausibleScript() : HeadConfig[] {
 }
 
 
+/* llms.txt lists documentation pages only; an external sidebar link (GitHub releases) has no markdown source */
+function withoutExternalLinks(items: DefaultTheme.SidebarItem[]): DefaultTheme.SidebarItem[] {
+    return items
+        .filter(item => !item.link || !/^https?:\/\//.test(item.link))
+        .map(item => item.items ? { ...item, items: withoutExternalLinks(item.items) } : item);
+}
+
 export default defineConfig({
     lang: 'en-US',
     title: 'QuestPDF',
@@ -26,6 +33,7 @@ export default defineConfig({
 
     vite: {
       plugins: [llmstxt({
+          sidebar: sidebar => Array.isArray(sidebar) ? withoutExternalLinks(sidebar) : sidebar,
           domain: 'https://www.questpdf.com',
           customLLMsTxtTemplate: llmsTxtTemplate,
           ignoreFiles: [
@@ -48,8 +56,7 @@ export default defineConfig({
     },
 
     head: [
-        ['link', { rel: 'icon', href: '/logo.png', type: 'image/png' }],
-        ['script', { src: 'https://kit.fontawesome.com/294da38298.js', crossorigin: 'anonymous', async: "" }],
+        ['link', { rel: 'icon', href: '/favicon.png', type: 'image/png', sizes: '64x64' }],
         ...getPlausibleScript(),
         ['meta', { name: "title", content: "C# PDF Generation Library | QuestPDF for .NET" }],
         ['meta', { name: "description", content: "Generate and edit PDF documents in your C# applications using the QuestPDF library and its C# Fluent API. Build invoices, reports and data exports with ease." }],
@@ -57,7 +64,12 @@ export default defineConfig({
     ],
 
     themeConfig: {
-        logo: '/logo.webp',
+        logo: {
+            light: '/questpdf-logo-nav-light.webp',
+            dark: '/questpdf-logo-nav-dark.webp',
+            alt: 'QuestPDF'
+        },
+        siteTitle: false,
         search: {
             provider: 'algolia',
             options: {
@@ -68,7 +80,7 @@ export default defineConfig({
             }
         },
         nav: [
-            { text: 'Documentation', link: '/quick-start' },
+            { text: 'Documentation', link: '/quick-start', activeMatch: '^/(quick-start|invoice-tutorial|roadmap|acknowledgements|document-previewer|license/configuration|companion/|concepts/|api-reference/|examples/)' },
             { text: 'Features', link: '/features-overview' },
             { text: 'Pricing', link: '/pricing' },
             { text: 'GitHub', link: 'https://github.com/QuestPDF/QuestPDF', noIcon: true },

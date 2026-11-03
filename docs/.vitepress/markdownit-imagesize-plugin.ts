@@ -61,6 +61,9 @@ const imageSizePlugin: PluginWithOptions = (md) => {
                 applyImageDimensions(token, imagePath)
         }
 
+        if (!token.attrGet('loading'))
+            token.attrSet('loading', 'lazy')
+
         return defaultRenderer(tokens, idx, options, env, self)
     }
 }

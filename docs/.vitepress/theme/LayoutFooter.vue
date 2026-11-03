@@ -60,7 +60,7 @@ const columns: FooterColumn[] = [
   }
 ];
 
-const year = 2026;
+const year = new Date().getFullYear();
 </script>
 
 <template>
@@ -72,11 +72,7 @@ const year = 2026;
 
           <ul>
             <li v-for="link in column.links" :key="link.label">
-              <a :href="link.href"
-                 :target="link.external ? '_blank' : undefined"
-                 :rel="link.external ? 'noopener' : undefined">
-                {{ link.label }}
-              </a>
+              <a :href="link.href" :target="link.external ? '_blank' : undefined">{{ link.label }}</a>
             </li>
           </ul>
         </div>
@@ -84,15 +80,16 @@ const year = 2026;
     </div>
 
     <div class="content">
-      <p class="copyright">© {{ year }} QuestPDF by Marcin Ziąbek CodeFlint</p>
+      <p class="copyright">© {{ year }} QuestPDF by Marcin Ziabek CodeFlint</p>
     </div>
   </footer>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 
 footer {
-  background-color: var(--vp-c-bg-alt);
+  /* opaque, so the page canvas stops at the footer's top border */
+  background-color: var(--vp-c-bg);
 }
 
 footer * {
@@ -101,51 +98,40 @@ footer * {
 }
 
 
-/* LINKS */
-
 .content {
   border-top: 1px solid var(--vp-c-divider);
+}
 
-  & > * {
-    margin: 0 auto;
-    max-width: 1216px;
-    padding: 48px 32px 48px;
-  }
+.content > * {
+  margin: 0 auto;
+  max-width: var(--custom-page-width);
+  padding: 48px var(--custom-page-gutter);
 }
 
 .link-categories {
-  margin: 0 auto;
-  max-width: 1216px;
-  padding: 48px 32px 48px;
-
   display: grid;
   grid-template-columns: repeat(4, auto);
   gap: 48px 32px;
 }
 
-.link-category {
-  h2 {
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--vp-c-text-1);
-    margin-bottom: 12px;
-  }
+.link-category h2 {
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--vp-c-text-1);
+  margin-bottom: 12px;
+}
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+.link-category ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
-  a:hover {
-    color: var(--vp-c-text-1);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
+.link-category a:hover {
+  color: var(--vp-c-text-1);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 @media screen and (max-width: 960px) {
@@ -160,12 +146,25 @@ footer * {
   }
 }
 
+@media (pointer: coarse) {
+  .link-category h2 {
+    margin-bottom: 2px;
+  }
 
-/* COPYRIGHT */
+  .link-category ul {
+    gap: 0;
+  }
+
+  .link-category a {
+    display: block;
+    padding-block: 10px;
+  }
+}
+
 
 .copyright {
   text-align: center;
-  padding: 24px 32px;
+  padding: 24px var(--custom-page-gutter);
 }
 
 </style>

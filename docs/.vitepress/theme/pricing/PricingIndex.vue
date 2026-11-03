@@ -1,16 +1,16 @@
 <template>
-  <div class="custom-page">
-    <div class="container reverse-background">
+  <div class="custom-page pricing-page texture-dots">
+    <div class="container">
       <pricing-tiers />
     </div>
 
-    <div class="container">
-      <pricing-resellers />
-    </div>
+    <div class="dotted-divider"></div>
 
-    <div class="container reverse-background">
+    <div class="container">
       <pricing-faq />
     </div>
+
+    <div class="dotted-divider"></div>
 
     <div class="container">
       <pricing-contact />
@@ -21,12 +21,30 @@
 <script setup lang="ts">
 
 import PricingTiers from "./PricingTiers.vue";
-import PricingContact from "./PricingContact.vue";
-import PricingResellers from "./PricingResellers.vue";
 import PricingFaq from "./PricingFaq.vue";
+import PricingContact from "./PricingContact.vue";
 
 </script>
 
-<style scoped>
+<style>
+
+.custom-page.pricing-page > .dotted-divider {
+  width: calc(100% - 2 * var(--custom-page-gutter));
+  max-width: calc(var(--custom-page-width) - 2 * var(--custom-page-gutter));
+  margin: 0 auto;
+}
+
+.pricing-page .content {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
+.pricing-page > .container:first-child .content {
+  padding-top: 64px;
+}
+
+.pricing-page > .container:last-child .content {
+  padding-bottom: 64px;
+}
 
 </style>

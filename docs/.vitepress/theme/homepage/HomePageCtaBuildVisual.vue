@@ -1,0 +1,267 @@
+<script setup lang="ts">
+import { faPlay } from "@fortawesome/pro-solid-svg-icons";
+import Icon from "../Icon.vue";
+import { computed, onBeforeUnmount, ref, watch } from "vue";
+import { reducedMotion, Timeline } from "./ctaTimeline";
+
+/* The intro-video card's visual: an invoice page in 3D whose sections land on it on hover, or when the card comes
+   into view on a device without hover. A pass always finishes, even if the pointer leaves. Reduced motion: the
+   finished page, nothing moves. */
+
+const props = defineProps<{ active: boolean; visible: boolean }>();
+const playing = computed(() => props.active || props.visible);
+
+/* play: the play button is shown; it hides when a pass starts and returns with the totals */
+const play = ref(true);
+const root = ref<HTMLElement>();
+
+/* the sections in page coordinates (148 x 200): where each sits, its delay after the first, and its bars */
+interface Box {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+interface Bar extends Box {
+  tone?: "strong" | "soft";
+}
+
+interface Section extends Box {
+  delay: number;
+  bars: Bar[];
+}
+
+const tableRow: Bar[] = [
+  { x: 4, y: 4, w: 44, h: 4 },
+  { x: 60, y: 4, w: 14, h: 4, tone: "soft" },
+  { x: 82, y: 4, w: 18, h: 4, tone: "soft" },
+  { x: 104, y: 4, w: 18, h: 4 }
+];
+
+const sections: Section[] = [
+  /* the title block */
+  {
+    x: 10, y: 12, w: 128, h: 30, delay: 0,
+    bars: [
+      { x: 2, y: 4, w: 14, h: 14, tone: "strong" },
+      { x: 22, y: 5, w: 52, h: 8, tone: "strong" },
+      { x: 22, y: 18, w: 34, h: 4, tone: "soft" },
+      { x: 94, y: 5, w: 32, h: 4 },
+      { x: 94, y: 13, w: 26, h: 4, tone: "soft" },
+      { x: 94, y: 21, w: 30, h: 4, tone: "soft" }
+    ]
+  },
+  /* the two parties */
+  {
+    x: 10, y: 50, w: 128, h: 32, delay: 0.17,
+    bars: [
+      { x: 2, y: 4, w: 30, h: 5, tone: "strong" },
+      { x: 2, y: 13, w: 44, h: 3.5, tone: "soft" },
+      { x: 2, y: 19, w: 38, h: 3.5, tone: "soft" },
+      { x: 2, y: 25, w: 42, h: 3.5, tone: "soft" },
+      { x: 70, y: 4, w: 30, h: 5, tone: "strong" },
+      { x: 70, y: 13, w: 46, h: 3.5, tone: "soft" },
+      { x: 70, y: 19, w: 36, h: 3.5, tone: "soft" },
+      { x: 70, y: 25, w: 40, h: 3.5, tone: "soft" }
+    ]
+  },
+  /* the table header and rows */
+  {
+    x: 10, y: 90, w: 128, h: 12, delay: 0.33,
+    bars: [{ x: 0, y: 0, w: 128, h: 12, tone: "strong" }]
+  },
+  { x: 10, y: 104, w: 128, h: 12, delay: 0.45, bars: tableRow },
+  { x: 10, y: 116, w: 128, h: 12, delay: 0.53, bars: tableRow },
+  { x: 10, y: 128, w: 128, h: 12, delay: 0.6, bars: tableRow },
+  { x: 10, y: 140, w: 128, h: 12, delay: 0.68, bars: tableRow },
+  /* the totals */
+  {
+    x: 74, y: 158, w: 64, h: 26, delay: 0.83,
+    bars: [
+      { x: 10, y: 2, w: 24, h: 3.5, tone: "soft" },
+      { x: 42, y: 2, w: 18, h: 3.5, tone: "soft" },
+      { x: 10, y: 9, w: 24, h: 3.5, tone: "soft" },
+      { x: 42, y: 9, w: 18, h: 3.5, tone: "soft" },
+      { x: 4, y: 17, w: 30, h: 6, tone: "strong" },
+      { x: 38, y: 17, w: 22, h: 6, tone: "strong" }
+    ]
+  },
+  /* the footer line */
+  {
+    x: 10, y: 186, w: 60, h: 8, delay: 0.95,
+    bars: [
+      { x: 0, y: 2, w: 40, h: 3.5, tone: "soft" }
+    ]
+  }
+];
+
+function box(item: Box) {
+  return { left: `${item.x}px`, top: `${item.y}px`, width: `${item.w}px`, height: `${item.h}px` };
+}
+
+/* a pass: the content fades out (0.2s), then the sections land one after another (0.7s each, the last starting
+   0.95s in) and the play button returns 1s into the landings; see ctaTimeline.ts for the waits */
+const FADE = 200;
+const LAND = 700;
+const PLAY_AT = 1000;
+const LAND_EASING = "cubic-bezier(0.3, 0.6, 0.15, 1)";
+
+const timeline = new Timeline();
+let busy = false;
+
+async function pass() {
+  busy = true;
+  play.value = false;
+
+  const targets = [...root.value!.querySelectorAll(".section")];
+
+  const fades = targets.map(section => timeline.animate(section, [{ opacity: 1 }, { opacity: 0 }], { duration: FADE, easing: "ease-out", fill: "both" }));
+
+  if (!await Timeline.settled(fades))
+    return;
+
+  const landings = targets.map((section, index) => timeline.animate(section, [
+    { transform: "translateZ(var(--lift))", opacity: 0, easing: LAND_EASING },
+    { opacity: 1, offset: 0.4, easing: LAND_EASING },
+    { transform: "translateZ(0)", opacity: 1 }
+  ], { duration: LAND, delay: sections[index].delay * 1000, fill: "both" }));
+
+  fades.forEach(fade => fade.cancel()); /* each landing holds its section invisible until its turn */
+
+  Timeline.settled([timeline.wait(root.value!, PLAY_AT)]).then(reached => reached && (play.value = true));
+
+  if (!await Timeline.settled(landings))
+    return;
+
+  landings.forEach(landing => landing.cancel()); /* their end state is the page's own */
+  busy = false;
+}
+
+watch(playing, isPlaying => {
+  if (isPlaying && !busy && !reducedMotion())
+    pass();
+});
+
+onBeforeUnmount(() => timeline.cancel());
+</script>
+
+<template>
+  <div ref="root" class="scene build" :class="{ play, active: playing }">
+    <div class="stage">
+      <div class="model">
+        <div class="shadow" />
+        <div class="paper page" />
+
+        <div v-for="(section, index) of sections" :key="index" class="section" :style="box(section)">
+          <span v-for="(bar, barIndex) of section.bars" :key="barIndex" class="shape" :class="bar.tone" :style="box(bar)" />
+        </div>
+      </div>
+    </div>
+
+    <span class="play-button"><Icon :icon="faPlay" /></span>
+  </div>
+</template>
+
+<style scoped src="./ctaVisual.css"></style>
+
+<style scoped>
+
+/* the pose; the rest is shared, see ctaVisual.css */
+.build {
+  --tilt-y: 26deg;
+  --tilt-z: -2deg;
+  --lift: 56px; /* how far in front of the page a section starts */
+}
+
+
+.section {
+  position: absolute;
+  color: var(--ink);
+}
+
+/* hidden from the start of a pass until the script sets .play */
+.play-button {
+  position: absolute;
+  z-index: 10;
+  left: calc(50% - 22px);
+  top: calc(50% - 22px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+
+  background-color: var(--accent-secondary);
+  color: #FFF;
+  box-shadow:
+      0 0 0 5px color-mix(in srgb, var(--accent-secondary) 22%, transparent),
+      0 8px 20px -4px color-mix(in srgb, var(--accent-secondary) 60%, transparent);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+}
+
+.play-button .icon {
+  font-size: 1rem;
+  margin-left: 3px; /* optical centring of the triangle */
+}
+
+.build:not(.play) > .play-button {
+  transform: scale(0.45);
+  opacity: 0;
+  transition-duration: 0.18s;
+  transition-timing-function: ease-in;
+}
+
+.play-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-secondary) 45%, transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Hover */
+@media (prefers-reduced-motion: no-preference) {
+  .build.active {
+    --tilt-x: 4deg;
+    --tilt-y: 14deg;
+    --tilt-z: -1deg;
+    --rise: -4px;
+  }
+
+  .build.active.play > .play-button {
+    transform: scale(1.08);
+    animation: play-breathe 1.8s ease-in-out 0.4s infinite;
+  }
+
+  .build.active.play > .play-button::before {
+    animation: play-ring 1.8s ease-out 0.4s infinite;
+  }
+}
+
+@keyframes play-breathe {
+  0%, 100% {
+    transform: scale(1.08);
+  }
+
+  35% {
+    transform: scale(1.14);
+  }
+}
+
+@keyframes play-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-secondary) 45%, transparent);
+    opacity: 1;
+  }
+
+  70%, 100% {
+    box-shadow: 0 0 0 18px color-mix(in srgb, var(--accent-secondary) 45%, transparent);
+    opacity: 0;
+  }
+}
+
+</style>

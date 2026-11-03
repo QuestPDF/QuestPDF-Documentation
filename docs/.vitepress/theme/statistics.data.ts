@@ -1,7 +1,6 @@
 import { defineLoader } from 'vitepress'
 
 export interface StatisticEntry {
-    icon: string;
     label: string;
     link: string;
     value: string;
@@ -10,23 +9,36 @@ export interface StatisticEntry {
 declare const data: StatisticEntry[]
 export { data }
 
+/* the publish date of QuestPDF 2020.11.0, the first stable version on NuGet */
+const firstRelease = new Date('2020-11-01');
+
 export default defineLoader({
     async load(): Promise<StatisticEntry[]> {
-        const nugetDownloads = await getNugetDownloads();
-        const githubStars = await getGithubStars();
+        const [nugetDownloads, githubStars] = await Promise.all([
+            getNugetDownloads(),
+            getGithubStars()
+        ]);
 
         return [
             {
-                icon: "fa-star",
                 label: "GitHub stars",
                 link: "https://github.com/QuestPDF/QuestPDF",
                 value: `${toThousands(githubStars)}K`
             },
             {
-                icon: "fa-download",
                 label: "NuGet downloads",
                 link: "https://www.nuget.org/packages/QuestPDF/",
                 value: `${toMillions(nugetDownloads)}M`
+            },
+            {
+                label: "paying customers",
+                link: "/pricing",
+                value: "800+"
+            },
+            {
+                label: "years in production",
+                link: "https://www.nuget.org/packages/QuestPDF/#versions-body-tab",
+                value: `${toYears(firstRelease)}`
             }
         ];
     }
@@ -61,7 +73,6 @@ async function getNugetDownloads(): Promise<number> {
     if (!searchResource)
         throw new Error('SearchQueryService not found in service index');
 
-    // query for the package
     const queryUrl = `${searchResource['@id']}?q=packageid:questpdf&prerelease=true`;
     const data = await fetchJson(queryUrl);
 
@@ -86,10 +97,15 @@ async function getGithubStars(): Promise<number> {
     return stars;
 }
 
-export function toMillions(n: number): number {
+function toMillions(n: number): number {
     return Math.round(n / 1_000_000)
 }
 
-export function toThousands(n: number): number {
+function toThousands(n: number): number {
     return Math.round(n / 100) / 10
+}
+
+function toYears(since: Date): number {
+    const millisecondsPerYear = 365.25 * 24 * 60 * 60 * 1000;
+    return Math.round((Date.now() - since.getTime()) / millisecondsPerYear);
 }

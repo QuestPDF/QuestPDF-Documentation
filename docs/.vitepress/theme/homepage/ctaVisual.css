@@ -1,0 +1,86 @@
+/* Shared by HomePageCtaBuildVisual.vue and HomePageCtaDeckVisual.vue. The model has a 148 x 200 coordinate system
+   for its shapes; the pose variables place it. */
+
+.scene {
+  --tilt-x: 8deg;
+  --scale: 0.74;
+  --shift: 0px;
+  --rise: 0px;
+  --ink: #A7AEBB;
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 196px;
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+  perspective: 640px;
+  perspective-origin: 50% 45%;
+}
+
+.model {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 148px;
+  height: 200px;
+  margin: -100px 0 0 -74px;
+  transform-style: preserve-3d;
+  transform: translate(var(--shift), var(--rise)) scale(var(--scale)) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(var(--tilt-z));
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.paper {
+  background-color: light-dark(#FFF, #F4F4F6);
+  box-shadow: 0 0 0 1px light-dark(rgba(0, 0, 0, 0.10), rgba(255, 255, 255, 0.06));
+}
+
+.page {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  background-image: linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, var(--page-shade, 0.025)));
+}
+
+html.dark .page {
+  background-image: none;
+}
+
+.shadow {
+  position: absolute;
+  inset: 8px -6px -10px 10px;
+  border-radius: 8px;
+  background: light-dark(rgba(20, 24, 40, 0.16), rgba(0, 0, 0, 0.45));
+  filter: blur(10px);
+  transform: translateZ(-1px);
+}
+
+/* Placeholders */
+.shape {
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+  border-radius: 2px;
+  background-color: currentColor;
+  opacity: 0.7;
+}
+
+.shape.strong {
+  opacity: 1;
+}
+
+.shape.soft {
+  opacity: 0.5;
+}
+
+
+/* Compact */
+
+@media screen and (max-width: 700px) {
+  .scene {
+    min-height: 180px;
+  }
+}

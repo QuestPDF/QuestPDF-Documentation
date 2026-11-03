@@ -1,117 +1,123 @@
 <template>
   <div class="custom-page home-page">
-    <div class="container hero-container">
-      <HomePageHero />
-    </div>
+    <HomePageHero />
 
-    <div class="container">
-      <HomePageAdoption />
-    </div>
+    <div class="content sections">
+      <div class="cta-row">
+        <!-- the planned cards, once the video tutorial and the sample gallery exist (see roadmap.md) -->
+        <template v-if="plannedCardsReady">
+          <HomePageCtaCard
+              title="Invoice in 10 minutes"
+              description="Learn the core concepts step by step, from blank page to finished PDF in under 200 lines of C# code."
+              label="Watch the tutorial"
+              href="/quick-start.html">
+            <template #visual="{ active, visible }">
+              <HomePageCtaBuildVisual :active="active" :visible="visible" />
+            </template>
+          </HomePageCtaCard>
 
-    <div class="container reverse-background">
-      <HomePageCodeAnimation />
+          <HomePageCtaCard
+              title="230+ real-world examples"
+              description="Get inspired by our catalog of predesigned components, then reuse them and adjust them to your needs."
+              label="Browse the gallery"
+              href="/sample-gallery.html"
+              accent="#5C6BC0"
+              accent-secondary="#3F51B5">
+            <template #visual="{ active, visible }">
+              <HomePageCtaDeckVisual :active="active" :visible="visible" />
+            </template>
+          </HomePageCtaCard>
+        </template>
 
-    </div>
+        <!-- the interim cards until then -->
+        <template v-else>
+          <HomePageCtaCard
+              title="Invoice in under 200 lines"
+              description="Build a professional, paginated invoice step by step and learn the core concepts of QuestPDF along the way."
+              label="Start the tutorial"
+              href="/invoice-tutorial.html">
+            <template #visual="{ active, visible }">
+              <HomePageCtaTutorialVisual :active="active" :visible="visible" />
+            </template>
+          </HomePageCtaCard>
 
-    <div class="container">
-      <HomePageFeatures />
-    </div>
+          <HomePageCtaCard
+              title="120+ documented features"
+              description="Browse every capability, from layout and typography to charts, barcodes and PDF/A output, each linked to its documentation."
+              label="Explore the features"
+              href="/features-overview.html"
+              accent="#5C6BC0"
+              accent-secondary="#3F51B5">
+            <template #visual="{ active, visible }">
+              <HomePageCtaFeaturesVisual :active="active" :visible="visible" />
+            </template>
+          </HomePageCtaCard>
+        </template>
+      </div>
 
-    <div class="container reverse-background">
-      <HomePageCodeFocusedApproach />
-    </div>
+      <div class="dotted-divider"></div>
 
-    <div class="container">
+      <HomePageQuickStart />
+
+      <div class="dotted-divider"></div>
+
       <HomePageCompanion />
-    </div>
 
-    <div class="container reverse-background">
-      <HomePageOverview />
-    </div>
+      <div class="dotted-divider"></div>
 
-    <div class="container">
-      <HomePageMultiplatform />
-    </div>
+      <HomePageTrust />
 
-    <div class="container reverse-background">
-      <HomePageStandardCompliance />
-    </div>
+      <div class="dotted-divider"></div>
 
-    <div class="container footer-container">
       <HomePageLicense />
-    </div>
-
-    <div class="container footer-container">
-      <HomePageGettingStarted />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 
-import HomePageOverview from "./HomePageOverview.vue";
-import HomePageGettingStarted from "./HomePageGettingStarted.vue";
-import HomePageLicense from "./HomePageLicense.vue";
-import HomePageMultiplatform from "./HomePageMultiplatform.vue";
-import HomePageCodeFocusedApproach from "./HomePageCodeFocusedApproach.vue";
-import HomePageCompanion from "./HomePageCompanion.vue";
 import HomePageHero from "./HomePageHero.vue";
-import HomePageStandardCompliance from "./HomePageStandardCompliance.vue";
-import HomePageAdoption from "./HomePageAdoption.vue";
-import HomePageCodeAnimation from "./HomePageCodeAnimation.vue";
-import HomePageFeatures from "./HomePageFeatures.vue";
+import HomePageCtaCard from "./HomePageCtaCard.vue";
+import HomePageCtaBuildVisual from "./HomePageCtaBuildVisual.vue";
+import HomePageCtaDeckVisual from "./HomePageCtaDeckVisual.vue";
+import HomePageCtaTutorialVisual from "./HomePageCtaTutorialVisual.vue";
+import HomePageCtaFeaturesVisual from "./HomePageCtaFeaturesVisual.vue";
+import HomePageQuickStart from "./HomePageQuickStart.vue";
+import HomePageCompanion from "./HomePageCompanion.vue";
+import HomePageTrust from "./HomePageTrust.vue";
+import HomePageLicense from "./HomePageLicense.vue";
+
+/* flip once the video tutorial and the sample gallery are live; the footer's "Sample gallery" link goes with it */
+const plannedCardsReady = false;
 
 </script>
 
-<style>
+<style scoped>
 
-
-.VPNavBar:not(.has-sidebar) .container {
-  max-width: 1152px;
+.home-page {
+  --panel-padding: clamp(32px, 12.7px + 2.76vw, 48px) clamp(24px, 4.14vw - 4.95px, 48px);
+  --vp-c-text-2: light-dark(#56565C, #B3B3B9);
 }
 
-.VPNavBar:not(.has-sidebar):not(.home) .container > .title {
-  min-width: 0;
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-top: 0;
+  padding-bottom: 48px;
 }
 
-.VPNavBar.top .VPNavBarAppearance {
-  --vp-c-divider: var(--vp-c-text-3);
-  --vp-input-border-color: var(--vp-c-text-3);
+.cta-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px;
 }
 
-html:not(.dark):has(.home-page) .VPNavBar.home.top {
-  .VPNavBarMenuLink *,
-  .VPNavBarMenuGroup span.text {
-    color: black !important;
+@media screen and (max-width: 1180px) {
+  .cta-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
   }
 }
-
-
-/* Background */
-
-.hero-container {
-  position: relative;
-}
-
-.footer-container {
-  position: relative;
-}
-
-
-/* Common styles */
-
-.section-tag {
-  background-color: color-mix(in srgb, var(--vp-c-brand-2), transparent 85%);
-  border-radius: 12px;
-  padding: 6px 18px;
-  word-spacing: 2px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  margin-bottom: 24px;
-  color: var(--vp-c-brand-1);
-  width: fit-content;
-  text-transform: uppercase;
-}
-
 
 </style>
