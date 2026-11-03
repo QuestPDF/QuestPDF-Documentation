@@ -1,7 +1,7 @@
 # Document previewer
 
 ::: danger LEGACY TOOL
-The QuestPDF Previewer has been replaced by the [Companion App](/companion/usage), introduced in version 2024.10.
+The QuestPDF Previewer has been replaced by the [Companion App](/companion/usage.md), introduced in version 2024.10.
 
 This page is kept for users of older library versions. If you are using QuestPDF 2024.10 or newer, please use the Companion App instead — the Previewer is no longer maintained and does not support features added since 2024.10.
 

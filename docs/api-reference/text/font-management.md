@@ -127,7 +127,7 @@ Document.Create(document =>
 });
 ```
 
-Learn more in the [font fallback](/api-reference/text/text-style#font-fallback) section.
+Learn more in the [font fallback](/api-reference/text/text-style.md#font-fallback) section.
 
 
 ## Missing font families

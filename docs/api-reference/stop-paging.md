@@ -9,7 +9,7 @@ Renders the element exclusively on the first page.
 Any portion of the element that doesn't fit is omitted.
 
 ::: tip
-If your goal is to limit the content to a specific area, please consider using other approaches: [Text Clamp Lines](/api-reference/text/paragraph-style#clamp-line-with-ellipsis) and [Scale to Fit](/api-reference/scale-to-fit).
+If your goal is to limit the content to a specific area, please consider using other approaches: [Text Clamp Lines](/api-reference/text/paragraph-style.md#clamp-line-with-ellipsis) and [Scale to Fit](/api-reference/scale-to-fit.md).
 :::
 
 ## Example
