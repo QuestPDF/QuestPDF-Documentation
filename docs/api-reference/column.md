@@ -53,10 +53,10 @@ container
 
 <br>
 
-Optionally, you can specify the unit value (default is `Unit.Points`).
+Optionally, you can specify the unit value (default is `Unit.Point`).
 
 ```csharp
-column.Spacing(5, Unit.Millimeters);
+column.Spacing(5, Unit.Millimetre);
 ```
 
 <!--@include: tip-unit.md--> 

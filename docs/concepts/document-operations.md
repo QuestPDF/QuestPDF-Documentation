@@ -121,7 +121,7 @@ A simple overlay example:
 ```csharp
 DocumentOperation
     .LoadFile("input.pdf")
-    .OverlayFile(new LayerConfiguration
+    .OverlayFile(new DocumentOperation.LayerConfiguration
     {
         FilePath = "watermark.pdf"
     })
@@ -133,7 +133,7 @@ More complex overlay example with specific page selections:
 ```csharp
 DocumentOperation
     .LoadFile("input.pdf")
-    .OverlayFile(new LayerConfiguration
+    .OverlayFile(new DocumentOperation.LayerConfiguration
     {
         FilePath = "watermak.pdf",
         TargetPages = "1-z",           // Apply to all pages
@@ -171,7 +171,7 @@ Starting with the 2026.7.2 version, the `AllowModification` permission is also s
 ```csharp
 DocumentOperation
     .LoadFile("input.pdf")
-    .Encrypt(new Encryption40Bit
+    .Encrypt(new DocumentOperation.Encryption40Bit
     {
         UserPassword = "user123",
         OwnerPassword = "owner456",
@@ -188,7 +188,7 @@ DocumentOperation
 ```csharp
 DocumentOperation
     .LoadFile("input.pdf")
-    .Encrypt(new Encryption128Bit
+    .Encrypt(new DocumentOperation.Encryption128Bit
     {
         UserPassword = "user123",
         OwnerPassword = "owner456",
@@ -208,7 +208,7 @@ DocumentOperation
 ```csharp
 DocumentOperation
     .LoadFile("input.pdf")
-    .Encrypt(new Encryption256Bit
+    .Encrypt(new DocumentOperation.Encryption256Bit
     {
         UserPassword = "user123",
         OwnerPassword = "owner456",
@@ -245,7 +245,7 @@ A simple attachment example:
 ```csharp
 DocumentOperation
     .LoadFile("input.pdf")
-    .AddAttachment(new DocumentAttachment
+    .AddAttachment(new DocumentOperation.DocumentAttachment
     {
         FilePath = "data.csv",
         Description = "Supporting data table",
@@ -286,12 +286,12 @@ The PDF/A-3b standard requires that all attachments provide more information abo
 ```csharp
 DocumentOperation
     .LoadFile("input.pdf")
-    .AddAttachment(new DocumentAttachment
+    .AddAttachment(new DocumentOperation.DocumentAttachment
     {
         FilePath = "invoice-data.xml",
         Description = "Invoice XML data",
         MimeType = "application/xml",
-        Relationship = DocumentAttachmentRelationship.Alternative,
+        Relationship = DocumentOperation.DocumentAttachmentRelationship.Alternative,
         CreationDate = DateTime.UtcNow,
         ModificationDate = DateTime.UtcNow,
         Replace = true
@@ -319,7 +319,7 @@ Document
       page.Content().Text("Your invoice content");
     });
   })
-  .WithSettings(new DocumentSettings() { PdfA = true }) // important
+  .WithSettings(new DocumentSettings() { PDFA_Conformance = PDFA_Conformance.PDFA_3B }) // important
   .GeneratePdf(path);
 
 // step 2: extend the metadata of the PDF document
@@ -342,17 +342,17 @@ DocumentOperation
     .LoadFile("input.pdf")
     .TakePages("1-10")                 // Select first 10 pages
     .MergeFile("appendix.pdf", "1-z")  // Append all pages from appendix
-    .OverlayFile(new LayerConfiguration
+    .OverlayFile(new DocumentOperation.LayerConfiguration
     {
         FilePath = "watermark.pdf",
         TargetPages = "1-z"
     })
-    .AddAttachment(new DocumentAttachment
+    .AddAttachment(new DocumentOperation.DocumentAttachment
     {
         FilePath = "metadata.xml",
-        Relationship = DocumentAttachmentRelationship.Supplement
+        Relationship = DocumentOperation.DocumentAttachmentRelationship.Supplement
     })
-    .Encrypt(new Encryption256Bit
+    .Encrypt(new DocumentOperation.Encryption256Bit
     {
         OwnerPassword = "owner456",
         AllowPrinting = true,

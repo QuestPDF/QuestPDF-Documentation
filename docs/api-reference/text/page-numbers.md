@@ -40,7 +40,7 @@ Document.Create(document =>
 The following methods allow you to display page numbers relative to a specific section of the document.
 
 ::: tip
-[Section](/api-reference/section) defines part of the document that can be further referenced by name, e.g. for page numbering or linking.
+[Section](/api-reference/section.md) defines part of the document that can be further referenced by name, e.g. for page numbering or linking.
 :::
 
 #### Available methods

@@ -11,7 +11,7 @@ Get real-time results without the need of code recompilation. Save time and enjo
 ![Application screenshot](/companion/application-dark.webp){.companion-screenshot .dark-only}
 
 :::info
-Read more about features availble in the Companion App in the [Features](/companion/features) section.
+Read more about features availble in the Companion App in the [Features](/companion/features.md) section.
 :::
 
 
@@ -27,7 +27,7 @@ The Companion App is available for download on Windows, macOS, and Linux.
 | Linux (.rpm, Fedora, RHEL and openSUSE)    | [Download](https://github.com/QuestPDF/QuestPDF.Companion/releases/download/2026.2.2/questpdf_companion-2026.2.2-linux.rpm)    |
 
 :::info
-To access older versions of the Companion App, visit the [Download](/companion/download) section.
+To access older versions of the Companion App, visit the [Download](/companion/download.md) section.
 :::
 
 

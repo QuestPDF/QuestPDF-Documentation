@@ -78,17 +78,24 @@ Placeholders.Color();
 #### BackgroundColor example
 
 ```csharp{11}
-.Grid(grid =>
+.Column(column =>
 {
-    grid.Columns(5);
-    grid.Spacing(5);
+    column.Spacing(5);
 
-    foreach (var _ in Enumerable.Range(0, 25))
+    foreach (var rowNumber in Enumerable.Range(0, 5))
     {
-        grid.Item()
-            .Height(50)
-            .Width(50)
-            .Background(Placeholders.BackgroundColor());
+        column.Item().Row(row =>
+        {
+            row.Spacing(5);
+
+            foreach (var columnNumber in Enumerable.Range(0, 5))
+            {
+                row.RelativeItem()
+                    .Height(50)
+                    .Width(50)
+                    .Background(Placeholders.BackgroundColor());
+            }
+        });
     }
 });
 ```

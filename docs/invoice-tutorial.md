@@ -11,7 +11,7 @@ By the end, you'll have a fully functional, paginated invoice generator that loo
 ![invoice](/getting-started/invoice.webp)
 
 ::: tip INSTALLATION
-Before starting this tutorial, please familiarize yourself with [the Quick Start tutorial](/quick-start).
+Before starting this tutorial, please familiarize yourself with [the Quick Start tutorial](/quick-start.md).
 It will guide you through the installation process and provide a basic understanding of the library's architecture.
 :::
 

@@ -17,15 +17,15 @@ You can specify text and color to better distinguish between various debug eleme
 
 ```csharp{2}
 container
-    .Debug("Grid example", Colors.Blue.Medium)
+    .DebugArea("Grid example", Colors.Blue.Medium)
     // content
 ```
 
 It is also possible to skip the color (it is red by default), and even the label:
 
 ```csharp
-.Debug("Grid example")
-.Debug()
+.DebugArea("Grid example")
+.DebugArea()
 ```
 
 <!--@include: tip-color.md--> 
@@ -38,13 +38,20 @@ container
     .Height(250)
     .Padding(25)
     .DebugArea("Grid example", Colors.Blue.Medium)
-    .Grid(grid =>
+    .Column(column =>
     {
-        grid.Columns(3);
-        grid.Spacing(5);
+        column.Spacing(5);
 
-        foreach (var _ in Enumerable.Range(0, 8))
-            grid.Item().Height(50).Placeholder();
+        foreach (var _ in Enumerable.Range(0, 3))
+        {
+            column.Item().Row(row =>
+            {
+                row.Spacing(5);
+
+                foreach (var _ in Enumerable.Range(0, 3))
+                    row.RelativeItem().Height(50).Placeholder();
+            });
+        }
     });
 ```
 

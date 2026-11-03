@@ -11,7 +11,7 @@ Ensure that the enclosed content fits within a single page to avoid errors.
 :::
 
 ::: tip
-Please consider using a less-strict alternative, [EnsureSpace](/api-reference/ensure-space), if you want to maintain visual consistency without enforcing a hard page constraint.
+Please consider using a less-strict alternative, [EnsureSpace](/api-reference/ensure-space.md), if you want to maintain visual consistency without enforcing a hard page constraint.
 :::
 
 

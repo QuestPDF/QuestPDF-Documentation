@@ -139,5 +139,5 @@ Hyperlink is a clickable text that redirects the user to a specific webpage.
 ```
 
 <object data="/api-reference/text-hyperlink.pdf" type="application/pdf" class="pdf-viewer">
-  <p>Unable to display PDF file. <a href="/api-reference/document-merge-continuous.pdf">Download</a> instead.</p>
+  <p>Unable to display PDF file. <a href="/api-reference/text-hyperlink.pdf">Download</a> instead.</p>
 </object>

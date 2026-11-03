@@ -121,7 +121,7 @@ using ZXing.Rendering;
             var writer = new QRCodeWriter();
             var qrCode = writer.encode(url, BarcodeFormat.QR_CODE, (int)size.Width, (int)size.Height);
             var renderer = new SvgRenderer { FontName = "Lato" };
-            return renderer.Render(qrCode, BarcodeFormat.EAN_13, null).Content;
+            return renderer.Render(qrCode, BarcodeFormat.QR_CODE, null).Content;
         });
 });
 ```

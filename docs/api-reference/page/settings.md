@@ -36,7 +36,7 @@ document.Page(page =>
 {
     page.Size(595, 842); // in points
     // or
-    page.Size(21, 29.7f, Unit.Centimeter);
+    page.Size(21, 29.7f, Unit.Centimetre);
     // or
     page.Size(PageSizes.A4);
 });
@@ -53,7 +53,7 @@ document.Page(page =>
 {
     page.ContinuousSize(215);
     // or
-    page.ContinuousSize(76, Unit.Millimeter);
+    page.ContinuousSize(76, Unit.Millimetre);
 });
 ```
 
@@ -116,7 +116,7 @@ You can configure each side individually or use combined methods for convenience
 document.Page(page =>
 {
     page.MarginVertical(32);
-    page.MarginHorizontal(2, Unit.Centimeter);
+    page.MarginHorizontal(2, Unit.Centimetre);
 });
 ```
 
@@ -125,7 +125,7 @@ document.Page(page =>
 
 You can apply a default text style to every text element within a page. 
 This is particularly helpful for setting consistent fonts, sizes, and colors across your document:
-[Learn more](/api-reference/text/style-inheritance)
+[Learn more](/api-reference/text/style-inheritance.md)
 
 ```csharp
 document.Page(page =>
@@ -141,7 +141,7 @@ document.Page(page =>
 
 QuestPDF supports both left-to-right (LTR) and right-to-left (RTL) layouts to accommodate languages with different reading directions.
 This option applies a global content direction to the entire page set.
-[Learn more](/api-reference/content-direction)
+[Learn more](/api-reference/content-direction.md)
 
 ```csharp
 document.Page(page =>
@@ -173,7 +173,7 @@ Document
         document.Page(page =>
         {
             page.Size(PageSizes.A5.Landscape());
-            page.Margin(2f, Unit.Centimeter);
+            page.Margin(2f, Unit.Centimetre);
     
             page.Content().AlignCenter().AlignMiddle().Text("A5 LANDSCAPE");
         });

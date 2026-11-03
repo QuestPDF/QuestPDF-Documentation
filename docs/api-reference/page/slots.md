@@ -15,34 +15,31 @@ The main slots are Header, Content, and Footer.
 
 
 ```csharp
-.Page(page =>
+document.Page(page =>
 {
-    document.Page(page =>
-    {
-        page.Size(PageSizes.A4);
-        page.Margin(2, Unit.Centimetre);
-        page.DefaultTextStyle(x => x.FontSize(24));
+    page.Size(PageSizes.A4);
+    page.Margin(2, Unit.Centimetre);
+    page.DefaultTextStyle(x => x.FontSize(24));
+
+    page.Header()
+        .Background(Colors.Grey.Lighten1)
+        .Height(125)
+        .AlignCenter()
+        .AlignMiddle()
+        .Text("Header");
     
-        page.Header()
-            .Background(Colors.Grey.Lighten1)
-            .Height(125)
-            .AlignCenter()
-            .AlignMiddle()
-            .Text("Header");
-        
-        page.Content()
-            .Background(Colors.Grey.Lighten2)
-            .AlignCenter()
-            .AlignMiddle()
-            .Text("Content");
-        
-        page.Footer()
-            .Background(Colors.Grey.Lighten1)
-            .Height(75)
-            .AlignCenter()
-            .AlignMiddle()
-            .Text("Footer");
-    });
+    page.Content()
+        .Background(Colors.Grey.Lighten2)
+        .AlignCenter()
+        .AlignMiddle()
+        .Text("Content");
+    
+    page.Footer()
+        .Background(Colors.Grey.Lighten1)
+        .Height(75)
+        .AlignCenter()
+        .AlignMiddle()
+        .Text("Footer");
 });
 ```
 

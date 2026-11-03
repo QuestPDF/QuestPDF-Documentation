@@ -46,7 +46,7 @@ Document
         Subject = "ZUGFeRD Test Document",
         Language = "en-US"
     })
-    .WithSettings(new DocumentSettings { PdfA = true }) // PDF/A-3b
+    .WithSettings(new DocumentSettings { PDFA_Conformance = PDFA_Conformance.PDFA_3B }) // PDF/A-3b
     .GeneratePdf("invoice-bbb.pdf");
 
 DocumentOperation

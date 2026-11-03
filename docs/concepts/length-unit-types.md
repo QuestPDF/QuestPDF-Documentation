@@ -14,12 +14,14 @@ Most Fluent API methods accept an optional unit parameter for specifying alterna
 | Unit                | Size             |
 |---------------------|------------------|
 | Unit.**Point**      | 1/72 inch        |
-| Unit.**Meter**      | 100 centimeters  |
-| Unit.**Inch**       | 2.54 centimeters |
-| Unit.**Centimeter** | 10 millimeters   |
+| Unit.**Inch**       | 72 points        |
 | Unit.**Feet**       | 12 inches        |
 | Unit.**Mil**        | 1/1000 inch      |
-| Unit.**Inch**       | 72 points        |
+| Unit.**Meter**      | 100 centimeters  |
+| Unit.**Centimetre** | 10 millimeters   |
+| Unit.**Millimetre** | 1/1000 meter     |
+
+Note the British spelling of the metric values: `Unit.Centimetre` and `Unit.Millimetre`.
 
 
 ## Example
@@ -33,5 +35,5 @@ using QuestPDF.Infrastructure;
 .Padding(72)
 .Padding(1, Unit.Inch)
 .Padding(1/12f, Unit.Feet)
-.Padding(1000, Unit.Mill)
+.Padding(1000, Unit.Mil)
 ```
