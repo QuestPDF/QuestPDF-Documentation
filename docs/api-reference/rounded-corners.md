@@ -26,7 +26,7 @@ container
     .Text("Container with consistently rounded corners");
 ```
 
-![example](/api-reference/rounded-corners-consistent.webp)
+![All four corners are rounded with the same radius; the thin black border and the light grey background both follow the curve.](/api-reference/rounded-corners-consistent.webp){.example}
 
 
 ## Various Corner Radius
@@ -45,7 +45,7 @@ container
     .Text("Container with rounded corners");
 ```
 
-![example](/api-reference/rounded-corners-various.webp)
+![Each corner has its own radius, from a barely rounded top-left corner to a wide curve at the bottom-left; the border and the background follow every corner.](/api-reference/rounded-corners-various.webp){.example}
 
 
 ## Image Example
@@ -58,7 +58,7 @@ container
     .Image("Resources/landscape.jpg");
 ```
 
-![example](/api-reference/rounded-corners-image.webp)
+![The photo is clipped to rounded corners, so its edges curve instead of meeting at sharp corners.](/api-reference/rounded-corners-image.webp){.example}
 
 
 ## Complex Example
@@ -112,4 +112,4 @@ container
     });
 ```
 
-![example](/api-reference/rounded-corners-complex.webp)
+![A table with a header row and five rows inside a rounded black border: the outer corners of the header and the last row are clipped to the curve, while the inner cell borders stay straight.](/api-reference/rounded-corners-complex.webp){.example}

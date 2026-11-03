@@ -25,7 +25,7 @@ It's worth noting that different fonts may render text with different visual siz
 });
 ```
 
-![example](/api-reference/text-font-size.webp)
+![Three lines of the same sentence at 16, 24 and 36 points, each one clearly larger than the last.](/api-reference/text-font-size.webp){.example}
 
 
 ## Font Family
@@ -49,7 +49,7 @@ Examples of font families include Lato, Noto Serif and JetBrains Mono. Fonts oth
 });
 ```
 
-![example](/api-reference/text-font-family.webp)
+![The same sentence in three fonts: the default sans-serif Lato, Noto Serif with serifs, and the monospaced JetBrains Mono.](/api-reference/text-font-family.webp){.example}
 
 
 ## Font Fallback
@@ -64,7 +64,7 @@ container
     .FontFamily("Lato", "Noto Sans Arabic");
 ```
 
-![example](/api-reference/text-font-fallback.webp)
+![An English sentence in Lato ends with the Arabic word البرمجة, which is drawn correctly by the fallback font instead of missing-glyph boxes.](/api-reference/text-font-fallback.webp){.example}
 
 It's also useful for displaying emojis, which are not universally supported by all fonts.
 
@@ -74,7 +74,7 @@ container
     .FontFamily("Lato", "Noto Emoji");
 ```
 
-![example](/api-reference/text-font-fallback-emoji.webp)
+![Five emojis drawn inline with the text by the fallback font; they appear as black-and-white outlines, not in colour.](/api-reference/text-font-fallback-emoji.webp){.example}
 
 ::: tip
 Rather than repeating the fallback list on every text element, configure it once in the [default text style](/api-reference/default-text-style) of the page or document.
@@ -100,7 +100,7 @@ It also influences the default color of text decorations, such as underlines.
 });
 ```
 
-![example](/api-reference/text-font-color.webp)
+![Only the words "red", "green" and "blue" take their colours; the rest of the sentence stays black.](/api-reference/text-font-color.webp){.example}
 
 
 ## Background Color
@@ -118,7 +118,7 @@ This color fills the area behind the text or other elements, enhancing contrast 
 });
 ```
 
-![example](/api-reference/text-font-background.webp)
+![Only the bold word "algorithm" has a pale yellow background that hugs the word; the rest of the sentence wraps to a second line without a background.](/api-reference/text-font-background.webp){.example}
 
 
 ## Font Weight
@@ -156,7 +156,7 @@ Please note that not all fonts support every weight. If the specified weight isn
 });
 ```
 
-![example](/api-reference/text-font-weight.webp)
+![Bold, normal, light and thin weights in one sentence; the thin word is barely visible.](/api-reference/text-font-weight.webp){.example}
 
 :::warning
 QuestPDF does not currently support fonts with variable weights.
@@ -178,7 +178,7 @@ Commonly used for emphasis or to distinguish specific words.
 });
 ```
 
-![example](/api-reference/text-font-italic.webp)
+![The word "important" is slanted while the rest of the sentence stays upright.](/api-reference/text-font-italic.webp){.example}
 
 
 ## Decorations
@@ -205,7 +205,7 @@ It is also possible to customize the decoration position:
 });
 ```
 
-![example](/api-reference/text-decoration-types.webp)
+![A red line below "underline", a green line through "strikethrough", and a blue line above "overline", as far above the tallest letters as the underline is below the baseline.](/api-reference/text-decoration-types.webp){.example}
 
 ### Styles
 
@@ -233,7 +233,7 @@ It is also possible to customize the decoration line style:
 });
 ```
 
-![example](/api-reference/text-decoration-styles.webp)
+![Five underline styles under coloured words: solid, double, wavy, dotted and dashed.](/api-reference/text-decoration-styles.webp){.example}
 
 ### Styling
 
@@ -255,7 +255,7 @@ However, these properties can be customized.
 });
 ```
 
-![example](/api-reference/text-decoration-advanced.webp)
+![A red wavy line under the misspelled word "seriuos", in a different colour from the black text.](/api-reference/text-decoration-advanced.webp){.example}
 
 
 ## Subscript
@@ -272,7 +272,7 @@ Commonly used for chemical formulas or mathematical notations
 });
 ```
 
-![example](/api-reference/text-subscript.webp)
+![The 2 in H2O is smaller and sits below the baseline.](/api-reference/text-subscript.webp){.example}
 
 
 ## Superscript
@@ -289,7 +289,7 @@ Typically used for exponents, footnotes, or ordinal indicators
 });
 ```
 
-![example](/api-reference/text-superscript.webp)
+![The 2 in E = mc2 is smaller and raised above the baseline.](/api-reference/text-superscript.webp){.example}
 
 
 ## Line Height
@@ -318,7 +318,7 @@ The added space is proportional to the text size.
 });
 ```
 
-![example](/api-reference/text-line-height.webp)
+![The same paragraph with three increasing line heights: in the tightest one the lines overlap, and in the widest one there is a full empty line between them.](/api-reference/text-line-height.webp){.example}
 
 
 ## Letter Spacing
@@ -348,7 +348,7 @@ The adjustment is proportional to the text size.
 });
 ```
 
-![example](/api-reference/text-letter-spacing.webp)
+![The same sentence with tighter, normal and wider letter spacing: tight letters touch each other, while wide spacing leaves a visible gap between every letter.](/api-reference/text-letter-spacing.webp){.example}
 
 
 ## Word Spacing
@@ -376,7 +376,7 @@ The adjustment is proportional to the text size.
 });
 ```
 
-![example](/api-reference/text-word-spacing.webp)
+![Negative word spacing removes the gaps between words, normal spacing keeps them, and positive spacing widens them.](/api-reference/text-word-spacing.webp){.example}
 
 
 ## Hyphenation
@@ -404,7 +404,7 @@ A soft hyphen is invisible and is rendered only when the line actually breaks at
 });
 ```
 
-![example](/api-reference/text-hyphenation.webp)
+![Without soft hyphens the long German words move to the next line whole; with them, the words break at the soft hyphens and a hyphen is drawn at each break.](/api-reference/text-hyphenation.webp){.example}
 
 
 ## Font Features
@@ -461,7 +461,7 @@ Let's analyze the `StandardLigatures` font feature, which replaces specific pair
 });
 ```
 
-![example](/api-reference/text-font-features.webp)
+![Without ligatures, "fl" and "fi" are separate letters; with ligatures, each pair is joined into a single glyph.](/api-reference/text-font-features.webp){.example}
 
 
 ## Break Anywhere
@@ -488,4 +488,4 @@ Without this setting, a word longer than the line is still split where it overfl
 });
 ```
 
-![example](/api-reference/text-break-anywhere.webp)
+![By default the URL breaks only after hyphens, leaving uneven lines; with BreakAnywhere every line is filled and words are split at any character, such as "api-ref" / "erence".](/api-reference/text-break-anywhere.webp){.example}

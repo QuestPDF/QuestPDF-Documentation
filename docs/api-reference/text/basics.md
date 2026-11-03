@@ -9,7 +9,7 @@ container
     .Text("Hello, World!");
 ```
 
-![example](/api-reference/text-basic.webp)
+![Without any styling, the text uses the default style: "Sample text" in regular black letters.](/api-reference/text-basic.webp){.example}
 
 ## Customization
 
@@ -42,7 +42,7 @@ The `Text` method returns a descriptor that allows further customization of the 
 });
 ```
 
-![example](/api-reference/text-basic-descriptor.webp)
+![Three grey boxes: the first text is blue, the second is bold and underlined, and the third is smaller and centred in its box.](/api-reference/text-basic-descriptor.webp){.example}
 
 
 ## Rich text formatting
@@ -65,7 +65,7 @@ container
     });
 ```
 
-![example](/api-reference/text-rich.webp)
+![One sentence with mixed formatting: "chemical formula" is underlined, "sulfuric acid" has a yellow highlight, and the 2 and 4 in H2SO4 are subscript.](/api-reference/text-rich.webp){.example}
 
 
 ## Typography pattern
