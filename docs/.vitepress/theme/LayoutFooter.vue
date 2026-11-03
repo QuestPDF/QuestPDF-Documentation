@@ -27,7 +27,6 @@ const columns: FooterColumn[] = [
       { label: "Quick start", href: "/quick-start.html" },
       { label: "Invoice tutorial", href: "/invoice-tutorial.html" },
       { label: "Features overview", href: "/features-overview.html" },
-      { label: "Sample gallery", href: "/sample-gallery.html" },
       { label: "Companion app", href: "/companion/usage.html" },
     ]
   },
