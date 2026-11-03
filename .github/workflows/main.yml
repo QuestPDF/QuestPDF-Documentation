@@ -25,6 +25,8 @@ jobs:
           cache: npm
 
       - name: Install dependencies
+        env:
+          FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
         run: npm ci
 
       - name: Build
