@@ -136,13 +136,17 @@ html:not(.dark) .benefits li {
   height: 2.5rem;
   margin-block: -0.375rem;
   border-radius: 10px;
-  background-color: light-dark(#FFFFFF, color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent));
-  box-shadow: inset 0 0 0 1.5px light-dark(rgba(0, 98, 196, 0.32), transparent);
+  background-color: light-dark(#E0F3FF, color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent));
+  box-shadow: 0 0 20px 5px light-dark(#FFFFFF, transparent);
 }
 
 .list-icon .icon {
   font-size: 1.25rem;
-  color: light-dark(#0062C4, var(--vp-c-brand-1));
+  color: light-dark(#1F6B99, var(--vp-c-brand-1));
+}
+
+html:not(.dark) .list-icon .icon {
+  font-size: 1.5rem;
 }
 
 /* each stat is a link whose parts set their own colours, so the global link hover never reaches them */
