@@ -30,21 +30,20 @@ import PricingContact from "./PricingContact.vue";
 
 .custom-page.pricing-page > .dotted-divider {
   width: calc(100% - 2 * var(--custom-page-gutter));
-  max-width: calc(var(--custom-page-width) - 2 * var(--custom-page-gutter));
+  max-width: 1040px;
   margin: 0 auto;
 }
 
 .pricing-page .content {
-  padding-top: 48px;
-  padding-bottom: 48px;
-}
-
-.pricing-page > .container:first-child .content {
   padding-top: 64px;
+  padding-bottom: 64px;
 }
 
-.pricing-page > .container:last-child .content {
-  padding-bottom: 64px;
+@media screen and (max-width: 767px) {
+  .pricing-page .content {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
 }
 
 </style>

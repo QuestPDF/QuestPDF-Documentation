@@ -8,16 +8,9 @@ import { faqCategories as categories } from "./faq";
 
 <template>
   <article class="content">
-    <div class="section-header">
-      <h2>Frequently Asked Questions</h2>
-    </div>
-
     <div class="faq-categories">
       <section v-for="category of categories" :key="category.title" class="faq-category">
-        <div class="faq-category-header">
-          <h3 class="faq-category-title">{{ category.title }}</h3>
-          <p class="faq-category-description">{{ category.description }}</p>
-        </div>
+        <h2 class="faq-category-title">{{ category.title }}</h2>
 
         <div class="panel faq-list">
           <details v-for="item of category.items" :key="item.question" class="faq-item">
@@ -40,40 +33,27 @@ import { faqCategories as categories } from "./faq";
 
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 64px;
 
   width: 100%;
-  max-width: 1180px;
-  margin: 40px auto 0;
+  max-width: 860px;
+  margin: 0 auto;
 }
 
 .faq-category {
-  display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
-  gap: 56px;
-}
-
-.faq-category-header {
   display: flex;
   flex-direction: column;
-  padding-top: 22px;
-  text-align: right;
+  gap: 32px;
 }
 
 .faq-category-title {
-  line-height: 1.75rem;
-  font-weight: 700;
-}
-
-.faq-category-description {
-  margin: 6px 0 0;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  color: var(--vp-c-text-2);
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  text-align: center;
 }
 
 .faq-list {
-  align-self: start;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -152,29 +132,9 @@ html.dark .faq-item[open] {
   text-decoration: underline;
 }
 
-@media screen and (max-width: 1200px) {
-  .faq-category {
-    grid-template-columns: 220px minmax(0, 1fr);
-    gap: 40px;
-  }
-}
-
-@media screen and (max-width: 960px) {
-  .faq-category {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .faq-category-header {
-    padding: 0 32px;
-    text-align: left;
-  }
-}
-
 @media screen and (max-width: 700px) {
-  .faq-category-header {
-    padding: 0 20px;
+  .faq-categories {
+    gap: 48px;
   }
 
   .faq-question {

@@ -7,15 +7,12 @@ export interface FaqItem {
 
 export interface FaqCategory {
   title: string;
-  /* one line naming the topics the group's questions cover, shown under the title */
-  description: string;
   items: FaqItem[];
 }
 
 export const faqCategories: FaqCategory[] = [
   {
-    title: "Choosing Your License",
-    description: "Free use, growing past the limit, and evaluating before you buy.",
+    title: "Eligibility for the Free Community License",
     items: [
       {
         question: "Who qualifies for the free Community License?",
@@ -44,8 +41,7 @@ export const faqCategories: FaqCategory[] = [
     ]
   },
   {
-    title: "Professional vs Enterprise",
-    description: "Developers covered, which tier fits, and subsidiaries.",
+    title: "Choosing Between Professional & Enterprise",
     items: [
       {
         question: "How many developers does a paid license cover?",
@@ -66,8 +62,7 @@ export const faqCategories: FaqCategory[] = [
     ]
   },
   {
-    title: "Pricing & Renewals",
-    description: "What you keep, what renewal costs, cancelling, and refunds.",
+    title: "Perpetual Licenses, Renewals & Refunds",
     items: [
       {
         question: "Is this a subscription or a perpetual license?",
@@ -96,8 +91,7 @@ export const faqCategories: FaqCategory[] = [
     ]
   },
   {
-    title: "Deployment & Security",
-    description: "Servers, shipped products, build pipelines, telemetry, and audits.",
+    title: "Deployment, Distribution & Security",
     items: [
       {
         question: "Can we use QuestPDF in a SaaS, cloud, or web application?",
@@ -122,8 +116,7 @@ export const faqCategories: FaqCategory[] = [
     ]
   },
   {
-    title: "Client Work",
-    description: "Agencies, contractors, and freelancers building for a client.",
+    title: "Agencies, Freelancers & Client Projects",
     items: [
       {
         question: "We are building software for a client. Whose license covers the project?",
@@ -136,8 +129,7 @@ export const faqCategories: FaqCategory[] = [
     ]
   },
   {
-    title: "Purchasing & Legal Review",
-    description: "Invoices, tax numbers, resellers, and the legal terms.",
+    title: "Purchasing, Invoicing & Legal Terms",
     items: [
       {
         question: "Can we pay by invoice or purchase order?",
