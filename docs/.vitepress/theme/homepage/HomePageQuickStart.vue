@@ -26,10 +26,10 @@ const cards: Card[] = [
     title: "Create and review in C#",
     label: "Why write documents in C#",
     notes: [
-      { icon: faCode, text: "Write loops and conditions in plain C#, not a template language" },
-      { icon: faPuzzlePiece, text: "Build reusable components from ordinary classes and methods" },
-      { icon: faLightbulbOn, text: "Get IntelliSense, type checking and refactoring in your IDE" },
-      { icon: faCodeBranch, text: "Keep layouts in Git beside your application code" }
+      { icon: faCode, text: "Write loops and conditions in C#, not templates" },
+      { icon: faPuzzlePiece, text: "Build reusable components with classes and methods" },
+      { icon: faLightbulbOn, text: "Use IntelliSense, type checking and refactoring in IDE" },
+      { icon: faCodeBranch, text: "Track changes and easily review in version-control" }
     ]
   },
   {
@@ -37,10 +37,10 @@ const cards: Card[] = [
     title: "Develop with AI agents",
     label: "How an AI assistant helps",
     notes: [
-      { icon: faArrowRightArrowLeft, text: "Migrate legacy HTML-based reports to QuestPDF with AI" },
-      { icon: faComments, text: "Create and modify documents confidently through prompts" },
-      { icon: faBolt, text: "Deliver new documents and changes significantly faster" },
-      { icon: faShieldCheck, text: "Keep every AI change type-checked and easy to review" }
+      { icon: faArrowRightArrowLeft, text: "Easily migrate legacy HTML reports to QuestPDF" },
+      { icon: faComments, text: "Create and edit documents confidently with prompts" },
+      { icon: faBolt, text: "Ship new documents and changes much faster" },
+      { icon: faShieldCheck, text: "Keep AI changes type-checked and reviewable" }
     ]
   }
 ];
@@ -361,12 +361,16 @@ html.dark .agent-card {
       radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #AB47BC 4%, transparent), transparent);
 }
 
+html.dark .quick-start-card .card-title {
+  color: color-mix(in srgb, var(--tint) 60%, var(--vp-c-text-1));
+}
+
 
 .notes {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin: 12px 0 0;
+  margin: 20px 0 0;
 }
 
 .note {
@@ -409,7 +413,18 @@ html.dark .agent-card {
   gap: 6px;
   padding: 8px 16px 8px 24px;
   border-bottom: 1px solid var(--vp-c-divider);
-  background-color: light-dark(var(--vp-c-bg), var(--vp-c-bg-alt));
+  background-color: var(--vp-c-bg);
+}
+
+/* the code's bar sits in the panel's top-left corner, so its lights start where the 32px rounding ends */
+.window > .window-header {
+  padding-left: 32px;
+}
+
+/* the title bars wear the panel's own surface; it is see-through, so the canvas and its grain go under it */
+html.dark .window-header {
+  background-color: var(--custom-page-bg);
+  background-image: var(--surface-sheen), linear-gradient(var(--surface) 0 0), var(--canvas-grain);
 }
 
 .window-body {
@@ -863,6 +878,11 @@ html.dark .agent-card {
     border-left: none;
     border-top: 1px solid var(--vp-c-divider);
     border-bottom: 1px solid var(--vp-c-divider);
+  }
+
+  /* mid-panel here, where the panel has no sheen */
+  html.dark .viewer .window-header {
+    background-image: linear-gradient(var(--surface) 0 0), var(--canvas-grain);
   }
 
   .result {

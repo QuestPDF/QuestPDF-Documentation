@@ -19,6 +19,10 @@ import {
   faTextHeight, faTextSize, faTextWidth, faToggleOn, faUnderline, faUniversalAccess, faUnlock, faUpDown,
   faUpRightAndDownLeftFromCenter, faVectorSquare, faWandMagicSparkles
 } from "@fortawesome/pro-regular-svg-icons";
+import {
+  faCode as faMenuCodeOrganization, faFileExport as faMenuDocumentGeneration, faFiles as faMenuDocumentOperations,
+  faImage as faMenuVisualContent, faScrewdriverWrench as faMenuDevelopmentTools, faTableLayout as faMenuLayout
+} from "@fortawesome/pro-light-svg-icons";
 import { faDropShadow, faRoundedCorners } from "./customIcons";
 
 export interface Feature {
@@ -33,14 +37,23 @@ export interface FeatureCategory {
   features: Feature[];
 }
 
+/* the rail of the Features Overview: chapters fold open to their categories, a section stands on its own */
 export interface FeatureChapter {
   name: string;
+  icon: IconDefinition;
   categories: FeatureCategory[];
 }
 
-export const featureChapters: FeatureChapter[] = [
+export interface FeatureSection extends FeatureCategory {
+  icon: IconDefinition;
+}
+
+export type FeatureMenuEntry = FeatureChapter | FeatureSection;
+
+export const featureMenu: FeatureMenuEntry[] = [
   {
     name: "Development tools",
+    icon: faMenuDevelopmentTools,
     categories: [
       {
         name: "Companion App",
@@ -122,6 +135,7 @@ export const featureChapters: FeatureChapter[] = [
   },
   {
     name: "Code organization",
+    icon: faMenuCodeOrganization,
     categories: [
       {
         name: "Code patterns",
@@ -214,6 +228,7 @@ export const featureChapters: FeatureChapter[] = [
   },
   {
     name: "Layout",
+    icon: faMenuLayout,
     categories: [
       {
         name: "Page setup",
@@ -476,7 +491,8 @@ export const featureChapters: FeatureChapter[] = [
     ]
   },
   {
-    name: "Text",
+    name: "Visual content",
+    icon: faMenuVisualContent,
     categories: [
       {
         name: "Text basics",
@@ -671,12 +687,7 @@ export const featureChapters: FeatureChapter[] = [
             link: "/api-reference/text/font-management.html#missing-text-glyphs"
           }
         ]
-      }
-    ]
-  },
-  {
-    name: "Visual content",
-    categories: [
+      },
       {
         name: "Styling",
         features: [
@@ -791,107 +802,104 @@ export const featureChapters: FeatureChapter[] = [
     ]
   },
   {
-    name: "Document output",
-    categories: [
+    name: "Document generation",
+    icon: faMenuDocumentGeneration,
+    features: [
       {
-        name: "Document generation",
-        features: [
-          {
-            name: "Output formats",
-            description: "Generate PDF, SVG, or raster images (PNG, JPEG, WEBP). Save to file, stream, or byte array for flexible integration.",
-            icon: faFileExport,
-            link: "/concepts/generating-output.html"
-          },
-          {
-            name: "Document metadata",
-            description: "Set PDF properties like title, author, subject, keywords, and timestamps. Improve document organization and searchability.",
-            icon: faIdCard,
-            link: "/concepts/document-metadata.html"
-          },
-          {
-            name: "Document settings",
-            description: "Configure PDF/A archival and PDF/UA accessibility compliance. Control compression, image quality, DPI, and content direction.",
-            icon: faSliders,
-            link: "/concepts/document-settings.html"
-          },
-          {
-            name: "Accessibility",
-            description: "Generate inclusive PDFs with PDF/UA compliance and tagged content. Enable screen reader support with proper semantic structure for all users.",
-            icon: faUniversalAccess,
-            link: "/concepts/accessibility.html"
-          },
-          {
-            name: "Hyperlinks",
-            description: "Create interactive clickable areas linking to URLs, email addresses, or phone numbers. Seamless integration with PDF reader capabilities.",
-            icon: faLink,
-            link: "/api-reference/hyperlink.html"
-          },
-          {
-            name: "Named sections",
-            description: "Define named regions for navigation and location-aware page numbering. Build table of contents and cross-references with ease.",
-            icon: faBookmark,
-            link: "/api-reference/section.html"
-          },
-          {
-            name: "Lazy generation",
-            description: "Optimize memory for large documents with deferred content generation. Ideal for data-intensive reports and enterprise-scale document processing.",
-            icon: faFeather,
-            link: "/api-reference/lazy.html"
-          }
-        ]
+        name: "Output formats",
+        description: "Generate PDF, SVG, or raster images (PNG, JPEG, WEBP). Save to file, stream, or byte array for flexible integration.",
+        icon: faFileExport,
+        link: "/concepts/generating-output.html"
       },
       {
-        name: "Document operations",
-        features: [
-          {
-            name: "Merge documents",
-            description: "Combine multiple PDF files into a single document. Merge entire documents or select specific pages from each source with full control.",
-            icon: faMerge,
-            link: "/concepts/document-operations.html#merging-documents"
-          },
-          {
-            name: "Extract pages",
-            description: "Select specific pages using flexible range syntax. Extract, reorder, reverse, or filter pages with powerful selection patterns.",
-            icon: faScissors,
-            link: "/concepts/document-operations.html#page-selection"
-          },
-          {
-            name: "Overlays and watermarks",
-            description: "Apply watermarks, headers, footers, or letterhead by layering PDF content. Configure which pages receive overlays with precise control.",
-            icon: faStamp,
-            link: "/concepts/document-operations.html#overlays-and-underlays"
-          },
-          {
-            name: "Encryption",
-            description: "Secure PDFs with 40-bit, 128-bit, or 256-bit encryption. Set user/owner passwords and control permissions for printing, copying, and editing.",
-            icon: faLock,
-            link: "/concepts/document-operations.html#document-encryption"
-          },
-          {
-            name: "Decryption",
-            description: "Remove encryption and security restrictions from password-protected PDFs. Access content for further processing or distribution.",
-            icon: faUnlock,
-            link: "/concepts/document-operations.html#document-decryption"
-          },
-          {
-            name: "Linearization",
-            description: "Optimize PDFs for web delivery. Linearized files allow viewers to display content before the entire file downloads, improving user experience.",
-            icon: faGlobe,
-            link: "/concepts/document-operations.html#document-linearization"
-          },
-          {
-            name: "Attachments",
-            description: "Embed files directly within PDFs with full PDF/A compliance. Support for all embedded file relationships.",
-            icon: faPaperclip,
-            link: "/concepts/document-operations.html#file-attachments"
-          },
-          {
-            name: "XMP metadata",
-            description: "Add custom XMP metadata to PDF/A documents. Essential for industry standards like ZUGFeRD invoices and other compliance requirements.",
-            icon: faTags,
-            link: "/concepts/document-operations.html#xmp-metadata-extension"
-          }
-        ]
+        name: "Document metadata",
+        description: "Set PDF properties like title, author, subject, keywords, and timestamps. Improve document organization and searchability.",
+        icon: faIdCard,
+        link: "/concepts/document-metadata.html"
+      },
+      {
+        name: "Document settings",
+        description: "Configure PDF/A archival and PDF/UA accessibility compliance. Control compression, image quality, DPI, and content direction.",
+        icon: faSliders,
+        link: "/concepts/document-settings.html"
+      },
+      {
+        name: "Accessibility",
+        description: "Generate inclusive PDFs with PDF/UA compliance and tagged content. Enable screen reader support with proper semantic structure for all users.",
+        icon: faUniversalAccess,
+        link: "/concepts/accessibility.html"
+      },
+      {
+        name: "Hyperlinks",
+        description: "Create interactive clickable areas linking to URLs, email addresses, or phone numbers. Seamless integration with PDF reader capabilities.",
+        icon: faLink,
+        link: "/api-reference/hyperlink.html"
+      },
+      {
+        name: "Named sections",
+        description: "Define named regions for navigation and location-aware page numbering. Build table of contents and cross-references with ease.",
+        icon: faBookmark,
+        link: "/api-reference/section.html"
+      },
+      {
+        name: "Lazy generation",
+        description: "Optimize memory for large documents with deferred content generation. Ideal for data-intensive reports and enterprise-scale document processing.",
+        icon: faFeather,
+        link: "/api-reference/lazy.html"
+      }
+    ]
+  },
+  {
+    name: "Document operations",
+    icon: faMenuDocumentOperations,
+    features: [
+      {
+        name: "Merge documents",
+        description: "Combine multiple PDF files into a single document. Merge entire documents or select specific pages from each source with full control.",
+        icon: faMerge,
+        link: "/concepts/document-operations.html#merging-documents"
+      },
+      {
+        name: "Extract pages",
+        description: "Select specific pages using flexible range syntax. Extract, reorder, reverse, or filter pages with powerful selection patterns.",
+        icon: faScissors,
+        link: "/concepts/document-operations.html#page-selection"
+      },
+      {
+        name: "Overlays and watermarks",
+        description: "Apply watermarks, headers, footers, or letterhead by layering PDF content. Configure which pages receive overlays with precise control.",
+        icon: faStamp,
+        link: "/concepts/document-operations.html#overlays-and-underlays"
+      },
+      {
+        name: "Encryption",
+        description: "Secure PDFs with 40-bit, 128-bit, or 256-bit encryption. Set user/owner passwords and control permissions for printing, copying, and editing.",
+        icon: faLock,
+        link: "/concepts/document-operations.html#document-encryption"
+      },
+      {
+        name: "Decryption",
+        description: "Remove encryption and security restrictions from password-protected PDFs. Access content for further processing or distribution.",
+        icon: faUnlock,
+        link: "/concepts/document-operations.html#document-decryption"
+      },
+      {
+        name: "Linearization",
+        description: "Optimize PDFs for web delivery. Linearized files allow viewers to display content before the entire file downloads, improving user experience.",
+        icon: faGlobe,
+        link: "/concepts/document-operations.html#document-linearization"
+      },
+      {
+        name: "Attachments",
+        description: "Embed files directly within PDFs with full PDF/A compliance. Support for all embedded file relationships.",
+        icon: faPaperclip,
+        link: "/concepts/document-operations.html#file-attachments"
+      },
+      {
+        name: "XMP metadata",
+        description: "Add custom XMP metadata to PDF/A documents. Essential for industry standards like ZUGFeRD invoices and other compliance requirements.",
+        icon: faTags,
+        link: "/concepts/document-operations.html#xmp-metadata-extension"
       }
     ]
   }

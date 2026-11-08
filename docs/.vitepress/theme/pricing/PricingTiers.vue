@@ -65,16 +65,16 @@ interface License {
 
 const CommunityLicense: License = {
   name: "community",
-  description: "For individuals, FOSS-compatible projects, charities, academic institutions, and businesses <b>under</b> 1M&nbsp;USD annual gross revenue",
+  description: "Free for individuals, open-source projects, nonprofits, academic institutions, and businesses under $1M annual revenue.",
   price: null,
   paddlePriceId: null,
   details: [
-    "Full feature set — same core product as paid tiers",
+    "Full feature set, same core product as paid tiers",
     "Commercial use allowed",
     "Unlimited developers, projects, servers, and deployments",
     "Royalty-free redistribution inside your own apps",
     "No registration, license keys, or watermarks",
-    "Source-available — full source code on GitHub",
+    "Source-available, with full source code on GitHub",
     "Community support via GitHub"
   ],
   footnote: "From package install to first PDF in minutes"
@@ -82,7 +82,7 @@ const CommunityLicense: License = {
 
 const ProfessionalLicense: License = {
   name: "professional",
-  description: "For one legal entity shipping PDFs in production — every developer covered at one flat, predictable price, with no seat counting or usage fees",
+  description: "For businesses needing perpetual licensing, unlimited developers and deployments, and direct technical support.",
   price: licensePrices.professional,
   paddlePriceId: paddle.professionalLicensePriceId,
   details: [
@@ -90,17 +90,17 @@ const ProfessionalLicense: License = {
     "Unlimited developers, projects, servers, and deployments",
     "One year of feature updates, fixes, and security patches included",
     "Direct email support",
-    "Royalty-free redistribution — SaaS, desktop, on-prem; end users need no license",
+    "Royalty-free redistribution across SaaS, desktop, and on-prem apps",
     "Runs fully offline and air-gapped",
-    "Price Lock — your renewal price never increases while you renew continuously",
+    "Price Lock: your renewal price never increases while you renew continuously",
     "30-day money-back guarantee"
   ],
-  footnote: "Renews annually at today's price — cancel anytime, keep your version forever"
+  footnote: "Renews annually at today's price. Cancel anytime, keep your version forever"
 };
 
 const EnterpriseLicense: License = {
   name: "enterprise",
-  description: "For corporate groups that need affiliate-wide coverage, priority support, reduced risk, and procurement-friendly terms",
+  description: "For organizations that need affiliate-wide licensing, priority support, business continuity, and flexible procurement terms.",
   price: licensePrices.enterprise,
   paddlePriceId: paddle.enterpriseLicensePriceId,
   details: [
@@ -296,7 +296,7 @@ html.dark .license-tier .tag {
 .license-tier .tier-description {
   color: var(--vp-c-text-2);
   font-size: 1rem;
-  line-height: 1.5rem;
+  line-height: 1.625rem;
 }
 
 

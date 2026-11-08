@@ -7,7 +7,7 @@ import { faqCategories as categories } from "./faq";
 </script>
 
 <template>
-  <article class="content">
+  <article id="faq" class="content">
     <div class="faq-categories">
       <section v-for="category of categories" :key="category.title" class="faq-category">
         <h2 class="faq-category-title">{{ category.title }}</h2>

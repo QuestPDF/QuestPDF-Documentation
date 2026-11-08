@@ -158,10 +158,10 @@
 }
 
 html.dark .custom-page {
-  --surface: rgba(255, 255, 255, 0.045);
+  --surface: rgba(255, 255, 255, 0.02);
   --surface-inner: rgba(0, 0, 0, 0.4);
   --surface-edge: none;
-  --surface-rim: linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.015));
+  --surface-rim: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0.012));
   --surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0) 160px);
 }
 
@@ -211,33 +211,31 @@ html.dark .custom-page {
   isolation: isolate; /* keeps the wings (z-index: -1) above the canvas but below the content */
 }
 
+/* drawn by useDotWings (dotWings.ts), which sets --dot-wing-left/right on the page. A page whose header text reaches
+   the wings sets --dots-clear to that text's width, so the dots stay beside it, and a page whose first card or
+   divider reaches under them sets --dots-height to that card's top */
 .texture-dots::before,
 .texture-dots::after {
   content: "";
   position: absolute;
   top: 0;
-  width: 28%;
-  height: 420px;
+  width: min(28%, max(0px, (100% - var(--dots-clear, 0px)) / 2));
+  height: var(--dots-height, 420px);
   z-index: -1;
   pointer-events: none;
-  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 36%, transparent) 1px, transparent 1.5px);
-  background-size: 24px 24px;
-  background-position: center top;
 }
 
+/* the masks are anchored at the outer edge, where the dots are largest */
 .texture-dots::before {
   left: 0;
-  mask-image: radial-gradient(ellipse 55% 55% at 40% 42%, #000, transparent 100%);
+  background: var(--dot-wing-left, none) left top no-repeat;
+  mask-image: radial-gradient(ellipse 200% 85% at 0% 8%, #000 40%, transparent 100%);
 }
 
 .texture-dots::after {
   right: 0;
-  mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%);
-}
-
-html.dark .texture-dots::before,
-html.dark .texture-dots::after {
-  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #64B5F6 50%, var(--vp-c-text-1)) 16%, transparent) 1px, transparent 1.5px);
+  background: var(--dot-wing-right, none) right top no-repeat;
+  mask-image: radial-gradient(ellipse 200% 85% at 100% 8%, #000 40%, transparent 100%);
 }
 
 @media screen and (max-width: 960px) {
@@ -256,7 +254,7 @@ html.dark .texture-dots::after {
   margin: 14px 0;
   pointer-events: none;
   background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 40%, transparent) 1px, transparent 1.5px);
-  background-size: 12px 4px;
+  background-size: 20px 4px;
   background-position: center;
   mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
@@ -273,7 +271,7 @@ body:has(.custom-page) {
   --canvas-glow: color-mix(in srgb, #2196F3 32%, transparent);
   --canvas-glow-soft: color-mix(in srgb, #2196F3 12%, transparent);
   --canvas-glow-side: color-mix(in srgb, #2196F3 20%, transparent);
-  --canvas-glow-side-shape: ellipse 800px 450px at 0% 2%;
+  --canvas-glow-side-shape: ellipse 800px 450px at 0% 80px; /* px, not %: a percentage follows the page height */
   --canvas-grain: none;
 
   background-color: var(--custom-page-bg);
@@ -285,18 +283,17 @@ body:has(.custom-page) {
   background-repeat: repeat, no-repeat, no-repeat, no-repeat;
 }
 
-/* the homepage in light mode takes the side glow down the left edge; the more specific dark rule below keeps the
-   corner */
+/* light only: the dark rule below outranks this one */
 body:has(.home-page) {
-  --canvas-glow-side-shape: ellipse 760px 500px at 0% 780px;
-  --canvas-glow-side: color-mix(in srgb, #2196F3 11%, transparent);
+  --canvas-glow: color-mix(in srgb, #2196F3 40%, transparent);
+  --canvas-glow-soft: color-mix(in srgb, #2196F3 16%, transparent);
+  --canvas-glow-side: color-mix(in srgb, #2196F3 15%, transparent);
 }
 
 html.dark body:has(.custom-page) {
   --canvas-glow: color-mix(in srgb, #2196F3 20%, transparent);
   --canvas-glow-soft: color-mix(in srgb, #2196F3 7%, transparent);
   --canvas-glow-side: color-mix(in srgb, #2196F3 12%, transparent);
-  --canvas-glow-side-shape: ellipse 800px 450px at 0% 2%;
   /* grain only on the dark canvas */
   --canvas-grain: url("/homepage/grain-dark.png");
 }

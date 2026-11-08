@@ -171,7 +171,9 @@ onBeforeUnmount(() => timeline.cancel());
 .build {
   --tilt-y: 26deg;
   --tilt-z: -2deg;
+  --scale: 0.62;
   --lift: 56px; /* how far in front of the page a section starts */
+  min-height: 148px;
 }
 
 
@@ -184,19 +186,19 @@ onBeforeUnmount(() => timeline.cancel());
 .play-button {
   position: absolute;
   z-index: 10;
-  left: calc(50% - 22px);
-  top: calc(50% - 22px);
+  left: calc(50% - 18px);
+  top: calc(50% - 18px);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
 
   background-color: var(--accent-secondary);
   color: #FFF;
   box-shadow:
-      0 0 0 5px color-mix(in srgb, var(--accent-secondary) 22%, transparent),
+      0 0 0 4px color-mix(in srgb, var(--accent-secondary) 22%, transparent),
       0 8px 20px -4px color-mix(in srgb, var(--accent-secondary) 60%, transparent);
   transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
 }

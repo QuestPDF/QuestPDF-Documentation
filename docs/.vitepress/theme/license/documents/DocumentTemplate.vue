@@ -1,5 +1,5 @@
 <template>
-  <section class="custom-page document-page legal-page texture-dots">
+  <section ref="root" class="custom-page document-page legal-page texture-dots" :style="wingStyle">
     <div class="content">
       <header class="section-header document-header">
         <a class="document-back" href="/license">
@@ -38,13 +38,22 @@
 import { faArrowLeft } from "@fortawesome/pro-solid-svg-icons";
 import Icon from "../../Icon.vue";
 import { data } from "./licenseDocuments.data";
+import { ref } from "vue";
+import { useDotWings } from "../../dotWings";
 
 const props = defineProps<{ id: string }>();
 
 const doc = data[props.id];
+
+const root = ref<HTMLElement>();
+const wingStyle = useDotWings(root);
 </script>
 
 <style>
+
+.document-page {
+  --dots-height: 204px; /* the document card */
+}
 
 .document-page .content {
   display: flex;

@@ -1,281 +1,200 @@
 <script setup lang="ts">
-import { faArrowRight, faBoxOpen, faInfinity, faLayerGroup, faLockOpen, faRotateLeft, faTag, faUsers } from "@fortawesome/pro-regular-svg-icons";
+import {
+  faCalendarCheck, faEnvelope, faHandHoldingHeart, faInfinity, faLayerGroup, faLockOpen,
+  faTag, faUser
+} from "@fortawesome/pro-regular-svg-icons";
 import Icon from "../Icon.vue";
 import { licensePrices } from "../pricing/prices";
 
-const perYear = (price: number) => `$${price.toLocaleString("en-US")} / year`;
+const usd = (amount: number) => `$${amount.toLocaleString("en-US")}`;
 
-const tiers = [
+const halves = [
   {
-    name: "Community",
-    price: "Free",
-    description: "For individuals, FOSS projects, charities, academic institutions and businesses under $1M in annual revenue. Public-sector bodies and publicly traded companies need a paid license."
+    kind: "free",
+    lead: "",
+    amount: "Free",
+    per: "",
+    points: [
+      { icon: faUser, text: "For individuals and organisations under $1M annual revenue" },
+      { icon: faHandHoldingHeart, text: "For open-source projects, charities and academia" },
+      { icon: faLayerGroup, text: "All features, commercial use included" },
+      { icon: faLockOpen, text: "No registration, license keys or watermarks" }
+    ]
   },
   {
-    name: "Professional",
-    price: perYear(licensePrices.professional),
-    description: "For one legal entity shipping PDFs in production. Every developer covered at one flat price, with no seat counting or usage fees."
-  },
-  {
-    name: "Enterprise",
-    price: perYear(licensePrices.enterprise),
-    description: "For corporate groups that need affiliate-wide coverage, priority support, reduced risk and procurement-friendly terms."
+    kind: "paid",
+    lead: "Starting from",
+    amount: usd(licensePrices.professional),
+    per: "/ year",
+    points: [
+      { icon: faTag, text: "One flat price per company, no seat counting" },
+      { icon: faInfinity, text: "Perpetual license: keep every version received" },
+      { icon: faEnvelope, text: "Direct and priority email support" },
+      { icon: faCalendarCheck, text: "60-day evaluation period" }
+    ]
   }
-]
-
-const includes = [
-  { icon: faInfinity, text: "Perpetual license, not a subscription: keep every version you received" },
-  { icon: faLayerGroup, text: "Full feature set in every tier, including the free Community License" },
-  { icon: faUsers, text: "Unlimited developers, projects, servers and deployments" },
-  { icon: faBoxOpen, text: "Royalty-free redistribution in SaaS, desktop and on-premises apps" },
-  { icon: faLockOpen, text: "No registration, license keys, watermarks or time limits" },
-  { icon: faRotateLeft, text: "30-day money-back guarantee on every paid license" },
-  { icon: faTag, text: "Locked renewal price: it never increases while you keep renewing" }
-]
+];
 </script>
 
 <template>
   <div class="panel license-panel">
-    <div class="includes">
-      <h2 class="card-title">Fair and Sustainable License</h2>
+    <h2 class="visually-hidden">Fair and Sustainable License</h2>
 
-      <ul class="includes-list">
-        <li v-for="item of includes" :key="item.text">
-          <Icon :icon="item.icon" />
-          <span>{{ item.text }}</span>
+    <section v-for="half of halves" :key="half.kind" class="half" :class="half.kind">
+      <h3 class="card-title">
+        <a href="/pricing.html">
+          <span v-if="half.lead">{{ `${half.lead} ` }}</span>
+          <span class="amount">{{ half.amount }}<span v-if="half.per" class="per">{{ half.per }}</span></span>
+        </a>
+      </h3>
+
+      <ul class="points">
+        <li v-for="point of half.points" :key="point.text">
+          <Icon :icon="point.icon" />
+          <span>{{ point.text }}</span>
         </li>
       </ul>
+    </section>
 
-      <div class="actions">
-        <a class="action pricing-button" href="/pricing.html">View Pricing</a>
-        <a class="action" href="/license/guide.html">License Selection Guide</a>
-      </div>
-    </div>
-
-    <div class="divider" aria-hidden="true"></div>
-
-    <div class="tiers">
-      <a v-for="tier of tiers" :key="tier.name" class="tier" :class="tier.name.toLowerCase()" href="/pricing.html">
-        <span class="tier-head">
-          <span class="tier-name">{{ tier.name }}</span>
-          <span class="tier-price">
-            <span class="tier-price-text">{{ tier.price }}</span>
-            <Icon class="tier-arrow" :icon="faArrowRight" />
-          </span>
-        </span>
-        <span class="tier-description">{{ tier.description }}</span>
-      </a>
+    <div class="footer">
+      <p>Not sure which applies to you? See the <a href="/pricing.html#faq">licensing FAQ</a>.</p>
+      <a class="action primary" href="/pricing.html">View Pricing</a>
     </div>
   </div>
 </template>
 
 <style scoped>
 
+/* the halves carry the padding, like the Quick start cards, so the divider and the glows reach the panel's edges */
 .license-panel {
+  --pad-x: clamp(24px, 4.14vw - 4.95px, 48px);
+
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  gap: 48px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 0;
+  overflow: clip;
 }
 
-html.dark .license-panel {
-  background-image:
-      radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, #67B84D 7%, transparent), transparent),
-      radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #4CAF50 3%, transparent), transparent),
-      var(--surface-sheen);
-}
-
-.divider {
-  align-self: stretch;
-  width: 1px;
-  background-color: var(--vp-c-divider);
-}
-
-@media screen and (max-width: 960px) {
-  .license-panel {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 40px;
-  }
-
-  .divider {
-    width: auto;
-    height: 1px;
-  }
-}
-
-
-.includes {
+.half {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  padding: var(--panel-padding);
 }
 
-.includes-list {
+.free {
+  --tint: #2E7D32;
+}
+
+html.dark .free {
+  --tint: #81C784;
+
+  background-image:
+      radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, #67B84D 10%, transparent), transparent),
+      radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #4CAF50 4%, transparent), transparent);
+}
+
+.paid {
+  --tint: #0277BD;
+
+  border-left: 1px solid var(--vp-c-divider);
+}
+
+html.dark .paid {
+  --tint: #80C8FF;
+
+  background-image:
+      radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, #64B5F6 10%, transparent), transparent),
+      radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #29B6F6 4%, transparent), transparent);
+}
+
+.half .card-title {
+  font-variant-numeric: tabular-nums;
+}
+
+html.dark .half .card-title {
+  color: color-mix(in srgb, var(--tint) 60%, var(--vp-c-text-1));
+}
+
+.card-title a {
+  color: inherit;
+  border-radius: 4px;
+}
+
+.card-title a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.card-title a:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 4px;
+}
+
+.amount {
+  white-space: nowrap;
+}
+
+.per {
+  margin-left: 0.3em;
+}
+
+.points {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  flex-grow: 1;
-  margin: 32px 0 0;
+  margin-top: 20px;
 }
 
-.includes-list li {
+.points li {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
-  min-height: 36px;
+  padding: 6px 0;
   font-weight: 500;
   color: var(--vp-c-text-1);
 }
 
-.includes-list .icon {
+.points .icon {
   flex-shrink: 0;
   width: 18px;
+  margin-top: 0.25rem;
   font-size: 1rem;
-  color: light-dark(#38A83E, #6ECF73);
+  color: var(--tint);
 }
 
-@media screen and (max-width: 700px) {
-  .includes-list li {
-    align-items: flex-start;
-    min-height: 0;
-    padding: 6px 0;
-  }
-
-  .includes-list .icon {
-    margin-top: 0.25rem;
-  }
-}
-
-.actions {
+.footer {
+  grid-column: 1 / -1;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 32px;
-}
-
-
-/* Tiers */
-
-.tiers {
-  display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
-  gap: 40px;
-}
-
-.tier {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  border-radius: 4px;
-}
-
-.tier:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: 6px;
-}
-
-.tier-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 14px;
-}
-
-.tier-name {
-  padding: 7px 14px;
-  border-radius: 10px;
-  background-color: var(--surface-inner);
-
-  font-size: 0.9375rem;
-  line-height: 1.25rem;
-  font-weight: 600;
+  gap: 16px 32px;
+  padding: 24px var(--pad-x);
+  border-top: 1px solid var(--vp-c-divider);
   color: var(--vp-c-text-2);
 }
 
-.tier.community .tier-name {
-  color: light-dark(#2E7D32, #A5D6A7);
-  background-color: #67B84D33;
-}
-
-.tier.professional .tier-name {
-  color: white;
-  background-color: light-dark(#2196F3, #1976D2);
-}
-
-.tier.enterprise .tier-name {
-  color: light-dark(white, #212121);
-  background-color: light-dark(#212121, #EEEEEE);
-}
-
-.tier-price {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1rem;
-  line-height: 1.5rem;
+.footer p a {
   font-weight: 600;
-  color: var(--vp-c-text-1);
-  white-space: nowrap;
+  color: var(--vp-c-brand-1);
 }
 
-.tier-price-text {
-  text-decoration: underline transparent;
-  text-decoration-thickness: 1px;
+.footer p a:hover {
+  text-decoration: underline;
   text-underline-offset: 3px;
-  transition: text-decoration-color 0.2s;
 }
 
-.tier:is(:hover, :focus-visible) .tier-price-text {
-  text-decoration-color: currentColor;
-}
-
-.tier-arrow {
-  font-size: 1rem;
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: opacity 0.2s, transform 0.25s ease;
-}
-
-.tier:is(:hover, :focus-visible) .tier-arrow {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.tier-description {
-  font-size: 1rem;
-  line-height: 1.75rem;
-  color: var(--vp-c-text-2);
-}
-
-/* a touch screen never hovers, so there the cues show at rest */
-@media (hover: none) {
-  .tier-price-text {
-    text-decoration-color: currentColor;
+@media screen and (max-width: 760px) {
+  .license-panel {
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .tier-arrow {
-    opacity: 1;
-    transform: none;
+  .paid {
+    border-left: none;
+    border-top: 1px solid var(--vp-c-divider);
   }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .tier:is(:hover, :focus-visible) .tier-arrow {
-    transform: none;
-  }
-}
-
-
-/* two steps deeper than the list's green, so the white label passes AA */
-.action.pricing-button {
-  --fill: #2E7D32;
-
-  color: #FFF;
-  background-color: var(--fill);
-  box-shadow: var(--filled-edge);
-}
-
-.action.pricing-button:hover {
-  background-color: light-dark(#1B5E20, #388E3C);
 }
 
 </style>

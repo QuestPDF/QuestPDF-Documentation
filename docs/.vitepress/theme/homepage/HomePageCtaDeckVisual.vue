@@ -299,12 +299,13 @@ onBeforeUnmount(() => timeline.cancel());
 .deck {
   --tilt-y: -26deg;
   --tilt-z: 2deg;
-  --scale: 0.68;
-  --shift: -12px;
+  --scale: 0.58;
+  --shift: -10px;
   --dx: 4px;
   --dy: -4px;
   --dz: 14px;
   --ink-strong: #5A6472;
+  min-height: 148px;
 }
 
 .stage {
@@ -424,6 +425,7 @@ onBeforeUnmount(() => timeline.cancel());
   --tilt-x: 6deg;
   --tilt-y: -16deg;
   --tilt-z: 1deg;
+  --shift: -1px; /* the fanned pile reaches further right, so the whole pile stays centred */
   --rise: -4px;
   --dx: 7px;
   --dy: -6px;

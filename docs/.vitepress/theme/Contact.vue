@@ -3,6 +3,9 @@ import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
 import { faCreditCard, faEnvelope, faIdCard, faUserGroup } from "@fortawesome/pro-regular-svg-icons";
 import { faHeart } from "@fortawesome/pro-solid-svg-icons";
 import Icon from "./Icon.vue";
+import { ref } from "vue";
+import { useDotWings } from "./dotWings";
+
 interface Link {
   href: string;
   label: string;
@@ -65,10 +68,13 @@ const contacts: ContactInformation[] = [
     ]
   }
 ]
+
+const root = ref<HTMLElement>();
+const wingStyle = useDotWings(root);
 </script>
 
 <template>
-  <div class="custom-page contact-page texture-dots">
+  <div ref="root" class="custom-page contact-page texture-dots" :style="wingStyle">
     <div class="content">
       <header class="section-header contact-header">
         <h1>Contact us</h1>
@@ -125,6 +131,10 @@ const contacts: ContactInformation[] = [
 </template>
 
 <style scoped>
+
+.contact-page {
+  --dots-height: 196px; /* the contact cards */
+}
 
 .contact-header {
   margin-bottom: 48px;

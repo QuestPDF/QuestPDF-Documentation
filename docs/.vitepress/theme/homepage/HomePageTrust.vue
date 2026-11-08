@@ -1,102 +1,106 @@
 <script setup lang="ts">
 import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
-import { faArrowRight } from "@fortawesome/pro-regular-svg-icons";
-import { faApple, faAws, faDocker, faLinux, faMicrosoft, faWindows } from "@fortawesome/free-brands-svg-icons";
+import { faBoxArchive, faCloud, faCode, faDesktop, faReceipt, faShieldHalved, faUniversalAccess } from "@fortawesome/pro-regular-svg-icons";
 import Icon from "../Icon.vue";
+import HomePageSeal from "./HomePageSeal.vue";
 
-interface StandardsCategory {
-  title: string;
-  levels: string[];
+/* each standard says what it is for; wording stays at "for", never "complies with the law" */
+interface Standard {
+  name: string;
+  purpose: string;
+  icon: IconDefinition;
 }
 
-const standards : StandardsCategory[] = [
+const standards : Standard[] = [
   {
-    title: "Archiving",
-    levels: ["PDF/A-2b", "PDF/A-2u", "PDF/A-2a", "PDF/A-3b", "PDF/A-3u", "PDF/A-3a"]
+    name: "PDF/A",
+    purpose: "long-term document archiving",
+    icon: faBoxArchive
   },
   {
-    title: "Accessibility",
-    levels: ["PDF/UA-1"]
+    name: "PDF/UA",
+    purpose: "accessible, screen-reader-friendly PDFs",
+    icon: faUniversalAccess
   },
   {
-    title: "E-invoicing",
-    levels: ["EN 16931", "ZUGFeRD", "Factur-X"]
+    name: "Factur-X / ZUGFeRD",
+    purpose: "electronic invoices with embedded XML",
+    icon: faReceipt
   }
 ];
 
-interface PlatformGroup {
+interface PlatformRow {
   label: string;
-  platforms: string[];
+  values: string[];
+  icon: IconDefinition;
 }
 
-const platformGroups : PlatformGroup[] = [
+const platformRows : PlatformRow[] = [
   {
     /* as the package README states them: .NET 6 and later, .NET Framework 4.6.2 and later; Native AOT as
        listed under "Recently delivered" on the roadmap */
-    label: "Runtimes",
-    platforms: [".NET 6+", ".NET Framework 4.6.2+", "Native AOT"]
+    label: "Runtime",
+    values: [".NET 6+", ".NET Framework 4.6.2+", "Native AOT"],
+    icon: faCode
   },
   {
-    label: "Operating systems",
-    platforms: ["Windows", "Linux", "macOS"]
+    label: "Operating system",
+    values: ["Windows", "Linux", "macOS"],
+    icon: faDesktop
   },
   {
-    label: "Deployment",
-    platforms: ["Docker", "Azure", "AWS"]
+    label: "Hosting",
+    values: ["Docker", "Kubernetes", "Azure", "AWS", "Google Cloud"],
+    icon: faCloud
   }
 ];
-
-/* Azure takes Microsoft's mark: Font Awesome has none for Azure */
-const platformIcons: Record<string, IconDefinition> = {
-  Windows: faWindows,
-  Linux: faLinux,
-  macOS: faApple,
-  Docker: faDocker,
-  Azure: faMicrosoft,
-  AWS: faAws
-};
 
 </script>
 
 <template>
   <div class="trust">
     <div class="panel compliance">
-      <h2 class="card-title">Industry-standard compliant output</h2>
+      <HomePageSeal class="seal" />
+
+      <h2 class="card-title">Validated, standards-compliant output</h2>
       <p class="card-description">
-        Every build is automatically validated with the independent, trusted and open-source
+        Every release is tested against
         <a href="https://verapdf.org/" target="_blank">veraPDF</a> and
-        <a href="https://www.mustangproject.org/" target="_blank">Mustang</a> validators.
+        <a href="https://www.mustangproject.org/" target="_blank">Mustang</a>,
+        the independent, open-source, industry-standard validators.
       </p>
 
-      <div class="standards">
-        <section v-for="category of standards" :key="category.title" class="standards-category">
-          <h3 class="label">{{ category.title }}</h3>
-          <div class="standards-badges">
-            <span v-for="level in category.levels" :key="level">{{ level }}</span>
-          </div>
-        </section>
-      </div>
+      <ul class="standards">
+        <li v-for="standard of standards" :key="standard.name" class="standard">
+          <Icon class="standard-icon" :icon="standard.icon" />
+          <p class="standard-text">
+            <strong class="standard-name">{{ standard.name }}</strong> for {{ standard.purpose }}
+          </p>
+        </li>
+      </ul>
     </div>
 
-    <section class="panel cells" aria-label="Enterprise-grade foundations">
-      <a href="/security-policy" class="cell fact">
-        <span class="label">
-          <span class="label-text">Data privacy</span>
-          <Icon class="fact-arrow" :icon="faArrowRight" />
-        </span>
-        <span class="fact-text">No network calls, no telemetry, no license server. Works air-gapped.</span>
-      </a>
+    <section class="panel rows" aria-label="Enterprise-grade foundations">
+      <div v-for="row of platformRows" :key="row.label" class="row">
+        <Icon class="row-icon" :icon="row.icon" />
+        <div class="row-body">
+          <h3 class="label">{{ row.label }}</h3>
+          <p class="row-values">
+            <template v-for="(value, index) of row.values" :key="value">
+              <span v-if="index > 0" class="dot" aria-hidden="true">·</span>
+              <span class="value">{{ value }}</span>
+            </template>
+          </p>
+        </div>
+      </div>
 
-      <section v-for="group of platformGroups" :key="group.label" class="cell">
-        <h3 class="label">{{ group.label }}</h3>
-
-        <ul class="platforms">
-          <li v-for="platform of group.platforms" :key="platform" class="platform">
-            <Icon v-if="platformIcons[platform]" class="platform-icon" :icon="platformIcons[platform]" />
-            {{ platform }}
-          </li>
-        </ul>
-      </section>
+      <div class="row">
+        <Icon class="row-icon" :icon="faShieldHalved" />
+        <div class="row-body">
+          <h3 class="label">Data privacy</h3>
+          <p class="row-values">No network calls, no telemetry, no license server. Works air-gapped.</p>
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -117,48 +121,64 @@ const platformIcons: Record<string, IconDefinition> = {
 
 
 .label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
-  line-height: 1.25rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 1.0625rem;
+  line-height: 1.5rem;
+  font-weight: 700;
   color: var(--vp-c-text-1);
 }
 
 
+/* Compliance */
+
+.seal {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 76px;
+  height: 76px;
+  transform: rotate(-8deg);
+}
+
+.compliance .card-title,
+.compliance .card-description {
+  padding-right: 72px;
+}
+
+.compliance .card-description {
+  margin-top: 20px;
+}
+
 .standards {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px 40px;
-  margin-top: 32px;
+  flex-direction: column;
+  gap: 16px;
+  margin: 32px 0 0;
+  padding-top: 32px;
+  border-top: 1px solid var(--vp-c-divider);
 }
 
-.standards-category:first-child {
-  flex-basis: 100%;
+.standard {
+  display: grid;
+  grid-template-columns: 1rem minmax(0, 1fr);
+  gap: 1rem;
 }
 
-.standards-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
+.standard-icon {
+  margin-top: 4px;
+  font-size: 1rem;
+  color: var(--vp-c-brand-1);
 }
 
-.standards-badges > span {
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 10px;
-  line-height: 1;
-  border-radius: 8px;
-  font-size: 0.8125rem;
-  font-weight: 500;
+.standard-text {
+  font-size: 1rem;
+  line-height: 1.5rem;
   color: var(--vp-c-text-2);
-  border: 1px solid #8884;
 }
 
+.standard-name {
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+}
 
 .compliance .card-description a {
   color: var(--vp-c-text-1);
@@ -166,146 +186,69 @@ const platformIcons: Record<string, IconDefinition> = {
   text-decoration: underline;
   text-decoration-color: color-mix(in srgb, var(--vp-c-text-1) 30%, transparent);
   text-underline-offset: 3px;
-  transition: text-decoration-color 0.2s;
 }
 
 .compliance .card-description a:hover {
   text-decoration-color: var(--vp-c-text-1);
 }
 
+@media screen and (max-width: 600px) {
+  .seal {
+    top: 16px;
+    right: 16px;
+    width: 60px;
+    height: 60px;
+  }
 
-/* Cells */
-
-.cells {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: minmax(0, 1fr);
+  .compliance .card-title,
+  .compliance .card-description {
+    padding-right: 48px;
+  }
 }
 
-.cell {
-  min-width: 0;
+
+/* Rows */
+
+.rows {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 24px 32px;
+  gap: 28px;
 }
 
-.cell:nth-child(odd) {
-  padding-left: 0;
+.row {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
 }
 
-.cell:nth-child(even) {
-  padding-right: 0;
-  border-left: 1px solid var(--vp-c-divider);
+.row-icon {
+  margin-top: 3px;
+  font-size: 1.125rem;
+  text-align: center;
+  color: var(--vp-c-brand-1);
 }
 
-.cell:nth-child(-n + 2) {
-  padding-top: 0;
+.row-body {
+  min-width: 0;
 }
 
-.cell:nth-child(n + 3) {
-  padding-bottom: 0;
-  border-top: 1px solid var(--vp-c-divider);
-}
-
-/* :nth-child(n) weighs as much as the two-column rules above, so it replaces their paddings */
-@media screen and (max-width: 540px) {
-  .cells {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .cell:nth-child(n) {
-    padding: 20px 0;
-    border-left: none;
-  }
-
-  .cell:first-child {
-    padding-top: 0;
-  }
-
-  .cell:last-child {
-    padding-bottom: 0;
-  }
-
-  .cell:nth-child(n + 2) {
-    border-top: 1px solid var(--vp-c-divider);
-  }
-}
-
-.fact-text {
-  display: block;
-  margin: 6px 0 0;
+.row-values {
+  margin: 4px 0 0;
   font-size: 1rem;
   line-height: 1.5rem;
   color: var(--vp-c-text-2);
 }
 
-
-.platforms {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin: 6px 0 0;
-}
-
-.platform {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.value {
   white-space: nowrap;
 }
 
-.platform-icon {
-  flex-shrink: 0;
-  width: 24px;
-  text-align: center;
-  font-size: 1.0625rem;
-  color: var(--vp-c-text-2);
-}
-
-
-.fact {
-  border-radius: 4px;
-}
-
-.fact:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: 4px;
-}
-
-.label-text {
-  text-decoration: underline transparent;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-  transition: text-decoration-color 0.2s;
-}
-
-.fact:is(:hover, :focus-visible) .label-text {
-  text-decoration-color: currentColor;
-}
-
-.fact-arrow {
-  font-size: 1rem;
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: opacity 0.2s, transform 0.25s ease;
-}
-
-.fact:is(:hover, :focus-visible) .fact-arrow {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-/* a touch screen never hovers, so there the cues show at rest, or the link would read as plain text */
-@media (hover: none) {
-  .label-text {
-    text-decoration-color: currentColor;
-  }
-
-  .fact-arrow {
-    opacity: 1;
-    transform: none;
-  }
+.dot {
+  margin: 0 0.75em;
+  color: var(--vp-c-text-3);
 }
 
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div class="panel companion">
     <div class="companion-text">
-      <h2 class="card-title">Preview, inspect and debug</h2>
-      <p class="card-description">Add one line of code and your document opens beside your IDE. With hot-reload, every change appears in the preview at once: no recompiling, no reopening PDFs.</p>
+      <h2 class="card-title">Companion App</h2>
+      <p class="card-description">Make a change, see the result. Hot-&#8288;reload keeps the preview in sync, so every tweak is quick and effortless.</p>
 
       <ul class="points" aria-label="What the Companion App does">
         <li v-for="point of points" :key="point.text">
@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import { faBug, faChevronDown, faCode, faFolderTree, faRulerCombined } from "@fortawesome/pro-regular-svg-icons";
+import { faArrowPointer, faBug, faChevronDown, faCode, faFolderTree, faRulerCombined } from "@fortawesome/pro-regular-svg-icons";
 import { faApple, faLinux, faWindows } from "@fortawesome/free-brands-svg-icons";
 import Icon from "../Icon.vue";
 
@@ -57,10 +57,11 @@ import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 
 /* facts from docs/companion/features.md */
 const points = [
-  { icon: faFolderTree, text: "Explore and navigate the document structure" },
-  { icon: faRulerCombined, text: "Magnify details and measure distances" },
-  { icon: faCode, text: "Jump from the preview to the matching code" },
-  { icon: faBug, text: "Debug exceptions and layout issues" }
+  { icon: faFolderTree, text: "Explore the document structure" },
+  { icon: faArrowPointer, text: "Inspect any element" },
+  { icon: faRulerCombined, text: "Magnify and measure details" },
+  { icon: faCode, text: "Jump from preview to code" },
+  { icon: faBug, text: "Debug exceptions and layouts" }
 ];
 
 /* the latest release; keep in sync with docs/companion/download.md and public/companion/latest-version */
@@ -131,13 +132,17 @@ onBeforeUnmount(() => {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 480px;
   grid-template-areas: "media text";
-  gap: 48px;
+  gap: 64px;
   align-items: center;
 }
 
 .companion-text {
   grid-area: text;
   container-type: inline-size;
+}
+
+.companion .card-description {
+  text-wrap: pretty;
 }
 
 .companion-media {

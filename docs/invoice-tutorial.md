@@ -175,7 +175,7 @@ public class InvoiceDocument : IDocument
 
 Then, use the following code to generate the document:
 
-```csharp{10-12}
+```csharp{9-11}
 using System.IO;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
@@ -192,6 +192,8 @@ static void Main(string[] args)
     // document.GeneratePdf("invoice.pdf");
 }
 ```
+
+The Evaluation license is for trying the library and is not permitted in production: see [License configuration](/license/configuration.md) to choose yours.
 
 This initial scaffolding sets up basic sections. You’ll refine them in the following steps.
 
@@ -466,22 +468,3 @@ public class InvoiceDocument : IDocument
 ```
 
 ![example](/getting-started/step-5.webp)
-
-
-## License
-
-For learning and evaluation, you can use the free QuestPDF Evaluation license.
-
-```csharp
-QuestPDF.Settings.License = LicenseType.Evaluation;
-```
-
-::: warning SUSTAINABLE AND FAIR LICENSE
-By offering free access to most users and premium licenses for larger organizations, the project maintains its commitment to excellence while ensuring sustainable, long-term development for all.
-
-The library is free to use for any individual or business with less than 1 million USD annual gross revenue, or operates as a non-profit organization, or is a FOSS project.
-
-More details can be found on the [QuestPDF Pricing](/pricing) and [QuestPDF License](/license/) pages.
-:::
-
-
