@@ -41,10 +41,7 @@
       </div>
     </div>
 
-    <div class="companion-media">
-      <img src="/companion/application-light.webp" alt="QuestPDF Companion App" class="light" width="1917" height="1328" loading="lazy" />
-      <img src="/companion/application-dark.webp" alt="QuestPDF Companion App" class="dark" width="1917" height="1328" loading="lazy" />
-    </div>
+    <HomePageCompanionScreens class="companion-media" />
   </div>
 </template>
 
@@ -52,6 +49,7 @@
 import { faArrowPointer, faBug, faChevronDown, faCode, faFolderTree, faRulerCombined } from "@fortawesome/pro-regular-svg-icons";
 import { faApple, faLinux, faWindows } from "@fortawesome/free-brands-svg-icons";
 import Icon from "../Icon.vue";
+import HomePageCompanionScreens from "./HomePageCompanionScreens.vue";
 
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 
@@ -147,25 +145,6 @@ onBeforeUnmount(() => {
 
 .companion-media {
   grid-area: media;
-  aspect-ratio: 1.62;
-  overflow: hidden;
-  border-radius: 14px;
-  background-color: var(--vp-c-bg);
-  box-shadow:
-      0 0 0 1px light-dark(color-mix(in srgb, var(--vp-c-text-1) 10%, transparent), rgba(255, 255, 255, 0.08)),
-      0 16px 40px -16px light-dark(rgba(16, 24, 40, 0.22), rgba(0, 0, 0, 0.6));
-}
-
-.companion-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: left top;
-}
-
-html:not(.dark) .companion-media .dark,
-html.dark .companion-media .light {
-  display: none;
 }
 
 

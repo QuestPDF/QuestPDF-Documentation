@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
-import { faArrowRightArrowLeft, faArrowUp, faBolt, faCheck, faCode, faCodeBranch, faComments, faLightbulbOn, faPuzzlePiece, faShieldCheck } from "@fortawesome/pro-regular-svg-icons";
+import { faArrowUp, faCheck } from "@fortawesome/pro-regular-svg-icons";
 import { faSparkles } from "@fortawesome/pro-solid-svg-icons";
 import Icon from "../Icon.vue";
 import {computed, onMounted, onUnmounted, ref, watch} from "vue";
@@ -9,41 +8,6 @@ import {data as session} from "./quickStart.data";
 
 /* The quick start: a coding session (quickStart.data.ts, played by agentSession.ts) shown as code, a composer and
    the rendered page. */
-
-interface Card {
-  kind: "code-card" | "agent-card";
-  title: string;
-  label: string;
-  notes: {
-    icon: IconDefinition;
-    text: string;
-  }[];
-}
-
-const cards: Card[] = [
-  {
-    kind: "code-card",
-    title: "Create and review in C#",
-    label: "Why write documents in C#",
-    notes: [
-      { icon: faCode, text: "Write loops and conditions in C#, not templates" },
-      { icon: faPuzzlePiece, text: "Build reusable components with classes and methods" },
-      { icon: faLightbulbOn, text: "Use IntelliSense, type checking and refactoring in IDE" },
-      { icon: faCodeBranch, text: "Track changes and easily review in version-control" }
-    ]
-  },
-  {
-    kind: "agent-card",
-    title: "Develop with AI agents",
-    label: "How an AI assistant helps",
-    notes: [
-      { icon: faArrowRightArrowLeft, text: "Easily migrate legacy HTML reports to QuestPDF" },
-      { icon: faComments, text: "Create and edit documents confidently with prompts" },
-      { icon: faBolt, text: "Ship new documents and changes much faster" },
-      { icon: faShieldCheck, text: "Keep AI changes type-checked and reviewable" }
-    ]
-  }
-];
 
 const windowElement = ref<HTMLElement | null>(null);
 const { files, active, lines, promptIndex, promptText, typing, sent, working, finished, applied, zoom, scrolled, asking, countdown, paused, resetting, unfold } = useAgentSession(windowElement, session);
@@ -276,17 +240,6 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
         </div>
       </div>
     </div>
-
-    <article v-for="card of cards" :key="card.kind" class="quick-start-card" :class="card.kind">
-      <h2 class="card-title">{{ card.title }}</h2>
-
-      <ul class="notes" :aria-label="card.label">
-        <li v-for="note of card.notes" :key="note.text" class="note">
-          <Icon :icon="note.icon" />
-          <span>{{ note.text }}</span>
-        </li>
-      </ul>
-    </article>
   </div>
 </template>
 
@@ -307,11 +260,6 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
   --composer-ring-strong: color-mix(in srgb, var(--agent-accent) 30%, transparent);
   --composer-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 10px 28px -10px rgba(109, 73, 171, 0.3);
 
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-areas:
-      "window window"
-      "code agent";
   padding: 0;
   overflow: clip; /* the embedded window follows the panel's corners; clip, unlike hidden, lets the composer stick */
 }
@@ -325,77 +273,11 @@ html.dark .quick-start {
   --composer-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 10px 28px -10px rgba(0, 0, 0, 0.6);
 }
 
-.quick-start-card {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  padding: var(--panel-padding);
-}
-
-.code-card {
-  --tint: #0288D1;
-
-  grid-area: code;
-}
-
-html.dark .code-card {
-  --tint: #80C8FF;
-
-  background-image:
-      radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, #64B5F6 10%, transparent), transparent),
-      radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #29B6F6 4%, transparent), transparent);
-}
-
-.agent-card {
-  --tint: #5E35B1;
-
-  grid-area: agent;
-  border-left: 1px solid var(--vp-c-divider);
-}
-
-html.dark .agent-card {
-  --tint: #B388FF;
-
-  background-image:
-      radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, var(--agent-accent) 10%, transparent), transparent),
-      radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #AB47BC 4%, transparent), transparent);
-}
-
-html.dark .quick-start-card .card-title {
-  color: color-mix(in srgb, var(--tint) 60%, var(--vp-c-text-1));
-}
-
-
-.notes {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin: 20px 0 0;
-}
-
-.note {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 6px 0;
-  font-weight: 500;
-  color: var(--vp-c-text-1);
-}
-
-.note .icon {
-  flex-shrink: 0;
-  width: 18px;
-  margin-top: 0.25rem;
-  font-size: 1rem;
-  color: var(--tint);
-}
-
 
 /* Windows */
 
 /* the body has no box of its own here, so the page's window can reach up beside the title bar */
 .window {
-  grid-area: window;
   display: grid;
   grid-template-columns: minmax(0, 1fr) 36rem;
   grid-template-rows: auto 1fr;
@@ -403,7 +285,6 @@ html.dark .quick-start-card .card-title {
       "header viewer"
       "main viewer";
   min-width: 0;
-  border-bottom: 1px solid var(--vp-c-divider);
   background-color: var(--vp-c-bg);
 }
 
@@ -892,19 +773,6 @@ html.dark .window-header {
 }
 
 @media screen and (max-width: 760px) {
-  .quick-start {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-        "window"
-        "code"
-        "agent";
-  }
-
-  .agent-card {
-    border-left: none;
-    border-top: 1px solid var(--vp-c-divider);
-  }
-
   .window-header {
     padding: 8px 16px;
   }

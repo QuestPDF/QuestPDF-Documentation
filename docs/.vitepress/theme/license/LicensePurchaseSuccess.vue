@@ -72,12 +72,12 @@ const cards: Card[] = [
 ];
 
 const root = ref<HTMLElement>();
-const wingStyle = useDotWings(root);
+useDotWings(root);
 
 </script>
 
 <template>
-  <div ref="root" class="custom-page purchase-page texture-dots" :style="wingStyle">
+  <div ref="root" class="custom-page purchase-page texture-dots">
     <div class="content">
       <header class="section-header purchase-header">
         <div class="status-tag">

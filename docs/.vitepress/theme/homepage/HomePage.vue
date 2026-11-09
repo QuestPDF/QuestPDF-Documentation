@@ -1,5 +1,5 @@
 <template>
-  <div ref="root" class="custom-page home-page texture-dots" :style="wingStyle">
+  <div ref="root" class="custom-page home-page texture-dots">
     <HomePageHero />
 
     <div class="content sections">
@@ -57,6 +57,10 @@
 
       <div class="dotted-divider"></div>
 
+      <HomePageQuickStartCards />
+
+      <div class="dotted-divider"></div>
+
       <HomePageCompanion />
 
       <div class="dotted-divider"></div>
@@ -65,7 +69,14 @@
 
       <div class="dotted-divider"></div>
 
-      <HomePageLicense />
+      <HomePageEngine />
+
+      <div class="dotted-divider"></div>
+
+      <section class="titled-section">
+        <h2 class="section-title">Licensing and Pricing</h2>
+        <HomePageLicense />
+      </section>
     </div>
   </div>
 </template>
@@ -78,8 +89,10 @@ import HomePageCtaBuildVisual from "./HomePageCtaBuildVisual.vue";
 import HomePageCtaDeckVisual from "./HomePageCtaDeckVisual.vue";
 import HomePageStatistics from "./HomePageStatistics.vue";
 import HomePageQuickStart from "./HomePageQuickStart.vue";
+import HomePageQuickStartCards from "./HomePageQuickStartCards.vue";
 import HomePageCompanion from "./HomePageCompanion.vue";
 import HomePageTrust from "./HomePageTrust.vue";
+import HomePageEngine from "./HomePageEngine.vue";
 import HomePageLicense from "./HomePageLicense.vue";
 import { ref } from "vue";
 import { useDotWings } from "../dotWings";
@@ -88,7 +101,7 @@ import { useDotWings } from "../dotWings";
 const plannedCardsReady = false;
 
 const root = ref<HTMLElement>();
-const wingStyle = useDotWings(root);
+useDotWings(root, { animated: true });
 
 </script>
 
@@ -103,8 +116,7 @@ const wingStyle = useDotWings(root);
 
 /* below this the wings beside the hero title would be under 150px wide */
 @media screen and (max-width: 1239px) {
-  .home-page::before,
-  .home-page::after {
+  .home-page > :deep(.dot-wing) {
     display: none;
   }
 }
@@ -112,16 +124,37 @@ const wingStyle = useDotWings(root);
 .sections {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: var(--section-gap);
   padding-top: 0;
-  padding-bottom: 48px;
+  padding-bottom: var(--section-gap);
+}
+
+/* the column's gap is the only space around a divider */
+.sections .dotted-divider {
+  margin: 0;
+}
+
+.titled-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+.section-title {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--vp-c-text-1);
 }
 
 .cta-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 628px));
   justify-content: center;
-  gap: 32px;
+  gap: var(--section-gap);
 }
 
 @media screen and (max-width: 1180px) {

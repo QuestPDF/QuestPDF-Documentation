@@ -32,12 +32,12 @@ const documents = [
 ];
 
 const root = ref<HTMLElement>();
-const wingStyle = useDotWings(root);
+useDotWings(root);
 
 </script>
 
 <template>
-  <div ref="root" class="custom-page legal-page texture-dots" :style="wingStyle">
+  <div ref="root" class="custom-page legal-page texture-dots">
     <article class="content">
       <header class="section-header">
         <h1>QuestPDF Legal Terms</h1>

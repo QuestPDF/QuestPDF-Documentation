@@ -3,25 +3,28 @@
 
 import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
 import {
-  faAlignJustify, faArrowRightArrowLeft, faArrowsFromLine, faArrowsMaximize, faArrowsUpDownLeftRight, faBarsStaggered,
-  faBezierCurve, faBold, faBookFont, faBookmark, faBorderAll, faBorderOuter, faBracketsCurly, faBringFront, faBrush,
-  faBug, faChartMixed, faCircle1, faCircleExclamation, faCompress, faCrop, faCrosshairs, faCubes, faDiagramSubtask,
-  faDistributeSpacingVertical, faDownLeftAndUpRightToCenter, faDroplet, faEllipsis, faExpand, faEye, faFeather, faFile,
-  faFileCode, faFileExport, faFileSvg, faFileZipper, faFillDrip, faFont, faFontCase, faForwardStep, faFunction,
-  faGlobe, faHashtag, faHighlighter, faHorizontalRule, faHyphen, faIdCard, faImage, faImages, faIndent, faInfinity,
-  faItalic, faKerning, faLanguage, faLayerGroup, faLeftRight, faLineHeight, faLink, faLinkSimple, faList, faListOl,
-  faListTree, faLocationCrosshairs, faLocationDot, faLock, faMagnifyingGlass, faMagnifyingGlassPlus, faMapLocationDot,
+  faAlignJustify, faArrowPointer, faArrowRightArrowLeft, faArrowsFromLine, faArrowsMaximize, faArrowsUpDownLeftRight,
+  faArrowUpRightFromSquare, faBarsStaggered, faBezierCurve, faBold, faBookFont, faBookmark, faBookOpen, faBorderAll,
+  faBorderOuter, faBoxArchive, faBracketsCurly, faBringFront, faBrush, faBug, faChartMixed, faCircle1,
+  faCircleExclamation, faClipboardCheck, faClosedCaptioning, faCompress, faCrop, faCrosshairs, faCubes,
+  faDiagramSubtask, faDistributeSpacingVertical, faDownLeftAndUpRightToCenter, faDroplet, faEarthEurope, faEllipsis,
+  faExpand, faEye, faEyeSlash, faFeather, faFile, faFileCertificate, faFileCode, faFileExport, faFileSvg,
+  faFileZipper, faFillDrip, faFolderTree, faFont, faFontCase, faForwardStep, faFunction, faGlobe, faHashtag,
+  faHeading, faHighlighter, faHorizontalRule, faHyphen, faIdCard, faImage, faImages, faIndent, faInfinity, faItalic,
+  faKerning, faLanguage, faLayerGroup, faLeftRight, faLineHeight, faLink, faLinkSimple, faList, faListOl, faListTree,
+  faListUl, faLocationCrosshairs, faLocationDot, faLock, faMagnifyingGlass, faMagnifyingGlassPlus, faMapLocationDot,
   faMerge, faMountainSun, faNewspaper, faObjectGroup, faObjectsAlignCenterHorizontal, faPageBreak, faPaintbrush,
   faPalette, faPaperclip, faParagraph, faPuzzlePiece, faQrcode, faRectangleHistory, faReflectHorizontal, faRepeat,
   faRotate, faRuler, faRulerCombined, faRulerVertical, faScissors, faSitemap, faSliders, faSplit, faSquareDashed,
   faSquareDashedCirclePlus, faSquareQuestion, faSquareRing, faStamp, faStop, faSubscript, faSuperscript, faSwap,
-  faSwatchbook, faTable, faTableCellsHeader, faTableCellsMerge, faTableColumns, faTableRows, faTags, faText,
-  faTextHeight, faTextSize, faTextWidth, faToggleOn, faUnderline, faUniversalAccess, faUnlock, faUpDown,
-  faUpRightAndDownLeftFromCenter, faVectorSquare, faWandMagicSparkles
+  faSwatchbook, faTable, faTableCellsHeader, faTableCellsMerge, faTableColumns, faTableList, faTableRows, faTag,
+  faTags, faText, faTextHeight, faTextSize, faTextWidth, faToggleOn, faTriangleExclamation, faUnderline, faUnlock,
+  faUpDown, faUpRightAndDownLeftFromCenter, faVectorSquare, faWandMagicSparkles
 } from "@fortawesome/pro-regular-svg-icons";
 import {
-  faCode as faMenuCodeOrganization, faFileExport as faMenuDocumentGeneration, faFiles as faMenuDocumentOperations,
-  faImage as faMenuVisualContent, faScrewdriverWrench as faMenuDevelopmentTools, faTableLayout as faMenuLayout
+  faCode as faMenuDevelopment, faFileExport as faMenuDocumentGeneration, faFilePen as faMenuDocumentOperations,
+  faImage as faMenuVisualContent, faPlanetRinged as faMenuCompanion, faTableLayout as faMenuLayout,
+  faText as faMenuText, faUniversalAccess as faMenuAccessibility
 } from "@fortawesome/pro-light-svg-icons";
 import { faDropShadow, faRoundedCorners } from "./customIcons";
 
@@ -51,181 +54,6 @@ export interface FeatureSection extends FeatureCategory {
 export type FeatureMenuEntry = FeatureChapter | FeatureSection;
 
 export const featureMenu: FeatureMenuEntry[] = [
-  {
-    name: "Development tools",
-    icon: faMenuDevelopmentTools,
-    categories: [
-      {
-        name: "Companion App",
-        features: [
-          {
-            name: "Live preview",
-            description: "Download, install, and integrate the Companion App with your project. Enjoy real-time hot-reload preview.",
-            icon: faEye,
-            link: "/companion/usage.html"
-          },
-          {
-            name: "Magnifier",
-            description: "Zoom into any part of the page at pixel level. Inspect fine details without zooming and panning the whole preview.",
-            icon: faMagnifyingGlassPlus,
-            link: "/companion/features.html#magnifier"
-          },
-          {
-            name: "Coordinate picker",
-            description: "Read the exact position of any point or element on the page. Verify placement against your layout intent.",
-            icon: faLocationCrosshairs,
-            link: "/companion/features.html#coordinate-picker"
-          },
-          {
-            name: "Size measurement",
-            description: "Measure the width and height of visual elements, and the distance between them. Check spacing and alignment with precision.",
-            icon: faRulerCombined,
-            link: "/companion/features.html#size-measurement"
-          },
-          {
-            name: "Element inspection",
-            description: "Browse the document hierarchy and select any element. Review its configuration, position, size and every page it appears on.",
-            icon: faListTree,
-            link: "/companion/features.html#element-selection"
-          },
-          {
-            name: "Content search",
-            description: "Search the document for a phrase. Matches are highlighted in both the structure tree and the preview.",
-            icon: faMagnifyingGlass,
-            link: "/companion/features.html#content-searching"
-          },
-          {
-            name: "Jump to source code",
-            description: "Ctrl-click any area of the preview to open the code that produced it in your IDE.",
-            icon: faFileCode,
-            link: "/companion/features.html#go-to-implementation"
-          }
-        ]
-      },
-      {
-        name: "Debugging",
-        features: [
-          {
-            name: "Exception analysis",
-            description: "View detailed exception messages, stack traces, and source code context when errors occur during document generation.",
-            icon: faCircleExclamation,
-            link: "/companion/features.html#runtime-exceptions"
-          },
-          {
-            name: "Layout debugging",
-            description: "Diagnose layout problems with color-coded status indicators. Identify root causes with intelligent heuristics.",
-            icon: faBug,
-            link: "/companion/features.html#layout-issue-debugging"
-          },
-          {
-            name: "Debug outlines",
-            description: "Colored border and label overlay showing element boundaries. Visual debugging during development.",
-            icon: faVectorSquare,
-            link: "/api-reference/debug-area.html"
-          },
-          {
-            name: "Debug pointers",
-            description: "Named marker appearing in layout exception messages. Identifies problematic elements in error diagnostics.",
-            icon: faLocationDot,
-            link: "/api-reference/debug-pointer.html"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    name: "Code organization",
-    icon: faMenuCodeOrganization,
-    categories: [
-      {
-        name: "Code patterns",
-        features: [
-          {
-            name: "Execution order",
-            description: "Fluent API calls apply in the order they are chained. Learn how the order shapes the visual result.",
-            icon: faListOl,
-            link: "/concepts/code-patterns/execution-order.html"
-          },
-          {
-            name: "Document structure",
-            description: "Keep each document in one class and split its sections into well-named private methods. Modular code that stays readable as documents grow.",
-            icon: faSitemap,
-            link: "/concepts/code-patterns/document-structure.html"
-          },
-          {
-            name: "Local helpers",
-            description: "Encapsulate repeated layout logic in C# local functions, right where it is used. Clean code without single-use class members.",
-            icon: faFunction,
-            link: "/concepts/code-patterns/local-helpers.html"
-          },
-          {
-            name: "Reusable styles",
-            description: "Define shared styling once as a function and apply it to many elements. Consistent appearance with less repetition.",
-            icon: faBrush,
-            link: "/concepts/code-patterns/content-styling.html"
-          },
-          {
-            name: "Extension methods",
-            description: "Turn recurring styling and content patterns into extension methods. Reuse them across every document in your codebase.",
-            icon: faBracketsCurly,
-            link: "/concepts/code-patterns/extension-methods.html"
-          }
-        ]
-      },
-      {
-        name: "Components",
-        features: [
-          {
-            name: "Components",
-            description: "Build modular, reusable document blocks for cleaner architecture. Encapsulate layout patterns and maintain consistency across your entire codebase.",
-            icon: faPuzzlePiece,
-            link: "/concepts/code-patterns/components.html"
-          },
-          {
-            name: "Dynamic components",
-            description: "Components rendered separately on every page, with access to the page number, total page count and available space. Build progress bars or alternating layouts.",
-            icon: faCubes,
-            link: "/concepts/code-patterns/dynamic-components.html"
-          },
-          {
-            name: "Capture positions",
-            description: "Record where content lands on each page, then place other elements relative to it. Annotations, callouts and connectors.",
-            icon: faCrosshairs,
-            link: "/concepts/code-patterns/capture-content-position.html"
-          }
-        ]
-      },
-      {
-        name: "Prototyping",
-        features: [
-          {
-            name: "Placeholder text",
-            description: "Generate lorem ipsum, labels, sentences, names, emails, dates, numbers and more. Fill layouts before real data is available.",
-            icon: faWandMagicSparkles,
-            link: "/concepts/prototyping.html#text"
-          },
-          {
-            name: "Placeholder colours",
-            description: "Random colors drawn from the Material Design palette. Tell nested containers apart while prototyping.",
-            icon: faSwatchbook,
-            link: "/concepts/prototyping.html#colors"
-          },
-          {
-            name: "Placeholder images",
-            description: "Soft gradient images generated on demand. Test image placement, sizing and alignment before real assets arrive.",
-            icon: faMountainSun,
-            link: "/concepts/prototyping.html#image"
-          },
-          {
-            name: "Placeholder boxes",
-            description: "Gray rectangle with diagonal lines and optional label. Visualizes reserved space during layout prototyping.",
-            icon: faSquareDashed,
-            link: "/api-reference/placeholder.html"
-          }
-        ]
-      }
-    ]
-  },
   {
     name: "Layout",
     icon: faMenuLayout,
@@ -491,8 +319,8 @@ export const featureMenu: FeatureMenuEntry[] = [
     ]
   },
   {
-    name: "Visual content",
-    icon: faMenuVisualContent,
+    name: "Text",
+    icon: faMenuText,
     categories: [
       {
         name: "Text basics",
@@ -687,7 +515,13 @@ export const featureMenu: FeatureMenuEntry[] = [
             link: "/api-reference/text/font-management.html#missing-text-glyphs"
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    name: "Visual content",
+    icon: faMenuVisualContent,
+    categories: [
       {
         name: "Styling",
         features: [
@@ -824,10 +658,10 @@ export const featureMenu: FeatureMenuEntry[] = [
         link: "/concepts/document-settings.html"
       },
       {
-        name: "Accessibility",
-        description: "Generate inclusive PDFs with PDF/UA compliance and tagged content. Enable screen reader support with proper semantic structure for all users.",
-        icon: faUniversalAccess,
-        link: "/concepts/accessibility.html"
+        name: "PDF/A archival",
+        description: "Produce documents that meet the ISO 19005 long-term preservation standard. Files stay readable decades from now, independent of today's software.",
+        icon: faBoxArchive,
+        link: "/concepts/accessibility.html#pdf-a-archival"
       },
       {
         name: "Hyperlinks",
@@ -846,6 +680,78 @@ export const featureMenu: FeatureMenuEntry[] = [
         description: "Optimize memory for large documents with deferred content generation. Ideal for data-intensive reports and enterprise-scale document processing.",
         icon: faFeather,
         link: "/api-reference/lazy.html"
+      }
+    ]
+  },
+  {
+    name: "Accessibility",
+    icon: faMenuAccessibility,
+    features: [
+      {
+        name: "Tagged PDF",
+        description: "Embed the logical structure that screen readers and other assistive technologies rely on. Tags describe meaning the way semantic HTML elements do.",
+        icon: faTag,
+        link: "/concepts/accessibility.html#tagged-pdf"
+      },
+      {
+        name: "PDF/UA compliance",
+        description: "Generate documents that conform to the ISO 14289 standard for universal accessibility. The strongest guarantee that every reader can use the file.",
+        icon: faFileCertificate,
+        link: "/concepts/accessibility.html#pdf-ua-universal-accessibility"
+      },
+      {
+        name: "Semantic structure",
+        description: "Tag documents, parts, sections and articles so the reading order is explicit. Assistive technologies follow the same outline a sighted reader sees.",
+        icon: faFolderTree,
+        link: "/concepts/accessibility.html#document-structure"
+      },
+      {
+        name: "Headings",
+        description: "Mark headings from H1 to H6 to outline the content. PDF readers use them for navigation and to build a document outline.",
+        icon: faHeading,
+        link: "/concepts/accessibility.html#headings"
+      },
+      {
+        name: "Lists",
+        description: "Tag list items with their labels and bodies. Screen readers announce the list structure and the position of every entry.",
+        icon: faListUl,
+        link: "/concepts/accessibility.html#lists"
+      },
+      {
+        name: "Tables",
+        description: "Tag table headers, rows and cells with their scope and relationships. Readers can navigate data by column and row.",
+        icon: faTableList,
+        link: "/concepts/accessibility.html#tables"
+      },
+      {
+        name: "Table of contents",
+        description: "Mark a table of contents or an index as a navigational aid. Assistive technologies offer it as a shortcut through the document.",
+        icon: faBookOpen,
+        link: "/concepts/accessibility.html#table-of-contents"
+      },
+      {
+        name: "Alternative text",
+        description: "Describe figures, formulas and other non-text content with alternative text. The single most important step toward an accessible document.",
+        icon: faClosedCaptioning,
+        link: "/concepts/accessibility.html#illustrations-and-media"
+      },
+      {
+        name: "Content language",
+        description: "Declare the natural language of the whole document or any container. Screen readers switch to the matching pronunciation rules.",
+        icon: faEarthEurope,
+        link: "/concepts/accessibility.html#language"
+      },
+      {
+        name: "Decorative content",
+        description: "Exclude backgrounds, ornaments and helper lines from the accessibility tree. Assistive technologies skip what carries no meaning.",
+        icon: faEyeSlash,
+        link: "/concepts/accessibility.html#ignoring-content"
+      },
+      {
+        name: "Compliance checks",
+        description: "Validate the output with VeraPDF for formal PDF/A and PDF/UA conformance, and with PAC for how a screen reader experiences it.",
+        icon: faClipboardCheck,
+        link: "/concepts/accessibility.html#compliance-tools"
       }
     ]
   },
@@ -902,5 +808,198 @@ export const featureMenu: FeatureMenuEntry[] = [
         link: "/concepts/document-operations.html#xmp-metadata-extension"
       }
     ]
+  },
+  {
+    name: "Development",
+    icon: faMenuDevelopment,
+    categories: [
+      {
+        name: "Code patterns",
+        features: [
+          {
+            name: "Execution order",
+            description: "Fluent API calls apply in the order they are chained. Learn how the order shapes the visual result.",
+            icon: faListOl,
+            link: "/concepts/code-patterns/execution-order.html"
+          },
+          {
+            name: "Document structure",
+            description: "Keep each document in one class and split its sections into well-named private methods. Modular code that stays readable as documents grow.",
+            icon: faSitemap,
+            link: "/concepts/code-patterns/document-structure.html"
+          },
+          {
+            name: "Local helpers",
+            description: "Encapsulate repeated layout logic in C# local functions, right where it is used. Clean code without single-use class members.",
+            icon: faFunction,
+            link: "/concepts/code-patterns/local-helpers.html"
+          },
+          {
+            name: "Reusable styles",
+            description: "Define shared styling once as a function and apply it to many elements. Consistent appearance with less repetition.",
+            icon: faBrush,
+            link: "/concepts/code-patterns/content-styling.html"
+          },
+          {
+            name: "Extension methods",
+            description: "Turn recurring styling and content patterns into extension methods. Reuse them across every document in your codebase.",
+            icon: faBracketsCurly,
+            link: "/concepts/code-patterns/extension-methods.html"
+          }
+        ]
+      },
+      {
+        name: "Components",
+        features: [
+          {
+            name: "Components",
+            description: "Build modular, reusable document blocks for cleaner architecture. Encapsulate layout patterns and maintain consistency across your entire codebase.",
+            icon: faPuzzlePiece,
+            link: "/concepts/code-patterns/components.html"
+          },
+          {
+            name: "Dynamic components",
+            description: "Components rendered separately on every page, with access to the page number, total page count and available space. Build progress bars or alternating layouts.",
+            icon: faCubes,
+            link: "/concepts/code-patterns/dynamic-components.html"
+          },
+          {
+            name: "Capture positions",
+            description: "Record where content lands on each page, then place other elements relative to it. Annotations, callouts and connectors.",
+            icon: faCrosshairs,
+            link: "/concepts/code-patterns/capture-content-position.html"
+          }
+        ]
+      },
+      {
+        name: "Prototyping",
+        features: [
+          {
+            name: "Placeholder text",
+            description: "Generate lorem ipsum, labels, sentences, names, emails, dates, numbers and more. Fill layouts before real data is available.",
+            icon: faWandMagicSparkles,
+            link: "/concepts/prototyping.html#text"
+          },
+          {
+            name: "Placeholder colours",
+            description: "Random colors drawn from the Material Design palette. Tell nested containers apart while prototyping.",
+            icon: faSwatchbook,
+            link: "/concepts/prototyping.html#colors"
+          },
+          {
+            name: "Placeholder images",
+            description: "Soft gradient images generated on demand. Test image placement, sizing and alignment before real assets arrive.",
+            icon: faMountainSun,
+            link: "/concepts/prototyping.html#image"
+          },
+          {
+            name: "Placeholder boxes",
+            description: "Gray rectangle with diagonal lines and optional label. Visualizes reserved space during layout prototyping.",
+            icon: faSquareDashed,
+            link: "/api-reference/placeholder.html"
+          }
+        ]
+      },
+      {
+        name: "Debugging",
+        features: [
+          {
+            name: "Debug outlines",
+            description: "Colored border and label overlay showing element boundaries. Visual debugging during development.",
+            icon: faVectorSquare,
+            link: "/api-reference/debug-area.html"
+          },
+          {
+            name: "Debug pointers",
+            description: "Named marker appearing in layout exception messages. Identifies problematic elements in error diagnostics.",
+            icon: faLocationDot,
+            link: "/api-reference/debug-pointer.html"
+          },
+          {
+            name: "Layout error messages",
+            description: "When constraints cannot be met, the exception names the element most likely at fault, with its location and measurements.",
+            icon: faTriangleExclamation,
+            link: "/concepts/generating-output.html#layout-errors"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    name: "Companion App",
+    icon: faMenuCompanion,
+    features: [
+      {
+        name: "Live preview",
+        description: "Download, install, and integrate the Companion App with your project. Enjoy real-time hot-reload preview.",
+        icon: faEye,
+        link: "/companion/usage.html"
+      },
+      {
+        name: "Document hierarchy",
+        description: "Browse the document as a tree that mirrors the Fluent API calls. Expand nodes to navigate the content and select elements quickly.",
+        icon: faListTree,
+        link: "/companion/features.html#document-hierarchy"
+      },
+      {
+        name: "Element inspection",
+        description: "Select any element in the preview or the hierarchy. Review its configuration, position, size and every page it appears on.",
+        icon: faArrowPointer,
+        link: "/companion/features.html#element-selection"
+      },
+      {
+        name: "Magnifier",
+        description: "Zoom into any part of the page at pixel level. Inspect fine details without zooming and panning the whole preview.",
+        icon: faMagnifyingGlassPlus,
+        link: "/companion/features.html#magnifier"
+      },
+      {
+        name: "Coordinate picker",
+        description: "Read the exact position of any point or element on the page. Verify placement against your layout intent.",
+        icon: faLocationCrosshairs,
+        link: "/companion/features.html#coordinate-picker"
+      },
+      {
+        name: "Size measurement",
+        description: "Measure the width and height of visual elements, and the distance between them. Check spacing and alignment with precision.",
+        icon: faRulerCombined,
+        link: "/companion/features.html#size-measurement"
+      },
+      {
+        name: "Content search",
+        description: "Search the document for a phrase. Matches are highlighted in both the structure tree and the preview.",
+        icon: faMagnifyingGlass,
+        link: "/companion/features.html#content-searching"
+      },
+      {
+        name: "Document links",
+        description: "Alt-click any hyperlink or section link in the preview to follow it. Check the document's navigation without leaving the app.",
+        icon: faArrowUpRightFromSquare,
+        link: "/companion/features.html#document-links"
+      },
+      {
+        name: "Jump to source code",
+        description: "Ctrl-click any area of the preview to open the code that produced it in your IDE.",
+        icon: faFileCode,
+        link: "/companion/features.html#go-to-implementation"
+      },
+      {
+        name: "Exception analysis",
+        description: "View detailed exception messages, stack traces, and source code context when errors occur during document generation.",
+        icon: faCircleExclamation,
+        link: "/companion/features.html#runtime-exceptions"
+      },
+      {
+        name: "Layout debugging",
+        description: "Diagnose layout problems with color-coded status indicators. Identify root causes with intelligent heuristics.",
+        icon: faBug,
+        link: "/companion/features.html#layout-issue-debugging"
+      }
+    ]
   }
 ];
+
+export const isChapter = (entry: FeatureMenuEntry): entry is FeatureChapter => "categories" in entry;
+
+/* every category in rail order, chapters unfolded */
+export const featureCategories: FeatureCategory[] = featureMenu.flatMap(entry => isChapter(entry) ? entry.categories : [entry]);

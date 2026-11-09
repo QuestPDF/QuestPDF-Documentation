@@ -28,6 +28,11 @@ import { faqCategories as categories } from "./faq";
 
 <style scoped>
 
+/* #faq is a link target: keep the section padding visible under the fixed navbar */
+.content {
+  scroll-margin-top: var(--vp-nav-height);
+}
+
 .faq-categories {
   --faq-accent: light-dark(#1976D2, #2196F3);
 

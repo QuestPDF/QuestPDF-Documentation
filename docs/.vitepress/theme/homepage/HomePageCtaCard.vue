@@ -2,6 +2,7 @@
 import { faArrowRight } from "@fortawesome/pro-solid-svg-icons";
 import Icon from "../Icon.vue";
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { observeOnScreen } from "./ctaTimeline";
 
 /* `active` while hovered or keyboard-focused (a click's focus does not count: the click navigates anyway);
    `visible` while mostly on screen, tracked on devices without hover only. The visual slot gets both. */
@@ -35,8 +36,7 @@ onMounted(() => {
   if (window.matchMedia("(hover: hover)").matches)
     return;
 
-  observer = new IntersectionObserver(([entry]) => visible.value = entry.isIntersecting, { threshold: 0.6 });
-  observer.observe(card.value!);
+  observer = observeOnScreen(card.value!, onScreen => visible.value = onScreen);
 });
 
 onBeforeUnmount(() => observer?.disconnect());

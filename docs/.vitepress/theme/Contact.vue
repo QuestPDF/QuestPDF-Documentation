@@ -70,11 +70,11 @@ const contacts: ContactInformation[] = [
 ]
 
 const root = ref<HTMLElement>();
-const wingStyle = useDotWings(root);
+useDotWings(root);
 </script>
 
 <template>
-  <div ref="root" class="custom-page contact-page texture-dots" :style="wingStyle">
+  <div ref="root" class="custom-page contact-page texture-dots">
     <div class="content">
       <header class="section-header contact-header">
         <h1>Contact us</h1>

@@ -11,9 +11,7 @@ const usd = (amount: number) => `$${amount.toLocaleString("en-US")}`;
 const halves = [
   {
     kind: "free",
-    lead: "",
-    amount: "Free",
-    per: "",
+    lead: "Free license",
     points: [
       { icon: faUser, text: "For individuals and organisations under $1M annual revenue" },
       { icon: faHandHoldingHeart, text: "For open-source projects, charities and academia" },
@@ -23,7 +21,7 @@ const halves = [
   },
   {
     kind: "paid",
-    lead: "Starting from",
+    lead: "Paid license from",
     amount: usd(licensePrices.professional),
     per: "/ year",
     points: [
@@ -38,13 +36,11 @@ const halves = [
 
 <template>
   <div class="panel license-panel">
-    <h2 class="visually-hidden">Fair and Sustainable License</h2>
-
     <section v-for="half of halves" :key="half.kind" class="half" :class="half.kind">
       <h3 class="card-title">
         <a href="/pricing.html">
-          <span v-if="half.lead">{{ `${half.lead} ` }}</span>
-          <span class="amount">{{ half.amount }}<span v-if="half.per" class="per">{{ half.per }}</span></span>
+          {{ half.lead }}
+          <span v-if="half.amount" class="amount">{{ half.amount }}<span class="per">{{ half.per }}</span></span>
         </a>
       </h3>
 

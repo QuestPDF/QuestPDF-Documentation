@@ -1,5 +1,5 @@
 <template>
-  <div ref="root" class="custom-page pricing-page texture-dots" :style="wingStyle">
+  <div ref="root" class="custom-page pricing-page texture-dots">
     <div class="container">
       <pricing-tiers />
     </div>
@@ -27,7 +27,7 @@ import { ref } from "vue";
 import { useDotWings } from "../dotWings";
 
 const root = ref<HTMLElement>();
-const wingStyle = useDotWings(root);
+useDotWings(root);
 
 </script>
 

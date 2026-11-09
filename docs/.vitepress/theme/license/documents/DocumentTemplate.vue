@@ -1,5 +1,5 @@
 <template>
-  <section ref="root" class="custom-page document-page legal-page texture-dots" :style="wingStyle">
+  <section ref="root" class="custom-page document-page legal-page texture-dots">
     <div class="content">
       <header class="section-header document-header">
         <a class="document-back" href="/license">
@@ -46,7 +46,7 @@ const props = defineProps<{ id: string }>();
 const doc = data[props.id];
 
 const root = ref<HTMLElement>();
-const wingStyle = useDotWings(root);
+useDotWings(root);
 </script>
 
 <style>

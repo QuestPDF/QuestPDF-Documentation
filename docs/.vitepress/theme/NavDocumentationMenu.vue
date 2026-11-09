@@ -2,13 +2,11 @@
 import {
   faBadgeCheck,
   faBookOpenCover,
-  faGift,
-  faLayerGroup,
-  faObjectsColumn,
   faPlanetRinged,
+  faGift,
+  faObjectsColumn,
   faRocketLaunch,
-  faSignsPost,
-  faUniversalAccess
+  faSignsPost
 } from "@fortawesome/pro-light-svg-icons";
 import { useRoute } from "vitepress";
 import { VPLink } from "vitepress/theme";
@@ -20,18 +18,14 @@ const { screenMenu } = defineProps<{ menu?: boolean; screenMenu?: boolean }>();
 
 const route = useRoute();
 
-/* getting started, exploring, project news; each group is its own list, separated by a divider */
+/* learning the library, project news; each group is its own list, separated by a divider */
 const groups = [
   [
     { icon: faRocketLaunch, title: "Quick start", link: "/quick-start" },
     { icon: faBookOpenCover, title: "In-depth invoice tutorial", link: "/invoice-tutorial" },
-    { icon: faBadgeCheck, title: "License configuration", link: "/license/configuration" }
-  ],
-  [
+    { icon: faBadgeCheck, title: "License configuration", link: "/license/configuration" },
     { icon: faObjectsColumn, title: "Features overview", link: "/features-overview" },
-    { icon: faLayerGroup, title: "PDF document operations", link: "/concepts/document-operations" },
-    { icon: faUniversalAccess, title: "Accessibility", link: "/concepts/accessibility" },
-    { icon: faPlanetRinged, title: "Companion App", link: "/companion/usage" }
+    { icon: faPlanetRinged, title: "Companion app", link: "/companion/usage" }
   ],
   [
     { icon: faGift, title: "Releases", link: "https://github.com/QuestPDF/QuestPDF/releases" },
