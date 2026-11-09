@@ -1,5 +1,5 @@
 import {computed, onMounted, onUnmounted, ref, type Ref} from "vue";
-import type {Edit, QuickStartSession, Round} from "./sessionBuilder";
+import type {Box, Edit, QuickStartSession} from "./sessionBuilder";
 import {foldLines} from "./codeFolding";
 
 /* A simulated session with a coding agent that plays by itself while the window is mostly on screen. Every pause
@@ -38,6 +38,8 @@ const timing = {
   zoom: 1350,
   /* a file the agent opens comes to the front before it is edited */
   switchFile: 600,
+  /* the code scrolls to where an edit goes (HomePageQuickStart.vue, 0.6s) before it is edited */
+  scroll: 600,
   /* the lines an edit replaces turn red before the new ones arrive */
   markRemoved: 800,
   /* the room for the new lines opens */
@@ -89,16 +91,18 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
   /* how many rounds the page shows the result of */
   const applied = ref(0);
   /* the part of the page the viewer is zoomed in on, from a moment after a request is sent until another request
-     zooms elsewhere (none: the page's overview) */
-  const zoom = ref<Round["zoom"]>();
-  /* the method the code shows unfolded (none folds until the first request that names one) */
+     zooms elsewhere, and the finished document after the last one (none: the page's overview) */
+  const zoom = ref<Box>();
+  /* the page outlines what the last request changed, from the page changing until the diff is taken in */
+  const marked = ref(false);
+  /* the method the code shows unfolded (none: nothing folds) */
   const unfold = ref<string>();
   /* the next request is arriving in the composer: from it emptying until it is sent */
   const asking = ref(false);
   /* a wait the composer shows as a ring filling around the send button (the key restarts it) */
   const countdown = ref<{ key: number, ms: number }>();
   /* how many lines the code is scrolled by: a file longer than the window (session.lines) scrolls as an editor
-     does, to the method a request opens and to each line as it types in, only as far as it must */
+     does, to where an edit goes before it types in, only as far as it must */
   const scrolled = ref(0);
   /* the window is not mostly on screen, so the session and the composer's motion stand still */
   const paused = ref(true);
@@ -129,7 +133,8 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
     promptTyped.value = 0;
     applied.value = 0;
     zoom.value = undefined;
-    unfold.value = undefined;
+    marked.value = false;
+    unfold.value = session.unfold;
     scrolled.value = 0;
     asking.value = false;
     countdown.value = undefined;
@@ -139,14 +144,27 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
   function acceptDiff() {
     for (const file of files.value)
       file.lines = file.lines.filter(line => line.kind !== "removed").map(line => ({ text: line.text, kind: "normal" as const }));
-
-    scrolled.value = Math.min(scrolled.value, Math.max(0, lines.value.length - session.lines));
   }
 
   /* scrolls the shown line at `index` into the window, only as far as it must, so the code around it stays put */
   function scrollTo(index: number) {
     if (index >= 0)
       scrolled.value = Math.min(Math.max(scrolled.value, index - session.lines + 1), index);
+  }
+
+  /* moves the code once, before an edit, so all its new lines will fit with a line to spare below (the room under
+     the file may stay empty): as little as it must, and not past the signature of the method it is in, or the line
+     above the edit, while the edit leaves room for them; returns whether it moved */
+  function scrollToEdit({ after, remove = 0, add }: Edit) {
+    const at = after === undefined ? 0 : lines.value.findIndex(({ line }) => line.text === after && line.kind === "normal");
+    const last = (after === undefined ? 0 : at + Math.max(remove, 1)) + add.length - 1;
+    const signature = lines.value.findIndex(({ line }) => line.text === unfold.value);
+    const lowest = last - session.lines + 2;
+    const highest = Math.min(signature >= 0 && signature < at ? signature : at, at - 1);
+    const top = Math.max(0, lowest > highest ? lowest : Math.min(Math.max(scrolled.value, lowest), highest));
+    const moved = top !== scrolled.value;
+    scrolled.value = top;
+    return moved;
   }
 
   /* the file's reactive proxy, added if the edit creates it */
@@ -189,6 +207,7 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
     promptIndex.value = roundIndex.value;
     promptTyped.value = prompt.value.length;
     applied.value = rounds.length;
+    zoom.value = session.ending;
     phase.value = "done";
   }
 
@@ -255,6 +274,7 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
   }
 
   async function takeInDiff() {
+    marked.value = false;
     const removed = files.value.flatMap(file => file.lines.filter(line => line.kind === "removed"));
 
     if (removed.length) {
@@ -273,12 +293,15 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
       await pause(timing.switchFile);
     }
 
+    if (scrollToEdit(edit))
+      await pause(timing.scroll);
+
     const at = prepare(file, edit);
 
     if (edit.remove)
       await pause(timing.markRemoved);
 
-    const kind = edit.after === undefined ? "normal" : "added";
+    const kind: Line["kind"] = edit.after === undefined ? "normal" : "added";
     file.lines.splice(at, 0, ...edit.add.map(text => ({ text, kind, typed: 0, state: "opening" as const })));
     await pause(timing.openLines);
 
@@ -308,7 +331,11 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
     roundIndex.value = index;
     phase.value = "working";
     unfold.value = round.value.unfold ?? unfold.value;
-    scrollTo(lines.value.findIndex(({ line }) => line.text === unfold.value));
+
+    /* the code moves to where the first edit goes while the agent works, so it then types in place */
+    if (round.value.edits[0].file === active.value)
+      scrollToEdit(round.value.edits[0]);
+
     await pause(timing.working);
 
     /* compared by value: two requests may change the same part of the page */
@@ -325,6 +352,7 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
     await pause(timing.diffHold);
     phase.value = "done";
     applied.value = index + 1;
+    marked.value = true;
   }
 
   async function loop() {
@@ -341,7 +369,7 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
           await takeInDiff();
 
           if (index === rounds.length - 1) {
-            zoom.value = undefined;
+            zoom.value = session.ending;
             await wait(timing.endHold);
           }
           else
@@ -386,5 +414,5 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
     document.removeEventListener("visibilitychange", updatePaused);
   });
 
-  return { files, active, lines, promptIndex, promptText, typing, sent, working, finished, applied, zoom, scrolled, asking, countdown, paused, resetting, unfold };
+  return { files, active, lines, promptIndex, promptText, typing, sent, working, finished, applied, zoom, marked, scrolled, asking, countdown, paused, resetting, unfold };
 }

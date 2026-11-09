@@ -29,7 +29,7 @@ const screens = [
   { name: "measurement-horizontal", alt: "Measuring along the horizontal axis" }
 ];
 
-const holdMs = 4000;
+const holdMs = 3000;
 
 const current = ref(0);
 const root = ref<HTMLElement>();

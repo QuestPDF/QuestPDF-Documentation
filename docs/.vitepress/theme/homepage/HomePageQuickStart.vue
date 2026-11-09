@@ -10,13 +10,16 @@ import {data as session} from "./quickStart.data";
    the rendered page. */
 
 const windowElement = ref<HTMLElement | null>(null);
-const { files, active, lines, promptIndex, promptText, typing, sent, working, finished, applied, zoom, scrolled, asking, countdown, paused, resetting, unfold } = useAgentSession(windowElement, session);
+const { files, active, lines, promptIndex, promptText, typing, sent, working, finished, applied, zoom, marked, scrolled, asking, countdown, paused, resetting, unfold } = useAgentSession(windowElement, session);
 
 /* rendered at three times the page's box, so they stay sharp when zoomed in on; each is large once decoded, so only
    the one shown, the one fading out and the next one are in the document */
 const page = session.page;
 const pages = computed(() => Array.from({ length: session.rounds.length + 1 }, (_, index) => ({ index, src: `${session.renders}${index}.webp` }))
     .filter(({ index }) => Math.abs(index - applied.value) <= 1));
+
+/* the parts of the page the last request changed; they stay in place while their outlines fade out */
+const marks = computed(() => session.rounds[applied.value - 1]?.marks ?? []);
 
 /* The page's box: 595 px wide and as tall as the session's page; the rounds' zoom is measured in its pixels. */
 const result = ref<HTMLElement | null>(null);
@@ -163,7 +166,7 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
   let left = typed;
   let html = "";
 
-  for (const { content, style } of session.tokens[session.langs[active.value]][text]) {
+  for (const { content, style } of session.tokens[text]) {
     if (left <= 0)
       break;
 
@@ -235,6 +238,8 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
           <div ref="result" class="result">
             <div class="page" :style="pageStyle">
               <img v-for="{ index, src } of pages" :key="src" :src="src" :alt="index === applied ? `${session.title} rendered by QuestPDF` : ''" :class="{ shown: index === applied }" :width="page.width" :height="page.height" loading="lazy" />
+
+              <span v-for="([x, y, width, height], index) of marks" :key="index" class="mark" :class="{ shown: marked }" :style="{ left: `${x}px`, top: `${y}px`, width: `${width}px`, height: `${height}px` }" aria-hidden="true" />
             </div>
           </div>
         </div>
@@ -500,6 +505,26 @@ html.dark .window-header {
 
 .page img.shown {
   opacity: 1;
+}
+
+/* outlines what the last request changed, once the page shows it, in the site's light-theme primary (the page is
+   white in both themes); its edge and corners are divided by the page's scale, as the page's own are */
+.mark {
+  --mark: #0277BD;
+
+  position: absolute;
+  border: calc(2px / var(--scale)) solid var(--mark);
+  border-radius: calc(6px / var(--scale));
+  box-shadow: 0 0 0 calc(4px / var(--scale)) color-mix(in srgb, var(--mark) 14%, transparent);
+  opacity: 0;
+  scale: 1.04;
+  transition: opacity 0.32s ease, scale 0.32s ease;
+}
+
+.mark.shown {
+  opacity: 1;
+  scale: 1;
+  transition: opacity 0.4s ease 0.3s, scale 0.4s ease 0.3s;
 }
 
 
