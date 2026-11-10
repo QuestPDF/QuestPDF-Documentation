@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { faArrowRight } from "@fortawesome/pro-solid-svg-icons";
 import Icon from "../Icon.vue";
+import { ref } from "vue";
+import { useDotWings } from "../dotWings";
 
 const documents = [
   {
@@ -29,10 +31,13 @@ const documents = [
   }
 ];
 
+const root = ref<HTMLElement>();
+useDotWings(root);
+
 </script>
 
 <template>
-  <div class="custom-page legal-page texture-dots">
+  <div ref="root" class="custom-page legal-page texture-dots">
     <article class="content">
       <header class="section-header">
         <h1>QuestPDF Legal Terms</h1>
@@ -54,6 +59,10 @@ const documents = [
 </template>
 
 <style scoped>
+.legal-page {
+  --dots-clear: 760px; /* the 750px section header */
+}
+
 .section-header {
   max-width: 750px;
 }

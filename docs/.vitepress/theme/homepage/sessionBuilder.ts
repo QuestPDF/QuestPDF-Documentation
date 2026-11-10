@@ -4,8 +4,8 @@ import { type FoldableLine, foldLines } from "./codeFolding.ts";
 /* Turns the quick start session (quickStart.data.ts) into what the window needs, highlighting every line it will
    show at build time, so no highlighter ships to the browser. */
 
-/* Shiki's languages: the legacy HTML template stays plain text, so the C# it becomes is what stands out */
-export type Lang = "csharp" | "text";
+/* a part of the page as [x, y, width, height], in the pixels of the page's box */
+export type Box = [number, number, number, number];
 
 export interface Edit {
   file: string;
@@ -21,9 +21,11 @@ export interface Round {
   edits: Edit[];
   /* the method the request works on: the window shows it and folds every other one */
   unfold?: string;
-  /* the part of the page the viewer flies to, as [x, y, width, height] in the page box's pixels, its sides in the
-     gaps between columns so the viewer's edges cut no words (none: the page's overview) */
-  zoom?: [number, number, number, number];
+  /* the part of the page the viewer flies to, its sides in the gaps between columns so the viewer's edges cut no
+     words (none: the page's overview) */
+  zoom?: Box;
+  /* the parts of the page the request changed, outlined from the page changing until the diff is taken in */
+  marks?: Box[];
 }
 
 export interface SessionDefinition {
@@ -36,8 +38,13 @@ export interface SessionDefinition {
   page: { width: number; height: number };
   /* the part of the page, from its top-left corner, that the viewer shows at rest: the head and the first content */
   overview: { width: number; height: number };
+  /* the part of the page the viewer flies out to after the last request: the finished document whole (none: the
+     overview) */
+  ending?: Box;
   /* the files open as the session starts */
   files: { name: string; lines: string[] }[];
+  /* the method the window shows unfolded as the session starts (none: nothing folds until a request names one) */
+  unfold?: string;
   rounds: Round[];
 }
 
@@ -48,10 +55,8 @@ export interface Token {
 }
 
 export interface QuickStartSession extends SessionDefinition {
-  /* per language, the tokens of every line that appears, by its text */
-  tokens: Record<Lang, Record<string, Token[]>>;
-  /* per file, its language (a data loader exports nothing but its data, so the client cannot call langOf) */
-  langs: Record<string, Lang>;
+  /* the tokens of every line that appears, by its text */
+  tokens: Record<string, Token[]>;
   /* the most lines the window shows at once, which it keeps room for */
   lines: number;
   /* how many digits the window's line numbers take: those of the longest file */
@@ -61,8 +66,6 @@ export interface QuickStartSession extends SessionDefinition {
 /* the most lines the window shows at once: 26 keep it, title bar included, within a laptop screen; a longer file
    scrolls to the lines being edited */
 const maxLines = 26;
-
-const langOf = (file: string): Lang => file.endsWith(".html") ? "text" : "csharp";
 
 /* a file after an edit: the diff (the replaced lines still in place above the new ones) and the accepted lines */
 function applyEdit(lines: string[], { after, remove = 0, add }: Edit) {
@@ -75,6 +78,9 @@ function applyEdit(lines: string[], { after, remove = 0, add }: Edit) {
 
   if (at < 0)
     throw new Error(`[session] no line "${after.trim()}" in the code for a request to edit`);
+
+  if (lines.lastIndexOf(after) !== at)
+    throw new Error(`[session] more than one line "${after.trim()}" in the code for a request to edit`);
 
   const end = at + Math.max(remove, 1);
   const kept = (text: string, index: number): FoldableLine => ({ text, kind: index >= at && index < at + remove ? "removed" : "normal" });
@@ -97,8 +103,8 @@ export async function buildSession(definition: SessionDefinition): Promise<Quick
   const accepted: Record<string, string[]> = Object.fromEntries(files.map(file => [file.name, file.lines]));
   const states = files.map(({ name, lines }) => ({ file: name, lines, diff: false }));
   const asNormal = (lines: string[]) => lines.map(text => ({ text, kind: "normal" as const }));
-  let unfold: string | undefined;
-  let lines = Math.max(0, ...files.map(file => file.lines.length));
+  let unfold = definition.unfold;
+  let lines = Math.max(0, ...files.map(file => foldLines(asNormal(file.lines), unfold).length));
 
   for (const round of rounds) {
     unfold = round.unfold ?? unfold;
@@ -114,39 +120,36 @@ export async function buildSession(definition: SessionDefinition): Promise<Quick
     }
   }
 
-  const tokens: QuickStartSession["tokens"] = { csharp: {}, text: {} };
+  const tokens: QuickStartSession["tokens"] = {};
 
   /* a diff holds the replaced lines above their replacement, which is not valid code (two lambdas opened where
      one closes), so a line keeps the tokens of a file as accepted and a diff only highlights the lines it alone has */
-  for (const { file, lines, diff } of [...states.filter(state => !state.diff), ...states.filter(state => state.diff)]) {
-    const lang = langOf(file);
-
-    for (const [index, line] of (await highlight(lines, lang)).entries()) {
+  for (const { lines, diff } of [...states.filter(state => !state.diff), ...states.filter(state => state.diff)]) {
+    for (const [index, line] of (await highlight(lines)).entries()) {
       const text = lines[index];
       const lineTokens = line.map(token => ({ content: token.content, style: stringifyTokenStyle(token.htmlStyle ?? {}) }));
 
-      if (diff && text in tokens[lang])
+      if (diff && text in tokens)
         continue;
 
-      if (text in tokens[lang] && JSON.stringify(tokens[lang][text]) !== JSON.stringify(lineTokens))
+      if (text in tokens && JSON.stringify(tokens[text]) !== JSON.stringify(lineTokens))
         throw new Error(`[session] "${text.trim()}" is highlighted differently in two places`);
 
-      tokens[lang][text] = lineTokens;
+      tokens[text] = lineTokens;
     }
   }
 
-  const langs = Object.fromEntries(states.map(({ file }) => [file, langOf(file)]));
   const digits = String(Math.max(...states.map(state => state.lines.length))).length;
 
-  return { ...definition, tokens, langs, lines: Math.min(lines, maxLines), digits };
+  return { ...definition, tokens, lines: Math.min(lines, maxLines), digits };
 }
 
 /* the tokens exactly as codeToHtml renders them (whitespace merged into the token that follows it) */
-async function highlight(lines: string[], lang: Lang): Promise<ThemedToken[][]> {
+async function highlight(lines: string[]): Promise<ThemedToken[][]> {
   let result: ThemedToken[][] = [];
 
   await codeToHtml(lines.join("\n"), {
-    lang,
+    lang: "csharp",
     themes: { light: "light-plus", dark: "dark-plus" },
     defaultColor: false,
     transformers: [{ tokens: tokens => { result = tokens; } }]

@@ -1,31 +1,29 @@
 # Quick start
 
-QuestPDF is a modern C# library for PDF generation that provides a dedicated layout engine optimized specifically for creating PDF documents. Its component-based architecture lets you compose simple elements (such as text, images, tables, and grids) into sophisticated layouts through an intuitive, declarative API. Because it's pure C#, you get full access to familiar programming constructs, strong typing, and seamless IDE support.
+Create a console project, add the QuestPDF package and generate your first PDF.
 
 ## Installation
 
-QuestPDF is available as a NuGet package. You can install it through your IDE by searching for phrase `QuestPDF`. If you are not familiar how to do that, please refer to the following guides: 
-- [Visual Studio](https://learn.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio)
-- [Visual Code](https://code.visualstudio.com/docs/csharp/package-management)
-- [JetBrains Rider](https://www.jetbrains.com/help/rider/Using_NuGet.html)
-
-Or use the following command in your terminal:
+Run these commands in your terminal:
 
 ```bash
+dotnet new console -n HelloPdf
+cd HelloPdf
 dotnet add package QuestPDF
 ```
 
+Already have a project? Run only `dotnet add package QuestPDF` in its folder, or search for `QuestPDF` in the NuGet package manager of [Visual Studio](https://learn.microsoft.com/en-us/nuget/consume-packages/install-use-packages-visual-studio), [Visual Studio Code](https://code.visualstudio.com/docs/csharp/package-management) or [JetBrains Rider](https://www.jetbrains.com/help/rider/Using_NuGet.html).
+
 ## Implementation
 
-QuestPDF's minimal API makes it incredibly easy to create and prototype PDF documents. Here's a simple example that demonstrates its intuitive syntax:
+Replace the contents of `Program.cs` with the following code:
 
 ```csharp
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 
-// TODO: set your license here:
-// QuestPDF.Settings.License = LicenseType.Evaluation;
+QuestPDF.Settings.License = LicenseType.Evaluation;
 
 Document.Create(container =>
 {
@@ -62,24 +60,19 @@ Document.Create(container =>
 .GeneratePdf("hello.pdf");
 ```
 
-This code generates a PDF document with the following layout:
+Then run the project:
+
+```bash
+dotnet run
+```
+
+The program saves `hello.pdf` in the folder it runs from, here `HelloPdf`. The document looks like this:
 
 ![example](/minimal-api.webp)
 
 ## License
 
-::: warning SUSTAINABLE AND FAIR LICENSE
-By offering free access to most users and premium licenses for larger organizations, the project maintains its commitment to excellence while ensuring sustainable, long-term development for all.
-
-The library is free to use for any individual or business with less than 1 million USD annual gross revenue, or operates as a non-profit organization, or is a FOSS project.
-
-More details can be found on the [QuestPDF Pricing](/pricing) and [QuestPDF License](/license/) pages.
-:::
-
-::: tip
-For learning and evaluation, you can use the QuestPDF Evaluation license type.
-:::
-
+The Evaluation license lets you try every feature before choosing a license, and is not permitted in production. QuestPDF is free for individuals, non-profits, FOSS projects and organizations under $1M USD in annual gross revenue: see [License configuration](/license/configuration.md) and [Pricing](/pricing).
 
 ## Are you ready for more?
 

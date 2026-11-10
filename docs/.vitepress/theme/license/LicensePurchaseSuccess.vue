@@ -3,6 +3,8 @@ import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
 import { faAwardSimple, faBolt, faCalendarDay, faCode, faCreditCard, faReceipt } from "@fortawesome/pro-regular-svg-icons";
 import { faCheck } from "@fortawesome/pro-solid-svg-icons";
 import Icon from "../Icon.vue";
+import { ref } from "vue";
+import { useDotWings } from "../dotWings";
 const shareEmailSubject = 'QuestPDF License Purchased – Setup Instructions';
 const shareEmailBody = `Hi Team,
 
@@ -69,10 +71,13 @@ const cards: Card[] = [
   }
 ];
 
+const root = ref<HTMLElement>();
+useDotWings(root);
+
 </script>
 
 <template>
-  <div class="custom-page purchase-page texture-dots">
+  <div ref="root" class="custom-page purchase-page texture-dots">
     <div class="content">
       <header class="section-header purchase-header">
         <div class="status-tag">
@@ -120,6 +125,11 @@ const cards: Card[] = [
 </template>
 
 <style scoped>
+
+.purchase-page {
+  --dots-clear: 700px; /* the 650px section header */
+  --dots-height: 270px; /* the cards */
+}
 
 .content {
   display: flex;

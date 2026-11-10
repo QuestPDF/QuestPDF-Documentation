@@ -5,29 +5,29 @@ const resellers = [
     name: "SoftwareOne",
     link: "https://www.softwareone.com/",
     src: "software-one.svg",
-    size: 38,
+    size: 32,
     marginTop: -3
   },
   {
     name: "Insight",
     link: "https://www.insight.com/",
     src: "insight.svg",
-    size: 43,
+    size: 37,
     marginTop: 3
   },
   {
     name: "SHI",
     link: "https://www.shi.com/",
     src: "shi.svg",
-    size: 45,
-    marginTop: -13
+    size: 38,
+    marginTop: -11
   },
   {
     name: "QBS Software",
     link: "https://www.qbssoftware.com/",
     src: "qbs-software.svg",
-    size: 56,
-    marginTop: 4
+    size: 48,
+    marginTop: 3
   }
 ];
 

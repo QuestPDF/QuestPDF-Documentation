@@ -1,8 +1,8 @@
 <template>
   <div class="panel companion">
     <div class="companion-text">
-      <h2 class="card-title">Preview, inspect and debug</h2>
-      <p class="card-description">Add one line of code and your document opens beside your IDE. With hot-reload, every change appears in the preview at once: no recompiling, no reopening PDFs.</p>
+      <h2 class="card-title">Companion App</h2>
+      <p class="card-description">Make a change, see the result. Hot-&#8288;reload keeps the preview in sync, so every tweak is quick and effortless.</p>
 
       <ul class="points" aria-label="What the Companion App does">
         <li v-for="point of points" :key="point.text">
@@ -41,26 +41,25 @@
       </div>
     </div>
 
-    <div class="companion-media">
-      <img src="/companion/application-light.webp" alt="QuestPDF Companion App" class="light" width="1917" height="1328" loading="lazy" />
-      <img src="/companion/application-dark.webp" alt="QuestPDF Companion App" class="dark" width="1917" height="1328" loading="lazy" />
-    </div>
+    <HomePageCompanionScreens class="companion-media" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { faBug, faChevronDown, faCode, faFolderTree, faRulerCombined } from "@fortawesome/pro-regular-svg-icons";
+import { faArrowPointer, faBug, faChevronDown, faCode, faFolderTree, faRulerCombined } from "@fortawesome/pro-regular-svg-icons";
 import { faApple, faLinux, faWindows } from "@fortawesome/free-brands-svg-icons";
 import Icon from "../Icon.vue";
+import HomePageCompanionScreens from "./HomePageCompanionScreens.vue";
 
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 
 /* facts from docs/companion/features.md */
 const points = [
-  { icon: faFolderTree, text: "Explore and navigate the document structure" },
-  { icon: faRulerCombined, text: "Magnify details and measure distances" },
-  { icon: faCode, text: "Jump from the preview to the matching code" },
-  { icon: faBug, text: "Debug exceptions and layout issues" }
+  { icon: faFolderTree, text: "Explore the document structure" },
+  { icon: faArrowPointer, text: "Inspect any element" },
+  { icon: faRulerCombined, text: "Magnify and measure details" },
+  { icon: faCode, text: "Jump from preview to code" },
+  { icon: faBug, text: "Debug exceptions and layouts" }
 ];
 
 /* the latest release; keep in sync with docs/companion/download.md and public/companion/latest-version */
@@ -131,7 +130,7 @@ onBeforeUnmount(() => {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 480px;
   grid-template-areas: "media text";
-  gap: 48px;
+  gap: 64px;
   align-items: center;
 }
 
@@ -140,27 +139,12 @@ onBeforeUnmount(() => {
   container-type: inline-size;
 }
 
+.companion .card-description {
+  text-wrap: pretty;
+}
+
 .companion-media {
   grid-area: media;
-  aspect-ratio: 1.62;
-  overflow: hidden;
-  border-radius: 14px;
-  background-color: var(--vp-c-bg);
-  box-shadow:
-      0 0 0 1px light-dark(color-mix(in srgb, var(--vp-c-text-1) 10%, transparent), rgba(255, 255, 255, 0.08)),
-      0 16px 40px -16px light-dark(rgba(16, 24, 40, 0.22), rgba(0, 0, 0, 0.6));
-}
-
-.companion-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: left top;
-}
-
-html:not(.dark) .companion-media .dark,
-html.dark .companion-media .light {
-  display: none;
 }
 
 

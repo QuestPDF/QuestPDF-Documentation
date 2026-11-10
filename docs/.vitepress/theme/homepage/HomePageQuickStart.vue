@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
-import { faArrowRightArrowLeft, faArrowUp, faBolt, faCheck, faCode, faCodeBranch, faComments, faLightbulbOn, faPuzzlePiece, faShieldCheck } from "@fortawesome/pro-regular-svg-icons";
+import { faArrowUp, faCheck } from "@fortawesome/pro-regular-svg-icons";
 import { faSparkles } from "@fortawesome/pro-solid-svg-icons";
 import Icon from "../Icon.vue";
 import {computed, onMounted, onUnmounted, ref, watch} from "vue";
@@ -10,49 +9,24 @@ import {data as session} from "./quickStart.data";
 /* The quick start: a coding session (quickStart.data.ts, played by agentSession.ts) shown as code, a composer and
    the rendered page. */
 
-interface Card {
-  kind: "code-card" | "agent-card";
-  title: string;
-  label: string;
-  notes: {
-    icon: IconDefinition;
-    text: string;
-  }[];
-}
-
-const cards: Card[] = [
-  {
-    kind: "code-card",
-    title: "Create and review in C#",
-    label: "Why write documents in C#",
-    notes: [
-      { icon: faCode, text: "Write loops and conditions in plain C#, not a template language" },
-      { icon: faPuzzlePiece, text: "Build reusable components from ordinary classes and methods" },
-      { icon: faLightbulbOn, text: "Get IntelliSense, type checking and refactoring in your IDE" },
-      { icon: faCodeBranch, text: "Keep layouts in Git beside your application code" }
-    ]
-  },
-  {
-    kind: "agent-card",
-    title: "Develop with AI agents",
-    label: "How an AI assistant helps",
-    notes: [
-      { icon: faArrowRightArrowLeft, text: "Migrate legacy HTML-based reports to QuestPDF with AI" },
-      { icon: faComments, text: "Create and modify documents confidently through prompts" },
-      { icon: faBolt, text: "Deliver new documents and changes significantly faster" },
-      { icon: faShieldCheck, text: "Keep every AI change type-checked and easy to review" }
-    ]
-  }
-];
-
 const windowElement = ref<HTMLElement | null>(null);
-const { files, active, lines, promptIndex, promptText, typing, sent, working, finished, applied, zoom, scrolled, asking, countdown, paused, resetting, unfold } = useAgentSession(windowElement, session);
+const code = ref<HTMLElement | null>(null);
+const probe = ref<HTMLElement | null>(null);
+/* how many lines and characters the code shows, measured once mounted (narrow layouts show fewer) */
+const shownLines = ref(session.lines);
+const columns = ref(Infinity);
+const { files, active, lines, promptIndex, promptText, typing, sent, working, finished, applied, zoom, marked, scrolled, shifted, asking, countdown, paused, resetting, unfold } = useAgentSession(windowElement, session, { lines: shownLines, columns });
+
+const placeholder = "Ask the agent to change the invoice…";
 
 /* rendered at three times the page's box, so they stay sharp when zoomed in on; each is large once decoded, so only
    the one shown, the one fading out and the next one are in the document */
 const page = session.page;
 const pages = computed(() => Array.from({ length: session.rounds.length + 1 }, (_, index) => ({ index, src: `${session.renders}${index}.webp` }))
     .filter(({ index }) => Math.abs(index - applied.value) <= 1));
+
+/* the parts of the page the last request changed; they stay in place while their outlines fade out */
+const marks = computed(() => session.rounds[applied.value - 1]?.marks ?? []);
 
 /* The page's box: 595 px wide and as tall as the session's page; the rounds' zoom is measured in its pixels. */
 const result = ref<HTMLElement | null>(null);
@@ -61,6 +35,8 @@ const view = ref({ x: 24, y: 24, width: 528, height: 444 });
 /* the page's head and its first content, the part of the page the viewer shows at rest */
 const overview = session.overview;
 const maxScale = 1.5;
+/* the closest the camera comes, so a close-up keeps some of the page around the change */
+const maxZoom = 1.8;
 
 const camera = computed(() => {
   const { x, y, width, height } = view.value;
@@ -72,7 +48,7 @@ const camera = computed(() => {
   const [left, top, w, h] = zoom.value;
   const across = width + 2 * x;
   const down = height + 2 * y;
-  let scale = Math.min(across / w, down / h, rest * 2);
+  let scale = Math.min(across / w, down / h, rest * 2, maxZoom);
 
   if (scale > maxScale && page.width * maxScale <= across)
     scale = maxScale;
@@ -163,16 +139,34 @@ function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
 
+/* a line's text starts after the line's 24px padding, the gutter and its 12px margin, and keeps 4px on the right */
+function measureCode() {
+  const box = code.value;
+  if (!box || !probe.value)
+    return;
+
+  const lineHeight = parseFloat(getComputedStyle(box).lineHeight);
+  const ch = probe.value.getBoundingClientRect().width;
+  shownLines.value = Math.max(1, Math.round(box.clientHeight / lineHeight));
+  columns.value = Math.floor((box.clientWidth - 40) / ch) - session.digits;
+}
+
 let resizeObserver: ResizeObserver | undefined;
+let codeObserver: ResizeObserver | undefined;
 
 onMounted(() => {
   resizeObserver = new ResizeObserver(([{ contentRect: { x, y, width, height } }]) => view.value = { x, y, width, height });
   resizeObserver.observe(result.value!);
+
+  codeObserver = new ResizeObserver(measureCode);
+  codeObserver.observe(code.value!);
+  void document.fonts.ready.then(measureCode);
 });
 
 onUnmounted(() => {
   cancelAnimationFrame(flight);
   resizeObserver?.disconnect();
+  codeObserver?.disconnect();
 });
 
 /* the window's markup, as Shiki writes it, from the tokens highlighted at build time (quickStart.data.ts) */
@@ -199,7 +193,7 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
   let left = typed;
   let html = "";
 
-  for (const { content, style } of session.tokens[session.langs[active.value]][text]) {
+  for (const { content, style } of session.tokens[text]) {
     if (left <= 0)
       break;
 
@@ -210,7 +204,7 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
   const classes = ["line", kind === "normal" ? "" : `line-${kind}`, state ? `line-${state}` : ""].filter(Boolean).join(" ");
   const gutter = `<span class="gutter">${state ? " " : number ?? " "}</span>`;
   const fold = folded && typed >= text.length ? `<span class="fold">{ … }</span>` : "";
-  return `<span class="${classes}">${gutter}${html}${fold}</span>`;
+  return `<span class="${classes}">${gutter}<span class="text">${html}${fold}</span></span>`;
 }
 </script>
 
@@ -228,8 +222,8 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
       <div class="window-body" :class="{ resetting }">
         <!-- the composer sticks within this part, so it never rides up over the code's title bar -->
         <div class="window-main">
-          <div class="code-source" :style="{ '--code-lines': session.lines, '--gutter-digits': session.digits, '--scroll': scrolled }">
-            <pre class="shiki" tabindex="0"><code v-html="codeHtml"></code></pre>
+          <div class="code-source" :style="{ '--session-lines': session.lines, '--gutter-digits': session.digits, '--scroll': scrolled, '--shift': shifted }">
+            <pre ref="code" class="shiki" tabindex="0"><code v-html="codeHtml"></code><span ref="probe" class="probe" aria-hidden="true">0</span></pre>
           </div>
 
           <div class="composer" :class="{ asking, sent, working }">
@@ -239,6 +233,7 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
                  request that wraps while it types does not move the page -->
             <div class="composer-text">
               <span v-for="round of session.rounds" :key="round.prompt" class="composer-sizer" aria-hidden="true">{{ round.prompt }}</span>
+              <span v-if="!promptText" class="composer-placeholder">{{ placeholder }}</span>
               <span>{{ promptText }}<span v-if="!sent" class="caret" :class="{ steady: typing }"></span></span>
             </div>
 
@@ -271,22 +266,13 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
           <div ref="result" class="result">
             <div class="page" :style="pageStyle">
               <img v-for="{ index, src } of pages" :key="src" :src="src" :alt="index === applied ? `${session.title} rendered by QuestPDF` : ''" :class="{ shown: index === applied }" :width="page.width" :height="page.height" loading="lazy" />
+
+              <span v-for="([x, y, width, height], index) of marks" :key="index" class="mark" :class="{ shown: marked }" :style="{ left: `${x}px`, top: `${y}px`, width: `${width}px`, height: `${height}px` }" aria-hidden="true" />
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <article v-for="card of cards" :key="card.kind" class="quick-start-card" :class="card.kind">
-      <h2 class="card-title">{{ card.title }}</h2>
-
-      <ul class="notes" :aria-label="card.label">
-        <li v-for="note of card.notes" :key="note.text" class="note">
-          <Icon :icon="note.icon" />
-          <span>{{ note.text }}</span>
-        </li>
-      </ul>
-    </article>
   </div>
 </template>
 
@@ -300,6 +286,7 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
   --composer-text: #FFFFFF;
   --composer-icon: rgba(255, 255, 255, 0.9);
   --composer-step: rgba(255, 255, 255, 0.85);
+  --composer-placeholder: rgba(255, 255, 255, 0.72);
   --composer-ink: #FFFFFF;
   --composer-button-ink: #6D49AB;
   --composer-sheen: rgba(255, 255, 255, 0.14);
@@ -307,11 +294,6 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
   --composer-ring-strong: color-mix(in srgb, var(--agent-accent) 30%, transparent);
   --composer-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 10px 28px -10px rgba(109, 73, 171, 0.3);
 
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-areas:
-      "window window"
-      "code agent";
   padding: 0;
   overflow: clip; /* the embedded window follows the panel's corners; clip, unlike hidden, lets the composer stick */
 }
@@ -325,81 +307,21 @@ html.dark .quick-start {
   --composer-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 10px 28px -10px rgba(0, 0, 0, 0.6);
 }
 
-.quick-start-card {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  padding: var(--panel-padding);
-}
-
-.code-card {
-  --tint: #0288D1;
-
-  grid-area: code;
-}
-
-html.dark .code-card {
-  --tint: #80C8FF;
-
-  background-image:
-      radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, #64B5F6 10%, transparent), transparent),
-      radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #29B6F6 4%, transparent), transparent);
-}
-
-.agent-card {
-  --tint: #5E35B1;
-
-  grid-area: agent;
-  border-left: 1px solid var(--vp-c-divider);
-}
-
-html.dark .agent-card {
-  --tint: #B388FF;
-
-  background-image:
-      radial-gradient(ellipse 90% 55% at 0% 64px, color-mix(in srgb, var(--agent-accent) 10%, transparent), transparent),
-      radial-gradient(ellipse 50% 30% at 0% 64px, color-mix(in srgb, #AB47BC 4%, transparent), transparent);
-}
-
-
-.notes {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin: 12px 0 0;
-}
-
-.note {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 6px 0;
-  font-weight: 500;
-  color: var(--vp-c-text-1);
-}
-
-.note .icon {
-  flex-shrink: 0;
-  width: 18px;
-  margin-top: 0.25rem;
-  font-size: 1rem;
-  color: var(--tint);
-}
-
 
 /* Windows */
 
-/* the body has no box of its own here, so the page's window can reach up beside the title bar */
+/* the body has no box of its own here, so the page's window can reach up beside the title bar; the code keeps room
+   for its longest line (68 characters) and the page takes the rest, up to 42rem */
 .window {
-  grid-area: window;
+  --code-width: 640px;
+
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 36rem;
+  grid-template-columns: minmax(0, 1fr) min(42rem, 100% - var(--code-width));
   grid-template-rows: auto 1fr;
   grid-template-areas:
       "header viewer"
       "main viewer";
   min-width: 0;
-  border-bottom: 1px solid var(--vp-c-divider);
   background-color: var(--vp-c-bg);
 }
 
@@ -409,14 +331,24 @@ html.dark .agent-card {
   gap: 6px;
   padding: 8px 16px 8px 24px;
   border-bottom: 1px solid var(--vp-c-divider);
-  background-color: light-dark(var(--vp-c-bg), var(--vp-c-bg-alt));
+  background-color: var(--vp-c-bg);
+}
+
+/* the code's bar sits in the panel's top-left corner, so its lights start where the 32px rounding ends */
+.window > .window-header {
+  padding-left: 32px;
+}
+
+/* the title bars wear the panel's own surface; it is see-through, so the canvas and its grain go under it */
+html.dark .window-header {
+  background-color: var(--custom-page-bg);
+  background-image: var(--surface-sheen), linear-gradient(var(--surface) 0 0), var(--canvas-grain);
 }
 
 .window-body {
   display: contents;
 }
 
-.code-source,
 .result {
   transition: opacity 0.45s ease;
 }
@@ -465,18 +397,34 @@ html.dark .agent-card {
   background-color: var(--lit);
 }
 
-/* as tall as the most lines the session shows, so the window keeps its height; a longer file scrolls by --scroll */
+/* as tall as the most lines the session shows, so the window keeps its height; a longer file scrolls by --scroll,
+   and where the window is narrower than an edit, its lines move sideways by --shift */
+@property --shift {
+  syntax: "<number> | <length>";
+  inherits: true;
+  initial-value: 0;
+}
+
 .code-source {
+  --code-lines: var(--session-lines);
+
   flex-grow: 1;
   padding-bottom: 12px;
   font-size: 0.875rem;
   line-height: 1.5;
+  transition: opacity 0.45s ease, --shift 0.6s ease;
 }
 
 .code-source pre {
   height: calc(var(--code-lines) * 1lh);
   overflow-x: auto;
   overflow-y: hidden;
+}
+
+.probe {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .code-source :deep(code) {
@@ -492,6 +440,13 @@ html.dark .agent-card {
   min-width: 100%;
   min-height: 1lh;
   padding: 0 4px 0 24px;
+}
+
+/* the code moves under the line numbers, so the part moved past the text's start is cut off */
+.code-source :deep(.text) {
+  display: inline-block;
+  translate: calc(var(--shift) * -1ch) 0;
+  clip-path: inset(-4px 0 -4px calc(var(--shift) * 1ch));
 }
 
 /* a blank slot holds a space, so every line keeps one baseline */
@@ -593,6 +548,11 @@ html.dark .agent-card {
   transform-origin: 0 0;
 }
 
+/* a little see-through, so the white page does not glare on the dark desk */
+html.dark .page {
+  opacity: 0.88;
+}
+
 .page img {
   position: absolute;
   inset: 0;
@@ -604,6 +564,24 @@ html.dark .agent-card {
 
 .page img.shown {
   opacity: 1;
+}
+
+/* marks what the last request changed, once the page shows it, like a highlighter pen; multiply keeps the text
+   readable and the corners are divided by the page's scale, as the page's own are */
+.mark {
+  position: absolute;
+  background: rgba(255, 214, 10, 0.5);
+  mix-blend-mode: multiply;
+  border-radius: calc(3px / var(--scale));
+  opacity: 0;
+  scale: 1.04;
+  transition: opacity 0.32s ease, scale 0.32s ease;
+}
+
+.mark.shown {
+  opacity: 1;
+  scale: 1;
+  transition: opacity 0.4s ease 0.3s, scale 0.4s ease 0.3s;
 }
 
 
@@ -715,6 +693,11 @@ html.dark .agent-card {
 
 .composer-sizer {
   visibility: hidden;
+}
+
+.composer-placeholder {
+  font-weight: 500;
+  color: var(--composer-placeholder);
 }
 
 /* as wide as the caret, which follows a request until it is sent, so a request wraps where its sizer does */
@@ -832,9 +815,20 @@ html.dark .agent-card {
 }
 
 
-/* below 1280px the page's window goes under the code and the composer under the page, so the composer still sticks
-   over the code */
-@media screen and (max-width: 1280px) {
+/* the code and the page stay side by side down to 1024px, with smaller code */
+@media screen and (max-width: 1279px) {
+  .window {
+    --code-width: 600px;
+  }
+
+  .code-source {
+    font-size: 0.8125rem;
+  }
+}
+
+/* below 1024px the page's window goes under the code, with the composer between them; the code shows fewer lines,
+   so the code, the request and the page fit on one screen */
+@media screen and (max-width: 1023px) {
   .window {
     display: flex;
     flex-direction: column;
@@ -849,20 +843,25 @@ html.dark .agent-card {
     display: contents;
   }
 
-  /* the composer sticks within the body here, so the code's top padding is its own */
   .code-source {
+    --code-lines: min(var(--session-lines), 16);
+
     padding-top: 12px;
   }
 
   .composer {
-    order: 1;
-    margin-top: 24px;
+    position: relative;
+    bottom: auto;
   }
 
   .viewer {
     border-left: none;
     border-top: 1px solid var(--vp-c-divider);
-    border-bottom: 1px solid var(--vp-c-divider);
+  }
+
+  /* mid-panel here, where the panel has no sheen */
+  html.dark .viewer .window-header {
+    background-image: linear-gradient(var(--surface) 0 0), var(--canvas-grain);
   }
 
   .result {
@@ -872,19 +871,6 @@ html.dark .agent-card {
 }
 
 @media screen and (max-width: 760px) {
-  .quick-start {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-        "window"
-        "code"
-        "agent";
-  }
-
-  .agent-card {
-    border-left: none;
-    border-top: 1px solid var(--vp-c-divider);
-  }
-
   .window-header {
     padding: 8px 16px;
   }
@@ -894,11 +880,13 @@ html.dark .agent-card {
   }
 
   .code-source {
-    line-height: 1.25;
+    --code-lines: min(var(--session-lines), 14);
+
+    font-size: 0.75rem;
   }
 
   .composer {
-    margin: 16px;
+    margin: 4px 16px 16px;
   }
 }
 

@@ -80,8 +80,7 @@ export default defineConfig({
             }
         },
         nav: [
-            { text: 'Documentation', link: '/quick-start', activeMatch: '^/(quick-start|invoice-tutorial|roadmap|acknowledgements|document-previewer|license/configuration|companion/|concepts/|api-reference/|examples/)' },
-            { text: 'Features', link: '/features-overview' },
+            { text: 'Documentation', items: [{ component: 'NavDocumentationMenu' }], activeMatch:'^/(quick-start|invoice-tutorial|roadmap|acknowledgements|document-previewer|license/configuration|features-overview|companion/|concepts/|api-reference/|examples/)' },
             { text: 'Pricing', link: '/pricing' },
             { text: 'GitHub', link: 'https://github.com/QuestPDF/QuestPDF', noIcon: true },
             { text: 'NuGet', link: 'https://www.nuget.org/packages/QuestPDF', noIcon: true },

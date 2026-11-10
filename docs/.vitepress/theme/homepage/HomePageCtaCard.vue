@@ -2,6 +2,7 @@
 import { faArrowRight } from "@fortawesome/pro-solid-svg-icons";
 import Icon from "../Icon.vue";
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { observeOnScreen } from "./ctaTimeline";
 
 /* `active` while hovered or keyboard-focused (a click's focus does not count: the click navigates anyway);
    `visible` while mostly on screen, tracked on devices without hover only. The visual slot gets both. */
@@ -9,11 +10,9 @@ import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 withDefaults(defineProps<{
   title: string;
   description: string;
-
-  label: string;
   href: string;
 
-  /* the glow behind the visual (dark theme) and the colour of the link row */
+  /* the glow behind the visual (dark theme) and the colour of the arrow */
   accent?: string;
   accentSecondary?: string;
 }>(), {
@@ -37,8 +36,7 @@ onMounted(() => {
   if (window.matchMedia("(hover: hover)").matches)
     return;
 
-  observer = new IntersectionObserver(([entry]) => visible.value = entry.isIntersecting, { threshold: 0.6 });
-  observer.observe(card.value!);
+  observer = observeOnScreen(card.value!, onScreen => visible.value = onScreen);
 });
 
 onBeforeUnmount(() => observer?.disconnect());
@@ -63,13 +61,9 @@ onBeforeUnmount(() => observer?.disconnect());
     </div>
 
     <div class="cta-text">
-      <h2 class="card-title">{{ title }}</h2>
+      <!-- the word joiner keeps the arrow on the last word's line -->
+      <h2 class="card-title">{{ title }} &#8288;<Icon class="arrow-icon" :icon="faArrowRight" /></h2>
       <p class="card-description">{{ description }}</p>
-
-      <span class="cta-link">
-        {{ label }}
-        <Icon class="arrow-icon" :icon="faArrowRight" />
-      </span>
     </div>
   </a>
 </template>
@@ -81,11 +75,11 @@ onBeforeUnmount(() => observer?.disconnect());
   overflow: hidden;
 
   display: grid;
-  grid-template-columns: 184px minmax(0, 1fr);
-  column-gap: 24px;
+  grid-template-columns: 160px minmax(0, 30rem);
+  justify-content: center;
+  column-gap: 32px;
   align-items: center;
-  min-height: 256px;
-  padding: 32px 48px 32px 32px;
+  padding: 28px 48px 28px 32px;
 
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
@@ -98,7 +92,7 @@ onBeforeUnmount(() => observer?.disconnect());
 
 html.dark .cta-card.active {
   box-shadow: var(--elevation-hover), var(--accent-halo);
-  background-color: rgba(255, 255, 255, 0.07);
+  background-color: rgba(255, 255, 255, 0.045);
 }
 
 .cta-card:focus-visible {
@@ -178,9 +172,6 @@ html.dark .cta-card {
 
 
 .cta-text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   min-width: 0;
 }
 
@@ -188,22 +179,11 @@ html.dark .cta-card {
   text-wrap: pretty;
 }
 
-.cta-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  white-space: nowrap;
-  margin-top: 20px;
-
-  font-size: 1rem;
-  line-height: 1.5rem;
-  font-weight: 600;
-  color: var(--accent-text);
-  align-self: flex-end;
-}
-
 .arrow-icon {
-  font-size: 1rem;
+  margin-left: 0.35em;
+  font-size: 1.125rem;
+  vertical-align: -0.05em;
+  color: var(--accent-text);
   transition: transform 0.25s ease;
 }
 
@@ -244,9 +224,10 @@ html.dark .background-gradient {
 }
 
 
-@media screen and (max-width: 1280px) and (min-width: 1181px) {
+@media screen and (min-width: 1181px) {
   .cta-card {
-    grid-template-columns: 168px minmax(0, 1fr);
+    grid-template-columns: 148px minmax(0, 1fr);
+    column-gap: 40px;
     padding: 28px;
   }
 }
@@ -257,18 +238,28 @@ html.dark .background-gradient {
 @media screen and (max-width: 700px) {
   .cta-card {
     grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
     row-gap: 20px;
-    min-height: 0;
-    padding: 24px;
+    padding: 24px 24px 32px;
   }
 
   .visual {
     align-self: auto;
+    justify-self: stretch;
+  }
+
+  .cta-text {
+    max-width: 22rem;
+    text-align: center;
   }
 
   .cta-text .card-title {
     font-size: 1.25rem;
     line-height: 1.625rem;
+  }
+
+  .cta-text .card-description {
+    text-wrap: balance;
   }
 
   .background-gradient {

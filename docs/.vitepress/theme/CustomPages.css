@@ -145,6 +145,7 @@
 
 .custom-page {
   --panel-padding: clamp(32px, 22.4px + 1.38vw, 40px) clamp(24px, 4.7px + 2.76vw, 40px);
+  --section-gap: 36px; /* between the homepage's sections, and between the cards of a row */
   --surface: #FFFFFF;
   --surface-inner: #F0F2F6;
   /* VitePress's light divider is too faint on white */
@@ -158,10 +159,10 @@
 }
 
 html.dark .custom-page {
-  --surface: rgba(255, 255, 255, 0.045);
+  --surface: rgba(255, 255, 255, 0.02);
   --surface-inner: rgba(0, 0, 0, 0.4);
   --surface-edge: none;
-  --surface-rim: linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.015));
+  --surface-rim: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0.012));
   --surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0) 160px);
 }
 
@@ -204,6 +205,21 @@ html.dark .custom-page {
   color: var(--vp-c-text-1);
 }
 
+/* a floating sheet in a card's figure: white with a crisp edge in light, lifted and translucent in dark.
+   light-dark() takes colours only, so the shadows read theirs from variables. */
+.custom-page :where(.fragment) {
+  --edge: light-dark(rgba(16, 24, 40, 0.1), rgba(255, 255, 255, 0.14));
+  --shadow-near: light-dark(rgba(16, 24, 40, 0.04), transparent);
+  --shadow-far: light-dark(rgba(16, 24, 40, 0.14), rgba(0, 0, 0, 0.22));
+
+  border-radius: 12px;
+  background-color: light-dark(#FFFFFF, rgba(255, 255, 255, 0.07));
+  box-shadow:
+      0 0 0 1px var(--edge),
+      0 2px 4px var(--shadow-near),
+      0 14px 32px -12px var(--shadow-far);
+}
+
 /* Dot wings */
 
 .texture-dots {
@@ -211,38 +227,36 @@ html.dark .custom-page {
   isolation: isolate; /* keeps the wings (z-index: -1) above the canvas but below the content */
 }
 
-.texture-dots::before,
-.texture-dots::after {
-  content: "";
+/* one canvas per wing, drawn and flown by useDotWings (dotWings.ts). A page whose header text reaches the wings sets
+   --dots-clear to that text's width, so the dots stay beside it, and a page whose first card or divider reaches under
+   them sets --dots-height to that card's top. The wings run on behind the navbar and above the page by --dots-bleed, so
+   the macOS overscroll pull reveals more dots instead of an empty band. */
+.texture-dots > .dot-wing {
+  --dots-bleed: calc(var(--vp-nav-height) + 200px);
+  --dots-mask-size: 200% calc(0.85 * var(--dots-height, 420px));
+  --dots-mask-y: calc(var(--dots-bleed) + 0.08 * var(--dots-height, 420px));
+
   position: absolute;
-  top: 0;
-  width: 28%;
-  height: 420px;
+  top: calc(-1 * var(--dots-bleed));
+  width: min(28%, max(0px, (100% - var(--dots-clear, 0px)) / 2));
+  height: calc(var(--dots-height, 420px) + var(--dots-bleed));
   z-index: -1;
   pointer-events: none;
-  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 36%, transparent) 1px, transparent 1.5px);
-  background-size: 24px 24px;
-  background-position: center top;
 }
 
-.texture-dots::before {
+/* the masks are anchored at the outer edge, where the dots are largest */
+.texture-dots > .dot-wing.left {
   left: 0;
-  mask-image: radial-gradient(ellipse 55% 55% at 40% 42%, #000, transparent 100%);
+  mask-image: radial-gradient(ellipse var(--dots-mask-size) at 0% var(--dots-mask-y), #000 40%, transparent 100%);
 }
 
-.texture-dots::after {
+.texture-dots > .dot-wing.right {
   right: 0;
-  mask-image: radial-gradient(ellipse 55% 55% at 60% 42%, #000, transparent 100%);
-}
-
-html.dark .texture-dots::before,
-html.dark .texture-dots::after {
-  background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #64B5F6 50%, var(--vp-c-text-1)) 16%, transparent) 1px, transparent 1.5px);
+  mask-image: radial-gradient(ellipse var(--dots-mask-size) at 100% var(--dots-mask-y), #000 40%, transparent 100%);
 }
 
 @media screen and (max-width: 960px) {
-  .texture-dots::before,
-  .texture-dots::after {
+  .texture-dots > .dot-wing {
     display: none;
   }
 }
@@ -256,7 +270,7 @@ html.dark .texture-dots::after {
   margin: 14px 0;
   pointer-events: none;
   background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 40%, transparent) 1px, transparent 1.5px);
-  background-size: 12px 4px;
+  background-size: 20px 4px;
   background-position: center;
   mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
@@ -273,7 +287,7 @@ body:has(.custom-page) {
   --canvas-glow: color-mix(in srgb, #2196F3 32%, transparent);
   --canvas-glow-soft: color-mix(in srgb, #2196F3 12%, transparent);
   --canvas-glow-side: color-mix(in srgb, #2196F3 20%, transparent);
-  --canvas-glow-side-shape: ellipse 800px 450px at 0% 2%;
+  --canvas-glow-side-shape: ellipse 800px 450px at 0% 80px; /* px, not %: a percentage follows the page height */
   --canvas-grain: none;
 
   background-color: var(--custom-page-bg);
@@ -285,18 +299,17 @@ body:has(.custom-page) {
   background-repeat: repeat, no-repeat, no-repeat, no-repeat;
 }
 
-/* the homepage in light mode takes the side glow down the left edge; the more specific dark rule below keeps the
-   corner */
+/* light only: the dark rule below outranks this one */
 body:has(.home-page) {
-  --canvas-glow-side-shape: ellipse 760px 500px at 0% 780px;
-  --canvas-glow-side: color-mix(in srgb, #2196F3 11%, transparent);
+  --canvas-glow: color-mix(in srgb, #2196F3 40%, transparent);
+  --canvas-glow-soft: color-mix(in srgb, #2196F3 16%, transparent);
+  --canvas-glow-side: color-mix(in srgb, #2196F3 15%, transparent);
 }
 
 html.dark body:has(.custom-page) {
   --canvas-glow: color-mix(in srgb, #2196F3 20%, transparent);
   --canvas-glow-soft: color-mix(in srgb, #2196F3 7%, transparent);
   --canvas-glow-side: color-mix(in srgb, #2196F3 12%, transparent);
-  --canvas-glow-side-shape: ellipse 800px 450px at 0% 2%;
   /* grain only on the dark canvas */
   --canvas-grain: url("/homepage/grain-dark.png");
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-page pricing-page texture-dots">
+  <div ref="root" class="custom-page pricing-page texture-dots">
     <div class="container">
       <pricing-tiers />
     </div>
@@ -23,10 +23,19 @@
 import PricingTiers from "./PricingTiers.vue";
 import PricingFaq from "./PricingFaq.vue";
 import PricingContact from "./PricingContact.vue";
+import { ref } from "vue";
+import { useDotWings } from "../dotWings";
+
+const root = ref<HTMLElement>();
+useDotWings(root);
 
 </script>
 
 <style>
+
+.pricing-page {
+  --dots-height: 224px; /* the Community tier card */
+}
 
 .custom-page.pricing-page > .dotted-divider {
   width: calc(100% - 2 * var(--custom-page-gutter));

@@ -7,7 +7,7 @@ import { faqCategories as categories } from "./faq";
 </script>
 
 <template>
-  <article class="content">
+  <article id="faq" class="content">
     <div class="faq-categories">
       <section v-for="category of categories" :key="category.title" class="faq-category">
         <h2 class="faq-category-title">{{ category.title }}</h2>
@@ -27,6 +27,11 @@ import { faqCategories as categories } from "./faq";
 </template>
 
 <style scoped>
+
+/* #faq is a link target: keep the section padding visible under the fixed navbar */
+.content {
+  scroll-margin-top: var(--vp-nav-height);
+}
 
 .faq-categories {
   --faq-accent: light-dark(#1976D2, #2196F3);
