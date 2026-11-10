@@ -107,11 +107,11 @@ html.dark .quick-start-card .card-title {
 }
 
 
-/* both figures are 151px tall (168px at 90% zoom); the fixed box keeps the two titles level if one ever changes */
+/* both figures are 134px tall at 80% zoom (168px unzoomed); the fixed box keeps the two titles level if one ever changes */
 .card-figure {
   display: flex;
   align-items: flex-end;
-  height: 151px;
+  height: 134px;
   margin: 0 0 48px;
 }
 

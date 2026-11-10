@@ -126,12 +126,12 @@ useDotWings(root, { animated: true });
   flex-direction: column;
   gap: var(--section-gap);
   padding-top: 0;
-  padding-bottom: var(--section-gap);
+  padding-bottom: calc(2 * var(--section-gap));
 }
 
-/* the column's gap is the only space around a divider */
+/* the column's gap plus a quarter of it again: 25% more space on each side of a divider */
 .sections .dotted-divider {
-  margin: 0;
+  margin: calc(var(--section-gap) / 4) 0;
 }
 
 .titled-section {
