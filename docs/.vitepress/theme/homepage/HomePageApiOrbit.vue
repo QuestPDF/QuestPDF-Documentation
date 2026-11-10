@@ -83,8 +83,8 @@ onBeforeUnmount(() => {
 <template>
   <article ref="card" class="panel api-orbit-card" :style="fade ? { '--fade': `${fade}px` } : undefined">
     <div ref="text" class="orbit-text">
-      <h2 class="card-title">Designed for professional documents</h2>
-      <p class="card-description">Precise typography, flexible layouts, rich visual content and fine control over every page. {{ featureCount }}+ features for professional documents.</p>
+      <h2 class="card-title">{{ featureCount }}+ document features</h2>
+      <p class="card-description">Precise typography, flexible layouts, rich visual content and fine control over every page. Everything you need to build professional documents.</p>
       <a class="action primary" href="/features-overview.html">Explore features</a>
     </div>
 

@@ -20,6 +20,12 @@ export interface OpenFile {
   lines: Line[];
 }
 
+/* how many lines, and characters of a line, the code window shows (HomePageQuickStart.vue measures them) */
+export interface CodeView {
+  lines: Ref<number>;
+  columns: Ref<number>;
+}
+
 type Phase = "idle" | "working" | "editing" | "built" | "done";
 
 const tick = 16;
@@ -77,7 +83,7 @@ function keyDelay(typed: string) {
 /* thrown out of a pause once the component is gone, which ends the loop */
 const unmounted = Symbol("unmounted");
 
-export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickStartSession) {
+export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickStartSession, view: CodeView) {
   const { rounds } = session;
 
   const files = ref<OpenFile[]>([]);
@@ -101,9 +107,11 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
   const asking = ref(false);
   /* a wait the composer shows as a ring filling around the send button (the key restarts it) */
   const countdown = ref<{ key: number, ms: number }>();
-  /* how many lines the code is scrolled by: a file longer than the window (session.lines) scrolls as an editor
-     does, to where an edit goes before it types in, only as far as it must */
+  /* how many lines the code is scrolled by: a file longer than the window scrolls as an editor does, to where an
+     edit goes before it types in, only as far as it must */
   const scrolled = ref(0);
+  /* how many characters the code is moved sideways by, where the window is narrower than the edit's lines */
+  const shifted = ref(0);
   /* the window is not mostly on screen, so the session and the composer's motion stand still */
   const paused = ref(true);
   /* the session fades out before it starts over */
@@ -136,6 +144,7 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
     marked.value = false;
     unfold.value = session.unfold;
     scrolled.value = 0;
+    shifted.value = 0;
     asking.value = false;
     countdown.value = undefined;
     phase.value = "idle";
@@ -149,22 +158,43 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
   /* scrolls the shown line at `index` into the window, only as far as it must, so the code around it stays put */
   function scrollTo(index: number) {
     if (index >= 0)
-      scrolled.value = Math.min(Math.max(scrolled.value, index - session.lines + 1), index);
+      scrolled.value = Math.min(Math.max(scrolled.value, index - view.lines.value + 1), index);
   }
 
   /* moves the code once, before an edit, so all its new lines will fit with a line to spare below (the room under
      the file may stay empty): as little as it must, and not past the signature of the method it is in, or the line
      above the edit, while the edit leaves room for them; returns whether it moved */
-  function scrollToEdit({ after, remove = 0, add }: Edit) {
+  function scrollToEdit(edit: Edit) {
+    const { after, remove = 0, add } = edit;
     const at = after === undefined ? 0 : lines.value.findIndex(({ line }) => line.text === after && line.kind === "normal");
     const last = (after === undefined ? 0 : at + Math.max(remove, 1)) + add.length - 1;
     const signature = lines.value.findIndex(({ line }) => line.text === unfold.value);
-    const lowest = last - session.lines + 2;
+    const lowest = last - view.lines.value + 2;
     const highest = Math.min(signature >= 0 && signature < at ? signature : at, at - 1);
     const top = Math.max(0, lowest > highest ? lowest : Math.min(Math.max(scrolled.value, lowest), highest));
-    const moved = top !== scrolled.value;
+    const left = shiftFor(edit);
+    const moved = top !== scrolled.value || left !== shifted.value;
     scrolled.value = top;
+    shifted.value = left;
     return moved;
+  }
+
+  /* how far sideways the code goes for an edit: as little as it must for its longest new line to fit, and never past
+     where the change starts: the new lines' indent, or the first character that one line replacing another changes */
+  function shiftFor({ after, remove = 0, add }: Edit) {
+    const written = add.filter(text => text.trim());
+    const overflow = Math.max(0, ...written.map(text => text.length)) + 1 - view.columns.value;
+
+    if (overflow <= 0)
+      return 0;
+
+    let start = Math.min(...written.map(text => text.length - text.trimStart().length));
+
+    if (remove === 1 && after !== undefined && written.length === 1)
+      while (start < after.length && after[start] === written[0][start])
+        start++;
+
+    return Math.min(overflow, start);
   }
 
   /* the file's reactive proxy, added if the edit creates it */
@@ -414,5 +444,5 @@ export function useAgentSession(root: Ref<HTMLElement | null>, session: QuickSta
     document.removeEventListener("visibilitychange", updatePaused);
   });
 
-  return { files, active, lines, promptIndex, promptText, typing, sent, working, finished, applied, zoom, marked, scrolled, asking, countdown, paused, resetting, unfold };
+  return { files, active, lines, promptIndex, promptText, typing, sent, working, finished, applied, zoom, marked, scrolled, shifted, asking, countdown, paused, resetting, unfold };
 }

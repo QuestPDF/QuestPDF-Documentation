@@ -74,7 +74,7 @@ void ComposeAddresses(IContainer container)
                 column.Item()
                     .PaddingBottom(4)
                     .Text(label)
-                    .SemiBold()
+                    .Bold()
                     .FontColor(Accent);
 
                 column.Item().Text(address.Name);
@@ -118,7 +118,7 @@ void ComposeItems(IContainer container)
         .BorderBottom(1)
         .BorderColor(Accent)
         .PaddingBottom(6)
-        .DefaultTextStyle(x => x.SemiBold().FontColor(Accent));
+        .DefaultTextStyle(x => x.Bold().FontColor(Accent));
 
     IContainer Cell(IContainer cell) => cell
         .BorderBottom(0.5f)

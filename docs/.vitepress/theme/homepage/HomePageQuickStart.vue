@@ -10,7 +10,14 @@ import {data as session} from "./quickStart.data";
    the rendered page. */
 
 const windowElement = ref<HTMLElement | null>(null);
-const { files, active, lines, promptIndex, promptText, typing, sent, working, finished, applied, zoom, marked, scrolled, asking, countdown, paused, resetting, unfold } = useAgentSession(windowElement, session);
+const code = ref<HTMLElement | null>(null);
+const probe = ref<HTMLElement | null>(null);
+/* how many lines and characters the code shows, measured once mounted (narrow layouts show fewer) */
+const shownLines = ref(session.lines);
+const columns = ref(Infinity);
+const { files, active, lines, promptIndex, promptText, typing, sent, working, finished, applied, zoom, marked, scrolled, shifted, asking, countdown, paused, resetting, unfold } = useAgentSession(windowElement, session, { lines: shownLines, columns });
+
+const placeholder = "Ask the agent to change the invoice…";
 
 /* rendered at three times the page's box, so they stay sharp when zoomed in on; each is large once decoded, so only
    the one shown, the one fading out and the next one are in the document */
@@ -28,6 +35,8 @@ const view = ref({ x: 24, y: 24, width: 528, height: 444 });
 /* the page's head and its first content, the part of the page the viewer shows at rest */
 const overview = session.overview;
 const maxScale = 1.5;
+/* the closest the camera comes, so a close-up keeps some of the page around the change */
+const maxZoom = 1.8;
 
 const camera = computed(() => {
   const { x, y, width, height } = view.value;
@@ -39,7 +48,7 @@ const camera = computed(() => {
   const [left, top, w, h] = zoom.value;
   const across = width + 2 * x;
   const down = height + 2 * y;
-  let scale = Math.min(across / w, down / h, rest * 2);
+  let scale = Math.min(across / w, down / h, rest * 2, maxZoom);
 
   if (scale > maxScale && page.width * maxScale <= across)
     scale = maxScale;
@@ -130,16 +139,34 @@ function clamp(value: number, min: number, max: number) {
   return Math.min(Math.max(value, min), max);
 }
 
+/* a line's text starts after the line's 24px padding, the gutter and its 12px margin, and keeps 4px on the right */
+function measureCode() {
+  const box = code.value;
+  if (!box || !probe.value)
+    return;
+
+  const lineHeight = parseFloat(getComputedStyle(box).lineHeight);
+  const ch = probe.value.getBoundingClientRect().width;
+  shownLines.value = Math.max(1, Math.round(box.clientHeight / lineHeight));
+  columns.value = Math.floor((box.clientWidth - 40) / ch) - session.digits;
+}
+
 let resizeObserver: ResizeObserver | undefined;
+let codeObserver: ResizeObserver | undefined;
 
 onMounted(() => {
   resizeObserver = new ResizeObserver(([{ contentRect: { x, y, width, height } }]) => view.value = { x, y, width, height });
   resizeObserver.observe(result.value!);
+
+  codeObserver = new ResizeObserver(measureCode);
+  codeObserver.observe(code.value!);
+  void document.fonts.ready.then(measureCode);
 });
 
 onUnmounted(() => {
   cancelAnimationFrame(flight);
   resizeObserver?.disconnect();
+  codeObserver?.disconnect();
 });
 
 /* the window's markup, as Shiki writes it, from the tokens highlighted at build time (quickStart.data.ts) */
@@ -177,7 +204,7 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
   const classes = ["line", kind === "normal" ? "" : `line-${kind}`, state ? `line-${state}` : ""].filter(Boolean).join(" ");
   const gutter = `<span class="gutter">${state ? " " : number ?? " "}</span>`;
   const fold = folded && typed >= text.length ? `<span class="fold">{ … }</span>` : "";
-  return `<span class="${classes}">${gutter}${html}${fold}</span>`;
+  return `<span class="${classes}">${gutter}<span class="text">${html}${fold}</span></span>`;
 }
 </script>
 
@@ -195,8 +222,8 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
       <div class="window-body" :class="{ resetting }">
         <!-- the composer sticks within this part, so it never rides up over the code's title bar -->
         <div class="window-main">
-          <div class="code-source" :style="{ '--code-lines': session.lines, '--gutter-digits': session.digits, '--scroll': scrolled }">
-            <pre class="shiki" tabindex="0"><code v-html="codeHtml"></code></pre>
+          <div class="code-source" :style="{ '--session-lines': session.lines, '--gutter-digits': session.digits, '--scroll': scrolled, '--shift': shifted }">
+            <pre ref="code" class="shiki" tabindex="0"><code v-html="codeHtml"></code><span ref="probe" class="probe" aria-hidden="true">0</span></pre>
           </div>
 
           <div class="composer" :class="{ asking, sent, working }">
@@ -206,6 +233,7 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
                  request that wraps while it types does not move the page -->
             <div class="composer-text">
               <span v-for="round of session.rounds" :key="round.prompt" class="composer-sizer" aria-hidden="true">{{ round.prompt }}</span>
+              <span v-if="!promptText" class="composer-placeholder">{{ placeholder }}</span>
               <span>{{ promptText }}<span v-if="!sent" class="caret" :class="{ steady: typing }"></span></span>
             </div>
 
@@ -258,6 +286,7 @@ function lineHtml(line: Line, folded: boolean, number?: number) {
   --composer-text: #FFFFFF;
   --composer-icon: rgba(255, 255, 255, 0.9);
   --composer-step: rgba(255, 255, 255, 0.85);
+  --composer-placeholder: rgba(255, 255, 255, 0.72);
   --composer-ink: #FFFFFF;
   --composer-button-ink: #6D49AB;
   --composer-sheen: rgba(255, 255, 255, 0.14);
@@ -281,10 +310,13 @@ html.dark .quick-start {
 
 /* Windows */
 
-/* the body has no box of its own here, so the page's window can reach up beside the title bar */
+/* the body has no box of its own here, so the page's window can reach up beside the title bar; the code keeps room
+   for its longest line (68 characters) and the page takes the rest, up to 42rem */
 .window {
+  --code-width: 640px;
+
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 36rem;
+  grid-template-columns: minmax(0, 1fr) min(42rem, 100% - var(--code-width));
   grid-template-rows: auto 1fr;
   grid-template-areas:
       "header viewer"
@@ -317,7 +349,6 @@ html.dark .window-header {
   display: contents;
 }
 
-.code-source,
 .result {
   transition: opacity 0.45s ease;
 }
@@ -366,18 +397,34 @@ html.dark .window-header {
   background-color: var(--lit);
 }
 
-/* as tall as the most lines the session shows, so the window keeps its height; a longer file scrolls by --scroll */
+/* as tall as the most lines the session shows, so the window keeps its height; a longer file scrolls by --scroll,
+   and where the window is narrower than an edit, its lines move sideways by --shift */
+@property --shift {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
 .code-source {
+  --code-lines: var(--session-lines);
+
   flex-grow: 1;
   padding-bottom: 12px;
   font-size: 0.875rem;
   line-height: 1.5;
+  transition: opacity 0.45s ease, --shift 0.6s ease;
 }
 
 .code-source pre {
   height: calc(var(--code-lines) * 1lh);
   overflow-x: auto;
   overflow-y: hidden;
+}
+
+.probe {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .code-source :deep(code) {
@@ -393,6 +440,13 @@ html.dark .window-header {
   min-width: 100%;
   min-height: 1lh;
   padding: 0 4px 0 24px;
+}
+
+/* the code moves under the line numbers, so the part moved past the text's start is cut off */
+.code-source :deep(.text) {
+  display: inline-block;
+  translate: calc(var(--shift) * -1ch) 0;
+  clip-path: inset(-4px 0 -4px calc(var(--shift) * 1ch));
 }
 
 /* a blank slot holds a space, so every line keeps one baseline */
@@ -492,6 +546,11 @@ html.dark .window-header {
       0 0 0 calc(1px / var(--scale)) light-dark(rgba(16, 24, 40, 0.1), rgba(255, 255, 255, 0.1)),
       0 calc(6px / var(--scale)) calc(18px / var(--scale)) calc(-8px / var(--scale)) light-dark(rgba(16, 24, 40, 0.25), rgba(0, 0, 0, 0.6));
   transform-origin: 0 0;
+}
+
+/* a little see-through, so the white page does not glare on the dark desk */
+html.dark .page {
+  opacity: 0.88;
 }
 
 .page img {
@@ -638,6 +697,11 @@ html.dark .window-header {
   visibility: hidden;
 }
 
+.composer-placeholder {
+  font-weight: 500;
+  color: var(--composer-placeholder);
+}
+
 /* as wide as the caret, which follows a request until it is sent, so a request wraps where its sizer does */
 .composer-sizer::after {
   content: "";
@@ -753,9 +817,20 @@ html.dark .window-header {
 }
 
 
-/* below 1280px the page's window goes under the code and the composer under the page, so the composer still sticks
-   over the code */
-@media screen and (max-width: 1280px) {
+/* the code and the page stay side by side down to 1024px, with smaller code */
+@media screen and (max-width: 1279px) {
+  .window {
+    --code-width: 600px;
+  }
+
+  .code-source {
+    font-size: 0.8125rem;
+  }
+}
+
+/* below 1024px the page's window goes under the code, with the composer between them; the code shows fewer lines,
+   so the code, the request and the page fit on one screen */
+@media screen and (max-width: 1023px) {
   .window {
     display: flex;
     flex-direction: column;
@@ -770,20 +845,20 @@ html.dark .window-header {
     display: contents;
   }
 
-  /* the composer sticks within the body here, so the code's top padding is its own */
   .code-source {
+    --code-lines: min(var(--session-lines), 16);
+
     padding-top: 12px;
   }
 
   .composer {
-    order: 1;
-    margin-top: 24px;
+    position: relative;
+    bottom: auto;
   }
 
   .viewer {
     border-left: none;
     border-top: 1px solid var(--vp-c-divider);
-    border-bottom: 1px solid var(--vp-c-divider);
   }
 
   /* mid-panel here, where the panel has no sheen */
@@ -807,11 +882,13 @@ html.dark .window-header {
   }
 
   .code-source {
-    line-height: 1.25;
+    --code-lines: min(var(--session-lines), 14);
+
+    font-size: 0.75rem;
   }
 
   .composer {
-    margin: 16px;
+    margin: 4px 16px 16px;
   }
 }
 
