@@ -106,6 +106,7 @@ onBeforeUnmount(() => {
       color-mix(in srgb, var(--vp-c-text-1) 50%, transparent));
 
   width: 100%;
+  zoom: 0.9;
   user-select: none;
 }
 

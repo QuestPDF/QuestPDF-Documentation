@@ -91,6 +91,7 @@ onBeforeUnmount(() => {
   --del: light-dark(#C62828, #EF9A9A);
 
   width: 100%;
+  zoom: 0.9;
   user-select: none;
 }
 
