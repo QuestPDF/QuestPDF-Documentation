@@ -65,7 +65,7 @@ interface License {
 
 const CommunityLicense: License = {
   name: "community",
-  description: "Free for individuals, open-source projects, nonprofits, academic institutions, and businesses under $1M annual revenue.",
+  description: "Free for individuals, open-source projects, qualifying charities, academic institutions, and businesses under $1M annual revenue.",
   price: null,
   paddlePriceId: null,
   details: [
