@@ -566,15 +566,13 @@ html.dark .page {
   opacity: 1;
 }
 
-/* outlines what the last request changed, once the page shows it, in the site's light-theme primary (the page is
-   white in both themes); its edge and corners are divided by the page's scale, as the page's own are */
+/* marks what the last request changed, once the page shows it, like a highlighter pen; multiply keeps the text
+   readable and the corners are divided by the page's scale, as the page's own are */
 .mark {
-  --mark: #0277BD;
-
   position: absolute;
-  border: calc(2px / var(--scale)) solid var(--mark);
-  border-radius: calc(6px / var(--scale));
-  box-shadow: 0 0 0 calc(4px / var(--scale)) color-mix(in srgb, var(--mark) 14%, transparent);
+  background: rgba(255, 214, 10, 0.5);
+  mix-blend-mode: multiply;
+  border-radius: calc(3px / var(--scale));
   opacity: 0;
   scale: 1.04;
   transition: opacity 0.32s ease, scale 0.32s ease;
