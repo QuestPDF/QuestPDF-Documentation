@@ -400,7 +400,7 @@ html.dark .window-header {
 /* as tall as the most lines the session shows, so the window keeps its height; a longer file scrolls by --scroll,
    and where the window is narrower than an edit, its lines move sideways by --shift */
 @property --shift {
-  syntax: "<number>";
+  syntax: "<number> | <length>";
   inherits: true;
   initial-value: 0;
 }
