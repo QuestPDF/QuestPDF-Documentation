@@ -29,6 +29,7 @@ const card = ref<HTMLElement>();
 const text = ref<HTMLElement>();
 const dots: HTMLElement[] = [];
 const fade = ref<number>();
+const scale = ref(1); /* narrow cards shrink the orbits so more planets fit */
 
 let frame = 0;
 let elapsed = 0;
@@ -39,8 +40,8 @@ let resize: ResizeObserver | undefined;
 function place(seconds: number) {
   planets.forEach((planet, index) => {
     const angle = (planet.start + seconds / planet.orbit.period * 360) * Math.PI / 180;
-    const x = planet.orbit.radius * Math.cos(angle);
-    const y = planet.orbit.radius * squash * Math.sin(angle);
+    const x = planet.orbit.radius * scale.value * Math.cos(angle);
+    const y = planet.orbit.radius * scale.value * squash * Math.sin(angle);
     dots[index].style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
   });
 }
@@ -61,7 +62,11 @@ function stop() {
 onMounted(() => {
   place(0);
 
-  resize = new ResizeObserver(() => fade.value = text.value!.offsetTop + text.value!.offsetHeight);
+  resize = new ResizeObserver(() => {
+    fade.value = text.value!.offsetTop + text.value!.offsetHeight;
+    scale.value = Math.min(1, Math.max(0.78, card.value!.offsetWidth / 520));
+    place(elapsed);
+  });
   resize.observe(card.value!);
 
   if (reducedMotion()) return;
@@ -81,7 +86,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <article ref="card" class="panel api-orbit-card" :style="fade ? { '--fade': `${fade}px` } : undefined">
+  <article ref="card" class="panel api-orbit-card" :style="fade ? { '--fade': `${fade}px`, '--sun-size': `${72 * scale}px` } : undefined">
     <div ref="text" class="orbit-text">
       <h2 class="card-title">{{ featureCount }}+ document features</h2>
       <p class="card-description">Precise typography, flexible layouts, rich visual content and fine control over every page. Everything you need to build professional documents.</p>
@@ -92,7 +97,7 @@ onBeforeUnmount(() => {
       <span class="glow"></span>
 
       <svg class="orbits" width="1" height="1" viewBox="0 0 1 1">
-        <ellipse v-for="orbit of orbits" :key="orbit.radius" cx="0" cy="0" :rx="orbit.radius" :ry="orbit.radius * squash" />
+        <ellipse v-for="orbit of orbits" :key="orbit.radius" cx="0" cy="0" :rx="orbit.radius * scale" :ry="orbit.radius * scale * squash" />
       </svg>
 
       <span v-for="(planet, index) of planets" :key="index" :ref="el => dots[index] = el as HTMLElement" class="planet"></span>
@@ -185,8 +190,8 @@ html.dark .api-orbit-card {
   position: absolute;
   left: 50%;
   top: 100%;
-  width: 72px;
-  height: 72px;
+  width: var(--sun-size, 72px);
+  height: var(--sun-size, 72px);
   translate: -50% -50%;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, var(--sun-light), var(--sun) 58%, var(--sun-deep));

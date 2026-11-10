@@ -163,10 +163,7 @@ const slabs = computed(() => layers.map((_, i) => {
         <span class="text">
           <strong class="name">{{ layer.name }}</strong>
           <span class="values">
-            <template v-for="(value, j) of layer.values" :key="value">
-              <span v-if="j > 0" class="dot" aria-hidden="true">·</span>
-              <span class="value">{{ value }}</span>
-            </template>
+            <span v-for="(value, j) of layer.values" :key="value" class="value">{{ value }}{{ j < layer.values.length - 1 ? "," : "" }}</span>
           </span>
         </span>
       </li>
@@ -301,9 +298,8 @@ const slabs = computed(() => layers.map((_, i) => {
   white-space: nowrap;
 }
 
-.dot {
-  margin: 0 0.5em;
-  color: var(--vp-c-text-3);
+.value:not(:last-child) {
+  margin-right: 0.3em;
 }
 
 /* phones: the figure sits above the rows, and the leaders have nothing to reach */
@@ -317,7 +313,9 @@ const slabs = computed(() => layers.map((_, i) => {
     margin-inline: auto;
   }
 
-  .leader {
+  .leader,
+  .joint,
+  .marker {
     display: none;
   }
 }

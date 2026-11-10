@@ -284,9 +284,9 @@ html.dark .custom-page .dotted-divider {
    that import it. */
 
 body:has(.custom-page) {
-  --canvas-glow: color-mix(in srgb, #2196F3 32%, transparent);
-  --canvas-glow-soft: color-mix(in srgb, #2196F3 12%, transparent);
-  --canvas-glow-side: color-mix(in srgb, #2196F3 20%, transparent);
+  --canvas-glow: color-mix(in srgb, #4DA3FF 36%, transparent);
+  --canvas-glow-soft: color-mix(in srgb, #4DA3FF 14%, transparent);
+  --canvas-glow-side: color-mix(in srgb, #4DA3FF 14%, transparent);
   --canvas-glow-side-shape: ellipse 800px 450px at 0% 80px; /* px, not %: a percentage follows the page height */
   --canvas-grain: none;
 
@@ -297,13 +297,6 @@ body:has(.custom-page) {
       radial-gradient(ellipse 1000px 500px at 30% 0%, var(--canvas-glow-soft), transparent 70%),
       radial-gradient(var(--canvas-glow-side-shape), var(--canvas-glow-side), transparent 70%);
   background-repeat: repeat, no-repeat, no-repeat, no-repeat;
-}
-
-/* light only: the dark rule below outranks this one */
-body:has(.home-page) {
-  --canvas-glow: color-mix(in srgb, #2196F3 40%, transparent);
-  --canvas-glow-soft: color-mix(in srgb, #2196F3 16%, transparent);
-  --canvas-glow-side: color-mix(in srgb, #2196F3 15%, transparent);
 }
 
 html.dark body:has(.custom-page) {

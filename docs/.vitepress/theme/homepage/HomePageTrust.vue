@@ -142,12 +142,12 @@ const standards: Standard[] = [
 @media screen and (max-width: 600px) {
   .standards {
     padding-right: 0;
-    padding-bottom: 104px;
+    padding-bottom: 120px;
   }
 
   .page-figure {
     right: 16px;
-    bottom: -110px;
+    bottom: -94px;
   }
 }
 

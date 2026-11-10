@@ -201,6 +201,10 @@ onBeforeUnmount(() => timeline.cancel());
       0 0 0 4px color-mix(in srgb, var(--accent-secondary) 22%, transparent),
       0 8px 20px -4px color-mix(in srgb, var(--accent-secondary) 60%, transparent);
   transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+
+  /* its own compositor layer, so the 3D page next to it cannot make iOS repaint it */
+  will-change: transform, opacity;
+  backface-visibility: hidden;
 }
 
 .play-button .icon {
@@ -218,11 +222,12 @@ onBeforeUnmount(() => timeline.cancel());
 .play-button::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -18px;
   border-radius: 50%;
-  box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-secondary) 45%, transparent);
+  background: radial-gradient(circle, transparent 54%, color-mix(in srgb, var(--accent-secondary) 45%, transparent) 55%);
   opacity: 0;
   pointer-events: none;
+  will-change: transform, opacity;
 }
 
 /* Hover */
@@ -256,12 +261,12 @@ onBeforeUnmount(() => timeline.cancel());
 
 @keyframes play-ring {
   0% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-secondary) 45%, transparent);
+    transform: scale(0.55);
     opacity: 1;
   }
 
   70%, 100% {
-    box-shadow: 0 0 0 18px color-mix(in srgb, var(--accent-secondary) 45%, transparent);
+    transform: scale(1);
     opacity: 0;
   }
 }

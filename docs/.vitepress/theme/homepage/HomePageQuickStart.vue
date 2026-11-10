@@ -890,4 +890,51 @@ html.dark .page {
   }
 }
 
+/* phones: the section runs edge to edge, with no title bars, a compact composer and tighter line numbers */
+@media screen and (max-width: 600px) {
+  .quick-start {
+    margin-inline: calc(var(--custom-page-gutter) * -1);
+    border-radius: 0;
+  }
+
+  .window-header {
+    display: none;
+  }
+
+  .code-source {
+    padding-top: 16px;
+  }
+
+  .code-source :deep(.line) {
+    padding-left: 12px;
+  }
+
+  .code-source :deep(.gutter) {
+    margin-right: 8px;
+  }
+
+  .composer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 12px;
+    margin: 4px 12px 16px;
+    padding-left: 14px;
+  }
+
+  .composer-icon,
+  .composer-step {
+    display: none;
+  }
+
+  .composer-text {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .composer-send {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
 </style>

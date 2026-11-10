@@ -40,7 +40,7 @@ h1 .highlight-foreground {
   padding-right: 0.05em; /* keeps the gradient clip from shaving the last letter's edge */
   font-weight: 700;
 
-  background-image: linear-gradient(100deg, #00c6ff 0%, #0094f9 55%, #2979ff 100%);
+  background-image: linear-gradient(100deg, #1AA3FF 0%, #0A7CFF 55%, #3D5BFF 100%);
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;

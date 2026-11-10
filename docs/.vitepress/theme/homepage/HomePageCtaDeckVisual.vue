@@ -206,6 +206,14 @@ const LEAVE_FADE: Keyframe[] = [
   { opacity: 1 }
 ];
 
+/* the pile's shadow follows the page in hand: it thins while that page is invisible, so no shadow stays behind it */
+const SHADOW_DIP: Keyframe[] = [
+  { opacity: 1, easing: "cubic-bezier(0.45, 0, 0.55, 1)" },
+  { opacity: 0.35, offset: 0.35, easing: "linear" },
+  { opacity: 0.35, offset: 0.39, easing: "cubic-bezier(0.2, 0.7, 0.2, 1)" },
+  { opacity: 1 }
+];
+
 /* the run: without end while hovered, one cycle through the pile when the card merely came into view */
 const run = computed(() => props.active ? Infinity : props.visible ? pages.length : 0);
 
@@ -221,7 +229,8 @@ async function step() {
 
   const motions = [
     timeline.animate(page, LEAVE_PLACE, { duration: STEP, fill: "both" }),
-    timeline.animate(page, LEAVE_FADE, { duration: STEP, fill: "both" })
+    timeline.animate(page, LEAVE_FADE, { duration: STEP, fill: "both" }),
+    timeline.animate(root.value!.querySelector(".shadow")!, SHADOW_DIP, { duration: STEP, fill: "both" })
   ];
 
   if (!await Timeline.settled(motions))
