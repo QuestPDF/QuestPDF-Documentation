@@ -105,7 +105,7 @@ onMounted(() => {
       });
     }
     else if (entry.intersectionRatio >= onScreenShare) {
-      [...building, ...floating].forEach(animation => animation.play());
+      [...building, ...floating].filter(animation => animation.playState !== "finished").forEach(animation => animation.play());
     }
     /* partly on screen: an assembly under way finishes, the hover waits */
     else {
