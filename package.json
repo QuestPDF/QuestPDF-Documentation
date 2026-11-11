@@ -11,13 +11,13 @@
     "@fortawesome/pro-light-svg-icons": "7.3.1",
     "@fortawesome/pro-regular-svg-icons": "7.3.1",
     "@fortawesome/pro-solid-svg-icons": "7.3.1",
-    "@paddle/paddle-js": "1.6.5",
+    "@paddle/paddle-js": "1.6.6",
     "@types/node": "^22.19.21",
     "image-size": "^2.0.4",
     "shiki": "^4.6.0",
     "vitepress": "^2.0.0-alpha.21",
     "vitepress-plugin-llms": "^1.14.0",
-    "vue": "3.5.44"
+    "vue": "3.5.45"
   },
   "scripts": {
     "docs:dev": "vitepress dev docs",
