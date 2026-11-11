@@ -154,23 +154,3 @@ QuestPDF.Settings.ThrowOnMissingTextGlyphs = true;
 ```
 
 When this setting is disabled and a glyph is not available in the font family or any of its fallbacks, placeholder characters are visible in the produced PDF file.
-
-
-## Removing the default Lato font
-
-The bundled font is distributed as a single compressed archive: `QuestPDF.Fonts.Lato.br` on .NET 5 and newer, and `QuestPDF.Fonts.Lato.gz` on .NET Standard 2.0 and .NET Framework.
-
-If you are using your own fonts and want to optimize your package size, you can safely remove it from the output.
-To follow this approach, please add the following snippet to your `.csproj` file:
-
-```xml{3-7}
-<Project Sdk="Microsoft.NET.Sdk">
-
-    <Target Name="QuestPDF_DoNotIncludeLatoFont" BeforeTargets="AssignTargetPaths">
-        <ItemGroup>
-            <None Remove="@(None->WithMetadataValue('Filename','QuestPDF.Fonts.Lato'))" />
-        </ItemGroup>
-    </Target>
-
-</Project>
-```
