@@ -63,8 +63,8 @@ const points = [
 ];
 
 /* the latest release; keep in sync with docs/companion/download.md and public/companion/latest-version */
-const companionVersion = "2026.2.2";
-const releaseUrl = `https://github.com/QuestPDF/QuestPDF.Companion/releases/download/${companionVersion}`;
+const companionVersion = "2026.11.0";
+const releaseUrl = `https://github.com/QuestPDF/QuestPDF.CompanionApp/releases/download/${companionVersion}`;
 
 const downloads = [
   { icon: faWindows, name: "Windows", format: ".msix", url: `${releaseUrl}/questpdf_companion-${companionVersion}-windows.msix` },
