@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <HomePageCompanionScreens class="companion-media" />
+    <HomePageCompanionVideo class="companion-media" />
   </div>
 </template>
 
@@ -49,7 +49,7 @@
 import { faArrowPointer, faBug, faChevronDown, faCode, faFolderTree, faRulerCombined } from "@fortawesome/pro-regular-svg-icons";
 import { faApple, faLinux, faWindows } from "@fortawesome/free-brands-svg-icons";
 import Icon from "../Icon.vue";
-import HomePageCompanionScreens from "./HomePageCompanionScreens.vue";
+import HomePageCompanionVideo from "./HomePageCompanionVideo.vue";
 
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 
