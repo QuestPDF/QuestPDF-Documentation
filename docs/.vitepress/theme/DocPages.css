@@ -1,0 +1,310 @@
+/* Documentation pages: the menu, the article and the "On this page" pane. Everything is nested under html:root, so
+   each rule outweighs VitePress's scoped component styles. */
+
+html:root {
+  --doc-bg: light-dark(#FFFFFF, #0E1014);
+  --doc-pane: light-dark(#F3F7FD, #11151C);
+  --doc-line: light-dark(#DFE5EE, #252A33);
+  --doc-line-strong: light-dark(#C3CCD9, #3B424E);
+  --doc-glow: light-dark(color-mix(in srgb, #4DA3FF 12%, transparent), color-mix(in srgb, #2196F3 7%, transparent));
+  --doc-code-bg: light-dark(#FBFBFC, #0A0C0F);
+  --doc-hover: color-mix(in srgb, var(--vp-c-text-1) 7%, transparent);
+  --doc-menu-strong: light-dark(#1B1B1F, #F5F5F7); /* section and sub-group names */
+  --doc-menu-item: color-mix(in srgb, var(--vp-c-text-1) 15%, var(--vp-c-text-2)); /* page links: a step above VitePress's own grey, which reads faint at 14px */
+
+  body:has(.VPDoc) {
+    background-color: var(--doc-bg);
+  }
+
+  .VPSidebar,
+  .VPContent,
+  .VPLocalNav,
+  .Layout:has(> .VPSidebar) > footer {
+    --vp-c-bg: var(--doc-bg);
+    --vp-c-divider: var(--doc-line);
+    --vp-sidebar-bg-color: var(--doc-bg);
+    --vp-local-nav-bg-color: var(--doc-bg);
+  }
+
+  /* the homepage's glow, faint, behind the title */
+  .VPContent > .VPDoc {
+    background-image: radial-gradient(ellipse 660px 320px at 44% 0%, var(--doc-glow), transparent 70%);
+    background-repeat: no-repeat;
+  }
+
+
+  /* Menu pane */
+
+  @media (min-width: 60rem) {
+    .Layout > aside.VPSidebar {
+      border-inline-end: 1px solid var(--doc-line);
+      padding-bottom: 3rem;
+      scrollbar-width: thin;
+      scrollbar-color: color-mix(in srgb, var(--vp-c-text-1) 20%, transparent) transparent;
+    }
+
+    .VPSidebar .group:first-of-type {
+      padding-top: 1rem;
+    }
+  }
+
+  .VPSidebar .group,
+  .VPSidebar .group + .group {
+    border-top: none;
+    padding-top: 0;
+  }
+
+
+  /* Outline: a third pane behind a full-height rule, on the content's background */
+
+  .VPDoc:has(.VPDocAsideOutline.has-outline) .aside {
+    padding-inline-start: 0.5rem;
+  }
+
+  /* an inset shadow, not a border: the pane clips at its padding edge, and a marker has to lie on the rule */
+  .VPDoc:has(.VPDocAsideOutline.has-outline) .aside > .aside-container {
+    box-shadow: inset 1px 0 var(--doc-line);
+    padding-inline-start: 1.5rem;
+    width: 15.5rem;
+  }
+
+  /* the fade at the pane's foot starts right of the rule, so the rule reaches the bottom */
+  .VPDoc .aside > .aside-curtain {
+    margin-inline-start: 0.5rem;
+  }
+
+  .VPDocAsideOutline > .content {
+    border-inline-start: none;
+    padding-inline-start: 0;
+  }
+
+  /* the text follows the menu: the title like a section name, the headings like page links */
+
+  .VPDocAsideOutline .outline-title,
+  .VPDocAsideOutline .outline-link {
+    letter-spacing: 0.015em;
+    word-spacing: 0.1em;
+  }
+
+  .VPDocAsideOutline .outline-title {
+    padding-bottom: 0.25rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--doc-menu-strong);
+    text-transform: uppercase;
+  }
+
+  .VPDocAsideOutline .outline-link {
+    position: relative;
+    padding-block: 0.25rem;
+    line-height: 1.5rem;
+    color: var(--doc-menu-item);
+    white-space: normal;
+    overflow: visible;
+  }
+
+  .VPDocAsideOutline .outline-link:hover {
+    color: var(--vp-c-text-1);
+  }
+
+  /* how far a marker reaches back to sit on the pane's rule: the pane's padding, plus a nested list's own */
+  .VPDocAsideOutline .outline-link {
+    --doc-rule-offset: -1.5rem;
+  }
+
+  .VPDocAsideOutline .nested .outline-link {
+    --doc-rule-offset: -2.5rem;
+  }
+
+  .VPDocAsideOutline .outline-marker {
+    display: none;
+  }
+
+  .VPDocAsideOutline .outline-link.active {
+    color: var(--vp-c-brand-1);
+  }
+
+  /* the current heading is a stretch of the pane's rule */
+  .VPDocAsideOutline .outline-link.active::before {
+    content: "";
+    position: absolute;
+    inset-block: 4px;
+    inset-inline-start: var(--doc-rule-offset);
+    width: 2px;
+    background-color: var(--vp-c-brand-1);
+  }
+
+
+  /* Article text */
+
+  .vp-doc h1 {
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  .vp-doc p {
+    line-height: 1.7;
+  }
+
+  .vp-doc h2 {
+    margin-top: 2.5rem;
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+
+  .vp-doc h3 {
+    font-size: 1.125rem;
+  }
+
+
+  /* Code blocks: a toolbar with the language on the left and the copy button always in reach */
+
+  .vp-doc div[class*="language-"] {
+    border-block: 1px solid var(--doc-line);
+    padding-top: 2.25rem;
+    background-color: var(--doc-code-bg);
+  }
+
+  @media (min-width: 40rem) {
+    .vp-doc div[class*="language-"] {
+      border: 1px solid var(--doc-line);
+      border-radius: 10px;
+    }
+  }
+
+  .vp-doc div[class*="language-"]::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 2.25rem;
+    border-bottom: 1px solid var(--doc-line);
+    background-color: var(--doc-pane);
+  }
+
+  .vp-doc div[class*="language-"] > span.lang,
+  .vp-doc div[class*="language-"]:hover > button.copy + span.lang,
+  .vp-doc div[class*="language-"] > button.copy:focus + span.lang {
+    top: 0;
+    inset-inline: 1rem auto;
+    font-family: var(--vp-font-family-mono);
+    font-size: 0.75rem;
+    line-height: 2.25rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 1;
+  }
+
+  .vp-doc div.language-csharp > span.lang {
+    font-size: 0;
+  }
+
+  .vp-doc div.language-csharp > span.lang::after {
+    content: "C#";
+    font-size: 0.75rem;
+  }
+
+  .vp-doc div[class*="language-"] > button.copy {
+    top: 0.25rem;
+    inset-inline-end: 0.375rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-color: transparent;
+    border-radius: 6px;
+    background-color: transparent;
+    background-size: 1rem;
+    opacity: 1;
+    transition: none;
+  }
+
+  .vp-doc div[class*="language-"] > button.copy:hover,
+  .vp-doc div[class*="language-"] > button.copy.copied {
+    border-color: transparent;
+    background-color: var(--doc-hover);
+  }
+
+  .vp-doc div[class*="language-"] > button.copy.copied::before,
+  .vp-doc div[class*="language-"] > button.copy:hover.copied::before {
+    top: -1px;
+    height: 1.75rem;
+    border: none;
+    border-radius: 6px 0 0 6px;
+    background-color: var(--doc-hover);
+  }
+
+  .vp-doc [class*="language-"] pre {
+    padding-block: 1rem;
+  }
+
+
+  /* Tables: a reference grid */
+
+  .vp-doc tr,
+  .vp-doc tr:nth-child(2n) {
+    background-color: transparent;
+  }
+
+  .vp-doc th {
+    background-color: var(--doc-pane);
+  }
+
+  @media (min-width: 40rem) {
+    .vp-doc .custom-block {
+      border-radius: 10px;
+    }
+  }
+
+
+  /* Footer: right of the menu. Its line runs to the window's edge, and it covers the foot of the outline pane's
+     rule. */
+
+  .Layout:has(> .VPSidebar) > footer {
+    position: relative;
+    z-index: var(--vp-z-index-footer);
+    border-top: 1px solid var(--doc-line);
+  }
+
+  .Layout:has(> .VPSidebar) > footer > .content:first-child {
+    border-top: none;
+  }
+
+  @media (min-width: 60rem) {
+    .Layout:has(> .VPSidebar) > footer {
+      padding-inline: max(0px, (100% - var(--vp-layout-max-width)) / 2);
+    }
+
+    .Layout:has(> .VPSidebar) > footer > .content {
+      margin-inline-start: var(--vp-sidebar-width);
+    }
+  }
+
+
+  /* Navbar: as on the other pages, one surface and one divider across the window, the logo not held to the menu's
+     column */
+
+  @media (min-width: 60rem) {
+    .VPNavBar.has-sidebar {
+      --vp-nav-col-offset: 0px;
+    }
+
+    .VPNavBar.has-sidebar .divider::before {
+      content: none;
+    }
+
+    .VPNavBar.has-sidebar .container > .title,
+    .VPNavBar.has-sidebar .VPNavBarTitle.has-sidebar {
+      min-width: 0;
+      max-width: none;
+    }
+  }
+
+
+  /* hover answers at once */
+  .VPSidebar .text,
+  .VPSidebar .indicator,
+  .VPDocAsideOutline .outline-link {
+    transition: none;
+  }
+}

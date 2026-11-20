@@ -6,6 +6,7 @@ import NavDocumentationMenu from './NavDocumentationMenu.vue';
 
 import './VitepressAdjustments.css'
 import './CustomPages.css'
+import './DocPages.css'
 
 export default {
     ...DefaultTheme,

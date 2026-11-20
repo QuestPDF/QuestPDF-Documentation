@@ -1,7 +1,13 @@
 import {readFileSync} from 'node:fs'
+import {fileURLToPath} from 'node:url'
 import {defineConfig, type DefaultTheme, HeadConfig} from 'vitepress'
 import llmstxt from 'vitepress-plugin-llms'
+import {
+    faArrowsUpDownLeftRight, faCode, faCubes, faImage, faLightbulb, faPageBreak, faPlanetRinged, faRocketLaunch,
+    faTableLayout
+} from '@fortawesome/pro-light-svg-icons'
 import imageSizePlugin from "./markdownit-imagesize-plugin.ts";
+import type {ThemeConfig} from "./theme/themeConfig.ts";
 
 const isProd = process.env.NODE_ENV === 'production';
 const llmsTxtTemplate = readFileSync(new URL('./llms-txt-template.md', import.meta.url), 'utf-8').trimEnd();
@@ -24,7 +30,7 @@ function withoutExternalLinks(items: DefaultTheme.SidebarItem[]): DefaultTheme.S
         .map(item => item.items ? { ...item, items: withoutExternalLinks(item.items) } : item);
 }
 
-export default defineConfig({
+export default defineConfig<ThemeConfig>({
     lang: 'en-US',
     title: 'QuestPDF',
     description: 'Modern C# library for PDF document generation',
@@ -32,6 +38,12 @@ export default defineConfig({
     cleanUrls: false,
 
     vite: {
+      resolve: {
+          alias: [{
+              find: /^.*\/VPSidebarItem\.vue$/,
+              replacement: fileURLToPath(new URL('./theme/SidebarItem.vue', import.meta.url))
+          }]
+      },
       plugins: [llmstxt({
           sidebar: sidebar => Array.isArray(sidebar) ? withoutExternalLinks(sidebar) : sidebar,
           domain: 'https://www.questpdf.com',
@@ -86,9 +98,12 @@ export default defineConfig({
             { text: 'NuGet', link: 'https://www.nuget.org/packages/QuestPDF', noIcon: true },
             { text: 'Contact', link: '/contact' },
         ],
+        docFooter: { prev: false, next: false },
         sidebar: [
             {
                 text: 'Introduction',
+                icon: faRocketLaunch,
+                collapsed: true,
                 items: [
                     { text: 'Quick start', link: '/quick-start' },
                     { text: 'Invoice Tutorial', link: '/invoice-tutorial' },
@@ -100,6 +115,8 @@ export default defineConfig({
             },
             {
                 text: 'Companion App',
+                icon: faPlanetRinged,
+                collapsed: true,
                 items: [
                     { text: 'Introduction and Usage', link: '/companion/usage' },
                     { text: 'Download', link: '/companion/download' },
@@ -109,7 +126,9 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Important concepts',
+                text: 'Concepts',
+                icon: faLightbulb,
+                collapsed: true,
                 items: [
                     {
                         text: 'Generating content',
@@ -150,7 +169,9 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Visual content',
+                text: 'Visual',
+                icon: faImage,
+                collapsed: true,
                 items: [
                     {
                         text: 'Styled Container',
@@ -193,7 +214,9 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Layout elements',
+                text: 'Layout',
+                icon: faTableLayout,
+                collapsed: true,
                 items: [
                     {
                         text: 'Page',
@@ -222,7 +245,9 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Positional elements',
+                text: 'Position / Size',
+                icon: faArrowsUpDownLeftRight,
+                collapsed: true,
                 items: [
                     { text: 'Width', link: '/api-reference/width' },
                     { text: 'Height', link: '/api-reference/height' },
@@ -241,7 +266,9 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Content flow elements',
+                text: 'Content flow',
+                icon: faPageBreak,
+                collapsed: true,
                 items: [
                     { text: 'Page break', link: '/api-reference/page-break' },
                     { text: 'Prevent page break', link: '/api-reference/prevent-page-break' },
@@ -255,7 +282,9 @@ export default defineConfig({
                 ]
             },
             {
-                text: 'Other elements',
+                text: 'Other',
+                icon: faCubes,
+                collapsed: true,
                 items: [
                     { text: 'Section', link: '/api-reference/section' },
                     { text: 'Hyperlink', link: '/api-reference/hyperlink' },
@@ -268,6 +297,8 @@ export default defineConfig({
             },
             {
                 text: 'Examples',
+                icon: faCode,
+                collapsed: true,
                 items: [
                     { text: 'Custom header on first page', link: '/examples/custom-header-on-first-page' },
                     { text: 'Integration with ASP.NET', link: '/examples/aspnet-integration' },
