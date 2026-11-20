@@ -3,8 +3,8 @@ import {fileURLToPath} from 'node:url'
 import {defineConfig, type DefaultTheme, HeadConfig} from 'vitepress'
 import llmstxt from 'vitepress-plugin-llms'
 import {
-    faArrowsUpDownLeftRight, faCode, faCubes, faImage, faLightbulb, faPageBreak, faPlanetRinged, faRocketLaunch,
-    faTableLayout
+    faCode, faFileLines, faImage, faLayerGroup, faLink, faPageBreak, faRocketLaunch, faRulerCombined, faSignsPost,
+    faTableLayout, faText, faUniversalAccess, faWindowRestore
 } from '@fortawesome/pro-light-svg-icons'
 import imageSizePlugin from "./markdownit-imagesize-plugin.ts";
 import type {ThemeConfig} from "./theme/themeConfig.ts";
@@ -101,49 +101,62 @@ export default defineConfig<ThemeConfig>({
         docFooter: { prev: false, next: false },
         sidebar: [
             {
-                text: 'Introduction',
+                text: 'Getting started',
                 icon: faRocketLaunch,
                 collapsed: true,
                 items: [
                     { text: 'Quick start', link: '/quick-start' },
-                    { text: 'Invoice Tutorial', link: '/invoice-tutorial' },
+                    { text: 'Invoice tutorial', link: '/invoice-tutorial' },
                     { text: 'License configuration', link: '/license/configuration' },
+                    { text: 'ASP.NET integration', link: '/examples/aspnet-integration' },
+                ]
+            },
+            {
+                text: 'Project',
+                icon: faSignsPost,
+                collapsed: true,
+                items: [
                     { text: 'Roadmap', link: '/roadmap' },
                     { text: 'Releases', link: 'https://github.com/QuestPDF/QuestPDF/releases' },
-                    { text: 'Acknowledgements', link: '/acknowledgements' }
+                    { text: 'Acknowledgements', link: '/acknowledgements' },
+                ]
+            },
+            {
+                text: 'PDF operations',
+                icon: faLayerGroup,
+                collapsed: true,
+                items: [
+                    { text: 'Overview', link: '/concepts/document-operations' },
+                    { text: 'Loading documents', link: '/concepts/document-operations#loading-documents' },
+                    { text: 'Page selection', link: '/concepts/document-operations#page-selection' },
+                    { text: 'Linearization', link: '/concepts/document-operations#document-linearization' },
+                    { text: 'Merging', link: '/concepts/document-operations#merging-documents' },
+                    { text: 'Overlays and underlays', link: '/concepts/document-operations#overlays-and-underlays' },
+                    { text: 'Encryption', link: '/concepts/document-operations#document-encryption' },
+                    { text: 'Decryption', link: '/concepts/document-operations#document-decryption' },
+                    { text: 'File attachments', link: '/concepts/document-operations#file-attachments' },
+                    { text: 'XMP metadata', link: '/concepts/document-operations#xmp-metadata-extension' },
+                    { text: 'Advanced examples', link: '/concepts/document-operations#advanced-examples' },
+                    { text: 'ZUGFeRD / Factur-X', link: '/examples/zugferd' },
                 ]
             },
             {
                 text: 'Companion App',
-                icon: faPlanetRinged,
+                icon: faWindowRestore,
                 collapsed: true,
                 items: [
-                    { text: 'Introduction and Usage', link: '/companion/usage' },
-                    { text: 'Download', link: '/companion/download' },
+                    { text: 'Overview and setup', link: '/companion/usage' },
                     { text: 'Features', link: '/companion/features' },
-                    { text: 'Warnings', link: '/companion/warnings' },
+                    { text: 'Download', link: '/companion/download' },
+                    { text: 'Warning messages', link: '/companion/warnings' },
                     { text: 'Previewer (legacy)', link: '/document-previewer' },
                 ]
             },
             {
-                text: 'Concepts',
-                icon: faLightbulb,
+                text: 'Development',
+                icon: faCode,
                 collapsed: true,
                 items: [
-                    {
-                        text: 'Generating content',
-                        items: [
-                            { text: 'Output types', link: '/concepts/generating-output' },
-                            { text: 'Document metadata', link: '/concepts/document-metadata' },
-                            { text: 'Document settings', link: '/concepts/document-settings' },
-                            { text: 'Merged documents', link: '/concepts/merging-documents' },
-                        ]
-                    },
-                    { text: 'Document operations', link: '/concepts/document-operations' },
-                    { text: 'Prototyping', link: '/concepts/prototyping' },
-                    { text: 'Colors', link: '/concepts/colors' },
-                    { text: 'Length unit types', link: '/concepts/length-unit-types' },
-                    { text: 'Accessibility <span class="VPBadge tip" style="margin-left: 8px;">new</span>', link: '/concepts/accessibility' },
                     {
                         text: 'Code patterns',
                         items: [
@@ -152,6 +165,11 @@ export default defineConfig<ThemeConfig>({
                             { text: 'Local helpers', link: '/concepts/code-patterns/local-helpers' },
                             { text: 'Content styling', link: '/concepts/code-patterns/content-styling' },
                             { text: 'Extension methods', link: '/concepts/code-patterns/extension-methods' },
+                        ]
+                    },
+                    {
+                        text: 'Components',
+                        items: [
                             { text: 'Components', link: '/concepts/code-patterns/components' },
                             { text: 'Dynamic components', link: '/concepts/code-patterns/dynamic-components' },
                             { text: 'Capture content position', link: '/concepts/code-patterns/capture-content-position' },
@@ -165,52 +183,34 @@ export default defineConfig<ThemeConfig>({
                             { text: 'Configurable tables', link: '/concepts/dynamic-composition/configurable-tables' },
                             { text: 'Nested content', link: '/concepts/dynamic-composition/nested-content' },
                         ]
-                    }
+                    },
+                    {
+                        text: 'Prototyping',
+                        items: [
+                            { text: 'Placeholder content', link: '/concepts/prototyping' },
+                            { text: 'Placeholder element', link: '/api-reference/placeholder' },
+                        ]
+                    },
+                    {
+                        text: 'Debugging',
+                        items: [
+                            { text: 'Debug area', link: '/api-reference/debug-area' },
+                            { text: 'Debug pointer', link: '/api-reference/debug-pointer' },
+                        ]
+                    },
                 ]
             },
             {
-                text: 'Visual',
-                icon: faImage,
+                text: 'Generation',
+                icon: faFileLines,
                 collapsed: true,
                 items: [
-                    {
-                        text: 'Styled Container',
-                        items: [
-                            { text: 'Background', link: '/api-reference/background' },
-                            { text: 'Border', link: '/api-reference/border' },
-                            { text: 'Rounded Corners', link: '/api-reference/rounded-corners' },
-                            { text: 'Shadows', link: '/api-reference/shadow' },
-                        ]
-                    },
-                    {
-                        text: 'Text',
-                        items: [
-                            { text: 'Basics', link: '/api-reference/text/basics' },
-                            { text: 'Text Style', link: '/api-reference/text/text-style' },
-                            { text: 'Paragraph Style', link: '/api-reference/text/paragraph-style' },
-                            { text: 'Page Numbers', link: '/api-reference/text/page-numbers' },
-                            { text: 'Injecting Custom Content', link: '/api-reference/text/injecting-custom-content' },
-                            { text: 'Style inheritance', link: '/api-reference/text/style-inheritance' },
-                            { text: 'Font management', link: '/api-reference/text/font-management' }
-                        ]
-                    },
-                    {
-                        text: 'Image',
-                        items: [
-                            { text: 'Basics', link: '/api-reference/image/basics' },
-                            { text: 'Optimization', link: '/api-reference/image/optimization' },
-                            { text: 'Shared Images', link: '/api-reference/image/shared' },
-                            { text: 'SVG', link: '/api-reference/image/svg' },
-                            { text: 'Images Of Dynamic Size', link: '/api-reference/image/dynamic' }
-                        ]
-                    },
-                    { text: 'Line', link: '/api-reference/line' },
-                    { text: 'Placeholder', link: '/api-reference/placeholder' },
-                    { text: 'Charts', link: '/api-reference/charts' },
-                    { text: 'Barcodes / QR Codes', link: '/api-reference/barcodes' },
-                    { text: 'Maps', link: '/api-reference/maps' },
-                    { text: 'Complex Graphics', link: '/api-reference/complex-graphics' },
-                    { text: 'SkiaSharp Integration', link: '/api-reference/skiasharp-integration' },
+                    { text: 'Output formats', link: '/concepts/generating-output' },
+                    { text: 'Settings', link: '/concepts/document-settings' },
+                    { text: 'Metadata', link: '/concepts/document-metadata' },
+                    { text: 'Content direction (RTL)', link: '/api-reference/content-direction' },
+                    { text: 'Merging documents', link: '/concepts/merging-documents' },
+                    { text: 'Large documents (Lazy)', link: '/api-reference/lazy' },
                 ]
             },
             {
@@ -222,8 +222,9 @@ export default defineConfig<ThemeConfig>({
                         text: 'Page',
                         items: [
                             { text: 'Basics', link: '/api-reference/page/basics' },
-                            { text: 'Slots', link: '/api-reference/page/slots' },
-                            { text: 'Settings', link: '/api-reference/page/settings' }
+                            { text: 'Header and footer', link: '/api-reference/page/slots' },
+                            { text: 'Settings', link: '/api-reference/page/settings' },
+                            { text: 'First-page header', link: '/examples/custom-header-on-first-page' },
                         ]
                     },
                     {
@@ -232,37 +233,58 @@ export default defineConfig<ThemeConfig>({
                             { text: 'Basics', link: '/api-reference/table/basics' },
                             { text: 'Cell style pattern', link: '/api-reference/table/cell-style-pattern' },
                             { text: 'Header and footer', link: '/api-reference/table/header-and-footer' },
-                            { text: 'Overlapping cells', link: '/api-reference/table/overlapping-cells' }
+                            { text: 'Overlapping cells', link: '/api-reference/table/overlapping-cells' },
                         ]
                     },
-                    { text: 'Column', link: '/api-reference/column' },
-                    { text: 'Row', link: '/api-reference/row' },
-                    { text: 'Decoration', link: '/api-reference/decoration' },
-                    { text: 'List', link: '/api-reference/lists' },
-                    { text: 'Layers', link: '/api-reference/layers' },
-                    { text: 'Inlined', link: '/api-reference/inlined' },
-                    { text: 'Multi Column', link: '/api-reference/multi-column' },
+                    {
+                        text: 'Containers',
+                        items: [
+                            { text: 'Column', link: '/api-reference/column' },
+                            { text: 'Row', link: '/api-reference/row' },
+                            { text: 'Inlined', link: '/api-reference/inlined' },
+                            { text: 'Multi-column', link: '/api-reference/multi-column' },
+                            { text: 'Lists', link: '/api-reference/lists' },
+                            { text: 'Decoration', link: '/api-reference/decoration' },
+                            { text: 'Layers', link: '/api-reference/layers' },
+                            { text: 'Z-index', link: '/api-reference/zindex' },
+                        ]
+                    },
                 ]
             },
             {
-                text: 'Position / Size',
-                icon: faArrowsUpDownLeftRight,
+                text: 'Size & position',
+                icon: faRulerCombined,
                 collapsed: true,
                 items: [
-                    { text: 'Width', link: '/api-reference/width' },
-                    { text: 'Height', link: '/api-reference/height' },
-                    { text: 'Alignment', link: '/api-reference/alignment' },
-                    { text: 'Padding', link: '/api-reference/padding' },
-                    { text: 'Aspect Ratio', link: '/api-reference/aspect-ratio' },
-                    { text: 'Rotate', link: '/api-reference/rotate' },
-                    { text: 'Scale', link: '/api-reference/scale' },
-                    { text: 'Scale to fit', link: '/api-reference/scale-to-fit' },
-                    { text: 'Offset', link: '/api-reference/offset' },
-                    { text: 'Flip', link: '/api-reference/flip' },
-                    { text: 'Unconstrained', link: '/api-reference/unconstrained' },
-                    { text: 'Extend', link: '/api-reference/extend' },
-                    { text: 'Shrink', link: '/api-reference/shrink' },
-                    { text: 'Z-Index', link: '/api-reference/zindex' },
+                    {
+                        text: 'Size',
+                        items: [
+                            { text: 'Width', link: '/api-reference/width' },
+                            { text: 'Height', link: '/api-reference/height' },
+                            { text: 'Aspect ratio', link: '/api-reference/aspect-ratio' },
+                            { text: 'Extend', link: '/api-reference/extend' },
+                            { text: 'Shrink', link: '/api-reference/shrink' },
+                            { text: 'Unconstrained', link: '/api-reference/unconstrained' },
+                            { text: 'Length units', link: '/concepts/length-unit-types' },
+                        ]
+                    },
+                    {
+                        text: 'Position',
+                        items: [
+                            { text: 'Padding', link: '/api-reference/padding' },
+                            { text: 'Alignment', link: '/api-reference/alignment' },
+                            { text: 'Offset', link: '/api-reference/offset' },
+                        ]
+                    },
+                    {
+                        text: 'Transformations',
+                        items: [
+                            { text: 'Rotate', link: '/api-reference/rotate' },
+                            { text: 'Scale', link: '/api-reference/scale' },
+                            { text: 'Scale to fit', link: '/api-reference/scale-to-fit' },
+                            { text: 'Flip', link: '/api-reference/flip' },
+                        ]
+                    },
                 ]
             },
             {
@@ -270,39 +292,126 @@ export default defineConfig<ThemeConfig>({
                 icon: faPageBreak,
                 collapsed: true,
                 items: [
-                    { text: 'Page break', link: '/api-reference/page-break' },
-                    { text: 'Prevent page break', link: '/api-reference/prevent-page-break' },
-                    { text: 'Ensure space', link: '/api-reference/ensure-space' },
-                    { text: 'Show entire', link: '/api-reference/show-entire' },
-                    { text: 'Repeat', link: '/api-reference/repeat' },
-                    { text: 'Show if', link: '/api-reference/show-if' },
-                    { text: 'Show once', link: '/api-reference/show-once' },
-                    { text: 'Skip once', link: '/api-reference/skip-once' },
-                    { text: 'Stop paging', link: '/api-reference/stop-paging' },
+                    {
+                        text: 'Page breaks',
+                        items: [
+                            { text: 'Page break', link: '/api-reference/page-break' },
+                            { text: 'Prevent page break', link: '/api-reference/prevent-page-break' },
+                            { text: 'Ensure space', link: '/api-reference/ensure-space' },
+                            { text: 'Show entire', link: '/api-reference/show-entire' },
+                            { text: 'Stop paging', link: '/api-reference/stop-paging' },
+                        ]
+                    },
+                    {
+                        text: 'Visibility',
+                        items: [
+                            { text: 'Repeat', link: '/api-reference/repeat' },
+                            { text: 'Show once', link: '/api-reference/show-once' },
+                            { text: 'Skip once', link: '/api-reference/skip-once' },
+                            { text: 'Show if', link: '/api-reference/show-if' },
+                        ]
+                    },
                 ]
             },
             {
-                text: 'Other',
-                icon: faCubes,
+                text: 'Text',
+                icon: faText,
                 collapsed: true,
                 items: [
-                    { text: 'Section', link: '/api-reference/section' },
-                    { text: 'Hyperlink', link: '/api-reference/hyperlink' },
-                    { text: 'Lazy (Memory Optimization)', link: '/api-reference/lazy' },
-                    { text: 'Default Text Style', link: '/api-reference/default-text-style' },
-                    { text: 'Content Direction (RTL)', link: '/api-reference/content-direction' },
-                    { text: 'Debug Area', link: '/api-reference/debug-area' },
-                    { text: 'Debug Pointer', link: '/api-reference/debug-pointer' },
+                    {
+                        text: 'Content',
+                        items: [
+                            { text: 'Basics', link: '/api-reference/text/basics' },
+                            { text: 'Page numbers', link: '/api-reference/text/page-numbers' },
+                            { text: 'Elements inside text', link: '/api-reference/text/injecting-custom-content' },
+                        ]
+                    },
+                    {
+                        text: 'Style',
+                        items: [
+                            { text: 'Text style', link: '/api-reference/text/text-style' },
+                            { text: 'Paragraph style', link: '/api-reference/text/paragraph-style' },
+                            { text: 'Style inheritance', link: '/api-reference/text/style-inheritance' },
+                            { text: 'Default text style', link: '/api-reference/default-text-style' },
+                        ]
+                    },
+                    { text: 'Font management', link: '/api-reference/text/font-management' },
                 ]
             },
             {
-                text: 'Examples',
-                icon: faCode,
+                text: 'Visual',
+                icon: faImage,
                 collapsed: true,
                 items: [
-                    { text: 'Custom header on first page', link: '/examples/custom-header-on-first-page' },
-                    { text: 'Integration with ASP.NET', link: '/examples/aspnet-integration' },
-                    { text: 'ZUGFeRD', link: '/examples/zugferd' },
+                    {
+                        text: 'Styling',
+                        items: [
+                            { text: 'Background', link: '/api-reference/background' },
+                            { text: 'Border', link: '/api-reference/border' },
+                            { text: 'Rounded corners', link: '/api-reference/rounded-corners' },
+                            { text: 'Shadow', link: '/api-reference/shadow' },
+                            { text: 'Colors', link: '/concepts/colors' },
+                        ]
+                    },
+                    {
+                        text: 'Images',
+                        items: [
+                            { text: 'Basics', link: '/api-reference/image/basics' },
+                            { text: 'SVG', link: '/api-reference/image/svg' },
+                            { text: 'Optimization', link: '/api-reference/image/optimization' },
+                            { text: 'Shared images', link: '/api-reference/image/shared' },
+                            { text: 'Dynamic-size images', link: '/api-reference/image/dynamic' },
+                        ]
+                    },
+                    {
+                        text: 'Graphics',
+                        items: [
+                            { text: 'Line', link: '/api-reference/line' },
+                            { text: 'Charts', link: '/api-reference/charts' },
+                            { text: 'Barcodes, QR codes', link: '/api-reference/barcodes' },
+                            { text: 'Maps', link: '/api-reference/maps' },
+                            { text: 'Complex graphics', link: '/api-reference/complex-graphics' },
+                            { text: 'SkiaSharp integration', link: '/api-reference/skiasharp-integration' },
+                        ]
+                    },
+                ]
+            },
+            {
+                text: 'Links',
+                icon: faLink,
+                collapsed: true,
+                items: [
+                    { text: 'Hyperlinks', link: '/api-reference/hyperlink' },
+                    { text: 'Sections and links', link: '/api-reference/section' },
+                ]
+            },
+            {
+                text: 'Accessibility',
+                icon: faUniversalAccess,
+                collapsed: true,
+                items: [
+                    { text: 'Overview', link: '/concepts/accessibility' },
+                    { text: 'Tagged PDF', link: '/concepts/accessibility#tagged-pdf' },
+                    { text: 'PDF/A (archival)', link: '/concepts/accessibility#pdf-a-archival' },
+                    { text: 'PDF/UA (accessibility)', link: '/concepts/accessibility#pdf-ua-universal-accessibility' },
+                    { text: 'Compliance tools', link: '/concepts/accessibility#compliance-tools' },
+                    { text: 'Minimal example', link: '/concepts/accessibility#minimal-example' },
+                    {
+                        text: 'Semantic elements',
+                        link: '/concepts/accessibility#semantic-elements',
+                        items: [
+                            { text: 'Document structure', link: '/concepts/accessibility#document-structure' },
+                            { text: 'Headings', link: '/concepts/accessibility#headings' },
+                            { text: 'Text content', link: '/concepts/accessibility#text-content' },
+                            { text: 'Lists', link: '/concepts/accessibility#lists' },
+                            { text: 'Tables', link: '/concepts/accessibility#tables' },
+                            { text: 'Table of contents', link: '/concepts/accessibility#table-of-contents' },
+                            { text: 'Inline elements', link: '/concepts/accessibility#inline-elements' },
+                            { text: 'Illustrations, media', link: '/concepts/accessibility#illustrations-and-media' },
+                            { text: 'Language', link: '/concepts/accessibility#language' },
+                            { text: 'Ignoring content', link: '/concepts/accessibility#ignoring-content' },
+                        ]
+                    },
                 ]
             }
         ]
