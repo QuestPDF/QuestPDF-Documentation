@@ -38,21 +38,20 @@ body {
 }
 
 @media (min-width: 48rem) {
-    .VPNavBar:not(.has-sidebar) .VPNavBarSearch {
+    .VPNavBar .VPNavBarSearch {
         padding-inline-start: 2.5rem;
     }
 }
 
 @media (min-width: 60rem) {
-    .VPNavBar:not(.has-sidebar) .VPNavBarSearch {
+    .VPNavBar .VPNavBarSearch {
         padding-inline-start: 3.5rem;
     }
 }
 
 .VPLink.link.active,
 .VPLink.link.active > span.link-text,
-.outline-link.active,
-.VPSidebarItem .is-active p {
+.outline-link.active {
     font-weight: 600 !important;
 }
 
@@ -120,10 +119,13 @@ html:not(.dark) .dark-only {
     border-radius: 8px;
 }
 
-/* Dark navbar: the bg-alt token, so the bar reads as its own surface. VitePress paints the bar through this token
-   (VPNavBar::before), so the local nav and the home bar pick it up as well. */
 html.dark {
-    --vp-nav-bg-color: var(--vp-c-bg-alt);
+    --vp-nav-bg-color: #12151B;
+    --vp-c-bg-elv: #191D25;
+}
+
+html.dark .VPNavBar .VPMenu {
+    --vp-c-divider: #292F3A;
 }
 
 /* VitePress makes the home navbar transparent at the top of the page (and always below 60rem): restore the regular
@@ -275,8 +277,7 @@ html.dark .VPNavBar .VPNavBarMenu .VPNavBarMenuGroup.active > .button .text {
 }
 
 html.dark .VPNavBar .VPNavBarMenu .VPMenu:has(.nav-documentation-menu) {
-    border-color: rgba(255, 255, 255, 0.12);
-    background-color: #1E1F23;
+    border-color: #343A46;
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.06),
         0 12px 24px -8px rgba(0, 0, 0, 0.5),
@@ -315,11 +316,13 @@ html.dark .VPNavBar .VPNavBarMenu .VPMenu:has(.nav-documentation-menu) {
 
 /* Search */
 @media (min-width: 48rem) {
+    /* the field is an outline on the bar, not a second surface */
     .VPNavBar .VPNavBarSearchButton {
         height: 40px;
         padding: 0 8px 0 12px;
         border: 1px solid var(--vp-c-divider);
         border-radius: 10px;
+        background-color: var(--vp-nav-bg-color);
         transition: border-color 0.2s;
     }
 

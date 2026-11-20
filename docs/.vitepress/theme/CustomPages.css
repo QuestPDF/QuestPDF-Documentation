@@ -380,3 +380,10 @@ html.dark :is(a, button).action.primary:hover {
     padding-block: 12px;
   }
 }
+
+/* Icon lists, light theme: the icons are a step larger, thin dark glyphs on white read smaller */
+html:not(.dark) .custom-page :is(.note, .points li) > .icon {
+  width: 1.25rem;
+  margin-top: 0.1875rem;
+  font-size: 1.125rem;
+}

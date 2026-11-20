@@ -89,7 +89,7 @@ const year = new Date().getFullYear();
 
 footer {
   /* opaque, so the page canvas stops at the footer's top border */
-  background-color: var(--vp-c-bg);
+  background-color: light-dark(var(--vp-c-bg), #0D1015);
 }
 
 footer * {
