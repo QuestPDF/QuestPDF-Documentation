@@ -2,11 +2,11 @@
 import {
   faBadgeCheck,
   faBookOpenCover,
-  faPlanetRinged,
   faGift,
   faObjectsColumn,
   faRocketLaunch,
-  faSignsPost
+  faSignsPost,
+  faWindowRestore
 } from "@fortawesome/pro-light-svg-icons";
 import { useRoute } from "vitepress";
 import { VPLink } from "vitepress/theme";
@@ -25,7 +25,7 @@ const groups = [
     { icon: faBookOpenCover, title: "In-depth invoice tutorial", link: "/invoice-tutorial" },
     { icon: faBadgeCheck, title: "License configuration", link: "/license/configuration" },
     { icon: faObjectsColumn, title: "Features overview", link: "/features-overview" },
-    { icon: faPlanetRinged, title: "Companion app", link: "/companion/usage" }
+    { icon: faWindowRestore, title: "Companion app", link: "/companion/usage" }
   ],
   [
     { icon: faGift, title: "Releases", link: "https://github.com/QuestPDF/QuestPDF/releases" },
