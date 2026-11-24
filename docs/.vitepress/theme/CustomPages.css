@@ -220,6 +220,54 @@ html.dark .custom-page {
       0 14px 32px -12px var(--shadow-far);
 }
 
+
+/* Rows in a card: they sit 8px inside it, with corners that follow the card's. A row is a link or a <summary>. */
+
+.custom-page :where(.inset-rows) {
+  --row-fill: light-dark(color-mix(in srgb, var(--vp-c-text-1) 6%, transparent), rgba(255, 255, 255, 0.07));
+
+  padding: 8px;
+}
+
+.custom-page :where(.inset-row) {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border-radius: 24px;
+  font-weight: 500;
+  color: var(--vp-c-text-1);
+}
+
+.custom-page :where(.inset-row):focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: -2px;
+}
+
+/* the arrow or chevron at the row's end */
+.custom-page :where(.inset-row .row-mark) {
+  flex-shrink: 0;
+  font-size: 1rem;
+  color: var(--vp-c-text-3);
+}
+
+/* a tap leaves :hover stuck on touch screens, which would keep the row filled */
+@media (hover: hover) {
+  .custom-page :where(.inset-row):hover {
+    background-color: var(--row-fill);
+  }
+
+  .custom-page :where(.inset-row):hover :where(.row-mark) {
+    color: var(--vp-c-text-1);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .custom-page :where(.inset-row) {
+    padding-inline: 12px;
+  }
+}
+
+
 /* Dot wings */
 
 .texture-dots {
