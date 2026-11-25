@@ -5,7 +5,8 @@
     </header>
 
     <div class="license-tiers">
-      <section v-for="license of licenses" :key="license.name" class="license-tier panel" :class="license.name">
+      <section v-for="license of licenses" :key="license.name" class="license-tier panel"
+               :class="[license.name, { ringed: license.name === 'professional' }]">
         <div v-if="license.name === 'professional'" class="tag"><Icon :icon="faStar" />Most Popular</div>
 
         <header>
@@ -177,22 +178,7 @@ const licenses = [
 
 
 .license-tier.professional {
-  border: 2px solid light-dark(#2196F3, #3D8BD4);
-  box-shadow:
-      var(--surface-edge),
-      0 0 0 6px color-mix(in srgb, #2196F3 10%, transparent),
-      0 24px 48px -24px color-mix(in srgb, #2196F3 35%, transparent);
   z-index: 1;
-}
-
-html.dark .license-tier.professional {
-  background-color: color-mix(in srgb, #2196F3 3%, var(--surface));
-  box-shadow: 0 24px 48px -24px color-mix(in srgb, #3D8BD4 22%, transparent);
-}
-
-/* the glass rim sits inside the 2px border, so its corners are 2px tighter than the card's */
-.license-tier.professional::before {
-  border-radius: 30px;
 }
 
 .license-tier.community {

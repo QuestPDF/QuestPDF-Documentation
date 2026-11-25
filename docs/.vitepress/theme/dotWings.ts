@@ -19,10 +19,15 @@ const pitch = 24;
 /* milliseconds to fly one pitch */
 const flightPeriod = 4500;
 
-const inks = {
-  light: { color: "#FFFFFF", alpha: 0.85, core: 1.25, edge: 2.25 },
-  dark: { color: "#A2CAE6", alpha: 0.22, core: 1, edge: 1.5 }
+/* the base dot: full ink up to `core`, fading out to `radius`; a solid disc without a core */
+type Ink = { color: string; alpha: number; radius: number; core?: number };
+
+const inks: Record<Theme, Ink> = {
+  light: { color: "#FFFFFF", alpha: 0.85, radius: 1.5 },
+  dark: { color: "#A2CAE6", alpha: 0.22, radius: 1.5, core: 1 }
 };
+
+type Stamp = (context: CanvasRenderingContext2D, x: number, y: number, radius: number) => void;
 
 /* the vanishing point's distance from the outer edge, in wing widths: further away flattens the wall */
 const vanishingDistance = 2.5;
@@ -37,20 +42,32 @@ const fadeIn = pitch * 0.6;
 
 const spriteSize = 64;
 
-/* one soft dot, scaled onto the canvas for every dot of the wall */
-function dotSprite({ color, alpha, core, edge }: (typeof inks)[Theme]) {
+/* draws one dot of the wall: a solid ink as a disc, a fading one as a sprite scaled to the dot (a disc scaled down
+   that far would come out jagged) */
+function dotStamp(ink: Ink): Stamp {
+  const fill = withAlpha(ink.color, ink.alpha * dotOpacity);
+
+  if (ink.core === undefined)
+    return (context, x, y, radius) => {
+      context.fillStyle = fill;
+      context.beginPath();
+      context.arc(x, y, radius, 0, 2 * Math.PI);
+      context.fill();
+    };
+
   const sprite = document.createElement("canvas");
   sprite.width = sprite.height = spriteSize;
 
   const half = spriteSize / 2;
   const context = sprite.getContext("2d")!;
   const gradient = context.createRadialGradient(half, half, 0, half, half, half);
-  gradient.addColorStop(core / edge, withAlpha(color, alpha * dotOpacity));
-  gradient.addColorStop(1, withAlpha(color, 0));
+  gradient.addColorStop(ink.core / ink.radius, fill);
+  gradient.addColorStop(1, withAlpha(ink.color, 0));
 
   context.fillStyle = gradient;
   context.fillRect(0, 0, spriteSize, spriteSize);
-  return sprite;
+
+  return (context, x, y, radius) => context.drawImage(sprite, x - radius, y - radius, 2 * radius, 2 * radius);
 }
 
 function withAlpha(hex: string, alpha: number) {
@@ -59,8 +76,8 @@ function withAlpha(hex: string, alpha: number) {
 }
 
 /* draws the wall after `flown` pixels of flight, 0 to pitch */
-function draw(context: CanvasRenderingContext2D, { width, height, titleMiddle }: Wing, theme: Theme, sprite: HTMLCanvasElement, mirror: boolean, flown: number) {
-  const { edge } = inks[theme];
+function draw(context: CanvasRenderingContext2D, { width, height, titleMiddle }: Wing, theme: Theme, stamp: Stamp, mirror: boolean, flown: number) {
+  const base = inks[theme].radius;
   const vanishingX = vanishingDistance * width;
   const innerScale = 1 - width / vanishingX;
 
@@ -74,14 +91,14 @@ function draw(context: CanvasRenderingContext2D, { width, height, titleMiddle }:
     if (x > width + 8)
       break;
 
-    const radius = edge * dotSize(Math.max(0, (scale - innerScale) / (1 - innerScale)));
+    const radius = base * dotSize(Math.max(0, (scale - innerScale) / (1 - innerScale)));
     const toRow = (y: number) => (titleMiddle + (y - titleMiddle) / scale - pitch / 2) / pitch;
 
     context.globalAlpha = Math.min(1, Math.max(0, (width - x) / fadeIn));
 
     for (let row = Math.ceil(toRow(-radius)); row <= toRow(height + radius); row++) {
       const y = titleMiddle + (pitch / 2 + row * pitch - titleMiddle) * scale;
-      context.drawImage(sprite, (mirror ? width - x : x) - radius, y - radius, 2 * radius, 2 * radius);
+      stamp(context, mirror ? width - x : x, y, radius);
     }
   }
 
@@ -97,7 +114,7 @@ export function useDotWings(root: Ref<HTMLElement | undefined>, { animated = fal
   let canvases: { canvas: HTMLCanvasElement; mirror: boolean; context: CanvasRenderingContext2D }[] = [];
 
   let wing: Wing | undefined;
-  let sprite: HTMLCanvasElement | undefined;
+  let stamp: Stamp | undefined;
   let theme: Theme = "light";
   let onScreen = false;
   let frame = 0;
@@ -106,13 +123,13 @@ export function useDotWings(root: Ref<HTMLElement | undefined>, { animated = fal
   const currentTheme = (): Theme => (isDark.value ? "dark" : "light");
 
   function render(flown: number) {
-    if (!wing || !sprite)
+    if (!wing || !stamp)
       return;
 
     for (const { canvas, mirror, context } of canvases) {
       const scale = canvas.width / wing.width;
       context.setTransform(scale, 0, 0, scale, 0, 0);
-      draw(context, wing, theme, sprite, mirror, flown);
+      draw(context, wing, theme, stamp, mirror, flown);
     }
   }
 
@@ -171,7 +188,7 @@ export function useDotWings(root: Ref<HTMLElement | undefined>, { animated = fal
     const element = root.value!;
 
     theme = currentTheme();
-    sprite = dotSprite(inks[theme]);
+    stamp = dotStamp(inks[theme]);
 
     canvases = [false, true].map(mirror => {
       const canvas = document.createElement("canvas");
@@ -199,11 +216,11 @@ export function useDotWings(root: Ref<HTMLElement | undefined>, { animated = fal
   });
 
   watch(isDark, () => {
-    if (!sprite)
+    if (!stamp)
       return;
 
     theme = currentTheme();
-    sprite = dotSprite(inks[theme]);
+    stamp = dotStamp(inks[theme]);
     update();
   });
 

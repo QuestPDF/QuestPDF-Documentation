@@ -47,7 +47,7 @@ const isCurrent = (link: string) => route.data.relativePath === `${link.slice(1)
           :class="{ current: isCurrent(entry.link) }"
           :aria-current="isCurrent(entry.link) ? 'page' : undefined"
         >
-          <Icon :icon="entry.icon" />
+          <Icon v-if="!screenMenu" :icon="entry.icon" />
           {{ entry.title }}
         </VPLink>
       </li>
@@ -70,12 +70,13 @@ const isCurrent = (link: string) => route.data.relativePath === `${link.slice(1)
   padding: 0.5rem 0.5rem 0;
 }
 
+/* the rows sit 8px inside the panel, with corners that follow the panel's */
 .entry {
   display: flex;
   align-items: center;
   gap: 1.25rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
+  padding: 0.5rem 0.875rem;
+  border-radius: 16px;
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 500;
@@ -88,28 +89,50 @@ const isCurrent = (link: string) => route.data.relativePath === `${link.slice(1)
 }
 
 .entry:is(:hover, :focus-visible) {
-  background-color: var(--vp-c-default-soft);
+  background-color: var(--surface-hover);
 }
 
+/* the current page: the navbar button's blue on a pale blue pill in light, a pill a step stronger than the hover in
+   dark */
 .entry.current {
-  color: var(--vp-c-brand-1);
+  color: light-dark(#1976D2, var(--vp-c-text-1));
+  background-color: var(--surface-current);
 }
+
+
+/* Phone menu: plain links, as VitePress draws the entries of a group, on 40px rows that are easier to tap */
 
 .screen .entries {
-  gap: 0;
+  display: block;
   white-space: normal;
 }
 
 .screen .entries + .entries {
-  margin: 0.5rem 0 0;
-  padding: 0.5rem 0 0;
+  margin: 0;
+  border-top: none;
+  padding: 0;
 }
 
 .screen .entry {
-  padding: 0.625rem 0;
+  display: block;
+  margin-inline-start: 1.25rem;
+  padding: 0.5rem 0;
+  border-radius: 0;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.screen .entry:is(:hover, :focus-visible) {
+  background-color: transparent;
 }
 
 .screen .entry:hover {
+  color: var(--vp-c-brand-1);
+}
+
+.screen .entry.current {
   background-color: transparent;
+  font-weight: 600;
+  color: var(--vp-c-brand-1);
 }
 </style>

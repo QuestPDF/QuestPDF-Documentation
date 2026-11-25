@@ -67,7 +67,6 @@ const standards: Standard[] = [
 }
 
 .card-description {
-  margin-top: 20px;
   text-wrap: pretty;
 }
 

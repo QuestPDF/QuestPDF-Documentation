@@ -13,9 +13,11 @@
   }
 }
 
-/* on the layout root, so the navbar and the footer widen with the page */
+/* on the layout root, so the navbar and the footer follow the page: its width, and the blue-leaning line under the
+   navbar and above the footer */
 .Layout:has(.custom-page) {
   --custom-page-width: 90rem;
+  --custom-page-divider: light-dark(color-mix(in srgb, #2196F3 28%, #E2E2E3), color-mix(in srgb, #2196F3 20%, #2E2E32));
 }
 
 .VPNavBar:not(.has-sidebar) .container {
@@ -112,7 +114,7 @@
 }
 
 .custom-page .card-description {
-  margin: 12px 0 0;
+  margin: 20px 0 0;
   font-size: 1.125rem;
   line-height: 1.75rem;
   color: var(--vp-c-text-2);
@@ -143,13 +145,12 @@
 
 /* Surfaces */
 
-.custom-page {
-  --panel-padding: clamp(32px, 22.4px + 1.38vw, 40px) clamp(24px, 4.7px + 2.76vw, 40px);
-  --section-gap: 36px; /* between the homepage's sections, and between the cards of a row */
+/* on the root: the navbar's dropdowns are cards too (VitepressAdjustments.css) */
+:root {
   --surface: #FFFFFF;
   --surface-inner: #F0F2F6;
-  /* VitePress's light divider is too faint on white */
-  --vp-c-divider: light-dark(#DBDDE1, #2E2E32);
+  --surface-hover: light-dark(color-mix(in srgb, var(--vp-c-text-1) 6%, transparent), rgba(255, 255, 255, 0.07));
+  --surface-current: light-dark(color-mix(in srgb, #1976D2 10%, transparent), rgba(255, 255, 255, 0.13));
   --surface-edge:
       inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 7%, transparent),
       0 1px 2px rgba(16, 24, 40, 0.04),
@@ -158,12 +159,19 @@
   --surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 160px);
 }
 
-html.dark .custom-page {
+html.dark {
   --surface: rgba(255, 255, 255, 0.02);
   --surface-inner: rgba(0, 0, 0, 0.4);
   --surface-edge: none;
   --surface-rim: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0.012));
   --surface-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0) 160px);
+}
+
+.custom-page {
+  --panel-padding: clamp(32px, 22.4px + 1.38vw, 40px) clamp(24px, 4.7px + 2.76vw, 40px);
+  --section-gap: 36px; /* between the homepage's sections, and between the cards of a row */
+  /* VitePress's light divider is too faint on white */
+  --vp-c-divider: light-dark(#DBDDE1, #2E2E32);
 }
 
 /* the rim is a ::before whose gradient is masked to a one-pixel border, so the surface stays see-through */
@@ -187,6 +195,26 @@ html.dark .custom-page {
   background: var(--surface-rim);
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   mask-composite: exclude;
+}
+
+/* the blue ring of a panel that stands out from its neighbours */
+
+.custom-page :where(.panel.ringed) {
+  border: 2px solid light-dark(#2196F3, #3D8BD4);
+  box-shadow:
+      var(--surface-edge),
+      0 0 0 6px color-mix(in srgb, #2196F3 10%, transparent),
+      0 24px 48px -24px color-mix(in srgb, #2196F3 35%, transparent);
+}
+
+html.dark .custom-page :where(.panel.ringed) {
+  background-color: color-mix(in srgb, #2196F3 3%, var(--surface));
+  box-shadow: 0 24px 48px -24px color-mix(in srgb, #3D8BD4 22%, transparent);
+}
+
+/* the glass rim sits inside the 2px border, so its corners are 2px tighter than the card's */
+.custom-page :where(.panel.ringed)::before {
+  border-radius: 30px;
 }
 
 .custom-page .icon-tile {

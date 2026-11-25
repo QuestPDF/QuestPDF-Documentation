@@ -7,6 +7,12 @@
     <div class="dotted-divider"></div>
 
     <div class="container">
+      <pricing-buying />
+    </div>
+
+    <div class="dotted-divider"></div>
+
+    <div class="container">
       <pricing-faq />
     </div>
 
@@ -21,6 +27,7 @@
 <script setup lang="ts">
 
 import PricingTiers from "./PricingTiers.vue";
+import PricingBuying from "./PricingBuying.vue";
 import PricingFaq from "./PricingFaq.vue";
 import PricingContact from "./PricingContact.vue";
 import { ref } from "vue";

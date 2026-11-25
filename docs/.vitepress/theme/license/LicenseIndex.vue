@@ -33,7 +33,7 @@ useDotWings(root);
         <h1>QuestPDF Legal Terms</h1>
       </header>
 
-      <section class="panel plain-language">
+      <section class="panel ringed plain-language">
         <h2 class="card-title">Looking for licensing information?</h2>
         <p class="card-description">Legal documents are written to be precise, not easy to read. Our Pricing page and FAQ explain license eligibility, usage rights, and commercial terms in plain language.</p>
 
@@ -83,25 +83,10 @@ useDotWings(root);
 }
 
 
-/* Plain-language card: the ring of the Professional tier (PricingTiers.vue); with its 2px the inset stays 40px */
+/* Plain-language card: with the ring's 2px border the inset stays 40px */
 
 .plain-language {
   padding: 38px;
-  border: 2px solid light-dark(#2196F3, #3D8BD4);
-  box-shadow:
-      var(--surface-edge),
-      0 0 0 6px color-mix(in srgb, #2196F3 10%, transparent),
-      0 24px 48px -24px color-mix(in srgb, #2196F3 35%, transparent);
-}
-
-html.dark .plain-language {
-  background-color: color-mix(in srgb, #2196F3 3%, var(--surface));
-  box-shadow: 0 24px 48px -24px color-mix(in srgb, #3D8BD4 22%, transparent);
-}
-
-/* the glass rim sits inside the 2px border, so its corners are 2px tighter than the card's */
-.plain-language::before {
-  border-radius: 30px;
 }
 
 .plain-language .card-title {
@@ -174,7 +159,7 @@ html.dark .plain-language {
 /* a tap leaves :hover stuck on touch screens, which would keep the row filled */
 @media (hover: hover) {
   .document-link:hover {
-    background-color: light-dark(color-mix(in srgb, var(--vp-c-text-1) 6%, transparent), rgba(255, 255, 255, 0.07));
+    background-color: var(--surface-hover);
   }
 
   .document-link:hover .arrow {

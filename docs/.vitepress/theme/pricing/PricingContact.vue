@@ -1,125 +1,83 @@
 <script setup lang="ts">
-
-const resellers = [
-  {
-    name: "SoftwareOne",
-    link: "https://www.softwareone.com/",
-    src: "software-one.svg",
-    size: 32,
-    marginTop: -3
-  },
-  {
-    name: "Insight",
-    link: "https://www.insight.com/",
-    src: "insight.svg",
-    size: 37,
-    marginTop: 3
-  },
-  {
-    name: "SHI",
-    link: "https://www.shi.com/",
-    src: "shi.svg",
-    size: 38,
-    marginTop: -11
-  },
-  {
-    name: "QBS Software",
-    link: "https://www.qbssoftware.com/",
-    src: "qbs-software.svg",
-    size: 48,
-    marginTop: 3
-  }
-];
-
+import PricingKeycap from "./PricingKeycap.vue";
 </script>
 
 <template>
-  <article class="content closing">
-    <section class="panel">
-      <div class="section-header">
-        <h3 class="card-title">Purchase Through Your Preferred Reseller</h3>
-        <p class="card-description">Any software reseller can order QuestPDF for you, with no partner agreement or registration needed. Invoices, purchase orders, and multi-year terms are supported.</p>
-      </div>
+  <article class="content">
+    <section class="panel ringed closing">
+      <div class="layout">
+        <div>
+          <h3 class="card-title">Still Have Questions?</h3>
+          <p class="card-description">Ask about licensing, purchasing, or anything this page left open, and get a reply within one business day. You can also read the exact legal terms before you buy.</p>
 
-      <div class="resellers-list">
-        <a v-for="reseller of resellers" :key="reseller.name" :href="reseller.link" target="_blank">
-          <img :src="'/license/resellers/' + reseller.src"
-              :alt="reseller.name"
-              :style="{ height: reseller.size + 'px', marginTop: reseller.marginTop + 'px' }" />
-        </a>
-      </div>
-    </section>
+          <div class="actions">
+            <a class="action primary" href="mailto:contact@questpdf.com">Contact us</a>
+            <a class="action" href="/license/">Read the Legal Terms</a>
+          </div>
+        </div>
 
-    <section class="panel">
-      <div class="section-header">
-        <h3 class="card-title">Still have questions?</h3>
-        <p class="card-description">Need further details on licensing, a custom quote, or to place a purchase order? Reach out to our team - we will respond within one business day.</p>
+        <PricingKeycap class="figure" />
       </div>
-
-      <a class="action primary" href="mailto:contact@questpdf.com">Contact us</a>
     </section>
   </article>
 </template>
 
 <style scoped>
 
+/* as wide as the FAQ list above it (PricingFaq.vue); with the ring's 2px border the inset stays 40px */
 .closing {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.closing > .panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  container-type: inline-size;
   width: 100%;
   max-width: 860px;
   margin: 0 auto;
-  text-align: center;
+  padding: 38px;
 }
 
-.section-header {
-  max-width: 750px;
-}
-
-.resellers-list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 56px;
-  justify-content: center;
+/* the key sits in the middle of a 200px column */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 200px;
   align-items: center;
-  margin-top: 40px;
+  gap: 64px;
 }
 
-.resellers-list img {
-  display: block;
-  opacity: 0.85;
-  transition: opacity 0.2s ease-in-out, filter 0.2s ease-in-out, transform 0.2s ease-in-out;
+.closing .card-description {
+  text-wrap: pretty;
 }
 
-.resellers-list a:hover img {
-  opacity: 1;
-  filter: brightness(0.7);
-  transform: scale(1.08);
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
 }
 
-html.dark .resellers-list a:hover img {
-  filter: brightness(1.4);
+.figure {
+  justify-self: center;
+  width: 180px;
 }
 
-/* touch: grown evenly, so each logo keeps its tuned position */
-@media (pointer: coarse) {
-  .resellers-list a {
-    padding-block: 4px;
+/* the width is the card's content box, which is what a container query measures: below it the two buttons no longer
+   fit beside the key, so the card is text only */
+@container (max-width: 615px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .figure {
+    display: none;
   }
 }
 
-.action {
-  margin-top: 24px;
-  padding-inline: 20px;
+@media screen and (max-width: 700px) {
+  .closing {
+    padding: 26px 18px 22px;
+  }
+
+  .actions {
+    flex-direction: column;
+    margin-top: 24px;
+  }
 }
 
 </style>
