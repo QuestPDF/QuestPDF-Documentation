@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { faChevronDown } from "@fortawesome/pro-solid-svg-icons";
+import { faChevronDown } from "@fortawesome/pro-regular-svg-icons";
 import Icon from "../Icon.vue";
 
 import { faqCategories as categories } from "./faq";
@@ -34,11 +34,11 @@ import { faqCategories as categories } from "./faq";
 }
 
 .faq-categories {
-  --faq-accent: light-dark(#1976D2, #2196F3);
+  --accent: light-dark(#1976D2, oklch(0.78 0.10 245));
 
   display: flex;
   flex-direction: column;
-  gap: 64px;
+  gap: 80px;
 
   width: 100%;
   max-width: 860px;
@@ -56,28 +56,18 @@ import { faqCategories as categories } from "./faq";
   font-size: 1.5rem;
   line-height: 2rem;
   text-align: center;
+  color: var(--accent);
 }
 
+/* a ruled list without fills: the lines stay in every state */
 .faq-list {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  --pad-x: 36px;
+
   padding: 0;
-  overflow: hidden;
 }
 
-.faq-item:not(:last-child) {
-  border-bottom: 1px solid var(--vp-c-divider);
-}
-
-/* a shadow, so opening an item does not push its text sideways; positioned to paint above the panel's rim */
-.faq-item[open] {
-  position: relative;
-  box-shadow: inset 4.5px 0 0 var(--faq-accent);
-}
-
-html.dark .faq-item[open] {
-  box-shadow: inset 3px 0 0 var(--faq-accent);
+.faq-item + .faq-item {
+  border-top: 1px solid var(--vp-c-divider);
 }
 
 .faq-question {
@@ -85,22 +75,13 @@ html.dark .faq-item[open] {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-
-  padding: 24px 32px;
+  padding: 26px var(--pad-x);
   cursor: pointer;
   list-style: none;
-
-  font-size: 1rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
   font-weight: 500;
   color: var(--vp-c-text-1);
-  transition: background-color 0.2s ease;
-}
-
-/* a tap leaves :hover stuck on touch screens, which would keep the row tinted */
-@media (hover: hover) {
-  .faq-question:hover {
-    background-color: color-mix(in srgb, var(--faq-accent) 5%, transparent);
-  }
 }
 
 /* older Safari draws its disclosure triangle through this pseudo-element, whatever the display */
@@ -108,29 +89,51 @@ html.dark .faq-item[open] {
   display: none;
 }
 
-.faq-item[open] .faq-question {
-  color: var(--faq-accent);
-  font-weight: 600;
+/* the ring sits 8px inside the card and follows its corners, as on the legal documents list */
+.faq-question:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: -10px;
+  border-radius: 32px;
 }
 
 .faq-chevron {
   flex-shrink: 0;
   font-size: 1rem;
-  color: var(--vp-c-text-2);
-  transition: transform 0.2s ease;
+  color: var(--vp-c-text-3);
+}
+
+.faq-item[open] .faq-question {
+  padding-bottom: 22px;
+  font-weight: 600;
 }
 
 .faq-item[open] .faq-chevron {
-  color: var(--faq-accent);
+  color: var(--vp-c-text-1);
   transform: rotate(180deg);
+}
+
+/* after the open state, so an open question's chevron turns blue as well */
+@media (hover: hover) {
+  .faq-question:hover,
+  .faq-question:hover .faq-chevron {
+    color: var(--accent);
+  }
 }
 
 /* the answers in faq.ts separate their paragraphs with a blank line, which is kept */
 .faq-answer {
-  padding: 0 32px 24px 32px;
-  max-width: 85ch;
-  color: var(--vp-c-text-1);
+  max-width: calc(68ch + 2 * var(--pad-x));
+  padding: 0 var(--pad-x) 32px;
+  font-size: 1rem;
+  line-height: 1.75rem;
+  color: color-mix(in srgb, var(--vp-c-text-1), var(--vp-c-text-2));
   white-space: pre-line;
+}
+
+/* the brand colour is under 4.5:1 in the light theme, and the pages' hover colour is lighter still;
+   :any-link outranks that hover rule */
+.faq-answer :deep(a:any-link) {
+  color: color-mix(in srgb, var(--vp-c-brand-1), var(--vp-c-text-1) 20%);
 }
 
 .faq-answer :deep(a:hover) {
@@ -139,15 +142,23 @@ html.dark .faq-item[open] {
 
 @media screen and (max-width: 700px) {
   .faq-categories {
-    gap: 48px;
+    gap: 56px;
+  }
+
+  .faq-list {
+    --pad-x: 20px;
   }
 
   .faq-question {
-    padding: 24px 20px;
+    padding-block: 20px;
+  }
+
+  .faq-item[open] .faq-question {
+    padding-bottom: 16px;
   }
 
   .faq-answer {
-    padding: 0 20px 20px 20px;
+    padding-bottom: 24px;
   }
 }
 

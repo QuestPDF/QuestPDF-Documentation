@@ -34,21 +34,21 @@ useDotWings(root);
       </header>
 
       <section class="panel plain-language">
-        <h2 class="card-title">We wrote a plain&#8209;language version</h2>
-        <p class="card-description">Legal documents are written to be precise, not easy to read. The Pricing page and FAQ answer most questions.</p>
+        <h2 class="card-title">Looking for licensing information?</h2>
+        <p class="card-description">Legal documents are written to be precise, not easy to read. Our Pricing page and FAQ explain license eligibility, usage rights, and commercial terms in plain language.</p>
 
         <div class="actions">
-          <a class="action primary" href="/pricing.html">View Pricing</a>
+          <a class="action primary" href="/pricing.html">Compare licenses</a>
           <a class="action" href="/pricing.html#faq">Read the FAQ</a>
         </div>
       </section>
 
-      <nav class="panel inset-rows documents" aria-label="Legal documents">
+      <nav class="panel documents" aria-label="Legal documents">
         <div v-for="(documents, index) in groups" :key="index" class="document-group">
-          <a v-for="document in documents" :key="document.title" :href="document.link" class="inset-row document-link">
+          <a v-for="document in documents" :key="document.title" :href="document.link" class="document-link">
             <Icon class="document-icon" :icon="document.icon" />
             <span>{{ document.title }}</span>
-            <Icon class="row-mark arrow" :icon="faArrowRight" />
+            <Icon class="arrow" :icon="faArrowRight" />
           </a>
         </div>
       </nav>
@@ -63,7 +63,7 @@ useDotWings(root);
 
 <style scoped>
 .legal-page {
-  --dots-clear: 760px; /* the 550px cards and about 100px of air on each side */
+  --dots-clear: 810px; /* the 600px cards and about 100px of air on each side */
 }
 
 .content {
@@ -79,7 +79,7 @@ useDotWings(root);
 .plain-language,
 .documents {
   width: 100%;
-  max-width: 550px;
+  max-width: 600px;
 }
 
 
@@ -123,10 +123,11 @@ html.dark .plain-language {
 }
 
 
-/* Documents */
+/* Documents: the rows sit 8px inside the card, with corners that follow the card's */
 
 .documents {
   margin-top: 40px;
+  padding: 8px;
 }
 
 .document-group {
@@ -142,7 +143,18 @@ html.dark .plain-language {
 }
 
 .document-link {
+  display: flex;
+  align-items: center;
   gap: 14px;
+  padding: 16px 20px;
+  border-radius: 24px;
+  font-weight: 500;
+  color: var(--vp-c-text-1);
+}
+
+.document-link:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: -2px;
 }
 
 /* a 20px glyph in a 24px slot */
@@ -153,11 +165,20 @@ html.dark .plain-language {
 }
 
 .arrow {
+  flex-shrink: 0;
   margin-left: auto;
+  margin-right: 4px;
+  color: var(--vp-c-text-3);
 }
 
+/* a tap leaves :hover stuck on touch screens, which would keep the row filled */
 @media (hover: hover) {
+  .document-link:hover {
+    background-color: light-dark(color-mix(in srgb, var(--vp-c-text-1) 6%, transparent), rgba(255, 255, 255, 0.07));
+  }
+
   .document-link:hover .arrow {
+    color: var(--vp-c-text-1);
     transform: translateX(4px);
   }
 }
@@ -193,6 +214,10 @@ html.dark .plain-language {
   .actions {
     flex-direction: column;
     margin-top: 24px;
+  }
+
+  .document-link {
+    padding-inline: 12px;
   }
 }
 
