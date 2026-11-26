@@ -39,7 +39,7 @@
           </HomePageCtaCard>
 
           <HomePageCtaCard
-              title="Explore 120+ features"
+              :title="`Explore ${featureCount}+ features`"
               description="Explore QuestPDF features and learn to create documents that match your needs."
               href="/features-overview.html"
               accent="#5C6BC0"
@@ -96,6 +96,7 @@ import HomePageEngine from "./HomePageEngine.vue";
 import HomePageLicense from "./HomePageLicense.vue";
 import { ref } from "vue";
 import { useDotWings } from "../dotWings";
+import { data as featureCount } from "../features/featureCount.data";
 
 /* flip once the video tutorial and the sample gallery are live; the footer's "Sample gallery" link goes with it */
 const plannedCardsReady = false;

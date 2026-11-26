@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from "vue";
-import { featureCategories } from "../features";
+import { data as featureCount } from "../features/featureCount.data";
 import { observeOnScreen, reducedMotion } from "./ctaTimeline";
-
-const featureCount = featureCategories.reduce((count, category) => count + category.features.length, 0);
 
 /* Tilted orbits around a sun half-sunk in the card's bottom edge. Each orbit turns at its own, very slow pace
    (seconds per turn); its planets sit at uneven but fixed gaps. */
