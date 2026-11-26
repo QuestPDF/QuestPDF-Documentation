@@ -3,8 +3,8 @@ import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
 import { faCheck, faHeart } from "@fortawesome/pro-solid-svg-icons";
 import { faChevronDown, faClipboard } from "@fortawesome/pro-regular-svg-icons";
 import {
-  faArrowRotateLeft, faArrowsRotate, faBadgeCheck, faBriefcase, faBug, faBuilding, faBuildingColumns, faCreditCard, faEnvelope, faFileContract,
-  faFileInvoiceDollar, faHandshake, faLifeRing, faLightbulb, faReceipt, faShieldCheck
+  faArrowsRotate, faBadgeCheck, faBriefcase, faBug, faBuildingColumns, faCreditCard, faEnvelope, faFileArrowDown, faFileInvoiceDollar, faHandshake,
+  faLifeRing, faLightbulb, faMessageDollar, faMoneyBills, faPenToSquare, faReply, faShieldExclamation
 } from "@fortawesome/pro-light-svg-icons";
 import Icon from "./Icon.vue";
 import { onBeforeUnmount, ref } from "vue";
@@ -46,7 +46,7 @@ const topicGroups: { title: string; topics: Topic[] }[] = [
     title: "Buying a license",
     topics: [
       {
-        icon: faFileInvoiceDollar,
+        icon: faMessageDollar,
         label: "Get a quote",
         paragraphs: [
           "We will prepare a formal quote for a new license or a renewal within one business day, ready for your approval process."
@@ -54,7 +54,7 @@ const topicGroups: { title: string; topics: Topic[] }[] = [
         action: { label: "Request a Quote", href: quoteMail }
       },
       {
-        icon: faFileContract,
+        icon: faFileInvoiceDollar,
         label: "Pay by invoice or purchase order",
         paragraphs: [
           "We will send the invoice by email within one business day, and no quote is needed first. If your company requires a purchase order, please have its number ready so that we can add it to the invoice."
@@ -101,7 +101,7 @@ const topicGroups: { title: string; topics: Topic[] }[] = [
     title: "Billing and renewals",
     topics: [
       {
-        icon: faReceipt,
+        icon: faFileArrowDown,
         label: "Download an invoice or receipt",
         paragraphs: ["All your invoices and receipts are available in the Customer Portal, which is also linked from every purchase email."],
         action: openPortal
@@ -122,7 +122,7 @@ const topicGroups: { title: string; topics: Topic[] }[] = [
         action: openPortal
       },
       {
-        icon: faBuilding,
+        icon: faPenToSquare,
         label: "Add company details to an invoice",
         paragraphs: [
           "The View Invoice link in your receipt email lets you add your company name, address and VAT number, and download the updated invoice. If the link does not work, please write to us."
@@ -130,7 +130,7 @@ const topicGroups: { title: string; topics: Topic[] }[] = [
         action: { label: "Write to Us", href: invoiceUpdateMail }
       },
       {
-        icon: faArrowRotateLeft,
+        icon: faReply,
         label: "Request a refund",
         paragraphs: [
           "Paid licenses come with a 30-day money-back guarantee. Please write to us within 30 days of your purchase for a full refund, which also ends the license."
@@ -171,7 +171,7 @@ const topicGroups: { title: string; topics: Topic[] }[] = [
         secondAction: { label: "View the Roadmap", href: "/roadmap.html" }
       },
       {
-        icon: faShieldCheck,
+        icon: faShieldExclamation,
         label: "Report a security vulnerability",
         paragraphs: [
           "Please report vulnerabilities through GitHub's private reporting form rather than a public issue. We will confirm receipt within a few business days and coordinate the disclosure with you."
@@ -263,7 +263,7 @@ useDotWings(root);
 
       <section class="panel side-card paddle">
         <div class="icon-tile">
-          <Icon :icon="faCreditCard" />
+          <Icon :icon="faMoneyBills" />
         </div>
 
         <div>
