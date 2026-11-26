@@ -142,11 +142,11 @@ useDotWings(root);
   outline-offset: -2px;
 }
 
-/* a 20px glyph in a 24px slot */
+/* a 24px slot at the glyphs' 20px height: in a square box the wide glyphs shrank to fit its width */
 .document-icon {
   flex-shrink: 0;
-  margin-inline: 2px;
-  font-size: 1.25rem;
+  width: 1.5rem;
+  height: 1.25rem;
 }
 
 .arrow {
