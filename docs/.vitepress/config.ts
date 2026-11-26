@@ -69,6 +69,8 @@ export default defineConfig<ThemeConfig>({
 
     head: [
         ['link', { rel: 'icon', href: '/favicon.png', type: 'image/png', sizes: '64x64' }],
+        // PROTOTYPE (QST-741): the visitor's folded/open menu choice, applied before the first paint (theme/SidebarRail.vue)
+        ['script', {}, `try{var s=localStorage.getItem('questpdf-sidebar');if(s==='rail'||s==='docked')document.documentElement.dataset.sidebar=s}catch(e){}`],
         ...getPlausibleScript(),
         ['meta', { name: "title", content: "C# PDF Generation Library | QuestPDF for .NET" }],
         ['meta', { name: "description", content: "Generate and edit PDF documents in your C# applications using the QuestPDF library and its C# Fluent API. Build invoices, reports and data exports with ease." }],
@@ -123,6 +125,20 @@ export default defineConfig<ThemeConfig>({
                     { text: 'Features', link: '/companion/features' },
                     { text: 'Warnings', link: '/companion/warnings' },
                     { text: 'Previewer (legacy)', link: '/document-previewer' },
+                ]
+            },
+            /* PROTOTYPE for QST-741: remove before merging */
+            {
+                text: 'Features prototypes',
+                icon: faPlanetRinged,
+                collapsed: false,
+                items: [
+                    { text: 'Option 1: Alternating rows (old)', link: '/companion/features-option-1' },
+                    { text: 'Option 2: Alternating rows (new)', link: '/companion/features-option-2' },
+                    { text: 'Option 3: Two films', link: '/companion/features-option-3' },
+                    { text: 'Option 4: List and preview', link: '/companion/features-option-4' },
+                    { text: 'Option 5: Sticky player', link: '/companion/features-option-5' },
+                    { text: 'Option 6: Sections', link: '/companion/features-option-6' },
                 ]
             },
             {

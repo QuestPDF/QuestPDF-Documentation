@@ -238,20 +238,23 @@ html.dark .custom-page {
 
   position: absolute;
   top: calc(-1 * var(--dots-bleed));
-  width: min(28%, max(0px, (100% - var(--dots-clear, 0px)) / 2));
   height: calc(var(--dots-height, 420px) + var(--dots-bleed));
   z-index: -1;
   pointer-events: none;
 }
 
-/* the masks are anchored at the outer edge, where the dots are largest */
+/* the masks are anchored at the outer edge, where the dots are largest. On a page narrower than the window (beside a
+   sidebar) each wing runs out to the window's edge, by the gap useDotWings measures (--dots-left, --dots-right), and
+   is sized by the window's width (--dots-span), as on a full-width page. */
 .texture-dots > .dot-wing.left {
-  left: 0;
+  left: calc(-1 * var(--dots-left, 0px));
+  width: min(0.28 * var(--dots-span, 100%), max(0px, var(--dots-left, 0px) + (100% - var(--dots-clear, 0px)) / 2));
   mask-image: radial-gradient(ellipse var(--dots-mask-size) at 0% var(--dots-mask-y), #000 40%, transparent 100%);
 }
 
 .texture-dots > .dot-wing.right {
-  right: 0;
+  right: calc(-1 * var(--dots-right, 0px));
+  width: min(0.28 * var(--dots-span, 100%), max(0px, var(--dots-right, 0px) + (100% - var(--dots-clear, 0px)) / 2));
   mask-image: radial-gradient(ellipse var(--dots-mask-size) at 100% var(--dots-mask-y), #000 40%, transparent 100%);
 }
 

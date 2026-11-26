@@ -135,6 +135,14 @@ export function useDotWings(root: Ref<HTMLElement | undefined>, { animated = fal
 
   /* the size comes from CSS; NaN while the wings are hidden */
   function measure(element: HTMLElement) {
+    /* the wings reach the window's edges even when the page is narrower than the window (a sidebar layout pads it in):
+       the CSS takes the gap on each side and the window's width from these */
+    const box = element.getBoundingClientRect();
+    const span = document.documentElement.clientWidth;
+    element.style.setProperty("--dots-left", `${Math.max(0, box.left)}px`);
+    element.style.setProperty("--dots-right", `${Math.max(0, span - box.right)}px`);
+    element.style.setProperty("--dots-span", `${span}px`);
+
     const style = getComputedStyle(canvases[0].canvas);
     const width = parseFloat(style.width);
     const title = element.querySelector("h1")?.getBoundingClientRect();
@@ -166,6 +174,7 @@ export function useDotWings(root: Ref<HTMLElement | undefined>, { animated = fal
 
   let resizeObserver: ResizeObserver | undefined;
   let intersectionObserver: IntersectionObserver | undefined;
+  const onWindowResize = () => root.value && canvases.length && measure(root.value);
 
   onMounted(() => {
     const element = root.value!;
@@ -183,6 +192,8 @@ export function useDotWings(root: Ref<HTMLElement | undefined>, { animated = fal
 
     resizeObserver = new ResizeObserver(() => measure(element));
     resizeObserver.observe(element);
+    /* the page can move within the window without changing its size, when the sidebar is pinned or folded */
+    window.addEventListener("resize", onWindowResize);
 
     if (!animated)
       return;
@@ -210,6 +221,7 @@ export function useDotWings(root: Ref<HTMLElement | undefined>, { animated = fal
   onBeforeUnmount(() => {
     cancelAnimationFrame(frame);
     resizeObserver?.disconnect();
+    window.removeEventListener("resize", onWindowResize);
     intersectionObserver?.disconnect();
     motion?.removeEventListener("change", update);
 

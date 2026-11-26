@@ -2,6 +2,7 @@
 import { onMounted } from "vue";
 import DefaultTheme from "vitepress/theme";
 import LayoutFooter from "./LayoutFooter.vue";
+import SidebarRail from "./SidebarRail.vue";
 import { loadPaddle } from "./paddle";
 
 const { Layout } = DefaultTheme;
@@ -13,6 +14,10 @@ onMounted(loadPaddle);
 
 <template>
   <Layout>
+    <template #sidebar-nav-before>
+      <SidebarRail />
+    </template>
+
     <template #layout-bottom>
       <LayoutFooter />
     </template>
