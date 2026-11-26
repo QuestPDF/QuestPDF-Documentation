@@ -127,18 +127,13 @@ useDotWings(root, { animated: true });
   flex-direction: column;
   gap: var(--section-gap);
   padding-top: 0;
-  padding-bottom: calc(2 * var(--section-gap));
-}
-
-/* the column's gap plus a quarter of it again: 25% more space on each side of a divider */
-.sections .dotted-divider {
-  margin: calc(var(--section-gap) / 4) 0;
+  padding-bottom: 72px;
 }
 
 .titled-section {
   display: flex;
   flex-direction: column;
-  gap: var(--section-gap);
+  gap: 36px;
 }
 
 .section-title {
@@ -161,7 +156,6 @@ useDotWings(root, { animated: true });
 @media screen and (max-width: 1180px) {
   .cta-row {
     grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
   }
 }
 

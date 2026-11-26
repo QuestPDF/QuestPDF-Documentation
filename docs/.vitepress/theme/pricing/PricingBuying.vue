@@ -97,7 +97,7 @@ const resellers = [
 .routes {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 32px;
+  gap: var(--section-gap);
   width: 100%;
   margin: 0 auto;
 }

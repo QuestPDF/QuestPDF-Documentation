@@ -180,7 +180,7 @@ useDotWings(root);
 .purchase-cards {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 32px;
+  gap: var(--section-gap);
   width: 100%;
 }
 
