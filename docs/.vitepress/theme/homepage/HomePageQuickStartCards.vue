@@ -142,7 +142,6 @@ html.dark .quick-start-card .card-title {
 @media screen and (max-width: 760px) {
   .quick-start-cards {
     grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
   }
 }
 

@@ -147,7 +147,7 @@ const licenses = [
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: repeat(6, auto); /* tag, header, divider, details, action, footnote */
-  gap: 0 32px;
+  gap: 0 32px; /* deliberately tighter than the section gap */
 }
 
 /* the inset is a token so the badge can reach the card's edges */

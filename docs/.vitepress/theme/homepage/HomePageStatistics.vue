@@ -35,7 +35,7 @@ const icons: Record<string, IconDefinition> = {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 40px 24px;
-  margin-block: 32px;
+  margin-block: 16px; /* on top of the homepage column's 48px gap */
 }
 
 @media screen and (max-width: 640px) {

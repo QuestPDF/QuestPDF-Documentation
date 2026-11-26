@@ -169,7 +169,7 @@ html.dark {
 
 .custom-page {
   --panel-padding: clamp(32px, 22.4px + 1.38vw, 40px) clamp(24px, 4.7px + 2.76vw, 40px);
-  --section-gap: 36px; /* between the homepage's sections, and between the cards of a row */
+  --section-gap: 48px; /* between sections, between cards, and on each side of a dotted divider */
   /* VitePress's light divider is too faint on white */
   --vp-c-divider: light-dark(#DBDDE1, #2E2E32);
 }
@@ -296,7 +296,7 @@ html.dark .custom-page :where(.panel.ringed) {
 .custom-page .dotted-divider {
   grid-column: 1 / -1;
   height: 4px;
-  margin: 14px 0;
+  margin: 0; /* the column's gap, or the page's own margin, spaces it */
   pointer-events: none;
   background-image: radial-gradient(circle, color-mix(in srgb, color-mix(in srgb, #1E88E5 85%, var(--vp-c-text-1)) 40%, transparent) 1px, transparent 1.5px);
   background-size: 20px 4px;

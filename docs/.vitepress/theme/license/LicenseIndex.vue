@@ -111,7 +111,7 @@ useDotWings(root);
 /* Documents: the rows sit 8px inside the card, with corners that follow the card's */
 
 .documents {
-  margin-top: 40px;
+  margin-top: var(--section-gap);
   padding: 8px;
 }
 

@@ -50,16 +50,14 @@ useDotWings(root);
   margin: 0 auto;
 }
 
-.pricing-page .content {
-  padding-top: 64px;
-  padding-bottom: 64px;
+/* the page padding stays at the top and the bottom; next to a divider the contents keep the section gap (adjacency,
+   not :first-child, because the dot wings are prepended to the page) */
+.pricing-page > .dotted-divider + .container > .content {
+  padding-top: var(--section-gap);
 }
 
-@media screen and (max-width: 767px) {
-  .pricing-page .content {
-    padding-top: 48px;
-    padding-bottom: 48px;
-  }
+.pricing-page > .container:has(+ .dotted-divider) > .content {
+  padding-bottom: var(--section-gap);
 }
 
 </style>
