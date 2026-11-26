@@ -1,30 +1,9 @@
 <script setup lang="ts">
 import { licensePrices } from "./prices";
-
-/* the quote request opens as an email that already asks for what a quote needs */
-const quoteSubject = "Quote request: QuestPDF license";
-
-const quoteBody = [
-  "Company legal name:",
-  "Country:",
-  "License: Professional / Enterprise",
-  "New purchase or renewal (license ID if renewal):",
-  "PO number required on the invoice: yes / no"
-].join("\n");
-
-const quoteMail = `mailto:contact@questpdf.com?subject=${encodeURIComponent(quoteSubject)}&body=${encodeURIComponent(quoteBody)}`;
+import { quoteMail } from "../contactMails";
+import { resellers } from "./resellers";
 
 const price = `$${licensePrices.professional.toLocaleString("en-US")}`;
-
-/* size: the height at which the logo's letters are as tall as the others' (about 29px). shift: moves the logo so that
-   the letters stand on one baseline; QBS is stacked, so it is centred on the letters instead. Both are multiplied by
-   the row's --unit. */
-const resellers = [
-  { name: "SoftwareOne", link: "https://www.softwareone.com/", src: "software-one.svg", size: 30, shift: 0.4 },
-  { name: "Insight", link: "https://www.insight.com/", src: "insight.svg", size: 38, shift: 4.6 },
-  { name: "SHI", link: "https://www.shi.com/", src: "shi.svg", size: 40, shift: -5.1 },
-  { name: "QBS Software", link: "https://www.qbssoftware.com/", src: "qbs-software.svg", size: 45, shift: 0 }
-];
 </script>
 
 <template>
