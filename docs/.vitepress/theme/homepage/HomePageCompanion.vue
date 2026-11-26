@@ -25,7 +25,7 @@
             <Icon class="download-chevron" :icon="faChevronDown" />
           </button>
 
-          <div v-if="isDownloadOpen" ref="downloadMenuRef" class="download-menu" :class="{ below: isDownloadBelow }">
+          <div v-if="isDownloadOpen" ref="downloadMenuRef" class="menu-panel download-menu" :class="{ below: isDownloadBelow }">
             <a
               v-for="download of downloads"
               :key="download.url"
@@ -199,19 +199,17 @@ onBeforeUnmount(() => {
   transform: rotate(180deg);
 }
 
+/* the navbar's dropdown: its panel (.menu-panel) and the rows of the Documentation menu */
 .download-menu {
   position: absolute;
   bottom: calc(100% + 8px);
   left: 0;
   z-index: 10;
   min-width: 240px;
-  padding: 6px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
-  background-color: var(--vp-c-bg-elv);
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 12px;
-  box-shadow: var(--elevation);
+  gap: 4px;
 }
 
 .download-menu.below {
@@ -222,25 +220,24 @@ onBeforeUnmount(() => {
 .download-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  border-radius: 8px;
+  gap: 1.25rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 16px;
   font-size: 1rem;
   line-height: 1.5rem;
   color: var(--vp-c-text-1);
   white-space: nowrap;
 }
 
-.download-item:hover {
-  background-color: var(--vp-c-default-soft);
+.download-item:is(:hover, :focus-visible) {
+  background-color: var(--surface-hover);
 }
 
+/* solid brand glyphs, so halfway between the title and the grey of the file format */
 .download-icon {
   flex-shrink: 0;
-  width: 18px;
-  text-align: center;
-  font-size: 1.0625rem;
-  color: var(--vp-c-text-2);
+  font-size: 1.25rem;
+  color: color-mix(in srgb, var(--vp-c-text-1), var(--vp-c-text-3));
 }
 
 .download-name {

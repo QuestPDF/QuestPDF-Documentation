@@ -191,8 +191,9 @@ html.dark .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {
 }
 
 /* Dropdown panels: a card (CustomPages.css) on a piece of the bar, because a menu floats over the page and cannot be
-   see-through */
-.VPNavBar .VPFlyout .VPMenu {
+   see-through. `.menu-panel` gives the same look to a menu outside the bar (the homepage's Companion downloads). */
+.VPNavBar .VPFlyout .VPMenu,
+.menu-panel {
     position: relative;
     border: none;
     border-radius: 24px;
@@ -204,13 +205,15 @@ html.dark .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {
 }
 
 /* --surface-edge is `none` in dark, which cannot be part of a list */
-html.dark .VPNavBar .VPFlyout .VPMenu {
+html.dark .VPNavBar .VPFlyout .VPMenu,
+html.dark .menu-panel {
     box-shadow:
         0 12px 24px -8px rgba(0, 0, 0, 0.5),
         0 40px 80px -20px rgba(0, 0, 0, 0.75);
 }
 
-.VPNavBar .VPFlyout .VPMenu::before {
+.VPNavBar .VPFlyout .VPMenu::before,
+.menu-panel::before {
     content: "";
     position: absolute;
     inset: 0;
