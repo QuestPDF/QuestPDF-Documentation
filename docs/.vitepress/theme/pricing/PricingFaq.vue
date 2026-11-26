@@ -55,6 +55,7 @@ import { faqCategories as categories } from "./faq";
   margin: 0;
   font-size: 1.5rem;
   line-height: 2rem;
+  font-weight: 600;
   text-align: center;
   color: var(--accent);
 }
@@ -80,8 +81,13 @@ import { faqCategories as categories } from "./faq";
   list-style: none;
   font-size: 1.125rem;
   line-height: 1.75rem;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--vp-c-text-1);
+}
+
+/* dark text on white reads lighter than light on dark */
+html:not(.dark) .faq-question {
+  font-weight: 450;
 }
 
 /* older Safari draws its disclosure triangle through this pseudo-element, whatever the display */
@@ -102,17 +108,18 @@ import { faqCategories as categories } from "./faq";
   color: var(--vp-c-text-3);
 }
 
+/* an open question keeps the hover colour */
 .faq-item[open] .faq-question {
   padding-bottom: 22px;
   font-weight: 600;
+  color: var(--accent);
 }
 
 .faq-item[open] .faq-chevron {
-  color: var(--vp-c-text-1);
+  color: var(--accent);
   transform: rotate(180deg);
 }
 
-/* after the open state, so an open question's chevron turns blue as well */
 @media (hover: hover) {
   .faq-question:hover,
   .faq-question:hover .faq-chevron {
@@ -125,9 +132,15 @@ import { faqCategories as categories } from "./faq";
   max-width: calc(68ch + 2 * var(--pad-x));
   padding: 0 var(--pad-x) 32px;
   font-size: 1rem;
-  line-height: 1.75rem;
+  line-height: 1.875rem;
   color: color-mix(in srgb, var(--vp-c-text-1), var(--vp-c-text-2));
   white-space: pre-line;
+}
+
+/* the part of an answer that settles the question, marked in faq.ts */
+.faq-answer :deep(strong) {
+  font-weight: 600;
+  color: var(--vp-c-text-1);
 }
 
 /* the brand colour is under 4.5:1 in the light theme, and the pages' hover colour is lighter still;
