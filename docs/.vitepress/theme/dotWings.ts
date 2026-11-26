@@ -1,5 +1,5 @@
 /* The dot wings beside custom page headers (.texture-dots): each wing is a wall of a corridor receding towards the
-   page's h1, and the homepage flies slowly down it. Columns step back a fixed 24px, so the drawing does not scale with the
+   page's h1, and the page flies slowly down it. Columns step back a fixed 24px, so the drawing does not scale with the
    wing; it is drawn for the measured wing, on one canvas per wing, once the page is mounted. After 24px of flight the
    lattice repeats itself, so the loop is seamless. */
 
@@ -105,8 +105,8 @@ function draw(context: CanvasRenderingContext2D, { width, height, titleMiddle }:
   context.globalAlpha = 1;
 }
 
-/* the wings of a .texture-dots page, flying only where `animated`: no wings until mounted, as their drawing depends on the window width */
-export function useDotWings(root: Ref<HTMLElement | undefined>, { animated = false } = {}) {
+/* the wings of a .texture-dots page: no wings until mounted, as their drawing depends on the window width */
+export function useDotWings(root: Ref<HTMLElement | undefined>) {
   const { isDark } = useData();
 
   /* created on mount: the page is also rendered on the server */
@@ -143,7 +143,7 @@ export function useDotWings(root: Ref<HTMLElement | undefined>, { animated = fal
     cancelAnimationFrame(frame);
     frame = 0;
 
-    if (animated && wing && onScreen && !motion?.matches) {
+    if (wing && onScreen && !motion?.matches) {
       flightStart = performance.now();
       frame = requestAnimationFrame(tick);
     } else
@@ -200,9 +200,6 @@ export function useDotWings(root: Ref<HTMLElement | undefined>, { animated = fal
 
     resizeObserver = new ResizeObserver(() => measure(element));
     resizeObserver.observe(element);
-
-    if (!animated)
-      return;
 
     motion = matchMedia("(prefers-reduced-motion: reduce)");
     motion.addEventListener("change", update);

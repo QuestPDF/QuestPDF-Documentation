@@ -14,7 +14,7 @@ The tree-structure uses a similar compact concept as C# Fluent API. Each node in
 
 | Shortcut   | Description                    |
 |------------|--------------------------------|
-| ctrl + W   | Hide / show document hierarchy |
+| ctrl + B   | Hide / show document hierarchy |
 
 ![Document hierarchy hidden](/companion/screenshots/hierarchy-hidden-light.webp){.companion-screenshot .light-only}
 ![Document hierarchy hidden](/companion/screenshots/hierarchy-hidden-dark.webp){.companion-screenshot .dark-only}

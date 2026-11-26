@@ -102,6 +102,30 @@
   text-align: center;
 }
 
+/* Features Overview and the Companion page open with a sentence under the title: larger, and between the two text
+   colours, so it reads softer than the title without fading. Its size and the header's width hold the Features
+   Overview's sentence in two lines, even where a browser sets the text a little wider. */
+.custom-page :where(.section-header.with-lead) {
+  max-width: 45rem;
+}
+
+.custom-page :where(.with-lead) h1 {
+  margin-bottom: 1.5rem;
+}
+
+.custom-page :where(.with-lead) p.sub-header {
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.3125rem);
+  line-height: 1.55;
+  font-weight: 450;
+  color: color-mix(in srgb, var(--vp-c-text-1) 60%, var(--vp-c-text-2));
+  text-wrap: balance;
+}
+
+/* light text on dark already reads heavier */
+html.dark .custom-page :where(.with-lead) p.sub-header {
+  font-weight: 400;
+}
+
 /* Text in a panel */
 
 .custom-page .card-title {
@@ -256,10 +280,10 @@ html.dark .custom-page :where(.panel.ringed) {
   isolation: isolate; /* keeps the wings (z-index: -1) above the canvas but below the content */
 }
 
-/* one canvas per wing, drawn and flown by useDotWings (dotWings.ts). A page whose header text reaches the wings sets
-   --dots-clear to that text's width, so the dots stay beside it, and a page whose first card or divider reaches under
-   them sets --dots-height to that card's top. The wings run on behind the navbar and above the page by --dots-bleed, so
-   the macOS overscroll pull reveals more dots instead of an empty band. */
+/* one canvas per wing, drawn and flown by useDotWings (dotWings.ts). A page whose header text or first card reaches the
+   wings sets --dots-clear to the width that must stay free, so the dots stay beside it; one whose cards reach under
+   the wings sets --dots-height to where the dots fade out. The wings run on behind the navbar and above the page by
+   --dots-bleed, so the macOS overscroll pull reveals more dots instead of an empty band. */
 .texture-dots > .dot-wing {
   --dots-bleed: calc(var(--vp-nav-height) + 200px);
   --dots-mask-size: 200% calc(0.85 * var(--dots-height, 420px));
@@ -356,7 +380,7 @@ html.dark body:has(.custom-page) {
   max-width: 100%;
   text-align: center;
 
-  border-radius: 10px;
+  border-radius: 18px; /* as round as the navbar's 36px pills with their 16px */
   padding: 10px 22px;
   font-size: 1rem;
   font-weight: 600;

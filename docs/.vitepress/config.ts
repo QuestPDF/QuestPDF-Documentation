@@ -4,7 +4,7 @@ import {defineConfig, type DefaultTheme, HeadConfig} from 'vitepress'
 import llmstxt from 'vitepress-plugin-llms'
 import {
     faCode, faFileLines, faImage, faLayerGroup, faLink, faPageBreak, faRocketLaunch, faRulerCombined, faSignsPost,
-    faTableLayout, faText, faUniversalAccess, faWindowRestore
+    faTableLayout, faText, faUniversalAccess
 } from '@fortawesome/pro-light-svg-icons'
 import imageSizePlugin from "./markdownit-imagesize-plugin.ts";
 import type {ThemeConfig} from "./theme/themeConfig.ts";
@@ -63,6 +63,7 @@ export default defineConfig<ThemeConfig>({
               'pricing.md',
               'contact.md',
               'features-overview.md',
+              'companion.md',
           ],
       })]
     },
@@ -92,7 +93,7 @@ export default defineConfig<ThemeConfig>({
             }
         },
         nav: [
-            { text: 'Documentation', items: [{ component: 'NavDocumentationMenu' }], activeMatch:'^/(quick-start|invoice-tutorial|roadmap|acknowledgements|document-previewer|license/configuration|features-overview|companion/|concepts/|api-reference/|examples/)' },
+            { text: 'Documentation', items: [{ component: 'NavDocumentationMenu' }], activeMatch:'^/(quick-start|invoice-tutorial|roadmap|acknowledgements|document-previewer|license/configuration|features-overview|companion|concepts/|api-reference/|examples/)' },
             { text: 'Pricing', link: '/pricing' },
             { text: 'GitHub', link: 'https://github.com/QuestPDF/QuestPDF', noIcon: true },
             { text: 'NuGet', link: 'https://www.nuget.org/packages/QuestPDF', noIcon: true },
@@ -109,6 +110,7 @@ export default defineConfig<ThemeConfig>({
                     { text: 'Invoice tutorial', link: '/invoice-tutorial' },
                     { text: 'License configuration', link: '/license/configuration' },
                     { text: 'ASP.NET integration', link: '/examples/aspnet-integration' },
+                    { text: 'Companion app', link: '/companion' },
                 ]
             },
             {
@@ -138,18 +140,6 @@ export default defineConfig<ThemeConfig>({
                     { text: 'XMP metadata', link: '/concepts/document-operations#xmp-metadata-extension' },
                     { text: 'Advanced examples', link: '/concepts/document-operations#advanced-examples' },
                     { text: 'ZUGFeRD / Factur-X', link: '/examples/zugferd' },
-                ]
-            },
-            {
-                text: 'Companion App',
-                icon: faWindowRestore,
-                collapsed: true,
-                items: [
-                    { text: 'Overview and setup', link: '/companion/usage' },
-                    { text: 'Features', link: '/companion/features' },
-                    { text: 'Download', link: '/companion/download' },
-                    { text: 'Warning messages', link: '/companion/warnings' },
-                    { text: 'Previewer (legacy)', link: '/document-previewer' },
                 ]
             },
             {

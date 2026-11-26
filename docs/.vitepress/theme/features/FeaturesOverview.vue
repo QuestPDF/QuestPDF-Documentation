@@ -24,7 +24,7 @@ useDotWings(page);
 <template>
   <div ref="page" class="custom-page features-page texture-dots">
     <div class="content">
-      <header class="section-header">
+      <header class="section-header with-lead">
         <h1>Features Overview</h1>
         <p class="sub-header">Precise typography, flexible layouts, rich visual content and fine control over every page. Everything you need to build professional documents.</p>
       </header>
@@ -67,30 +67,8 @@ useDotWings(page);
   --dots-clear: 888px; /* the column and 100px of air on each side */
 }
 
-.section-header h1 {
-  margin-bottom: 1.5rem;
-}
-
-/* the sub-header's two lines are as wide as the 43rem column to the pixel: the room beyond keeps them from wrapping
-   into three where a browser sets the text a little wider */
-.features-page .section-header {
-  max-width: 45rem;
-}
-
-/* the largest size that holds the text in two lines no wider than the search field; between the two text colours,
-   so it reads softer than the title without fading */
 .features-page p.sub-header {
   margin-bottom: 2.5rem;
-  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.3125rem);
-  line-height: 1.55;
-  font-weight: 450;
-  color: color-mix(in srgb, var(--vp-c-text-1) 60%, var(--vp-c-text-2));
-  text-wrap: balance;
-}
-
-/* light text on dark already reads heavier */
-html.dark .features-page p.sub-header {
-  font-weight: 400;
 }
 
 /* the column of a documentation article */
@@ -108,6 +86,9 @@ html.dark .features-page p.sub-header {
   --stem: 11.5px;
   --row: 6px;
   --branch: var(--doc-line-strong);
+
+  /* the areas' icons: the blue of the Companion page's shortcut sheet */
+  --area-tint: light-dark(#1976D2, var(--vp-c-brand-1));
 }
 
 @media (min-width: 60rem) {
@@ -151,7 +132,7 @@ html.dark .features-page p.sub-header {
 .area-icon {
   flex: none;
   font-size: 1.5rem;
-  color: var(--doc-menu-strong);
+  color: var(--area-tint);
 }
 
 /* the filter's words in the names: Marked (treeFilter.ts) renders the marks without a scope id */
@@ -220,7 +201,7 @@ html.dark .features-page p.sub-header {
   flex: none;
   margin-inline-end: 4px;
   font-size: 1.5rem;
-  color: var(--doc-menu-strong);
+  color: var(--area-tint);
 }
 
 /* on a narrow screen the names in the middle give way first: the last one says where the reader is */

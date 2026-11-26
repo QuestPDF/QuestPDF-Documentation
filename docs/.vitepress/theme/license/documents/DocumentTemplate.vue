@@ -52,7 +52,7 @@ useDotWings(root);
 <style>
 
 .document-page {
-  --dots-height: 204px; /* the document card */
+  --dots-clear: 916px; /* the 820px document card and 48px of air on each side */
 }
 
 .document-page .content {

@@ -191,7 +191,7 @@ html.dark .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {
 }
 
 /* Dropdown panels: a card (CustomPages.css) on a piece of the bar, because a menu floats over the page and cannot be
-   see-through. `.menu-panel` gives the same look to a menu outside the bar (the homepage's Companion downloads). */
+   see-through. `.menu-panel` gives the same look to a menu outside the bar (the Companion App's download list). */
 .VPNavBar .VPFlyout .VPMenu,
 .menu-panel {
     position: relative;

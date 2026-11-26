@@ -32,7 +32,7 @@ const columns: FooterColumn[] = [
       { label: "Quick start", href: "/quick-start.html" },
       { label: "Invoice tutorial", href: "/invoice-tutorial.html" },
       { label: "Features overview", href: "/features-overview.html" },
-      { label: "Companion app", href: "/companion/usage.html" },
+      { label: "Companion app", href: "/companion.html" },
     ]
   },
   {

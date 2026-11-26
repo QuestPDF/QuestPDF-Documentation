@@ -8,7 +8,7 @@
 
 import type { IconDefinition } from "@fortawesome/fontawesome-common-types";
 import {
-  faCode, faFileLines, faImage, faLayerGroup, faLink, faPageBreak, faRulerCombined, faTableLayout, faText,
+  faCode, faFileLines, faImage, faLayerGroup, faLink, faPageBreak, faRulerCombined, faTableLayout, faTextSize,
   faUniversalAccess
 } from "@fortawesome/pro-regular-svg-icons";
 
@@ -827,7 +827,7 @@ export const featureTree: FeatureArea[] = [
   {
     name: "Text",
     keywords: "typography",
-    icon: faText,
+    icon: faTextSize,
     items: [
       {
         name: "Content",

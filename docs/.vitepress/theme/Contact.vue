@@ -298,7 +298,7 @@ useDotWings(root);
 
 <style scoped>
 .contact-page {
-  --dots-height: 172px; /* the topics card */
+  --dots-clear: 816px; /* the 720px topics card and 48px of air on each side */
 }
 
 .content {

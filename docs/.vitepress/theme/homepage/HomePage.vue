@@ -102,7 +102,7 @@ import { data as featureCount } from "../features/featureCount.data";
 const plannedCardsReady = false;
 
 const root = ref<HTMLElement>();
-useDotWings(root, { animated: true });
+useDotWings(root);
 
 </script>
 

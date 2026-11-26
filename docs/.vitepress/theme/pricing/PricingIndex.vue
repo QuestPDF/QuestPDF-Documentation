@@ -41,7 +41,7 @@ useDotWings(root);
 <style>
 
 .pricing-page {
-  --dots-height: 224px; /* the Community tier card */
+  --dots-height: 320px; /* the cards span the page: the dots fade out just inside the Community and Enterprise cards (224px) */
 }
 
 .custom-page.pricing-page > .dotted-divider {

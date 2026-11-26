@@ -127,15 +127,16 @@ onBeforeUnmount(() => {
 
 <style scoped>
 
+/* a page can lift the frame further with --film-shadow */
 .frame {
   position: relative;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 14px;
   background-color: var(--vp-c-bg);
-  box-shadow:
+  box-shadow: var(--film-shadow,
       0 0 0 1px light-dark(color-mix(in srgb, var(--vp-c-text-1) 10%, transparent), rgba(255, 255, 255, 0.08)),
-      0 16px 40px -16px light-dark(rgba(16, 24, 40, 0.22), rgba(0, 0, 0, 0.6));
+      0 16px 40px -16px light-dark(rgba(16, 24, 40, 0.22), rgba(0, 0, 0, 0.6)));
 }
 
 .frame video {

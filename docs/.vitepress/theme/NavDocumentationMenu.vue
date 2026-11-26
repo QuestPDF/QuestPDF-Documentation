@@ -25,7 +25,7 @@ const groups = [
     { icon: faBookOpenCover, title: "In-depth invoice tutorial", link: "/invoice-tutorial" },
     { icon: faBadgeCheck, title: "License configuration", link: "/license/configuration" },
     { icon: faObjectsColumn, title: "Features overview", link: "/features-overview" },
-    { icon: faWindowRestore, title: "Companion app", link: "/companion/usage" }
+    { icon: faWindowRestore, title: "Companion app", link: "/companion" }
   ],
   [
     { icon: faGift, title: "Releases", link: "https://github.com/QuestPDF/QuestPDF/releases" },
