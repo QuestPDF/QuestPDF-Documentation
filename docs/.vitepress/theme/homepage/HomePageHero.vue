@@ -32,7 +32,7 @@ h1 {
   line-height: 1.05;
   letter-spacing: -0.03em;
   word-spacing: 0.1em;
-  color: light-dark(#142630, var(--vp-c-text-1));
+  color: var(--ink-title);
 }
 
 h1 .highlight-foreground {

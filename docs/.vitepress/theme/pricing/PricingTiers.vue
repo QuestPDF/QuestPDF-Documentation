@@ -182,12 +182,12 @@ const licenses = [
 }
 
 .license-tier.community {
-  border-radius: 32px 0 0 32px;
+  border-radius: var(--radius-panel) 0 0 var(--radius-panel);
   margin: 48px 0;
 }
 
 .license-tier.enterprise {
-  border-radius: 0 32px 32px 0;
+  border-radius: 0 var(--radius-panel) var(--radius-panel) 0;
   margin: 48px 0;
 }
 
@@ -198,7 +198,7 @@ const licenses = [
   justify-self: stretch;
   margin: calc(-1 * var(--tier-padding)) calc(-1 * var(--tier-padding)) 0;
   height: 46px;
-  border-radius: 30px 30px 0 0;
+  border-radius: calc(var(--radius-panel) - 2px) calc(var(--radius-panel) - 2px) 0 0;
 
   display: flex;
   align-items: center;
@@ -333,7 +333,7 @@ html.dark .license-tier .tag {
 
 /* see CustomPages.css for --fill */
 .license-tier.professional .action {
-  --fill: #1976D2;
+  --fill: var(--action);
 
   color: #FFF;
   background-color: var(--fill);
@@ -341,7 +341,7 @@ html.dark .license-tier .tag {
 }
 
 .license-tier.professional .action:hover {
-  background-color: light-dark(#1565C0, #1E88E5);
+  background-color: var(--action-hover);
 }
 
 .license-tier.enterprise .action {
@@ -362,8 +362,8 @@ html.dark .license-tier .tag {
   text-align: center;
   margin-top: 16px;
 
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  font-size: var(--text-label);
+  line-height: var(--leading-label);
   color: var(--vp-c-text-2);
 }
 
@@ -402,7 +402,7 @@ html.dark .license-tier .tag {
   .license-tier.community,
   .license-tier.enterprise {
     margin: 0;
-    border-radius: 32px;
+    border-radius: var(--radius-panel);
   }
 }
 

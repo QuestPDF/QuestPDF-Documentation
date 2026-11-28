@@ -34,7 +34,7 @@ import { faqCategories as categories } from "./faq";
 }
 
 .faq-categories {
-  --accent: light-dark(#1976D2, oklch(0.78 0.10 245));
+  --accent: var(--ink-accent);
 
   display: flex;
   flex-direction: column;
@@ -53,8 +53,8 @@ import { faqCategories as categories } from "./faq";
 
 .faq-category-title {
   margin: 0;
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: var(--text-title);
+  line-height: var(--leading-title);
   font-weight: 600;
   text-align: center;
   color: var(--accent);
@@ -79,8 +79,8 @@ import { faqCategories as categories } from "./faq";
   padding: 26px var(--pad-x);
   cursor: pointer;
   list-style: none;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
+  font-size: var(--text-lead);
+  line-height: var(--leading-lead);
   font-weight: 400;
   color: var(--vp-c-text-1);
 }
@@ -99,7 +99,7 @@ html:not(.dark) .faq-question {
 .faq-question:focus-visible {
   outline: 2px solid var(--vp-c-brand-1);
   outline-offset: -10px;
-  border-radius: 32px;
+  border-radius: var(--radius-panel);
 }
 
 .faq-chevron {

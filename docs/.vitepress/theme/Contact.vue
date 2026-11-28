@@ -362,7 +362,7 @@ useDotWings(root);
 }
 
 .address.copied .icon {
-  color: light-dark(#2E7D32, #81C784);
+  color: var(--positive);
 }
 
 
@@ -395,11 +395,11 @@ useDotWings(root);
   letter-spacing: 0.02em;
   word-spacing: 0.1em;
   text-transform: uppercase;
-  color: light-dark(#1976D2, oklch(0.78 0.10 245));
+  color: var(--ink-accent);
 }
 
 .topic {
-  border-radius: 24px;
+  border-radius: var(--radius-row);
 }
 
 .topic[open] {
@@ -411,7 +411,7 @@ useDotWings(root);
   align-items: center;
   gap: 14px;
   padding: 16px 20px;
-  border-radius: 24px;
+  border-radius: var(--radius-row);
   list-style: none;
   font-weight: 500;
   color: var(--vp-c-text-1);
@@ -516,7 +516,7 @@ useDotWings(root);
 .company-details {
   display: grid;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: var(--title-gap);
 }
 
 /* the grid's gap spaces the groups */

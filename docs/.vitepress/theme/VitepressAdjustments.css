@@ -163,7 +163,7 @@ html.dark .VPNavBar .VPMenu {
 
 .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {
     color: #ffffff;
-    background-color: #1976D2;
+    background-color: var(--action);
 }
 
 html.dark .VPNavBar .VPNavBarMenu .VPNavMenuLink.VPNavBarMenuLink.active {
@@ -241,7 +241,7 @@ html.dark .menu-panel {
 }
 
 .VPNavBar .VPFlyout .VPMenuLink .link.active {
-    color: light-dark(#1976D2, var(--vp-c-text-1));
+    color: light-dark(var(--action), var(--vp-c-text-1));
     background-color: var(--surface-current);
 }
 
@@ -293,7 +293,7 @@ html.dark .menu-panel {
 }
 
 .VPNavBar .VPNavBarMenu .VPNavBarMenuGroup.active > .button::before {
-    background-color: #1976D2;
+    background-color: var(--action);
 }
 
 .VPNavBar .VPNavBarMenu .VPNavBarMenuGroup.active > .button .text {

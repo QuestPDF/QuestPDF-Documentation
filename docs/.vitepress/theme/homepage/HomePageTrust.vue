@@ -113,8 +113,8 @@ const standards: Standard[] = [
   width: 24px;
   height: 24px;
   border-radius: 6px;
-  background-color: color-mix(in srgb, light-dark(#2E7D32, #81C784) 12%, transparent);
-  color: light-dark(#2E7D32, #81C784);
+  background-color: color-mix(in srgb, var(--positive) 12%, transparent);
+  color: var(--positive);
   font-size: 1rem;
 }
 

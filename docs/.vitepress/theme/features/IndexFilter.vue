@@ -60,7 +60,6 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onFind));
 }
 
 .field {
-  --ring: light-dark(#2196F3, #3D8BD4);
   position: relative;
   display: flex;
   align-items: center;
@@ -84,7 +83,7 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onFind));
   height: 48px;
   padding: 0 44px 0 48px;
   border: 2px solid var(--ring);
-  border-radius: 12px;
+  border-radius: var(--radius-tile);
   appearance: none;
   font: inherit;
   font-size: 1rem;

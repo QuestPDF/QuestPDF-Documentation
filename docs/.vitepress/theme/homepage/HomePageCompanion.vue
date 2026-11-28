@@ -81,7 +81,7 @@ const points = [
   width: 18px;
   margin-top: 0.25rem;
   font-size: 1rem;
-  color: light-dark(#1976D2, var(--vp-c-brand-1));
+  color: light-dark(var(--action), var(--vp-c-brand-1));
 }
 
 

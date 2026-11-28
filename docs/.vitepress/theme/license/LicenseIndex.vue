@@ -132,7 +132,7 @@ useDotWings(root);
   align-items: center;
   gap: 14px;
   padding: 16px 20px;
-  border-radius: 24px;
+  border-radius: var(--radius-row);
   font-weight: 500;
   color: var(--vp-c-text-1);
 }

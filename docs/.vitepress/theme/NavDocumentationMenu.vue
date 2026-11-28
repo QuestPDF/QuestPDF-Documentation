@@ -95,7 +95,7 @@ const isCurrent = (link: string) => route.data.relativePath === `${link.slice(1)
 /* the current page: the navbar button's blue on a pale blue pill in light, a pill a step stronger than the hover in
    dark */
 .entry.current {
-  color: light-dark(#1976D2, var(--vp-c-text-1));
+  color: light-dark(var(--action), var(--vp-c-text-1));
   background-color: var(--surface-current);
 }
 

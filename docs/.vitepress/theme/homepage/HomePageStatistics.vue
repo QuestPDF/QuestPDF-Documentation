@@ -98,7 +98,7 @@ const icons: Record<string, IconDefinition> = {
   font-weight: 700;
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
-  color: light-dark(#142630, var(--vp-c-text-1));
+  color: var(--ink-title);
 }
 
 .label {
