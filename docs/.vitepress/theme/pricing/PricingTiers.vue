@@ -141,9 +141,11 @@ const licenses = [
 /* Each card is a subgrid of six shared rows, so sections line up across the cards; the children are pinned to their
    rows because only the professional card has the tag. */
 
-.license-tiers {
-  margin-top: 28px;
+.section-header h1 {
+  margin-bottom: var(--header-gap);
+}
 
+.license-tiers {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: repeat(6, auto); /* tag, header, divider, details, action, footnote */

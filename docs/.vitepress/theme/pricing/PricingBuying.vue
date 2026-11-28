@@ -122,7 +122,7 @@ const price = `$${licensePrices.professional.toLocaleString("en-US")}`;
 }
 
 .text .card-description {
-  margin-bottom: 24px;
+  margin-bottom: var(--actions-gap);
 }
 
 .figure {

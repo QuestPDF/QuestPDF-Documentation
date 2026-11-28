@@ -37,12 +37,28 @@
 
   /* Space */
   --title-gap: 20px; /* a card's title to its text */
+  --actions-gap: 28px; /* a card's text to its buttons */
+  --header-gap: 56px; /* a page's title to its first card */
+  --measure: 53ch; /* about 72 characters: the average letter of Inter is narrower than its zero */
 
   /* Shape: a row sits 8px inside its panel, so its corners are 8px tighter */
   --radius-panel: 32px;
   --radius-row: 24px;
   --radius-button: 18px; /* as round as the navbar's 36px pills with their 16px */
   --radius-tile: 12px;
+}
+
+/* the gaps follow the type: a card's text is a step smaller from 768px down, the page title from 700px */
+@media screen and (max-width: 768px) {
+  :root {
+    --actions-gap: 24px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  :root {
+    --header-gap: 48px;
+  }
 }
 
 /* on the layout root, so the navbar and the footer follow the page: its width, and the blue-leaning line under the
@@ -172,6 +188,7 @@ html.dark .custom-page :where(.with-lead) p.sub-header {
 }
 
 .custom-page .card-description {
+  max-width: var(--measure);
   margin: var(--title-gap) 0 0;
   font-size: var(--text-lead);
   line-height: var(--leading-lead);

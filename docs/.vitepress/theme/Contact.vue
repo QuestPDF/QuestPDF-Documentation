@@ -308,7 +308,7 @@ useDotWings(root);
 }
 
 .section-header h1 {
-  margin-bottom: 56px;
+  margin-bottom: var(--header-gap);
 }
 
 .topics,
@@ -328,7 +328,7 @@ useDotWings(root);
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: var(--actions-gap);
 }
 
 
@@ -345,7 +345,6 @@ useDotWings(root);
 
 .write .actions {
   align-items: center;
-  margin-top: 28px;
 }
 
 /* the shared secondary button, with the icon beside the address */
@@ -503,10 +502,6 @@ useDotWings(root);
   text-wrap: pretty;
 }
 
-.paddle .actions {
-  margin-top: 28px;
-}
-
 .icon-tile .love {
   color: #F44336;
 }
@@ -528,10 +523,6 @@ useDotWings(root);
 }
 
 @media screen and (max-width: 700px) {
-  .section-header h1 {
-    margin-bottom: 48px;
-  }
-
   /* with the ring, the same inset as the two cards below */
   .write {
     padding: 30px 22px;

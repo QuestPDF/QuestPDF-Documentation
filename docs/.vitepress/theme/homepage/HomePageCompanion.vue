@@ -89,7 +89,7 @@ const points = [
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 28px;
+  margin-top: var(--actions-gap);
 }
 
 

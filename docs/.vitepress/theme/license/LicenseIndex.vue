@@ -73,7 +73,7 @@ useDotWings(root);
 }
 
 .section-header h1 {
-  margin-bottom: 56px;
+  margin-bottom: var(--header-gap);
 }
 
 .plain-language,
@@ -104,7 +104,7 @@ useDotWings(root);
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 32px;
+  margin-top: var(--actions-gap);
 }
 
 
@@ -187,10 +187,6 @@ useDotWings(root);
 }
 
 @media screen and (max-width: 700px) {
-  .section-header h1 {
-    margin-bottom: 48px;
-  }
-
   /* the text starts 20px from the card's edge, like the list's rows */
   .plain-language {
     padding: 26px 18px 22px;
@@ -198,7 +194,6 @@ useDotWings(root);
 
   .actions {
     flex-direction: column;
-    margin-top: 24px;
   }
 
   .document-link {

@@ -140,7 +140,7 @@ html.dark .api-orbit-card {
 }
 
 .orbit-text .action {
-  margin-top: 24px;
+  margin-top: var(--actions-gap);
 }
 
 /* the orbit layer fills the card and fades out above the text's bottom edge */
