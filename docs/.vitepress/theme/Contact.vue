@@ -308,7 +308,7 @@ useDotWings(root);
 }
 
 .section-header h1 {
-  margin-bottom: 56px;
+  margin-bottom: var(--header-gap);
 }
 
 .topics,
@@ -328,7 +328,7 @@ useDotWings(root);
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: var(--actions-gap);
 }
 
 
@@ -339,14 +339,8 @@ useDotWings(root);
   padding: 38px;
 }
 
-.write .card-description {
-  line-height: 1.875rem;
-  text-wrap: pretty;
-}
-
 .write .actions {
   align-items: center;
-  margin-top: 28px;
 }
 
 /* the shared secondary button, with the icon beside the address */
@@ -362,7 +356,7 @@ useDotWings(root);
 }
 
 .address.copied .icon {
-  color: light-dark(#2E7D32, #81C784);
+  color: var(--positive);
 }
 
 
@@ -395,11 +389,11 @@ useDotWings(root);
   letter-spacing: 0.02em;
   word-spacing: 0.1em;
   text-transform: uppercase;
-  color: light-dark(#1976D2, oklch(0.78 0.10 245));
+  color: var(--ink-accent);
 }
 
 .topic {
-  border-radius: 24px;
+  border-radius: var(--radius-row);
 }
 
 .topic[open] {
@@ -411,7 +405,7 @@ useDotWings(root);
   align-items: center;
   gap: 14px;
   padding: 16px 20px;
-  border-radius: 24px;
+  border-radius: var(--radius-row);
   list-style: none;
   font-weight: 500;
   color: var(--vp-c-text-1);
@@ -424,7 +418,7 @@ useDotWings(root);
 }
 
 .topic-row:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
+  outline: var(--focus-ring);
   outline-offset: -2px;
 }
 
@@ -500,14 +494,6 @@ useDotWings(root);
   padding-top: 8px;
 }
 
-.paddle .card-description {
-  text-wrap: pretty;
-}
-
-.paddle .actions {
-  margin-top: 28px;
-}
-
 .icon-tile .love {
   color: #F44336;
 }
@@ -516,7 +502,7 @@ useDotWings(root);
 .company-details {
   display: grid;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: var(--title-gap);
 }
 
 /* the grid's gap spaces the groups */
@@ -529,10 +515,6 @@ useDotWings(root);
 }
 
 @media screen and (max-width: 700px) {
-  .section-header h1 {
-    margin-bottom: 48px;
-  }
-
   /* with the ring, the same inset as the two cards below */
   .write {
     padding: 30px 22px;

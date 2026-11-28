@@ -73,7 +73,7 @@ useDotWings(root);
 }
 
 .section-header h1 {
-  margin-bottom: 56px;
+  margin-bottom: var(--header-gap);
 }
 
 .plain-language,
@@ -97,14 +97,13 @@ useDotWings(root);
 
 .plain-language .card-description {
   margin-top: 16px;
-  text-wrap: pretty;
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 32px;
+  margin-top: var(--actions-gap);
 }
 
 
@@ -132,13 +131,13 @@ useDotWings(root);
   align-items: center;
   gap: 14px;
   padding: 16px 20px;
-  border-radius: 24px;
+  border-radius: var(--radius-row);
   font-weight: 500;
   color: var(--vp-c-text-1);
 }
 
 .document-link:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
+  outline: var(--focus-ring);
   outline-offset: -2px;
 }
 
@@ -187,10 +186,6 @@ useDotWings(root);
 }
 
 @media screen and (max-width: 700px) {
-  .section-header h1 {
-    margin-bottom: 48px;
-  }
-
   /* the text starts 20px from the card's edge, like the list's rows */
   .plain-language {
     padding: 26px 18px 22px;
@@ -198,7 +193,6 @@ useDotWings(root);
 
   .actions {
     flex-direction: column;
-    margin-top: 24px;
   }
 
   .document-link {

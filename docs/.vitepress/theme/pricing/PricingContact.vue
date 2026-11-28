@@ -41,15 +41,11 @@ import PricingKeycap from "./PricingKeycap.vue";
   gap: 64px;
 }
 
-.closing .card-description {
-  text-wrap: pretty;
-}
-
 .actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 32px;
+  margin-top: var(--actions-gap);
 }
 
 .figure {
@@ -76,7 +72,6 @@ import PricingKeycap from "./PricingKeycap.vue";
 
   .actions {
     flex-direction: column;
-    margin-top: 24px;
   }
 }
 

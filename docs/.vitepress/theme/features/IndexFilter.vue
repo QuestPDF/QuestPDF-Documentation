@@ -60,7 +60,6 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onFind));
 }
 
 .field {
-  --ring: light-dark(#2196F3, #3D8BD4);
   position: relative;
   display: flex;
   align-items: center;
@@ -84,7 +83,7 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onFind));
   height: 48px;
   padding: 0 44px 0 48px;
   border: 2px solid var(--ring);
-  border-radius: 12px;
+  border-radius: var(--radius-tile);
   appearance: none;
   font: inherit;
   font-size: 1rem;
@@ -113,7 +112,7 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onFind));
 
 .field-input:focus-visible {
   --halo: color-mix(in srgb, var(--ring) 32%, transparent);
-  outline: 2px solid var(--vp-c-brand-1);
+  outline: var(--focus-ring);
   outline-offset: -2px;
 }
 
@@ -141,7 +140,7 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onFind));
 }
 
 .field-clear:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
+  outline: var(--focus-ring);
   outline-offset: -2px;
 }
 

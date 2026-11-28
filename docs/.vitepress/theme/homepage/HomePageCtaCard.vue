@@ -96,7 +96,7 @@ html.dark .cta-card.active {
 }
 
 .cta-card:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
+  outline: var(--focus-ring);
   outline-offset: 4px;
 }
 
@@ -173,10 +173,6 @@ html.dark .cta-card {
 
 .cta-text {
   min-width: 0;
-}
-
-.cta-text .card-description {
-  text-wrap: pretty;
 }
 
 .arrow-icon {

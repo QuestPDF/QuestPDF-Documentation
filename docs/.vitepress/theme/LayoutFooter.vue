@@ -211,10 +211,10 @@ footer {
 
 .link-category h2 {
   margin-bottom: 20px;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  font-size: var(--text-label);
+  line-height: var(--leading-label);
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: light-dark(#1B1B1F, #F5F5F7);
 }
@@ -236,8 +236,8 @@ footer {
 }
 
 a:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: 3px;
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
 }
 
 
@@ -249,8 +249,8 @@ a:focus-visible {
   justify-content: space-between;
   gap: 8px 32px;
   padding-block: 24px;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  font-size: var(--text-label);
+  line-height: var(--leading-label);
 }
 
 /* 56px under the columns, the grid's row gap included */

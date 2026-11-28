@@ -197,6 +197,12 @@ onBeforeUnmount(() => {
   transform: none;
 }
 
+/* the focused half's ring stays above the other half */
+.split .action:focus-visible {
+  position: relative;
+  z-index: 1;
+}
+
 
 /* The list: the navbar's dropdown panel (.menu-panel) with the rows and the divider of the Documentation menu */
 

@@ -88,7 +88,7 @@ useDotWings(page);
   --branch: var(--doc-line-strong);
 
   /* the areas' icons: the blue of the Companion page's shortcut sheet */
-  --area-tint: light-dark(#1976D2, var(--vp-c-brand-1));
+  --area-tint: light-dark(var(--action), var(--vp-c-brand-1));
 }
 
 @media (min-width: 60rem) {

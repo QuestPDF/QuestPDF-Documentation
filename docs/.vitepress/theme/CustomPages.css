@@ -13,6 +13,58 @@
   }
 }
 
+/* Tokens of the custom pages. Sizes and gaps are multiples of 4px: 4 8 12 16 20 24 28 32 40 48 56 64 80. */
+:root {
+  /* Colour: the brand blue draws lines and glows; --action is the darker step that carries white text (4.6:1) */
+  --action: #1976D2;
+  --action-hover: light-dark(#1565C0, #1E88E5);
+  --ring: light-dark(#2196F3, #3D8BD4);
+  --ink-title: light-dark(#142630, var(--vp-c-text-1));
+  --ink-accent: light-dark(#1976D2, oklch(0.78 0.10 245));
+  --positive: light-dark(#2E7D32, #81C784);
+  --code-gutter: light-dark(#6B6B70, #85858C); /* line numbers and fold markers, at 4.5:1 or more */
+
+  /* Type: the size and line height of each role */
+  --text-label: 0.875rem;
+  --leading-label: 1.25rem;
+  --text-lead: 1.125rem;
+  --leading-lead: 1.75rem;
+  --text-title: 1.5rem;
+  --leading-title: 2rem;
+  --tracking-display: -0.02em;
+  --tracking-title: -0.015em;
+  --tracking-label: 0.05em; /* uppercase labels */
+
+  /* Space */
+  --title-gap: 20px; /* a card's title to its text */
+  --actions-gap: 28px; /* a card's text to its buttons */
+  --header-gap: 56px; /* a page's title to its first card */
+  --measure: 53ch; /* about 72 characters: the average letter of Inter is narrower than its zero */
+
+  /* Shape: a row sits 8px inside its panel, so its corners are 8px tighter */
+  --radius-panel: 32px;
+  --radius-row: 24px;
+  --radius-button: 18px; /* as round as the navbar's 36px pills with their 16px */
+  --radius-tile: 12px;
+
+  /* Keyboard focus */
+  --focus-ring: 2px solid var(--vp-c-brand-1);
+  --focus-offset: 2px;
+}
+
+/* the gaps follow the type: a card's text is a step smaller from 768px down, the page title from 700px */
+@media screen and (max-width: 768px) {
+  :root {
+    --actions-gap: 24px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  :root {
+    --header-gap: 48px;
+  }
+}
+
 /* on the layout root, so the navbar and the footer follow the page: its width, and the blue-leaning line under the
    navbar and above the footer */
 .Layout:has(.custom-page) {
@@ -49,16 +101,18 @@
   font-size: clamp(2.25rem, 25.8px + 2.6vw, 2.75rem);
   font-weight: 700;
   line-height: clamp(2.5rem, 24.7px + 3.9vw, 3.25rem);
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tracking-display);
   margin-bottom: 2rem;
+  color: var(--ink-title);
 }
 
 .custom-page h2 {
   font-size: clamp(1.75rem, 22.9px + 1.3vw, 2rem);
   font-weight: 700;
   line-height: clamp(2.25rem, 30.9px + 1.3vw, 2.5rem);
-  letter-spacing: -0.015em;
+  letter-spacing: var(--tracking-title);
   margin-bottom: 1rem;
+  color: var(--ink-title);
 }
 
 .custom-page h3 {
@@ -130,17 +184,19 @@ html.dark .custom-page :where(.with-lead) p.sub-header {
 
 .custom-page .card-title {
   margin: 0;
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: var(--text-title);
+  line-height: var(--leading-title);
   font-weight: 700;
-  letter-spacing: -0.015em;
+  letter-spacing: var(--tracking-title);
   color: var(--vp-c-text-1);
 }
 
 .custom-page .card-description {
-  margin: 20px 0 0;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
+  max-width: var(--measure);
+  text-wrap: pretty;
+  margin: var(--title-gap) 0 0;
+  font-size: var(--text-lead);
+  line-height: var(--leading-lead);
   color: var(--vp-c-text-2);
 }
 
@@ -174,7 +230,7 @@ html.dark .custom-page :where(.with-lead) p.sub-header {
   --surface: #FFFFFF;
   --surface-inner: #F0F2F6;
   --surface-hover: light-dark(color-mix(in srgb, var(--vp-c-text-1) 6%, transparent), rgba(255, 255, 255, 0.07));
-  --surface-current: light-dark(color-mix(in srgb, #1976D2 10%, transparent), rgba(255, 255, 255, 0.13));
+  --surface-current: light-dark(color-mix(in srgb, var(--action) 10%, transparent), rgba(255, 255, 255, 0.13));
   --surface-edge:
       inset 0 0 0 1px color-mix(in srgb, var(--vp-c-text-1) 7%, transparent),
       0 1px 2px rgba(16, 24, 40, 0.04),
@@ -198,11 +254,18 @@ html.dark {
   --vp-c-divider: light-dark(#DBDDE1, #2E2E32);
 }
 
+/* the footer's rule is one of the page's hairlines. A rule of its own: the documentation styles set the divider on
+   .VPContent, so the layout root cannot pass it down, and the build dropped this selector from a list shared with
+   .custom-page. */
+.Layout:has(.custom-page) > footer {
+  --vp-c-divider: light-dark(#DBDDE1, #2E2E32);
+}
+
 /* the rim is a ::before whose gradient is masked to a one-pixel border, so the surface stays see-through */
 
 .custom-page :where(.panel) {
   position: relative;
-  border-radius: 32px;
+  border-radius: var(--radius-panel);
   padding: var(--panel-padding);
   background-color: var(--surface);
   background-image: var(--surface-sheen);
@@ -224,21 +287,21 @@ html.dark {
 /* the blue ring of a panel that stands out from its neighbours */
 
 .custom-page :where(.panel.ringed) {
-  border: 2px solid light-dark(#2196F3, #3D8BD4);
+  border: 2px solid var(--ring);
   box-shadow:
       var(--surface-edge),
-      0 0 0 6px color-mix(in srgb, #2196F3 10%, transparent),
-      0 24px 48px -24px color-mix(in srgb, #2196F3 35%, transparent);
+      0 0 0 6px color-mix(in srgb, var(--ring) 10%, transparent),
+      0 24px 48px -24px color-mix(in srgb, var(--ring) 35%, transparent);
 }
 
 html.dark .custom-page :where(.panel.ringed) {
   background-color: color-mix(in srgb, #2196F3 3%, var(--surface));
-  box-shadow: 0 24px 48px -24px color-mix(in srgb, #3D8BD4 22%, transparent);
+  box-shadow: 0 24px 48px -24px color-mix(in srgb, var(--ring) 22%, transparent);
 }
 
 /* the glass rim sits inside the 2px border, so its corners are 2px tighter than the card's */
 .custom-page :where(.panel.ringed)::before {
-  border-radius: 30px;
+  border-radius: calc(var(--radius-panel) - 2px);
 }
 
 .custom-page .icon-tile {
@@ -248,7 +311,7 @@ html.dark .custom-page :where(.panel.ringed) {
   justify-content: center;
   width: 48px;
   height: 48px;
-  border-radius: 12px;
+  border-radius: var(--radius-tile);
   background-color: var(--surface-inner);
 }
 
@@ -368,6 +431,19 @@ html.dark body:has(.custom-page) {
   color: var(--vp-c-brand-2);
 }
 
+/* Keyboard focus: one ring for every control of a custom page, drawn outside the control so it also shows on a filled
+   button. A component whose shape calls for it sets its own offset. */
+
+.custom-page :where(a, button, summary, input):focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* a link in running text has no shape of its own */
+.custom-page :where(a:not([class])):focus-visible {
+  border-radius: 4px;
+}
+
 /* Buttons: a <button> takes the class too, for a control that only runs script (the VitePress router intercepts
    clicks on links). A filled button sets --fill, and --filled-edge tints its lift with it. */
 :is(a, button).action {
@@ -380,7 +456,7 @@ html.dark body:has(.custom-page) {
   max-width: 100%;
   text-align: center;
 
-  border-radius: 18px; /* as round as the navbar's 36px pills with their 16px */
+  border-radius: var(--radius-button);
   padding: 10px 22px;
   font-size: 1rem;
   font-weight: 600;
@@ -416,7 +492,7 @@ html.dark :is(a, button).action:hover {
 /* the dark rules name the primary button too, so the secondary's dark fill (a more specific rule) does not win */
 :is(a, button).action.primary,
 html.dark :is(a, button).action.primary {
-  --fill: #1976D2;
+  --fill: var(--action);
 
   color: #FFF;
   background-color: var(--fill);
@@ -425,7 +501,12 @@ html.dark :is(a, button).action.primary {
 
 :is(a, button).action.primary:hover,
 html.dark :is(a, button).action.primary:hover {
-  background-color: light-dark(#1565C0, #1E88E5);
+  background-color: var(--action-hover);
+}
+
+/* pressed: back down onto the surface */
+:is(a, button).action:active {
+  transform: none;
 }
 
 @media (pointer: coarse) {
@@ -434,8 +515,34 @@ html.dark :is(a, button).action.primary:hover {
   }
 }
 
-/* Icon lists, light theme: the icons are a step larger, thin dark glyphs on white read smaller */
-html:not(.dark) .custom-page :is(.note, .points li) > .icon {
+/* Icon lists: a glyph and a line of text per point. A list's card sets --tint for its glyphs. */
+
+.custom-page :where(.notes, .points) {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: var(--title-gap) 0 0;
+}
+
+.custom-page :where(.notes > .note, .points > li) {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 6px 0;
+  font-weight: 500;
+  color: var(--vp-c-text-1);
+}
+
+.custom-page :where(.notes > .note, .points > li) > .icon {
+  flex-shrink: 0;
+  width: 18px;
+  margin-top: 0.25rem;
+  font-size: 1rem;
+  color: var(--tint);
+}
+
+/* light theme: the icons are a step larger, thin dark glyphs on white read smaller */
+html:not(.dark) .custom-page :is(.notes > .note, .points > li) > .icon {
   width: 1.25rem;
   margin-top: 0.1875rem;
   font-size: 1.125rem;

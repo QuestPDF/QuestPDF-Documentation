@@ -84,6 +84,7 @@ const { node, depth } = defineProps<{ node: FeatureNode; depth: number }>();
 }
 
 .name {
+  border-radius: 4px; /* the focus ring's corners */
   scroll-margin-top: 8.5rem; /* a link reached with Tab is not left under the navbar and the path line */
   font-weight: 400;
   color: var(--vp-c-text-1);

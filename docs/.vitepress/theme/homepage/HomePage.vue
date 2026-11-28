@@ -136,14 +136,10 @@ useDotWings(root);
   gap: 36px;
 }
 
+/* the size, weight and tracking are the shared h2's */
 .section-title {
   margin: 0;
-  font-size: 2rem;
-  line-height: 2.5rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
   text-align: center;
-  color: var(--vp-c-text-1);
 }
 
 .cta-row {

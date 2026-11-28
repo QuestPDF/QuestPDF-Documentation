@@ -141,9 +141,11 @@ const licenses = [
 /* Each card is a subgrid of six shared rows, so sections line up across the cards; the children are pinned to their
    rows because only the professional card has the tag. */
 
-.license-tiers {
-  margin-top: 28px;
+.section-header h1 {
+  margin-bottom: var(--header-gap);
+}
 
+.license-tiers {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: repeat(6, auto); /* tag, header, divider, details, action, footnote */
@@ -182,12 +184,12 @@ const licenses = [
 }
 
 .license-tier.community {
-  border-radius: 32px 0 0 32px;
+  border-radius: var(--radius-panel) 0 0 var(--radius-panel);
   margin: 48px 0;
 }
 
 .license-tier.enterprise {
-  border-radius: 0 32px 32px 0;
+  border-radius: 0 var(--radius-panel) var(--radius-panel) 0;
   margin: 48px 0;
 }
 
@@ -198,7 +200,7 @@ const licenses = [
   justify-self: stretch;
   margin: calc(-1 * var(--tier-padding)) calc(-1 * var(--tier-padding)) 0;
   height: 46px;
-  border-radius: 30px 30px 0 0;
+  border-radius: calc(var(--radius-panel) - 2px) calc(var(--radius-panel) - 2px) 0 0;
 
   display: flex;
   align-items: center;
@@ -206,20 +208,20 @@ const licenses = [
   gap: 12px;
   white-space: nowrap;
 
-  color: light-dark(#2196F3, #7CC4FF);
+  color: light-dark(var(--action), #7CC4FF);
   background-color: light-dark(#FFFFFF, transparent);
   box-shadow: inset 0 -2px 0 light-dark(rgba(33, 150, 243, 0.2), rgba(100, 181, 246, 0.14));
   font-size: 0.875rem;
   font-weight: 700;
   line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: var(--tracking-label);
   word-spacing: 4px;
 }
 
 .license-tier .tag .icon {
   font-size: 1rem;
-  color: light-dark(#2196F3, #7CC4FF);
+  color: light-dark(var(--action), #7CC4FF);
 }
 
 html.dark .license-tier .tag {
@@ -240,7 +242,7 @@ html.dark .license-tier .tag {
   padding: 6px 24px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: var(--tracking-label);
   font-size: 0.875rem;
 }
 
@@ -250,7 +252,7 @@ html.dark .license-tier .tag {
 }
 
 .license-tier.professional .tier-name {
-  background-color: light-dark(#2196F3, #1976D2);
+  background-color: var(--action);
   color: white;
 }
 
@@ -263,7 +265,7 @@ html.dark .license-tier .tag {
   font-size: 2.25rem;
   line-height: 2.25rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tracking-display);
   font-variant-numeric: tabular-nums;
   color: var(--vp-c-text-1);
 }
@@ -315,7 +317,7 @@ html.dark .license-tier .tag {
 
 .license-tier.professional .check-icon {
   --fa-primary-color: white;
-  --fa-secondary-color: light-dark(#2196F3, #1976D2);
+  --fa-secondary-color: var(--action);
   --fa-secondary-opacity: 1.0;
 }
 
@@ -333,7 +335,7 @@ html.dark .license-tier .tag {
 
 /* see CustomPages.css for --fill */
 .license-tier.professional .action {
-  --fill: #1976D2;
+  --fill: var(--action);
 
   color: #FFF;
   background-color: var(--fill);
@@ -341,7 +343,7 @@ html.dark .license-tier .tag {
 }
 
 .license-tier.professional .action:hover {
-  background-color: light-dark(#1565C0, #1E88E5);
+  background-color: var(--action-hover);
 }
 
 .license-tier.enterprise .action {
@@ -362,8 +364,8 @@ html.dark .license-tier .tag {
   text-align: center;
   margin-top: 16px;
 
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+  font-size: var(--text-label);
+  line-height: var(--leading-label);
   color: var(--vp-c-text-2);
 }
 
@@ -402,7 +404,7 @@ html.dark .license-tier .tag {
   .license-tier.community,
   .license-tier.enterprise {
     margin: 0;
-    border-radius: 32px;
+    border-radius: var(--radius-panel);
   }
 }
 
