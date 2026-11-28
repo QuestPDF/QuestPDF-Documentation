@@ -249,6 +249,13 @@ html.dark {
   --vp-c-divider: light-dark(#DBDDE1, #2E2E32);
 }
 
+/* the footer's rule is one of the page's hairlines. A rule of its own: the documentation styles set the divider on
+   .VPContent, so the layout root cannot pass it down, and the build dropped this selector from a list shared with
+   .custom-page. */
+.Layout:has(.custom-page) > footer {
+  --vp-c-divider: light-dark(#DBDDE1, #2E2E32);
+}
+
 /* the rim is a ::before whose gradient is masked to a one-pixel border, so the surface stays see-through */
 
 .custom-page :where(.panel) {
