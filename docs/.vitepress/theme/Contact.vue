@@ -340,7 +340,6 @@ useDotWings(root);
 }
 
 .write .card-description {
-  line-height: 1.875rem;
   text-wrap: pretty;
 }
 

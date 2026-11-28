@@ -213,7 +213,7 @@ const licenses = [
   font-weight: 700;
   line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: var(--tracking-label);
   word-spacing: 4px;
 }
 
@@ -240,7 +240,7 @@ html.dark .license-tier .tag {
   padding: 6px 24px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: var(--tracking-label);
   font-size: 0.875rem;
 }
 
@@ -263,7 +263,7 @@ html.dark .license-tier .tag {
   font-size: 2.25rem;
   line-height: 2.25rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--tracking-display);
   font-variant-numeric: tabular-nums;
   color: var(--vp-c-text-1);
 }

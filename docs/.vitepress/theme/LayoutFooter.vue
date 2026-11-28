@@ -214,7 +214,7 @@ footer {
   font-size: var(--text-label);
   line-height: var(--leading-label);
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: light-dark(#1B1B1F, #F5F5F7);
 }
