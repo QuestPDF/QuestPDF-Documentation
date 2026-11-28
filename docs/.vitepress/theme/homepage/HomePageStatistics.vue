@@ -74,7 +74,7 @@ const icons: Record<string, IconDefinition> = {
 }
 
 .statistic:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
+  outline: var(--focus-ring);
   outline-offset: 6px;
 }
 

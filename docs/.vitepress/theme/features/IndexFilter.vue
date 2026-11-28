@@ -112,7 +112,7 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onFind));
 
 .field-input:focus-visible {
   --halo: color-mix(in srgb, var(--ring) 32%, transparent);
-  outline: 2px solid var(--vp-c-brand-1);
+  outline: var(--focus-ring);
   outline-offset: -2px;
 }
 
@@ -140,7 +140,7 @@ onBeforeUnmount(() => window.removeEventListener("keydown", onFind));
 }
 
 .field-clear:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
+  outline: var(--focus-ring);
   outline-offset: -2px;
 }
 

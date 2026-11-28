@@ -115,30 +115,6 @@ html.dark .quick-start-card .card-title {
   margin: 0 0 48px;
 }
 
-.notes {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin: 20px 0 0;
-}
-
-.note {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 6px 0;
-  font-weight: 500;
-  color: var(--vp-c-text-1);
-}
-
-.note .icon {
-  flex-shrink: 0;
-  width: 18px;
-  margin-top: 0.25rem;
-  font-size: 1rem;
-  color: var(--tint);
-}
-
 @media screen and (max-width: 760px) {
   .quick-start-cards {
     grid-template-columns: minmax(0, 1fr);

@@ -41,10 +41,6 @@ import PricingKeycap from "./PricingKeycap.vue";
   gap: 64px;
 }
 
-.closing .card-description {
-  text-wrap: pretty;
-}
-
 .actions {
   display: flex;
   flex-wrap: wrap;

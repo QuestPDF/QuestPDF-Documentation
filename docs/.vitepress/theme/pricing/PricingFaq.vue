@@ -97,7 +97,7 @@ html:not(.dark) .faq-question {
 
 /* the ring sits 8px inside the card and follows its corners, as on the legal documents list */
 .faq-question:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
+  outline: var(--focus-ring);
   outline-offset: -10px;
   border-radius: var(--radius-panel);
 }

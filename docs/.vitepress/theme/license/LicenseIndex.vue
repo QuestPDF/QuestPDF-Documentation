@@ -97,7 +97,6 @@ useDotWings(root);
 
 .plain-language .card-description {
   margin-top: 16px;
-  text-wrap: pretty;
 }
 
 .actions {
@@ -138,7 +137,7 @@ useDotWings(root);
 }
 
 .document-link:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
+  outline: var(--focus-ring);
   outline-offset: -2px;
 }
 

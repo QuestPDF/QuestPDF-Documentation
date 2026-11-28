@@ -88,10 +88,6 @@ const price = `$${licensePrices.professional.toLocaleString("en-US")}`;
   }
 }
 
-.card-description {
-  text-wrap: pretty;
-}
-
 .action {
   margin-top: auto;
 }
@@ -306,11 +302,6 @@ const price = `$${licensePrices.professional.toLocaleString("en-US")}`;
   justify-content: center;
   border-radius: 14px;
   padding: 12px 14px;
-}
-
-.resellers a:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: 2px;
 }
 
 /* the files are a mid grey (#888); the filter brings them close to the tone of the text in each theme */

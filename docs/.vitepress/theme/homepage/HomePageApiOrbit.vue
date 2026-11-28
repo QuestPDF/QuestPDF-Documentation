@@ -135,10 +135,6 @@ html.dark .api-orbit-card {
   z-index: 1;
 }
 
-.card-description {
-  text-wrap: pretty;
-}
-
 .orbit-text .action {
   margin-top: var(--actions-gap);
 }

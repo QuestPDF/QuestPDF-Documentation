@@ -66,11 +66,6 @@ const standards: Standard[] = [
   }
 }
 
-.card-description {
-  text-wrap: pretty;
-}
-
-
 /* Compliance */
 
 .compliance {

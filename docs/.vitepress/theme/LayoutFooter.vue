@@ -236,8 +236,8 @@ footer {
 }
 
 a:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: 3px;
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
 }
 
 

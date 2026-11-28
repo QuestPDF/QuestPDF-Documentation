@@ -51,36 +51,16 @@ const points = [
   grid-area: text;
 }
 
-.companion .card-description {
-  text-wrap: pretty;
-}
-
 .companion-media {
   grid-area: media;
 }
 
 
 .points {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin: 24px 0 0;
-}
-
-.points li {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 6px 0;
-  font-weight: 500;
-  color: var(--vp-c-text-1);
+  margin-top: 24px;
 }
 
 .points .icon {
-  flex-shrink: 0;
-  width: 18px;
-  margin-top: 0.25rem;
-  font-size: 1rem;
   color: light-dark(var(--action), var(--vp-c-brand-1));
 }
 

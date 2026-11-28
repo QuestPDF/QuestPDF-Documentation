@@ -339,10 +339,6 @@ useDotWings(root);
   padding: 38px;
 }
 
-.write .card-description {
-  text-wrap: pretty;
-}
-
 .write .actions {
   align-items: center;
 }
@@ -422,7 +418,7 @@ useDotWings(root);
 }
 
 .topic-row:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
+  outline: var(--focus-ring);
   outline-offset: -2px;
 }
 
@@ -496,10 +492,6 @@ useDotWings(root);
 .side-card > div:last-child {
   min-width: 0;
   padding-top: 8px;
-}
-
-.paddle .card-description {
-  text-wrap: pretty;
 }
 
 .icon-tile .love {

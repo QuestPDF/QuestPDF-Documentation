@@ -123,41 +123,12 @@ html.dark .half .card-title {
   text-underline-offset: 4px;
 }
 
-.card-title a:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: 4px;
-}
-
 .amount {
   white-space: nowrap;
 }
 
 .per {
   margin-left: 0.3em;
-}
-
-.points {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 20px;
-}
-
-.points li {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 6px 0;
-  font-weight: 500;
-  color: var(--vp-c-text-1);
-}
-
-.points .icon {
-  flex-shrink: 0;
-  width: 18px;
-  margin-top: 0.25rem;
-  font-size: 1rem;
-  color: var(--tint);
 }
 
 .footer {
