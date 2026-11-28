@@ -455,8 +455,7 @@ html.dark .window-header {
   width: calc(var(--gutter-digits) * 1ch);
   margin-right: 12px;
   text-align: right;
-  color: var(--vp-c-text-3);
-  opacity: 0.7;
+  color: var(--code-gutter);
   user-select: none;
 }
 
@@ -495,7 +494,7 @@ html.dark .window-header {
   padding: 0 6px;
   border-radius: 4px;
   background-color: var(--surface-inner);
-  color: var(--vp-c-text-3);
+  color: var(--code-gutter);
 }
 
 

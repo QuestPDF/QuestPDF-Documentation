@@ -22,6 +22,7 @@
   --ink-title: light-dark(#142630, var(--vp-c-text-1));
   --ink-accent: light-dark(#1976D2, oklch(0.78 0.10 245));
   --positive: light-dark(#2E7D32, #81C784);
+  --code-gutter: light-dark(#6B6B70, #85858C); /* line numbers and fold markers, at 4.5:1 or more */
 
   /* Type: the size and line height of each role */
   --text-label: 0.875rem;
@@ -82,6 +83,7 @@
   line-height: clamp(2.5rem, 24.7px + 3.9vw, 3.25rem);
   letter-spacing: var(--tracking-display);
   margin-bottom: 2rem;
+  color: var(--ink-title);
 }
 
 .custom-page h2 {
@@ -90,6 +92,7 @@
   line-height: clamp(2.25rem, 30.9px + 1.3vw, 2.5rem);
   letter-spacing: var(--tracking-title);
   margin-bottom: 1rem;
+  color: var(--ink-title);
 }
 
 .custom-page h3 {

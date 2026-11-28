@@ -206,7 +206,7 @@ const licenses = [
   gap: 12px;
   white-space: nowrap;
 
-  color: light-dark(#2196F3, #7CC4FF);
+  color: light-dark(var(--action), #7CC4FF);
   background-color: light-dark(#FFFFFF, transparent);
   box-shadow: inset 0 -2px 0 light-dark(rgba(33, 150, 243, 0.2), rgba(100, 181, 246, 0.14));
   font-size: 0.875rem;
@@ -219,7 +219,7 @@ const licenses = [
 
 .license-tier .tag .icon {
   font-size: 1rem;
-  color: light-dark(#2196F3, #7CC4FF);
+  color: light-dark(var(--action), #7CC4FF);
 }
 
 html.dark .license-tier .tag {
@@ -250,7 +250,7 @@ html.dark .license-tier .tag {
 }
 
 .license-tier.professional .tier-name {
-  background-color: light-dark(#2196F3, #1976D2);
+  background-color: var(--action);
   color: white;
 }
 
@@ -315,7 +315,7 @@ html.dark .license-tier .tag {
 
 .license-tier.professional .check-icon {
   --fa-primary-color: white;
-  --fa-secondary-color: light-dark(#2196F3, #1976D2);
+  --fa-secondary-color: var(--action);
   --fa-secondary-opacity: 1.0;
 }
 
